@@ -116,19 +116,22 @@ function get_read_more_link() {
 /**
  * Test adding widget on Theme-change
  */
-add_action( 'after_switch_theme', 'yst_add_widget_after_activating_theme', 10, 2 );
+//add_action( 'after_switch_theme', 'yst_add_widget_after_activating_theme', 10, 2 );
+//
+//function yst_add_widget_after_activating_theme( $oldname, $oldtheme = false ) {
+//	$sidebar_id                    = 'yoast-after-header-3';
+//	$sidebars_widgets              = get_option( 'sidebars_widgets' );
+//	$id                            = count( $sidebars_widgets ) + 1;
+//	$sidebars_widgets[$sidebar_id] = array( "text-" . $id );
+//
+//	$ops      = get_option( 'widget_text' );
+//	$ops[$id] = array(
+//		'title' => 'Automatic Widget',
+//		'text'  => 'Works!',
+//	);
+//	update_option( 'widget_text', $ops );
+//	update_option( 'sidebars_widgets', $sidebars_widgets );
+//}
 
-function yst_add_widget_after_activating_theme( $oldname, $oldtheme = false ) {
-	$sidebar_id                    = 'yoast-after-header-3';
-	$sidebars_widgets              = get_option( 'sidebars_widgets' );
-	$id                            = count( $sidebars_widgets ) + 1;
-	$sidebars_widgets[$sidebar_id] = array( "text-" . $id );
-
-	$ops      = get_option( 'widget_text' );
-	$ops[$id] = array(
-		'title' => 'Automatic Widget',
-		'text'  => 'Works!',
-	);
-	update_option( 'widget_text', $ops );
-	update_option( 'sidebars_widgets', $sidebars_widgets );
-}
+// Include the functions for the hamburger menu
+require("lib/functions/hamburger.php");
