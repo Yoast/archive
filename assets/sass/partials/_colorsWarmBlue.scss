@@ -1,0 +1,166 @@
+// color declarations
+
+// general
+$c_bodyTopLine:         #ec9e61;
+
+$c_paragraph:           #000000;
+$c_link:                #028aaf;
+$c_linkHover:           #e25918;
+$c_linkBorder:          #dddddd;
+
+$c_logoText:            #999999;
+$c_logoTextLink:        #333333;
+$c_logoTextLinkHover:   #333333;
+
+$c_taglineTop:          #000000;
+$c_taglineTopBold:      #028aaf;
+$c_taglineFullWidth:    #000000;
+$c_taglineFullWidthBold:#028aaf;
+
+$c_breadcrumbs:         #000000;
+$c_breadcrumbsLink:     #028aaf;
+$c_breadcrumbsLinkHover:#e25918;
+
+$c_pagenavBg:           #eeeeee;
+$c_pagenavLink:         #028aaf;
+$c_pagenavHoverBg:      #b3d736;
+$c_pagenavHoverLink:    #ffffff;
+$c_pagenavActiveBg:     #b3d736;
+$c_pagenavActiveLink:   #ffffff;
+
+$c_metaAtPost:          #333333;
+$c_metaAtPostBorder:    #dddddd;
+$c_linkToArchives:      #028aaf;
+$c_commentHTMLtags:     #b2b8b8;
+$c_hrLine:              #e25918;
+$c_randLine:            #dddddd; // random grey line
+
+$c_selectionText:       #028aaf;
+$c_selectionBg:         #b3d7e6;
+
+$c_fieldsetBorder:      #c0c0c0;
+
+// header
+$c_headerBg:            #eeeeee;
+$c_headerBorderTop:     #c34200;
+$c_headerText:          #028aaf;
+$c_headerLink:          #028aaf;
+$c_headerLinkHover:     #e25918;
+$c_headerH3:            #e25918;
+$c_headerH4:            #e25918;
+
+// navigation
+$c_navMainFullBg:       #b3d7e6;
+$c_navMainFullBorder:   #e25918;
+
+$c_navMainBg:           #b3d7e6;
+$c_navMainText:         #000000;
+$c_navMainLink:         #000000;
+$c_navMainLinkHover:    #ffffff;
+$c_navMainLinkBg:       #b3d7e6;
+$c_navMainLinkBgHover:  #e25918;
+$c_navMainLinkActive:   #e25918;
+$c_navMainBorder:       #ffffff;
+$c_navMainBorderBottom: #e25918;
+
+$c_navSubBg:           #e25918;
+$c_navSubText:         #ffffff;
+$c_navSubLink:         #ffffff;
+$c_navSubLinkHover:    #000000;
+$c_navSubLinkBg:       #b3d7e6;
+$c_navSubLinkBgHover:  #b3d7e6;
+$c_navSubLinkActive:   #b3d7e6;
+$c_navSubBorder:       #ffffff;
+$c_navSubBorderBottom: #e25918;
+
+
+// main content
+$c_mainBg:              #ffffff;
+$c_mainText:            #000000;
+$c_mainLink:            #028aaf;
+$c_mainLinkHover:       #e25918;
+$c_mainH1:              #e25918;
+$c_mainH1Hover:         #c34200;
+$c_mainH2:              #e25918;
+$c_mainH2Hover:         #c34200;
+$c_mainH3:              #e25918;
+$c_mainH3Hover:         #c34200;
+$c_mainH4:              #000000;
+$c_mainH4Hover:         #333333;
+$c_mainH5:              #000000;
+$c_mainH5Hover:         #333333;
+$c_mainH6:              #000000;
+$c_mainH6Hover:         #333333;
+
+// blockquote
+$c_BlockquoteText:      #333333;
+$c_BlockquoteLink:      #028aaf;
+$c_BlockquoteLinkHover: #e25918;
+$c_BlockquoteBorder:    #dddddd;
+$c_BlockquoteBg:        #eeeeee;
+$c_blockquoteBefore:    #999999;
+
+// input
+$c_inputText:           #000000;
+$c_inputTextFocus:      #000000;
+$c_inputBg:             #ffffff;
+$c_inputBgFocus:        #ffffff;
+$c_inputBorder:         #b2b8b8;
+$c_inputBoxShadow:      #eeeeee;
+$c_inputBorderFocus:    #999999;
+$c_inputTextPlaceholder:#999999;
+$c_inputSubmitText:     #ffffff;
+$c_inputSubmitTextHover:#ffffff;
+$c_inputSubmitBg:       #333333;
+$c_inputSubmitBgHover:  #e25918;
+
+// comments
+$c_commentBg:           #ffffff;
+$c_commentText:         #000000;
+$c_commentLink:         #e25918;
+$c_commentBorder:       #e25918;
+$c_commentReplyBorder:  #dddddd;
+
+// call-to-action
+$c_ctaBgFrom:           #92ce59; // top
+$c_ctaBgTo:             #6bbd1e; // bottom
+$c_ctaBorder:           #6bbd1e;
+$c_ctaText:             #ffffff;
+$c_ctaTextShadow:       #eeeeee;
+$c_ctaBoxShadow:        #ffffff;
+
+// tables
+$c_tableBg:               #ffffff;
+$c_tableText:             #000000;
+$c_tableRowAlt:           #b3d7e6;
+$c_tableHeaderBg:         #028aaf;
+$c_tableHeaderText:       #ffffff;
+$c_tableLink:             #028aaf;
+$c_tableLinkHover:        #e25918;
+$c_tableBorder:           #dddddd;
+
+// code
+$c_codeBg:              #333333;
+$c_codeText:            #dddddd;
+
+// mark
+$c_markBg:              #ffff00;
+$c_markText:            #000000;
+
+// sidebar
+$c_sidebarBg:           #ffffff;
+$c_sidebarText:         #000000;
+$c_sidebarLink:         #000000;
+$c_sidebarLinkHover:    #028aaf;
+$c_sidebarH3:           #028aaf;
+$c_sidebarH3Bg:         #eeeeee;
+$c_sidebarH4:           #666666;
+$c_sidebarH4Bg:         #ffffff;
+
+// footer
+$c_footerBg:            #e2e2e2;
+$c_footerText:          #b2b8b8;
+$c_footerLink:          #028aaf;
+$c_footerLinkHover:     #e25918;
+$c_footerH3:            #000000;
+$c_footerH4:            #000000;
