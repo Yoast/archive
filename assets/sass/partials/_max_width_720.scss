@@ -30,6 +30,7 @@ $nav-off-canvas-width: 70%;
     }
 
     li {
+				display:block;
         position: relative;
         border-top: 1px solid rgba(255,255,255, 0.1);
 
@@ -108,7 +109,8 @@ $nav-off-canvas-width: 70%;
 
 @if ($step > 2) {
 
-//    .csstransforms3d.csstransitions.js-ready {
+//    .csstransforms3d.csstransitions
+.js-ready {
 
         #menu-primary-navigation {
             left: 0;
@@ -122,7 +124,7 @@ $nav-off-canvas-width: 70%;
             @include transition(transform 500ms ease);
             @include backface-visibility(hidden);
         }
-//    }
+    }
 
 //    .csstransforms3d.csstransitions.js-nav {
 
@@ -136,7 +138,7 @@ $nav-off-canvas-width: 70%;
 
 @if ($step > 3) {
 
-//    .csstransforms3d.csstransitions.js-ready {
+    .csstransforms3d.csstransitions.js-ready {
 
         #menu-primary-navigation {
 
@@ -147,9 +149,9 @@ $nav-off-canvas-width: 70%;
                 @include transform-origin(50%, 0%);
             }
         }
-//    }
+    }
 
-//    .csstransforms3d.csstransitions.js-nav {
+    .csstransforms3d.csstransitions.js-nav {
 
         #menu-primary-navigation {
 
@@ -158,6 +160,6 @@ $nav-off-canvas-width: 70%;
                 @include transform(translate3d(0,0,0));
             }
         }
-//    }
+    }
 
 } // end @if ($step > 3)
