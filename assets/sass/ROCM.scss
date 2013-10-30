@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+@-ms-viewport {
+    width: device-width;
+}
+
+@viewport {
+    width: device-width;
+}
+
+/*!
+ *
+ *  Copyright (c) David Bushell | http://dbushell.com/
+ *
+ */
+
+$step: 4 !default;
+
+@import "compass/css3";
+
+//@import "partials/normalize";
+
+//@import "partials/base";
+
+@media screen and (min-width: 45.0625em) {
+   //@import "partials/min_width_720";
+}
+$background-color: white;
+
+@media screen and (max-width: 45em) {
+    @import "partials/max_width_720";
+}
