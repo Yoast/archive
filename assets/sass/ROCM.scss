@@ -50,6 +50,13 @@
 
 $step: 4 !default;
 
+.close-btn {
+	color: #FF0000;
+	position: absolute;
+	top: pem(-60);
+	left: pem(30);
+}
+
 @import "compass/css3";
 
 //@import "partials/normalize";

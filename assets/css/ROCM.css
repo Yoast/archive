@@ -12,6 +12,14 @@
  *  Copyright (c) David Bushell | http://dbushell.com/
  *
  */
+/* line 53, ../sass/ROCM.scss */
+.close-btn {
+  color: #FF0000;
+  position: absolute;
+  top: -3.75em;
+  left: 1.875em;
+}
+
 @media screen and (max-width: 45em) {
   /* line 3, ../sass/partials/_max_width_720.scss */
   .close-btn {
