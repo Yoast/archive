@@ -1,0 +1,90 @@
+// font dimensions for Theme 001
+// Always have 62.5% font size for the body to assure em working from 10pt
+// html {font-size:62.5%;}
+
+$f_baseFont:    'Quattrocento Sans', Helvetica, Arial, sans-serif;
+$f_extraFont:   'Lekton', 'Courier New', Courier, serif;
+$f_codeFont:    'Lekton', 'Courier New', Courier, serif;
+
+// font sizes
+$f_main-px:             16px;
+$f_main:                1.6rem;
+
+$f_taglineTop-px:       20px;
+$f_taglineTop:          2.0rem;
+$f_taglineFullWidth-px: 26px;
+$f_taglineFullWidth:    2.6rem;
+
+$f_breadcrumbs-px:      14px;
+$f_breadcrumbs:         1.4rem;
+
+$f_metaAtPost-px:       14px;
+$f_metaAtPost:          1.4rem;
+
+$f_pagenav-px:          20px;
+$f_pagenav:             2.0rem;
+
+$f_linkToArchives-px:   20px;
+$f_linkToArchives:      2.0rem;
+
+$f_commentHTMLtags-px:  15px;
+$f_commentHTMLtags:     1.5rem;
+
+// header
+$f_header-px:    16px;
+$f_header:       1.6rem;
+$f_headerH3-px:  20px;
+$f_headerH3:     2.0rem;
+$f_headerH4-px:  20px;
+$f_headerH4:     2.0rem;
+
+// navigation
+$f_navFont:     'Quattrocento Sans', Helvetica, Arial, sans-serif;
+$f_navMainLink-px:  18px;
+$f_navMainLink:     1.8rem;
+$f_navSubLink-px:  14px;
+$f_navSubLink:     1.4rem;
+
+// main content
+$f_H1Font:      'Quattrocento Sans', Helvetica, Arial, sans-serif;
+$f_H2Font:      'Quattrocento Sans', Helvetica, Arial, sans-serif;
+$f_H3Font:      'Quattrocento Sans', Helvetica, Arial, sans-serif;
+$f_H4Font:      'Quattrocento Sans', Helvetica, Arial, sans-serif;
+$f_H5Font:      'Quattrocento Sans', Helvetica, Arial, sans-serif;
+$f_H6Font:      'Quattrocento Sans', Helvetica, Arial, sans-serif;
+$f_mainH1-px:    32px;
+$f_mainH1:       3.2rem;
+$f_mainH2-px:    24px;
+$f_mainH2:       2.4rem;
+$f_mainH3-px:    20px;
+$f_mainH3:       2.0rem;
+$f_mainH4-px:    20px;
+$f_mainH4:       2.0rem;
+$f_mainH5-px:    16px;
+$f_mainH5:       1.6rem;
+$f_mainH6-px:    14px;
+$f_mainH6:       1.4rem;
+
+// blockquote
+$f_blockquoteBefore-px: 30px;
+$f_blockquoteBefore:    3.0rem;
+
+// input
+$f_inputText-px:        14px;
+$f_inputText:           1.4rem;
+
+// call-to-action
+$f_ctaText-px:    24px;
+$f_ctaText:       2.4rem;
+
+// sidebar
+$f_sidebarH3-px: 20px;
+$f_sidebarH3:    2.0rem;
+$f_sidebarH4-px: 20px;
+$f_sidebarH4:    2.0rem;
+
+// footer
+$f_footerH3-px:  20px;
+$f_footerH3:     2.0rem;
+$f_footerH4-px:  20px;
+$f_footerH4:     2.0rem;

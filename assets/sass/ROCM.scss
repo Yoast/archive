@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+@-ms-viewport {
+    width: device-width;
+}
+
+@viewport {
+    width: device-width;
+}
+
+@function pem($px, $base: 16) {
+	@return ($px / $base) + em;
+}
+
+@mixin clearfix {
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+	*zoom: 1;
+}
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+@mixin hidden {
+	display: none !important;
+	visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+@mixin visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+/*!
+ *
+ *  Copyright (c) David Bushell | http://dbushell.com/
+ *
+ */
+
+$step: 4 !default;
+
+.close-btn {
+	color: #FF0000;
+	position: absolute;
+	top: pem(-60);
+	left: pem(30);
+}
+
+@import "compass/css3";
+
+//@import "partials/normalize";
+//@import "partials/base";
+
+@media screen and (min-width: 45.0625em) {
+   //@import "partials/min_width_720";
+}
+$background-color: white;
+
+@media screen and (max-width: 45em) {
+    @import "partials/max_width_720";
+}
