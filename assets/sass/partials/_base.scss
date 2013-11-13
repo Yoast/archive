@@ -198,6 +198,11 @@ body {
         display: none;
     }
 
+		.open-btn {
+			display: none;
+
+		}
+
     .block-title {
         @include visuallyhidden;
     }

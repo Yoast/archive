@@ -135,3 +135,11 @@ function get_read_more_link() {
 
 // Include the functions for the hamburger menu
 require("lib/functions/hamburger.php");
+
+/**
+ * Add styling for hamburgermenu
+ */
+function enqueue_styles_basic() {
+	wp_enqueue_style( 'style-basic', get_stylesheet_directory_uri() . '/assets/css/style.css' );
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic' );

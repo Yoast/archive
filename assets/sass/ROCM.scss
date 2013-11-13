@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import "compass/css3/images";
 
 @-ms-viewport {
     width: device-width;
@@ -50,13 +51,6 @@
 
 $step: 4 !default;
 
-.close-btn {
-	color: #FF0000;
-	position: absolute;
-	top: pem(-60);
-	left: pem(30);
-}
-
 @import "compass/css3";
 
 //@import "partials/normalize";
@@ -64,9 +58,31 @@ $step: 4 !default;
 
 @media screen and (min-width: 45.0625em) {
    //@import "partials/min_width_720";
+	.close-btn {
+		color: #FF0000;
+		position: absolute;
+		top: pem(-60);
+		left: pem(30);
+	}
+
+	.nav-btn {
+		color: #FF0000;
+		position: absolute;
+		top: pem(-60);
+		left: pem(30);
+	}
 }
 $background-color: white;
 
 @media screen and (max-width: 45em) {
     @import "partials/max_width_720";
+	.nav-btn {
+		position: absolute;
+		@include background(image-url("hbmenu.png"));
+		@include background-size(cover);
+		height: 20px;
+		width: 20px;
+		top: pem(20);
+		left: pem(5);
+	}
 }

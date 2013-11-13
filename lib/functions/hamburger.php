@@ -17,7 +17,7 @@ function enqueue_styles_hambugermenu() {
 add_action( 'wp_enqueue_scripts', 'enqueue_styles_hambugermenu' );
 
 function add_to_genesis_header() {
-	echo '<a class="nav-btn" id="nav-open-btn" href="#nav">Open navigation</a>';
+	echo '<a class="nav-btn" id="nav-open-btn" href="#nav"></a>';
 }
 add_action( 'genesis_header', 'add_to_genesis_header' );
 
