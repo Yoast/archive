@@ -37,7 +37,7 @@ function yst_register_colourscheme_box( $_genesis_theme_settings_pagehook ) {
 	add_meta_box( 'yst-colourscheme-settings', 'Yoast Theme Colour Scheme', 'yst_colourscheme_settings_box', $_genesis_theme_settings_pagehook, 'main', 'high' );
 }
 
-add_action( 'genesis_theme_settings_metaboxes', 'yst_register_colourscheme_box' );
+add_action( 'genesis_page_child', 'yst_register_colourscheme_box' );
 
 /**
  * Create Metabox

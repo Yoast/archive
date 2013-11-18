@@ -110,9 +110,9 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 		add_meta_box( 'home_intro_metabox', 'Home Intro', array( $this, 'home_intro_metabox' ), $this->pagehook, 'main', 'high' );
 		add_meta_box( 'footer_metabox', 'Footer', array( $this, 'footer_metabox' ), $this->pagehook, 'main', 'high' );
 		add_meta_box( 'after_post_information_metabox', 'After Post Information', array( $this, 'after_post_information_metabox' ), $this->pagehook, 'main', 'high' );
-		add_meta_box( 'plugin_archive_metabox', 'Plugin Archive', array( $this, 'plugin_archive_metabox' ), $this->pagehook, 'main', 'high' );
+		//add_meta_box( 'plugin_archive_metabox', 'Plugin Archive', array( $this, 'plugin_archive_metabox' ), $this->pagehook, 'main', 'high' );
 
-		add_meta_box( 'cpt_intro_metabox', 'Custom Post Type Intro\'s', array( $this, 'cpt_intro_metabox' ), $this->pagehook, 'main', 'high' );
+		//add_meta_box( 'cpt_intro_metabox', 'Custom Post Type Intro\'s', array( $this, 'cpt_intro_metabox' ), $this->pagehook, 'main', 'high' );
 	}
 
 	/**

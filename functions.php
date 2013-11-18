@@ -11,7 +11,11 @@ foreach ( glob( CHILD_DIR . "/lib/widgets/*-widget.php" ) as $file ) {
 require_once( 'lib/functions/yst-colourscheme-settings.php' );
 
 // Load the right CSS
-wp_enqueue_style( 'yst_custom_css', get_theme_root_uri() . "/theme001" . genesis_get_option( 'yst_colourscheme' ), array( 'google-font-lato', 'admin-bar', 'theme001' ) );
+function yst_load_css_from_setting() {
+	wp_enqueue_style( 'yst_custom_css', get_theme_root_uri() . "/theme001" . genesis_get_option( 'yst_colourscheme' ), array( 'google-font-lato', 'admin-bar', 'theme001' ) );
+}
+add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting' );
+
 
 //* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'Theme001' );
