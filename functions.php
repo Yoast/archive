@@ -7,6 +7,12 @@ foreach ( glob( CHILD_DIR . "/lib/widgets/*-widget.php" ) as $file ) {
 	require_once $file;
 }
 
+//include_once( get_theme_root_uri() . '/theme001/lib/functions/yst-colourscheme-settings.php' );
+require_once( 'lib/functions/yst-colourscheme-settings.php' );
+
+// Load the right CSS
+wp_enqueue_style( 'yst_custom_css', get_theme_root_uri() . "/theme001" . genesis_get_option( 'yst_colourscheme' ), array( 'google-font-lato', 'admin-bar', 'theme001' ) );
+
 //* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'Theme001' );
 define( 'CHILD_THEME_URL', 'http://yoast.com/' );
@@ -16,7 +22,6 @@ define( 'CHILD_THEME_VERSION', '0.0.1' );
 function genesis_sample_google_fonts() {
 	wp_enqueue_style( 'google-font-lato', '//fonts.googleapis.com/css?family=Lato:300,700', array(), CHILD_THEME_VERSION );
 }
-
 add_action( 'wp_enqueue_scripts', 'genesis_sample_google_fonts' );
 
 //* Add HTML5 markup structure
@@ -41,6 +46,9 @@ add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 genesis_unregister_layout( 'content-sidebar-sidebar' );
 genesis_unregister_layout( 'sidebar-sidebar-content' );
 genesis_unregister_layout( 'sidebar-content-sidebar' );
+
+// Setup Theme Settings
+include_once( CHILD_DIR . '/lib/functions/child-theme-settings.php' );
 
 /** Register widget areas */
 genesis_register_sidebar( array(
