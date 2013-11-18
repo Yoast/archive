@@ -684,11 +684,21 @@ Structure and Layout
   }
 }
 
-aside.sidebar-primary .widget-title {
-  background-color: $c_sidebarH3Bg;
-  color: $c_sidebarH3;
-  padding: 10px;
-  @include box-shadow(1px 2px 5px #ccc);
+aside {
+  &.header-widget-area {
+    .widget-title {
+      display:none;
+      visibility:hidden;
+    }
+  }
+  &.sidebar-primary {
+    .widget-title {
+      background-color: $c_sidebarH3Bg;
+      color: $c_sidebarH3;
+      padding: 10px;
+      @include box-shadow(1px 2px 5px #ccc);
+    }
+  }
 }
 
 .full-width-content .content {
@@ -1263,9 +1273,9 @@ img#wpstats {
     text: {
       align: right;
     }
-    padding: 20px 0 0;
-    padding: 2rem 0 0;
-    width: $d_headerAside;
+    padding: 20px 20px 0 0;
+    padding: 2rem 2rem 0 0;
+    // width: $d_headerAside;
     color: $c_taglineTop;
     font: {
       size: $f_taglineTop-px;
@@ -1278,8 +1288,8 @@ img#wpstats {
   .search-form {
     float: right;
     margin: {
-      top: 24px;
-      top: 2.4rem;
+      top: 20px;
+      top: 2.0rem;
     }
     input {
       font: {
@@ -1324,12 +1334,6 @@ img#wpstats {
       bottom: 24px;
       bottom: 2.4rem;
     }
-    background: {
-      image: url(../images/Michiel.png); // hmz. might be a better solution for this image sizing, perhaps just less flexible.
-      position: right top;
-      repeat: no-repeat;
-      size: 250px 100%;
-    }
   }
   .widget-title {
     margin: 24px 0 0;
@@ -1342,6 +1346,9 @@ img#wpstats {
     color: $c_headerLink;
     text: {
       decoration: underline;
+    }
+    font: {
+      weight: bold;
     }
     &:hover {
       text: {
@@ -1359,10 +1366,27 @@ img#wpstats {
       left: 24px;
     }
   }
-}
-
-.yoast-after-header-widget {
-  float: left;
+  .yoast-after-header-widget {
+    float: left;
+    ul {
+      margin: {
+      left: 20px;
+      }
+      li {
+        a {
+          text-decoration:none;
+          &:after {
+            content: " »";
+          }
+          &:hover {
+            text: {
+              decoration:underline;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 #yoast-after-header-1 {
@@ -1924,7 +1948,7 @@ Content Area
       clear: both;
     }
     .comment-respond {
-      background {
+      background: {
         color: $c_mainBg;
       }
       margin {
@@ -1979,11 +2003,13 @@ Content Area
 }
 
 .form-allowed-tags {
-  background {
+  background: {
     color: #f5f5f5;
   }
-  font-size: 14px;
-  font-size: 1.4rem;
+  font: {
+    size: 14px;
+    size: 1.4rem;
+  }
   padding: 24px;
   padding: 2.4rem;
 }
@@ -1995,40 +2021,76 @@ Sidebars
 
 .sidebar {
   color: #999;
-}
-
-.sidebar a {
-  border-bottom: 1px solid #ddd;
-}
-
-.sidebar p:last-child {
-  margin-bottom: 0;
-}
-
-.sidebar li {
-  list-style-type: none;
-  margin-bottom: 6px;
-  margin-bottom: 0.6rem;
-  word-wrap: break-word;
-}
-
-.sidebar ul > li:last-child {
-  margin-bottom: 0;
-}
-
-.sidebar .widget {
-  background: {
-    color: $c_mainBg;
+  a {
+    border: {
+      bottom: 1px solid #ddd;
+    }
   }
-  padding: {
-    bottom: 40px;
-    bottom: 4rem;
+  p:last-child {
+    margin: {
+      bottom: 0;
+    }
   }
-  border-radius: 3px;
-}
-
-.sidebar .enews-widget {
-  background-color: #333;
+  li {
+    list-style-type: none;
+    margin: {
+      bottom: 6px;
+      bottom: 0.6rem;
+    }
+    word-wrap: break-word;
+  }
+  ul > li:last-child {
+    margin: {
+      bottom: 0;
+    }
+  }
+  .widget {
+    background: {
+      color: $c_mainBg;
+    }
+    padding: {
+      bottom: 40px;
+      bottom: 4rem;
+    }
+    border-radius: 3px;
+  }
+  .enews-widget {
+    background: {
+      color: #333;
+    }
+  }
+  .widget-wrap {
+    li {
+      a {
+        border: {
+          bottom: 0;
+        }
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      a:after {
+        content: '»';
+        padding: {
+          left: 5px;
+          top: 1px;
+        }
+        font: {
+          size: 1.2em;
+        }
+        color: $c_mainLink;
+      }
+    }
+    &>* {
+      padding: 0 1em;
+    }
+    .widget-title {
+      margin: {
+        left:-0.5em;
+        right:-0.5em;
+      }
+    }
+  }
 }
 
 /*  Sidebar Widgets
@@ -2037,178 +2099,208 @@ Sidebars
   .button-green {
     display: block;
     padding: 10px 20px;
-    border: 1px solid $c_ctaBorder;
+    border: {
+      width: 1px;
+      style: solid;
+      color: $c_ctaBorder;
+    }
     @include box-shadow(inset 0px 0 5px $c_ctaBoxShadow);
     @include background-image(linear-gradient($c_ctaBgFrom, $c_ctaBgTo));
     a {
-      color: $c_ctaText;
-      font-size: $f_ctaText-px;
-      font-size: $f_ctaText;
+      color: $c_ctaTextWhite;
+      font: {
+        size: $f_ctaText-px;
+        size: $f_ctaText;
+      }
       @include text-shadow($c_ctaTextShadow 1px 1px 5px)
     }
     a:after {
       content: '»';
-      padding-left: 5px;
-      padding-top: 1px;
+      padding: {
+        left: 5px;
+        top: 1px;
+       }
     }
   }
-}
-
-.sidebar .widget-wrap li a {
-  border-bottom: 0;
-}
-
-.sidebar .widget-wrap>* {
-  padding: 0 1em;
-}
-
-.sidebar .widget-wrap .widget-title {
-  margin-left:-0.5em;
-  margin-right:-0.5em;
-}
-
-.sidebar .widget-wrap li a:hover {
-  text-decoration: underline;
-}
-
-.sidebar .widget-wrap li a:after {
-  content: '»';
-  padding-left: 5px;
-  padding-top: 1px;
-  font-size: 1.2em;
-  color: $c_mainLink;
 }
 
 /*
 Newsletter Widget
 ---------------------------------------------------------------------------------------------------- */
-.widget-yns input[type="text"] {
-  width:75%;
+.widget-yns {
+  input[type="text"] {
+    width:75%;
+  }
+  input[type="submit"] {
+    background: {
+      color: $c_inputSubmitBg;
+    }
+    &:hover {
+      background: {
+        color: $c_inputSubmitBg;
+      }
+    }
+  }
 }
-.widget-yns input[type="submit"] {
-  background-color: $c_inputSubmitBg;
-}
-.widget-yns input:hover[type="submit"] {
-  background-color: $c_inputSubmitBg;
-}
-
-
 
 /*
 Social Media Widget
 ---------------------------------------------------------------------------------------------------- */
-.btn-fb, .btn-gp, .btn-li, .btn-pin, .btn-rss, .btn-tw, .btn-yt{
-  background: url(../images/social_sprites.png) no-repeat;
-}
-
-#yst_social_widget a {display:block;width:32px;height:32px;float:left;margin-right:10px;}
-
-.btn-fb{
-  background-position: -40.000030517578125px -80.00001525878906px ;
-}
-
-.btn-gp{
-  background-position: -41.000030517578125px -40.00001525878906px ;
-}
-
-.btn-li{
-  background-position: -40.000030517578125px 0;
-}
-
-.SM_Pinterest_32x32{
-  background-position: 0 -121.00001525878906px ;
-}
-
-.btn-rss{
-  background-position: 0 -80.00001525878906px ;
-}
-
-.btn-tw{
-  background-position: 0 -40px ;
-}
-
-.btn-yt{
-  background-position: 0 0;
-}
-
-.ysw_url {
-  border: {
-    spacing: 0;
-  }
-  width: 100%;
-  clear: both;
-  margin: 0;
-}
-
-.ysw_flw_wrapper {
-  z-index: 10;
+.widget_socials {
   margin: {
-    top:75%;
-    right:-5px;
-    right:-0.5rem;
+    bottom: 40px;
+    bottom: 4.0rem;
   }
-  text: {
-    align:center;
+  #yst_social_widget {
+    a {
+      display:block;
+      width:32px;
+      height:32px;
+      float:left;
+      margin: {
+        right:10px;
+        right:1.0rem;
+      }
+      background: {
+        image: url(../images/social_sprites.png);
+        repeat: no-repeat;
+      }
+    }
+    .btn-fb {
+      background: {
+        position: -40.000030517578125px -80.00001525878906px;
+      }
+    }
+    .btn-gp {
+      background: {
+        position: -41.000030517578125px -40.00001525878906px;
+      }
+    }
+    .btn-li {
+      background: {
+        position: -40.000030517578125px 0;
+      }
+    }
+    .SM_Pinterest_32x32 {
+      background: {
+        position: 0 -121.00001525878906px;
+      }
+    }
+    .btn-rss {
+      background: {
+        position: 0 -80.00001525878906px;
+      }
+    }
+    .btn-tw {
+      background: {
+        position: 0 -40px ;
+      }
+    }
+    .btn-yt {
+      background: {
+        position: 0 0;
+      }
+    }
+    .ysw_url {
+      border: {
+        spacing: 0;
+      }
+      width: 100%;
+      clear: both;
+      margin: 0;
+    }
+    .ysw_flw_wrapper {
+      z-index: 10;
+      margin: {
+        top:75%;
+        right:-5px;
+        right:-0.5rem;
+      }
+      text: {
+        align:center;
+      }
+      min-width: 20px;
+      float: right;
+      background: {
+        color: $c_ctaBgGrey; /* fallback */
+      }
+      @include background-image(linear-gradient($c_ctaBgGrey, $c_ctaBgWhite));
+      vertical-align: bottom;
+      padding: 0 1px;
+      line-height: 1em;
+      border: {
+        width:1px;
+        style: solid;
+        color: $c_ctaBorderGrey;
+        radius: 5px;
+      }
+      .ysw_flw  {
+        color: $c_ctaTextBlack;
+        font: {
+          size: 0.7em;
+          weight: 300;
+        }
+      }
+    }
   }
-  min-width: 20px;
-  float: right;
-  background-color: #b2b8b8;/* fallback */
-  background: -webkit-linear-gradient(top, #ffffff, #b2b8b8);
-  background: -moz-linear-gradient(top, #ffffff, #b2b8b8);
-  background: -ms-linear-gradient(top, #ffffff, #b2b8b8);
-  background: -o-linear-gradient(top, #ffffff, #b2b8b8);
-  vertical-align: bottom;
-  padding: 0 1px;
-  line-height: 1em;
-  border: 1px solid #b2b8b8;
-  border-radius: 5px;
-}
-
-.ysw_flw_wrapper .ysw_flw  {
-  color: #000000;
-  font-size: 0.7em;
-  font-weight: 300;
 }
 
 @media
 (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
 /* Retina-specific stuff here */
-  .btn-fb, .btn-gp, .btn-li, .btn-pin, .btn-rss, .btn-tw, .btn-yt{
-    background: url(images/social_spritesx2.png) no-repeat;
-  }
+  .widget_socials {
+    #yst_social_widget {
+      a {
+        background: url(images/social_spritesx2.png) no-repeat;
+        display:block;
+        width:64px;
+        height:64px;
+        float:left;
+        margin: {
+          right:10px;
+          right:1.0rem;
+        }
+      }
+      .btn-fb {
+        background: {
+          position: -100px -145px;
+        }
+      }
+      .btn-gp {
+        background: {
+          position: -100px -74px;
+        }
+      }
+      .btn-li {
+        background: {
+          position: -100px -2px;
+        }
+      }
+      .btn-pin {
+        background: {
+          position: 0 -221px;
+        }
+      }
+      .btn-rss {
+        background: {
+          position: 0 -146px;
+        }
+      }
+      .btn-tw {
+        background: {
+          position: 0 -73px;
+        }
+      }
 
-  #yst_social_widget a {display:block;width:64px;height:64px;float:left;margin-right:10px;}
-
-  .btn-fb{
-    background-position: -100px -145px ;
-  }
-
-  .btn-gp{
-    background-position: -100px -74px ;
-  }
-
-  .btn-li{
-    background-position: -100px -2px ;
-  }
-
-  .btn-pin{
-    background-position: 0 -221px ;
-  }
-
-  .btn-rss{
-    background-position: 0 -146px ;
-  }
-
-  .btn-tw{
-    background-position: 0 -73px ;
-  }
-
-  .btn-yt{
-    background-position: 0 0;
+      .btn-yt {
+        background: {
+          position: 0 0;
+        }
+      }
+    }
   }
 }
-
 
 
 /*
@@ -2343,14 +2435,23 @@ only screen and (min-device-pixel-ratio: 1.5) {
     max-width: 960px;
   }
 
+  #yoast-after-header-container {
+    #yoast-after-header-1,
+    #yoast-after-header-2,
+    #yoast-after-header-3 {
+      width:25%;
+    }
+  }
+
   .content-sidebar-sidebar .content-sidebar-wrap,
   .sidebar-content-sidebar .content-sidebar-wrap,
   .sidebar-sidebar-content .content-sidebar-wrap {
     width: 740px;
   }
 
-  .content,
-  .site-header .widget-area {
+  .content
+  //.site-header .widget-area
+  {
     width: 620px;
   }
 
@@ -2388,7 +2489,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
   .sidebar-secondary,
   .sidebar-sidebar-content .content,
   .sidebar-sidebar-content .content-sidebar-wrap,
-  .site-header .widget-area,
+  // .site-header .widget-area,
   .site-inner,
   .title-area,
   .wrap {
@@ -2477,7 +2578,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 863px ) { // was 767px
 
   .five-sixths,
   .four-sixths,
@@ -2492,5 +2593,14 @@ only screen and (min-device-pixel-ratio: 1.5) {
   .two-thirds {
     margin: 0;
     width: 100%;
+  }
+  .site-header .widget-area {
+    width: 100%;
+    text-align:left;
+    padding: 0 20px 0;
+    padding: 0 2rem 0;
+    img {
+      max-width: 100%;
+    }
   }
 }

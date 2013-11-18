@@ -33,6 +33,7 @@ $c_metaAtPostBorder:    #dddddd;
 $c_linkToArchives:      #028aaf;
 $c_commentHTMLtags:     #b2b8b8;
 $c_hrLine:              #e25918;
+
 $c_randLine:            #dddddd; // random grey line
 
 $c_selectionText:       #028aaf;
@@ -125,19 +126,25 @@ $c_commentReplyBorder:  #dddddd;
 $c_ctaBgFrom:           #92ce59; // top
 $c_ctaBgTo:             #6bbd1e; // bottom
 $c_ctaBorder:           #6bbd1e;
-$c_ctaText:             #ffffff;
+$c_ctaTextWhite:        #ffffff;
 $c_ctaTextShadow:       #eeeeee;
 $c_ctaBoxShadow:        #ffffff;
 
+$c_ctaBgWhite:          #ffffff;
+$c_ctaBorderWhite:      #ffffff;
+$c_ctaBgGrey:           #b2b8b8;
+$c_ctaBorderGrey:       #b2b8b8;
+$c_ctaTextBlack:        #000000;
+
 // tables
-$c_tableBg:               #ffffff;
-$c_tableText:             #000000;
-$c_tableRowAlt:           #b3d7e6;
-$c_tableHeaderBg:         #028aaf;
-$c_tableHeaderText:       #ffffff;
-$c_tableLink:             #028aaf;
-$c_tableLinkHover:        #e25918;
-$c_tableBorder:           #dddddd;
+$c_tableBg:             #ffffff;
+$c_tableText:           #000000;
+$c_tableRowAlt:         #b3d7e6;
+$c_tableHeaderBg:       #028aaf;
+$c_tableHeaderText:     #ffffff;
+$c_tableLink:           #028aaf;
+$c_tableLinkHover:      #e25918;
+$c_tableBorder:         #dddddd;
 
 // code
 $c_codeBg:              #333333;
