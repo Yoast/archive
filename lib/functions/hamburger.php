@@ -32,9 +32,8 @@ add_action( 'genesis_after_header', 'add_to_genesis_menu' );
 
 function add_search_to_wp_menu( $items, $args ) {
 	if ( 'primary' === $args->theme_location ) {
-		$search = get_search_form( false );
 		$add = '<li class="menu-item menu-item-search">';
-		$add .= $search;
+		$add .= get_search_form( false );
 		$add .= '</li>';
 		$items = $add . $items;
 	}
