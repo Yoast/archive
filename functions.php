@@ -56,6 +56,12 @@ include_once( CHILD_DIR . '/lib/functions/child-theme-settings.php' );
 
 /** Register widget areas */
 genesis_register_sidebar( array(
+	'id'          => 'yoast-top-right',
+	'name'        => __( 'Top Right', 'yoast' ),
+	'description' => __( 'Top right widget area. Intended for search widget. Changes drastically on mobile.', 'yoast' ),
+) );
+
+genesis_register_sidebar( array(
 	'id'          => 'yoast-after-header-1',
 	'name'        => __( 'After Header 1', 'yoast' ),
 	'description' => __( 'After Header 1 widget area.', 'yoast' ),
@@ -117,6 +123,20 @@ function yoast_after_header_genesis() {
 }
 
 add_action( 'genesis_after_header', 'yoast_after_header_genesis' );
+
+/**
+ * Add top-right widget area for search-widget
+ */
+function yoast_add_top_right_area() {
+	if (true) {
+		genesis_widget_area( 'yoast-top-right', array(
+			'before' => '<div id="yoast-top-right" class="yoast-top-right-widget">',
+			'after'  => '</div>',
+		) );
+	}
+}
+
+add_action( 'genesis_before_header', 'yoast_add_top_right_area' );
 
 // Add Read More Link to Excerpts
 add_filter( 'excerpt_more', 'get_read_more_link' );
