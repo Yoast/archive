@@ -136,7 +136,7 @@ function yoast_add_top_right_area() {
 	}
 }
 
-add_action( 'genesis_before_header', 'yoast_add_top_right_area' );
+add_action( 'genesis_header', 'yoast_add_top_right_area' );
 
 // Add Read More Link to Excerpts
 add_filter( 'excerpt_more', 'get_read_more_link' );
