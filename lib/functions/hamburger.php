@@ -26,6 +26,17 @@ function add_to_genesis_menu() {
 }
 add_action( 'genesis_after_header', 'add_to_genesis_menu' );
 
+function add_search_to_wp_menu ( $items, $args ) {
+	if( 'primary' === $args -> theme_location ) {
+		$search = get_search_form(false);
+		$items .= '<li class="menu-item menu-item-search">';
+		$items .= $search;
+		$items .= '</li>';
+	}
+	return $items;
+}
+add_filter('wp_nav_menu_items','add_search_to_wp_menu',10,2);
+
 function add_wrappers_open() {
 	echo '<div id="outer-wrap"><div id="inner-wrap">';
 }

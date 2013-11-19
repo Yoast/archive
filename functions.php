@@ -57,8 +57,8 @@ include_once( CHILD_DIR . '/lib/functions/child-theme-settings.php' );
 /** Register widget areas */
 genesis_register_sidebar( array(
 	'id'          => 'yoast-top-right',
-	'name'        => __( 'Top Right', 'yoast' ),
-	'description' => __( 'Top right widget area. Intended for search widget. Changes drastically on mobile.', 'yoast' ),
+	'name'        => __( 'Search', 'yoast' ),
+	'description' => __( 'Search widget area. Intended for search widget. Changes drastically on mobile.', 'yoast' ),
 ) );
 
 genesis_register_sidebar( array(
@@ -130,7 +130,7 @@ add_action( 'genesis_after_header', 'yoast_after_header_genesis' );
 function yoast_add_top_right_area() {
 	if (true) {
 		genesis_widget_area( 'yoast-top-right', array(
-			'before' => '<div id="yoast-top-right" class="yoast-top-right-widget">',
+			'before' => '<div id="yoast-top-right" class="widget-area yoast-top-right-widget">',
 			'after'  => '</div>',
 		) );
 	}
