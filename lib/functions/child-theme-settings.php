@@ -38,13 +38,13 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 		$menu_ops = array(
 			'submenu' => array(
 				'parent_slug' => 'genesis',
-				'page_title'  => 'Genesis - Child Theme Settings',
+				'page_title'  => 'Genesis - Child Theme Settings by Yoast',
 				'menu_title'  => 'Child Theme Settings',
 			)
 		);
 
 		// Set up page options. These are optional, so only uncomment if you want to change the defaults
-		$page_ops = array(//	'screen_icon'       => 'options-general',
+		$page_ops = array( //	'screen_icon'       => 'options-general',
 			//	'save_button_text'  => 'Save Settings',
 			//	'reset_button_text' => 'Reset Settings',
 			//	'save_notice_text'  => 'Settings saved.',
@@ -59,13 +59,6 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 		$default_settings = array(
 			'home-intro'                   => '',
 			'footer'                       => 'Copyright &copy; ' . date( 'Y' ) . ' All Rights Reserved',
-			'subscribe-text'               => '',
-			'genesis-text'                 => '',
-			'plugin-archive-title'         => '',
-			'plugin-archive-intro'         => '',
-			'plugin-archive-lower-title'   => '',
-			'plugin-archive-lower-content' => '',
-			'speaking-intro'               => '',
 		);
 
 		// Create the Admin Page
@@ -73,7 +66,6 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 		// Initialize the Sanitization Filter
 		add_action( 'genesis_settings_sanitizer_init', array( $this, 'sanitization_filters' ) );
-
 	}
 
 	/**
@@ -83,22 +75,10 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 	 * See /lib/classes/sanitization.php for all available filters.
 	 */
 	function sanitization_filters() {
-
-		genesis_add_option_filter( 'no_html', $this->settings_field,
-			array(
-				'plugin-archive-title',
-				'plugin-archive-lower-title',
-			) );
-
 		genesis_add_option_filter( 'safe_html', $this->settings_field,
 			array(
 				'home-intro',
-				'footer',
-				'plugin-archive-intro',
-				'plugin-archive-lower-content',
-				'subscribe-text',
-				'genesis-text',
-				'speaking-intro'
+				'footer'
 			) );
 	}
 
@@ -109,10 +89,6 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 	function metaboxes() {
 		add_meta_box( 'home_intro_metabox', 'Home Intro', array( $this, 'home_intro_metabox' ), $this->pagehook, 'main', 'high' );
 		add_meta_box( 'footer_metabox', 'Footer', array( $this, 'footer_metabox' ), $this->pagehook, 'main', 'high' );
-		add_meta_box( 'after_post_information_metabox', 'After Post Information', array( $this, 'after_post_information_metabox' ), $this->pagehook, 'main', 'high' );
-		//add_meta_box( 'plugin_archive_metabox', 'Plugin Archive', array( $this, 'plugin_archive_metabox' ), $this->pagehook, 'main', 'high' );
-
-		//add_meta_box( 'cpt_intro_metabox', 'Custom Post Type Intro\'s', array( $this, 'cpt_intro_metabox' ), $this->pagehook, 'main', 'high' );
 	}
 
 	/**
@@ -124,18 +100,6 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 	}
 
 	/**
-	 * Speaking Intro
-	 *
-	 */
-	function cpt_intro_metabox() {
-		foreach ( get_post_types( array( 'public' => true, '_builtin' => false, 'has_archive' => true ), 'objects' ) as $cpt ) {
-			echo '<h4>' . $cpt->labels->name . ' (' . $cpt->name . ')</h4>';
-			echo '<p><label for="' . $this->get_field_id( $cpt->name . '-title' ) . '">Title: </label><input type="text" name="' . $this->get_field_name( $cpt->name . '-title' ) . '" id="' . $this->get_field_id( $cpt->name . '-title' ) . '" value="' . esc_attr( $this->get_field_value( $cpt->name . '-title' ) ) . '" size="27" /></p>';
-			wp_editor( $this->get_field_value( $cpt->name . '-intro' ), $this->get_field_id( $cpt->name . '-intro' ), array( 'textarea_rows' => 5 ) );
-		}
-	}
-
-	/**
 	 * Footer Metabox
 	 * @since 1.0.0
 	 */
@@ -143,36 +107,6 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 		wp_editor( $this->get_field_value( 'footer' ), $this->get_field_id( 'footer' ), array( 'textarea_rows' => 5 ) );
 	}
-
-	/**
-	 * After Post Information Metabox
-	 * @since 1.0.0
-	 */
-	function after_post_information_metabox() {
-
-		echo '<p><strong>Subscribe text</strong></p>';
-		wp_editor( $this->get_field_value( 'subscribe-text' ), $this->get_field_id( 'subscribe-text' ), array( 'textarea_rows' => 5 ) );
-
-		echo '<p><strong>Genesis text</strong></p>';
-		wp_editor( $this->get_field_value( 'genesis-text' ), $this->get_field_id( 'genesis-text' ), array( 'textarea_rows' => 5 ) );
-	}
-
-	/**
-	 * Plugin Archive
-	 *
-	 */
-	function plugin_archive_metabox() {
-
-		echo '<p><strong>Introduction</strong></p>';
-		echo '<p><label for="' . $this->get_field_id( 'plugin-archive-title' ) . '">Title: </label><input type="text" name="' . $this->get_field_name( 'plugin-archive-title' ) . '" id="' . $this->get_field_id( 'plugin-archive-title' ) . '" value="' . esc_attr( $this->get_field_value( 'plugin-archive-title' ) ) . '" size="27" /></p>';
-		wp_editor( $this->get_field_value( 'plugin-archive-intro' ), $this->get_field_id( 'plugin-archive-intro' ) );
-
-		echo '<p><strong>Lower Section</strong></p>';
-		echo '<p><label for="' . $this->get_field_id( 'plugin-archive-lower-title' ) . '">Title: </label><input type="text" name="' . $this->get_field_name( 'plugin-archive-lower-title' ) . '" id="' . $this->get_field_id( 'plugin-archive-lower-title' ) . '" value="' . esc_attr( $this->get_field_value( 'plugin-archive-lower-title' ) ) . '" size="27" /></p>';
-		wp_editor( $this->get_field_value( 'plugin-archive-lower-content' ), $this->get_field_id( 'plugin-archive-lower-content' ) );
-
-	}
-
 }
 
 /**

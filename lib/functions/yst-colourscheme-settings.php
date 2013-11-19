@@ -15,7 +15,6 @@
  * Set defaults
  *
  * @param $defaults
- *
  * @return mixed
  */
 function yst_colourscheme_defaults( $defaults ) {
