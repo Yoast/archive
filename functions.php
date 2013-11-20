@@ -182,20 +182,16 @@ add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic' );
 function yst_do_genesis_footer() {
 	//* Build the text strings.
 	$backtotop_text = '';
-	$creds_text     = sprintf( '&#x000B7; Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a> &#x000B7;', date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com" rel="nofollow">Theme001</a>', '<a href="http://yoast.com" rel="nofollow">Yoast</a>' );
+	$creds_text     = sprintf( '&#x000B7; Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a> &#x000B7;', date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com" rel="nofollow">Theme001</a>', 'Yoast' );
 
 	//* Filter the text strings
 	$backtotop_text = apply_filters( 'genesis_footer_backtotop_text', $backtotop_text );
 	$creds_text     = apply_filters( 'genesis_footer_creds_text', $creds_text );
 
-	$backtotop = $backtotop_text ? sprintf( '<div class="gototop"><p>%s</p></div>', $backtotop_text ) : '';
-	$creds     = $creds_text ? sprintf( '<div class="creds"><p>%s</p></div>', $creds_text ) : '';
+	$backtotop = $backtotop_text ? sprintf( '<div class="gototop">%s</div>', $backtotop_text ) : '';
+	$creds     = $creds_text ? sprintf( '<div class="creds">%s</div>', $creds_text ) : '';
 
 	$output = $backtotop . $creds;
-
-	//* Only use credits if HTML5
-	if ( genesis_html5() )
-		$output = '<p>' . $creds_text . '</p>';
 
 	echo apply_filters( 'genesis_footer_output', $output, $backtotop_text, $creds_text );
 }
