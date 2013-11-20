@@ -12,8 +12,9 @@ require_once( 'lib/functions/yst-colourscheme-settings.php' );
 
 // Load the right CSS
 function yst_load_css_from_setting() {
-	wp_enqueue_style( 'yst_custom_css', get_theme_root_uri() . "/theme001" . genesis_get_option( 'yst_colourscheme' ), array( 'google-font-lato', 'admin-bar', 'theme001' ) );
+	wp_enqueue_style( 'yst_custom_css', get_theme_root_uri() . "/theme001" . genesis_get_option( 'yst_colourscheme' ), array( 'google-font-quattrocento_sans', 'admin-bar', 'theme001' ) );
 }
+
 add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting' );
 
 
@@ -22,11 +23,12 @@ define( 'CHILD_THEME_NAME', 'Theme001' );
 define( 'CHILD_THEME_URL', 'http://yoast.com/' );
 define( 'CHILD_THEME_VERSION', '0.0.1' );
 
-//* Enqueue Lato Google font
-function genesis_sample_google_fonts() {
-	wp_enqueue_style( 'google-font-lato', '//fonts.googleapis.com/css?family=Lato:300,700', array(), CHILD_THEME_VERSION );
+//* Enqueue Google font
+function yst_add_google_fonts() {
+	wp_enqueue_style( 'google-font-quattrocento_sans', '//fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);', array(), CHILD_THEME_VERSION );
 }
-add_action( 'wp_enqueue_scripts', 'genesis_sample_google_fonts' );
+
+add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 
 //* Add HTML5 markup structure
 add_theme_support( 'html5' );
@@ -128,7 +130,7 @@ add_action( 'genesis_after_header', 'yoast_after_header_genesis' );
  * Add top-right widget area for search-widget
  */
 function yoast_add_top_right_area() {
-	if (true) {
+	if ( true ) {
 		genesis_widget_area( 'yoast-top-right', array(
 			'before' => '<div id="yoast-top-right" class="widget-area yoast-top-right-widget">',
 			'after'  => '</div>',
@@ -166,7 +168,7 @@ function get_read_more_link() {
 //}
 
 // Include the functions for the hamburger menu
-require("lib/functions/hamburger.php");
+require( "lib/functions/hamburger.php" );
 
 /**
  * Add styling for hamburgermenu
@@ -174,4 +176,29 @@ require("lib/functions/hamburger.php");
 function enqueue_styles_basic() {
 	wp_enqueue_style( 'style-basic', get_stylesheet_directory_uri() . '/assets/css/style.css' );
 }
+
 add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic' );
+
+function yst_do_genesis_footer() {
+	//* Build the text strings.
+	$backtotop_text = '';
+	$creds_text     = sprintf( '&#x000B7; Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a> &#x000B7;', date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com" rel="nofollow">Theme001</a>', '<a href="http://yoast.com" rel="nofollow">Yoast</a>' );
+
+	//* Filter the text strings
+	$backtotop_text = apply_filters( 'genesis_footer_backtotop_text', $backtotop_text );
+	$creds_text     = apply_filters( 'genesis_footer_creds_text', $creds_text );
+
+	$backtotop = $backtotop_text ? sprintf( '<div class="gototop"><p>%s</p></div>', $backtotop_text ) : '';
+	$creds     = $creds_text ? sprintf( '<div class="creds"><p>%s</p></div>', $creds_text ) : '';
+
+	$output = $backtotop . $creds;
+
+	//* Only use credits if HTML5
+	if ( genesis_html5() )
+		$output = '<p>' . $creds_text . '</p>';
+
+	echo apply_filters( 'genesis_footer_output', $output, $backtotop_text, $creds_text );
+}
+
+remove_action( 'genesis_footer', 'genesis_do_footer' );
+add_action( 'genesis_footer', 'yst_do_genesis_footer' );
