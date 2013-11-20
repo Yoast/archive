@@ -639,7 +639,7 @@ Structure and Layout
 
 .content {
   float: right;
-  width: $d_mainColumn;
+  width: $d_homepageMainColumn;
 }
 
 .content-sidebar {
@@ -934,10 +934,6 @@ img.alignright,
   text: {
     align: left;
   }
-  font: {
-    size: 36px;
-    size: 3.6rem;
-  }
   line-height: 1;
   a {
     color: $c_mainH1;
@@ -995,42 +991,6 @@ Widgets
     decoration: none;
   }
 }
-
-.exerptreadmore {
-  text: {
-    align: right;
-    decoration: none;
-  }
-}
-
-.exerptreadmore a {
-  text: {
-    align: right;
-    decoration: none;
-  }
-  color: $c_mainLink;
-  border: {
-    bottom: none;
-  }
-}
-
-.exerptreadmore a:hover {
-  font: {
-    weight: bold;
-  }
-  color: $c_mainLink;
-}
-
-.exerptreadmore a:after {
-  content: '»';
-  padding: {
-    left: 5px;
-  }
-  font: {
-    size:1.2em;
-  }
-}
-
 
 /*
 Plugins
@@ -1295,8 +1255,8 @@ img#wpstats {
   }
   > .wrap {
     padding: {
-      bottom: 24px;
-      bottom: 2.4rem;
+      bottom: 6px;
+      bottom: 0.6rem;
     }
   }
   .widget-title {
@@ -1644,6 +1604,14 @@ Content Area
 --------------------------------------------- */
 
 .post {
+  margin: {
+    bottom: 36px;
+    bottom: 3.6rem;
+  }
+  padding: {
+    bottom: 14px;
+    bottom: 1.4rem;
+  }
   border: {
     bottom: 1px solid $c_hrLine;
   }
@@ -1723,6 +1691,59 @@ Content Area
   .search-form {
     width: 50%;
   }
+  .exerptreadmore {
+    text: {
+      align: right;
+      decoration: none;
+    }
+    a {
+      text: {
+        align: right;
+        decoration: none;
+      }
+      color: $c_mainLink;
+      font: {
+        weight: 700;
+      }
+      border: {
+        bottom: none;
+      }
+      &:hover {
+        font: {
+          weight: bold;
+        }
+        color: $c_mainLinkHover;
+      }
+      &:after {
+        content: '»';
+        padding: {
+          left: 5px;
+        }
+        font: {
+          size:1.2em;
+        }
+      }
+    }
+  }
+}
+
+// exceptions for archive pages, read more link closer to content
+.blog {
+  .entry-content {
+    p {
+      margin: {
+        bottom: 0;
+      }
+    }
+    img.alignleft {
+      margin: 0 10px 10px 0;
+      margin: 0 1.0rem 1.0rem 0;
+    }
+    img.alignright {
+      margin: 0 0 10px 10px;
+      margin: 0 0 1.0rem 1.0rem;
+    }
+  }
 }
 
 .quote-caption {
@@ -1739,12 +1760,8 @@ Content Area
     size: 1.4rem;
   }
   a {
-    border: {
-      bottom: {
-        width: 1px;
-        style: solid;
-        color: $c_linkBorder;
-      }
+    font: {
+      weight: 700;
     }
   }
 }
@@ -2017,22 +2034,20 @@ Content Area
 
 
 /*
-Sidebars
+=Sidebars
 ---------------------------------------------------------------------------------------------------- */
 .sidebar {
   color: $c_sidebarText;
   .widget-wrap {
     ul {
       margin: {
-        left: 20px;
-        left: 2.0rem;
+        left: 26px;
+        left: 2.6rem;
       }
     }
     li {
       list-style:square;
       margin: {
-        left: 10px;
-        left: 1rem;
         bottom:0;
       }
       line-height: 1.625em;
@@ -2126,8 +2141,8 @@ Sidebars
   .button-green {
     a {
       display: block;
-      padding: 5px 15px;
-      padding: 0.5rem 1.5rem;
+      padding: 15px;
+      padding: 1.5rem;
       border: {
         width: 1px;
         style: solid;
@@ -2140,9 +2155,10 @@ Sidebars
         size: $f_ctaText-px;
         size: $f_ctaText;
       }
+      line-height: 1em;
       @include text-shadow($c_ctaTextShadow 1px 1px 5px);
       &:after {
-        content: '»';
+        content: '▸';
         padding: {
           left: 5px;
           top: 1px;
@@ -2150,6 +2166,7 @@ Sidebars
       }
       &:hover {
         @include background-image(linear-gradient($c_ctaBgTo, $c_ctaBgFrom));
+        color: $c_ctaTextWhite;
       }
     }
   }
@@ -2184,8 +2201,8 @@ Social Media Widget
   }
   #yst_social_widget {
     padding: {
-      left: 20px;
-      left: 2.0rem;
+      left: 10px;
+      left: 1.0rem;
     }
     a {
       display:block;
@@ -2342,6 +2359,10 @@ Footer Widgets
 ---------------------------------------------------------------------------------------------------- */
 
 .footer-widgets {
+  font: {
+    size: $f_footerBaseFont-px;
+    size: $f_footerBaseFont;
+  }
   background: {
     color: $c_footerWidgetsBg;
   }
@@ -2354,12 +2375,19 @@ Footer Widgets
   }
   color: $c_footerWidgetsText;
   clear: both;
-  padding: 40px 0 16px;
-  padding: 4rem 0 1.6rem;
+  padding: 30px 0 16px;
+  padding: 3rem 0 1.6rem;
   a {
     color: $c_footerWidgetsLink;
     &:hover {
       color: $c_footerWidgetsLinkHover;
+    }
+  }
+  h3,
+  h4 {
+    font: {
+      size: $f_footerH3-px;
+      size: $f_footerH3;
     }
   }
   li {
