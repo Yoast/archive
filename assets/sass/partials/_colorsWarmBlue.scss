@@ -12,10 +12,13 @@ $c_logoText:            #999999;
 $c_logoTextLink:        #333333;
 $c_logoTextLinkHover:   #333333;
 
-$c_taglineTop:          #000000;
+$c_taglineTop:          #666666;
 $c_taglineTopBold:      #028aaf;
-$c_taglineFullWidth:    #000000;
+$c_taglineFullWidth:    #666666;
 $c_taglineFullWidthBold:#028aaf;
+$c_taglineBoxShadow:    #cccccc;
+$c_taglineLink:         #028aaf;
+$c_taglineLinkHover:    #e25918;
 
 $c_breadcrumbs:         #000000;
 $c_breadcrumbsLink:     #028aaf;
@@ -67,9 +70,9 @@ $c_navMainBorderBottom: #e25918;
 $c_navSubBg:           #e25918;
 $c_navSubText:         #ffffff;
 $c_navSubLink:         #ffffff;
-$c_navSubLinkHover:    #000000;
+$c_navSubLinkHover:    #ffffff;
 $c_navSubLinkBg:       #b3d7e6;
-$c_navSubLinkBgHover:  #b3d7e6;
+$c_navSubLinkBgHover:  #028aaf;
 $c_navSubLinkActive:   #b3d7e6;
 $c_navSubBorder:       #ffffff;
 $c_navSubBorderBottom: #e25918;
@@ -127,7 +130,7 @@ $c_ctaBgFrom:           #92ce59; // top
 $c_ctaBgTo:             #6bbd1e; // bottom
 $c_ctaBorder:           #6bbd1e;
 $c_ctaTextWhite:        #ffffff;
-$c_ctaTextShadow:       #eeeeee;
+$c_ctaTextShadow:       #333333;
 $c_ctaBoxShadow:        #ffffff;
 
 $c_ctaBgWhite:          #ffffff;
@@ -159,10 +162,20 @@ $c_sidebarBg:           #ffffff;
 $c_sidebarText:         #000000;
 $c_sidebarLink:         #000000;
 $c_sidebarLinkHover:    #028aaf;
+$c_sidebarLinkArrow:    #028aaf;
 $c_sidebarH3:           #028aaf;
 $c_sidebarH3Bg:         #eeeeee;
 $c_sidebarH4:           #666666;
 $c_sidebarH4Bg:         #ffffff;
+
+// footerwidgets
+$c_footerWidgetsBg:       #eeeeee;
+$c_footerWidgetsBorderTop:#ec9e61;
+$c_footerWidgetsText:     #000000;
+$c_footerWidgetsLink:     #000000;
+$c_footerWidgetsLinkHover:#000000;
+$c_footerWidgetsH3:       #000000;
+$c_footerWidgetsH4:       #000000;
 
 // footer
 $c_footerBg:            #e2e2e2;
