@@ -220,3 +220,7 @@ function yst_sticky_menu() {
 	});</script>';
 }
 add_action( 'wp_footer', 'yst_sticky_menu' );
+
+//* Reposition the breadcrumbs
+remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
+add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
