@@ -632,6 +632,94 @@ img {
   width: auto; /* IE8 */
 }
 
+/*
+=Sticky menu - scrolling
+---------------------------------------------------------------------------------------------------- */
+
+body.sticky {
+  padding-top: 120px;
+  .site-header {
+    position: fixed;
+    top: 0;
+    background-position: center -30px;
+    z-index: 400;
+    height: 44px;
+    .wrap {
+      padding: 0;
+    }
+    aside,
+    #yoast-top-right {
+      display: none;
+      visibility: hidden;
+    }
+    .title-area {
+      background: none !important;
+      position: fixed;
+      top: 0;
+      padding: 0;
+      margin: 0;
+      z-index: 600;
+      width: 0;
+      height: 0;
+      .site-title {
+        a {
+          width:0;
+          height:0
+        }
+      }
+    }
+  }
+  .nav-primary {
+    position: fixed;
+    background: {
+      color:$c_navMainBg;
+    }
+    top: 0;
+    width: 100%;
+    z-index: 500;
+    height: 44px;
+    overflow-y: hidden;
+    padding: 0;
+    @include box-shadow(0 8px 8px -6px $c_navMainShadow);
+    border: none;
+    margin: 0;
+    li {
+      a {
+        color: $c_navMainLink;
+        &:hover {
+          color:$c_navMainLinkHover;
+          text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+        }
+      }
+      &.current-menu-item,
+      &.current-page-ancestor {
+        background: {
+          color: $c_navMainLinkBgHover;
+        }
+      }
+      &.menu-item-search {
+        display:inline;
+        visibility: visible;
+        z-index: 700;
+        float:right;
+        width:160px;
+        input {
+          width: 100px;
+          margin: {
+            top: 5px;
+          }
+          &:focus {
+            width:160px;
+            margin: {
+              left: -60px;
+            }
+            @include transition-property(width);
+          }
+        }
+      }
+    }
+  }
+}
 
 /*
 Structure and Layout
@@ -1351,8 +1439,10 @@ img#wpstats {
   }
   a {
     color: $c_taglineLink;
+    text-decoration: underline;
     &:hover {
       color: $c_taglineLinkHover;
+      text-decoration: none;
     }
   }
 }
@@ -1822,7 +1912,6 @@ Content Area
       background: {
         color: $c_pagenavBg;
       }
-      @include border-radius(3px);
       color: $c_pagenavLink;
       cursor: pointer;
       display: inline-block;

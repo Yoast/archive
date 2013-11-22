@@ -179,6 +179,9 @@ function enqueue_styles_basic() {
 
 add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic' );
 
+/**
+ * Function Do Genesis Footer
+ */
 function yst_do_genesis_footer() {
 	//* Build the text strings.
 	$backtotop_text = '';
@@ -198,3 +201,22 @@ function yst_do_genesis_footer() {
 
 remove_action( 'genesis_footer', 'genesis_do_footer' );
 add_action( 'genesis_footer', 'yst_do_genesis_footer' );
+
+/**
+ * Add sticky menu for scrolling
+ */
+function yst_sticky_menu() {
+	echo '<script>jQuery(function( $ ){
+		if ( $(window).width() > 768 ) {
+			$(window).scroll(function() {
+				var yPos = ( $(window).scrollTop() );
+				if(yPos > 70) {
+					$("body").addClass("sticky");
+				} else {
+					$("body").removeClass("sticky");
+				}
+			});
+		}
+	});</script>';
+}
+add_action( 'wp_footer', 'yst_sticky_menu' );
