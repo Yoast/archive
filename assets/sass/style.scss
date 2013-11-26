@@ -15,7 +15,6 @@
 
     v2
 
-
 */
 
 @import "compass";
@@ -24,6 +23,7 @@
 // Import default for this theme
 @import "partials/reset";
 @import "partials/colorsWarmBlue";
+//@import "partials/colorsLimeAndMagenta";
 @import "partials/dimensions";
 @import "partials/fonts";
 
@@ -32,12 +32,8 @@
 @import url(http://fonts.googleapis.com/css?family=Lekton:400,700,400italic);
 
 //  HTML5 Reset
-//  ---------------------------------------------------------------------------------------------------- */
-//
 //  Baseline Normalize
 //  normalize.css v2.1.2 | MIT License | git.io/normalize
-//  --------------------------------------------- */
-
 
 * {
   @include box-sizing(border-box);
@@ -45,7 +41,7 @@
 
 html {
   font: {
-    size: 62.5%; /* 10px browser default */
+    size: 62.5%; // 10px browser default
     family: sans-serif;
   }
 }
@@ -62,8 +58,7 @@ audio:not([controls]) {
   display:none;
 }
 
-/* Main Elements
---------------------------------------------- */
+/* =Main Elements */
 body {
   background: {
     color: $c_mainBg;
@@ -194,7 +189,7 @@ abbr[title]{
 b,
 strong {
   font: {
-    weight:bold;
+    weight:700;
   }
 }
 
@@ -265,7 +260,7 @@ header {
   }
 }
 
-/* Forms */
+/* =Forms */
 
 fieldset {
   border:1px solid $c_fieldsetBorder;
@@ -281,29 +276,30 @@ legend {
 button {
   font: {
     family:inherit;
-    size:100%;
+    size:inherit;
   }
+  padding:8px;
+  padding:0.8rem;
   margin:0;
   line-height:normal;
   text: {
     transform:none
   }
   -webkit-appearance:button;
-  background: {
-    color: $c_inputSubmitBg
+  border: {
+    width: 1px;
+    style: solid;
+    color: $c_inputSubmitBorder;
   }
-  border: none;
-  @include box-shadow(none);
+  @include box-shadow(inset 0px 0 3px $c_inputSubmitBoxShadow);
+  @include background-image(linear-gradient(lighten($c_inputSubmitBg,5%),$c_inputSubmitBg));
   color: $c_inputSubmitText;
   cursor: pointer;
-  padding: 16px 24px;
-  padding: 1.6rem 2.4rem;
   width: auto;
+  position:relative; // if there's a better way to align input and submit, please add 1/2
+  top:1px; // if there's a better way to align input and submit, please add 2/2
   &:hover {
-    background: {
-      color:$c_inputSubmitBgHover
-    }
-    color: $c_inputSubmitTextHover;
+    @include background-image(linear-gradient($c_inputSubmitBg,lighten($c_inputSubmitBg,5%)));
   }
   &[disabled] {
     cursor:default;
@@ -316,7 +312,7 @@ button {
 
 input {
   font: {
-    family:inherit
+    family: $f_codeFont;
   }
   background: {
     color: $c_inputBg;
@@ -343,14 +339,6 @@ input {
   }
   &.button{
     @extend button;
-    @include border-radius(3px);
-    display: inline-block;
-    &:hover {
-      background: {
-        color: $c_inputSubmitBgHover;
-      }
-      color: $c_inputSubmitTextHover;
-    }
   }
   &.entry-content .button {
     @extend button;
@@ -415,8 +403,7 @@ textarea {
   color: $c_inputTextPlaceholder;
 }
 
-/* Tables
---------------------------------------------- */
+/* =Tables */
 
 table {
   border: {
@@ -447,7 +434,7 @@ table {
       transform: none;
     }
     font: {
-      weight: bold;
+      weight: 700;
     }
   }
   td {
@@ -460,6 +447,52 @@ table {
     }
     padding: 6px 0;
     padding: 0.6rem 0;
+  }
+}
+
+// Calendar widget
+.widget_calendar {
+  .widget-title {
+    display:none;
+  }
+  #wp-calendar {
+    tbody {
+      border:0;
+      a {
+        color: $c_linkHover;
+        font: {
+          weight: 700;
+        }
+        &:hover {
+          color: $c_link;
+        }
+      }
+    }
+    td {
+      border:0;
+      padding:0;
+      line-height:1.5em;
+    }
+    tfoot {
+      font: {
+        weight: 700;
+      }
+      #prev {
+        text-align:left;
+      }
+      #next {
+        text-align:right;
+      }
+    }
+    caption {
+      @extend widgettitle;
+      line-height:1em;
+      text-align:left;
+      float:none;
+      font: {
+        weight: 700;
+      }
+    }
   }
 }
 
@@ -522,8 +555,8 @@ table {
   margin: 0 auto;
   max-width: $d_full;
   padding: {
-    top: 40px;
-    top: 4rem;
+    top: 32px;
+    top: 3.2rem;
   }
 }
 
@@ -544,16 +577,15 @@ table {
 }
 
 
-/* Headings
---------------------------------------------- */
+/* =Headings */
 
 .headingsDefault {
   font: {
     weight: 700;
   }
   line-height: 1.2;
-  margin: 0 0 16px;
-  margin: 0 0 1.6rem;
+  margin: 0 0 24px;
+  margin: 0 0 2.4rem;
 }
 
 h1 {
@@ -563,6 +595,11 @@ h1 {
     family: $f_H1Font;
     size: $f_mainH1-px;
     size: $f_mainH1;
+  }
+}
+.post {
+  h1 {
+    margin:0;
   }
 }
 
@@ -576,9 +613,19 @@ h2 {
   }
 }
 
+.blog,
+.sidebar-content,
+.content-sidebar,
+.full-width-content {
+  h2 {
+    margin:0;
+  }
+}
+
 h3 {
   @extend .headingsDefault;
   color: $c_mainH3;
+  margin: 0;
   font: {
     family: $f_H3Font;
     size: $f_mainH3-px;
@@ -589,6 +636,7 @@ h3 {
 h4 {
   @extend .headingsDefault;
   color: $c_mainH4;
+  margin: 0;
   font: {
     family: $f_H4Font;
     size: $f_mainH4-px;
@@ -599,6 +647,7 @@ h4 {
 h5 {
   @extend .headingsDefault;
   color: $c_mainH5;
+  margin: 0;
   font: {
     family: $f_H5Font;
     size: $f_mainH5-px;
@@ -608,6 +657,7 @@ h5 {
 h6 {
   @extend .headingsDefault;
   color: $c_mainH6;
+  margin: 0;
   font: {
     family: $f_H6Font;
     size: $f_mainH6-px;
@@ -615,8 +665,7 @@ h6 {
   }
 }
 
-/* Objects
---------------------------------------------- */
+/* =Objects */
 
 embed,
 iframe,
@@ -629,105 +678,14 @@ video,
 
 img {
   height: auto;
-  width: auto; /* IE8 */
+  width: auto; // IE8
 }
 
-/*
-=Sticky menu - scrolling
----------------------------------------------------------------------------------------------------- */
-
-body.sticky {
-  padding-top: 120px;
-  .site-header {
-    position: fixed;
-    top: 0;
-    background-position: center -30px;
-    z-index: 400;
-    height: 44px;
-    .wrap {
-      padding: 0;
-    }
-    aside,
-    #yoast-top-right {
-      display: none;
-      visibility: hidden;
-    }
-    .title-area {
-      background: none !important;
-      position: fixed;
-      top: 0;
-      padding: 0;
-      margin: 0;
-      z-index: 600;
-      width: 0;
-      height: 0;
-      .site-title {
-        a {
-          width:0;
-          height:0
-        }
-      }
-    }
-  }
-  .nav-primary {
-    position: fixed;
-    background: {
-      color:$c_navMainBg;
-    }
-    top: 0;
-    width: 100%;
-    z-index: 500;
-    height: 44px;
-    overflow-y: hidden;
-    padding: 0;
-    @include box-shadow(0 8px 8px -6px $c_navMainShadow);
-    border: none;
-    margin: 0;
-    li {
-      a {
-        color: $c_navMainLink;
-        &:hover {
-          color:$c_navMainLinkHover;
-          text-shadow: 1px 1px 1px $c_navMainLinkShadow;
-        }
-      }
-      &.current-menu-item,
-      &.current-page-ancestor {
-        background: {
-          color: $c_navMainLinkBgHover;
-        }
-      }
-      &.menu-item-search {
-        display:inline;
-        visibility: visible;
-        z-index: 700;
-        float:right;
-        width:160px;
-        input {
-          width: 100px;
-          margin: {
-            top: 5px;
-          }
-          &:focus {
-            width:160px;
-            margin: {
-              left: -60px;
-            }
-            @include transition-property(width);
-          }
-        }
-      }
-    }
-  }
-}
-
-/*
-Structure and Layout
----------------------------------------------------------------------------------------------------- */
+/* =Structure and =Layout */
 
 .content {
   float: right;
-  width: $d_homepageMainColumn;
+  width: $d_mainColumn;
 }
 
 .content-sidebar {
@@ -736,68 +694,36 @@ Structure and Layout
   }
 }
 
-.content-sidebar-sidebar {
-  .content-sidebar-wrap {
-    width: $d_full;
-    float: left;
-  }
-  .content {
-    float: left;
-    width: $d_mainColumn;
-  }
-}
-
-.sidebar-content-sidebar {
-  .content-sidebar-wrap {
-    width: $d_full;
-    float: right;
-  }
-  .content {
-    float: left;
-    width: $d_mainColumn;
-  }
-}
-
-.sidebar-sidebar-content {
-  .content-sidebar-wrap {
-    width: $d_full;
-    float: right;
-  }
-  .content {
-    width: $d_mainColumn;
-  }
-}
-
 .full-width-content .content {
   width: 100%;
 }
 
-/* Primary Sidebar */
+/* =Primary =Sidebar */
 
 .sidebar-primary {
   float: right;
   width: $d_sidebar;
 }
 
-.sidebar-content .sidebar-primary,
-.sidebar-sidebar-content .sidebar-primary {
-  float: left;
+.sidebar-content {
+  .sidebar-primary {
+    float: left;
+  }
+  .content {
+    position:relative;
+    left:-120px;
+  }
 }
 
-/* Secondary Sidebar */
+/* =Secondary =Sidebar */
 
 .sidebar-secondary {
   float: left;
   width: ($d_sidebar/2);
 }
 
-.content-sidebar-sidebar .sidebar-secondary {
-  float: right;
-}
-
-/* Column Classes
-	Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css
---------------------------------------------- */
+/* =Column Classes
+Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css */
 
 .five-sixths,
 .four-sixths,
@@ -856,12 +782,9 @@ Structure and Layout
 }
 
 
-/*
-Common Classes
----------------------------------------------------------------------------------------------------- */
+/* =Common Classes */
 
-/* WordPress
---------------------------------------------- */
+/* =WordPress */
 
 .avatar {
   float: left;
@@ -879,9 +802,6 @@ Common Classes
     left: 24px;
     left: 2.4rem;
   }
-}
-
-.sticky {
 }
 
 img.centered,
@@ -952,13 +872,24 @@ img.alignright,
   }
 }
 
-/* Genesis
---------------------------------------------- */
+/* =Genesis */
 
 .breadcrumb {
-  margin: {
-    bottom: 20px;
-    bottom: 2rem;
+  max-width: $d_full;
+  margin: 0 auto;
+  padding: 10px 0 0;
+  padding: 1rem 0 0;
+  color: $c_breadcrumbs;
+  font: {
+    size: $f_breadcrumbs-px;
+    size: $f_breadcrumbs;
+    weight: 700;
+  }
+  a {
+    color: $c_breadcrumbsLink;
+    &:hover {
+      color: $c_breadcrumbsLinkHover;
+    }
   }
 }
 
@@ -1015,8 +946,7 @@ img.alignright,
   }
 }
 
-/* Titles
---------------------------------------------- */
+/* =Titles */
 
 .entry-title {
   text: {
@@ -1043,49 +973,57 @@ img.alignright,
 }
 
 
-/*
-Widgets
----------------------------------------------------------------------------------------------------- */
-
-
-/* Featured Content
---------------------------------------------- */
-
-.featured-content .entry {
-  border: {
-    bottom: 2px solid $c_hrLine;
+/* Geneisis =Featured Content */
+.featured-content {
+  .entry {
+    border: {
+      bottom: 1px solid $c_hrLine;
+    }
+    margin: {
+      bottom: 20px;
+      bottom: 2rem;
+    }
+    padding: 0 10px 24px;
+    padding: 0 1.0rem 2.4rem;
+    img {
+      width:230px;
+    }
   }
-  margin: {
-    bottom: 20px;
-    bottom: 2rem;
+  a {
+    &.alignleft,
+    &.alignright {
+      display:block;
+      img {
+        text-align:center;
+      }
+    }
   }
-  padding: 0 0 24px;
-  padding: 0 0 2.4rem;
+  .entry-title {
+    clear:both;
+    border: none;
+    font: {
+      size: $f_sidebarH2-px;
+      size: $f_sidebarH2;
+    }
+    line-height: 1.2em;
+    padding: {
+      top: 10px;
+      top:1.0rem;
+    }
+    a {
+      border: none;
+      color: $c_mainLink;
+      text: {
+        decoration: none;
+      }
+    }
+  }
 }
 
-.featured-content .entry-title {
-  border: none;
-  font: {
-    size: $f_mainH2-px;
-    size: $f_mainH2;
-  }
-  line-height: 1.2em;
-}
 
-.featured-content .entry-title a {
-  border: none;
-  color: $c_mainLink;
-  text: {
-    decoration: none;
-  }
-}
+/* =Plugins */
 
-/*
-Plugins
----------------------------------------------------------------------------------------------------- */
-
-/* Genesis eNews Extended
---------------------------------------------- */
+/* =Genesis =eNews Extended */
 
 .enews-widget {
   color: #999;
@@ -1100,25 +1038,10 @@ Plugins
     &:focus {
       border: 1px solid $c_randLine;
     }
-    &[type="submit"] {
-      background: {
-        color: $c_inputSubmitBg;
-      }
-      color: $c_inputSubmitText;
-      margin: 0;
-      width: 100%;
-    }
-    &:hover[type="submit"] {
-      background: {
-        color: $c_inputSubmitBgHover;
-      }
-      color: $c_inputSubmitTextHover;
-    }
   }
 }
 
-/* Genesis Latest Tweets
---------------------------------------------- */
+/* =Genesis Latest =Tweets */
 
 .latest-tweets ul li {
   margin: {
@@ -1127,26 +1050,36 @@ Plugins
   }
 }
 
-/* Gravity Forms
---------------------------------------------- */
+/* =Gravity =Forms */
 
 div.gform_wrapper {
+  ul.gfield_radio {
+   li {
+     padding: {
+       left: 1px !important;
+       left: 0.1rem !important;
+     }
+   }
+  }
   input {
     &[type="email"] {
       font: {
         size: $f_inputText-px;
         size: $f_inputText;
       }
-      padding: 16px;
-      padding: 1.6rem;
+      padding: 8px;
+      padding: 0.8rem;
     }
     &[type="text"] {
       font: {
         size: $f_inputText-px;
         size: $f_inputText;
       }
-      padding: 16px;
-      padding: 1.6rem;
+      padding: 8px;
+      padding: 0.8rem;
+    }
+    &[value="Other"] {
+      max-width: 80%;
     }
   }
   textarea {
@@ -1154,8 +1087,14 @@ div.gform_wrapper {
       size: $f_inputText-px;
       size: $f_inputText;
     }
-    padding: 16px;
-    padding: 1.6rem;
+    padding: 8px;
+    padding: 0.8rem;
+  }
+  select {
+    font: {
+      size: $f_inputText-px;
+      size: $f_inputText;
+    }
   }
   .ginput_complex {
     label {
@@ -1167,27 +1106,28 @@ div.gform_wrapper {
     }
   }
   li {
-    margin: 16px 0 0;
-    margin: 1.6rem 0 0;
+    margin: 8px 0 0;
+    margin: 0.8rem 0 0;
   }
   form {
     li {
-      margin: 16px 0 0;
-      margin: 1.6rem 0 0;
+      margin: 8px 0 0;
+      margin: 0.8rem 0 0;
     }
   }
   .gform_footer {
-    input[type="submit"] {
-      font: {
-        size: $f_inputText-px;
-        size: $f_inputText;
+    input {
+      [type="submit"] {
+        font: {
+          size: $f_inputText-px;
+          size: $f_inputText;
+        }
       }
     }
   }
 }
 
-/* Search form
---------------------------------------------- */
+/* =Search =form */
 .search-form {
   input {
     font: {
@@ -1214,18 +1154,14 @@ div.gform_wrapper {
 }
 
 
-/* Jetpack
---------------------------------------------- */
+/* =Jetpack */
 
 img#wpstats {
   display: none;
   visibility: hidden;
 }
 
-
-
-/* Title Area
---------------------------------------------- */
+/* =Title Area */
 
 .header-full-width {
   .title-area {
@@ -1295,11 +1231,19 @@ img#wpstats {
       width: 100%;
     }
   }
+  #yoast-top-right {
+    margin: {
+      bottom: 20px;
+      bottom: 2rem;
+    }
+  }
   .widget-area {
     float: right;
     text: {
       align: right;
     }
+    max-width: 630px;
+    overflow-x:hidden;
     padding: 20px 0 0 0;
     padding: 2rem 0 0 0;
     // width: $d_headerAside;
@@ -1327,19 +1271,19 @@ img#wpstats {
   }
 }
 
-/*  After Header Widgets
---------------------------------------------*/
+/* After =Header =Widgets */
+
+// testing no widgets and tagline below menu
+#yoast-after-header-container,
+#yoast-tagline-after-header-container {
+  display:none;
+}
+
+
 #yoast-after-header-container {
   color: $c_headerLink;
   background: {
     color: $c_headerBg;
-  }
-  border: {
-    top: {
-      width: 10px;
-      style: solid;
-      color: $c_headerBorderTop;
-    }
   }
   > .wrap {
     padding: {
@@ -1360,7 +1304,7 @@ img#wpstats {
       decoration: underline;
     }
     font: {
-      weight: bold;
+      weight: 700;
     }
     &:hover {
       text: {
@@ -1388,7 +1332,7 @@ img#wpstats {
         a {
           text-decoration:none;
           &:after {
-            content: " »";
+            content: "&nbsp;»";
           }
           &:hover {
             text: {
@@ -1420,8 +1364,7 @@ img#wpstats {
   width: $d_sidebar;
 }
 
-/*  Tagline Widgets
---------------------------------------------*/
+/* =Tagline Widgets */
 
 #yoast-tagline-after-header-container {
   border-top: 1px solid $c_hrLine;
@@ -1435,7 +1378,7 @@ img#wpstats {
   color: $c_taglineFullWidth;
   strong {
     color: $c_taglineFullWidthBold;
-    font-weight: 600;
+    font-weight: 700;
   }
   a {
     color: $c_taglineLink;
@@ -1447,10 +1390,7 @@ img#wpstats {
   }
 }
 
-
-/*
-Site Navigation
----------------------------------------------------------------------------------------------------- */
+/* Site =Navigation */
 .nav-primary { // entire width
   background: {
     color:  $c_navMainFullBg;
@@ -1459,17 +1399,24 @@ Site Navigation
     bottom: {
       width: 10px;
       style: solid;
-      color: $c_navMainFullBorder;
+      color: $c_navMainFullBorderBottom;
+    }
+  }
+  &:after {
+    content:"";
+    width:100%;
+    display:block;
+    border: {
+      top: {
+        width: 10px;
+        style: solid;
+        color: $c_navMainFullBorderTop;
+      }
     }
   }
 }
 
 .genesis-nav-menu {
-  border: {
-    width: 0 0 0 1px;
-    style: solid;
-    color: $c_navMainBorder;
-  }
   clear: both;
   color: $c_navMainLink;
   font: {
@@ -1479,9 +1426,6 @@ Site Navigation
   width: 100%;
   background: {
     color:  $c_navMainBg;
-  }
-  border: {
-    bottom: 0px solid $c_navMainBorderBottom;
   }
   .menu-item {
     display: inline-block;
@@ -1513,6 +1457,15 @@ Site Navigation
       content: '';
     }
   }
+  > li:nth-child(2) {
+    a {
+      border: {
+        width: 0 1px;
+        style: solid;
+        color: $c_navMainBorder;
+      }
+    }
+  }
   a {
     display: block;
     position: relative;
@@ -1526,7 +1479,7 @@ Site Navigation
       color: $c_navMainBorder;
     }
     font: {
-      weight: 600;
+      weight: 700;
     }
     text: {
       decoration: none;
@@ -1542,14 +1495,18 @@ Site Navigation
       background: {
         color: $c_navMainLinkBgHover;
       }
+      text-shadow: 1px 1px 1px $c_navMainLinkShadow;
       position: static;
     }
   }
-  .current-menu-item {
+  .current-menu-item,
+  .current-menu-parent,
+  .current-menu-ancestor {
     > a {
       color: $c_navSubLink;
+      text-shadow: 1px 1px 1px $c_navMainLinkShadow;
       background: {
-        color: $c_navSubLinkBgHover;
+        color: $c_navMainBgActive;
       }
     }
     > a:hover {
@@ -1573,6 +1530,7 @@ Site Navigation
         color: $c_navSubBg;
       }
       color: $c_navSubLink;
+      text-shadow: 1px 1px 1px $c_navMainLinkShadow;
       border: {
         width: 0 0 1px;
         style: solid;
@@ -1587,14 +1545,14 @@ Site Navigation
       position: relative;
       width: $d_navSubWidth;
       &:hover {
-      color: $c_navSubLinkHover;
-      background: {
+        color: $c_navSubLinkHover;
+        background: {
         color: $c_navSubLinkBgHover;
       }
       }
     }
     > .menu-item {
-      > a:after /* set up the downward arrow for top level items */
+      > a:after // set up the downward arrow for top level items
       {
         content: '▼';
         font: {
@@ -1659,8 +1617,7 @@ Site Navigation
   }
 }
 
-/* Site Header Navigation
---------------------------------------------- */
+/* Site =Header =Navigation */
 
 .site-header {
   .sub-menu {
@@ -1685,13 +1642,92 @@ Site Navigation
   }
 }
 
+/* =Sticky =Menu - scrolling */
 
-/*
-Content Area
----------------------------------------------------------------------------------------------------- */
+body.sticky {
+  padding-top: 120px;
+  .site-header {
+    position: fixed;
+    top: 0;
+    background-position: center -30px;
+    z-index: 400;
+    height: 44px;
+    .wrap {
+      padding: 0;
+    }
+    aside,
+    #yoast-top-right {
+      display: none;
+      visibility: hidden;
+    }
+    .title-area {
+      background: none !important;
+      position: fixed;
+      top: 0;
+      padding: 0;
+      margin: 0;
+      z-index: 600;
+      width: 0;
+      height: 0;
+      .site-title {
+        a {
+          width:0;
+          height:0
+        }
+      }
+    }
+  }
+  .nav-primary {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 500;
+    height: 64px;
+    padding: 0;
+    @include box-shadow(0 8px 8px -6px $c_navMainShadow);
+    margin: 0;
+    li {
+      a {
+        color: $c_navMainLink;
+        &:hover {
+          color:$c_navMainLinkHover;
+          text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+        }
+        &:after {
+          content: "";
+        }
+      }
+      &.current-menu-item,
+      &.current-menu-parent,
+      &.current-page-ancestor {
+        background: {
+          color: $c_navMainBgActive;
+        }
+        a {
+          color: $c_navMainTextActive;
+          text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+        }
+      }
+      &.menu-item-search {
+        display:inline;
+        visibility: visible;
+        z-index: 700;
+        float:right;
+        width:250px;
+        input {
+          width: 250px;
+          margin: {
+            top: 5px;
+          }
+        }
+      }
+    }
+  }
+}
 
-/* Entries
---------------------------------------------- */
+/* =Content Area */
+
+/* =Entries */
 
 .post {
   margin: {
@@ -1721,6 +1757,10 @@ Content Area
 }
 
 .entry-content {
+  padding: {
+    bottom: 24px;
+    bottom: 2.4rem;
+  }
   a {
     border: {
       bottom: 1px solid $c_linkBorder;
@@ -1800,7 +1840,7 @@ Content Area
       }
       &:hover {
         font: {
-          weight: bold;
+          weight: 700;
         }
         color: $c_mainLinkHover;
       }
@@ -1819,6 +1859,14 @@ Content Area
 
 // exceptions for archive pages, read more link closer to content
 .blog {
+  .content {
+    width: $d_homepageMainColumn;
+  }
+  &.sidebar-content {
+    .content {
+      width: $d_mainColumn;
+    }
+  }
   .entry-content {
     p {
       margin: {
@@ -1826,12 +1874,28 @@ Content Area
       }
     }
     img.alignleft {
-      margin: 0 10px 10px 0;
-      margin: 0 1.0rem 1.0rem 0;
+      margin: 0 24px 10px 0;
+      margin: 0 2.4rem 1rem 0;
     }
     img.alignright {
-      margin: 0 0 10px 10px;
-      margin: 0 0 1.0rem 1.0rem;
+      margin: 0 0 24px 10px;
+      margin: 0 0 2.4rem 1rem;
+    }
+  }
+}
+
+// full-width
+.full-width-content {
+  .content {
+    width: 990px;
+    float:none;
+    p,
+    ul,
+    ol,
+    blockquote,
+    div,
+    table {
+      max-width:$d_mainColumn;
     }
   }
 }
@@ -1859,8 +1923,16 @@ Content Area
 .entry-header {
   .entry-meta {
     margin: {
-      bottom: 24px;
-      bottom: 2.4rem;
+      bottom: 26px;
+      bottom: 2.6rem;
+      top: 5px;
+      top: 0.5rem;
+    }
+    font: {
+      weight: 700;
+    }
+    .entry-author-name {
+      text-transform: capitalize;
     }
   }
 }
@@ -1898,12 +1970,14 @@ Content Area
   display: block;
 }
 
-/* Pagination
---------------------------------------------- */
+/* =Pagination */
 
 .archive-pagination {
-  font-size: 14px;
-  font-size: 1.4rem;
+  font: {
+    size: 14px;
+    size:1.4rem;
+    weight:700;
+  }
   margin: 40px 0;
   margin: 4rem 0;
   li {
@@ -1917,7 +1991,7 @@ Content Area
       display: inline-block;
       padding: 8px 12px;
       padding: 0.8rem 1.2rem;
-      :hover {
+      &:hover {
         color: $c_pagenavHoverLink;
         background: {
           color: $c_pagenavHoverBg;
@@ -1953,8 +2027,7 @@ Content Area
   }
 }
 
-/* Comments
---------------------------------------------- */
+/* =Comments */
 
 .entry-comments {
   background: {
@@ -2122,12 +2195,22 @@ Content Area
 }
 
 
-/*
-=Sidebars
----------------------------------------------------------------------------------------------------- */
+/* =Sidebars */
 .sidebar {
   color: $c_sidebarText;
   .widget-wrap {
+    p {
+      a {
+        text: {
+          decoration: underline;
+        }
+        &:hover {
+          text: {
+            decoration: none;
+          }
+        }
+      }
+    }
     ul {
       margin: {
         left: 26px;
@@ -2145,15 +2228,18 @@ Content Area
           bottom: 0;
         }
         color: $c_sidebarLink;
-      }
-      &:hover {
-        text-decoration: underline;
-        &:after {
-          text-decoration:none;
+        text: {
+          decoration: underline;
+        }
+        &:hover {
+          text-decoration: none;
         }
       }
       &:after {
         content: '»';
+        text: {
+          decoration: none !important;
+        }
         padding: {
           left: 5px;
           top: 1px;
@@ -2186,7 +2272,8 @@ Content Area
       bottom: 0;
     }
   }
-  .widget-title {
+  .widget-title,
+  widgettitle {
     font: {
       size:$f_sidebarH3-px;
       size:$f_sidebarH3;
@@ -2198,14 +2285,14 @@ Content Area
     text: {
       transform: none;
     }
-    a {
-      border:none;
-      color: $c_sidebarH3;
-    }
     background-color: $c_sidebarH3Bg;
     color: $c_sidebarH3;
     padding: 10px;
     @include box-shadow(1px 2px 5px #ccc);
+    a {
+      border:none;
+      color: $c_sidebarH3;
+    }
   }
   .widget {
     background: {
@@ -2224,8 +2311,7 @@ Content Area
   }
 }
 
-/*  Sidebar Widgets
---------------------------------------------*/
+/*  =Sidebar =Widgets */
 .widget_bigbutton {
   .button-green {
     a {
@@ -2238,7 +2324,7 @@ Content Area
         color: $c_ctaBorder;
       }
       @include box-shadow(inset 0px 0 5px $c_ctaBoxShadow);
-      @include background-image(linear-gradient($c_ctaBgFrom, $c_ctaBgTo));
+      @include background-image(linear-gradient($c_ctaBg,darken($c_ctaBg,10%)));
       color: $c_ctaTextWhite;
       font: {
         size: $f_ctaText-px;
@@ -2254,35 +2340,53 @@ Content Area
          }
       }
       &:hover {
-        @include background-image(linear-gradient($c_ctaBgTo, $c_ctaBgFrom));
+        @include background-image(linear-gradient(darken($c_ctaBg,10%),$c_ctaBg));
         color: $c_ctaTextWhite;
       }
     }
   }
 }
 
-/*
-Newsletter Widget
----------------------------------------------------------------------------------------------------- */
+/* =Newsletter =Widget */
 .widget-yns {
-  input[type="text"] {
-    width:75%;
-  }
-  input[type="submit"] {
-    background: {
-      color: $c_inputSubmitBg;
+  p,
+  form {
+    padding: {
+      left: 10px;
+      left: 1rem;
+      right: 10px;
+      right: 1rem;
     }
-    &:hover {
-      background: {
-        color: $c_inputSubmitBg;
+  }
+  form {
+    label {
+      display:block;
+      font: {
+        size: $f_sidebarLabel-px;
+        size: $f_sidebarLabel;
+        weight: 700;
+      }
+    }
+    input {
+      padding:8px;
+      margin: {
+        bottom: 10px;
+        bottom: 1rem;
+      }
+      &[type="text"] {
+        width:75%;
+      }
+      &[type="submit"] {
+        font: {
+          size: 12px;
+          size: 1.2rem;
+        };
       }
     }
   }
 }
 
-/*
-Social Media Widget
----------------------------------------------------------------------------------------------------- */
+/* =Social Media =Widget */
 .widget_socials {
   margin: {
     bottom: 40px;
@@ -2363,7 +2467,7 @@ Social Media Widget
       min-width: 20px;
       float: right;
       background: {
-        color: $c_ctaBgGrey; /* fallback */
+        color: $c_ctaBgGrey; // fallback
       }
       @include background-image(linear-gradient($c_ctaBgGrey, $c_ctaBgWhite));
       vertical-align: bottom;
@@ -2443,9 +2547,7 @@ Social Media Widget
 }
 
 
-/*
-Footer Widgets
----------------------------------------------------------------------------------------------------- */
+/* =Footer =Widgets */
 
 .footer-widgets {
   font: {
@@ -2514,15 +2616,19 @@ Footer Widgets
   }
 }
 
-/*
-Site Footer
----------------------------------------------------------------------------------------------------- */
+/* Site =Footer */
 
 .site-footer {
   background: {
     color: $c_footerBg;
   }
-  @include box-shadow(-1px -1px 5px $c_ctaBoxShadow);
+  border: {
+    top: {
+      width: 1px;
+      style: solid;
+      color: $c_footerBorderTop;
+    }
+  }
   color: $c_footerText;
   font: {
     size: 14px;
@@ -2533,7 +2639,7 @@ Site Footer
   a {
     color: $c_footerLink;
     border-bottom: 1px solid #ddd;
-    :hover {
+    &:hover {
       color:$c_footerLinkHover;
     }
   }
@@ -2551,9 +2657,7 @@ Site Footer
 }
 
 
-/*
-Media Queries
----------------------------------------------------------------------------------------------------- */
+/* Media Queries */
 
 // iPhone 480x320
 // iPhone 5 1136x640
@@ -2572,19 +2676,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
 
 }
 
-@media only screen and (max-width: 1139px) {
-  .content-sidebar-sidebar .content-sidebar-wrap,
-  .sidebar-content-sidebar .content-sidebar-wrap,
-  .sidebar-sidebar-content .content-sidebar-wrap {
-    //width: 740px;
-  }
-  .sidebar-content-sidebar .content,
-  .sidebar-sidebar-content .content,
-  .content-sidebar-sidebar .content {
-    //width: 400px;
-  }
-}
-
 @media only screen and (max-width: 1024px) {
   .site-header {
     .widget-area {
@@ -2592,27 +2683,25 @@ only screen and (min-device-pixel-ratio: 1.5) {
       padding:0 2.0rem;
     }
   }
+  .sidebar-content {
+    .content {
+      left:0px;
+    }
+  }
 
 
 // old:
 
   .content,
-  .content-sidebar-sidebar .content,
-  .content-sidebar-sidebar .content-sidebar-wrap,
   .footer-widgets-1,
   .footer-widgets-2,
   .footer-widgets-3,
-  .sidebar-content-sidebar .content,
-  .sidebar-content-sidebar .content-sidebar-wrap,
   .sidebar-primary,
   .sidebar-secondary,
-  .sidebar-sidebar-content .content,
-  .sidebar-sidebar-content .content-sidebar-wrap,
-  // .site-header .widget-area,
   .site-inner,
   .title-area,
   .wrap {
-    //width: 100%;
+    width: 100%;
   }
 
   .site-header .wrap {
@@ -2625,8 +2714,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
   }
 
   .site-inner {
-    padding-left: 5%;
-    padding-right: 5%;
   }
 
   .archive-description,
@@ -2636,7 +2723,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
   .entry-comments,
   .entry-footer .entry-meta,
   .header-image .site-header .widget-area,
-  .sidebar .widget,
+//  .sidebar .widget,
   .site-header {
     padding: 0;
   }
@@ -2697,7 +2784,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 
 }
 
-@media only screen and (max-width: 863px ) { // was 767px
+@media only screen and (max-width: 863px ) {
 
   .five-sixths,
   .four-sixths,
@@ -2752,3 +2839,40 @@ only screen and (min-device-pixel-ratio: 1.5) {
     }
   }
 }
+
+@media only screen and (max-width: 321px ) {
+  .blog {
+    &.sidebar-content {
+      .content {
+        width:100%;
+        padding:0 1%;
+        margin:0;
+      }
+    }
+  }
+  .sidebar {
+    .widget-wrap {
+      li {
+        &:after {
+          content:"";
+          padding:0;
+        }
+      }
+    }
+    .widget_banner {
+      text-align:center;
+    }
+    .featured-content {
+      img {
+        display:none;
+        visibility: hidden;
+      }
+    }
+    form,
+    p,
+    .posts-link {
+      padding: 0 2%;
+    }
+  }
+}
+
