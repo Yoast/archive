@@ -17,6 +17,11 @@ function yst_load_css_from_setting() {
 
 add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting' );
 
+function enqueue_styles_basic() {
+	wp_enqueue_style( 'style-basic', get_stylesheet_directory_uri() . '/assets/css/style.css' );
+}
+
+add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic' );
 
 //* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'Theme001' );
@@ -167,14 +172,52 @@ function get_read_more_link() {
 //	update_option( 'sidebars_widgets', $sidebars_widgets );
 //}
 
-/**
- * Add styling for hamburgermenu
- */
-function enqueue_styles_basic() {
-	wp_enqueue_style( 'style-basic', get_stylesheet_directory_uri() . '/assets/css/style.css' );
+// Include jQuery.mmenu with dependency on jquery
+function yst_include_jquery_mmenu() {
+	wp_enqueue_script(
+		'yst_mmenu_script',
+			get_stylesheet_directory_uri() . '/lib/js/jquery.mmenu.js',
+		array( 'jquery' )
+	);
+	wp_enqueue_style( 'yst-mmenu-css', get_stylesheet_directory_uri() . '/lib/css/jquery.mmenu.css' );
 }
 
-add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic' );
+add_action( 'wp_enqueue_scripts', 'yst_include_jquery_mmenu' );
+
+// add id="yst-nav" to <nav.. />
+function yst_override_nav_menu( $output ) {
+	return str_replace( '<nav ', '<nav id="yst-nav" ', $output );
+}
+add_filter( 'genesis_markup_nav-primary_output', 'yst_override_nav_menu' );
+
+// Add open button
+function add_to_genesis_header() {
+	echo '<a href="#yst-nav">&nbsp;Open!</a>';
+}
+
+add_action( 'genesis_header', 'add_to_genesis_header' );
+
+function yst_mmenu() {
+	echo '<script type="text/javascript">
+   $(function() {
+      $("yst-nav").mmenu({
+         classes: "mm-slide"
+      });
+   });
+</script>';
+}
+add_action( 'wp_head', 'yst_mmenu' );
+
+//function add_wrappers_open() {
+//	echo '<div>';
+//}
+//
+//add_action( 'genesis_before_header', 'add_wrappers_open' );
+//function add_wrappers_close() {
+//	echo '</div>';
+//}
+//
+//add_action( 'genesis_after_footer', 'add_wrappers_close' );
 
 /**
  * Function Do Genesis Footer
