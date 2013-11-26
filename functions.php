@@ -167,9 +167,6 @@ function get_read_more_link() {
 //	update_option( 'sidebars_widgets', $sidebars_widgets );
 //}
 
-// Include the functions for the hamburger menu
-require( "lib/functions/hamburger.php" );
-
 /**
  * Add styling for hamburgermenu
  */
@@ -224,3 +221,22 @@ add_action( 'wp_footer', 'yst_sticky_menu' );
 //* Reposition the breadcrumbs
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+
+// Voor michiel
+function yoast_term_archive_intro() {
+	if ( !is_category() && !is_tag() && !is_tax() )
+		return;
+
+	if( get_query_var( 'paged' ) )
+		return;
+
+	echo '</pre>
+<h1 class="entry-title">'.single_term_title('', false).'</h1>
+<pre>
+';
+	echo '</pre>
+<div class="entry-content">'.wpautop( term_description() ).'</div>
+<pre>
+';
+}
+add_action( 'genesis_before_loop', 'yoast_term_archive_intro', 20 );
