@@ -179,7 +179,7 @@ function yst_include_jquery_mmenu() {
 			get_stylesheet_directory_uri() . '/lib/js/jquery.mmenu.min.all.js',
 		array( 'jquery' )
 	);
-	wp_enqueue_style( 'yst-mmenu-css', get_stylesheet_directory_uri() . '/lib/css/jquery.mmenu.css' );
+	wp_enqueue_style( 'yst-mmenu-css', get_stylesheet_directory_uri() . '/lib/css/jquery.mmenu.css', '', false, 'all and (max-width: 640px)' );
 }
 
 add_action( 'wp_enqueue_scripts', 'yst_include_jquery_mmenu' );
