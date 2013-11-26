@@ -224,19 +224,22 @@ add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 
 // Voor michiel
 function yoast_term_archive_intro() {
-	if ( !is_category() && !is_tag() && !is_tax() )
+	if ( ! is_category() && ! is_tag() && ! is_tax() )
 		return;
 
-	if( get_query_var( 'paged' ) )
+	if ( get_query_var( 'paged' ) )
 		return;
 
-	echo '</pre>
-<h1 class="entry-title">'.single_term_title('', false).'</h1>
-<pre>
-';
-	echo '</pre>
-<div class="entry-content">'.wpautop( term_description() ).'</div>
-<pre>
-';
+	echo '<div class="term-intro">';
+	echo '<h1>' . single_term_title( '', false ) . '</h1>';
+	echo '<div class="entry-content">';
+	if ( is_category() ) {
+		$cat = get_queried_object();
+		echo '<img class="alignright hires noborder transparent" width="110" height="110" alt="' . $cat->name . '" src="' . get_stylesheet_directory_uri() . '/images/fi/FI-' . $cat->slug . '.png"/>';
+	}
+	echo wpautop( term_description() );
+	echo '</div>';
+	echo '</div>';
 }
+
 add_action( 'genesis_before_loop', 'yoast_term_archive_intro', 20 );
