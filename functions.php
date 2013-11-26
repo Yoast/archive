@@ -176,7 +176,7 @@ function get_read_more_link() {
 function yst_include_jquery_mmenu() {
 	wp_enqueue_script(
 		'yst_mmenu_script',
-			get_stylesheet_directory_uri() . '/lib/js/jquery.mmenu.js',
+			get_stylesheet_directory_uri() . '/lib/js/jquery.mmenu.min.all.js',
 		array( 'jquery' )
 	);
 	wp_enqueue_style( 'yst-mmenu-css', get_stylesheet_directory_uri() . '/lib/css/jquery.mmenu.css' );
@@ -199,25 +199,12 @@ add_action( 'genesis_header', 'add_to_genesis_header' );
 
 function yst_mmenu() {
 	echo '<script type="text/javascript">
-   $(function() {
-      $("yst-nav").mmenu({
-         classes: "mm-slide"
-      });
+   jQuery( document ).ready(function( $ ) {
+      $("#yst-nav").mmenu();
    });
 </script>';
 }
-add_action( 'wp_head', 'yst_mmenu' );
-
-//function add_wrappers_open() {
-//	echo '<div>';
-//}
-//
-//add_action( 'genesis_before_header', 'add_wrappers_open' );
-//function add_wrappers_close() {
-//	echo '</div>';
-//}
-//
-//add_action( 'genesis_after_footer', 'add_wrappers_close' );
+add_action( 'wp_footer', 'yst_mmenu' );
 
 /**
  * Function Do Genesis Footer
