@@ -182,7 +182,7 @@ function yst_include_jquery_mmenu() {
 	wp_enqueue_style( 'yst-mmenu-css', get_stylesheet_directory_uri() . '/lib/css/jquery.mmenu.css', '', false, 'all and (max-width: 640px)' );
 }
 
-add_action( 'wp_enqueue_scripts', 'yst_include_jquery_mmenu' );
+//add_action( 'wp_enqueue_scripts', 'yst_include_jquery_mmenu' );
 
 // add id="yst-nav" to <nav.. />
 function yst_override_nav_menu( $output ) {
@@ -263,10 +263,11 @@ function yoast_term_archive_intro() {
 	echo '<div class="term-intro">';
 	echo '<h1>' . single_term_title( '', false ) . '</h1>';
 	echo '<div class="entry-content">';
-	if ( is_category() ) {
-		$cat = get_queried_object();
-		echo '<img class="alignright hires noborder transparent" width="110" height="110" alt="' . $cat->name . '" src="' . get_stylesheet_directory_uri() . '/images/fi/FI-' . $cat->slug . '.png"/>';
-	}
+// do not display image like on yoast.com
+//	if ( is_category() ) {
+//		$cat = get_queried_object();
+//		echo '<img class="alignright hires noborder transparent" width="110" height="110" alt="' . $cat->name . '" src="' . get_stylesheet_directory_uri() . '/images/fi/FI-' . $cat->slug . '.png"/>';
+//	}
 	echo wpautop( term_description() );
 	echo '</div>';
 	echo '</div>';
