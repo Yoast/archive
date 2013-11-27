@@ -274,3 +274,11 @@ function yoast_term_archive_intro() {
 }
 
 add_action( 'genesis_before_loop', 'yoast_term_archive_intro', 20 );
+
+
+//* Modify the size of the Gravatar in comments
+add_filter( 'genesis_comment_list_args', 'sp_comments_gravatar' );
+function sp_comments_gravatar( $args ) {
+    $args['avatar_size'] = 100;
+    return $args;
+}
