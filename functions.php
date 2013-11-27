@@ -326,21 +326,9 @@ function yoast_term_archive_intro() {
 add_action( 'genesis_before_loop', 'yoast_term_archive_intro', 20 );
 
 
-// Change Genesis avatar size for comments
-add_filter( 'genesis_comment_list_args', 'childtheme_comment_list_args' );
-/**
- * Change size of comment avatars.
- *
- * Value is side length of square avatar, in pixels.
- *
- * @author ipstenu
- * @link   http://www.studiopress.com/forums/topic/change-gravatar-size/
- *
- * @param array $args Existing comment settings.
- *
- * @return array Amended comment settings.
- */
-function childtheme_comment_list_args( $args ) {
+//* Modify the size of the Gravatar in comments
+add_filter( 'genesis_comment_list_args', 'sp_comments_gravatar' );
+function sp_comments_gravatar( $args ) {
     $args['avatar_size'] = 100;
     return $args;
 }
