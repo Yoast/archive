@@ -172,39 +172,91 @@ function get_read_more_link() {
 //	update_option( 'sidebars_widgets', $sidebars_widgets );
 //}
 
-// Include jQuery.mmenu with dependency on jquery
-function yst_include_jquery_mmenu() {
-	wp_enqueue_script(
-		'yst_mmenu_script',
-			get_stylesheet_directory_uri() . '/lib/js/jquery.mmenu.min.all.js',
-		array( 'jquery' )
-	);
-	wp_enqueue_style( 'yst-mmenu-css', get_stylesheet_directory_uri() . '/lib/css/jquery.mmenu.css', '', false, 'all and (max-width: 640px)' );
+/**
+ * This function is temporary, all the CSS here should move to the main stylesheet later on
+ *
+ * @todo move this into main CSS file.
+ */
+function yst_header_sidr_css() {
+	?>
+	<style>
+		@media (min-width: 640px) {
+			a.open, #sidr-menu {
+				width: 0 !important;
+				display: none !important;
+			}
+		}
+		@media (max-width: 639px) {
+			a.open {
+				display: block;
+				text-indent: -10000px;
+				width: 35px;
+				height: 24px;
+				line-height: 22px;
+				padding: 15px;
+				margin: 0;
+				background: #333 url('<?php echo get_stylesheet_directory_uri(); ?>/images/hamburger.png') 5px 5px no-repeat;
+			}
+			#yst-nav {
+				display: none;
+			}
+		}
+	</style>
+	<?php
+}
+add_action( 'wp_head', 'yst_header_sidr_css' );
+
+/**
+ * Includes SIDR and its stylesheet
+ *
+ * @todo the CSS enqueued should be merged into the main stylesheet.
+ * @link http://www.berriart.com/sidr/#documentation
+ */
+function yst_include_sidr() {
+	wp_enqueue_script( 'yst_sidr', get_stylesheet_directory_uri() . '/lib/js/jquery.sidr.js', array( 'jquery' ) );
+	wp_enqueue_style( 'yst-sidr-css', get_stylesheet_directory_uri() . '/lib/css/jquery.sidr.dark.css' );
 }
 
-//add_action( 'wp_enqueue_scripts', 'yst_include_jquery_mmenu' );
+add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
 
-// add id="yst-nav" to <nav.. />
+/**
+ * Activates the sidr functionality, allowing for a left hand menu block.
+ *
+ * sidr takes the HTML from the elements referenced in source and puts them in the left hand menu.
+ *
+ * @link http://www.berriart.com/sidr/#documentation
+ *
+ * @todo combine with sticky menu code.
+ */
+function yst_activate_sidr() {
+?>
+	<script>
+		jQuery(document).ready(function($) {
+			$('#sidr-open').sidr({
+				name: 'sidr-menu',
+				source: '.search-form,#yst-nav',
+				coverScreen: true
+			});
+		});
+	</script>
+<?php
+}
+add_action( 'wp_footer', 'yst_activate_sidr' );
+
+/**
+ * This adds an ID to the nav element.
+ *
+ * @param $output
+ *
+ * @return mixed
+ *
+ * @todo fix this, should be possible to do this using a genesis attribute filter instead of a string replace.
+ *
+ */
 function yst_override_nav_menu( $output ) {
-	return str_replace( '<nav ', '<nav id="yst-nav" ', $output );
+	return str_replace( '<nav ', '<a class="open" id="sidr-open" href="#sidr-menu">&nbsp;Open navigation</a><nav id="yst-nav" ', $output );
 }
 add_filter( 'genesis_markup_nav-primary_output', 'yst_override_nav_menu' );
-
-// Add open button
-function add_to_genesis_header() {
-	echo '<a href="#yst-nav">&nbsp;Open!</a>';
-}
-
-add_action( 'genesis_header', 'add_to_genesis_header' );
-
-function yst_mmenu() {
-	echo '<script type="text/javascript">
-   jQuery( document ).ready(function( $ ) {
-      $("#yst-nav").mmenu();
-   });
-</script>';
-}
-add_action( 'wp_footer', 'yst_mmenu' );
 
 /**
  * Function Do Genesis Footer
@@ -252,7 +304,9 @@ add_action( 'wp_footer', 'yst_sticky_menu' );
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 
-// Voor michiel
+/**
+ * Displays a term archive intro
+ */
 function yoast_term_archive_intro() {
 	if ( ! is_category() && ! is_tag() && ! is_tax() )
 		return;
@@ -263,11 +317,7 @@ function yoast_term_archive_intro() {
 	echo '<div class="term-intro">';
 	echo '<h1>' . single_term_title( '', false ) . '</h1>';
 	echo '<div class="entry-content">';
-// do not display image like on yoast.com
-//	if ( is_category() ) {
-//		$cat = get_queried_object();
-//		echo '<img class="alignright hires noborder transparent" width="110" height="110" alt="' . $cat->name . '" src="' . get_stylesheet_directory_uri() . '/images/fi/FI-' . $cat->slug . '.png"/>';
-//	}
+	do_action( 'yst_term_archive_intro' );
 	echo wpautop( term_description() );
 	echo '</div>';
 	echo '</div>';
