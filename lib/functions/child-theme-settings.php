@@ -3,15 +3,15 @@
  * Child Theme Settings
  *
  * This file registers all of this child theme's specific Theme Settings, accessible from
- * Genesis > Child Theme Settings.
+ * Genesis > Child Theme Settings. Based in large parts on code by Bill Erickson.
  *
  * @package     BE_Genesis_Child
  * @since       1.0.0
  * @link        https://github.com/billerickson/BE-Genesis-Child
  * @author      Bill Erickson <bill@billerickson.net>
  * @copyright   Copyright (c) 2011, Bill Erickson
+ * @copyright   Copyright (c) 2013, Yoast
  * @license     http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
- * @link        https://github.com/billerickson/BE-Genesis-Child
  */
 
 /**
@@ -27,6 +27,7 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 	/**
 	 * Create an admin menu item and settings page.
+	 *
 	 * @since 1.0.0
 	 */
 	function __construct() {
@@ -70,9 +71,10 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 	/**
 	 * Set up Sanitization Filters
-	 * @since 1.0.0
 	 *
 	 * See /lib/classes/sanitization.php for all available filters.
+	 *
+	 * @since 1.0.0
 	 */
 	function sanitization_filters() {
 		genesis_add_option_filter( 'safe_html', $this->settings_field,
@@ -112,6 +114,8 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 /**
  * Add the Theme Settings Page
  * @since 1.0.0
+ *
+ * @fixme change namespace to yst
  */
 function be_add_child_theme_settings() {
 	global $_child_theme_settings;
