@@ -217,14 +217,14 @@ function yst_get_read_more_link() {
 function yst_header_sidr_css() {
 	?>
 	<style>
-		@media (min-width: 639px) {
+		@media (min-width: 641px) {
 			a.open, #sidr-left, #sidr-right {
 				width: 0 !important;
 				display: none !important;
 			}
 		}
 
-		@media (max-width: 639px) {
+		@media (max-width: 641px) {
 			.nav-primary {
 				display: none;
 			}
