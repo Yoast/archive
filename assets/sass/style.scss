@@ -278,8 +278,8 @@ button {
     family:inherit;
     size:inherit;
   }
-  padding:8px;
-  padding:0.8rem;
+  padding:8px 16px;
+  padding:0.8rem 1.6rem;
   margin:0;
   line-height:normal;
   text: {
@@ -456,6 +456,9 @@ table {
     display:none;
   }
   #wp-calendar {
+    margin: {
+      bottom:0;
+    }
     tbody {
       border:0;
       a {
@@ -479,9 +482,17 @@ table {
       }
       #prev {
         text-align:left;
+        padding: {
+          left:10px;
+          left:1rem;
+        }
       }
       #next {
         text-align:right;
+        padding: {
+          right:10px;
+          right:1rem;
+        }
       }
     }
     caption {
@@ -976,15 +987,8 @@ img.alignright,
 /* Geneisis =Featured Content */
 .featured-content {
   .entry {
-    border: {
-      bottom: 1px solid $c_hrLine;
-    }
-    margin: {
-      bottom: 20px;
-      bottom: 2rem;
-    }
-    padding: 0 10px 24px;
-    padding: 0 1.0rem 2.4rem;
+    padding: 0 10px;
+    padding: 0 1.0rem;
     img {
       width:230px;
     }
@@ -1052,7 +1056,26 @@ img.alignright,
 
 /* =Gravity =Forms */
 
-div.gform_wrapper {
+.gform_wrapper {
+  .gf_progressbar_wrapper {
+    border: {
+      bottom: {
+        width: 1px;
+        style: solid !important;
+        color: $c_hrLine !important;
+      }
+    }
+    h3 {
+      &.gf_progressbar_title {
+        color: $c_mainText;
+        opacity:1 !important;
+        font: {
+          size: $f_main-px !important;
+          size: $f_main !important;
+        }
+      }
+    }
+  }
   ul.gfield_radio {
    li {
      padding: {
@@ -1457,7 +1480,7 @@ img#wpstats {
       content: '';
     }
   }
-  > li:nth-child(2) {
+  > li:nth-child(1) { //depending on whether home is item 1 in the menu or not, otherwise switch to 2
     a {
       border: {
         width: 0 1px;
@@ -1757,17 +1780,19 @@ body.sticky {
 }
 
 .entry-content {
-  padding: {
-    bottom: 24px;
-    bottom: 2.4rem;
-  }
   a {
-    border: {
-      bottom: 1px solid $c_linkBorder;
-    }
     color: $c_mainLink;
+    font: {
+      weight: 700;
+    }
+    text: {
+      decoration:underline;
+    }
     &:hover {
       color: $c_mainLinkHover;
+      text: {
+        decoration: none;
+      }
     }
   }
   p {
@@ -1884,6 +1909,23 @@ body.sticky {
   }
 }
 
+// category intro
+.term-intro {
+  padding: {
+    bottom: 24px;
+    bottom:2.4rem;
+  }
+  h1 {
+    color:$c_taxonomyIntroH1;
+  }
+  p {
+    color:$c_taxonomyIntroText;
+    font: {
+      weight: 700;
+    }
+  }
+}
+
 // full-width
 .full-width-content {
   .content {
@@ -1989,8 +2031,8 @@ body.sticky {
       color: $c_pagenavLink;
       cursor: pointer;
       display: inline-block;
-      padding: 8px 12px;
-      padding: 0.8rem 1.2rem;
+      padding: 4px 12px;
+      padding: 0.4rem 1.2rem;
       &:hover {
         color: $c_pagenavHoverLink;
         background: {
@@ -2033,80 +2075,74 @@ body.sticky {
   background: {
     color: $c_mainBg;
   }
-  margin: {
-    bottom: 40px;
-    bottom: 4rem;
-  }
-  padding: {
-    top: 40px;
-    top: 4rem;
-    bottom: 40px;
-    bottom: 4rem
-  }
   a {
-    border: {
-      bottom: 1px solid $c_linkBorder;
+    font: {
+      weight: 700;
     }
   }
-
-  .comment-author {
+  h3 {
     margin: {
-      bottom: 0;
+      bottom: 24px;
+      bottom: 2.4rem;
     }
   }
-
+  .comment-author {
+    img {
+      float:left;
+      margin: {
+        right: 16px;
+        right: 1.6rem;
+      }
+    }
+    span {
+      font: {
+        weight: 700;
+      }
+      &:before {
+        content: "By ";
+        font: {
+          weight: normal;
+        }
+      }
+      &:after {
+        content: " on";
+        font: {
+          weight: normal;
+        }
+      }
+      &.says {
+        display:none;
+        visibility: hidden;
+      }
+    }
+  }
+  .comment-content {
+    clear:left;
+  }
   .comment-list {
     li {
       list-style-type: none;
-      margin: {
-        top: 24px;
-        top: 2.4rem;
-      }
-      padding: 32px 0 32px 100px;
-      padding: 3.2rem 0 3.2rem 10rem;
       &.depth-1 {
         .avatar {
           float:left;
-          margin: {
-            left: -100px;
-            left: -10rem;
-          }
           background: {
             color: #ff0000; //$c_mainBg;
           }
           width: 100px;
-          padding: {
-            right: 15px;
-            right:1.5rem;
-          }
         }
       }
       .depth-2 {
-        padding: 32px 0 16px 30px;
-        padding: 3.2rem 0 1.6rem 3rem;
         border: {
           width:1px 0 0 0;
           style: dotted;
           color: $c_commentReplyBorder;
         }
         article {
-          padding: {
-            left: 20px;
-            left: 2rem;
-          }
           .comment-content,
           .comment-reply {
-            padding: {
-              left: 10px;
-              left:1rem;
-            }
           }
           .avatar {
             width:75px;
-            margin: {
-              left:-60px;
-              left:-6rem;
-            }
           }
         }
       }
@@ -2124,19 +2160,16 @@ body.sticky {
         }
       }
     }
-    .comment-content {
-      clear: both;
-    }
     .comment-respond {
       background: {
         color: $c_mainBg;
       }
-      margin {
-        bottom: 40px;
-        bottom: 4rem;
-      }
-      padding: 40px 40px 16px;
-      padding: 4rem 4rem 1.6rem;
+//      margin {
+//        bottom: 40px;
+//        bottom: 4rem;
+//      }
+//      padding: 40px 40px 16px;
+//      padding: 4rem 4rem 1.6rem;
       a {
         border-bottom: 1px solid $c_linkBorder;
       }
@@ -2183,9 +2216,6 @@ body.sticky {
 }
 
 .form-allowed-tags {
-  background: {
-    color: #f5f5f5;
-  }
   font: {
     size: 14px;
     size: 1.4rem;
@@ -2304,9 +2334,28 @@ body.sticky {
     }
     border-radius: 3px;
   }
+  form {
+    padding: 0 10px;
+    padding: 0 1.0rem;
+  }
   .enews-widget {
     background: {
       color: #333;
+    }
+  }
+  .user-profile,
+  .widget_tag_cloud {
+    .widget-wrap {
+      p,
+      div {
+        padding: 0 10px;
+        padding: 0 1.0rem;
+        a {
+          font: {
+            weight: 700;
+          }
+        }
+      }
     }
   }
 }
@@ -2324,7 +2373,7 @@ body.sticky {
         color: $c_ctaBorder;
       }
       @include box-shadow(inset 0px 0 5px $c_ctaBoxShadow);
-      @include background-image(linear-gradient($c_ctaBg,darken($c_ctaBg,10%)));
+      @include background-image(linear-gradient(lighten($c_ctaBg,10%),$c_ctaBg));
       color: $c_ctaTextWhite;
       font: {
         size: $f_ctaText-px;
@@ -2340,7 +2389,7 @@ body.sticky {
          }
       }
       &:hover {
-        @include background-image(linear-gradient(darken($c_ctaBg,10%),$c_ctaBg));
+        @include background-image(linear-gradient($c_ctaBg,lighten($c_ctaBg,10%)));
         color: $c_ctaTextWhite;
       }
     }
@@ -2374,7 +2423,7 @@ body.sticky {
         bottom: 1rem;
       }
       &[type="text"] {
-        width:75%;
+        width:80%;
       }
       &[type="submit"] {
         font: {
@@ -2568,6 +2617,10 @@ body.sticky {
   clear: both;
   padding: 30px 0 16px;
   padding: 3rem 0 1.6rem;
+  margin: {
+    top:24px;
+    top:2.4rem;
+  }
   a {
     color: $c_footerWidgetsLink;
     &:hover {
@@ -2638,7 +2691,7 @@ body.sticky {
   padding: 2.0rem 0;
   a {
     color: $c_footerLink;
-    border-bottom: 1px solid #ddd;
+    text-decoration:underline;
     &:hover {
       color:$c_footerLinkHover;
     }
@@ -2663,6 +2716,9 @@ body.sticky {
 // iPhone 5 1136x640
 // iPad 1024x768
 // Retina x2
+
+// vanaf 639 laten we hamburgermenu zien
+
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
 only screen and (-moz-min-device-pixel-ratio: 1.5),

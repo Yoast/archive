@@ -19,6 +19,7 @@ class YST_Facebook_Widget extends WP_Widget {
 	 */
 	function YST_Facebook_Widget() {
 		$this->vars = array(
+			__( 'Widget title', 'yoast-theme' )             => 'title',
 			__( 'Facebook URL', 'yoast-theme' )             => 'data_href',
 			__( 'Width', 'yoast-theme' )                    => 'data_width',
 			__( 'Height', 'yoast-theme' )                   => 'data_height',
@@ -31,6 +32,7 @@ class YST_Facebook_Widget extends WP_Widget {
 		);
 
 		$this->defaults = array(
+			'title'            => 'Find us on Facebook',
 			'data_href'        => 'http://www.facebook.com/yoast',
 			'data_width'       => 250,
 			'data_height'      => 300,
@@ -64,7 +66,11 @@ class YST_Facebook_Widget extends WP_Widget {
 			$label      = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
 
 			echo '<p>';
-			if ( $var == 'data_href' ) {
+			if ( $var == 'title' ) {
+				echo $label;
+				echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . strip_tags( $instance[$var] ) . '" />';
+			}
+			else if ( $var == 'data_href' ) {
 				echo $label;
 				echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . esc_html( $instance[$var] ) . '" />';
 			}
@@ -113,6 +119,9 @@ class YST_Facebook_Widget extends WP_Widget {
 			}
 			if ( isset( $new_instance[$var] ) ) {
 				switch ( $var ) {
+					case 'title':
+						$instance[$var] = strip_tags( $new_instance[$var] );
+						break;
 					case 'data_href':
 						$instance[$var] = esc_url( $new_instance[$var] );
 						break;
@@ -161,6 +170,12 @@ class YST_Facebook_Widget extends WP_Widget {
 		<?php
 
 		echo $args['before_widget'];
+
+		if ( isset ( $instance['title'] ) ) {
+			$title = '<h4 class="widget-title">' . strip_tags( $instance['title'] ) . '</h4>';
+			$title = apply_filters( 'yst_fb_title', $title );
+			echo $title;
+		}
 
 		?>
 		<div class="fb-like-box widget"
