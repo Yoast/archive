@@ -342,6 +342,8 @@ function yst_mobile_nav() {
  * @param string $footer_creds_text
  *
  * @return string
+ *
+ * @fixme If this becomes something you can change in the settings, just retrieve the option here and return it.
  */
 function yst_footer_creds_text( $footer_creds_text ) {
 	return sprintf( __( '&#x000B7; Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a> &#x000B7;', 'yoast-theme' ), date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com/wordpress/themes/tailor-made/" rel="nofollow">Tailor Made</a>', 'Yoast' );
