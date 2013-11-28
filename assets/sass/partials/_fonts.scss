@@ -1,4 +1,4 @@
-// font dimensions for Theme 001
+// font dimensions for Tailor Made
 // Always have 62.5% font size for the body to assure em working from 10pt
 // html {font-size:62.5%;}
 
@@ -31,19 +31,23 @@ $f_commentHTMLtags-px:  15px;
 $f_commentHTMLtags:     1.5rem;
 
 // header
-$f_header-px:    16px;
-$f_header:       1.6rem;
-$f_headerH3-px:  20px;
-$f_headerH3:     2.0rem;
-$f_headerH4-px:  20px;
-$f_headerH4:     2.0rem;
+$f_header-px:           16px;
+$f_header:              1.6rem;
+$f_headerH3-px:         20px;
+$f_headerH3:            2.0rem;
+$f_headerH4-px:         20px;
+$f_headerH4:            2.0rem;
 
 // navigation
-$f_navFont:     'Quattrocento Sans', Helvetica, Arial, sans-serif;
-$f_navMainLink-px:  18px;
-$f_navMainLink:     1.8rem;
-$f_navSubLink-px:  14px;
-$f_navSubLink:     1.4rem;
+$f_navFont:             'Quattrocento Sans', Helvetica, Arial, sans-serif;
+$f_navMainLink-px:      18px;
+$f_navMainLink:         1.8rem;
+$f_navSubLink-px:       14px;
+$f_navSubLink:          1.4rem;
+
+// mobile menu
+$sidr-font-family:      'lucida grande',tahoma,verdana,arial,sans-serif;
+$sidr-font-size:        15px;
 
 // main content
 $f_H1Font:      'Quattrocento Sans', Helvetica, Arial, sans-serif;
@@ -71,7 +75,6 @@ $f_sidebarH2-px:    20px;
 $f_sidebarH2:       2.0rem;
 $f_sidebarH3-px:    20px;
 $f_sidebarH3:       2.0rem;
-
 
 // blockquote
 $f_blockquoteBefore-px: 30px;

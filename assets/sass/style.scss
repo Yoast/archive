@@ -1,14 +1,9 @@
 /*
-	Theme Name: Theme001
-	Description: Yoast First Theme
-	Author: Yoast.com
+	Theme Name: Tailor Made
+	Description: Tailor Made by Yoast
+	Author: Yoast BV
 	Author URI: http://yoast.com/
 	Version: 0.0.1
-
-	Tags: yoast;
-
-	Template: genesis
-	Template Version: 2.0.0
 
 	License: GPL-2.0+
 	License URI: http://www.opensource.org/licenses/gpl-license.php
@@ -20,16 +15,22 @@
 @import "compass";
 @import "compass/css3";
 
-// Import default for this theme
+/**
+ *  Fonts used
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);
+@import url(http://fonts.googleapis.com/css?family=Lekton:400,700,400italic);
+
+/**
+ * Import defaults for this theme
+ */
+
 @import "partials/reset";
 @import "partials/colorsWarmBlue";
 //@import "partials/colorsLimeAndMagenta";
 @import "partials/dimensions";
 @import "partials/fonts";
-
-// fonts used
-@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);
-@import url(http://fonts.googleapis.com/css?family=Lekton:400,700,400italic);
 
 //  HTML5 Reset
 //  Baseline Normalize
@@ -58,7 +59,10 @@ audio:not([controls]) {
   display:none;
 }
 
-/* =Main Elements */
+/**
+ *  Main elements
+ */
+
 body {
   background: {
     color: $c_mainBg;
@@ -260,7 +264,9 @@ header {
   }
 }
 
-/* =Forms */
+/**
+ * Forms
+ */
 
 fieldset {
   border:1px solid $c_fieldsetBorder;
@@ -403,7 +409,38 @@ textarea {
   color: $c_inputTextPlaceholder;
 }
 
-/* =Tables */
+/**
+ * Search
+ */
+
+.search-form {
+  input {
+    font: {
+      family: $f_codeFont;
+    }
+    height: 1.5em;
+    padding: 16px 32px 16px 16px;
+    padding: 1.6rem 3.2rem 1.6rem 1.6rem;
+    background: {
+      image: url(../images/icon-search.png);
+      position: 95% 50%;
+      repeat: no-repeat;
+    }
+  }
+  input[type="submit"] {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+}
+
+/**
+ * Tables
+ */
 
 table {
   border: {
@@ -450,7 +487,10 @@ table {
   }
 }
 
-// Calendar widget
+/*
+ * Calendar widget
+ */
+
 .widget_calendar {
   .widget-title {
     display:none;
@@ -588,7 +628,9 @@ table {
 }
 
 
-/* =Headings */
+/**
+ * Headings
+ */
 
 .headingsDefault {
   font: {
@@ -676,7 +718,9 @@ h6 {
   }
 }
 
-/* =Objects */
+/**
+ * Objects
+ */
 
 embed,
 iframe,
@@ -692,7 +736,9 @@ img {
   width: auto; // IE8
 }
 
-/* =Structure and =Layout */
+/**
+ * Structure and Layout
+ */
 
 .content {
   float: right;
@@ -709,7 +755,9 @@ img {
   width: 100%;
 }
 
-/* =Primary =Sidebar */
+/*
+ * Primary Sidebar
+ */
 
 .sidebar-primary {
   float: right;
@@ -726,15 +774,19 @@ img {
   }
 }
 
-/* =Secondary =Sidebar */
+/**
+ * Secondary Sidebar
+ */
 
 .sidebar-secondary {
   float: left;
   width: ($d_sidebar/2);
 }
 
-/* =Column Classes
-Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css */
+/**
+ * Column Classes
+ * @link http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css
+ */
 
 .five-sixths,
 .four-sixths,
@@ -793,9 +845,9 @@ Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css */
 }
 
 
-/* =Common Classes */
-
-/* =WordPress */
+/**
+ * Wordpress classes
+ */
 
 .avatar {
   float: left;
@@ -883,7 +935,9 @@ img.alignright,
   }
 }
 
-/* =Genesis */
+/**
+ * Genesis classes
+ */
 
 .breadcrumb {
   max-width: $d_full;
@@ -957,7 +1011,9 @@ img.alignright,
   }
 }
 
-/* =Titles */
+/**
+ * Titles
+ */
 
 .entry-title {
   text: {
@@ -971,7 +1027,6 @@ img.alignright,
     }
   }
 }
-
 .archive-title {
   font: {
     size: 20px;
@@ -983,8 +1038,10 @@ img.alignright,
   }
 }
 
+/**
+ * Genesis Featured Content
+ */
 
-/* Geneisis =Featured Content */
 .featured-content {
   .entry {
     padding: 0 10px;
@@ -1025,9 +1082,11 @@ img.alignright,
 }
 
 
-/* =Plugins */
-
-/* =Genesis =eNews Extended */
+/**
+ * Genesis
+ * @plugin(title: eNews Extended)
+ * @link: http://wordpress.org/plugins/genesis-enews-extended/
+ */
 
 .enews-widget {
   color: #999;
@@ -1045,7 +1104,11 @@ img.alignright,
   }
 }
 
-/* =Genesis Latest =Tweets */
+/**
+ * Genesis
+ * @plugin(title: Latest Tweets)
+ * @link http://wordpress.org/plugins/genesis-latest-tweets/
+ */
 
 .latest-tweets ul li {
   margin: {
@@ -1054,7 +1117,11 @@ img.alignright,
   }
 }
 
-/* =Gravity =Forms */
+/**
+ * Gravity Forms
+ * @plugin(title: Gravity Forms)
+ * @link http://www.gravityforms.com/
+ */
 
 .gform_wrapper {
   .gf_progressbar_wrapper {
@@ -1150,41 +1217,20 @@ img.alignright,
   }
 }
 
-/* =Search =form */
-.search-form {
-  input {
-    font: {
-      family: $f_codeFont;
-    }
-    height: 1.5em;
-    padding: 16px 32px 16px 16px;
-    padding: 1.6rem 3.2rem 1.6rem 1.6rem;
-    background: {
-      image: url(../images/icon-search.png);
-      position: 95% 50%;
-      repeat: no-repeat;
-    }
-  }
-  input[type="submit"] {
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-}
-
-
-/* =Jetpack */
+/**
+ * Jetpack
+ * @plugin(title: Jetpack by WordPress.com)
+ * @link http://wordpress.org/plugins/jetpack/
+ */
 
 img#wpstats {
   display: none;
   visibility: hidden;
 }
 
-/* =Title Area */
+/**
+ * Title Area
+ */
 
 .header-full-width {
   .title-area {
@@ -1294,7 +1340,9 @@ img#wpstats {
   }
 }
 
-/* After =Header =Widgets */
+/**
+ * After Header Widgets
+ */
 
 // testing no widgets and tagline below menu
 #yoast-after-header-container,
@@ -1387,7 +1435,9 @@ img#wpstats {
   width: $d_sidebar;
 }
 
-/* =Tagline Widgets */
+/**
+ * Tagline Widgets
+ */
 
 #yoast-tagline-after-header-container {
   border-top: 1px solid $c_hrLine;
@@ -1413,7 +1463,9 @@ img#wpstats {
   }
 }
 
-/* Site =Navigation */
+/**
+ * Site Navigation
+ */
 .nav-primary { // entire width
   background: {
     color:  $c_navMainFullBg;
@@ -1640,7 +1692,199 @@ img#wpstats {
   }
 }
 
-/* Site =Header =Navigation */
+/**
+ * Hamburger menu
+ */
+
+.sidr {
+  // Default Settings
+  display: none;
+  position: absolute;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  z-index: 999999;
+  width: 260px;
+  overflow-x: none;
+  overflow-y: auto;
+
+  .sidr-inner {
+    padding: 0 0 15px;
+
+    > p {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+  }
+
+  &.right {
+    left: auto;
+    right: -260px;
+  }
+
+  &.left {
+    left: -260px;
+    right: auto;
+  }
+
+  // Theme Settings
+  font-family: $sidr-font-family;
+  font-size: $sidr-font-size;
+  background: $sidr-background;
+  color: $sidr-text-color;
+  @include single-box-shadow($sidr-background-shadow-color, 0, 0, 5px, 5px, inset);
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: $sidr-font-size - 4;
+    font-weight: normal;
+    padding: 0 15px;
+    margin: 0 0 5px;
+    color: $sidr-text-color;
+    line-height: 24px;
+    @include background-image(linear-gradient(lighten($sidr-background, 10%), darken($sidr-background, 10%)));
+    @include single-box-shadow(rgba(#000, .2), 0, 5px, 5px, 3px);
+  }
+
+  p {
+    font-size: $sidr-font-size - 2;
+    margin: 0 0 12px;
+    a {
+      color: rgba($sidr-text-color, .9);
+    }
+  }
+
+  > p {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  ul {
+    display: block;
+    margin: 0 0 15px;
+    padding: 0;
+    border-top: 1px solid darken($sidr-background, 10%);
+    border-bottom: 1px solid lighten($sidr-background, 10%);
+
+    li {
+      display: block;
+      margin: 0;
+      line-height: 48px;
+      border-top: 1px solid lighten($sidr-background, 10%);
+      border-bottom: 1px solid darken($sidr-background, 10%);
+
+      &:hover,
+      &.active,
+      &.sidr-class-active {
+        border-top: none;
+        line-height: 49px;
+
+        > a, > span {
+          @include single-box-shadow($sidr-background-shadow-color, 0, 0, 15px, 3px, inset);
+        }
+      }
+
+      a, span {
+        padding: 0 15px;
+        display: block;
+        text-decoration: none;
+        color: $sidr-text-color;
+      }
+
+      ul {
+        border-bottom: none;
+        margin: 0;
+        li {
+          line-height: 40px;
+          font-size: $sidr-font-size - 2;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          &:hover,
+          &.active,
+          &.sidr-class-active {
+            border-top: none;
+            line-height: 41px;
+
+            > a, > span {
+              @include single-box-shadow($sidr-background-shadow-color, 0, 0, 15px, 3px, inset);
+            }
+          }
+
+          a, span {
+            color: rgba($sidr-text-color, .8);
+            padding-left: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  form {
+    margin: 0 15px;
+  }
+
+  label {
+    font-size: $sidr-font-size - 2;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="time"],
+  input[type="url"],
+  textarea, select {
+    width: 100%;
+    font-size: $sidr-font-size - 2;
+    padding: 5px;
+    @include box-sizing(border-box);
+    margin: 0 0 10px;
+    @include border-radius(2px);
+    border: none;
+    background: rgba(#000, .1);
+    color: rgba($sidr-text-color, .6);
+    display: block;
+    clear: both;
+  }
+
+  input[type=checkbox] {
+    width: auto;
+    display: inline;
+    clear: none;
+  }
+
+  input[type=button],
+  input[type=submit] {
+    color: $sidr-background;
+    background: $sidr-text-color;
+
+    &:hover {
+      background: rgba($sidr-text-color, .9);
+    }
+  }
+}
+
+.sidr-block {
+  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 888888;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/**
+ * Site Header Navigation
+ */
 
 .site-header {
   .sub-menu {
@@ -1665,9 +1909,12 @@ img#wpstats {
   }
 }
 
-/* =Sticky =Menu - scrolling */
+/**
+ * Sticky Menu - scrolling
+ */
 
-body.sticky {
+body.sticky,
+body.sticky-menu {
   padding-top: 120px;
   .site-header {
     position: fixed;
@@ -1748,10 +1995,11 @@ body.sticky {
   }
 }
 
-/* =Content Area */
+/**
+ * Content Area
+ */
 
-/* =Entries */
-
+// Entries
 .post {
   margin: {
     bottom: 36px;
@@ -1765,7 +2013,6 @@ body.sticky {
     bottom: 1px solid $c_hrLine;
   }
 }
-
 .entry {
   background {
     color: $c_mainBg;
@@ -1778,7 +2025,6 @@ body.sticky {
     padding: 4rem 4rem 2.4rem;
   }
 }
-
 .entry-content {
   a {
     color: $c_mainLink;
@@ -1941,14 +2187,12 @@ body.sticky {
     }
   }
 }
-
 .quote-caption {
   margin: {
     bottom: 26px;
     bottom: 2.6rem;
   }
 }
-
 .entry-meta {
   color: #999;
   font: {
@@ -1961,7 +2205,6 @@ body.sticky {
     }
   }
 }
-
 .entry-header {
   .entry-meta {
     margin: {
@@ -1978,7 +2221,6 @@ body.sticky {
     }
   }
 }
-
 .entry-footer {
   display: none;
   .entry-meta {
@@ -1995,7 +2237,6 @@ body.sticky {
     padding: 3.2rem 4rem 0.8rem;
   }
 }
-
 .entry-comments-link {
   ::before {
     content: "\2014";
@@ -2003,16 +2244,16 @@ body.sticky {
     margin: 0 0.6rem 0 0.2rem;
   }
 }
-
 .entry-categories {
   display: block;
 }
-
 .entry-tags {
   display: block;
 }
 
-/* =Pagination */
+/**
+ * Pagination
+ */
 
 .archive-pagination {
   font: {
@@ -2050,7 +2291,6 @@ body.sticky {
     }
   }
 }
-
 .entry-pagination {
   font: {
     size: 14px;
@@ -2069,7 +2309,9 @@ body.sticky {
   }
 }
 
-/* =Comments */
+/**
+ * Comments
+ */
 
 .entry-comments {
   background: {
@@ -2131,7 +2373,7 @@ body.sticky {
           width: 100px;
         }
       }
-      .depth-2 {
+      &.depth-2 {
         border: {
           width:1px 0 0 0;
           style: dotted;
@@ -2224,8 +2466,10 @@ body.sticky {
   padding: 2.4rem;
 }
 
+/**
+ * Sidebars
+ */
 
-/* =Sidebars */
 .sidebar {
   color: $c_sidebarText;
   .widget-wrap {
@@ -2332,7 +2576,11 @@ body.sticky {
       bottom: 40px;
       bottom: 4rem;
     }
-    border-radius: 3px;
+    .widget {
+      padding: {
+        bottom: 0;
+      }
+    }
   }
   form {
     padding: 0 10px;
@@ -2360,7 +2608,10 @@ body.sticky {
   }
 }
 
-/*  =Sidebar =Widgets */
+/**
+ * Sidebar Widgets
+ */
+
 .widget_bigbutton {
   .button-green {
     a {
@@ -2396,7 +2647,10 @@ body.sticky {
   }
 }
 
-/* =Newsletter =Widget */
+/**
+ * Newsletter Widget
+ */
+
 .widget-yns {
   p,
   form {
@@ -2435,7 +2689,10 @@ body.sticky {
   }
 }
 
-/* =Social Media =Widget */
+/**
+ * Social Media Widget
+ */
+
 .widget_socials {
   margin: {
     bottom: 40px;
@@ -2539,10 +2796,12 @@ body.sticky {
   }
 }
 
+/**
+ * Retina-specific stuff here
+ */
 @media
 (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
-/* Retina-specific stuff here */
   .widget_socials {
     #yst_social_widget {
       a {
@@ -2596,7 +2855,9 @@ body.sticky {
 }
 
 
-/* =Footer =Widgets */
+/**
+ * Footer Widgets
+ */
 
 .footer-widgets {
   font: {
@@ -2669,7 +2930,9 @@ body.sticky {
   }
 }
 
-/* Site =Footer */
+/**
+ * Site Footer
+ */
 
 .site-footer {
   background: {
@@ -2710,7 +2973,9 @@ body.sticky {
 }
 
 
-/* Media Queries */
+/**
+ * Media Queries
+ */
 
 // iPhone 480x320
 // iPhone 5 1136x640
@@ -2841,7 +3106,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 
 @media only screen and (max-width: 863px ) {
-
   .five-sixths,
   .four-sixths,
   .one-fourth,
