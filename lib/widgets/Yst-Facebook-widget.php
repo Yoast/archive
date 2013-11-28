@@ -4,12 +4,10 @@
  *
  * @package      Yoast Facebook Widget
  * @since        1.0.0
- * @author       Joost de Valk <joost@yoast.com>
- * @copyright    Copyright (c) 2013, Joost de Valk
+ * @author       Taco Verdonschot
+ * @copyright    Copyright (c) 2013, Yoast BV
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
-
-
 class YST_Facebook_Widget extends WP_Widget {
 
 	/**
@@ -18,6 +16,8 @@ class YST_Facebook_Widget extends WP_Widget {
 	 * @since 1.0.0
 	 */
 	function YST_Facebook_Widget() {
+		// @fixme It doesn't feel logical to have the keys be translateable here, I'd turn the use of this array around.
+		// @fixme Shouldn't the name of this array be labels instead of vars, as that's what it contains?
 		$this->vars = array(
 			__( 'Widget title', 'yoast-theme' )             => 'title',
 			__( 'Facebook URL', 'yoast-theme' )             => 'data_href',
@@ -31,6 +31,8 @@ class YST_Facebook_Widget extends WP_Widget {
 			__( 'Show check-ins only', 'yoast-theme' )      => 'data_force_wall'
 		);
 
+		// @fixme don't default to our FB page
+		// @fixme String is not i18n compatible
 		$this->defaults = array(
 			'title'            => 'Find us on Facebook',
 			'data_href'        => 'http://www.facebook.com/yoast',
@@ -43,7 +45,9 @@ class YST_Facebook_Widget extends WP_Widget {
 			'data_show_border' => false,
 			'data_force_wall'  => false
 		);
-		$widget_ops     = array( 'classname' => 'yst_fb_widget', 'description' => 'Yoast Facebook widget' );
+
+		// @fixme description is not i18n compatible.
+		$widget_ops = array( 'classname' => 'yst_fb_widget', 'description' => 'Yoast Facebook widget' );
 		$this->WP_Widget( 'widget-yst-fb', __( 'Yoast &mdash; Facebook', 'yoast-theme' ), $widget_ops );
 	}
 
@@ -77,6 +81,8 @@ class YST_Facebook_Widget extends WP_Widget {
 			else if ( $var == 'data_colorscheme' ) {
 				echo $label;
 				echo ' <select ' . $input_attr . '>';
+
+				// @fixme Make strings i18n compatible.
 				?>
 				<option value="light" <?php if ( $instance[$var] == 'light' ) echo 'selected="yes"'; ?>>Light</option>;
 				<option value="dark" <?php if ( $instance[$var] == 'dark' ) echo 'selected="yes"'; ?>>Dark</option>
@@ -113,6 +119,7 @@ class YST_Facebook_Widget extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 
+		// @fixme if $label is unused, no need to cast it here.
 		foreach ( $this->vars as $label => $var ) {
 			if ( $old_instance[$var] && ! isset ( $new_instance[$var] ) ) {
 				$instance[$var] = false;
@@ -155,6 +162,8 @@ class YST_Facebook_Widget extends WP_Widget {
 	 *
 	 * @param array $args     An array of standard parameters for widgets in this theme
 	 * @param array $instance An array of settings for this widget instance
+	 *
+	 * @fixme the fb-root div should be right under the <body> tag and the script should be loaded in wp_footer, not half way through the page.
 	 */
 	function widget( $args, $instance ) {
 		?>
