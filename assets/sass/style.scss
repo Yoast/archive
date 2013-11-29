@@ -1272,60 +1272,58 @@ img.alignright,
   }
 }
 
-.archive-description,
-.author-box {
-  background: {
-    color: #fff;
-  }
+.archive-description {
   margin: {
     bottom: 40px;
-    bottom: 4rem;
+    bottom:4rem;
   }
-}
-
-.archive-description {
   padding: 40px 40px 24px;
   padding: 4rem 4rem 2.4rem;
 }
 
 .author-box {
-  padding: 40px;
-  padding: 4rem;
-}
-
-.author-box-title {
-  color: #333;
-  font: {
-    family: $f_baseFont;
-    size: 16px;
-    size: 1.6rem;
+  margin: 40px 0;
+  margin: 4rem 0;
+  padding: 10px;
+  padding: 1rem;
+  background: {
+    color: $c_articleAuthorBg;
   }
-  margin: {
-    bottom: 4px;
-    bottom: 0.4rem;
+  .author-box-title {
+    margin: {
+      bottom: 4px;
+      bottom: 0.4rem;
+    }
+    font: {
+      size: $f_mainH2-px;
+      size: $f_mainH2;
+    }
+  }
+  p {
+    margin: {
+      bottom: 0
+    }
+    &.social {
+      a {
+        &:before {
+          content: "⋅ ";
+        }
+      }
+      a:first-child:before {
+        content:"";
+      }
+    }
+  }
+  .avatar {
+    float:right;
+    margin: {
+      left:10px;
+      left:1rem;
+      bottom:10px;
+      bottom:1rem;
+    }
   }
 }
-
-.author-box a {
-  border: {
-    bottom: 1px solid #ddd;
-  }
-}
-
-.author-box p {
-  margin: {
-    bottom: 0
-  }
-}
-
-.author-box .avatar {
-  margin: {
-    right: 24px;
-    right: 2.4rem;
-  }
-}
-
-
 
 /**
  * CONTENT
@@ -2153,10 +2151,6 @@ table {
  */
 
 // testing no widgets and tagline below menu
-#yoast-after-header-container,
-#yoast-tagline-after-header-container {
-  display:none;
-}
 #yoast-after-header-container {
   color: $c_headerLink;
   background: {
@@ -2209,7 +2203,7 @@ table {
         a {
           text-decoration:none;
           &:after {
-            content: "&nbsp;»";
+            content: " »";
           }
           &:hover {
             text: {
@@ -2221,11 +2215,9 @@ table {
     }
   }
 }
-
 #yoast-after-header-1 {
   width: $d_columnOne;
 }
-
 #yoast-after-header-2 {
   width: $d_columnTwo;
   margin: {
@@ -2236,7 +2228,6 @@ table {
   }
   vertical-align: middle;
 }
-
 #yoast-after-header-3 {
   width: $d_sidebar;
 }
@@ -2246,10 +2237,11 @@ table {
  */
 
 #yoast-tagline-after-header-container {
-  border-top: 1px solid $c_hrLine;
-  @include box-shadow(1px 2px 5px $c_taglineBoxShadow);
+  border: {
+    top: 1px solid $c_hrLine;
+    bottom: 1px solid $c_randLine;
+  }
 }
-
 .yoast-tagline-after-header-widget {
   padding: 20px 0px 20px 0px;
   text-align: center;
@@ -2365,7 +2357,6 @@ table {
     background-color: $c_sidebarH3Bg;
     color: $c_sidebarH3;
     padding: 10px;
-    @include box-shadow(1px 2px 5px #ccc);
     a {
       border:none;
       color: $c_sidebarH3;
@@ -2388,11 +2379,6 @@ table {
   form {
     padding: 0 10px;
     padding: 0 1.0rem;
-  }
-  .enews-widget {
-    background: {
-      color: #333;
-    }
   }
   .user-profile,
   .widget_tag_cloud {
@@ -2679,23 +2665,41 @@ table {
  **********************************/
 
 /**
+ * Simple Image Widget
+ * @plugin(title: Simple Image Widget)
+ * @link http://wordpress.org/plugins/simple-image-widget/
+ */
+.widget_simpleimage {
+  .more {
+    a:after {
+      content: " »";
+    }
+  }
+}
+
+/**
  * Genesis
  * @plugin(title: eNews Extended)
  * @link: http://wordpress.org/plugins/genesis-enews-extended/
  */
 
 .enews-widget {
-  color: #999;
-  .widget-title {
-    color: #fff;
-  }
-  input {
-    margin: {
-      bottom: 16px;
-      bottom: 1.6rem;
+  .enews {
+    > p {
+      padding: {
+        left: 10px;
+        left: 1rem;
+        right: 10px;
+        right: 1rem;
+      }
     }
-    &:focus {
-      border: 1px solid $c_randLine;
+    input {
+      padding: 8px 16px;
+      padding: 0.8rem 1.6rem;
+      margin: {
+        bottom: 16px;
+        bottom: 1.6rem;
+      }
     }
   }
 }
@@ -2707,6 +2711,17 @@ table {
  */
 
 .latest-tweets ul li {
+  .tweet-text {
+    display:block;
+  }
+  .tweet-details {
+    a {
+      color: $c_mainLink;
+      &:after {
+        content: "";
+      }
+    }
+  }
   margin: {
     bottom: 16px;
     bottom: 1.6rem;
@@ -2875,64 +2890,6 @@ img#wpstats {
  **********************************/
 
 /**
- * Retina-specific stuff here
- */
-@media
-(-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-  .widget_socials {
-    #yst_social_widget {
-      a {
-        background: url(images/social_spritesx2.png) no-repeat;
-        display:block;
-        width:64px;
-        height:64px;
-        float:left;
-        margin: {
-          right:10px;
-          right:1.0rem;
-        }
-      }
-      .btn-fb {
-        background: {
-          position: -100px -145px;
-        }
-      }
-      .btn-gp {
-        background: {
-          position: -100px -74px;
-        }
-      }
-      .btn-li {
-        background: {
-          position: -100px -2px;
-        }
-      }
-      .btn-pin {
-        background: {
-          position: 0 -221px;
-        }
-      }
-      .btn-rss {
-        background: {
-          position: 0 -146px;
-        }
-      }
-      .btn-tw {
-        background: {
-          position: 0 -73px;
-        }
-      }
-      .btn-yt {
-        background: {
-          position: 0 0;
-        }
-      }
-    }
-  }
-}
-
-/**
  * Mobile device Media Queries
  */
 
@@ -2943,27 +2900,17 @@ img#wpstats {
 
 // vanaf 639 laten we hamburgermenu zien
 
-/*
- * Retina
- */
-
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-only screen and (-moz-min-device-pixel-ratio: 1.5),
-only screen and (-o-min-device-pixel-ratio: 3/2),
-only screen and (min-device-pixel-ratio: 1.5) {
-
-  .header-image .site-header .wrap {
-    background: url(images/logo@2x.png) no-repeat left;
-    background-size: 320px 164px;
-  }
-
-}
+//Retina
+//@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+//only screen and (-moz-min-device-pixel-ratio: 1.5),
+//only screen and (-o-min-device-pixel-ratio: 3/2),
+//only screen and (min-device-pixel-ratio: 1.5) {}
 
 /*
  * iPad landscape
  */
 
-@media only screen and (max-width: 1025px) {
+@media (max-width: 1026px) {
   .content,
   .footer-widgets {
     padding: {
@@ -2991,13 +2938,9 @@ only screen and (min-device-pixel-ratio: 1.5) {
       padding:2.0rem 0;
     }
   }
-  .sidebar .widget.enews-widget {
-    padding: 40px;
-    padding: 4rem;
-  }
 }
 
-@media only screen and (max-width: 641px ) {
+@media (max-width: 642px) {
   .site-header {
     .title-area,
     .header-widget-area,
@@ -3008,62 +2951,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
   }
 }
 
-@media only screen and (max-width: 1px ) {
-  .five-sixths,
-  .four-sixths,
-  .one-fourth,
-  .one-half,
-  .one-sixth,
-  .one-third,
-  .three-fourths,
-  .three-sixths,
-  .two-fourths,
-  .two-sixths,
-  .two-thirds {
-    margin: 0;
-    width: 100%;
-  }
-  .site-header .widget-area {
-    width: 100%;
-    text-align:left;
-    padding: 0 20px 0;
-    padding: 0 2rem 0;
-    img {
-      max-width: 100%;
-    }
-  }
-  header {
-    &.site-header {
-      .widget_search {
-        display:none;
-        visibility:hidden;
-      }
-    }
-  }
-  .genesis-nav-menu {
-    .menu-item-search {
-      display:inline;
-      visibility:visible;
-      margin: {
-        right: 2.14286em
-      }
-      text-align:center;
-      padding: 0.85714em 2.14286em; // uit ROCM.css
-      input {
-        font: {
-          family: $f_codeFont;
-        }
-        background: {
-          image: url(../images/icon-search.png);
-          position: right 50%;
-          repeat: no-repeat;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 321px ) {
+@media (max-width: 322px) {
   .blog {
     &.sidebar-content {
       .content {
