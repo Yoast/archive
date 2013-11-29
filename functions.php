@@ -450,3 +450,13 @@ function yst_change_search_text() {
 }
 
 add_filter( 'genesis_search_text', 'yst_change_search_text' );
+
+/**
+ * Add back to top link
+ *
+ * @fixme If there is a better solid way to do this or Genesis fixes this feature, use that
+ */
+function yst_add_backtotop_to_post_footer() {
+	echo '<p class="back-to-top"><a href="#">'. __('Back to top', 'yoast-theme') . ' &#9652;</a></p>';
+}
+add_action('genesis_entry_footer', 'yst_add_backtotop_to_post_footer', 14);
