@@ -207,6 +207,7 @@ function yst_after_header_genesis() {
 
 function yst_fullwidth_sitebars_genesis() {
 	if ( 'full-width-content' == genesis_site_layout() ) {
+		echo '<div id="yoast-fullwidth-bottom-container"><div class="wrap">';
 		genesis_widget_area( 'yoast-fullwidth-widgetarea-1', array(
 			'before' => '<div id="yoast-fullwidth-widgetarea-1" class="yoast-fullwidth-widget">',
 			'after'  => '</div>',
@@ -219,6 +220,7 @@ function yst_fullwidth_sitebars_genesis() {
 			'before' => '<div id="yoast-fullwidth-widgetarea-3" class="yoast-fullwidth-widget">',
 			'after'  => '</div>',
 		) );
+		echo '</div></div>';
 	}
 }
 
