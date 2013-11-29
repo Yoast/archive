@@ -74,19 +74,19 @@ function child_theme_setup() {
 	) );
 
 	genesis_register_sidebar( array(
-		'id'          => 'full-width-sidebar-1',
+		'id'          => 'yoast-fullwidth-widgetarea-1',
 		'name'        => __( 'Full Width 1', 'yoast-theme' ),
 		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
 	) );
 
 	genesis_register_sidebar( array(
-		'id'          => 'full-width-sidebar-2',
+		'id'          => 'yoast-fullwidth-widgetarea-2',
 		'name'        => __( 'Full Width 2', 'yoast-theme' ),
 		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
 	) );
 
 	genesis_register_sidebar( array(
-		'id'          => 'full-width-sidebar-3',
+		'id'          => 'yoast-fullwidth-widgetarea-3',
 		'name'        => __( 'Full Width 3', 'yoast-theme' ),
 		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
 	) );
@@ -111,9 +111,9 @@ function child_theme_setup() {
 	add_action( 'genesis_after_header', 'yst_show_fullwidth_sidebars' );
 
 	function yoast_do_fullwidth_sidebars() {
-		dynamic_sidebar( 'full-width-sidebar-1' );
-		dynamic_sidebar( 'full-width-sidebar-2' );
-		dynamic_sidebar( 'full-width-sidebar-3' );
+		dynamic_sidebar( 'yoast-fullwidth-widgetarea-1' );
+		dynamic_sidebar( 'yoast-fullwidth-widgetarea-2' );
+		dynamic_sidebar( 'yoast-fullwidth-widgetarea-3' );
 	}
 
 	// Activate blogroll widget
@@ -207,16 +207,16 @@ function yst_after_header_genesis() {
 
 function yst_fullwidth_sitebars_genesis() {
 	if ( 'full-width-content' == genesis_site_layout() ) {
-		genesis_widget_area( 'full-width-sidebar-1', array(
-			'before' => '<div id="full-width-sidebar-1" class="yoast-fullwidth-widget">',
+		genesis_widget_area( 'yoast-fullwidth-widgetarea-1', array(
+			'before' => '<div id="yoast-fullwidth-widgetarea-1" class="yoast-fullwidth-widget">',
 			'after'  => '</div>',
 		) );
-		genesis_widget_area( 'full-width-sidebar-2', array(
-			'before' => '<div id="full-width-sidebar-1" class="yoast-fullwidth-widget">',
+		genesis_widget_area( 'yoast-fullwidth-widgetarea-2', array(
+			'before' => '<div id="yoast-fullwidth-widgetarea-2" class="yoast-fullwidth-widget">',
 			'after'  => '</div>',
 		) );
-		genesis_widget_area( 'full-width-sidebar-3', array(
-			'before' => '<div id="full-width-sidebar-1" class="yoast-fullwidth-widget">',
+		genesis_widget_area( 'yoast-fullwidth-widgetarea-3', array(
+			'before' => '<div id="yoast-fullwidth-widgetarea-3" class="yoast-fullwidth-widget">',
 			'after'  => '</div>',
 		) );
 	}
