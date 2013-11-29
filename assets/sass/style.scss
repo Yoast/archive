@@ -1740,19 +1740,12 @@ table {
   }
 }
 .entry-footer {
-  display: none;
   .entry-meta {
-    border: {
-      top: {
-        width: 2px;
-        style: solid;
-        color: $c_metaAtPostBorder;
-      }
-    }
-    margin: 0 -40px;
-    margin: 0 -4rem;
-    padding: 32px 40px 8px;
-    padding: 3.2rem 4rem 0.8rem;
+    padding: 32px 40px 8px 0;
+    padding: 3.2rem 4rem 0.8rem 0;
+  }
+  .back-to-top {
+    text-align:right;
   }
 }
 .entry-comments-link {
@@ -2051,9 +2044,6 @@ table {
   .entry {
     padding: 0 10px;
     padding: 0 1.0rem;
-    img {
-      width:230px;
-    }
   }
   a {
     &.alignleft,
@@ -2063,6 +2053,9 @@ table {
         text-align:center;
       }
     }
+  }
+  header.entry-header {
+    display:inline;
   }
   .entry-title {
     clear:both;
@@ -2341,27 +2334,6 @@ table {
       bottom: 0;
     }
   }
-  .widget-title,
-  widgettitle {
-    font: {
-      size:$f_sidebarH3-px;
-      size:$f_sidebarH3;
-    }
-    margin: {
-      bottom: 24px;
-      bottom: 2.4rem;
-    }
-    text: {
-      transform: none;
-    }
-    background-color: $c_sidebarH3Bg;
-    color: $c_sidebarH3;
-    padding: 10px;
-    a {
-      border:none;
-      color: $c_sidebarH3;
-    }
-  }
   .widget {
     background: {
       color: $c_mainBg;
@@ -2396,6 +2368,29 @@ table {
     }
   }
 }
+
+widgettitle,
+.widget-title {
+  font: {
+    size:$f_sidebarH3-px;
+    size:$f_sidebarH3;
+  }
+  margin: {
+    bottom: 24px;
+    bottom: 2.4rem;
+  }
+  text: {
+    transform: none;
+  }
+  background-color: $c_sidebarH3Bg;
+  color: $c_sidebarH3;
+  padding: 10px;
+  a {
+    border:none;
+    color: $c_sidebarH3;
+  }
+}
+
 
 /**
  * Sidebar Widgets
@@ -2582,6 +2577,40 @@ table {
         }
       }
     }
+  }
+}
+
+/**
+ * Facebook Like Box
+ */
+
+.fb-dark-bg {
+  background: #028aaf;
+}
+.fb-light-bg {
+  background: #028aaf;
+}
+
+/**
+ * Full Width Widgets
+ */
+
+#yoast-fullwidth-bottom-container {
+  .yoast-fullwidth-widget {
+    float:left;
+    width: $d_ThreeEqualColumns;
+  }
+  #yoast-fullwidth-widgetarea-2 {
+    margin:0 60px;
+  }
+  .widget {
+    padding: {
+      bottom:24px;
+      bottom:2.4rem;
+    }
+  }
+  .widget-title {
+    @extend widgettitle;
   }
 }
 
