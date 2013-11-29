@@ -384,3 +384,11 @@ function yst_comments_gravatar( $args ) {
 	$args['avatar_size'] = 100;
 	return $args;
 }
+
+/**
+ * Fix Search tekst
+ */
+function yst_change_search_text () {
+	return __('Search', 'yoast-theme') . '&#x02026;';
+}
+add_filter('genesis_search_text', 'yst_change_search_text');
