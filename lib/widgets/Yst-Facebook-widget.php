@@ -16,26 +16,22 @@ class YST_Facebook_Widget extends WP_Widget {
 	 * @since 1.0.0
 	 */
 	function YST_Facebook_Widget() {
-		// @fixme It doesn't feel logical to have the keys be translateable here, I'd turn the use of this array around.
-		// @fixme Shouldn't the name of this array be labels instead of vars, as that's what it contains?
-		$this->vars = array(
-			__( 'Widget title', 'yoast-theme' )             => 'title',
-			__( 'Facebook URL', 'yoast-theme' )             => 'data_href',
-			__( 'Width', 'yoast-theme' )                    => 'data_width',
-			__( 'Height', 'yoast-theme' )                   => 'data_height',
-			__( 'Colorscheme', 'yoast-theme' )              => 'data_colorscheme',
-			__( 'Display profile pictures', 'yoast-theme' ) => 'data_show_faces',
-			__( 'Show header', 'yoast-theme' )              => 'data_header',
-			__( 'Show stream', 'yoast-theme' )              => 'data_stream',
-			__( 'Show border', 'yoast-theme' )              => 'data_show_border',
-			__( 'Show check-ins only', 'yoast-theme' )      => 'data_force_wall'
+		$this->labels = array(
+			'title'            => __( 'Widget title', 'yoast-theme' ),
+			'data_href'        => __( 'Facebook URL', 'yoast-theme' ),
+			'data_width'       => __( 'Width', 'yoast-theme' ),
+			'data_height'      => __( 'Height', 'yoast-theme' ),
+			'data_colorscheme' => __( 'Colorscheme', 'yoast-theme' ),
+			'data_show_faces'  => __( 'Display profile pictures', 'yoast-theme' ),
+			'data_header'      => __( 'Show header', 'yoast-theme' ),
+			'data_stream'      => __( 'Show stream', 'yoast-theme' ),
+			'data_show_border' => __( 'Show border', 'yoast-theme' ),
+			'data_force_wall'  => __( 'Show check-ins only', 'yoast-theme' )
 		);
 
-		// @fixme don't default to our FB page
-		// @fixme String is not i18n compatible
 		$this->defaults = array(
-			'title'            => 'Find us on Facebook',
-			'data_href'        => 'http://www.facebook.com/yoast',
+			'title'            => __( 'Find us on Facebook', 'yoast-theme' ),
+			'data_href'        => 'http://www.facebook.com/FacebookDevelopers',
 			'data_width'       => 250,
 			'data_height'      => 300,
 			'data_colorscheme' => 'light',
@@ -46,8 +42,7 @@ class YST_Facebook_Widget extends WP_Widget {
 			'data_force_wall'  => false
 		);
 
-		// @fixme description is not i18n compatible.
-		$widget_ops = array( 'classname' => 'yst_fb_widget', 'description' => 'Yoast Facebook widget' );
+		$widget_ops = array( 'classname' => 'yst_fb_widget', 'description' => __( 'Yoast Facebook Widget: Easily add a Facebook Like-box to your widgets!', 'yoast-theme' ) );
 		$this->WP_Widget( 'widget-yst-fb', __( 'Yoast &mdash; Facebook', 'yoast-theme' ), $widget_ops );
 	}
 
@@ -65,7 +60,7 @@ class YST_Facebook_Widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $this->defaults );
 
 		// Loop through all the variables to display them
-		foreach ( $this->vars as $label => $var ) {
+		foreach ( $this->labels as $var => $label ) {
 			$input_attr = 'name="' . $this->get_field_name( $var ) . '" id="' . $this->get_field_id( $var ) . '"';
 			$label      = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
 
@@ -82,11 +77,19 @@ class YST_Facebook_Widget extends WP_Widget {
 				echo $label;
 				echo ' <select ' . $input_attr . '>';
 
-				// @fixme Make strings i18n compatible.
-				?>
-				<option value="light" <?php if ( $instance[$var] == 'light' ) echo 'selected="yes"'; ?>>Light</option>;
-				<option value="dark" <?php if ( $instance[$var] == 'dark' ) echo 'selected="yes"'; ?>>Dark</option>
-				<?php
+				// Add option 'light'
+				$output = '<option value="light" ';
+				if ( $instance[$var] == 'light' ) {
+					$output .= 'selected="yes"';
+				}
+				$output .= '>' . __( 'Light', 'yoast-theme' ) . '</option>';
+				// Add option 'dark'
+				$output .= '<option value="dark"';
+				if ( $instance[$var] == 'dark' ) {
+					$output .= 'selected="yes"';
+				}
+				$output .= '>' . __( 'Dark', 'yoast-theme' ) . '</option>';
+				echo $output;
 				echo '</select>';
 			}
 			else if ( $var == 'data_width' || $var == 'data_height' ) {
@@ -119,9 +122,8 @@ class YST_Facebook_Widget extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 
-		// @fixme if $label is unused, no need to cast it here.
-		foreach ( $this->vars as $label => $var ) {
-			if ( $old_instance[$var] && ! isset ( $new_instance[$var] ) ) {
+		foreach ( $this->labels as $var => $label ) {
+			if ( ( $old_instance[$var] || $old_instance[$var] == false ) && ! isset ( $new_instance[$var] ) ) {
 				$instance[$var] = false;
 			}
 			if ( isset( $new_instance[$var] ) ) {
@@ -154,6 +156,31 @@ class YST_Facebook_Widget extends WP_Widget {
 	}
 
 	/**
+	 * Helper function to add necessary div to body
+	 *
+	 * @since 1.0.0
+	 */
+	function yst_add_fb_widget_root_div () {
+		echo '<div id="fb-root"></div>';
+	}
+
+	/**
+	 * Helper function to add necessary JS to footer
+	 *
+	 * @since 1.0.0
+	 */
+	function yst_add_fb_widget_script () {
+		echo '<script>(function (d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s);
+				js.id = id;
+				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, \'script\', \'facebook-jssdk\'));</script>';
+	}
+
+	/**
 	 * Outputs the JavaScript and HTML for the widget
 	 *
 	 * @see   WP_Widget::widget()
@@ -163,20 +190,17 @@ class YST_Facebook_Widget extends WP_Widget {
 	 * @param array $args     An array of standard parameters for widgets in this theme
 	 * @param array $instance An array of settings for this widget instance
 	 *
-	 * @fixme the fb-root div should be right under the <body> tag and the script should be loaded in wp_footer, not half way through the page.
 	 */
 	function widget( $args, $instance ) {
-		?>
-		<div id="fb-root"></div>
-		<script>(function (d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s);
-				js.id = id;
-				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-				fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));</script>
-		<?php
+		foreach ( $this->labels as $var => $label ) {
+			if ( ! isset ( $instance[$var] ) || ( $instance[$var] != false && empty ( $instance[$var] ) ) ) {
+				echo '<p class="widget widget-error">' . __( 'Please fill in the details of the Yoast Facebook Widget', 'yoast-theme' ) . '</p>';
+				return;
+			}
+		}
+
+		add_action('genesis_before_header', array( $this, 'yst_add_fb_widget_root_div' ));
+		add_action('wp_footer', array ($this, 'yst_add_fb_widget_script'));
 
 		echo $args['before_widget'];
 
@@ -186,8 +210,14 @@ class YST_Facebook_Widget extends WP_Widget {
 			echo $title;
 		}
 
+		if ($instance['data_colorscheme'] === 'dark') {
+			$class = 'class="fb-like-box fb-dark-bg widget"';
+		} else {
+			$class = 'class="fb-like-box fb-light-bg widget"';
+		}
+
 		?>
-		<div class="fb-like-box widget"
+		<div <?php echo $class; ?>
 				 data-href="<?php echo esc_url( $instance['data_href'] ); ?>"
 				 data-width="<?php echo absint( $instance['data_width'] ); ?>"
 				 data-height="<?php echo absint( $instance['data_height'] ); ?>"
