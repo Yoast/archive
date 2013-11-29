@@ -2049,6 +2049,20 @@ table {
     padding: 0 10px;
     padding: 0 1.0rem;
   }
+  .post {
+    border: {
+      bottom: 0;
+    }
+  }
+  img {
+    &.entry-image {
+      display:block;
+      padding: {
+        bottom: 10px;
+        bottom:1.0rem;
+      }
+    }
+  }
   a {
     &.alignleft,
     &.alignright {
@@ -2062,17 +2076,12 @@ table {
     display:inline;
   }
   .entry-title {
-    clear:both;
     border: none;
     font: {
       size: $f_sidebarH2-px;
       size: $f_sidebarH2;
     }
     line-height: 1.2em;
-    padding: {
-      top: 10px;
-      top:1.0rem;
-    }
     a {
       border: none;
       color: $c_mainLink;
@@ -2080,6 +2089,15 @@ table {
         decoration: none;
       }
     }
+  }
+  .alignright {
+    .avatar {
+      float:left;
+      margin:0;
+    }
+  }
+  .more-link {
+    display:block;
   }
 }
 
@@ -2389,6 +2407,7 @@ widgettitle,
   background-color: $c_sidebarH3Bg;
   color: $c_sidebarH3;
   padding: 10px;
+  padding:1rem;
   a {
     border:none;
     color: $c_sidebarH3;
@@ -2588,11 +2607,19 @@ widgettitle,
  * Facebook Like Box
  */
 
-.fb-dark-bg {
-  background: #028aaf;
-}
-.fb-light-bg {
-  background: #028aaf;
+.yst_fb_widget {
+  .fb-dark-bg {
+  }
+  .fb-light-bg {
+  }
+  .widget-title {
+    background: {
+      color: $c_mainBg;
+    }
+    color: $c_sidebarH4;
+    padding:10px 10px 0 0;
+    padding:1rem 1rem 0 0;
+  }
 }
 
 /**
@@ -2742,22 +2769,27 @@ widgettitle,
  * @plugin(title: Latest Tweets)
  * @link http://wordpress.org/plugins/genesis-latest-tweets/
  */
-
-.latest-tweets ul li {
-  .tweet-text {
-    display:block;
-  }
-  .tweet-details {
-    a {
-      color: $c_mainLink;
-      &:after {
-        content: "";
+.sidebar {
+  .latest-tweets {
+    .widget-wrap {
+      li {
+        &:after {
+          content: "";
+        }
+        .tweet-text {
+          display:block;
+        }
+        .tweet-details {
+          a {
+            color: $c_mainLink;
+          }
+        }
+        margin: {
+          bottom: 16px;
+          bottom: 1.6rem;
+        }
       }
     }
-  }
-  margin: {
-    bottom: 16px;
-    bottom: 1.6rem;
   }
 }
 
