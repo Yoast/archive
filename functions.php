@@ -1,5 +1,7 @@
 <?php
 
+// @TODO: Clean up this file and add some structure to it.
+
 //* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'Tailor Made' );
 define( 'CHILD_THEME_URL', 'http://yoast.com/wordpress/themes/tailor-made/' );
@@ -14,7 +16,7 @@ function child_theme_setup() {
 	// Used for defaults in for instance the banner widget.
 	define( 'YST_SIDEBAR_WIDTH', 261 );
 
-		//* Start the engine
+	//* Start the engine
 	include_once( get_template_directory() . '/lib/init.php' );
 
 	// Setup Theme Settings
@@ -72,10 +74,47 @@ function child_theme_setup() {
 	) );
 
 	genesis_register_sidebar( array(
+		'id'          => 'full-width-sidebar-1',
+		'name'        => __( 'Full Width 1', 'yoast-theme' ),
+		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
+	) );
+
+	genesis_register_sidebar( array(
+		'id'          => 'full-width-sidebar-2',
+		'name'        => __( 'Full Width 2', 'yoast-theme' ),
+		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
+	) );
+
+	genesis_register_sidebar( array(
+		'id'          => 'full-width-sidebar-3',
+		'name'        => __( 'Full Width 3', 'yoast-theme' ),
+		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
+	) );
+
+	genesis_register_sidebar( array(
 		'id'          => 'yoast-tagline-after-header',
 		'name'        => __( 'Tagline After Header', 'yoast-theme' ),
 		'description' => __( 'Tagline After Header widget area.', 'yoast-theme' ),
 	) );
+
+	function yst_show_fullwidth_sidebars() {
+		if ( 'full-width-content' == genesis_site_layout() ) {
+			// Remove the Primary Sidebar from the Primary Sidebar area.
+			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
+			remove_action( 'genesis_sidebar_alt', 'genesis_do_sidebar_alt' );
+
+			// Place the Secondary Sidebar into the Primary Sidebar area.
+			add_action( 'genesis_sidebar', 'yoast_do_fullwidth_sidebars' );
+		}
+	}
+
+	add_action( 'genesis_after_header', 'yst_show_fullwidth_sidebars' );
+
+	function yoast_do_fullwidth_sidebars() {
+		dynamic_sidebar( 'full-width-sidebar-1' );
+		dynamic_sidebar( 'full-width-sidebar-2' );
+		dynamic_sidebar( 'full-width-sidebar-3' );
+	}
 
 	// Activate blogroll widget
 	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
@@ -90,6 +129,7 @@ function child_theme_setup() {
 	add_action( 'genesis_header', 'yst_mobile_nav' );
 
 	add_action( 'genesis_after_header', 'yst_after_header_genesis' );
+	add_action( 'genesis_after_content_sidebar_wrap', 'yst_fullwidth_sitebars_genesis' );
 
 	//* Reposition the breadcrumbs
 	add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
@@ -162,6 +202,23 @@ function yst_after_header_genesis() {
 		) );
 		echo '</div></div>';
 
+	}
+}
+
+function yst_fullwidth_sitebars_genesis() {
+	if ( 'full-width-content' == genesis_site_layout() ) {
+		genesis_widget_area( 'full-width-sidebar-1', array(
+			'before' => '<div id="full-width-sidebar-1" class="yoast-fullwidth-widget">',
+			'after'  => '</div>',
+		) );
+		genesis_widget_area( 'full-width-sidebar-2', array(
+			'before' => '<div id="full-width-sidebar-1" class="yoast-fullwidth-widget">',
+			'after'  => '</div>',
+		) );
+		genesis_widget_area( 'full-width-sidebar-3', array(
+			'before' => '<div id="full-width-sidebar-1" class="yoast-fullwidth-widget">',
+			'after'  => '</div>',
+		) );
 	}
 }
 
@@ -313,9 +370,9 @@ function yst_activate_sidr_and_sticky_menu() {
 				coverScreen: true,
 				side       : 'right'
 			});
-			$(window).scroll(function() {
+			$(window).scroll(function () {
 				var yPos = ( $(window).scrollTop() );
-				if(yPos > 70) {
+				if (yPos > 70) {
 					$("body").addClass("sticky-menu");
 				} else {
 					$("body").removeClass("sticky-menu");
@@ -386,7 +443,8 @@ function yst_comments_gravatar( $args ) {
 /**
  * Fix Search tekst
  */
-function yst_change_search_text () {
-	return __('Search', 'yoast-theme') . '&#x02026;';
+function yst_change_search_text() {
+	return __( 'Search', 'yoast-theme' ) . '&#x02026;';
 }
-add_filter('genesis_search_text', 'yst_change_search_text');
+
+add_filter( 'genesis_search_text', 'yst_change_search_text' );
