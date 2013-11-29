@@ -136,11 +136,9 @@ function yst_add_google_fonts() {
  * Add yst-after-header widget support for site. If widget not active, don't display
  */
 function yst_after_header_genesis() {
+	if ( is_front_page() ) {
+		echo '<div id="yoast-after-header-container"><div class="wrap">';
 
-	echo '<div id="yoast-after-header-container"><div class="wrap">';
-
-	// Change 'true' to specific page to show/hide widget area on that page
-	if ( true ) {
 		genesis_widget_area( 'yoast-after-header-1', array(
 			'before' => '<div id="yoast-after-header-1" class="yoast-after-header-widget">',
 			'after'  => '</div>',
@@ -156,7 +154,7 @@ function yst_after_header_genesis() {
 		echo '<div class="clearfloat"></div></div></div>';
 	}
 
-	if ( is_active_sidebar( 'yoast-tagline-after-header' ) ) {
+	if ( is_active_sidebar( 'yoast-tagline-after-header' ) && is_front_page() ) {
 		echo '<div id="yoast-tagline-after-header-container"><div class="wrap">';
 		genesis_widget_area( 'yoast-tagline-after-header', array(
 			'before' => '<div id="yoast-tagline-after-header" class="yoast-tagline-after-header-widget">',
