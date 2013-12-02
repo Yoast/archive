@@ -403,7 +403,11 @@ function yst_mobile_nav() {
  * @fixme If this becomes something you can change in the settings, just retrieve the option here and return it.
  */
 function yst_footer_creds_text( $footer_creds_text ) {
-	return sprintf( __( '&#x000B7; Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a> &#x000B7;', 'yoast-theme' ), date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com/wordpress/themes/tailor-made/" rel="nofollow">Tailor Made</a>', 'Yoast' );
+	$yst_footer = '<p class="custom_footer">';
+	$yst_footer .= trim( genesis_get_option( 'footer', 'child-settings' ) ) . '</p><p class="hardcoded-footer">';
+	$yst_footer .= sprintf( __( '&#x000B7; Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a> &#x000B7;', 'yoast-theme' ), date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com/wordpress/themes/tailor-made/" rel="nofollow">Tailor Made</a>', 'Yoast' );
+	$yst_footer .= '</p>';
+	return $yst_footer;
 }
 
 /**
@@ -457,6 +461,22 @@ add_filter( 'genesis_search_text', 'yst_change_search_text' );
  * @fixme If there is a better solid way to do this or Genesis fixes this feature, use that
  */
 function yst_add_backtotop_to_post_footer() {
-	echo '<p class="back-to-top"><a href="#">'. __('Back to top', 'yoast-theme') . ' &#9652;</a></p>';
+	echo '<p class="back-to-top"><a href="#">' . __( 'Back to top', 'yoast-theme' ) . ' &#9652;</a></p>';
 }
-add_action('genesis_entry_footer', 'yst_add_backtotop_to_post_footer', 14);
+
+add_action( 'genesis_entry_footer', 'yst_add_backtotop_to_post_footer', 14 );
+
+/**
+ * @param $profile_fields
+ *
+ * @return mixed
+ */
+function yst_modify_contact_methods( $profile_fields ) {
+
+	// Add new fields
+	$profile_fields['pinterest'] = __( 'Pinterest profile URL', 'yoast-theme' );
+	$profile_fields['linkedin']  = __( 'LinkedIn profile URL', 'yoast-theme' );
+	return $profile_fields;
+}
+
+add_filter( 'user_contactmethods', 'yst_modify_contact_methods' );

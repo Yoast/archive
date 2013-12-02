@@ -39,17 +39,17 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 		$menu_ops = array(
 			'submenu' => array(
 				'parent_slug' => 'genesis',
-				'page_title'  => 'Genesis - Child Theme Settings by Yoast',
-				'menu_title'  => 'Child Theme Settings',
+				'page_title'  => __( 'Genesis - Child Theme Settings by Yoast' ),
+				'menu_title'  => __( 'Child Theme Settings', 'yoast-theme' )
 			)
 		);
 
 		// Set up page options. These are optional, so only uncomment if you want to change the defaults
 		$page_ops = array( //	'screen_icon'       => 'options-general',
-			//	'save_button_text'  => 'Save Settings',
-			//	'reset_button_text' => 'Reset Settings',
-			//	'save_notice_text'  => 'Settings saved.',
-			//	'reset_notice_text' => 'Settings reset.',
+			//	'save_button_text'  => __('Save Settings', 'yoast-theme'),
+			//	'reset_button_text' => __('Reset Settings', 'yoast-theme'),
+			//	'save_notice_text'  => __('Settings saved.', 'yoast-theme'),
+			//	'reset_notice_text' => __('Settings reset.', 'yoast-theme')
 		);
 
 		// Give it a unique settings field. 
@@ -58,8 +58,9 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 		// Set the default values
 		$default_settings = array(
-			'home-intro'                   => '',
-			'footer'                       => 'Copyright &copy; ' . date( 'Y' ) . ' All Rights Reserved',
+			'home-intro'      => '',
+			'footer'          => 'Get this theme at <a href="http://yoast.com" name="Theme Creator Yoast">Yoast.com</a>',
+			'yst-mobile-logo' => ''
 		);
 
 		// Create the Admin Page
@@ -67,6 +68,7 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 		// Initialize the Sanitization Filter
 		add_action( 'genesis_settings_sanitizer_init', array( $this, 'sanitization_filters' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'yst_media_admin_scripts_style' ) );
 	}
 
 	/**
@@ -80,7 +82,8 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 		genesis_add_option_filter( 'safe_html', $this->settings_field,
 			array(
 				'home-intro',
-				'footer'
+				'footer',
+				'yst-mobile-logo'
 			) );
 	}
 
@@ -89,8 +92,9 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 	 * @since 1.0.0
 	 */
 	function metaboxes() {
-		add_meta_box( 'home_intro_metabox', 'Home Intro', array( $this, 'home_intro_metabox' ), $this->pagehook, 'main', 'high' );
-		add_meta_box( 'footer_metabox', 'Footer', array( $this, 'footer_metabox' ), $this->pagehook, 'main', 'high' );
+		add_meta_box( 'home_intro_metabox', __( 'Home Intro', 'yoast-theme' ), array( $this, 'home_intro_metabox' ), $this->pagehook, 'main', 'high' );
+		add_meta_box( 'footer_metabox', __( 'Footer', 'yoast-theme' ), array( $this, 'footer_metabox' ), $this->pagehook, 'main', 'high' );
+		add_meta_box( 'yst_mobile_logo_metabox', __( 'Mobile Logo', 'yoast-theme' ), array( $this, 'yst_mobile_logo_metabox' ), $this->pagehook, 'main', 'high' );
 	}
 
 	/**
@@ -106,8 +110,44 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 	 * @since 1.0.0
 	 */
 	function footer_metabox() {
-
 		wp_editor( $this->get_field_value( 'footer' ), $this->get_field_id( 'footer' ), array( 'textarea_rows' => 5 ) );
+	}
+
+	/**
+	 * Helper function: Add scripts for media uploader
+	 *
+	 * @fixme: hardcoded URL
+	 */
+	function yst_media_admin_scripts_style() {
+		if ( isset( $_GET['page'] ) && $_GET['page'] == 'child' ) {
+			wp_enqueue_media();
+			wp_register_script( 'yst-media-uploader', get_theme_root_uri() . '/theme001/lib/js/media-uploader.js', array( 'jquery' ) );
+			wp_enqueue_script( 'yst-media-uploader' );
+		}
+	}
+
+	/**
+	 * Yoast Mobile Logo
+	 *
+	 * Add the option to upload a smaller version of a sites logo, to improve speed on mobile devices
+	 *
+	 * @since 1.0.0
+	 */
+	function yst_mobile_logo_metabox() {
+		echo '<p class="yst-mobile-logo-explanation>' . __( 'To prevent loading an unnecessary large logo on mobile devices, you can upload a small version of your logo here.', 'yoast-theme' ) . '</p>';
+		?>
+		<label for="upload_image">
+			<input id="yst_mobile_logo_input" type="text" size="36" name="<?php echo $this->get_field_name( 'yst-mobile-logo' ); ?>" value="<?php echo $this->get_field_value( 'yst-mobile-logo' ); ?>" />
+			<input id="yst_mobile_logo_button" class="yst_image_upload_button button" type="button" value="<?php _e( 'Upload Image', 'yoast-theme' ); ?>" />
+		</label>
+		<?php
+		$yst_mobile_logo = $this->get_field_value( 'yst-mobile-logo' );
+		if ( isset( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) {
+			echo '<p>';
+			echo apply_filters( 'yst_mobile_logo_preview', '<h4>Mobile Logo preview</h4>' );
+			echo '<img src="' . esc_html( $this->get_field_value( 'yst-mobile-logo' ) ) . '" alt="' . __( 'Mobile Logo Preview', 'yoast-theme' ) . '" />';
+			echo '</p>';
+		}
 	}
 }
 
@@ -115,11 +155,10 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
  * Add the Theme Settings Page
  * @since 1.0.0
  *
- * @fixme change namespace to yst
  */
-function be_add_child_theme_settings() {
+function yst_add_child_theme_settings() {
 	global $_child_theme_settings;
 	$_child_theme_settings = new Child_Theme_Settings;
 }
 
-add_action( 'genesis_admin_menu', 'be_add_child_theme_settings' );
+add_action( 'genesis_admin_menu', 'yst_add_child_theme_settings' );
