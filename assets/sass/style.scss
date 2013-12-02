@@ -1073,7 +1073,7 @@ textarea {
  * Sticky Menu - scrolling
  */
 
-body.sticky,
+// body.sticky,
 body.sticky-menu {
   padding-top: 120px;
   .site-header {
@@ -1125,6 +1125,11 @@ body.sticky-menu {
         }
         &:after {
           content: "";
+        }
+      }
+      li {
+        a {
+          color: $c_navSubLink;
         }
       }
       &.current-menu-item,
@@ -1889,9 +1894,38 @@ table {
  * Comments
  */
 
-.entry-comments {
+#comments {
+
+  // NOG VERWIJDEREN NA NIEUWE OPZET COMMENTS
+  .avatar {
+    width: 63px;
+  }
+  .depth-2, .depth-3, .depth-4, depth-5 {
+    .avatar {
+      width:40px;
+    }
+  }
+  .comment-author, .comment-meta {
+    display:inline;
+  }
+  // EIND NOG VERWIJDEREN NA NIEUWE OPZET COMMENTS
+
+
+
   background: {
     color: $c_mainBg;
+  }
+  .bypostauthor > article {
+    background: {
+      color: $c_commentByAuthorBg;
+    }
+    header {
+      background: {
+        color: $c_commentByAuthorBg;
+      }
+    }
+    padding:10px;
+    padding:1rem;
   }
   a {
     font: {
@@ -1940,41 +1974,19 @@ table {
   .comment-list {
     li {
       list-style-type: none;
-      &.depth-1 {
-        .avatar {
-          float:left;
-          background: {
-            color: #ff0000; //$c_mainBg;
-          }
-          width: 100px;
+      article {
+        margin: {
+          bottom:24px;
+          bottom:2.4rem;
         }
       }
-      &.depth-2 {
-        border: {
-          width:1px 0 0 0;
-          style: dotted;
-          color: $c_commentReplyBorder;
-        }
-        article {
-          .comment-content,
-          .comment-reply {
-          }
-          .avatar {
-            width:75px;
-          }
-        }
-      }
-      .comment-author,
-      .comment-meta {
-        display:inline;
-      }
-    }
-    &>li {
-      border: {
-        bottom: {
-          width: 1px;
-          style: dotted;
-          color: $c_commentBorder;
+      &.depth-2,
+      &.depth-3,
+      &.depth-4,
+      &.depth-5 {
+        margin: {
+          left:10px;
+          left:1rem;
         }
       }
     }
@@ -2001,7 +2013,6 @@ table {
       }
     }
   }
-
   .entry-pings {
     background: {
       color: $c_mainBg;
@@ -2032,8 +2043,8 @@ table {
     size: 14px;
     size: 1.4rem;
   }
-  padding: 24px;
-  padding: 2.4rem;
+  padding: 24px 0;
+  padding: 2.4rem 0;
 }
 
 /**
@@ -2773,6 +2784,14 @@ widgettitle,
   .latest-tweets {
     .widget-wrap {
       li {
+        margin: {
+          bottom: 16px;
+          bottom: 1.6rem;
+        }
+        padding: {
+          right: 10px;
+          right:1rem;
+        }
         &:after {
           content: "";
         }
@@ -2783,10 +2802,6 @@ widgettitle,
           a {
             color: $c_mainLink;
           }
-        }
-        margin: {
-          bottom: 16px;
-          bottom: 1.6rem;
         }
       }
     }
