@@ -465,3 +465,18 @@ function yst_add_backtotop_to_post_footer() {
 }
 
 add_action( 'genesis_entry_footer', 'yst_add_backtotop_to_post_footer', 14 );
+
+/**
+ * @param $profile_fields
+ *
+ * @return mixed
+ */
+function yst_modify_contact_methods( $profile_fields ) {
+
+	// Add new fields
+	$profile_fields['pinterest'] = __( 'Pinterest profile URL', 'yoast-theme' );
+	$profile_fields['linkedin']  = __( 'LinkedIn profile URL', 'yoast-theme' );
+	return $profile_fields;
+}
+
+add_filter( 'user_contactmethods', 'yst_modify_contact_methods' );
