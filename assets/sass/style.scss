@@ -1991,13 +1991,10 @@ table {
       }
     }
     .comment-respond {
-      background: {
-        color: $c_mainBg;
-      }
       a {
         border-bottom: 1px solid $c_linkBorder;
       }
-      input {
+       input {
         &[type="email"],
         &[type="text"],
         &[type="url"] {
@@ -2028,23 +2025,26 @@ table {
     }
   }
 }
-
 .ping-list {
   li {
     list-style-type: none;
   }
 }
-
-.bypostauthor {
-}
-
 .form-allowed-tags {
   font: {
     size: 14px;
     size: 1.4rem;
   }
-  padding: 24px 0;
-  padding: 2.4rem 0;
+}
+.form-submit {
+  padding: {
+    bottom:24px;
+    bottom:2.4rem;
+  }
+  margin: {
+    bottom: 24px;
+    bottom: 2.4rem;
+  }
 }
 
 /**
@@ -2330,6 +2330,15 @@ table {
           text-decoration: none;
         }
       }
+    }
+  }
+  .featuredpost ul {
+    margin: {
+      bottom: 10px;
+      bottom: 1rem;
+    }
+    li a {
+      text-decoration:none;
       &:after {
         content: '»';
         text: {
@@ -2343,6 +2352,9 @@ table {
           size: 1.2em;
         }
         color: $c_sidebarLinkArrow;
+      }
+      &:hover {
+        color: $c_mainLinkHover;
       }
     }
   }
@@ -2616,13 +2628,11 @@ widgettitle,
 
 /**
  * Facebook Like Box
+ * Banner widget
  */
 
-.yst_fb_widget {
-  .fb-dark-bg {
-  }
-  .fb-light-bg {
-  }
+.yst_fb_widget,
+.widget_banner {
   .widget-title {
     background: {
       color: $c_mainBg;
@@ -2630,6 +2640,17 @@ widgettitle,
     color: $c_sidebarH4;
     padding:10px 10px 0 0;
     padding:1rem 1rem 0 0;
+    margin: {
+      bottom:16px;
+      bottom:1.6rem;
+    }
+  }
+}
+
+.yst_fb_widget {
+  .fb-dark-bg {
+  }
+  .fb-light-bg {
   }
 }
 
