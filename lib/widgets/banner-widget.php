@@ -92,6 +92,8 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 				$args['before_widget'] = str_replace( 'class="', 'class="' . $instance['class'] . ' ', $args['before_widget'] );
 
 			echo $args['before_widget'];
+			if ( ! empty( $instance['title'] ) )
+				echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
 
 			$out = '<img ';
 			if ( ! empty( $instance['image_width'] ) )
@@ -103,8 +105,8 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 			if ( ! empty( $instance['alt'] ) )
 				$out .= 'alt="' . $instance['alt'] . '" title="' . $instance['alt'] . '" ';
 
-			// @fixme class="hires" is hardcoded now, this might be something we have to formalize in the theme.
-			$out .= 'class="hires" src="' . $instance['image_url'] . '"/>';
+			$out .= apply_filters('yst_banner_widget_img_class', 'class="hires"');
+			$out .= 'src="' . $instance['image_url'] . '"/>';
 
 			if ( isset( $instance['url'] ) && ! empty( $instance['url'] ) )
 				$out = '<a ' . $link_attr . ' href="' . $instance['url'] . '">' . $out . '</a>';
@@ -195,21 +197,6 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 
 			if ( isset( $new_instance['url'] ) )
 				$new_instance['url'] = trim( $new_instance['url'] );
-
-			// If we have a Post ID, it's easy to prefill the alt based on the post title and the class based on the post_name
-			if (
-					isset( $new_instance['post_id'] ) && (
-							( ! isset( $new_instance['class'] ) || empty( $new_instance['class'] ) ) ||
-							( ! isset( $new_instance['alt'] ) || empty( $new_instance['alt'] ) )
-					)
-			) {
-				$p = get_post( $new_instance['post_id'] );
-				if ( ! isset( $new_instance['class'] ) || empty( $new_instance['class'] ) )
-					$new_instance['class'] = $p->post_name . '-banner';
-
-				if ( ! isset( $new_instance['alt'] ) || empty( $new_instance['alt'] ) )
-					$new_instance['alt'] = $p->post_title;
-			}
 
 			return $new_instance;
 		}

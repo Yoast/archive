@@ -414,3 +414,25 @@ function yst_modify_contact_methods( $profile_fields ) {
 }
 
 add_filter( 'user_contactmethods', 'yst_modify_contact_methods' );
+
+
+/**
+ * Change default image alignment
+ *
+ * @since 1.0.0
+ *
+ * @param string $img  Image HTML output
+ * @param array  $args Arguments for the image
+ *
+ * @return string Image HTML output.
+ */
+function yst_filter_content_archive_image( $img, $args ) {
+	if ( 'sidebar-content' == genesis_site_layout() || 'full-width-content' == genesis_site_layout() ) {
+		if ( 'archive' == $args['context'] ) {
+			$img = str_replace( 'alignleft', 'alignright', $img );
+		}
+	}
+	return $img;
+}
+
+add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
