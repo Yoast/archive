@@ -268,14 +268,12 @@ function yst_get_read_more_link() {
 
 
 /**
- * Includes SIDR and its stylesheet
+ * Includes SIDR
  *
- * @todo the CSS enqueued should be merged into the main stylesheet.
  * @link http://www.berriart.com/sidr/#documentation
  */
 function yst_include_sidr() {
 	wp_enqueue_script( 'yst_sidr', get_stylesheet_directory_uri() . '/lib/js/jquery.sidr.js', array( 'jquery' ) );
-	//wp_enqueue_style( 'yst-sidr-css', get_stylesheet_directory_uri() . '/lib/css/jquery.sidr.dark.css' );
 }
 
 /**
