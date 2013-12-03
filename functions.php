@@ -266,72 +266,6 @@ function yst_get_read_more_link() {
 //	update_option( 'sidebars_widgets', $sidebars_widgets );
 //}
 
-/**
- * This function is temporary, all the CSS here should move to the main stylesheet later on
- *
- * @todo move this into main CSS file.
- */
-function yst_header_sidr_css() {
-	?>
-	<style>
-		@media (min-width: 641px) {
-			a.open, #sidr-left, #sidr-right {
-				width: 0 !important;
-				display: none !important;
-			}
-		}
-
-		@media (max-width: 641px) {
-			.nav-primary {
-				display: none;
-			}
-
-			a.open {
-				display: inline-block;
-				text-indent: -10000px;
-				z-index: 13;
-				width: 25px;
-				height: 25px;
-				line-height: 22px;
-				padding: 10px;
-				margin: 0;
-			}
-
-			a#sidr-left {
-				float: left;
-				background: url('<?php echo get_stylesheet_directory_uri(); ?>/images/hamburger.png') 10px 10px no-repeat;
-			}
-
-			a#sidr-right {
-				float: right;
-				background: url('<?php echo get_stylesheet_directory_uri(); ?>/images/hamburger.png') 10px 10px no-repeat;
-			}
-
-			.nav-primary {
-				display: none !important;
-			}
-
-			body.sticky-menu .site-container a#sidr-left {
-				position: fixed;
-				top: 0;
-				left: 5px;
-			}
-
-			body.sticky-menu .site-container a#sidr-right {
-				position: fixed;
-				top: 0;
-				right: 5px;
-			}
-
-			body.sticky-menu .site-header .title-area .site-title a {
-				position: fixed;
-				top: 0;
-				margin-left: 50px;
-			}
-		}
-	</style>
-<?php
-}
 
 /**
  * Includes SIDR and its stylesheet
@@ -341,7 +275,7 @@ function yst_header_sidr_css() {
  */
 function yst_include_sidr() {
 	wp_enqueue_script( 'yst_sidr', get_stylesheet_directory_uri() . '/lib/js/jquery.sidr.js', array( 'jquery' ) );
-	wp_enqueue_style( 'yst-sidr-css', get_stylesheet_directory_uri() . '/lib/css/jquery.sidr.dark.css' );
+	//wp_enqueue_style( 'yst-sidr-css', get_stylesheet_directory_uri() . '/lib/css/jquery.sidr.dark.css' );
 }
 
 /**

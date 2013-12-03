@@ -81,9 +81,15 @@ $c_navSubBorder:       #ffffff;
 $c_navSubBorderBottom: #e25918;
 
 // mobile menu Sidr
-$sidr-background:               #f8f8f8; //toevoegen
+$sidr-background:               #e2e2e2; //#f8f8f8; //toevoegen
 $sidr-background-shadow-color:  #ebebeb; //toevoegen
 $sidr-text-color:               #333333; //toevoegen
+$c_sidr_linkBg:                 #b2b8b8;
+$c_sidr_linkBorder:             #ffffff;
+$c_sidr_linkHoverBg:            #666666;
+$c_sidr_linkHoverText:          #ffffff;
+$c_sidr_headingText:            #666666;
+$c_sidr_HeadingBorder:          #ffffff;
 
 // main content
 $c_mainBg:              #ffffff;
