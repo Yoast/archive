@@ -198,21 +198,6 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 			if ( isset( $new_instance['url'] ) )
 				$new_instance['url'] = trim( $new_instance['url'] );
 
-			// If we have a Post ID, it's easy to prefill the alt based on the post title and the class based on the post_name
-			if (
-					isset( $new_instance['post_id'] ) && (
-							( ! isset( $new_instance['class'] ) || empty( $new_instance['class'] ) ) ||
-							( ! isset( $new_instance['alt'] ) || empty( $new_instance['alt'] ) )
-					)
-			) {
-				$p = get_post( $new_instance['post_id'] );
-				if ( ! isset( $new_instance['class'] ) || empty( $new_instance['class'] ) )
-					$new_instance['class'] = $p->post_name . '-banner';
-
-				if ( ! isset( $new_instance['alt'] ) || empty( $new_instance['alt'] ) )
-					$new_instance['alt'] = $p->post_title;
-			}
-
 			return $new_instance;
 		}
 	}
