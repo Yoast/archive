@@ -121,7 +121,7 @@ function child_theme_setup() {
 
 	add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting', 5 );
 	add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic', 5 );
-	//add_action( 'wp_enqueue_scripts', 'enqueue_form_styles', 25 ); // @fixme: commented because script breaks layout.
+	add_action( 'wp_enqueue_scripts', 'enqueue_form_styles', 25 );
 	add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
 
