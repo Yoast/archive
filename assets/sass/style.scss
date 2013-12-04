@@ -301,11 +301,13 @@ header {
   }
 }
 .site-header {
-  .wrap {
+  .wrap,
+  .widget-wrap {
     padding: 0;
   }
   .title-area {
-    padding: 0;
+    padding: 20px 0 0;
+    padding: 2rem 0 0;
     background: {
       image: url(../images/logo.png);
       repeat: no-repeat;
@@ -406,6 +408,13 @@ header {
 .content {
   float: right;
   width: $d_mainColumn;
+  article {
+    float: left;
+    width: $d_mainContent;
+    .archive-pagination {
+      clear:both;
+    }
+  }
 }
 
 .content-sidebar {
@@ -432,8 +441,9 @@ header {
     float: left;
   }
   .content {
-    position:relative;
-    left:-120px;
+    article {
+      float:left;
+    }
   }
 }
 
@@ -930,7 +940,7 @@ textarea {
           bottom: {
             width:2px;
             style:solid;
-            color:#fff;
+            color:$c_sidr_linkBorder;
           }
         }
         color: $sidr-text-color;
@@ -949,22 +959,7 @@ textarea {
           }
         }
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
       ul {
-        display:none; //FIRE FIRE
-        //border-bottom: none;
         margin: 0;
         li {
           &:last-child {
@@ -2299,8 +2294,12 @@ table {
       text-decoration: none;
     }
   }
-  .widget {
+  .widget,
+  .widget-wrap {
     padding: {
+      bottom: 0;
+    }
+    margin: {
       bottom: 0;
     }
   }
@@ -2323,7 +2322,7 @@ table {
     bottom: 24px;
     bottom: 2.4rem;
   }
-  p {
+  > p {
     padding: {
       left: 10px;
       left: 1rem;
@@ -2339,7 +2338,7 @@ table {
       }
     }
   }
-  ul {
+  > ul {
     margin: {
       left: 26px;
       left: 2.6rem;
@@ -2887,106 +2886,6 @@ widgettitle,
 }
 
 /**
- * Gravity Forms
- * @plugin(title: Gravity Forms)
- * @link http://www.gravityforms.com/
- */
-
-.gform_wrapper {
-  .gf_progressbar_wrapper {
-    border: {
-      bottom: {
-        width: 1px;
-        style: solid !important;
-        color: $c_hrLine !important;
-      }
-    }
-    h3 {
-      &.gf_progressbar_title {
-        color: $c_mainText;
-        opacity:1 !important;
-        font: {
-          size: $f_main-px !important;
-          size: $f_main !important;
-        }
-      }
-    }
-  }
-  ul.gfield_radio {
-    li {
-      padding: {
-        left: 1px !important;
-        left: 0.1rem !important;
-      }
-    }
-  }
-  input {
-    &[type="email"] {
-      font: {
-        size: $f_inputText-px;
-        size: $f_inputText;
-      }
-      padding: 8px;
-      padding: 0.8rem;
-    }
-    &[type="text"] {
-      font: {
-        size: $f_inputText-px;
-        size: $f_inputText;
-      }
-      padding: 8px;
-      padding: 0.8rem;
-    }
-    &[value="Other"] {
-      max-width: 80%;
-    }
-  }
-  textarea {
-    font: {
-      size: $f_inputText-px;
-      size: $f_inputText;
-    }
-    padding: 8px;
-    padding: 0.8rem;
-  }
-  select {
-    font: {
-      size: $f_inputText-px;
-      size: $f_inputText;
-    }
-  }
-  .ginput_complex {
-    label {
-      font: {
-        size: $f_inputText-px;
-        size: $f_inputText;
-      }
-      padding: 0;
-    }
-  }
-  li {
-    margin: 8px 0 0;
-    margin: 0.8rem 0 0;
-  }
-  form {
-    li {
-      margin: 8px 0 0;
-      margin: 0.8rem 0 0;
-    }
-  }
-  .gform_footer {
-    input {
-      [type="submit"] {
-        font: {
-          size: $f_inputText-px;
-          size: $f_inputText;
-        }
-      }
-    }
-  }
-}
-
-/**
  * YARPP
  */
 .yarpp-related {
@@ -3057,6 +2956,19 @@ img#wpstats {
   }
 }
 
+
+/**
+ * Insert form styles
+ *
+ * @todo delete when GitHub issue #15
+ * @link https://github.com/Yoast/tailor-made/issues/15
+ */
+
+@import url(forms.css);
+
+
+
+
 /**
  * MEDIA QUERIES
  **********************************/
@@ -3104,9 +3016,18 @@ img#wpstats {
       right:1rem;
     }
   }
-  .sidebar-primary {
-    margin: {
-      right:10px;
+  .content-sidebar {
+    .sidebar-primary {
+      margin: {
+        right:10px;
+      }
+    }
+  }
+  .sidebar-content {
+    .sidebar-primary {
+      margin: {
+        left:10px;
+      }
     }
   }
   .site-header {
@@ -3128,6 +3049,12 @@ img#wpstats {
       }
       max-width:60%;
       overflow:hidden;
+    }
+  }
+  .breadcrumb {
+    padding: {
+      left: 10px;
+      left: 1rem;
     }
   }
   #yoast-after-header-container {
@@ -3223,20 +3150,39 @@ img#wpstats {
       right:1rem;
     }
   }
-  .sidebar-primary {
-    width:100%;
-    padding: {
-      left:20px;
-      left:2rem;
-    }
-    .widget {
+  .content-sidebar {
+    .sidebar-primary {
       width:100%;
-      &:nth-child(odd) {
-        clear:both;
+      padding: {
+        left:20px;
+        left:2rem;
+      }
+      .widget {
+        width:100%;
+      }
+      .widget_bigbutton, form, .wp-calendar {
+        max-width:50%;
       }
     }
-    .widget_bigbutton, form, .wp-calendar {
-      max-width:50%;
+  }
+  .sidebar-content {
+    .content {
+      margin: {
+        right:0;
+      }
+    }
+    .sidebar-primary {
+      width:100%;
+      padding: {
+        right:20px;
+        right:2rem;
+      }
+      .widget {
+        width:100%;
+      }
+      .widget_bigbutton, form, .wp-calendar {
+        max-width:50%;
+      }
     }
   }
   #yoast-after-header-container {
