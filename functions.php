@@ -121,6 +121,7 @@ function child_theme_setup() {
 
 	add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting' );
 	add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic' );
+	add_action( 'wp_enqueue_scripts', 'enqueue_form_styles', 25 );
 	add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
 
@@ -162,6 +163,13 @@ function yst_load_css_from_setting() {
  */
 function enqueue_styles_basic() {
 	wp_enqueue_style( 'style-basic', get_stylesheet_directory_uri() . '/assets/css/style.css' );
+}
+
+/**
+ * Seperate callback because of low priority loading of stylesheet.
+ */
+function enqueue_form_styles() {
+	wp_enqueue_style( 'yst-form-style', get_stylesheet_directory_uri() . '/assets/css/forms.css' );
 }
 
 /**
@@ -491,5 +499,6 @@ function yst_add_wrapper_before_content() {
 function yst_add_wrapper_after_content() {
 	echo '</div>';
 }
-add_action('genesis_before_loop', 'yst_add_wrapper_before_content');
-add_action('genesis_after_loop', 'yst_add_wrapper_after_content');
+
+add_action( 'genesis_before_loop', 'yst_add_wrapper_before_content' );
+add_action( 'genesis_after_loop', 'yst_add_wrapper_after_content' );
