@@ -125,8 +125,6 @@ function child_theme_setup() {
 	add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
 
-	// add_action( 'wp_head', 'yst_header_sidr_css' ); // @fixme: Has the css been moved to the main file?
-
 	add_action( 'genesis_header', 'yst_mobile_nav' );
 
 	add_action( 'genesis_after_header', 'yst_after_header_genesis' );

@@ -1020,7 +1020,8 @@ textarea {
     }
   }
 }
-.sidr-block {
+.sidr-block,
+.sidr-trap { //sidr-trap seems to be used, not sidr-block. GH#22
   position: absolute;
   position: fixed;
   top: 0;
