@@ -151,8 +151,7 @@ function child_theme_setup() {
 }
 
 /**
- *
- * @fixme this uses a hardcoded theme path....
+ * Helperfunctions to load colourscheme-css.
  */
 function yst_load_css_from_setting() {
 	wp_enqueue_style( 'yst_custom_css', get_stylesheet_directory_uri() . genesis_get_option( 'yst_colourscheme' ), array( 'google-font-quattrocento_sans', 'admin-bar', 'theme001' ) );
@@ -434,3 +433,45 @@ function yst_filter_content_archive_image( $img, $args ) {
 }
 
 add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
+
+/**
+ * Use the logo's set in the Child Theme Settings
+ *
+ * Adds CSS to wp_head to show either the regular logo or the mobile logo, if they are set. If they're not set, no logo-image will be used.
+ *
+ * @since 1.0.0
+ */
+function yst_display_logo() {
+	$yst_logo        = genesis_get_option( 'yst-logo', 'child-settings' );
+	$yst_mobile_logo = genesis_get_option( 'yst-mobile-logo', 'child-settings' );
+
+	if ( ( isset( $yst_logo ) && ! empty ( $yst_logo ) ) || ( ( isset( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) ) ) {
+		?>
+		<style text="text/css">
+			<?php
+			if (isset($yst_logo) && ! empty ($yst_logo)) {
+			?>
+			@media (min-width: 643px) {
+				.site-header .title-area {
+					background-image: url(<?php echo genesis_get_option( 'yst-logo', 'child-settings' ); ?>);
+				}
+
+			<?php
+			}
+			if (isset($yst_mobile_logo) && ! empty ($yst_mobile_logo)) {
+			?>
+				@media (max-width: 642px) {
+					.site-header .title-area {
+						background-image: url(<?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?>);
+					}
+				}
+
+			<?php
+			}
+			?>
+		</style>
+	<?php
+	}
+}
+
+add_action( 'wp_head', 'yst_display_logo' );

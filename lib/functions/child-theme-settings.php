@@ -60,7 +60,8 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 		$default_settings = array(
 			'home-intro'      => '',
 			'footer'          => 'Get this theme at <a href="http://yoast.com" name="Theme Creator Yoast">Yoast.com</a>',
-			'yst-mobile-logo' => ''
+			'yst-logo'        => '',
+			'yst-mobile-logo' => '',
 		);
 
 		// Create the Admin Page
@@ -83,7 +84,8 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 			array(
 				'home-intro',
 				'footer',
-				'yst-mobile-logo'
+				'yst-logo',
+				'yst-mobile-logo',
 			) );
 	}
 
@@ -94,7 +96,7 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 	function metaboxes() {
 		add_meta_box( 'home_intro_metabox', __( 'Home Intro', 'yoast-theme' ), array( $this, 'home_intro_metabox' ), $this->pagehook, 'main', 'high' );
 		add_meta_box( 'footer_metabox', __( 'Footer', 'yoast-theme' ), array( $this, 'footer_metabox' ), $this->pagehook, 'main', 'high' );
-		add_meta_box( 'yst_mobile_logo_metabox', __( 'Mobile Logo', 'yoast-theme' ), array( $this, 'yst_mobile_logo_metabox' ), $this->pagehook, 'main', 'high' );
+		add_meta_box( 'yst_logos_metabox', __( 'Website Logo', 'yoast-theme' ), array( $this, 'yst_logos_metabox' ), $this->pagehook, 'main', 'high' );
 	}
 
 	/**
@@ -131,19 +133,34 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 	 *
 	 * @since 1.0.0
 	 */
-	function yst_mobile_logo_metabox() {
-		echo '<p class="yst-mobile-logo-explanation>' . __( 'To prevent loading an unnecessary large logo on mobile devices, you can upload a small version of your logo here.', 'yoast-theme' ) . '</p>';
+	function yst_logos_metabox() {
+		echo apply_filters( 'yst_logo_title', '<h4>Upload your logo</h4>' );
+		echo '<p class="yst-logo-explanation">' . __( 'Your logo will be displayed using a fixed width of 360 pixels. The preferred height of the image is 144 pixels. For the best result, use an image with these dimensions.', 'yoast-theme' ) . ' </p>';
 		?>
 		<label for="upload_image">
+			<input id="yst_logo_input" type="text" size="36" name="<?php echo $this->get_field_name( 'yst-logo' ); ?>" value="<?php echo $this->get_field_value( 'yst-logo' ); ?>" />
+			<input id="yst_logo_button" class="yst_image_upload_button button" type="button" value="<?php _e( 'Upload Image', 'yoast-theme' ); ?>" />
+		</label>
+		<?php
+		$yst_logo = $this->get_field_value( 'yst-logo' );
+		if ( isset( $yst_logo ) && ! empty ( $yst_logo ) ) {
+			echo '<p class="preview_logos">';
+			//echo apply_filters( 'yst_logo_preview', '<h4>Preview Mobile logo</h4>' );
+			echo '<div id="yst_logo_preview"><em>' . __( 'Your current logo:', 'yoast-theme' ) . '</em><br /><img src="' . esc_html( $this->get_field_value( 'yst-logo' ) ) . '" alt="' . __( 'Logo Preview', 'yoast-theme' ) . '" style="width:360px;" /></div>';
+			echo '</p>';
+		}
+		echo apply_filters( 'yst_mobile_logo_title', '<h4>Upload your mobile logo</h4>' );
+		echo '<p class="yst-mobile-logo-explanation">' . __( 'To prevent loading an unnecessary large logo on mobile devices, you can upload a small version of your logo here.', 'yoast-theme' ) . '<br />' . __( 'Your mobile logo will be displayed using a width of 230 pixels and a height of 36 pixels to fit the mobile version of your website. For the best result, use an image with these dimensions.', 'yoast-theme' ) . ' </p>';
+		?>
+		<label for="upload_mobile_image">
 			<input id="yst_mobile_logo_input" type="text" size="36" name="<?php echo $this->get_field_name( 'yst-mobile-logo' ); ?>" value="<?php echo $this->get_field_value( 'yst-mobile-logo' ); ?>" />
 			<input id="yst_mobile_logo_button" class="yst_image_upload_button button" type="button" value="<?php _e( 'Upload Image', 'yoast-theme' ); ?>" />
 		</label>
 		<?php
 		$yst_mobile_logo = $this->get_field_value( 'yst-mobile-logo' );
 		if ( isset( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) {
-			echo '<p>';
-			echo apply_filters( 'yst_mobile_logo_preview', '<h4>Mobile Logo preview</h4>' );
-			echo '<img src="' . esc_html( $this->get_field_value( 'yst-mobile-logo' ) ) . '" alt="' . __( 'Mobile Logo Preview', 'yoast-theme' ) . '" />';
+			echo '<p class="preview_logos">';
+			echo '<div id="yst_mobile_logo_preview"><em>' . __( 'Your current mobile logo:', 'yoast-theme' ) . '</em><br /><img src="' . esc_html( $this->get_field_value( 'yst-mobile-logo' ) ) . '" alt="' . __( 'Mobile Logo Preview', 'yoast-theme' ) . '" style="max-width:230px;max-height:36px;" /></div>';
 			echo '</p>';
 		}
 	}
