@@ -870,10 +870,12 @@ textarea {
   &.right {
     left: auto;
     right: -260px;
+    @include box-shadow(-2px -2px 5px $c_sidr_boxShadow);
   }
   &.left {
     left: -260px;
     right: auto;
+    @include box-shadow(2px 2px 5px $c_sidr_boxShadow);
   }
   // Theme Settings
   //font-family: $sidr-font-family;
@@ -890,7 +892,7 @@ textarea {
       bottom: {
         width:5px;
         style:solid;
-        color:$c_sidr_HeadingBorder;
+        color: $c_sidr_headingBorder;
       }
     }
     padding: 5px 15px 4px;
@@ -932,6 +934,25 @@ textarea {
             color: $c_sidr_linkHoverBg;
           }
         }
+        &.active,
+        &.sidr-class-active {
+          background: {
+            color: $c_sidr_linkActiveBg;
+          }
+        }
+      }
+      &.current-menu-item {
+        > a {
+          color: $c_sidr_linkHoverText;
+          background: {
+            color: $c_sidr_linkActiveBg;
+          }
+          &:hover {
+            background: {
+              color: $c_sidr_linkHoverBg;
+            }
+          }
+        }
       }
       ul {
         margin: 0;
@@ -944,30 +965,24 @@ textarea {
           &.sidr-class-active {
             border-top: none;
           }
-          &.current-menu-item {
-            a {
-              background: {
-                color: $c_sidr_linkBg;
-              }
-              color: $c_sidr_linkHoverText;
+          a {
+            padding: {
+              left: 30px;
             }
-          }
-          a, span {
-            padding-left: 30px;
+            font: {
+              weight:normal;
+            }
           }
         }
       }
     }
   }
-
   form {
     margin: 0 15px;
   }
-
   label {
     font-size: inherit;
   }
-
   input[type="text"],
   input[type="password"],
   input[type="date"],
@@ -991,24 +1006,20 @@ textarea {
     display: block;
     clear: both;
   }
-
   input[type=checkbox] {
     width: auto;
     display: inline;
     clear: none;
   }
-
   input[type=button],
   input[type=submit] {
     color: $sidr-background;
     background: $sidr-text-color;
-
     &:hover {
       background: rgba($sidr-text-color, .9);
     }
   }
 }
-
 .sidr-block {
   position: absolute;
   position: fixed;
