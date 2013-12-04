@@ -32,23 +32,12 @@
 @import "partials/dimensions";
 @import "partials/fonts";
 
-//  HTML5 Reset
-//  Baseline Normalize
-//  normalize.css v2.1.2 | MIT License | git.io/normalize
-
 /**
  * GENERAL
  **********************************/
 
 * {
   @include box-sizing(border-box);
-}
-
-html {
-  font: {
-    size: 62.5%; // 10px browser default
-    family: sans-serif;
-  }
 }
 audio,canvas,video {
   display:inline-block;
@@ -121,7 +110,6 @@ a {
 }
 p {
   margin: 0 0 16px;
-  margin: 0 0 1.6rem;
   padding: 0;
 }
 strong {
@@ -237,7 +225,6 @@ header {
   }
   .wrap {
     padding: 40px 0;
-    padding: 4rem 0;
   }
 }
 .floatclearing {
@@ -270,7 +257,6 @@ header {
   max-width: $d_full;
   padding: {
     top: 32px;
-    top: 3.2rem;
   }
 }
 .wrap {
@@ -307,7 +293,6 @@ header {
   }
   .title-area {
     padding: 20px 0 0;
-    padding: 2rem 0 0;
     background: {
       image: url(../images/logo.png);
       repeat: no-repeat;
@@ -375,8 +360,6 @@ header {
     max-width: $d_headerAside;
     overflow-x:hidden;
     padding: 20px 0 0 0;
-    padding: 2rem 0 0 0;
-    // width: $d_headerAside;
     color: $c_taglineTop;
     font: {
       size: $f_taglineTop-px;
@@ -408,11 +391,19 @@ header {
 .content {
   float: right;
   width: $d_mainColumn;
-  article {
+  max-width: 100%;
+  #main-content-wrap {
     float: left;
     width: $d_mainContent;
-    .archive-pagination {
-      clear:both;
+    max-width:100%;
+  }
+}
+
+.sidebar-content {
+  .content {
+    padding: {
+      left: 60px;
+      left: 6rem;
     }
   }
 }
@@ -423,8 +414,10 @@ header {
   }
 }
 
-.full-width-content .content {
-  width: 100%;
+.full-width-content {
+  .content {
+    width: 100%;
+  }
 }
 
 /*
@@ -439,11 +432,6 @@ header {
 .sidebar-content {
   .sidebar-primary {
     float: left;
-  }
-  .content {
-    article {
-      float:left;
-    }
   }
 }
 
@@ -477,7 +465,6 @@ button {
     size:inherit;
   }
   padding:8px 16px;
-  padding:0.8rem 1.6rem;
   margin:0;
   line-height:normal;
   text: {
@@ -527,7 +514,6 @@ input {
     size: $f_inputText;
   }
   padding: 16px;
-  padding: 1.6rem;
   width: 100%;
   margin:0;
   line-height:normal;
@@ -612,7 +598,6 @@ textarea {
     }
     height: 1.5em;
     padding: 16px 32px 16px 16px;
-    padding: 1.6rem 3.2rem 1.6rem 1.6rem;
     background: {
       image: url(../images/icon-search.png);
       position: 95% 50%;
@@ -717,7 +702,6 @@ textarea {
     position: relative;
     color: $c_navMainLink;
     padding: 10px 20px;
-    padding: 1rem 2rem;
     margin: 0;
     border: {
       width: 0 1px 0 0;
@@ -787,7 +771,6 @@ textarea {
         font-size: $f_navSubLink;
       }
       padding: 16px 20px;
-      padding: 1.6rem 2rem;
       position: relative;
       width: $d_navSubWidth;
       &:hover {
@@ -836,7 +819,6 @@ textarea {
     float: right;
     list-style-type: none;
     padding: 28px 0;
-    padding: 2.8rem 0;
     text: {
       transform: none;
     }
@@ -849,7 +831,6 @@ textarea {
     > a {
       margin: {
         left: 48px;
-        left: 4.8rem;
       }
     }
   }
@@ -859,7 +840,6 @@ textarea {
   }
   > .search {
     padding: 14px 0 0;
-    padding: 1.4rem 0 0;
   }
 }
 
@@ -880,13 +860,10 @@ textarea {
   overflow-y: auto;
   .sidr-inner {
     padding: 0 0 15px;
-    padding: 0 0 1.5rem;
     > p {
       margin: {
         left: 15px;
-        left: 1.5rem;
         right: 15px;
-        right: 1.5rem;
       }
     }
   }
@@ -917,7 +894,6 @@ textarea {
       }
     }
     padding: 5px 15px 4px;
-    padding: 0.5rem 1.5rem 0.4rem;
     margin:0;
   }
   p {
@@ -925,7 +901,6 @@ textarea {
   ul {
     display: block;
     margin: 0 0 15px;
-    margin: 0 0 1.5rem;
     padding: 0;
     li {
       display: block;
@@ -933,7 +908,6 @@ textarea {
       line-height: 36px;
       a /*, span */ { //No idea what the span is for
         padding: 0 15px;
-        padding: 0 1.5rem;
         display: block;
         text-decoration: none;
         border: {
@@ -955,7 +929,7 @@ textarea {
           line-height: 36px;
           color: $c_sidr_linkHoverText;
           background: {
-              color: $c_sidr_linkHoverBg;
+            color: $c_sidr_linkHoverBg;
           }
         }
       }
@@ -963,7 +937,7 @@ textarea {
         margin: 0;
         li {
           &:last-child {
-        //    border-bottom: none;
+            //    border-bottom: none;
           }
           &:hover,
           &.active,
@@ -972,12 +946,12 @@ textarea {
           }
           &.current-menu-item {
             a {
-                background: {
-                  color: $c_sidr_linkBg;
-                }
-                color: $c_sidr_linkHoverText;
+              background: {
+                color: $c_sidr_linkBg;
               }
+              color: $c_sidr_linkHoverText;
             }
+          }
           a, span {
             padding-left: 30px;
           }
@@ -1176,73 +1150,55 @@ body.sticky-menu {
 .avatar {
   float: left;
 }
-
 .alignleft .avatar {
   margin: {
     right: 24px;
-    right: 2.4rem;
   }
 }
-
 .alignright .avatar {
   margin: {
     left: 24px;
-    left: 2.4rem;
   }
 }
-
 img.centered,
 .aligncenter {
   display: block;
   margin: 0 auto 24px;
-  margin: 0 auto 2.4rem;
 }
-
 img.alignnone {
   margin: {
     bottom: 12px;
-    bottom: 1.2rem;
   }
 }
-
 .alignleft {
   float: left;
   text-align: left;
 }
-
 .alignright {
   float: right;
   text: {
     align: right;
   }
 }
-
 img.alignleft,
 .wp-caption.alignleft {
   margin: 0 24px 24px 0;
-  margin: 0 2.4rem 2.4rem 0;
 }
-
 img.alignright,
 .wp-caption.alignright {
   margin: 0 0 24px 24px;
-  margin: 0 0 2.4rem 2.4rem;
 }
-
 .wp-caption-text {
   font: {
     size: 14px;
-    size: 1.4rem;
     weight: 700;
   }
   text: {
     align: center;
   }
 }
-
 .gallery-caption {
 }
-
 .widget_calendar {
   table {
     width: 100%;
@@ -1267,7 +1223,6 @@ img.alignright,
   max-width: $d_full;
   margin: 0 auto;
   padding: 10px 0 0;
-  padding: 1rem 0 0;
   color: $c_breadcrumbs;
   font: {
     size: $f_breadcrumbs-px;
@@ -1285,24 +1240,19 @@ img.alignright,
 .archive-description {
   margin: {
     bottom: 40px;
-    bottom:4rem;
   }
   padding: 40px 40px 24px;
-  padding: 4rem 4rem 2.4rem;
 }
 
 .author-box {
   margin: 40px 0;
-  margin: 4rem 0;
   padding: 10px;
-  padding: 1rem;
   background: {
     color: $c_articleAuthorBg;
   }
   .author-box-title {
     margin: {
       bottom: 4px;
-      bottom: 0.4rem;
     }
     font: {
       size: $f_mainH2-px;
@@ -1328,9 +1278,7 @@ img.alignright,
     float:right;
     margin: {
       left:10px;
-      left:1rem;
       bottom:10px;
-      bottom:1rem;
     }
   }
 }
@@ -1349,7 +1297,6 @@ img.alignright,
   }
   line-height: 1.2;
   margin: 0 0 24px;
-  margin: 0 0 2.4rem;
 }
 
 h1 {
@@ -1448,11 +1395,9 @@ h6 {
 .archive-title {
   font: {
     size: 20px;
-    size: 2rem;
   }
   margin: {
     bottom: 24px;
-    bottom: 2.4rem;
   }
 }
 
@@ -1493,7 +1438,6 @@ table {
   line-height: 2;
   margin: {
     bottom: 40px;
-    bottom: 4rem;
   }
   width: 100%;
   tbody {
@@ -1519,7 +1463,6 @@ table {
       top: 1px solid $c_tableBorder;
     }
     padding: 6px 0;
-    padding: 0.6rem 0;
   }
 }
 
@@ -1531,11 +1474,9 @@ table {
 .post {
   margin: {
     bottom: 36px;
-    bottom: 3.6rem;
   }
   padding: {
     bottom: 14px;
-    bottom: 1.4rem;
   }
   border: {
     bottom: 1px solid $c_hrLine;
@@ -1544,13 +1485,10 @@ table {
 .entry {
   background: {
     color: $c_mainBg;
-    }
-    margin: {
-      bottom: 40px;
-      bottom: 4rem;
-    }
-//    padding: 40px 40px 24px;
-//    padding: 4rem 4rem 2.4rem;
+  }
+  margin: {
+    bottom: 40px;
+  }
   .back-to-top {
     text-align:right;
   }
@@ -1574,15 +1512,12 @@ table {
   p {
     margin: {
       bottom: 26px;
-      bottom: 2.6rem;
     }
   }
   ol {
     margin: {
       bottom: 26px;
-      bottom: 2.6rem;
       left: 40px;
-      left: 4rem;
     }
     li {
       list-style-type: decimal;
@@ -1596,9 +1531,7 @@ table {
   ul {
     margin: {
       bottom: 26px;
-      bottom: 2.6rem;
       left: 40px;
-      left: 4rem;
     }
     li {
       list-style-type: disc;
@@ -1678,11 +1611,9 @@ table {
     }
     img.alignleft {
       margin: 0 24px 10px 0;
-      margin: 0 2.4rem 1rem 0;
     }
     img.alignright {
       margin: 0 0 24px 10px;
-      margin: 0 0 2.4rem 1rem;
     }
   }
   .entry-footer {
@@ -1695,7 +1626,6 @@ table {
 .term-intro {
   padding: {
     bottom: 24px;
-    bottom:2.4rem;
   }
   h1 {
     color:$c_taxonomyIntroH1;
@@ -1727,14 +1657,13 @@ table {
 .quote-caption {
   margin: {
     bottom: 26px;
-    bottom: 2.6rem;
   }
 }
 .entry-meta {
-  color: #999;
+  color: $c_metaAtPost;
   font: {
-    size: 14px;
-    size: 1.4rem;
+    size: $f_metaAtPost-px;
+    size: $f_metaAtPost;
   }
   a {
     font: {
@@ -1746,9 +1675,7 @@ table {
   .entry-meta {
     margin: {
       bottom: 26px;
-      bottom: 2.6rem;
       top: 5px;
-      top: 0.5rem;
     }
     font: {
       weight: 700;
@@ -1761,14 +1688,12 @@ table {
 .entry-footer {
   .entry-meta {
     padding: 32px 40px 8px 0;
-    padding: 3.2rem 4rem 0.8rem 0;
   }
 }
 .entry-comments-link {
   ::before {
     content: "\2014";
     margin: 0 6px 0 2px;
-    margin: 0 0.6rem 0 0.2rem;
   }
 }
 .entry-categories {
@@ -1845,12 +1770,11 @@ table {
 
 .archive-pagination {
   font: {
-    size: 14px;
-    size:1.4rem;
+    size: $f_pagenav-px;
+    size: $f_pagenav;
     weight:700;
   }
   margin: 40px 0;
-  margin: 4rem 0;
   li {
     display: inline;
     a {
@@ -1861,7 +1785,6 @@ table {
       cursor: pointer;
       display: inline-block;
       padding: 4px 12px;
-      padding: 0.4rem 1.2rem;
       &:hover {
         color: $c_pagenavHoverLink;
         background: {
@@ -1881,11 +1804,10 @@ table {
 }
 .entry-pagination {
   font: {
-    size: 14px;
-    size: 1.4rem;
+    size: $f_pagenav-px;
+    size: $f_pagenav;
   }
   margin: 40px 0;
-  margin: 4rem 0;
   a {
     border: {
       bottom: {
@@ -1932,7 +1854,6 @@ table {
       }
     }
     padding:10px;
-    padding:1rem;
   }
   a {
     font: {
@@ -1942,7 +1863,6 @@ table {
   h3 {
     margin: {
       bottom: 24px;
-      bottom: 2.4rem;
     }
   }
   .comment-author {
@@ -1950,7 +1870,6 @@ table {
       float:left;
       margin: {
         right: 16px;
-        right: 1.6rem;
       }
     }
     span {
@@ -1984,7 +1903,6 @@ table {
       article {
         margin: {
           bottom:24px;
-          bottom:2.4rem;
         }
       }
       &.depth-2,
@@ -1993,7 +1911,6 @@ table {
       &.depth-5 {
         margin: {
           left:10px;
-          left:1rem;
         }
       }
     }
@@ -2001,18 +1918,17 @@ table {
       a {
         border-bottom: 1px solid $c_linkBorder;
       }
-       input {
+      input {
         &[type="email"],
         &[type="text"],
         &[type="url"] {
-          width: 50%
+          width: 50%;
         }
       }
       label {
         display: block;
         margin {
           right: 12px;
-          right: 1.2rem;
         }
       }
     }
@@ -2023,10 +1939,8 @@ table {
     }
     margin {
       bottom: 40px;
-      bottom: 4rem;
     }
     padding: 40px 40px 16px;
-    padding: 4rem 4rem 1.6rem;
     .reply {
       display: none;
     }
@@ -2039,18 +1953,16 @@ table {
 }
 .form-allowed-tags {
   font: {
-    size: 14px;
-    size: 1.4rem;
+    size: $f_metaAtPost-px;
+    size: $f_metaAtPost;
   }
 }
 .form-submit {
   padding: {
     bottom:24px;
-    bottom:2.4rem;
   }
   margin: {
     bottom: 24px;
-    bottom: 2.4rem;
   }
 }
 
@@ -2065,7 +1977,6 @@ table {
 .featured-content {
   .entry {
     padding: 0 10px;
-    padding: 0 1.0rem;
   }
   .post {
     border: {
@@ -2077,7 +1988,6 @@ table {
       display:block;
       padding: {
         bottom: 10px;
-        bottom:1.0rem;
       }
     }
   }
@@ -2156,14 +2066,12 @@ table {
         text-align:left;
         padding: {
           left:10px;
-          left:1rem;
         }
       }
       #next {
         text-align:right;
         padding: {
           right:10px;
-          right:1rem;
         }
       }
     }
@@ -2192,15 +2100,12 @@ table {
   > .wrap {
     padding: {
       bottom: 6px;
-      bottom: 0.6rem;
     }
   }
   .widget-title {
     margin: 24px 0 0;
-    margin: 2.4rem 0 0;
     color: $c_headerH3;
     padding: 0 0 10px;
-    padding: 0 0 1.0rem;
   }
   a {
     color: $c_headerLink;
@@ -2257,9 +2162,7 @@ table {
   max-width:50%;
   margin: {
     left: 60px;
-    left: 6rem;
     right: 60px;
-    right: 6rem;
   }
   vertical-align: middle;
 }
@@ -2320,12 +2223,10 @@ table {
 .widget-wrap {
   padding: {
     bottom: 24px;
-    bottom: 2.4rem;
   }
   > p {
     padding: {
       left: 10px;
-      left: 1rem;
     }
     a {
       text: {
@@ -2341,7 +2242,6 @@ table {
   > ul {
     margin: {
       left: 26px;
-      left: 2.6rem;
       bottom:1em;
     }
   }
@@ -2367,7 +2267,6 @@ table {
   .featuredpost ul {
     margin: {
       bottom: 10px;
-      bottom: 1rem;
     }
     li a {
       text-decoration:none;
@@ -2401,7 +2300,6 @@ table {
   li {
     margin: {
       bottom: 6px;
-      bottom: 0.6rem;
     }
     word-wrap: break-word;
   }
@@ -2413,7 +2311,6 @@ table {
   .widget {
     padding: {
       bottom: 40px;
-      bottom: 4rem;
     }
     .widget {
       padding: {
@@ -2423,7 +2320,6 @@ table {
   }
   form {
     padding: 0 10px;
-    padding: 0 1.0rem;
     &.search-form {
       padding:0;
     }
@@ -2434,7 +2330,6 @@ table {
       p,
       div {
         padding: 0 10px;
-        padding: 0 1.0rem;
         a {
           font: {
             weight: 700;
@@ -2444,7 +2339,6 @@ table {
     }
   }
 }
-
 widgettitle,
 .widget-title {
   font: {
@@ -2453,7 +2347,6 @@ widgettitle,
   }
   margin: {
     bottom: 24px;
-    bottom: 2.4rem;
   }
   text: {
     transform: none;
@@ -2461,13 +2354,11 @@ widgettitle,
   background-color: $c_sidebarH3Bg;
   color: $c_sidebarH3;
   padding: 10px;
-  padding:1rem;
   a {
     border:none;
     color: $c_sidebarH3;
   }
 }
-
 
 /**
  * Sidebar Widgets
@@ -2478,7 +2369,6 @@ widgettitle,
     a {
       display: block;
       padding: 15px;
-      padding: 1.5rem;
       border: {
         width: 1px;
         style: solid;
@@ -2517,9 +2407,7 @@ widgettitle,
   form {
     padding: {
       left: 10px;
-      left: 1rem;
       right: 10px;
-      right: 1rem;
     }
   }
   form {
@@ -2535,7 +2423,6 @@ widgettitle,
       padding:8px;
       margin: {
         bottom: 10px;
-        bottom: 1rem;
       }
       &[type="text"] {
         width:80%;
@@ -2543,7 +2430,6 @@ widgettitle,
       &[type="submit"] {
         font: {
           size: 12px;
-          size: 1.2rem;
         };
       }
     }
@@ -2557,12 +2443,10 @@ widgettitle,
 .widget_socials {
   margin: {
     bottom: 40px;
-    bottom: 4.0rem;
   }
   #yst_social_widget {
     padding: {
       left: 10px;
-      left: 1.0rem;
     }
     a {
       display:block;
@@ -2571,7 +2455,6 @@ widgettitle,
       float:left;
       margin: {
         right:10px;
-        right:1.0rem;
       }
       background: {
         image: url(../images/social_sprites.png);
@@ -2626,7 +2509,6 @@ widgettitle,
       margin: {
         top:75%;
         right:-5px;
-        right:-0.5rem;
       }
       text: {
         align:center;
@@ -2670,10 +2552,8 @@ widgettitle,
     }
     color: $c_sidebarH4;
     padding:10px 10px 0 0;
-    padding:1rem 1rem 0 0;
     margin: {
       bottom:16px;
-      bottom:1.6rem;
     }
   }
 }
@@ -2690,9 +2570,9 @@ widgettitle,
  */
 
 #yoast-fullwidth-bottom-container {
+  clear:both;
   margin: {
     top: 36px;
-    top:3.6rem;
   }
   .yoast-fullwidth-widget {
     float:left;
@@ -2710,7 +2590,6 @@ widgettitle,
   .widget {
     padding: {
       bottom:24px;
-      bottom:2.4rem;
     }
   }
   .widget-title {
@@ -2720,9 +2599,7 @@ widgettitle,
   .search-form {
     padding: {
       left:10px;
-      left:1rem;
       right:10px;
-      right:1rem;
     }
   }
 }
@@ -2749,10 +2626,8 @@ widgettitle,
   color: $c_footerWidgetsText;
   clear: both;
   padding: 30px 0 16px;
-  padding: 3rem 0 1.6rem;
   margin: {
     top:24px;
-    top:2.4rem;
   }
   a {
     color: $c_footerWidgetsLink;
@@ -2770,13 +2645,13 @@ widgettitle,
   ul {
     margin: {
       left:10px;
-      left:1rem;
     }
   }
   li {
     list-style-type: none;
-    margin-bottom: 6px;
-    margin-bottom: 0.6rem;
+    margin: {
+      bottom: 6px;
+    }
     word-wrap: break-word;
   }
   .widget-area {
@@ -2788,20 +2663,16 @@ widgettitle,
   .footer-widgets-2 {
     margin: {
       left: 60px;
-      left: 6rem;
       right: 60px;
-      right: 6rem;
     }
   }
   .footer-widgets-3 {
     margin: {
       right: 60px;
-      right: 6rem;
     }
   }
   .widget {
     margin-bottom: 24px;
-    margin-bottom: 2.4rem;
     .widget-title {
       color: $c_footerWidgetsH3;
     }
@@ -2836,17 +2707,13 @@ widgettitle,
     > p {
       padding: {
         left: 10px;
-        left: 1rem;
         right: 10px;
-        right: 1rem;
       }
     }
     input {
       padding: 8px 16px;
-      padding: 0.8rem 1.6rem;
       margin: {
         bottom: 16px;
-        bottom: 1.6rem;
       }
     }
   }
@@ -2863,11 +2730,9 @@ widgettitle,
       li {
         margin: {
           bottom: 16px;
-          bottom: 1.6rem;
         }
         padding: {
           right: 10px;
-          right:1rem;
         }
         &:after {
           content: "";
@@ -2891,7 +2756,6 @@ widgettitle,
 .yarpp-related {
   padding: {
     bottom:36px;
-    bottom:3.6rem;
   }
   color: $c_mainLink;
   h3 {
@@ -2931,11 +2795,10 @@ img#wpstats {
   }
   color: $c_footerText;
   font: {
-    size: 14px;
-    size: 1.4rem;
+    size: $f_footerBaseFont-px;
+    size: $f_footerBaseFont;
   }
   padding: 20px 10px;
-  padding: 2.0rem 1rem;
   a {
     color: $c_footerLink;
     text-decoration:underline;
@@ -3011,9 +2874,7 @@ img#wpstats {
     max-width:66%;
     padding: {
       left:10px;
-      left:1rem;
       right:10px;
-      right:1rem;
     }
   }
   .content-sidebar {
@@ -3027,6 +2888,11 @@ img#wpstats {
     .sidebar-primary {
       margin: {
         left:10px;
+      }
+    }
+    .content {
+      padding: {
+        left: 0;
       }
     }
   }
@@ -3045,7 +2911,6 @@ img#wpstats {
     #yoast-top-right {
       padding: {
         right:20px;
-        right:2.0rem;
       }
       max-width:60%;
       overflow:hidden;
@@ -3054,41 +2919,35 @@ img#wpstats {
   .breadcrumb {
     padding: {
       left: 10px;
-      left: 1rem;
     }
   }
   #yoast-after-header-container {
-    padding-left:20px;
-    padding-left:2rem;
+    padding: {
+      left:20px;
+    }
     .yoast-after-header-widget {
       width:30%;
     }
     #yoast-after-header-2 {
       margin:0 30px;
-      margin:0 3rem;
     }
   }
   #yoast-fullwidth-bottom-container {
     padding: {
       left:20px;
-      left:2rem;
       right:20px;
-      right:2rem;
     }
     .yoast-fullwidth-widget {
       width:30%;
     }
     #yoast-fullwidth-widgetarea-2 {
       margin:0 30px;
-      margin:0 3rem;
     }
   }
   .footer-widgets {
     padding: {
       left:10px;
-      left:1rem;
       right:10px;
-      right:1rem;
     }
     .widget-area {
       width:22%;
@@ -3117,7 +2976,6 @@ img#wpstats {
   #yoast-fullwidth-bottom-container {
     #yoast-fullwidth-widgetarea-2 {
       margin:0 15px;
-      margin:0 1.5rem;
     }
   }
 }
@@ -3145,9 +3003,7 @@ img#wpstats {
   .breadcrumb {
     padding: {
       left:10px;
-      left:1rem;
       right:10px;
-      right:1rem;
     }
   }
   .content-sidebar {
@@ -3155,7 +3011,6 @@ img#wpstats {
       width:100%;
       padding: {
         left:20px;
-        left:2rem;
       }
       .widget {
         width:100%;
@@ -3175,7 +3030,6 @@ img#wpstats {
       width:100%;
       padding: {
         right:20px;
-        right:2rem;
       }
       .widget {
         width:100%;
@@ -3187,7 +3041,6 @@ img#wpstats {
   }
   #yoast-after-header-container {
     padding:0 10px;
-    padding:0 1rem;
     #yoast-after-header-1,
     #yoast-after-header-2,
     #yoast-after-header-3 {
@@ -3203,14 +3056,11 @@ img#wpstats {
   .yoast-tagline-after-header-widget {
     padding: {
       left:20px;
-      left:2rem;
       right:20px;
-      right:2rem;
     }
   }
   #yoast-fullwidth-bottom-container {
     padding:0 10px;
-    padding:0 1rem;
     #yoast-fullwidth-widgetarea-1,
     #yoast-fullwidth-widgetarea-2,
     #yoast-fullwidth-widgetarea-3 {
@@ -3226,9 +3076,7 @@ img#wpstats {
   .footer-widgets {
     padding: {
       left:10px;
-      left:1rem;
       right:10px;
-      right:1rem;
     }
     .widget-area {
       width:100%;
@@ -3241,9 +3089,9 @@ img#wpstats {
   .site-footer {
     text-align:center;
   }
-  /**
-   * Enter the mobile menu
-   */
+/**
+ * Enter the mobile menu
+ */
   body {
     border: 0;
   }
@@ -3274,10 +3122,10 @@ img#wpstats {
     .site-container {
       a {
         &#sidr-left {
-        position: fixed;
-        top: 0;
-        left: 0;
-      }
+          position: fixed;
+          top: 0;
+          left: 0;
+        }
         &#sidr-right {
           position: fixed;
           top: 0;
@@ -3296,13 +3144,13 @@ img#wpstats {
       }
     }
   }
-  /* end mobile menu */
+/* end mobile menu */
 }
 
 @media (max-width: 512px) {
   .sidebar-primary {
     .widget_bigbutton, form {
-    max-width:100%;
+      max-width:100%;
     }
   }
 }

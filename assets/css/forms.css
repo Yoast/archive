@@ -94,7 +94,7 @@ table {
   color: black;
   opacity: 1 !important;
   font-size: 16px !important;
-  font-size: 1.6rem !important;
+  font-size: 1rem !important;
 }
 /* line 56, ../sass/forms.scss */
 .gform_wrapper ul.gfield_radio li {
@@ -104,14 +104,14 @@ table {
 /* line 64, ../sass/forms.scss */
 .gform_wrapper input[type="email"] {
   font-size: 14px;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   padding: 8px;
   padding: 0.8rem;
 }
 /* line 72, ../sass/forms.scss */
 .gform_wrapper input[type="text"] {
   font-size: 14px;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   padding: 8px;
   padding: 0.8rem;
 }
@@ -122,19 +122,19 @@ table {
 /* line 84, ../sass/forms.scss */
 .gform_wrapper textarea {
   font-size: 14px;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   padding: 8px;
   padding: 0.8rem;
 }
 /* line 92, ../sass/forms.scss */
 .gform_wrapper select {
   font-size: 14px;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
 }
 /* line 99, ../sass/forms.scss */
 .gform_wrapper .ginput_complex label {
   font-size: 14px;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   padding: 0;
 }
 /* line 107, ../sass/forms.scss */
@@ -150,7 +150,7 @@ table {
 /* line 119, ../sass/forms.scss */
 .gform_wrapper .gform_footer input [type="submit"] {
   font-size: 14px;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
 }
 
 /**
