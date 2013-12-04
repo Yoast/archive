@@ -119,9 +119,9 @@ function child_theme_setup() {
 	// Activate blogroll widget
 	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
-	add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting' );
-	add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic' );
-	add_action( 'wp_enqueue_scripts', 'enqueue_form_styles', 25 );
+	add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting', 5 );
+	add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic', 5 );
+	//add_action( 'wp_enqueue_scripts', 'enqueue_form_styles', 25 ); // @fixme: commented because script breaks layout.
 	add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
 
@@ -167,9 +167,13 @@ function enqueue_styles_basic() {
 
 /**
  * Seperate callback because of low priority loading of stylesheet.
+ *
+ * @fixme: if-statement is always true because contactform 7 always loads their css. This breaks ours.
  */
 function enqueue_form_styles() {
-	wp_enqueue_style( 'yst-form-style', get_stylesheet_directory_uri() . '/assets/css/forms.css' );
+	if ( wp_style_is( 'gforms_browsers_css', $list = 'enqueued' ) || wp_style_is( 'contact-form-7', $list = 'enqueued' ) ) {
+		wp_enqueue_style( 'yst-form-style', get_stylesheet_directory_uri() . '/assets/css/forms.css' );
+	}
 }
 
 /**
@@ -502,3 +506,4 @@ function yst_add_wrapper_after_content() {
 
 add_action( 'genesis_before_loop', 'yst_add_wrapper_before_content' );
 add_action( 'genesis_after_loop', 'yst_add_wrapper_after_content' );
+
