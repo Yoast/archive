@@ -28,7 +28,7 @@ function child_theme_setup() {
 		require_once $file;
 	}
 
-	//include_once( get_theme_root_uri() . '/theme001/lib/functions/yst-colourscheme-settings.php' );
+	//include_once( get_stylesheet_directory_uri . '/lib/functions/yst-colourscheme-settings.php' );
 	require_once( 'lib/functions/yst-colourscheme-settings.php' );
 
 	//* Add HTML5 markup structure
@@ -124,7 +124,7 @@ function child_theme_setup() {
 	add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
 
-	add_action( 'wp_head', 'yst_header_sidr_css' );
+	// add_action( 'wp_head', 'yst_header_sidr_css' ); // @fixme: Has the css been moved to the main file?
 
 	add_action( 'genesis_header', 'yst_mobile_nav' );
 
@@ -155,7 +155,7 @@ function child_theme_setup() {
  * @fixme this uses a hardcoded theme path....
  */
 function yst_load_css_from_setting() {
-	wp_enqueue_style( 'yst_custom_css', get_theme_root_uri() . "/theme001" . genesis_get_option( 'yst_colourscheme' ), array( 'google-font-quattrocento_sans', 'admin-bar', 'theme001' ) );
+	wp_enqueue_style( 'yst_custom_css', get_stylesheet_directory_uri() . genesis_get_option( 'yst_colourscheme' ), array( 'google-font-quattrocento_sans', 'admin-bar', 'theme001' ) );
 }
 
 /**

@@ -115,13 +115,11 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 	/**
 	 * Helper function: Add scripts for media uploader
-	 *
-	 * @fixme: hardcoded URL
 	 */
 	function yst_media_admin_scripts_style() {
 		if ( isset( $_GET['page'] ) && $_GET['page'] == 'child' ) {
 			wp_enqueue_media();
-			wp_register_script( 'yst-media-uploader', get_theme_root_uri() . '/theme001/lib/js/media-uploader.js', array( 'jquery' ) );
+			wp_register_script( 'yst-media-uploader', get_stylesheet_directory_uri() . '/lib/js/media-uploader.js', array( 'jquery' ) );
 			wp_enqueue_script( 'yst-media-uploader' );
 		}
 	}
