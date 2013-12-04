@@ -40,48 +40,46 @@
   font-size: 14px;
   font-size: 0.875rem;
   padding: 8px;
-  padding: 0.8rem;
 }
-/* line 71, ../sass/forms.scss */
+/* line 70, ../sass/forms.scss */
 .gform_wrapper input[type="text"] {
   font-size: 14px;
   font-size: 0.875rem;
   padding: 8px;
-  padding: 0.8rem;
 }
-/* line 79, ../sass/forms.scss */
+/* line 77, ../sass/forms.scss */
 .gform_wrapper input[value="Other"] {
   max-width: 80%;
 }
-/* line 83, ../sass/forms.scss */
+/* line 81, ../sass/forms.scss */
 .gform_wrapper textarea {
   font-size: 14px;
   font-size: 0.875rem;
   padding: 8px;
   padding: 0.8rem;
 }
-/* line 91, ../sass/forms.scss */
+/* line 89, ../sass/forms.scss */
 .gform_wrapper select {
   font-size: 14px;
   font-size: 0.875rem;
 }
-/* line 98, ../sass/forms.scss */
+/* line 96, ../sass/forms.scss */
 .gform_wrapper .ginput_complex label {
   font-size: 14px;
   font-size: 0.875rem;
   padding: 0;
 }
-/* line 106, ../sass/forms.scss */
+/* line 104, ../sass/forms.scss */
 .gform_wrapper li {
   margin: 8px 0 0;
   margin: 0.8rem 0 0;
 }
-/* line 111, ../sass/forms.scss */
+/* line 109, ../sass/forms.scss */
 .gform_wrapper form li {
   margin: 8px 0 0;
   margin: 0.8rem 0 0;
 }
-/* line 118, ../sass/forms.scss */
+/* line 116, ../sass/forms.scss */
 .gform_wrapper .gform_footer input [type="submit"] {
   font-size: 14px;
   font-size: 0.875rem;
@@ -92,3 +90,40 @@
  * @plugin(title: Contact Form 7)
  * @link http://www.gravityforms.com/
  */
+/* line 137, ../sass/forms.scss */
+.wpcf7 .wpcf7-form .wpcf7-checkbox .wpcf7-list-item,
+.wpcf7 .wpcf7-form .wpcf7-radio .wpcf7-list-item,
+.wpcf7 .wpcf7-form .wpcf7-form-control-wrap .wpcf7-list-item {
+  display: block;
+}
+/* line 141, ../sass/forms.scss */
+.wpcf7 .wpcf7-form .wpcf7-checkbox input[type="checkbox"],
+.wpcf7 .wpcf7-form .wpcf7-checkbox input[type="radio"],
+.wpcf7 .wpcf7-form .wpcf7-radio input[type="checkbox"],
+.wpcf7 .wpcf7-form .wpcf7-radio input[type="radio"],
+.wpcf7 .wpcf7-form .wpcf7-form-control-wrap input[type="checkbox"],
+.wpcf7 .wpcf7-form .wpcf7-form-control-wrap input[type="radio"] {
+  width: 2em;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+/* line 146, ../sass/forms.scss */
+.wpcf7 .wpcf7-form .wpcf7-checkbox input[type="number"],
+.wpcf7 .wpcf7-form .wpcf7-checkbox input[type="date"],
+.wpcf7 .wpcf7-form .wpcf7-radio input[type="number"],
+.wpcf7 .wpcf7-form .wpcf7-radio input[type="date"],
+.wpcf7 .wpcf7-form .wpcf7-form-control-wrap input[type="number"],
+.wpcf7 .wpcf7-form .wpcf7-form-control-wrap input[type="date"] {
+  width: 150px;
+  max-width: 100%;
+}
+/* line 150, ../sass/forms.scss */
+.wpcf7 .wpcf7-form .wpcf7-checkbox input[type="range"],
+.wpcf7 .wpcf7-form .wpcf7-radio input[type="range"],
+.wpcf7 .wpcf7-form .wpcf7-form-control-wrap input[type="range"] {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border: 0;
+}

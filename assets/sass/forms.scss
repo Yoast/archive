@@ -66,7 +66,6 @@
         size: $f_inputText;
       }
       padding: 8px;
-      padding: 0.8rem;
     }
     &[type="text"] {
       font: {
@@ -74,7 +73,6 @@
         size: $f_inputText;
       }
       padding: 8px;
-      padding: 0.8rem;
     }
     &[value="Other"] {
       max-width: 80%;
@@ -130,3 +128,29 @@
  * @plugin(title: Contact Form 7)
  * @link http://www.gravityforms.com/
  */
+
+.wpcf7 {
+  .wpcf7-form {
+    .wpcf7-checkbox,
+    .wpcf7-radio,
+    .wpcf7-form-control-wrap {
+      .wpcf7-list-item {
+        display:block;
+      }
+      input[type="checkbox"],
+      input[type="radio"] {
+        width: 2em;
+        @include box-shadow(none);
+      }
+      input[type="number"],
+      input[type="date"] {
+        width:150px;
+        max-width:100%;
+      }
+      input[type="range"] {
+        @include box-shadow(none);
+        border: 0;
+      }
+    }
+  }
+}
