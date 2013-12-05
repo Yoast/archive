@@ -60,43 +60,47 @@
     }
   }
   input {
-    &[type="email"] {
+    &[type="Email"],
+    &[type="Text"],
+    &[type="Url"],
+    &[type="Tel"],
+    &[type="Number"],
+    &[type="Password"] {
       font: {
-        size: $f_inputText-px;
-        size: $f_inputText;
-      }
-      padding: 8px;
-    }
-    &[type="text"] {
-      font: {
-        size: $f_inputText-px;
-        size: $f_inputText;
+        size: $f_inputText-px !important;
+        size: $f_inputText !important;
       }
       padding: 8px;
     }
     &[value="Other"] {
       max-width: 80%;
     }
+    &[type="radio"],
+    &[type="checkbox"] {
+      margin: {
+        left:4px;
+      }
+    }
   }
   textarea {
     font: {
-      size: $f_inputText-px;
-      size: $f_inputText;
+      size: $f_inputText-px !important;
+      size: $f_inputText !important;
     }
     padding: 8px;
     padding: 0.8rem;
   }
   select {
     font: {
-      size: $f_inputText-px;
-      size: $f_inputText;
+      size: $f_inputText-px !important;
+      size: $f_inputText !important;
     }
   }
   .ginput_complex {
     label {
       font: {
-        size: $f_inputText-px;
-        size: $f_inputText;
+        size: $f_inputText-px !important;
+        size: $f_inputText !important;
       }
       padding: 0;
     }
@@ -115,14 +119,23 @@
     input {
       [type="submit"] {
         font: {
-          size: $f_inputText-px;
-          size: $f_inputText;
+          size: $f_inputText-px !important;
+          size: $f_inputText !important;
         }
       }
     }
   }
 }
-
+.gform_widget {
+  .gform_wrapper {
+    .small {
+      width:50% !important;
+    }
+    .medium {
+      width:100% !important;
+    }
+  }
+}
 /**
  * Contact Form 7
  * @plugin(title: Contact Form 7)
@@ -136,6 +149,9 @@
     .wpcf7-form-control-wrap {
       .wpcf7-list-item {
         display:block;
+        margin: {
+          left:0;
+        }
       }
       input[type="checkbox"],
       input[type="radio"] {

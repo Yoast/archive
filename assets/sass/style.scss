@@ -294,7 +294,6 @@ header {
   .title-area {
     padding: 20px 0 0;
     background: {
-      image: url(../images/logo.png);
       repeat: no-repeat;
       position: left;
     }
@@ -580,7 +579,7 @@ textarea {
 
 ::-moz-placeholder {
   color: $c_inputTextPlaceholder;
-  opacity: 1;
+  @include opacity(1);
 }
 
 ::-webkit-input-placeholder {
@@ -670,7 +669,7 @@ textarea {
       position: static;
       > .sub-menu {
         left: auto;
-        opacity: 1;
+        @include opacity(1);
       }
     }
     > a:after // set up the top level arrows first
@@ -748,7 +747,7 @@ textarea {
   }
   .sub-menu {
     left: -9999px;
-    opacity: 0;
+    @include opacity(0);
     position: absolute;
     width: $d_navSubWidth;
     z-index: 99;
@@ -978,7 +977,7 @@ textarea {
     }
   }
   form {
-    margin: 0 15px;
+    margin: 15px;
   }
   label {
     font-size: inherit;
@@ -996,13 +995,8 @@ textarea {
   textarea, select {
     width: 100%;
     font-size: inherit;
-    padding: 5px;
     @include box-sizing(border-box);
     margin: 0 0 10px;
-    @include border-radius(2px);
-    border: none;
-    background: rgba(#000, .1);
-    color: rgba($sidr-text-color, .6);
     display: block;
     clear: both;
   }
@@ -1021,7 +1015,7 @@ textarea {
   }
 }
 .sidr-block,
-.sidr-trap { //sidr-trap seems to be used, not sidr-block. GH#22
+.sidr-trap { //sidr-trap is used for a grey overlayer on the other content when the menu is open. GH#22
   position: absolute;
   position: fixed;
   top: 0;
@@ -1030,6 +1024,10 @@ textarea {
   height: 100%;
   z-index: 888888;
   -webkit-tap-highlight-color: transparent;
+  background: {
+    color: #000;
+  }
+  @include opacity(0.3);
 }
 
 
@@ -2701,6 +2699,9 @@ widgettitle,
  * @link http://wordpress.org/plugins/simple-image-widget/
  */
 .widget_simpleimage {
+  .widget-wrap > p {
+    padding-left: 0px;
+  }
   .more {
     a:after {
       content: " »";
@@ -2867,10 +2868,10 @@ img#wpstats {
 
 /**
  * IMPORTANT NOTE: This media query hides the mobile menu from
- * regular screens and only shows the mobile options from a width of 642 pixels.
+ * regular screens and only shows the mobile options from a width of 640 pixels.
  */
 
-@media (min-width: 642px) {
+@media (min-width: 640px) {
   a.open, #sidr-left, #sidr-right {
     width: 0 !important;
     display: none !important;
@@ -2881,18 +2882,23 @@ img#wpstats {
  * iPad landscape
  */
 
-@media (max-width: 1026px) {
+@media (max-width: 1024px) {
   .content {
-    max-width:66%;
-    padding: {
-      left:10px;
-      right:10px;
-    }
+    max-width:67%;
+  }
+  .sidebar-primary {
+    max-width:25%;
   }
   .content-sidebar {
     .sidebar-primary {
       margin: {
         right:10px;
+      }
+    }
+    .content {
+      padding: {
+        left: 10px;
+        right:0;
       }
     }
   }
@@ -2905,6 +2911,15 @@ img#wpstats {
     .content {
       padding: {
         left: 0;
+        right:10px;
+      }
+    }
+  }
+  .full-width-content {
+    .content {
+      padding: {
+        left: 10px;
+        right:0;
       }
     }
   }
@@ -2973,18 +2988,15 @@ img#wpstats {
       }
     }
   }
-}
-
-@media (max-width:780px) AND (min-width:643px) {
-  .sidebar-primary {
-    max-width:28%;
-    margin: {
-      right:10px;
-    }
+  /* Making the FB Like box responsive */
+  .fb-like-box,
+  .fb-like-box span,
+  .fb-like-box span iframe[style] {
+    width: 100% !important;
   }
 }
 
-@media (max-width:655px) AND (min-width:643px) {
+@media (max-width:655px) AND (min-width:640px) {
   #yoast-fullwidth-bottom-container {
     #yoast-fullwidth-widgetarea-2 {
       margin:0 15px;
@@ -2992,8 +3004,12 @@ img#wpstats {
   }
 }
 
-@media (max-width: 642px) {
+@media (max-width: 640px) {
   .content {
+    width:100%;
+    max-width:100%;
+  }
+  .sidebar-primary {
     width:100%;
     max-width:100%;
   }
@@ -3005,6 +3021,9 @@ img#wpstats {
     }
   }
   .site-header {
+    margin: {
+      bottom: 1em;
+    }
     .title-area,
     .header-widget-area,
     #yoast-top-right {
@@ -3018,7 +3037,8 @@ img#wpstats {
       right:10px;
     }
   }
-  .content-sidebar {
+  .content-sidebar,
+  .sidebar-content {
     .sidebar-primary {
       width:100%;
       padding: {
@@ -3027,27 +3047,29 @@ img#wpstats {
       .widget {
         width:100%;
       }
-      .widget_bigbutton, form, .wp-calendar {
-        max-width:50%;
-      }
     }
   }
   .sidebar-content {
     .content {
-      margin: {
-        right:0;
+      margin:0;
+      padding: {
+        left:10px;
       }
     }
     .sidebar-primary {
-      width:100%;
+      margin:0;
       padding: {
-        right:20px;
+        right:10px;
+        left:10px;
       }
-      .widget {
-        width:100%;
-      }
-      .widget_bigbutton, form, .wp-calendar {
-        max-width:50%;
+    }
+  }
+  .featured-content.featuredpost,
+  .featured-content.featuredpage {
+    img {
+      float:left;
+      margin: {
+        right: 10px;
       }
     }
   }
@@ -3127,7 +3149,7 @@ img#wpstats {
     }
     &#sidr-right {
       float: right;
-      background: url('../images/search.png') 10px 10px no-repeat;
+      background: url('../images/search.png') 6px 6px no-repeat;
     }
   }
   body.sticky-menu {
