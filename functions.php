@@ -477,7 +477,6 @@ function yst_display_logo() {
                         background-position: 50% 50%;
 					}
 				}
-
 			<?php
 			}
 			?>
