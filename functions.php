@@ -461,18 +461,20 @@ function yst_display_logo() {
 			<?php
 			if (isset($yst_logo) && ! empty ($yst_logo)) {
 			?>
-			@media (min-width: 643px) {
+			@media (min-width: 640px) {
 				.site-header .title-area {
 					background-image: url(<?php echo genesis_get_option( 'yst-logo', 'child-settings' ); ?>);
 				}
-
+            }
 			<?php
 			}
 			if (isset($yst_mobile_logo) && ! empty ($yst_mobile_logo)) {
 			?>
-				@media (max-width: 642px) {
-					.site-header .title-area {
-						background-image: url(<?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?>);
+				@media (max-width: 640px) {
+					header.site-header {
+                        background-image: url(<?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?>);
+                        background-repeat: no-repeat;
+                        background-position: 50% 50%;
 					}
 				}
 
