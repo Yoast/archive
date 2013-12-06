@@ -43,10 +43,9 @@ class YST_User_Profile_Widget extends WP_Widget {
 			'show_linkedin'   => '',
 		);
 
-		// @fixme: Change description.
 		$widget_ops = array(
 			'classname'   => 'yst-user-profile',
-			'description' => __( 'This needs a very neat description', 'yoast-theme' ),
+			'description' => __( 'Show a user profile to your visitors and/or guide them to that users\' social media.', 'yoast-theme' ),
 		);
 
 		$control_ops = array(
@@ -140,6 +139,24 @@ class YST_User_Profile_Widget extends WP_Widget {
 		$new_instance['title']          = strip_tags( $new_instance['title'] );
 		$new_instance['bio_text']       = current_user_can( 'unfiltered_html' ) ? $new_instance['bio_text'] : genesis_formatting_kses( $new_instance['bio_text'] );
 		$new_instance['page_link_text'] = strip_tags( $new_instance['page_link_text'] );
+		if (! isset( $new_instance['posts_link']) || $new_instance['posts_link'] != '1') {
+			unset( $new_instance['posts_link'] );
+		}
+		if (! isset( $new_instance['show_twitter']) || $new_instance['show_twitter'] !== '1') {
+			unset( $new_instance['show_twitter'] );
+		}
+		if (! isset( $new_instance['show_facebook']) || $new_instance['show_facebook'] !== '1') {
+			unset( $new_instance['show_facebook'] );
+		}
+		if (! isset( $new_instance['show_linkedin']) || $new_instance['show_linkedin'] !== '1') {
+			unset( $new_instance['show_linkedin'] );
+		}
+		if (! isset( $new_instance['show_googleplus']) || $new_instance['show_googleplus'] !== '1') {
+			unset( $new_instance['posts_link'] );
+		}
+		if (! isset( $new_instance['show_pinterest']) || $new_instance['show_pinterest'] !== '1') {
+			unset( $new_instance['show_pinterest'] );
+		}
 
 		return $new_instance;
 
