@@ -27,6 +27,7 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 			'image_url'    => '',
 			'image_width'  => YST_SIDEBAR_WIDTH,
 			'image_height' => '',
+			'size_type'    => 'px',
 			'class'        => '',
 			'alt'          => '',
 			'url'          => '',
@@ -40,16 +41,17 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 		 **/
 		public function __construct() {
 			$this->vars = array(
-				__( 'Title', 'yoast-theme' )              => 'title',
-				__( 'Image URL', 'yoast-theme' )          => 'image_url',
-				__( 'Image width', 'yoast-theme' )        => 'image_width',
-				__( 'Image height', 'yoast-theme' )       => 'image_height',
-				__( 'CSS Class', 'yoast-theme' )          => 'class',
-				__( 'Alt', 'yoast-theme' )                => 'alt',
-				__( 'URL', 'yoast-theme' )                => 'url',
-				__( 'Post Type', 'yoast-theme' )          => 'post_type',
-				__( 'Page To Link To', 'yoast-theme' )    => 'post_id',
-				__( 'Nofollow this link', 'yoast-theme' ) => 'nofollow'
+				'title'        => __( 'Title', 'yoast-theme' ),
+				'image_url'    => __( 'Image URL', 'yoast-theme' ),
+				'image_width'  => __( 'Image width (integer)', 'yoast-theme' ),
+				'image_height' => __( 'Image height (integer)', 'yoast-theme' ),
+				'size_type'    => __( 'Size in pixels or percentages', 'yoast-theme' ),
+				'class'        => __( 'CSS Class', 'yoast-theme' ),
+				'alt'          => __( 'Alt', 'yoast-theme' ),
+				'url'          => __( 'URL', 'yoast-theme' ),
+				'post_type'    => __( 'Post Type', 'yoast-theme' ),
+				'post_id'      => __( 'Page To Link To', 'yoast-theme' ),
+				'nofollow'     => __( 'Nofollow this link', 'yoast-theme' ),
 			);
 
 			$widget_ops = array( 'classname' => 'widget_banner' );
@@ -77,7 +79,7 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 			if ( ! isset( $instance['image_url'] ) )
 				return;
 
-			if ( isset( $instance['post_id'] ) )
+			if ( isset( $instance['post_id'] ) && ! empty( $instance['post_id'] ) )
 				$instance['url'] = get_permalink( $instance['post_id'] );
 
 			if ( ! isset( $instance['url'] ) )
@@ -93,19 +95,23 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 
 			echo $args['before_widget'];
 			if ( ! empty( $instance['title'] ) )
-				echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
+				echo $args['before_title'] . apply_filters( 'yst_banner_widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
 
 			$out = '<img ';
-			if ( ! empty( $instance['image_width'] ) )
-				$out .= 'width="' . $instance['image_width'] . '" ';
+			if ( ( isset ( $instance['image_width'] ) && ! empty( $instance['image_width'] ) ) || ( isset ( $instance['image_height'] ) && ! empty( $instance['image_width'] ) ) ) {
+				$out .= 'style="';
+				if ( ! empty( $instance['image_width'] ) )
+					$out .= 'width:' . $instance['image_width'] . ( $instance['size_type'] == 'perc' ? '%' : 'px' ) . '; ';
 
-			if ( ! empty( $instance['image_height'] ) )
-				$out .= 'height="' . $instance['image_height'] . '" ';
+				if ( ! empty( $instance['image_height'] ) )
+					$out .= 'height:' . $instance['image_height'] . ( $instance['size_type'] == 'perc' ? '%' : 'px' ) . '; ';
+				$out .= '"';
+			}
 
 			if ( ! empty( $instance['alt'] ) )
 				$out .= 'alt="' . $instance['alt'] . '" title="' . $instance['alt'] . '" ';
 
-			$out .= apply_filters('yst_banner_widget_img_class', 'class="hires"');
+			$out .= apply_filters( 'yst_banner_widget_img_class', 'class="hires"' );
 			$out .= 'src="' . $instance['image_url'] . '"/>';
 
 			if ( isset( $instance['url'] ) && ! empty( $instance['url'] ) )
@@ -126,10 +132,9 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 		 * @return string|void echoes output to the screen
 		 */
 		public function form( $instance ) {
-
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
 
-			foreach ( $this->vars as $label => $var ) {
+			foreach ( $this->vars as $var => $label ) {
 				echo '<p>';
 				$label = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
 
@@ -165,6 +170,13 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 					}
 					echo '</select>';
 				}
+				else if ( $var == 'size_type' ) {
+					echo $label;
+					echo '<select class="widefat" ' . $input_attr . '>';
+					echo '<option value="px" ' . selected( $instance[$var], "px", false ) . '>' . __( 'pixels', 'yoast-theme' ) . '</option>';
+					echo '<option value="perc" ' . selected( $instance[$var], "perc", false ) . '>' . __( 'percentages', 'yoast-theme' ) . '</option>';
+					echo '</select>';
+				}
 				else if ( $var == 'nofollow' ) {
 					echo '<input class="checkbox" ' . $input_attr . ' type="checkbox" ' . checked( $instance[$var], true, false ) . '/> ';
 					echo $label;
@@ -172,6 +184,11 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 				else {
 					echo $label;
 					echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . esc_html( $instance[$var] ) . '" />';
+					if ( $var == 'url' ) {
+						echo '<br /><em>';
+						_e( 'Used only if "Other page" is selected in "Page To Link To".', 'yoast-theme' );
+						echo '</em>';
+					}
 				}
 				echo '</p>';
 			}
@@ -192,11 +209,29 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 			if ( $new_instance['post_id'] == '-1' )
 				$new_instance['post_id'] = $old_instance['post_id'];
 
-			if ( isset( $new_instance['nofollow'] ) )
+			if ( isset( $new_instance['nofollow'] ) ) {
 				$new_instance['nofollow'] = true;
+			}
 
-			if ( isset( $new_instance['url'] ) )
-				$new_instance['url'] = trim( $new_instance['url'] );
+			if ( isset( $new_instance['url'] ) && '#' !== $new_instance['url'] ) {
+				$new_instance['url'] = esc_url( $new_instance['url'] );
+			}
+
+			if ( isset ( $new_instance['image_height'] ) && 0 != $new_instance['image_height'] ) {
+				$new_instance['image_height'] = absint( $new_instance['image_height'] );
+			}
+
+			if ( isset ( $new_instance['image_width'] ) && 0 != $new_instance['image_width'] ) {
+				$new_instance['image_width'] = absint( $new_instance['image_width'] );
+			}
+
+			if ( isset ( $new_instance['class'] ) ) {
+				$new_instance['class'] = sanitize_text_field( $new_instance['class'] );
+			}
+
+			if ( isset ( $new_instance['size_type'] ) && $new_instance['size_type'] != 'perc' ) {
+				$new_instance['size_type'] = 'px';
+			}
 
 			return $new_instance;
 		}
