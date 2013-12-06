@@ -27,7 +27,7 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 			'text'       => '',
 			'url'        => '',
 			'intern_url' => '',
-			'class'      => '',
+			'class'      => 'button-green',
 			'target'     => '_self',
 			'nofollow'   => false
 		);
@@ -37,13 +37,13 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 		 **/
 		public function __construct() {
 			$this->vars = array(
-				__( 'Title', 'yoast-theme' )              => 'title',
-				__( 'Text', 'yoast-theme' )               => 'text',
-				__( 'URL', 'yoast-theme' )                => 'url',
-				__( 'Internal URL', 'yoast-theme' )       => 'intern_url',
-				__( 'CSS Class', 'yoast-theme' )          => 'class',
-				__( 'Target', 'yoast-theme' )             => 'target',
-				__( 'Nofollow this link', 'yoast-theme' ) => 'nofollow'
+				'title'      => __( 'Title', 'yoast-theme' ),
+				'text'       => __( 'Text', 'yoast-theme' ),
+				'url'        => __( 'URL', 'yoast-theme' ),
+				'intern_url' => __( 'Internal URL', 'yoast-theme' ),
+				'class'      => __( 'CSS Class', 'yoast-theme' ),
+				'target'     => __( 'Target', 'yoast-theme' ),
+				'nofollow'   => __( 'Nofollow this link', 'yoast-theme' ),
 			);
 
 			$widget_ops = array( 'classname' => 'widget_bigbutton' );
@@ -87,7 +87,10 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 
 			echo $args['before_widget'];
 
-			if ( isset ( $instance['intern_url'] ) && $instance['intern_url'] != '' ) {
+			if ( ! empty( $instance['title'] ) )
+				echo $args['before_title'] . apply_filters( 'yst_bigbutton_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
+
+			if ( isset ( $instance['intern_url'] ) && ! empty ( $instance['intern_url'] ) ) {
 				$url = get_permalink( $instance['intern_url'] );
 			}
 			else {
@@ -128,7 +131,7 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
 
-			foreach ( $this->vars as $label => $var ) {
+			foreach ( $this->vars as $var => $label ) {
 				echo '<p>';
 				$label = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
 
@@ -184,24 +187,18 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 				$new_instance['nofollow'] = true;
 
 			if ( isset( $new_instance['url'] ) )
-				$new_instance['url'] = trim( $new_instance['url'] );
-
-			if ( ! preg_match( '/^https?:\/\//', $new_instance['url'], $matches ) )
-				$new_instance['url'] = "http://" . $new_instance['url'];
+				$new_instance['url'] = esc_url( $new_instance['url'] );
 
 			// If we have a Post ID, it's easy to prefill the alt based on the post title and the class based on the post_name
-			if ( $new_instance['intern_url'] != '-1' || $new_instance['intern_url'] != '' ) {
-				if (
-						isset( $new_instance['intern_url'] ) && ( $new_instance['intern_url'] != '' ) && (
+			if ( isset ( $new_instance['url'] ) && ( $new_instance['intern_url'] != '-1' || ! empty( $new_instance['intern_url'] ) ) ) {
+				if ( isset( $new_instance['intern_url'] ) && ! empty( $new_instance['intern_url'] ) &&
 						( ! isset( $new_instance['class'] ) || empty( $new_instance['class'] ) )
-						)
 				) {
 					$p = get_post( $new_instance['intern_url'] );
-					if ( ! isset( $new_instance['class'] ) || empty( $new_instance['class'] ) )
+					if ( ( ! isset( $new_instance['class'] ) || empty( $new_instance['class'] ) ) && isset( $p->post_name ) && ! empty ( $p->post_name ) )
 						$new_instance['class'] = $p->post_name . '-bigbutton';
 				}
 			}
-
 			return $new_instance;
 		}
 	}
