@@ -39,15 +39,15 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 		public function __construct() {
 
 			$this->vars = array(
-				__( 'Form Title', 'yoast-theme' )          => 'title',
-				__( 'Text', 'yoast-theme' )                => 'text',
-				__( 'Name', 'yoast-theme' )                => 'name',
-				__( 'E-mail address', 'yoast-theme' )      => 'email',
-				__( 'Form Action Field', 'yoast-theme' )   => 'faf',
-				__( 'Extra HTML', 'yoast-theme' )          => 'extrahtml',
-				__( 'Name of name-field', 'yoast-theme' )  => 'name_name',
-				__( 'Name of email-field', 'yoast-theme' ) => 'name_email',
-				__( 'Hide name', 'yoast-theme' )           => 'hide_name',
+				'title'      => __( 'Form Title', 'yoast-theme' ),
+				'text'       => __( 'Text', 'yoast-theme' ),
+				'name'       => __( 'Name', 'yoast-theme' ),
+				'email'      => __( 'E-mail address', 'yoast-theme' ),
+				'faf'        => __( 'Form Action Field', 'yoast-theme' ),
+				'extrahtml'  => __( 'Extra HTML', 'yoast-theme' ),
+				'name_name'  => __( 'Name of name-field', 'yoast-theme' ),
+				'name_email' => __( 'Name of email-field', 'yoast-theme' ),
+				'hide_name'  => __( 'Hide name', 'yoast-theme' ),
 			);
 
 			$widget_ops = array( 'classname' => 'widget-yns' );
@@ -69,16 +69,17 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 			if ( ! isset( $instance['faf'] ) || empty( $instance['faf'] ) )
 				return;
 
+
 			$out = '';
 			if ( isset ( $instance['title'] ) && ! empty( $instance['title'] ) ) {
-				$out .= '<h4 class="widget-title">' . $instance['title'] . '</h4>';
-				if (isset ($instance['text']) && ! empty ($instance['text']))
+				$out .= $args['before_title'] . $instance['title'] . $args['after_title'];
+				if ( isset ( $instance['text'] ) && ! empty ( $instance['text'] ) )
 					$out .= '<p class="newslettersubscription-text">' . $instance['text'] . '</p>';
 				$out .= '<p><form name="' . $instance['title'] . '" method=post action="' . $instance['faf'] . '">';
 			}
 			else {
-				if (isset ($instance['text']) && ! empty ($instance['text']))
-				$out .= '<p class="newslettersubscription-text">' . $instance['text'] . '</p>';
+				if ( isset ( $instance['text'] ) && ! empty ( $instance['text'] ) )
+					$out .= '<p class="newslettersubscription-text">' . $instance['text'] . '</p>';
 				$out .= '<p><form name="yst-newslettersubscription-form" method=post action="' . $instance['faf'] . '">';
 
 			}
@@ -114,7 +115,7 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
 			echo '<p class="ssl_hint">' . __( 'We suggest you use SSL for all forms. Read more about setting up SSL on <a href="http://yoast.com/wordpress-ssl-setup/" alt="WordPress SSL Setup by Yoast" target="_blank">Yoast.com</a>.', 'yoast-theme' ) . '</p>';
 
-			foreach ( $this->vars as $label => $var ) {
+			foreach ( $this->vars as $var => $label ) {
 				$varlabel = $label;
 				echo '<p>';
 				$label      = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
@@ -157,13 +158,13 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 		 * @return array Updated safe values to be saved.
 		 */
 		public function update( $new_instance, $old_instance ) {
-			$new_instance['title']      = strip_tags( trim( $new_instance['title'] ) );
-			$new_instance['text']       = strip_tags( trim( $new_instance['text'] ) );
-			$new_instance['name']       = strip_tags( trim( $new_instance['name'] ) );
-			$new_instance['email']      = strip_tags( trim( $new_instance['email'] ) );
-			$new_instance['faf']        = strip_tags( trim( $new_instance['faf'] ) );
-			$new_instance['name_name']  = strip_tags( trim( $new_instance['name_name'] ) );
-			$new_instance['name_email'] = strip_tags( trim( $new_instance['name_email'] ) );
+			$new_instance['title']      = sanitize_text_field( $new_instance['title'] );
+			$new_instance['text']       = sanitize_text_field( $new_instance['text'] );
+			$new_instance['name']       = sanitize_text_field( $new_instance['name'] );
+			$new_instance['email']      = sanitize_email( $new_instance['email'] );
+			$new_instance['faf']        = sanitize_text_field( $new_instance['faf'] );
+			$new_instance['name_name']  = sanitize_text_field( $new_instance['name_name'] );
+			$new_instance['name_email'] = sanitize_text_field( $new_instance['name_email'] );
 
 			if ( isset( $new_instance['hide_name'] ) )
 				$new_instance['hide_name'] = true;
