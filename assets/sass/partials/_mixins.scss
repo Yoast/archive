@@ -1,0 +1,56 @@
+// Mixins
+
+@mixin boxshadow($shadowSettings) {
+  box-shadow: $shadowSettings;
+  -moz-box-shadow: $shadowSettings;
+  -webkit-box-shadow: $shadowSettings;
+}
+
+@mixin opacity($value) {
+  opacity: $value;
+  filter: unquote("alpha(opacity=#{($value * 100)})");
+}
+
+@mixin transition($transProperty, $transTime) {
+  transition-duration: $transTime;
+  -o-transition-duration: $transTime;
+  -ms-transition-duration: $transTime;
+  -moz-transition-duration: $transTime;
+  -webkit-transition-duration: $transTime;
+
+  transition-property: $transProperty;
+  -o-transition-property: $transProperty;
+  -ms-transition-property: $transProperty;
+  -moz-transition-property: $transProperty;
+  -webkit-transition-property: $transProperty;
+
+  transition-timing-function: ease-in-out;
+  -o-transition-timing-function: ease-in-out;
+  -ms-transition-timing-function: ease-in-out;
+  -moz-transition-timing-function: ease-in-out;
+  -webkit-transition-timing-function: ease-in-out;
+}
+
+@mixin roundCorners($cornerRadius) { // also possible ($cornerRadius: 5px)
+  border-radius: $cornerRadius;
+  -moz-border-radius: $cornerRadius;
+  -webkit-border-radius: $cornerRadius;
+
+  background-clip: padding-box;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+
+@mixin bgGradient($gradFrom,$gradTo) {
+  background-image: linear-gradient(top,$gradFrom,$gradTo);
+  background-image: -o-linear-gradient(top,$gradFrom,$gradTo);
+  background-image: -ms-linear-gradient(top,$gradFrom,$gradTo);
+  background-image: -moz-linear-gradient(top,$gradFrom,$gradTo);
+  background-image: -webkit-linear-gradient(top,$gradFrom,$gradTo);
+}
+
+@mixin bgSize($bgPercent) {
+  background-size: $bgPercent;
+  -moz-background-size: $bgPercent;
+  -webkit-background-size: $bgPercent;
+}
