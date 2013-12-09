@@ -8,16 +8,7 @@
  * @copyright    Copyright (c) 2013, Joost de Valk
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
-/*
- * Social Widget
- *
- * @package      Core_Functionality
- * @since        1.0.0
- * @link         https://github.com/billerickson/Core-Functionality
- * @author       Bill Erickson <bill@billerickson.net>
- * @copyright    Copyright (c) 2011, Bill Erickson
- * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
- */
+
 // Sanity check to prevent double inclusion of this class.
 if ( ! class_exists( 'YST_Social_Widget' ) ) {
 	class YST_Social_Widget extends WP_Widget {
@@ -52,24 +43,24 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 		 */
 		function __construct() {
 			$this->vars = array(
-				__( 'Title', 'yoast-theme' )     => 'yst_title',
-				__( 'Facebook', 'yoast-theme' )  => 'yst_facebook',
-				__( 'Twitter', 'yoast-theme' )   => 'yst_twitter',
-				__( 'LinkedIn', 'yoast-theme' )  => 'yst_linkedin',
-				__( 'Google+', 'yoast-theme' )   => 'yst_googleplus',
-				__( 'YouTube', 'yoast-theme' )   => 'yst_youtube',
-				__( 'Pinterest', 'yoast-theme' ) => 'yst_pinterest',
-				__( 'RSS', 'yoast-theme' )       => 'yst_rss'
+				'yst_title'      => __( 'Title', 'yoast-theme' ),
+				'yst_facebook'   => __( 'Facebook', 'yoast-theme' ),
+				'yst_twitter'    => __( 'Twitter', 'yoast-theme' ),
+				'yst_linkedin'   => __( 'LinkedIn', 'yoast-theme' ),
+				'yst_googleplus' => __( 'Google+', 'yoast-theme' ),
+				'yst_youtube'    => __( 'YouTube', 'yoast-theme' ),
+				'yst_pinterest'  => __( 'Pinterest', 'yoast-theme' ),
+				'yst_rss'        => __( 'RSS', 'yoast-theme' ),
 			);
 
 			$this->flw = array(
-				__( 'Facebook Likes', 'yoast-theme' )       => 'yst_facebook_flw',
-				__( 'Twitter Followers', 'yoast-theme' )    => 'yst_twitter_flw',
-				__( 'LinkedIn Connections', 'yoast-theme' ) => 'yst_linkedin_flw',
-				__( 'Google+ Pluses', 'yoast-theme' )       => 'yst_googleplus_flw',
-				__( 'YouTube Subscribers', 'yoast-theme' )  => 'yst_youtube_flw',
-				__( 'Pinterest Followers', 'yoast-theme' )  => 'yst_pinterest_flw',
-				__( 'RSS Readers', 'yoast-theme' )          => 'yst_rss_flw'
+				'yst_facebook_flw'   => __( 'Facebook Likes', 'yoast-theme' ),
+				'yst_twitter_flw'    => __( 'Twitter Followers', 'yoast-theme' ),
+				'yst_linkedin_flw'   => __( 'LinkedIn Connections', 'yoast-theme' ),
+				'yst_googleplus_flw' => __( 'Google+ Pluses', 'yoast-theme' ),
+				'yst_youtube_flw'    => __( 'YouTube Subscribers', 'yoast-theme' ),
+				'yst_pinterest_flw'  => __( 'Pinterest Followers', 'yoast-theme' ),
+				'yst_rss_flw'        => __( 'RSS Readers', 'yoast-theme' ),
 			);
 
 			$control_ops = array( 'width' => 400, 'height' => 350 );
@@ -86,18 +77,17 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 		 * @return void Echoes it's output
 		 **/
 		function widget( $args, $instance ) {
-			extract( $args, EXTR_SKIP );
-			echo $before_widget;
+			echo $args['before_widget'];
 
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
 
 			if ( isset ( $instance['yst_title'] ) && ! empty( $instance['yst_title'] ) ) {
-				echo '<h4 class="widget-title">' . $instance['yst_title'] . '</h4>';
+				echo $args['before_title'] . $instance['yst_title'] . $args['after_title'];
 			}
 
 
 			echo '<div id="yst_social_widget">';
-			foreach ( $this->vars as $label => $var ) {
+			foreach ( $this->vars as $var => $label ) {
 				if ( isset ( $instance[$var] ) && ! empty ( $instance[$var] ) ) {
 					switch ( $var ) {
 						case 'yst_facebook':
@@ -126,23 +116,23 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 					}
 
 
-					$showlabel  = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
+//					$showlabel  = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
 					$input_attr = 'class= "' . $class . '" name="' . $var . '" id="' . $this->get_field_id( $var ) . '"';
 
 					if ( $var == 'yst_title' ) {
 						continue;
 					}
 					else if ( $var == 'yst_rss' ) {
-						echo '<a href="' . site_url( "feed" ) . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">'.$this->kformat($instance[($var .'_flw')]).'</div></div></a>';
+						echo '<a href="' . site_url( "feed" ) . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( $instance[( $var . '_flw' )] ) . '</div></div></a>';
 					}
 					else {
 						//echo $showlabel;
-						echo '<a href="' . $instance[$var] . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">'.$this->kformat($instance[($var .'_flw')]).'</div></div></a>';
+						echo '<a href="' . $instance[$var] . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( $instance[( $var . '_flw' )] ) . '</div></div></a>';
 					}
 				}
 			}
 			echo '</div>';
-			echo $after_widget;
+			echo $args['after_widget'];
 		}
 
 		/**
@@ -155,7 +145,7 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 		 * @return array The validated and (if necessary) amended settings
 		 **/
 		function update( $new_instance, $old_instance ) {
-			$new_instance['yst_title']      = strip_tags( trim( $new_instance['yst_title'] ) );
+			$new_instance['yst_title']      = sanitize_text_field( $new_instance['yst_title'] );
 			$new_instance['yst_facebook']   = esc_url( $new_instance['yst_facebook'] );
 			$new_instance['yst_twitter']    = esc_url( $new_instance['yst_twitter'] );
 			$new_instance['yst_linkedin']   = esc_url( $new_instance['yst_linkedin'] );
@@ -202,7 +192,7 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
 			reset( $this->flw );
 
-			foreach ( $this->vars as $label => $var ) {
+			foreach ( $this->vars as $var => $label ) {
 
 				$flw_var = $var . "_flw";
 
