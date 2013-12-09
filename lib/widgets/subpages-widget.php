@@ -13,12 +13,12 @@ if ( ! class_exists( 'YST_Sub_Pages_Widget' ) ) {
 	class YST_Sub_Pages_Widget extends WP_Widget {
 
 		/**
-		 * @var array The variables used in this banner widget, the keys are the captions, which is why they need .
+		 * @var array The variables used in this banner widget, the keys are the captions, which is why they need.
 		 */
 		var $vars = array();
 
 		/**
-		 * @var array
+		 * @var array Default values for the vars-array.
 		 */
 		var $defaults = array();
 
@@ -28,14 +28,14 @@ if ( ! class_exists( 'YST_Sub_Pages_Widget' ) ) {
 		function __construct() {
 			$this->vars = array(
 				__( 'Title', 'yoast-theme' )          => 'title',
-				__( 'Show info icon', 'yoast-theme' ) => 'show_info'
+				__( 'Show info icon', 'yoast-theme' ) => 'show_info',
 			);
 
 			$this->defaults = array(
 				'title'     => __( 'More information', 'yoast-theme' ),
-				'show_info' => true
+				'show_info' => true,
 			);
-			$widget_ops     = array( 'classname' => 'widget_sub_pages', 'description' => 'Sub-pages widget' );
+			$widget_ops     = array( 'classname' => 'widget_sub_pages', 'description' => __( 'Sub-pages widget', 'yoast-theme' ) );
 			$this->WP_Widget( 'sub-pages-widget', __( 'Yoast &mdash; Subpages', 'yoast-theme' ), $widget_ops );
 		}
 
@@ -159,8 +159,11 @@ if ( ! class_exists( 'YST_Sub_Pages_Widget' ) ) {
 		 * @return array The validated and (if necessary) amended settings
 		 **/
 		function update( $new_instance, $old_instance ) {
-			if ( isset( $new_instance['show_info'] ) )
+			if ( isset( $new_instance['show_info'] ) ) {
 				$new_instance['show_info'] = true;
+			}
+
+			$new_instance['title'] = sanitize_text_field( $new_instance['title'] );
 
 			return $new_instance;
 		}
