@@ -27,8 +27,18 @@
  */
 
 @import "partials/reset";
+
 @import "partials/colorsWarmBlue";
-//@import "partials/colorsLimeAndMagenta";
+// @import "partials/colorSet2";
+// @import "partials/colorSet3";
+// @import "partials/colorSet4";
+// @import "partials/colorSet5";
+// @import "partials/colorSet6";
+// @import "partials/colorSet7";
+// @import "partials/colorSet8";
+// @import "partials/colorSet9";
+// @import "partials/colorSet10";
+
 @import "partials/dimensions";
 @import "partials/fonts";
 
@@ -956,17 +966,9 @@ textarea {
       ul {
         margin: 0;
         li {
-          &:last-child {
-            //    border-bottom: none;
-          }
-          &:hover,
-          &.active,
-          &.sidr-class-active {
-            border-top: none;
-          }
           a {
             padding: {
-              left: 30px;
+              left: 20px;
             }
             font: {
               weight:normal;
@@ -3132,6 +3134,13 @@ img#wpstats {
   .nav-primary {
     display: none !important;
   }
+  header {
+    .wrap {
+      border: {
+        bottom: 5px solid $c_hrLine;
+      }
+    }
+  }
   a {
     &.open {
       display: inline-block;
@@ -3145,11 +3154,27 @@ img#wpstats {
     }
     &#sidr-left {
       float: left;
-      background: url('../images/hamburger.png') 10px 10px no-repeat;
+      margin:2px 0;
+      background: url('../images/hamburger.png') 7px 10px no-repeat;
+      border: {
+        right: {
+          width:2px;
+          style:solid;
+          color: $c_randLine;
+        }
+      }
     }
     &#sidr-right {
       float: right;
-      background: url('../images/search.png') 6px 6px no-repeat;
+      margin:2px 0;
+      background: url('../images/search.png') 6px 8px no-repeat;
+      border: {
+        left: {
+          width:2px;
+          style:solid;
+          color: $c_randLine;
+        }
+      }
     }
   }
   body.sticky-menu {
