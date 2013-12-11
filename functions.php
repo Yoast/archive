@@ -474,7 +474,7 @@ function yst_display_logo() {
 					header.site-header {
                         background-image: url(<?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?>);
                         background-repeat: no-repeat;
-                        background-position: 50% 50%;
+                        background-position: 50% 0;
 					}
 				}
 			<?php
