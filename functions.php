@@ -348,6 +348,7 @@ function yst_footer_creds_text( $footer_creds_text ) {
 	$yst_footer .= trim( genesis_get_option( 'footer', 'child-settings' ) ) . '</p><p class="hardcoded-footer">';
 	$yst_footer .= sprintf( __( '&#x000B7; Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a> &#x000B7;', 'yoast-theme' ), date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com/wordpress/themes/tailor-made/" rel="nofollow">Tailor Made</a>', 'Yoast' );
 	$yst_footer .= '</p>';
+
 	return $yst_footer;
 }
 
@@ -355,11 +356,13 @@ function yst_footer_creds_text( $footer_creds_text ) {
  * Displays a term archive intro
  */
 function yoast_term_archive_intro() {
-	if ( ! is_category() && ! is_tag() && ! is_tax() )
+	if ( ! is_category() && ! is_tag() && ! is_tax() ) {
 		return;
+	}
 
-	if ( get_query_var( 'paged' ) )
+	if ( get_query_var( 'paged' ) ) {
 		return;
+	}
 
 	echo '<div class="term-intro">';
 	echo '<h1>' . single_term_title( '', false ) . '</h1>';
@@ -384,6 +387,7 @@ function yoast_term_archive_intro() {
  */
 function yst_comments_gravatar( $args ) {
 	$args['avatar_size'] = 100;
+
 	return $args;
 }
 
@@ -417,6 +421,7 @@ function yst_modify_contact_methods( $profile_fields ) {
 	// Add new fields
 	$profile_fields['pinterest'] = __( 'Pinterest profile URL', 'yoast-theme' );
 	$profile_fields['linkedin']  = __( 'LinkedIn profile URL', 'yoast-theme' );
+
 	return $profile_fields;
 }
 
@@ -439,6 +444,7 @@ function yst_filter_content_archive_image( $img, $args ) {
 			$img = str_replace( 'alignleft', 'alignright', $img );
 		}
 	}
+
 	return $img;
 }
 
@@ -465,18 +471,20 @@ function yst_display_logo() {
 				.site-header .title-area {
 					background-image: url(<?php echo genesis_get_option( 'yst-logo', 'child-settings' ); ?>);
 				}
-            }
+			}
+
 			<?php
 			}
 			if (isset($yst_mobile_logo) && ! empty ($yst_mobile_logo)) {
 			?>
-				@media (max-width: 640px) {
-					header.site-header {
-                        background-image: url(<?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?>);
-                        background-repeat: no-repeat;
-                        background-position: 50% 0;
-					}
+			@media (max-width: 640px) {
+				header.site-header {
+					background-image: url(<?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?>);
+					background-repeat: no-repeat;
+					background-position: 50% 0;
 				}
+			}
+
 			<?php
 			}
 			?>
@@ -506,3 +514,39 @@ function yst_add_wrapper_after_content() {
 add_action( 'genesis_before_loop', 'yst_add_wrapper_before_content' );
 add_action( 'genesis_after_loop', 'yst_add_wrapper_after_content' );
 
+/**
+ * Resizes featured images
+ *
+ * @since 1.0.0
+ *
+ * @param string $img  Image HTML output
+ * @param array  $args Arguments for the image
+ *
+ * @return string Image HTML output.
+ * // @TODO: Is this the best option?
+ */
+function yst_resize_archive_image( $img, $args ) {
+	$maxheight = $maxwidth = 0;
+	if ( 'full-width-content' == genesis_site_layout() ) {
+		$maxwidth = 290;
+		$maxheight = 193;
+	} else if ('archive' == $args['context'] || 'blog' == $args['context']) {
+		$maxwidth = 180;
+		$maxheight = 120;
+	}
+	if ($maxwidth > 0 || $maxheight > 0) {
+		$output = 'style="';
+		if ($maxwidth > 0) {
+			$output .= 'max-width:'.$maxwidth.'px;';
+		}
+		if ($maxheight > 0) {
+			$output .= 'max-height:'.$maxheight.'px;';
+		}
+		$output .= '"';
+		return preg_replace('/width="[0-9]+([a-zA-Z]{0,2})?"(.)?height="[0-9]+([a-zA-Z]{0,2})?"/', $output, $img);
+	} else {
+		return $img;
+	}
+}
+
+add_filter( 'genesis_get_image', 'yst_resize_archive_image', 15, 2 );
