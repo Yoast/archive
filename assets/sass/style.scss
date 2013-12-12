@@ -22,12 +22,8 @@
 @import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);
 @import url(http://fonts.googleapis.com/css?family=Lekton:400,700,400italic);
 
-/**
- * Import defaults for this theme
- */
-
+// Import defaults for this theme
 @import "partials/reset";
-
 @import "partials/colorsWarmBlue";
 // @import "partials/colorSet2";
 // @import "partials/colorSet3";
@@ -38,7 +34,6 @@
 // @import "partials/colorSet8";
 // @import "partials/colorSet9";
 // @import "partials/colorSet10";
-
 @import "partials/dimensions";
 @import "partials/fonts";
 
@@ -627,9 +622,11 @@ textarea {
 /**
  * NAVIGATIONS
  **********************************/
+
 /**
  * Site Navigation
  */
+
 .nav-primary { // entire width
   background: {
     color:  $c_navMainFullBg;
@@ -811,14 +808,14 @@ textarea {
   }
   > .first {
     > a {
-      padding {
+      padding: {
         left: 0;
       }
     }
   }
   > .last {
     > a {
-      padding {
+      padding: {
         right: 0;
       }
     }
@@ -865,7 +862,7 @@ textarea {
   height: 100%;
   z-index: 999999;
   width: 260px;
-  overflow-x: none;
+  overflow-x: hidden;
   overflow-y: auto;
   .sidr-inner {
     padding: 0 0 15px;
@@ -1047,7 +1044,7 @@ textarea {
       }
     }
     .sub-menu {
-      margin {
+      margin: {
         top: -55px;
       }
     }
@@ -1467,7 +1464,7 @@ table {
     }
   }
   td {
-    text {
+    text: {
       align: left;
       transform:none;
     }
@@ -1939,7 +1936,7 @@ table {
       }
       label {
         display: block;
-        margin {
+        margin: {
           right: 12px;
         }
       }
@@ -1949,7 +1946,7 @@ table {
     background: {
       color: $c_mainBg;
     }
-    margin {
+    margin: {
       bottom: 40px;
     }
     padding: 40px 40px 16px;
@@ -2139,7 +2136,7 @@ table {
         image: url(../images/li-check.png);
       }
     }
-    margin {
+    margin: {
       left: 24px;
     }
   }
@@ -2873,7 +2870,7 @@ img#wpstats {
  * regular screens and only shows the mobile options from a width of 640 pixels.
  */
 
-@media (min-width: 640px) {
+@media (min-width: 641px) {
   a.open, #sidr-left, #sidr-right {
     width: 0 !important;
     display: none !important;
@@ -2933,7 +2930,7 @@ img#wpstats {
       max-width:40%;
       overflow:hidden;
       a {
-        min-height:auto;
+        min-height:116px;
       }
     }
     .header-widget-area,
@@ -3023,9 +3020,6 @@ img#wpstats {
     }
   }
   .site-header {
-    margin: {
-      bottom: 1em;
-    }
     .title-area,
     .header-widget-area,
     #yoast-top-right {
@@ -3037,6 +3031,9 @@ img#wpstats {
     padding: {
       left:10px;
       right:10px;
+    }
+    margin: {
+      top: 1em;
     }
   }
   .content-sidebar,
@@ -3135,7 +3132,7 @@ img#wpstats {
     display: none !important;
   }
   header {
-    .wrap {
+    &.site-header {
       border: {
         bottom: 5px solid $c_hrLine;
       }
@@ -3241,4 +3238,3 @@ img#wpstats {
     }
   }
 }
-
