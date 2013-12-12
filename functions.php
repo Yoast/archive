@@ -315,7 +315,7 @@ function yst_activate_sidr_and_sticky_menu() {
 			});
 			$(window).scroll(function () {
 				var yPos = ( $(window).scrollTop() );
-				if (yPos > 70) {
+				if (yPos > 50) {
 					$("body").addClass("sticky-menu");
 				} else {
 					$("body").removeClass("sticky-menu");

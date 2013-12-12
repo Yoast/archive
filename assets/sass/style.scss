@@ -2367,6 +2367,11 @@ widgettitle,
     border:none;
     color: $c_sidebarH3;
   }
+  + div {
+    padding: {
+      left: 10px;
+    }
+  }
 }
 
 /**
@@ -2776,6 +2781,18 @@ widgettitle,
 }
 
 /**
+ * LOCAL SEO
+ */
+.widget-wrap {
+  .wpseo-opening-hours,
+  .wpseo-map-canvas {
+    margin:0 10px;
+    width:230px;
+    max-width:100%;
+  }
+}
+
+/**
  * Jetpack
  * @plugin(title: Jetpack by WordPress.com)
  * @link http://wordpress.org/plugins/jetpack/
@@ -3127,6 +3144,7 @@ img#wpstats {
  */
   body {
     border: 0;
+    padding-top:44px;
   }
   .nav-primary {
     display: none !important;
@@ -3136,6 +3154,13 @@ img#wpstats {
       border: {
         bottom: 5px solid $c_hrLine;
       }
+      display: inline-block;
+      text-indent: -10000px;
+      z-index: 13;
+      height: 44px;
+      position: fixed;
+      top: 0;
+      width:100%;
     }
   }
   a {
@@ -3190,7 +3215,7 @@ img#wpstats {
       }
     }
     .site-header {
-      background: transparent;
+      background-position: center top;
       .title-area {
         .site-title a {
           position: fixed;
