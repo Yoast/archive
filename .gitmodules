@@ -1,0 +1,3 @@
+[submodule "lib/widgets"]
+	path = lib/widgets
+	url = https://tacoverdo@github.com/Yoast/yoast-widgets.git

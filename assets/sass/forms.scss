@@ -1,0 +1,172 @@
+/**
+ * FORM STYLES
+ * As most plugin css files are loaded below the main stylesheet for a theme,
+ * we decided to hook in another stylesheet right below that to make sure
+ * both Gravity Forms and Contact Form 7 forms are styled the right way.
+ **********************************/
+
+@import "compass";
+@import "compass/css3";
+
+/**
+ *  Fonts used
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);
+@import url(http://fonts.googleapis.com/css?family=Lekton:400,700,400italic);
+
+/**
+ * Import defaults for this theme
+ */
+
+@import "partials/colorsWarmBlue";
+//@import "partials/colorsLimeAndMagenta";
+@import "partials/dimensions";
+@import "partials/fonts";
+
+
+/**
+ * Gravity Forms
+ * @plugin(title: Gravity Forms)
+ * @link http://www.gravityforms.com/
+ */
+
+.gform_wrapper {
+  .gf_progressbar_wrapper {
+    border: {
+      bottom: {
+        width: 1px;
+        style: solid !important;
+        color: $c_hrLine !important;
+      }
+    }
+    h3 {
+      &.gf_progressbar_title {
+        color: $c_mainText;
+        opacity:1 !important;
+        font: {
+          size: $f_main-px !important;
+          size: $f_main !important;
+        }
+      }
+    }
+  }
+  ul.gfield_radio {
+    li {
+      padding: {
+        left: 1px !important;
+        left: 0.1rem !important;
+      }
+    }
+  }
+  input {
+    &[type="Email"],
+    &[type="Text"],
+    &[type="Url"],
+    &[type="Tel"],
+    &[type="Number"],
+    &[type="Password"] {
+      font: {
+        size: $f_inputText-px !important;
+        size: $f_inputText !important;
+      }
+      padding: 8px;
+    }
+    &[value="Other"] {
+      max-width: 80%;
+    }
+    &[type="radio"],
+    &[type="checkbox"] {
+      margin: {
+        left:4px;
+      }
+    }
+  }
+  textarea {
+    font: {
+      size: $f_inputText-px !important;
+      size: $f_inputText !important;
+    }
+    padding: 8px;
+    padding: 0.8rem;
+  }
+  select {
+    font: {
+      size: $f_inputText-px !important;
+      size: $f_inputText !important;
+    }
+  }
+  .ginput_complex {
+    label {
+      font: {
+        size: $f_inputText-px !important;
+        size: $f_inputText !important;
+      }
+      padding: 0;
+    }
+  }
+  li {
+    margin: 8px 0 0;
+    margin: 0.8rem 0 0;
+  }
+  form {
+    li {
+      margin: 8px 0 0;
+      margin: 0.8rem 0 0;
+    }
+  }
+  .gform_footer {
+    input {
+      [type="submit"] {
+        font: {
+          size: $f_inputText-px !important;
+          size: $f_inputText !important;
+        }
+      }
+    }
+  }
+}
+.gform_widget {
+  .gform_wrapper {
+    .small {
+      width:50% !important;
+    }
+    .medium {
+      width:100% !important;
+    }
+  }
+}
+/**
+ * Contact Form 7
+ * @plugin(title: Contact Form 7)
+ * @link http://www.gravityforms.com/
+ */
+
+.wpcf7 {
+  .wpcf7-form {
+    .wpcf7-checkbox,
+    .wpcf7-radio,
+    .wpcf7-form-control-wrap {
+      .wpcf7-list-item {
+        display:block;
+        margin: {
+          left:0;
+        }
+      }
+      input[type="checkbox"],
+      input[type="radio"] {
+        width: 2em;
+        @include box-shadow(none);
+      }
+      input[type="number"],
+      input[type="date"] {
+        width:150px;
+        max-width:100%;
+      }
+      input[type="range"] {
+        @include box-shadow(none);
+        border: 0;
+      }
+    }
+  }
+}
