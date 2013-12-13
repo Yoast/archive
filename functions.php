@@ -549,4 +549,10 @@ function yst_resize_archive_image( $img, $args ) {
 	}
 }
 
-add_filter( 'genesis_get_image', 'yst_resize_archive_image', 15, 2 );
+//add_filter( 'genesis_get_image', 'yst_resize_archive_image', 15, 2 );
+
+if ( function_exists( 'add_image_size' ) ) {
+	add_image_size( 'archive-thumb', 180, 120, true );
+	add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
+	add_image_size( 'fullwidth-thumb', 290, 193, true );
+}
