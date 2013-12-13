@@ -297,7 +297,7 @@ header {
     padding: 0;
   }
   .title-area {
-    padding: 20px 0 0;
+    margin: 20px 0 0;
     background: {
       repeat: no-repeat;
       position: left;
@@ -350,10 +350,15 @@ header {
       width: 100%;
     }
   }
-  #yoast-top-right {
+  section.widget {
     margin: {
-      bottom: 20px;
-      bottom: 2rem;
+      bottom: 10px;
+      bottom: 1rem;
+    }
+    &.widget_search {
+     form {
+       float: right;
+     }
     }
   }
   .widget-area {
@@ -363,7 +368,6 @@ header {
     }
     max-width: $d_headerAside;
     overflow-x:hidden;
-    padding: 20px 0 0 0;
     color: $c_taglineTop;
     font: {
       size: $f_taglineTop-px;
@@ -382,9 +386,19 @@ header {
       }
     }
   }
+  .header-widget-area {
+    margin: {
+      top: 20px;
+    }
+  }
   .widget-title {
     display:none;
     visibility:hidden;
+    + div {
+      padding: {
+        left: 0;
+      }
+    }
   }
 }
 
@@ -860,7 +874,7 @@ textarea {
   position: fixed;
   top: 0;
   height: 100%;
-  z-index: 999999;
+  z-index: 499;
   width: 260px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -876,11 +890,13 @@ textarea {
   &.right {
     left: auto;
     right: -260px;
+    z-index: 999999;
     @include box-shadow(-2px -2px 5px $c_sidr_boxShadow);
   }
   &.left {
     left: -260px;
     right: auto;
+    z-index: 999999;
     @include box-shadow(2px 2px 5px $c_sidr_boxShadow);
   }
   // Theme Settings
@@ -1013,8 +1029,7 @@ textarea {
     }
   }
 }
-.sidr-block,
-.sidr-trap { //sidr-trap is used for a grey overlayer on the other content when the menu is open. GH#22
+.sidr-trap { //sidr-trap is used for a grey overlayer on the other content when the menu is open.
   position: absolute;
   position: fixed;
   top: 0;
@@ -1065,6 +1080,7 @@ textarea {
 body.sticky-menu {
   padding-top: 120px;
   .site-header {
+    position: absolute;
     position: fixed;
     top: 0;
     background-position: center -30px;
@@ -1096,6 +1112,7 @@ body.sticky-menu {
     }
   }
   .nav-primary {
+    position: absolute;
     position: fixed;
     top: 0;
     width: 100%;
@@ -2115,6 +2132,11 @@ table {
     margin: 24px 0 0;
     color: $c_headerH3;
     padding: 0 0 10px;
+    + div {
+      padding: {
+        left: 0;
+      }
+    }
   }
   a {
     color: $c_headerLink;
@@ -2143,9 +2165,6 @@ table {
   .yoast-after-header-widget {
     float: left;
     ul {
-      margin: {
-        left: 20px;
-      }
       li {
         a {
           text-decoration:none;
@@ -2784,11 +2803,12 @@ widgettitle,
  * LOCAL SEO
  */
 .widget-wrap {
-  .wpseo-opening-hours,
-  .wpseo-map-canvas {
+  .wpseo-opening-hours {
     margin:0 10px;
-    width:230px;
-    max-width:100%;
+    width:92%;
+  }
+  .wpseo-map-canvas {
+    width:100% !important;
   }
 }
 
@@ -2914,7 +2934,7 @@ img#wpstats {
     .content {
       padding: {
         left: 10px;
-        right:0;
+        right:10px;
       }
     }
   }
@@ -2947,7 +2967,7 @@ img#wpstats {
       max-width:40%;
       overflow:hidden;
       a {
-        min-height:116px;
+        min-height:140px;
       }
     }
     .header-widget-area,
@@ -3036,13 +3056,9 @@ img#wpstats {
       right:0;
     }
   }
-  .site-header {
-    .title-area,
-    .header-widget-area,
-    #yoast-top-right {
-      display:none;
-      visibility:hidden;
-    }
+  #yoast-after-header-container {
+    display:none;
+    visibility: hidden;
   }
   .breadcrumb {
     padding: {
@@ -3161,6 +3177,12 @@ img#wpstats {
       position: fixed;
       top: 0;
       width:100%;
+      .title-area,
+      .header-widget-area,
+      #yoast-top-right {
+        display:none;
+        visibility:hidden;
+      }
     }
   }
   a {
@@ -3203,12 +3225,12 @@ img#wpstats {
     .site-container {
       a {
         &#sidr-left {
-          position: fixed;
+          position: relative;
           top: 0;
           left: 0;
         }
         &#sidr-right {
-          position: fixed;
+          position: relative;
           top: 0;
           right: 0;
         }
@@ -3220,7 +3242,9 @@ img#wpstats {
         .site-title a {
           position: fixed;
           top: 0;
-          margin-left: 50px;
+          margin: {
+            left: 50px;
+          }
         }
       }
     }
@@ -3236,7 +3260,18 @@ img#wpstats {
   }
 }
 
-@media (max-width: 322px) {
+@media (max-width: 330px) {
+  .entry {
+    img {
+      &.alignleft,
+      &.alignright,
+      &.aligncenter {
+        display:block;
+        float:none;
+        margin:1em auto;
+      }
+    }
+  }
   .blog {
     &.sidebar-content {
       .content {
@@ -3262,4 +3297,32 @@ img#wpstats {
       }
     }
   }
+}
+
+/**
+ * WordPress Admin bar fixes for menu
+ */
+
+body.admin-bar { // why does WordPress have two heights for that!?
+  .sidr,
+  .site-header,
+  .nav-primary {
+    top:32px;
+    @media (max-width:782px) {
+      top:46px;
+    }
+  }
+}
+body.sticky-menu.admin-bar { // why does WordPress have two heights for that!?
+  .site-header,
+  .nav-primary {
+    top:32px;
+    @media (max-width:782px) {
+      top:46px;
+    }
+  }
+}
+#wpadminbar {
+  position: absolute !important;
+  position: fixed !important;
 }
