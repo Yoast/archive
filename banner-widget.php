@@ -24,8 +24,9 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 		 */
 		var $defaults = array(
 			'title'        => '',
+			'show_title'   => '',
 			'image_url'    => '',
-			'image_width'  => YST_SIDEBAR_WIDTH,
+			'image_width'  => 250,
 			'image_height' => '',
 			'size_type'    => 'px',
 			'class'        => '',
@@ -42,6 +43,7 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 		public function __construct() {
 			$this->vars = array(
 				'title'        => __( 'Title', 'yoast-theme' ),
+				'show_title'   => __( 'Show title', 'yoast-theme' ),
 				'image_url'    => __( 'Image URL', 'yoast-theme' ),
 				'image_width'  => __( 'Image width (integer)', 'yoast-theme' ),
 				'image_height' => __( 'Image height (integer)', 'yoast-theme' ),
@@ -72,50 +74,60 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 			// Don't show the widget if it's advertising the current page.
 			if ( isset( $instance['post_id'] ) && ! empty( $instance['post_id'] ) && is_singular() ) {
 				global $post;
-				if ( $instance['post_id'] == $post->ID )
+				if ( $instance['post_id'] == $post->ID ) {
 					return;
+				}
 			}
 
-			if ( ! isset( $instance['image_url'] ) )
+			if ( ! isset( $instance['image_url'] ) ) {
 				return;
+			}
 
-			if ( isset( $instance['post_id'] ) && ! empty( $instance['post_id'] ) )
+			if ( isset( $instance['post_id'] ) && ! empty( $instance['post_id'] ) ) {
 				$instance['url'] = get_permalink( $instance['post_id'] );
+			}
 
-			if ( ! isset( $instance['url'] ) )
+			if ( ! isset( $instance['url'] ) ) {
 				return;
+			}
 
 			// If the link has to be nofollow, well, nofollow it.
 			$link_attr = '';
-			if ( isset( $instance['nofollow'] ) && $instance['nofollow'] )
+			if ( isset( $instance['nofollow'] ) && $instance['nofollow'] ) {
 				$link_attr = 'rel="nofollow"';
+			}
 
-			if ( isset( $instance['class'] ) )
-				$args['before_widget'] = str_replace( 'class="', 'class="' . $instance['class'] . ' ', $args['before_widget'] );
+			if ( isset( $instance['class'] ) ) {
+				$args['before_widget'] = str_replace( 'class="', 'class="yst-banner-widget ' . $instance['class'] . ' ', $args['before_widget'] );
+			}
 
 			echo $args['before_widget'];
-			if ( ! empty( $instance['title'] ) )
+			if ( isset ( $instance['title'] ) && ! empty( $instance['title'] ) && ( isset( $instance['show_title'] ) && '1' == $instance['show_title'] ) ) {
 				echo $args['before_title'] . apply_filters( 'yst_banner_widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
-
+			}
 			$out = '<img ';
 			if ( ( isset ( $instance['image_width'] ) && ! empty( $instance['image_width'] ) ) || ( isset ( $instance['image_height'] ) && ! empty( $instance['image_width'] ) ) ) {
 				$out .= 'style="';
-				if ( ! empty( $instance['image_width'] ) )
+				if ( ! empty( $instance['image_width'] ) ) {
 					$out .= 'width:' . $instance['image_width'] . ( $instance['size_type'] == 'perc' ? '%' : 'px' ) . '; ';
+				}
 
-				if ( ! empty( $instance['image_height'] ) )
+				if ( ! empty( $instance['image_height'] ) ) {
 					$out .= 'height:' . $instance['image_height'] . ( $instance['size_type'] == 'perc' ? '%' : 'px' ) . '; ';
+				}
 				$out .= '"';
 			}
 
-			if ( ! empty( $instance['alt'] ) )
+			if ( ! empty( $instance['alt'] ) ) {
 				$out .= 'alt="' . $instance['alt'] . '" title="' . $instance['alt'] . '" ';
+			}
 
 			$out .= apply_filters( 'yst_banner_widget_img_class', 'class="hires"' );
 			$out .= 'src="' . $instance['image_url'] . '"/>';
 
-			if ( isset( $instance['url'] ) && ! empty( $instance['url'] ) )
+			if ( isset( $instance['url'] ) && ! empty( $instance['url'] ) ) {
 				$out = '<a ' . $link_attr . ' href="' . $instance['url'] . '">' . $out . '</a>';
+			}
 
 			echo $out;
 
@@ -143,8 +155,9 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 				if ( $var == 'post_id' ) {
 					echo $label;
 					echo '<select class="widefat" ' . $input_attr . '>';
-					if ( isset( $instance['post_id'] ) )
+					if ( isset( $instance['post_id'] ) ) {
 						echo '<option value="-1">' . __( 'No change', 'yoast-theme' ) . '</option>';
+					}
 					echo '<option value="">' . __( 'Other URL', 'yoast-theme' ) . '</option>';
 					foreach ( get_posts(
 											array(
@@ -157,37 +170,40 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 						echo '<option ' . selected( $instance[$var], $post->ID, false ) . ' value="' . $post->ID . '">' . esc_html( $post->post_title ) . '</option>';
 					}
 					echo '</select>';
-				}
-				else if ( $var == 'post_type' ) {
-					echo $label;
-					echo '<select class="widefat" ' . $input_attr . '>';
-					foreach ( get_post_types( array( 'public' => true ), 'objects' ) as $post_type ) {
-						$name = $post_type->name;
-						if ( isset( $post_type->label ) )
-							$name = $post_type->label;
+				} else {
+					if ( $var == 'post_type' ) {
+						echo $label;
+						echo '<select class="widefat" ' . $input_attr . '>';
+						foreach ( get_post_types( array( 'public' => true ), 'objects' ) as $post_type ) {
+							$name = $post_type->name;
+							if ( isset( $post_type->label ) ) {
+								$name = $post_type->label;
+							}
 
-						echo '<option ' . selected( $instance[$var], $post_type->name, false ) . ' value="' . $post_type->name . '">' . esc_html( $name ) . '</option>';
-					}
-					echo '</select>';
-				}
-				else if ( $var == 'size_type' ) {
-					echo $label;
-					echo '<select class="widefat" ' . $input_attr . '>';
-					echo '<option value="px" ' . selected( $instance[$var], "px", false ) . '>' . __( 'pixels', 'yoast-theme' ) . '</option>';
-					echo '<option value="perc" ' . selected( $instance[$var], "perc", false ) . '>' . __( 'percentages', 'yoast-theme' ) . '</option>';
-					echo '</select>';
-				}
-				else if ( $var == 'nofollow' ) {
-					echo '<input class="checkbox" ' . $input_attr . ' type="checkbox" ' . checked( $instance[$var], true, false ) . '/> ';
-					echo $label;
-				}
-				else {
-					echo $label;
-					echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . esc_html( $instance[$var] ) . '" />';
-					if ( $var == 'url' ) {
-						echo '<br /><em>';
-						_e( 'Used only if "Other page" is selected in "Page To Link To".', 'yoast-theme' );
-						echo '</em>';
+							echo '<option ' . selected( $instance[$var], $post_type->name, false ) . ' value="' . $post_type->name . '">' . esc_html( $name ) . '</option>';
+						}
+						echo '</select>';
+					} else {
+						if ( $var == 'size_type' ) {
+							echo $label;
+							echo '<select class="widefat" ' . $input_attr . '>';
+							echo '<option value="px" ' . selected( $instance[$var], "px", false ) . '>' . __( 'pixels', 'yoast-theme' ) . '</option>';
+							echo '<option value="perc" ' . selected( $instance[$var], "perc", false ) . '>' . __( 'percentages', 'yoast-theme' ) . '</option>';
+							echo '</select>';
+						} else {
+							if ( $var == 'nofollow' || $var == 'show_title' ) {
+								echo '<input class="checkbox" ' . $input_attr . ' type="checkbox" ' . checked( $instance[$var], true, false ) . '/> ';
+								echo $label;
+							} else {
+								echo $label;
+								echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . esc_html( $instance[$var] ) . '" />';
+								if ( $var == 'url' ) {
+									echo '<br /><em>';
+									_e( 'Used only if "Other page" is selected in "Page To Link To".', 'yoast-theme' );
+									echo '</em>';
+								}
+							}
+						}
 					}
 				}
 				echo '</p>';
@@ -206,8 +222,13 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 		 */
 		public function update( $new_instance, $old_instance ) {
 			// -1 means: "no change" was selected.
-			if ( $new_instance['post_id'] == '-1' )
+			if ( $new_instance['post_id'] == '-1' ) {
 				$new_instance['post_id'] = $old_instance['post_id'];
+			}
+
+			if ( isset( $new_instance['show_title'] ) ) {
+				$new_instance['show_title'] = true;
+			}
 
 			if ( isset( $new_instance['nofollow'] ) ) {
 				$new_instance['nofollow'] = true;
