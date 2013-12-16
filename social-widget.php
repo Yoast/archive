@@ -63,7 +63,7 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 				'yst_rss_flw'        => __( 'RSS Readers', 'yoast-theme' ),
 			);
 
-			$control_ops = array( 'width' => 400, 'height' => 350 );
+			$control_ops = array( 'width' => 300 );
 			$widget_ops  = array( 'classname' => 'widget_socials', 'description' => 'Social icon widget' );
 			$this->WP_Widget( 'yst_social_widget', __( 'Yoast &mdash; Social Widget', 'yoast-theme' ), $widget_ops, $control_ops );
 		}
@@ -84,7 +84,6 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 			if ( isset ( $instance['yst_title'] ) && ! empty( $instance['yst_title'] ) ) {
 				echo $args['before_title'] . $instance['yst_title'] . $args['after_title'];
 			}
-
 
 			echo '<div id="yst_social_widget">';
 			foreach ( $this->vars as $var => $label ) {
@@ -115,19 +114,16 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 							$class = "btn-default";
 					}
 
-
-//					$showlabel  = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
 					$input_attr = 'class= "' . $class . '" name="' . $var . '" id="' . $this->get_field_id( $var ) . '"';
 
 					if ( $var == 'yst_title' ) {
 						continue;
-					}
-					else if ( $var == 'yst_rss' ) {
-						echo '<a href="' . site_url( "feed" ) . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( $instance[( $var . '_flw' )] ) . '</div></div></a>';
-					}
-					else {
-						//echo $showlabel;
-						echo '<a href="' . $instance[$var] . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( $instance[( $var . '_flw' )] ) . '</div></div></a>';
+					} else {
+						if ( $var == 'yst_rss' ) {
+							echo '<a href="' . site_url( "feed" ) . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( (int) $instance[( $var . '_flw' )] ) . '</div></div></a>';
+						} else {
+							echo '<a href="' . $instance[$var] . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( (int) $instance[( $var . '_flw' )] ) . '</div></div></a>';
+						}
 					}
 				}
 			}
@@ -160,8 +156,10 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 			$new_instance['yst_youtube_flw']    = (int) $new_instance['yst_youtube_flw'];
 			$new_instance['yst_pinterest_flw']  = (int) $new_instance['yst_pinterest_flw'];
 			$new_instance['yst_rss_flw']        = (int) $new_instance['yst_rss_flw'];
-			if ( isset( $new_instance['yst_rss'] ) )
+			if ( isset( $new_instance['yst_rss'] ) ) {
 				$new_instance['yst_rss'] = true;
+			}
+
 			return $new_instance;
 		}
 
@@ -175,9 +173,11 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 		function kformat( $number ) {
 			$prefixes = 'kMGTPEZY';
 			if ( $number >= 1000 ) {
-				$log1000 = floor( log10( $number ) / 3 );
-				return floor( $number / pow( 1000, $log1000 ) ) . $prefixes[$log1000 - 1];
+				$log1000 = (int) floor( log10( $number ) / 3 );
+
+				return (int) floor( $number / pow( 1000, $log1000 ) ) . $prefixes[$log1000 - 1];
 			}
+
 			return $number;
 		}
 
@@ -190,39 +190,37 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 		 **/
 		function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
-			reset( $this->flw );
 
 			foreach ( $this->vars as $var => $label ) {
-
 				$flw_var = $var . "_flw";
 
 				if ( $var != 'yst_title' ) {
-					if ( $flw_var == current( $this->flw ) ) {
-						$labelflw = key( $this->flw );
-					}
-					next( $this->flw );
+					$flw_label = $this->flw[$var . '_flw'];
+					$labelflw  = '<label for="' . $this->get_field_name( $flw_var ) . '">' . $flw_label . '</label>';
 				}
 
-				$labelflw   = '<label for="' . $this->get_field_name( $flw_var ) . '">' . $labelflw . '</label>';
 				$label      = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
 				$input_attr = 'name="' . $this->get_field_name( $var ) . '" id="' . $this->get_field_id( $var ) . '"';
 
 				if ( $var == 'yst_title' ) {
-					echo $label;
+					echo '<strong>' . $label . '</strong>';
 					$input_attr .= 'placeholder="Title on the page. E.g. Follow Us!"';
 					echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . $instance[$var] . '"/>';
 
-				}
-				else if ( $var == 'yst_rss' ) {
-					echo '<input class="checkbox" ' . $input_attr . ' type="checkbox" ' . checked( $instance[$var], true, false ) . '/>';
-					echo $label;
-					echo '<input class="widefat" type="number" name="' . $this->get_field_name( $flw_var ) . '" value="' . $instance[$flw_var] . '" />';
-				}
-				else {
-					echo $label;
-					echo '<input class="ysw_url" ' . $input_attr . ' type="text" value="' . esc_html( $instance[$var] ) . '" />';
-					echo $labelflw;
-					echo '<input class="widefat" type="number" name="' . $this->get_field_name( $flw_var ) . '" value="' . $instance[$flw_var] . '" />';
+				} else {
+					if ( $var == 'yst_rss' ) {
+						echo '<strong>' . $label . '</strong><br />';
+						echo '<input class="checkbox" ' . $input_attr . ' type="checkbox" ' . checked( $instance[$var], true, false ) . '/>';
+						echo ' Show ' . $label . '<br /><br />';
+						echo $labelflw;
+						echo '<input class="widefat" type="number" name="' . $this->get_field_name( $flw_var ) . '" value="' . $instance[$flw_var] . '" />';
+					} else {
+						echo '<strong>' . $label . '</strong><br />';
+						echo $label . __( ' url', 'yoast-theme' );
+						echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . esc_html( $instance[$var] ) . '" />';
+						echo $labelflw;
+						echo '<input class="widefat" type="number" name="' . $this->get_field_name( $flw_var ) . '" value="' . $instance[$flw_var] . '" />';
+					}
 				}
 				echo '</p>';
 			}
