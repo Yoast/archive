@@ -58,7 +58,6 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 		// Set the default values
 		$default_settings = array(
-			'home-intro'      => '',
 			'footer'          => 'Get this theme at <a href="http://yoast.com" name="Theme Creator Yoast">Yoast.com</a>',
 			'yst-logo'        => '',
 			'yst-mobile-logo' => '',
@@ -82,7 +81,6 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 	function sanitization_filters() {
 		genesis_add_option_filter( 'safe_html', $this->settings_field,
 			array(
-				'home-intro',
 				'footer',
 				'yst-logo',
 				'yst-mobile-logo',
@@ -94,17 +92,8 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 	 * @since 1.0.0
 	 */
 	function metaboxes() {
-		add_meta_box( 'home_intro_metabox', __( 'Home Intro', 'yoast-theme' ), array( $this, 'home_intro_metabox' ), $this->pagehook, 'main', 'high' );
 		add_meta_box( 'footer_metabox', __( 'Footer', 'yoast-theme' ), array( $this, 'footer_metabox' ), $this->pagehook, 'main', 'high' );
 		add_meta_box( 'yst_logos_metabox', __( 'Website Logo', 'yoast-theme' ), array( $this, 'yst_logos_metabox' ), $this->pagehook, 'main', 'high' );
-	}
-
-	/**
-	 * Home Intro
-	 *
-	 */
-	function home_intro_metabox() {
-		wp_editor( $this->get_field_value( 'home-intro' ), $this->get_field_id( 'home-intro' ), array( 'textarea_rows' => 5 ) );
 	}
 
 	/**
