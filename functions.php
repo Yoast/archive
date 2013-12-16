@@ -370,7 +370,7 @@ function yst_mobile_nav() {
 function yst_footer_creds_text( $footer_creds_text ) {
 	$yst_footer = '<p class="custom_footer">';
 	$yst_footer .= trim( genesis_get_option( 'footer', 'child-settings' ) ) . '</p><p class="hardcoded-footer">';
-	$yst_footer .= sprintf( __( '&#x000B7; Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a> &#x000B7;', 'yoast-theme' ), date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com/wordpress/themes/tailor-made/" rel="nofollow">Tailor Made</a>', 'Yoast' );
+	$yst_footer .= sprintf( __( 'Copyright &copy; %s. %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a>', 'yoast-theme' ), date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="' . CHILD_THEME_URL . '" rel="nofollow">' . CHILD_THEME_NAME . '</a>', 'Yoast' );
 	$yst_footer .= '</p>';
 
 	return $yst_footer;
