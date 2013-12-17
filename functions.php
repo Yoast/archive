@@ -597,7 +597,6 @@ if ( function_exists( 'add_image_size' ) ) {
 }
 
 /**
-<<<<<<< HEAD
  * Comment List Arguments, modify to change the callback function
  *
  * @param array $args
