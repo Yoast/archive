@@ -1531,12 +1531,12 @@ table td {
   width: 50%;
 }
 /* line 1593, ../sass/style.scss */
-.entry-content .exerptreadmore {
+.entry-content .excerpt_readmore {
   text-align: right;
   text-decoration: none;
 }
 /* line 1598, ../sass/style.scss */
-.entry-content .exerptreadmore a {
+.entry-content .excerpt_readmore a {
   text-align: right;
   text-decoration: none;
   color: #028aaf;
@@ -1544,12 +1544,12 @@ table td {
   border-bottom: none;
 }
 /* line 1610, ../sass/style.scss */
-.entry-content .exerptreadmore a:hover {
+.entry-content .excerpt_readmore a:hover {
   font-weight: 700;
   color: #e25918;
 }
 /* line 1616, ../sass/style.scss */
-.entry-content .exerptreadmore a:after {
+.entry-content .excerpt_readmore a:after {
   content: '»';
   padding-left: 5px;
   font-size: 1.2em;
