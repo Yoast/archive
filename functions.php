@@ -136,8 +136,9 @@ function child_theme_setup() {
 // Activate blogroll widget
 	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
+	add_filter( 'stylesheet_uri', 'yst_stylesheet_uri', 10, 2 );
+
 	add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting', 5 );
-	add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic', 5 );
 	add_action( 'wp_enqueue_scripts', 'enqueue_form_styles', 25 );
 	add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
@@ -175,10 +176,15 @@ function yst_load_css_from_setting() {
 }
 
 /**
+ * Change stylesheet URL.
  *
+ * @param string $stylesheet_uri
+ * @param string $stylesheet_dir_uri
+ *
+ * @return string
  */
-function enqueue_styles_basic() {
-	wp_enqueue_style( 'style-basic', get_stylesheet_directory_uri() . '/assets/css/style.css' );
+function yst_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
+	return $stylesheet_dir_uri . '/assets/css/style.css';
 }
 
 /**
