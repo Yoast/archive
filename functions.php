@@ -330,7 +330,23 @@ function yst_activate_sidr_and_sticky_menu() {
 			$('#sidr-left').sidr({
 				name       : 'sidr-menu-left',
 				source     : function () {
-					return "<h1><?php _e("Navigation","yoast-theme"); ?></h1><ul>" + $('.menu-primary').html() + "</ul>";
+					var menu = "<h1><?php _e( "Navigation", "yoast-theme" ); ?></h1>";
+					if ( $('.menu-primary').length > 0 ) {
+						menu += "<ul>" + $('.menu-primary').html() + "</ul>";
+					} else if ( $('.nav-header').length > 0 ) {
+						menu += "<ul>" + $('.nav-header ul').html() + "</ul>";
+					}
+					if ( $('.widget_categories').length > 0 ) {
+						menu += '<h1>' + $('.widget_categories .widgettitle').html() + '</h1><ul>';
+						menu += $('.widget_categories ul').html();
+						menu += '</ul>';
+					}
+					if ( $('.widget_recent_entries').length > 0 ) {
+						menu += '<h1>' + $('.widget_recent_entries .widgettitle').html() + '</h1><ul>';
+						menu += $('.widget_recent_entries ul').html();
+						menu += '</ul>';
+					}
+					return menu;
 				},
 				coverScreen: true
 			});
