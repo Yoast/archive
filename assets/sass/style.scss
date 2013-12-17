@@ -1519,9 +1519,6 @@ table {
   margin: {
     bottom: 40px;
   }
-  .back-to-top {
-    text-align:right;
-  }
 }
 .entry-content {
   a {
@@ -1620,7 +1617,12 @@ table {
     }
   }
 }
-
+.back-to-top {
+  text-align:right;
+  font: {
+    weight:700;
+  }
+}
 
 
 // exceptions for archive pages, read more link closer to content
@@ -1716,8 +1718,9 @@ table {
   }
 }
 .entry-footer {
-  .entry-meta {
-    padding: 32px 40px 8px 0;
+  p.entry-meta {
+    margin:0;
+    padding:0;
   }
 }
 .entry-comments-link {
@@ -1912,22 +1915,6 @@ table {
     span {
       font: {
         weight: 700;
-      }
-      &:before {
-        content: "By ";
-        font: {
-          weight: normal;
-        }
-      }
-      &:after {
-        content: " on";
-        font: {
-          weight: normal;
-        }
-      }
-      &.says {
-        display:none;
-        visibility: hidden;
       }
     }
   }
@@ -2280,7 +2267,7 @@ table {
 
 .widget-wrap {
   padding: {
-    bottom: 24px;
+    bottom: 32px;
   }
   > p {
     padding: {
@@ -2403,7 +2390,7 @@ table {
     size:$f_sidebarH3;
   }
   margin: {
-    bottom: 24px;
+    bottom: 16px;
   }
   text: {
     transform: none;
@@ -2652,15 +2639,24 @@ table {
     margin: {
       bottom:16px;
     }
+    + div {
+      padding: {
+        left:0;
+      }
+    }
   }
 }
-
-.yst_fb_widget {
-  .fb-dark-bg {
-  }
-  .fb-light-bg {
-  }
-}
+/**
+ * Optional styling for fb-widget
+ *
+ * .yst_fb_widget {
+ *  .fb-dark-bg {
+ *  }
+ *  .fb-light-bg {
+ *  }
+ *}
+ *
+ */
 
 /**
  * Full Width Widgets
@@ -2870,6 +2866,19 @@ table {
   .wpseo-opening-hours {
     margin:0 10px;
     width:92%;
+    tbody {
+      border:0;
+    }
+    td {
+      border:0;
+      padding:0;
+      &.time {
+        font: {
+          size:$f_tableSmall-px;
+          size:$f_tableSmall;
+        }
+      }
+    }
   }
   .wpseo-map-canvas {
     width:100% !important;
