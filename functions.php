@@ -692,3 +692,19 @@ function yst_post_meta_filter( $post_meta ) {
 }
 
 add_filter( 'genesis_post_meta', 'yst_post_meta_filter' );
+
+/**
+ * By default, Genesis lack a space after the raquo and laquo, this adds it.
+ *
+ * @param string $link
+ *
+ * @return string
+ */
+function yst_add_spacing_next_prev( $link ) {
+	$link = str_replace( '&#x000BB;', ' &#x000BB;', $link );
+	$link = str_replace( '&#x000AB;', '&#x000AB; ', $link );
+	return $link;
+}
+
+add_filter( 'genesis_next_link_text', 'yst_add_spacing_next_prev' );
+add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
