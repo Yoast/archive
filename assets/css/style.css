@@ -2664,13 +2664,14 @@ table td {
 .widget-wrap .wpseo-opening-hours td {
   border: 0;
   padding: 0;
+  line-height: 1.5em;
 }
-/* line 2875, ../sass/style.scss */
+/* line 2876, ../sass/style.scss */
 .widget-wrap .wpseo-opening-hours td.time {
   font-size: 14px;
   font-size: 0.875rem;
 }
-/* line 2883, ../sass/style.scss */
+/* line 2884, ../sass/style.scss */
 .widget-wrap .wpseo-map-canvas {
   width: 100% !important;
 }
@@ -2680,7 +2681,7 @@ table td {
  * @plugin(title: Jetpack by WordPress.com)
  * @link http://wordpress.org/plugins/jetpack/
  */
-/* line 2894, ../sass/style.scss */
+/* line 2895, ../sass/style.scss */
 img#wpstats {
   display: none;
   visibility: hidden;
@@ -2692,7 +2693,7 @@ img#wpstats {
 /**
  * Site Footer
  */
-/* line 2907, ../sass/style.scss */
+/* line 2908, ../sass/style.scss */
 .site-footer {
   background-color: #e2e2e2;
   border-top-width: 1px;
@@ -2703,24 +2704,24 @@ img#wpstats {
   font-size: 0.875rem;
   padding: 20px 10px;
 }
-/* line 2924, ../sass/style.scss */
+/* line 2925, ../sass/style.scss */
 .site-footer a {
   color: black;
   text-decoration: underline;
 }
-/* line 2927, ../sass/style.scss */
+/* line 2928, ../sass/style.scss */
 .site-footer a:hover {
   color: #e25918;
 }
-/* line 2931, ../sass/style.scss */
+/* line 2932, ../sass/style.scss */
 .site-footer h3 {
   color: black;
 }
-/* line 2934, ../sass/style.scss */
+/* line 2935, ../sass/style.scss */
 .site-footer h4 {
   color: black;
 }
-/* line 2937, ../sass/style.scss */
+/* line 2938, ../sass/style.scss */
 .site-footer p {
   margin-bottom: 0;
 }
@@ -2742,7 +2743,7 @@ img#wpstats {
  * regular screens and only shows the mobile options from a width of 640 pixels.
  */
 @media (min-width: 641px) {
-  /* line 2984, ../sass/style.scss */
+  /* line 2985, ../sass/style.scss */
   a.open, #sidr-left, #sidr-right {
     width: 0 !important;
     display: none !important;
@@ -2752,53 +2753,53 @@ img#wpstats {
  * iPad landscape
  */
 @media (max-width: 1024px) {
-  /* line 2995, ../sass/style.scss */
+  /* line 2996, ../sass/style.scss */
   .content {
     max-width: 67%;
   }
 
-  /* line 2998, ../sass/style.scss */
+  /* line 2999, ../sass/style.scss */
   .sidebar-primary {
     max-width: 25%;
   }
 
-  /* line 3002, ../sass/style.scss */
+  /* line 3003, ../sass/style.scss */
   .content-sidebar .sidebar-primary {
     margin-right: 10px;
   }
-  /* line 3007, ../sass/style.scss */
+  /* line 3008, ../sass/style.scss */
   .content-sidebar .content {
     padding-left: 10px;
     padding-right: 10px;
   }
 
-  /* line 3015, ../sass/style.scss */
+  /* line 3016, ../sass/style.scss */
   .sidebar-content .sidebar-primary {
     margin-left: 10px;
   }
-  /* line 3020, ../sass/style.scss */
+  /* line 3021, ../sass/style.scss */
   .sidebar-content .content {
     padding-left: 0;
     padding-right: 10px;
   }
 
-  /* line 3028, ../sass/style.scss */
+  /* line 3029, ../sass/style.scss */
   .full-width-content .content {
     padding-left: 10px;
     padding-right: 0;
   }
 
-  /* line 3036, ../sass/style.scss */
+  /* line 3037, ../sass/style.scss */
   .site-header .title-area {
     background-size: 100%;
     max-width: 40%;
     overflow: hidden;
   }
-  /* line 3042, ../sass/style.scss */
+  /* line 3043, ../sass/style.scss */
   .site-header .title-area a {
     min-height: 140px;
   }
-  /* line 3047, ../sass/style.scss */
+  /* line 3048, ../sass/style.scss */
   .site-header .header-widget-area,
   .site-header #yoast-top-right {
     padding-right: 20px;
@@ -2806,58 +2807,58 @@ img#wpstats {
     overflow: hidden;
   }
 
-  /* line 3055, ../sass/style.scss */
+  /* line 3056, ../sass/style.scss */
   .breadcrumb {
     padding-left: 10px;
   }
 
-  /* line 3060, ../sass/style.scss */
+  /* line 3061, ../sass/style.scss */
   #yoast-after-header-container {
     padding-left: 20px;
   }
-  /* line 3064, ../sass/style.scss */
+  /* line 3065, ../sass/style.scss */
   #yoast-after-header-container .yoast-after-header-widget {
     width: 30%;
   }
-  /* line 3067, ../sass/style.scss */
+  /* line 3068, ../sass/style.scss */
   #yoast-after-header-container #yoast-after-header-2 {
     margin: 0 30px;
   }
 
-  /* line 3071, ../sass/style.scss */
+  /* line 3072, ../sass/style.scss */
   #yoast-fullwidth-bottom-container {
     padding-left: 20px;
     padding-right: 20px;
   }
-  /* line 3076, ../sass/style.scss */
+  /* line 3077, ../sass/style.scss */
   #yoast-fullwidth-bottom-container .yoast-fullwidth-widget {
     width: 30%;
   }
-  /* line 3079, ../sass/style.scss */
+  /* line 3080, ../sass/style.scss */
   #yoast-fullwidth-bottom-container #yoast-fullwidth-widgetarea-2 {
     margin: 0 30px;
   }
 
-  /* line 3083, ../sass/style.scss */
+  /* line 3084, ../sass/style.scss */
   .footer-widgets {
     padding-left: 10px;
     padding-right: 10px;
   }
-  /* line 3088, ../sass/style.scss */
+  /* line 3089, ../sass/style.scss */
   .footer-widgets .widget-area {
     width: 22%;
   }
-  /* line 3090, ../sass/style.scss */
+  /* line 3091, ../sass/style.scss */
   .footer-widgets .widget-area.footer-widgets-2 {
     margin: 0 3%;
   }
-  /* line 3093, ../sass/style.scss */
+  /* line 3094, ../sass/style.scss */
   .footer-widgets .widget-area.footer-widgets-3 {
     margin-right: 3%;
   }
 
   /* Making the FB Like box responsive */
-  /* line 3103, ../sass/style.scss */
+  /* line 3104, ../sass/style.scss */
   .fb-like-box,
   .fb-like-box span,
   .fb-like-box span iframe[style] {
@@ -2865,80 +2866,80 @@ img#wpstats {
   }
 }
 @media (max-width: 655px) and (min-width: 640px) {
-  /* line 3110, ../sass/style.scss */
+  /* line 3111, ../sass/style.scss */
   #yoast-fullwidth-bottom-container #yoast-fullwidth-widgetarea-2 {
     margin: 0 15px;
   }
 }
 @media (max-width: 640px) {
-  /* line 3117, ../sass/style.scss */
+  /* line 3118, ../sass/style.scss */
   .content {
     width: 100%;
     max-width: 100%;
   }
 
-  /* line 3121, ../sass/style.scss */
+  /* line 3122, ../sass/style.scss */
   .sidebar-primary {
     width: 100%;
     max-width: 100%;
   }
 
-  /* line 3125, ../sass/style.scss */
+  /* line 3126, ../sass/style.scss */
   .entry {
     padding: 0;
     margin-left: 0;
     margin-right: 0;
   }
 
-  /* line 3132, ../sass/style.scss */
+  /* line 3133, ../sass/style.scss */
   #yoast-after-header-container {
     display: none;
     visibility: hidden;
   }
 
-  /* line 3136, ../sass/style.scss */
+  /* line 3137, ../sass/style.scss */
   .breadcrumb {
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 1em;
   }
 
-  /* line 3147, ../sass/style.scss */
+  /* line 3148, ../sass/style.scss */
   .content-sidebar .sidebar-primary,
   .sidebar-content .sidebar-primary {
     width: 100%;
     padding-left: 20px;
   }
-  /* line 3152, ../sass/style.scss */
+  /* line 3153, ../sass/style.scss */
   .content-sidebar .sidebar-primary .widget,
   .sidebar-content .sidebar-primary .widget {
     width: 100%;
   }
 
-  /* line 3158, ../sass/style.scss */
+  /* line 3159, ../sass/style.scss */
   .sidebar-content .content {
     margin: 0;
     padding-left: 10px;
   }
-  /* line 3164, ../sass/style.scss */
+  /* line 3165, ../sass/style.scss */
   .sidebar-content .sidebar-primary {
     margin: 0;
     padding-right: 10px;
     padding-left: 10px;
   }
 
-  /* line 3174, ../sass/style.scss */
+  /* line 3175, ../sass/style.scss */
   .featured-content.featuredpost img,
   .featured-content.featuredpage img {
     float: left;
     margin-right: 10px;
   }
 
-  /* line 3181, ../sass/style.scss */
+  /* line 3182, ../sass/style.scss */
   #yoast-after-header-container {
     padding: 0 10px;
   }
-  /* line 3185, ../sass/style.scss */
+  /* line 3186, ../sass/style.scss */
   #yoast-after-header-container #yoast-after-header-1,
   #yoast-after-header-container #yoast-after-header-2,
   #yoast-after-header-container #yoast-after-header-3 {
@@ -2949,17 +2950,17 @@ img#wpstats {
     max-width: 100%;
   }
 
-  /* line 3195, ../sass/style.scss */
+  /* line 3196, ../sass/style.scss */
   .yoast-tagline-after-header-widget {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 3201, ../sass/style.scss */
+  /* line 3202, ../sass/style.scss */
   #yoast-fullwidth-bottom-container {
     padding: 0 10px;
   }
-  /* line 3205, ../sass/style.scss */
+  /* line 3206, ../sass/style.scss */
   #yoast-fullwidth-bottom-container #yoast-fullwidth-widgetarea-1,
   #yoast-fullwidth-bottom-container #yoast-fullwidth-widgetarea-2,
   #yoast-fullwidth-bottom-container #yoast-fullwidth-widgetarea-3 {
@@ -2970,21 +2971,21 @@ img#wpstats {
     max-width: 100%;
   }
 
-  /* line 3215, ../sass/style.scss */
+  /* line 3216, ../sass/style.scss */
   .footer-widgets {
     padding-left: 10px;
     padding-right: 10px;
   }
-  /* line 3220, ../sass/style.scss */
+  /* line 3221, ../sass/style.scss */
   .footer-widgets .widget-area {
     width: 100%;
   }
-  /* line 3223, ../sass/style.scss */
+  /* line 3224, ../sass/style.scss */
   .footer-widgets .widget-area.footer-widgets-2, .footer-widgets .widget-area.footer-widgets-3 {
     margin: 0;
   }
 
-  /* line 3228, ../sass/style.scss */
+  /* line 3229, ../sass/style.scss */
   .site-footer {
     text-align: center;
   }
@@ -2992,18 +2993,18 @@ img#wpstats {
   /**
    * Enter the mobile menu
    */
-  /* line 3234, ../sass/style.scss */
+  /* line 3235, ../sass/style.scss */
   body {
     border: 0;
     padding-top: 44px;
   }
 
-  /* line 3238, ../sass/style.scss */
+  /* line 3239, ../sass/style.scss */
   .nav-primary {
     display: none !important;
   }
 
-  /* line 3242, ../sass/style.scss */
+  /* line 3243, ../sass/style.scss */
   header.site-header {
     border-bottom: 5px solid #e25918;
     display: inline-block;
@@ -3014,7 +3015,7 @@ img#wpstats {
     top: 0;
     width: 100%;
   }
-  /* line 3255, ../sass/style.scss */
+  /* line 3256, ../sass/style.scss */
   header.site-header .title-area,
   header.site-header .header-widget-area,
   header.site-header #yoast-top-right {
@@ -3022,7 +3023,7 @@ img#wpstats {
     visibility: hidden;
   }
 
-  /* line 3262, ../sass/style.scss */
+  /* line 3263, ../sass/style.scss */
   a.open {
     display: inline-block;
     text-indent: -10000px;
@@ -3033,7 +3034,7 @@ img#wpstats {
     padding: 10px;
     margin: 0;
   }
-  /* line 3272, ../sass/style.scss */
+  /* line 3273, ../sass/style.scss */
   a#sidr-left {
     float: left;
     margin: 2px 0;
@@ -3042,7 +3043,7 @@ img#wpstats {
     border-right-style: solid;
     border-right-color: #b2b8b8;
   }
-  /* line 3284, ../sass/style.scss */
+  /* line 3285, ../sass/style.scss */
   a#sidr-right {
     float: right;
     margin: 2px 0;
@@ -3052,23 +3053,23 @@ img#wpstats {
     border-left-color: #b2b8b8;
   }
 
-  /* line 3300, ../sass/style.scss */
+  /* line 3301, ../sass/style.scss */
   body.sticky-menu .site-container a#sidr-left {
     position: relative;
     top: 0;
     left: 0;
   }
-  /* line 3305, ../sass/style.scss */
+  /* line 3306, ../sass/style.scss */
   body.sticky-menu .site-container a#sidr-right {
     position: relative;
     top: 0;
     right: 0;
   }
-  /* line 3312, ../sass/style.scss */
+  /* line 3313, ../sass/style.scss */
   body.sticky-menu .site-header {
     background-position: center top;
   }
-  /* line 3315, ../sass/style.scss */
+  /* line 3316, ../sass/style.scss */
   body.sticky-menu .site-header .title-area .site-title a {
     position: fixed;
     top: 0;
@@ -3078,32 +3079,32 @@ img#wpstats {
   /* end mobile menu */
 }
 @media (max-width: 512px) {
-  /* line 3330, ../sass/style.scss */
+  /* line 3331, ../sass/style.scss */
   .sidebar-primary .widget_bigbutton, .sidebar-primary form {
     max-width: 100%;
   }
 }
 @media (max-width: 330px) {
-  /* line 3341, ../sass/style.scss */
+  /* line 3342, ../sass/style.scss */
   .entry img.alignleft, .entry img.alignright, .entry img.aligncenter {
     display: block;
     float: none;
     margin: 1em auto;
   }
 
-  /* line 3350, ../sass/style.scss */
+  /* line 3351, ../sass/style.scss */
   .blog.sidebar-content .content {
     width: 100%;
     padding: 0 1%;
     margin: 0;
   }
 
-  /* line 3360, ../sass/style.scss */
+  /* line 3361, ../sass/style.scss */
   .sidebar .widget-wrap li:after {
     content: "";
     padding: 0;
   }
-  /* line 3367, ../sass/style.scss */
+  /* line 3368, ../sass/style.scss */
   .sidebar .featured-content img {
     display: none;
     visibility: hidden;
@@ -3112,14 +3113,14 @@ img#wpstats {
 /**
  * WordPress Admin bar fixes for menu
  */
-/* line 3382, ../sass/style.scss */
+/* line 3383, ../sass/style.scss */
 body.admin-bar .sidr,
 body.admin-bar .site-header,
 body.admin-bar .nav-primary {
   top: 32px;
 }
 @media (max-width: 782px) {
-  /* line 3382, ../sass/style.scss */
+  /* line 3383, ../sass/style.scss */
   body.admin-bar .sidr,
   body.admin-bar .site-header,
   body.admin-bar .nav-primary {
@@ -3127,20 +3128,20 @@ body.admin-bar .nav-primary {
   }
 }
 
-/* line 3391, ../sass/style.scss */
+/* line 3392, ../sass/style.scss */
 body.sticky-menu.admin-bar .site-header,
 body.sticky-menu.admin-bar .nav-primary {
   top: 32px;
 }
 @media (max-width: 782px) {
-  /* line 3391, ../sass/style.scss */
+  /* line 3392, ../sass/style.scss */
   body.sticky-menu.admin-bar .site-header,
   body.sticky-menu.admin-bar .nav-primary {
     top: 46px;
   }
 }
 
-/* line 3398, ../sass/style.scss */
+/* line 3399, ../sass/style.scss */
 #wpadminbar {
   position: absolute !important;
   position: fixed !important;
