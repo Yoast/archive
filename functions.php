@@ -233,18 +233,18 @@ function yst_after_header_genesis() {
 	if ( is_front_page() ) {
 		echo '<div id="yoast-after-header-container"><div class="wrap">';
 
-		genesis_widget_area( 'yoast-after-header-1', array(
-			'before' => '<div id="yoast-after-header-1" class="yoast-after-header-widget">',
-			'after'  => '</div>',
-		) );
-		genesis_widget_area( 'yoast-after-header-2', array(
-			'before' => '<div id="yoast-after-header-2" class="yoast-after-header-widget">',
-			'after'  => '</div>',
-		) );
-		genesis_widget_area( 'yoast-after-header-3', array(
-			'before' => '<div id="yoast-after-header-3" class="yoast-after-header-widget">',
-			'after'  => '</div>',
-		) );
+		$areas = array( 'yoast-after-header-1', 'yoast-after-header-2', 'yoast-after-header-3' );
+		if ( 'sidebar-content' == genesis_site_layout() ) {
+			$areas = array_reverse( $areas );
+		}
+
+		foreach ( $areas as $area ) {
+			genesis_widget_area( $area, array(
+				'before' => '<div id="' . $area . '" class="yoast-after-header-widget">',
+				'after'  => '</div>',
+			) );
+		}
+
 		echo '<div class="clearfloat"></div></div></div>';
 	}
 
