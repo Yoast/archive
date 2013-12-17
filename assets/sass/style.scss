@@ -1519,9 +1519,6 @@ table {
   margin: {
     bottom: 40px;
   }
-  .back-to-top {
-    text-align:right;
-  }
 }
 .entry-content {
   a {
@@ -1620,7 +1617,9 @@ table {
     }
   }
 }
-
+.back-to-top {
+  text-align:right;
+}
 
 
 // exceptions for archive pages, read more link closer to content
@@ -1716,8 +1715,9 @@ table {
   }
 }
 .entry-footer {
-  .entry-meta {
-    padding: 32px 40px 8px 0;
+  p.entry-meta {
+    margin:0;
+    padding:0;
   }
 }
 .entry-comments-link {
@@ -2870,6 +2870,12 @@ table {
   .wpseo-opening-hours {
     margin:0 10px;
     width:92%;
+    .time {
+      font: {
+        size:$f_tableSmall-px;
+        size:$f_tableSmall;
+      }
+    }
   }
   .wpseo-map-canvas {
     width:100% !important;
