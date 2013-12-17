@@ -708,3 +708,18 @@ function yst_add_spacing_next_prev( $link ) {
 
 add_filter( 'genesis_next_link_text', 'yst_add_spacing_next_prev' );
 add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
+
+/**
+ * Override the image size for full-width designs, user settings are now completely ignored.
+ */
+function yst_override_content_thumbnail_setting( $size = null ) {
+	$layout = genesis_site_layout();
+
+	if ( false !== strpos( $layout, 'full-width' ) ) {
+		$size = 'fullwidth-thumb';
+	}
+
+	return $size;
+}
+
+add_filter( 'genesis_pre_get_option_image_size', 'yst_override_content_thumbnail_setting' );
