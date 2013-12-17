@@ -331,17 +331,17 @@ function yst_activate_sidr_and_sticky_menu() {
 				name       : 'sidr-menu-left',
 				source     : function () {
 					var menu = "<h1><?php _e( "Navigation", "yoast-theme" ); ?></h1>";
-					if ( $('.menu-primary').length > 0 ) {
+					if ($('.menu-primary').length > 0) {
 						menu += "<ul>" + $('.menu-primary').html() + "</ul>";
-					} else if ( $('.nav-header').length > 0 ) {
+					} else if ($('.nav-header').length > 0) {
 						menu += "<ul>" + $('.nav-header ul').html() + "</ul>";
 					}
-					if ( $('.widget_categories').length > 0 ) {
+					if ($('.widget_categories').length > 0) {
 						menu += '<h1>' + $('.widget_categories .widgettitle').html() + '</h1><ul>';
 						menu += $('.widget_categories ul').html();
 						menu += '</ul>';
 					}
-					if ( $('.widget_recent_entries').length > 0 ) {
+					if ($('.widget_recent_entries').length > 0) {
 						menu += '<h1>' + $('.widget_recent_entries .widgettitle').html() + '</h1><ul>';
 						menu += $('.widget_recent_entries ul').html();
 						menu += '</ul>';
@@ -544,12 +544,14 @@ function yst_display_logo() {
 			}
 			/* Use mobile logo positioning when screensize < 640px and alternative mobile logo is set to 1 */
 			if ( ( isset ( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) && ( isset ( $yst_use_alt_mobile_logo ) && ! empty ( $yst_use_alt_mobile_logo ) ) ) {
+			$yst_mobile_logo_height = absint( genesis_get_option( 'yst-use-alt-mobile-logo-height', 'child-settings' ) - 41 );
+			if ( is_user_logged_in() ) {
+				$yst_mobile_logo_height -= 46;
+			}
 			?>
 			@media ( max-width: 640px ) {
-				/* @TODO: Needs to be fixed! Just temporary code. */
 				.site-container {
-                    padding-top:170px; /* img height - 41 if not logged in */
-                    padding-top:124px; /* img height - 41 - 46 if logged in */
+					padding-top: <?php echo absint( genesis_get_option( 'yst-use-alt-mobile-logo-height', 'child-settings' ) ); ?>px; /* img height - 41 and - 46 if logged in */
 					background-image: url( <?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?> );
 					background-repeat: no-repeat;
 					background-position: 50% 0;
@@ -641,6 +643,7 @@ if ( function_exists( 'add_image_size' ) ) {
  */
 function yst_comment_list_args( $args ) {
 	$args['callback'] = 'yst_comment_callback';
+
 	return $args;
 }
 
@@ -666,7 +669,7 @@ function yst_comment_callback( $comment, $args, $depth ) {
 				<?php
 
 				$author = get_comment_author();
-				$url    = get_comment_author_url();
+				$url = get_comment_author_url();
 
 				if ( ! empty( $url ) && 'http://' !== $url ) {
 					$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
@@ -693,14 +696,14 @@ function yst_comment_callback( $comment, $args, $depth ) {
 			<?php comment_text(); ?>
 
 			<p class="comment-actions">
-			<?php
-			comment_reply_link( array_merge( $args, array(
-				'depth'  => $depth,
-				'before' => '<span class="comment-reply">',
-				'after'  => '</span>',
-			) ) );
-			edit_comment_link( __( 'Edit comment', 'yoast-theme' ), ' <span class="edit">', '</span>' );
-			?>
+				<?php
+				comment_reply_link( array_merge( $args, array(
+					'depth'  => $depth,
+					'before' => '<span class="comment-reply">',
+					'after'  => '</span>',
+				) ) );
+				edit_comment_link( __( 'Edit comment', 'yoast-theme' ), ' <span class="edit">', '</span>' );
+				?>
 			</p>
 		</div>
 
@@ -739,6 +742,7 @@ add_filter( 'genesis_post_meta', 'yst_post_meta_filter' );
 function yst_add_spacing_next_prev( $link ) {
 	$link = str_replace( '&#x000BB;', ' &#x000BB;', $link );
 	$link = str_replace( '&#x000AB;', '&#x000AB; ', $link );
+
 	return $link;
 }
 
