@@ -58,10 +58,11 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 		// Set the default values
 		$default_settings = array(
-			'footer'                  => 'Get this theme at <a href="http://yoast.com" name="Theme Creator Yoast">Yoast.com</a>',
-			'yst-logo'                => '',
-			'yst-mobile-logo'         => '',
-			'yst-use-alt-mobile-logo' => '0',
+			'footer'                         => 'Get this theme at <a href="http://yoast.com" name="Theme Creator Yoast">Yoast.com</a>',
+			'yst-logo'                       => '',
+			'yst-mobile-logo'                => '',
+			'yst-use-alt-mobile-logo'        => '0',
+			'yst-use-alt-mobile-logo-height' => '',
 		);
 
 		// Create the Admin Page
@@ -86,6 +87,7 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 				'yst-logo',
 				'yst-mobile-logo',
 				'yst-use-alt-mobile-logo',
+				'yst-use-alt-mobile-logo-height',
 			) );
 	}
 
@@ -160,6 +162,7 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 		/* Add hidden field for alternative mobile logo */
 		echo '<input type="hidden" id="yst-use-alt-mobile" name="' . esc_html( $this->get_field_name( 'yst-use-alt-mobile-logo' ) ) . '" value="' . esc_html( $this->get_field_value( 'yst-use-alt-mobile-logo' ) ) . '"/>';
+		echo '<input type="hidden" id="yst-use-alt-mobile-logo-height" name="' . esc_html( $this->get_field_name( 'yst-use-alt-mobile-logo-height' ) ) . '" value="' . esc_html( $this->get_field_value( 'yst-use-alt-mobile-logo-height' ) ) . '"/>';
 	}
 }
 
