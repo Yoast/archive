@@ -133,11 +133,18 @@ function child_theme_setup() {
 		}
 	}
 
+	if ( function_exists( 'add_image_size' ) ) {
+		add_image_size( 'archive-thumb', 180, 120, true );
+		add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
+		add_image_size( 'fullwidth-thumb', 290, 193, true );
+	}
+
 // Activate blogroll widget
 	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
+	add_filter( 'stylesheet_uri', 'yst_stylesheet_uri', 10, 2 );
+
 	add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting', 5 );
-	add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic', 5 );
 	add_action( 'wp_enqueue_scripts', 'enqueue_form_styles', 25 );
 	add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
@@ -175,10 +182,15 @@ function yst_load_css_from_setting() {
 }
 
 /**
+ * Change stylesheet URL.
  *
+ * @param string $stylesheet_uri
+ * @param string $stylesheet_dir_uri
+ *
+ * @return string
  */
-function enqueue_styles_basic() {
-	wp_enqueue_style( 'style-basic', get_stylesheet_directory_uri() . '/assets/css/style.css' );
+function yst_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
+	return $stylesheet_dir_uri . '/assets/css/style.css';
 }
 
 /**
@@ -283,27 +295,6 @@ function yst_add_top_right_area() {
 function yst_get_read_more_link() {
 	return '...&nbsp;<div class="exerptreadmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>';
 }
-
-/**
- * Test adding widget on Theme-change
- */
-//add_action( 'after_switch_theme', 'yst_add_widget_after_activating_theme', 10, 2 );
-//
-//function yst_add_widget_after_activating_theme( $oldname, $oldtheme = false ) {
-//	$sidebar_id                    = 'yoast-after-header-3';
-//	$sidebars_widgets              = get_option( 'sidebars_widgets' );
-//	$id                            = count( $sidebars_widgets ) + 1;
-//	$sidebars_widgets[$sidebar_id] = array( "text-" . $id );
-//
-//	$ops      = get_option( 'widget_text' );
-//	$ops[$id] = array(
-//		'title' => 'Automatic Widget',
-//		'text'  => 'Works!',
-//	);
-//	update_option( 'widget_text', $ops );
-//	update_option( 'sidebars_widgets', $sidebars_widgets );
-//}
-
 
 /**
  * Includes SIDR
@@ -587,52 +578,6 @@ function yst_add_wrapper_after_content() {
 
 add_action( 'genesis_before_loop', 'yst_add_wrapper_before_content' );
 add_action( 'genesis_after_loop', 'yst_add_wrapper_after_content' );
-
-/**
- * Resizes featured images
- *
- * @since 1.0.0
- *
- * @param string $img  Image HTML output
- * @param array  $args Arguments for the image
- *
- * @return string Image HTML output.
- * // @TODO: Is this the best option?
- */
-function yst_resize_archive_image( $img, $args ) {
-	$maxheight = $maxwidth = 0;
-	if ( 'full-width-content' == genesis_site_layout() ) {
-		$maxwidth  = 290;
-		$maxheight = 193;
-	} else {
-		if ( 'archive' == $args['context'] || 'blog' == $args['context'] ) {
-			$maxwidth  = 180;
-			$maxheight = 120;
-		}
-	}
-	if ( $maxwidth > 0 || $maxheight > 0 ) {
-		$output = 'style="';
-		if ( $maxwidth > 0 ) {
-			$output .= 'max-width:' . $maxwidth . 'px;';
-		}
-		if ( $maxheight > 0 ) {
-			$output .= 'max-height:' . $maxheight . 'px;';
-		}
-		$output .= '"';
-
-		return preg_replace( '/width="[0-9]+([a-zA-Z]{0,2})?"(.)?height="[0-9]+([a-zA-Z]{0,2})?"/', $output, $img );
-	} else {
-		return $img;
-	}
-}
-
-//add_filter( 'genesis_get_image', 'yst_resize_archive_image', 15, 2 );
-
-if ( function_exists( 'add_image_size' ) ) {
-	add_image_size( 'archive-thumb', 180, 120, true );
-	add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
-	add_image_size( 'fullwidth-thumb', 290, 193, true );
-}
 
 /**
  * Comment List Arguments, modify to change the callback function
