@@ -1913,22 +1913,6 @@ table {
       font: {
         weight: 700;
       }
-      &:before {
-        content: "By ";
-        font: {
-          weight: normal;
-        }
-      }
-      &:after {
-        content: " on";
-        font: {
-          weight: normal;
-        }
-      }
-      &.says {
-        display:none;
-        visibility: hidden;
-      }
     }
   }
   .comment-content {
