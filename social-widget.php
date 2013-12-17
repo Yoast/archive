@@ -127,7 +127,7 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 					}
 				}
 			}
-			echo '</div>';
+			echo '</div><div class="clearfloat"></div>';
 			echo $args['after_widget'];
 		}
 
