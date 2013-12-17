@@ -2124,7 +2124,7 @@ table td {
  */
 /* line 2265, ../sass/style.scss */
 .widget-wrap {
-  padding-bottom: 24px;
+  padding-bottom: 32px;
 }
 /* line 2269, ../sass/style.scss */
 .widget-wrap > p {
@@ -2232,7 +2232,7 @@ table td {
 .widget-title, #yoast-fullwidth-bottom-container .widget-title {
   font-size: 20px;
   font-size: 1.25rem;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   text-transform: none;
   background-color: #eeeeee;
   color: #028aaf;
