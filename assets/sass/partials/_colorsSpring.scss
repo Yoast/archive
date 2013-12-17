@@ -1,23 +1,26 @@
-// color declarations ColorSet2
+// color declarations ColorSet5
 
-// color bar 1          #eaf6f4
-// color bar 2          #f6aa51
-// color bar 3          #ef8151
-// t1                   #1799b8
-// nav                  #cbeeef
+// color bar 1          #ecf7bf
+// color bar 2          #db363f
+// color bar 3          #c50721
+// t1                   #219149
+// nav                  #c5e89c
 // gray background      #eeeeee
 // gray border          #b2b8b8
 // T4                   #666666
 // black text           #000000
-// cta                  #6bbd1e
+// cta                  #28a0ff
 // footer               #e2e2e2
 
+// #yoast-after-header-container check in list
+$c_ListCheckImage:      "../images/li-check-Spring.png";
+
 // general
-$c_bodyTopLine:         #eaf6f4;
+$c_bodyTopLine:         #ecf7bf;
 
 $c_paragraph:           #000000;
-$c_link:                #1799b8;
-$c_linkHover:           #f6aa51;
+$c_link:                #219149;
+$c_linkHover:           #db363f;
 $c_linkBorder:          #dddddd;
 
 $c_logoText:            #999999;
@@ -25,72 +28,73 @@ $c_logoTextLink:        #333333;
 $c_logoTextLinkHover:   #333333;
 
 $c_taglineTop:          #666666;
-$c_taglineTopBold:      #1799b8;
+$c_taglineTopBold:      #219149;
 $c_taglineFullWidth:    #666666;
-$c_taglineFullWidthBold:#1799b8;
+$c_taglineFullWidthBold:#219149;
 $c_taglineBoxShadow:    #cccccc;
-$c_taglineLink:         #1799b8;
-$c_taglineLinkHover:    #f6aa51;
+$c_taglineLink:         #219149;
+$c_taglineLinkHover:    #db363f;
 
 $c_breadcrumbs:         #666666;
-$c_breadcrumbsLink:     #1799b8;
-$c_breadcrumbsLinkHover:#f6aa51;
+$c_breadcrumbsLink:     #219149;
+$c_breadcrumbsLinkHover:#db363f;
 
 $c_pagenavBg:           #eeeeee;
-$c_pagenavLink:         #1799b8;
-$c_pagenavHoverBg:      #cbeeef;
+$c_pagenavLink:         #219149;
+$c_pagenavHoverBg:      #c5e89c;
 $c_pagenavHoverLink:    #ffffff;
-$c_pagenavActiveBg:     #cbeeef;
+$c_pagenavActiveBg:     #c5e89c;
 $c_pagenavActiveLink:   #ffffff;
 
-$c_metaAtPost:          #333333;
+$c_metaAtPost:          #666666;
 $c_metaAtPostBorder:    #dddddd;
-$c_linkToArchives:      #1799b8;
+$c_linkToArchives:      #219149;
 $c_commentHTMLtags:     #b2b8b8;
 
-$c_hrLine:              #f6aa51;
+$c_hrLine:              #db363f;
+$c_borderImg:           #b2b8b8;
 $c_randLine:            #b2b8b8; // random grey line
 
-$c_selectionText:       #1799b8;
-$c_selectionBg:         #cbeeef;
+$c_selectionText:       #219149;
+$c_selectionBg:         #c5e89c;
 
 $c_fieldsetBorder:      #c0c0c0;
 
 // header
 $c_headerBg:            #eeeeee;
-$c_headerText:          #1799b8;
-$c_headerLink:          #1799b8;
-$c_headerLinkHover:     #f6aa51;
-$c_headerH3:            #f6aa51;
-$c_headerH4:            #f6aa51;
+$c_headerText:          #219149;
+$c_headerLink:          #219149;
+$c_headerLinkHover:     #db363f;
+$c_headerH3:            #db363f;
+$c_headerH4:            #db363f;
 
 // navigation
-$c_navMainFullBg:           #cbeeef;
-$c_navMainFullBorderTop:    #f6aa51;
-$c_navMainFullBorderBottom: #ef8151;
+$c_navMainFullBg:           #c5e89c;
+$c_navMainFullBorderTop:    #db363f;
+$c_navMainFullBorderBottom: #c50721;
 
-$c_navMainBg:           #cbeeef;
+$c_navMainBg:           #c5e89c;
 $c_navMainText:         #000000;
 $c_navMainLink:         #000000;
 $c_navMainLinkHover:    #ffffff;
-$c_navMainLinkBg:       #cbeeef;
-$c_navMainLinkBgHover:  #f6aa51;
-$c_navMainBgActive:     #f6aa51;
+$c_navMainLinkBg:       #c5e89c;
+$c_navMainLinkBgHover:  #db363f;
+$c_navMainBgActive:     #db363f;
 $c_navMainTextActive:   #ffffff;
 $c_navMainLinkShadow:   #333333;
 $c_navMainBorder:       #ffffff;
-$c_navMainBorderBottom: #f6aa51;
+$c_navMainBorderBottom: #db363f;
 $c_navMainShadow:       #999999;
 
-$c_navSubBg:           #f6aa51;
+$c_navSubBg:           #db363f;
 $c_navSubText:         #ffffff;
 $c_navSubLink:         #ffffff;
 $c_navSubLinkHover:    #ffffff;
-$c_navSubLinkBg:       #cbeeef;
-$c_navSubLinkBgHover:  #1799b8;
-$c_navSubLinkActive:   #cbeeef;
+$c_navSubLinkBg:       #c5e89c;
+$c_navSubLinkBgHover:  #219149;
+$c_navSubLinkActive:   #c5e89c;
 $c_navSubBorder:       #ffffff;
-$c_navSubBorderBottom: #f6aa51;
+$c_navSubBorderBottom: #db363f;
 
 // mobile menu Sidr
 $sidr-background:               #e2e2e2;
@@ -108,14 +112,14 @@ $c_sidr_boxShadow:              #999999;
 // main content
 $c_mainBg:              #ffffff;
 $c_mainText:            #000000;
-$c_mainLink:            #1799b8;
-$c_mainLinkHover:       #f6aa51;
-$c_mainH1:              #f6aa51;
-$c_mainH1Hover:         #1799b8;
-$c_mainH2:              #f6aa51;
-$c_mainH2Hover:         #1799b8;
-$c_mainH3:              #f6aa51;
-$c_mainH3Hover:         #1799b8;
+$c_mainLink:            #219149;
+$c_mainLinkHover:       #db363f;
+$c_mainH1:              #db363f;
+$c_mainH1Hover:         #219149;
+$c_mainH2:              #db363f;
+$c_mainH2Hover:         #219149;
+$c_mainH3:              #db363f;
+$c_mainH3Hover:         #219149;
 $c_mainH4:              #000000;
 $c_mainH4Hover:         #333333;
 $c_mainH5:              #000000;
@@ -128,8 +132,8 @@ $c_taxonomyIntroH1:     #666666;
 
 // blockquote
 $c_BlockquoteText:      #333333;
-$c_BlockquoteLink:      #1799b8;
-$c_BlockquoteLinkHover: #f6aa51;
+$c_BlockquoteLink:      #219149;
+$c_BlockquoteLinkHover: #db363f;
 $c_BlockquoteBorder:    #dddddd;
 $c_BlockquoteBg:        #eeeeee;
 $c_blockquoteBefore:    #999999;
@@ -146,28 +150,28 @@ $c_inputTextPlaceholder:#999999;
 
 $c_inputSubmitText:     #ffffff;
 $c_inputSubmitTextHover:#ffffff;
-$c_inputSubmitBg:       #1799b8;
-$c_inputSubmitBgHover:  #f6aa51;
-$c_inputSubmitBorder:   #1799b8;
+$c_inputSubmitBg:       #219149;
+$c_inputSubmitBgHover:  #db363f;
+$c_inputSubmitBorder:   #219149;
 $c_inputSubmitTextShadow: #333333;
 $c_inputSubmitBoxShadow:  #ffffff;
 
 // comments
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
-$c_commentLink:         #f6aa51;
-$c_commentBorder:       #f6aa51;
+$c_commentLink:         #db363f;
+$c_commentBorder:       #db363f;
 $c_commentReplyBorder:  #dddddd;
 $c_commentByAuthorBg:   #eaf2f7;
 
 // author block
 $c_articleAuthorBg:     #eaf2f7;
-$c_articleAuthorH2:     #f6aa51;
-$c_articleAuthorH3:     #1799b8;
+$c_articleAuthorH2:     #db363f;
+$c_articleAuthorH3:     #219149;
 
 // call-to-action
-$c_ctaBg:               #6bbd1e;
-$c_ctaBorder:           #6bbd1e;
+$c_ctaBg:               #28a0ff;
+$c_ctaBorder:           #28a0ff;
 $c_ctaTextWhite:        #ffffff;
 $c_ctaTextShadow:       #333333;
 $c_ctaBoxShadow:        #ffffff;
@@ -181,13 +185,13 @@ $c_ctaTextBlack:        #000000;
 // tables
 $c_tableBg:             #ffffff;
 $c_tableText:           #000000;
-$c_tableRowAlt:         #cbeeef;
-$c_tableHeaderBg:       #1799b8;
+$c_tableRowAlt:         #c5e89c;
+$c_tableHeaderBg:       #219149;
 $c_tableHeaderText:     #ffffff;
-$c_tableLink:           #1799b8;
-$c_tableLinkHover:      #f6aa51;
+$c_tableLink:           #219149;
+$c_tableLinkHover:      #db363f;
 $c_tableBorder:         #dddddd;
-$c_tableCaption:        #1799b8;
+$c_tableCaption:        #219149;
 
 // code
 $c_codeBg:              #eeeeee;
@@ -201,18 +205,18 @@ $c_markText:            #000000;
 $c_sidebarBg:           #ffffff;
 $c_sidebarText:         #000000;
 $c_sidebarLink:         #000000;
-$c_sidebarLinkHover:    #1799b8;
-$c_sidebarLinkArrow:    #1799b8;
-$c_sidebarH3:           #1799b8;
+$c_sidebarLinkHover:    #219149;
+$c_sidebarLinkArrow:    #219149;
+$c_sidebarH3:           #219149;
 $c_sidebarH3Bg:         #eeeeee;
 $c_sidebarH4:           #666666;
 $c_sidebarH4Bg:         #ffffff;
 
 // footerwidgets
 $c_footerWidgetsBg:       #eeeeee;
-$c_footerWidgetsBorderTop:#eaf6f4;
+$c_footerWidgetsBorderTop:#ecf7bf;
 $c_footerWidgetsText:     #000000;
-$c_footerWidgetsLink:     #1799b8;
+$c_footerWidgetsLink:     #219149;
 $c_footerWidgetsLinkHover:#000000;
 $c_footerWidgetsH3:       #666666;
 $c_footerWidgetsH4:       #666666;
@@ -222,6 +226,6 @@ $c_footerBg:            #e2e2e2;
 $c_footerBorderTop:     #cccccc;
 $c_footerText:          #000000;
 $c_footerLink:          #000000;
-$c_footerLinkHover:     #f6aa51;
+$c_footerLinkHover:     #db363f;
 $c_footerH3:            #000000;
 $c_footerH4:            #000000;

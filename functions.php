@@ -13,6 +13,11 @@ add_action( 'genesis_setup', 'child_theme_setup', 15 );
  *
  */
 function child_theme_setup() {
+	global $content_width;
+
+	// Defines the content width of the content-sidebar design, as that's the default and this is needed for oEmbed.
+	$content_width = 560;
+
 	// Used for defaults in for instance the banner widget.
 	define( 'YST_SIDEBAR_WIDTH', 261 );
 

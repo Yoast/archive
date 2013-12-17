@@ -12,6 +12,9 @@
 // cta                  #6bbd1e
 // footer               #e2e2e2
 
+// #yoast-after-header-container check in list
+$c_ListCheckImage:      "../images/li-check-WarmBlue.png";
+
 // general
 $c_bodyTopLine:         #ec9e61;
 
@@ -43,12 +46,13 @@ $c_pagenavHoverLink:    #ffffff;
 $c_pagenavActiveBg:     #b3d7e6;
 $c_pagenavActiveLink:   #ffffff;
 
-$c_metaAtPost:          #333333;
+$c_metaAtPost:          #666666;
 $c_metaAtPostBorder:    #dddddd;
 $c_linkToArchives:      #028aaf;
 $c_commentHTMLtags:     #b2b8b8;
 
 $c_hrLine:              #e25918;
+$c_borderImg:           #b2b8b8;
 $c_randLine:            #b2b8b8; // random grey line
 
 $c_selectionText:       #028aaf;
