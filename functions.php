@@ -547,11 +547,13 @@ function yst_display_logo() {
 			?>
 			@media ( max-width: 640px ) {
 				/* @TODO: Needs to be fixed! Just temporary code. */
-				header.site-header {
+				.site-container {
+                    padding-top:170px; /* img height - 41 if not logged in */
+                    padding-top:124px; /* img height - 41 - 46 if logged in */
 					background-image: url( <?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?> );
 					background-repeat: no-repeat;
 					background-position: 50% 0;
-					background-size: 150px 150px;
+					background-size: auto;
 				}
 			}
 
