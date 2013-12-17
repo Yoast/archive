@@ -2854,10 +2854,17 @@ table {
   .wpseo-opening-hours {
     margin:0 10px;
     width:92%;
-    .time {
-      font: {
-        size:$f_tableSmall-px;
-        size:$f_tableSmall;
+    tbody {
+      border:0;
+    }
+    td {
+      border:0;
+      padding:0;
+      &.time {
+        font: {
+          size:$f_tableSmall-px;
+          size:$f_tableSmall;
+        }
       }
     }
   }
