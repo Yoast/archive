@@ -98,10 +98,10 @@ if ( ! class_exists( 'YST_User_Profile_Widget' ) ) {
 
 			//* If posts link option checked, add posts link to output
 			if ( $instance['posts_link'] )
-				printf( '<div class="posts_link posts-link"><a href="%s">%s</a></div>', get_author_posts_url( $instance['user'] ), __( 'View My Blog Posts', 'yoast-theme' ) );
+				printf( '<p class="posts_link posts-link yst-social-readmore"><a href="%s">%s</a></p>', get_author_posts_url( $instance['user'] ), __( 'View My Blog Posts', 'yoast-theme' ) );
 
 			if ( '1' === $instance['show_twitter'] || '1' === $instance['show_facebook'] || '1' === $instance['show_googleplus'] || '1' === $instance['show_pinterest'] || '1' === $instance['show_linkedin'] ) {
-				echo '<div class="">Or read more on</div><div class="social">';
+				echo '<p class="yst-social-readmore">Or read more on</p><div class="social">';
 				if ( '1' === $instance['show_twitter'] && '' != get_the_author_meta( 'twitter', $instance['user'] ) ) {
 					printf( '<div class="%s" id="%s"><a href="http://twitter.com/%s"></a></div>', 'btn-tw', $this->get_field_id( 'show_twitter' ), get_the_author_meta( 'twitter', $instance['user'] ) );
 				}
