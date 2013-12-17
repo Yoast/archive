@@ -11,6 +11,13 @@
  * Based on 'Genesis User Profile widget' by author StudioPress.
  */
 
+/* Unregister Genesis User Profile Widget */
+function remove_genesis_user_profile_widget() {
+	unregister_widget('Genesis_User_Profile_Widget');
+}
+
+add_action( 'widgets_init', 'remove_genesis_user_profile_widget' );
+
 if ( ! class_exists( 'YST_User_Profile_Widget' ) ) {
 	class YST_User_Profile_Widget extends WP_Widget {
 
@@ -45,7 +52,7 @@ if ( ! class_exists( 'YST_User_Profile_Widget' ) ) {
 			);
 
 			$widget_ops = array(
-				'classname'   => 'yst-user-profile',
+				'classname'   => 'user-profile',
 				'description' => __( 'Show a user profile to your visitors and/or guide them to that users\' social media.', 'yoast-theme' ),
 			);
 
