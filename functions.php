@@ -510,14 +510,16 @@ add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
  * @since 1.0.0
  */
 function yst_display_logo() {
-	$yst_logo        = genesis_get_option( 'yst-logo', 'child-settings' );
-	$yst_mobile_logo = genesis_get_option( 'yst-mobile-logo', 'child-settings' );
+	$yst_logo                = genesis_get_option( 'yst-logo', 'child-settings' );
+	$yst_mobile_logo         = genesis_get_option( 'yst-mobile-logo', 'child-settings' );
+	$yst_use_alt_mobile_logo = absint( genesis_get_option( 'yst-use-alt-mobile-logo', 'child-settings' ) );
 
 	if ( ( isset( $yst_logo ) && ! empty ( $yst_logo ) ) || ( ( isset( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) ) ) {
 		?>
 		<style text="text/css">
 			<?php
-			if (isset($yst_logo) && ! empty ($yst_logo)) {
+			/* Use normal logo when screensize >= 640px */
+			if ( isset ( $yst_logo ) && ! empty ( $yst_logo ) ) {
 			?>
 			@media (min-width: 640px) {
 				.site-header .title-area {
@@ -527,13 +529,29 @@ function yst_display_logo() {
 
 			<?php
 			}
-			if (isset($yst_mobile_logo) && ! empty ($yst_mobile_logo)) {
+			/* Use mobile logo positioning when screensize < 640px and alternative mobile logo is set to 0 */
+			if ( ( isset ( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) && ( ! isset ( $yst_use_alt_mobile_logo ) || empty ( $yst_use_alt_mobile_logo ) ) ) {
 			?>
-			@media (max-width: 640px) {
+			@media ( max-width: 640px ) {
 				header.site-header {
-					background-image: url(<?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?>);
+					background-image: url( <?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?> );
 					background-repeat: no-repeat;
 					background-position: 50% 0;
+				}
+			}
+
+			<?php
+			}
+			/* Use mobile logo positioning when screensize < 640px and alternative mobile logo is set to 1 */
+			if ( ( isset ( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) && ( isset ( $yst_use_alt_mobile_logo ) && ! empty ( $yst_use_alt_mobile_logo ) ) ) {
+			?>
+			@media ( max-width: 640px ) {
+				/* @TODO: Needs to be fixed! Just temporary code. */
+				header.site-header {
+					background-image: url( <?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?> );
+					background-repeat: no-repeat;
+					background-position: 50% 0;
+					background-size: 150px 150px;
 				}
 			}
 
