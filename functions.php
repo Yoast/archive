@@ -150,6 +150,8 @@ function child_theme_setup() {
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
 
 	add_action( 'genesis_header', 'yst_mobile_nav' );
+	add_action( 'wp_head', 'yst_display_logo' );
+	add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
 
 	add_action( 'genesis_after_header', 'yst_after_header_genesis' );
 	add_action( 'genesis_after_content_sidebar_wrap', 'yst_fullwidth_sitebars_genesis' );
@@ -165,13 +167,26 @@ function child_theme_setup() {
 
 	add_action( 'wp_footer', 'yst_activate_sidr_and_sticky_menu' );
 
-// Add Read More Link to Excerpts
+	// Add Read More Link to Excerpts
 	add_filter( 'excerpt_more', 'yst_get_read_more_link' );
 	add_filter( 'the_content_more_link', 'yst_get_read_more_link' );
 
+	// Footer stuff
 	add_filter( 'genesis_footer_creds_text', 'yst_footer_creds_text' );
 
-	add_filter( 'genesis_comment_list_args', 'yst_comments_gravatar' );
+	// Change the comment handling function
+	add_filter( 'genesis_comment_list_args', 'yst_comment_list_args' );
+
+	// Stuff with images
+	add_filter( 'genesis_pre_get_option_image_size', 'yst_override_content_thumbnail_setting' );
+	add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
+
+	add_filter( 'user_contactmethods', 'yst_modify_contact_methods' );
+	add_filter( 'genesis_post_meta', 'yst_post_meta_filter' );
+
+	add_filter( 'genesis_search_text', 'yst_change_search_text' );
+	add_filter( 'genesis_next_link_text', 'yst_add_spacing_next_prev' );
+	add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
 }
 
 /**
@@ -244,6 +259,9 @@ function yst_after_header_genesis() {
 	}
 }
 
+/**
+ * @todo add documentation
+ */
 function yst_fullwidth_sitebars_genesis() {
 	if ( 'full-width-content' == genesis_site_layout() ) {
 		echo '<div id="yoast-fullwidth-bottom-container"><div class="wrap">';
@@ -263,6 +281,9 @@ function yst_fullwidth_sitebars_genesis() {
 	}
 }
 
+/**
+ * @todo add documentation
+ */
 function yst_after_post_sitebar_genesis() {
 	if ( is_active_sidebar( 'yoast-after-post' ) && is_single() ) {
 		echo '<div id="yoast-after-post-container"><div class="wrap">';
@@ -293,7 +314,7 @@ function yst_add_top_right_area() {
  * @return string
  */
 function yst_get_read_more_link() {
-	return '...&nbsp;<div class="exerptreadmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>';
+	return '&hellip; <div class="exerptreadmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>';
 }
 
 /**
@@ -413,28 +434,11 @@ function yoast_term_archive_intro() {
 }
 
 /**
- * Changes the gravatar size to 100
- *
- * @param array $args
- *
- * @return array
- *
- * @todo make sure this is filterable.
- */
-function yst_comments_gravatar( $args ) {
-	$args['avatar_size'] = 100;
-
-	return $args;
-}
-
-/**
  * Fix Search tekst
  */
 function yst_change_search_text() {
 	return __( 'Search', 'yoast-theme' ) . '&#x02026;';
 }
-
-add_filter( 'genesis_search_text', 'yst_change_search_text' );
 
 /**
  * Add back to top link
@@ -445,14 +449,15 @@ function yst_add_backtotop() {
 	echo '<p class="back-to-top"><a href="#">' . __( 'Back to top', 'yoast-theme' ) . ' &#9652;</a></p>';
 }
 
+/**
+ * @todo add documentation
+ */
 function yst_conditional_add_backtotop() {
 	if ( is_single() ) {
 		add_action( 'genesis_entry_footer', 'yst_add_backtotop', 14 );
 	}
 	add_action( 'genesis_after_endwhile', 'yst_add_backtotop', 14 );
 }
-
-add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
 
 /**
  * @param $profile_fields
@@ -467,9 +472,6 @@ function yst_modify_contact_methods( $profile_fields ) {
 
 	return $profile_fields;
 }
-
-add_filter( 'user_contactmethods', 'yst_modify_contact_methods' );
-
 
 /**
  * Change default image alignment
@@ -490,8 +492,6 @@ function yst_filter_content_archive_image( $img, $args ) {
 
 	return $img;
 }
-
-add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
 
 /**
  * Use the logo's set in the Child Theme Settings
@@ -558,8 +558,6 @@ function yst_display_logo() {
 	}
 }
 
-add_action( 'wp_head', 'yst_display_logo' );
-
 /**
  * Open wrapper around main content for alignment
  * @fixme: can be combined with yst_add_wrapper_after_content() in one function.
@@ -576,9 +574,6 @@ function yst_add_wrapper_after_content() {
 	echo '</div>';
 }
 
-add_action( 'genesis_before_loop', 'yst_add_wrapper_before_content' );
-add_action( 'genesis_after_loop', 'yst_add_wrapper_after_content' );
-
 /**
  * Comment List Arguments, modify to change the callback function
  *
@@ -591,8 +586,6 @@ function yst_comment_list_args( $args ) {
 
 	return $args;
 }
-
-add_filter( 'genesis_comment_list_args', 'yst_comment_list_args' );
 
 /**
  * Comment Callback Function
@@ -675,8 +668,6 @@ function yst_post_meta_filter( $post_meta ) {
 	}
 }
 
-add_filter( 'genesis_post_meta', 'yst_post_meta_filter' );
-
 /**
  * By default, Genesis lack a space after the raquo and laquo, this adds it.
  *
@@ -691,9 +682,6 @@ function yst_add_spacing_next_prev( $link ) {
 	return $link;
 }
 
-add_filter( 'genesis_next_link_text', 'yst_add_spacing_next_prev' );
-add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
-
 /**
  * Override the image size for full-width designs, user settings are now completely ignored.
  */
@@ -706,4 +694,3 @@ function yst_override_content_thumbnail_setting( $size = null ) {
 	return $size;
 }
 
-add_filter( 'genesis_pre_get_option_image_size', 'yst_override_content_thumbnail_setting' );
