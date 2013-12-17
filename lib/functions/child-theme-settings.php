@@ -58,9 +58,10 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 
 		// Set the default values
 		$default_settings = array(
-			'footer'          => 'Get this theme at <a href="http://yoast.com" name="Theme Creator Yoast">Yoast.com</a>',
-			'yst-logo'        => '',
-			'yst-mobile-logo' => '',
+			'footer'                  => 'Get this theme at <a href="http://yoast.com" name="Theme Creator Yoast">Yoast.com</a>',
+			'yst-logo'                => '',
+			'yst-mobile-logo'         => '',
+			'yst-use-alt-mobile-logo' => '0',
 		);
 
 		// Create the Admin Page
@@ -84,6 +85,7 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 				'footer',
 				'yst-logo',
 				'yst-mobile-logo',
+				'yst-use-alt-mobile-logo',
 			) );
 	}
 
@@ -123,7 +125,8 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 	 * @since 1.0.0
 	 */
 	function yst_logos_metabox() {
-		echo apply_filters( 'yst_logo_title', '<h4>Upload your logo</h4>' );
+		/* Add upload and preview for regular logo */
+		echo apply_filters( 'yst_logo_title', '<h4>' . __( 'Upload your logo', 'yoast-theme' ) . '</h4>' );
 		echo '<p class="yst-logo-explanation">' . __( 'Your logo will be displayed using a fixed width of 360 pixels. The preferred height of the image is 144 pixels. For the best result, use an image with these dimensions.', 'yoast-theme' ) . ' </p>';
 		?>
 		<label for="upload_image">
@@ -133,12 +136,14 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 		<?php
 		$yst_logo = $this->get_field_value( 'yst-logo' );
 		if ( isset( $yst_logo ) && ! empty ( $yst_logo ) ) {
-			echo '<p class="preview_logos">';
-			//echo apply_filters( 'yst_logo_preview', '<h4>Preview Mobile logo</h4>' );
+			echo '<p class="preview_logo">';
 			echo '<div id="yst_logo_preview"><em>' . __( 'Your current logo:', 'yoast-theme' ) . '</em><br /><img src="' . esc_html( $this->get_field_value( 'yst-logo' ) ) . '" alt="' . __( 'Logo Preview', 'yoast-theme' ) . '" style="width:360px;" /></div>';
 			echo '</p>';
 		}
-		echo apply_filters( 'yst_mobile_logo_title', '<h4>Upload your mobile logo</h4>' );
+
+		/* @TODO: Add help-information about prefered sizes */
+		/* Add upload and preview for Mobile logo */
+		echo apply_filters( 'yst_mobile_logo_title', '<h4>' . __( 'Upload your mobile logo', 'yoast-theme' ) . '</h4>' );
 		echo '<p class="yst-mobile-logo-explanation">' . __( 'To prevent loading an unnecessary large logo on mobile devices, you can upload a small version of your logo here.', 'yoast-theme' ) . '<br />' . __( 'Your mobile logo will be displayed using a width of 230 pixels and a height of 36 pixels to fit the mobile version of your website. For the best result, use an image with these dimensions.', 'yoast-theme' ) . ' </p>';
 		?>
 		<label for="upload_mobile_image">
@@ -148,10 +153,13 @@ class Child_Theme_Settings extends Genesis_Admin_Boxes {
 		<?php
 		$yst_mobile_logo = $this->get_field_value( 'yst-mobile-logo' );
 		if ( isset( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) {
-			echo '<p class="preview_logos">';
+			echo '<p class="preview_logo">';
 			echo '<div id="yst_mobile_logo_preview"><em>' . __( 'Your current mobile logo:', 'yoast-theme' ) . '</em><br /><img src="' . esc_html( $this->get_field_value( 'yst-mobile-logo' ) ) . '" alt="' . __( 'Mobile Logo Preview', 'yoast-theme' ) . '" style="max-width:230px;max-height:36px;" /></div>';
 			echo '</p>';
 		}
+
+		/* Add hidden field for alternative mobile logo */
+		echo '<input type="hidden" id="yst-use-alt-mobile" name="' . esc_html( $this->get_field_name( 'yst-use-alt-mobile-logo' ) ) . '" value="' . esc_html( $this->get_field_value( 'yst-use-alt-mobile-logo' ) ) . '"/>';
 	}
 }
 

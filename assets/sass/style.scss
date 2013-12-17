@@ -1512,6 +1512,14 @@ table {
     bottom: 1px solid $c_hrLine;
   }
 }
+.single { // reduce whitespace below back-to-top for single()
+  .post {
+    padding: {
+      bottom:0;
+    }
+  }
+}
+
 .entry {
   background: {
     color: $c_mainBg;
@@ -2479,7 +2487,41 @@ table {
       &[type="submit"] {
         font: {
           size: 12px;
-        };
+        }
+      }
+    }
+  }
+}
+/**
+ * Newletter Widget additions for after-post area
+ */
+
+.yoast-after-post-widget {
+  border: {
+    width:1px 0;
+    style:solid;
+    color:$c_hrLine;
+  }
+  padding: {
+    top: 20px;
+  }
+  margin: {
+    bottom:36px;
+  }
+  .widget-yns {
+    .widget-title,
+    p,
+    form {
+      padding: {
+        left:0;
+      }
+    }
+    .widget-title {
+      margin: {
+        bottom:0;
+      }
+      background: {
+        color: $c_mainBg;
       }
     }
   }
@@ -2872,6 +2914,7 @@ table {
     td {
       border:0;
       padding:0;
+      line-height:1.5em;
       &.time {
         font: {
           size:$f_tableSmall-px;
