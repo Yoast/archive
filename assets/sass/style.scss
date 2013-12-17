@@ -24,16 +24,16 @@
 
 // Import defaults for this theme
 @import "partials/reset";
+// @import "partials/colorsAutumn";
+// @import "partials/colorsBusinessBlue";
+// @import "partials/colorsCupcake";
+// @import "partials/colorsIceBlue";
+// @import "partials/colorsMediterranean";
+// @import "partials/colorsSand";
+// @import "partials/colorsSpring";
+// @import "partials/colorsSummer";
 @import "partials/colorsWarmBlue";
-// @import "partials/colorSet2";
-// @import "partials/colorSet3";
-// @import "partials/colorSet4";
-// @import "partials/colorSet5";
-// @import "partials/colorSet6";
-// @import "partials/colorSet7";
-// @import "partials/colorSet8";
-// @import "partials/colorSet9";
-// @import "partials/colorSet10";
+// @import "partials/colorsWarmpurple";
 @import "partials/dimensions";
 @import "partials/fonts";
 
@@ -216,7 +216,11 @@ sub {
   bottom:-0.25em;
 }
 img {
-  border:0;
+  border: {
+    width: 1px;
+    style: solid;
+    color: $c_borderImg;
+  }
 }
 svg:not(:root) {
   overflow:hidden;
@@ -525,7 +529,7 @@ input {
     style: solid;
     color: $c_inputBorder;
   }
-  @include box-shadow(1px 1px 3px $c_inputBoxShadow inset);
+  // @include box-shadow(1px 1px 3px $c_inputBoxShadow inset);
   color: $c_inputText;
   font: {
     size: $f_inputText-px;
@@ -1636,10 +1640,10 @@ table {
       }
     }
     img.alignleft {
-      margin: 0 24px 10px 0;
+      margin: 7px 24px 10px 0;
     }
     img.alignright {
-      margin: 0 0 24px 10px;
+      margin: 7px 0 24px 10px;
     }
   }
   .entry-footer {
@@ -1799,6 +1803,13 @@ table {
     size: $f_pagenav-px;
     size: $f_pagenav;
     weight:700;
+  }
+  div.pagination-next,
+  div.pagination-previous {
+    font: {
+      size: $f_main-px;
+      size: $f_main;
+    }
   }
   margin: 40px 0;
   li {
@@ -1996,6 +2007,10 @@ table {
  * SIDEBAR AND WIDGETS
  **********************************/
 
+.widget {
+  clear:both;
+}
+
 /**
  * Genesis Featured Content Widget
  */
@@ -2012,7 +2027,7 @@ table {
   img {
     &.entry-image {
       display:block;
-      padding: {
+      margin: {
         bottom: 10px;
       }
     }
@@ -2123,13 +2138,25 @@ table {
   background: {
     color: $c_headerBg;
   }
+  padding: {
+    top: 24px; // this will be overwritten for Simple Image Plugin, so the image will be fixed to the top
+  }
+  .widget_simpleimage {
+    .simple-image {
+      img {
+        margin: {
+          top: -24px;
+        }
+      }
+    }
+  }
   > .wrap {
     padding: {
       bottom: 6px;
     }
   }
   .widget-title {
-    margin: 24px 0 0;
+    margin: 0;
     color: $c_headerH3;
     padding: 0 0 10px;
     + div {
@@ -2155,12 +2182,15 @@ table {
   li {
     list: {
       style: {
-        image: url(../images/li-check.png);
+        image: url($c_ListCheckImage);
       }
     }
     margin: {
       left: 24px;
     }
+  }
+  img {
+    border: 0;
   }
   .yoast-after-header-widget {
     float: left;
@@ -2367,7 +2397,6 @@ table {
     }
   }
 }
-widgettitle,
 .widget-title {
   font: {
     size:$f_sidebarH3-px;
@@ -2470,104 +2499,139 @@ widgettitle,
 }
 
 /**
- * Social Media Widget
+ * Social Media Widget / User Profile
  */
 
 .widget_socials {
   margin: {
     bottom: 40px;
   }
-  #yst_social_widget {
+}
+#yst_social_widget,
+.yst-user-profile .social {
+  line-height:32px;
+  margin: {
+    bottom: 40px;
+  }
+  padding: {
+    left: 10px;
+  }
+  a {
+    display:block;
+    width:32px;
+    height:32px;
+    float:left;
+    margin: {
+      right:10px;
+    }
+    background: {
+      image: url(../images/social_sprites.png);
+      repeat: no-repeat;
+    }
+  }
+  .btn-fb,
+  .btn-fb a {
+    background: {
+      position: -40.000030517578125px -80.00001525878906px;
+    }
+  }
+  .btn-gp,
+  .btn-gp a {
+    background: {
+      position: -41.000030517578125px -40.00001525878906px;
+    }
+  }
+  .btn-li,
+  .btn-li a {
+    background: {
+      position: -40.000030517578125px 0;
+    }
+  }
+  .btn-pin,
+  .btn-pin a {
+    background: {
+      position: 0 -121.00001525878906px;
+    }
+  }
+  .btn-rss,
+  .btn-rss a {
+    background: {
+      position: 0 -80.00001525878906px;
+    }
+  }
+  .btn-tw,
+  .btn-tw a {
+    background: {
+      position: 0 -40px ;
+    }
+  }
+  .btn-yt,
+  .btn-yt a {
+    background: {
+      position: 0 0;
+    }
+  }
+  .ysw_url {
+    border: {
+      spacing: 0;
+    }
+    width: 100%;
+    clear: both;
+    margin: 0;
+  }
+  .ysw_flw_wrapper {
+    z-index: 10;
+    margin: {
+      top:75%;
+      right:-5px;
+    }
+    text: {
+      align:center;
+    }
+    min-width: 20px;
+    float: right;
+    background: {
+      color: $c_ctaBgGrey; // fallback
+    }
+    @include background-image(linear-gradient($c_ctaBgGrey, $c_ctaBgWhite));
+    vertical-align: bottom;
+    padding: 0 1px;
+    line-height: 1em;
+    border: {
+      width:1px;
+      style: solid;
+      color: $c_ctaBorderGrey;
+      radius: 5px;
+    }
+    .ysw_flw  {
+      color: $c_ctaTextBlack;
+      font: {
+        size: 0.7em;
+        weight: 300;
+      }
+    }
+  }
+}
+#yst_social_widget {
+  a {
+    margin: {
+      bottom: 20px;
+    }
+  }
+}
+.yst-user-profile {
+  .posts-link {
     padding: {
       left: 10px;
     }
-    a {
-      display:block;
-      width:32px;
-      height:32px;
-      float:left;
-      margin: {
-        right:10px;
-      }
-      background: {
-        image: url(../images/social_sprites.png);
-        repeat: no-repeat;
-      }
+    font: {
+      weight: 700;
     }
-    .btn-fb {
-      background: {
-        position: -40.000030517578125px -80.00001525878906px;
-      }
-    }
-    .btn-gp {
-      background: {
-        position: -41.000030517578125px -40.00001525878906px;
-      }
-    }
-    .btn-li {
-      background: {
-        position: -40.000030517578125px 0;
-      }
-    }
-    .SM_Pinterest_32x32 {
-      background: {
-        position: 0 -121.00001525878906px;
-      }
-    }
-    .btn-rss {
-      background: {
-        position: 0 -80.00001525878906px;
-      }
-    }
-    .btn-tw {
-      background: {
-        position: 0 -40px ;
-      }
-    }
-    .btn-yt {
-      background: {
-        position: 0 0;
-      }
-    }
-    .ysw_url {
-      border: {
-        spacing: 0;
-      }
-      width: 100%;
-      clear: both;
-      margin: 0;
-    }
-    .ysw_flw_wrapper {
-      z-index: 10;
-      margin: {
-        top:75%;
-        right:-5px;
-      }
-      text: {
-        align:center;
-      }
-      min-width: 20px;
-      float: right;
-      background: {
-        color: $c_ctaBgGrey; // fallback
-      }
-      @include background-image(linear-gradient($c_ctaBgGrey, $c_ctaBgWhite));
-      vertical-align: bottom;
-      padding: 0 1px;
-      line-height: 1em;
-      border: {
-        width:1px;
-        style: solid;
-        color: $c_ctaBorderGrey;
-        radius: 5px;
-      }
-      .ysw_flw  {
-        color: $c_ctaTextBlack;
-        font: {
-          size: 0.7em;
-          weight: 300;
-        }
-      }
+  }
+  .yst-social-readmore {
+    padding: {
+      bottom: 0;
+      left: 10px;
     }
   }
 }
@@ -2626,7 +2690,7 @@ widgettitle,
     }
   }
   .widget-title {
-    @extend widgettitle;
+    @extend .widget-title;
   }
   .tagcloud,
   .search-form {
