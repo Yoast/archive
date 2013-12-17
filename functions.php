@@ -139,7 +139,7 @@ function child_theme_setup() {
 		add_image_size( 'fullwidth-thumb', 290, 193, true );
 	}
 
-// Activate blogroll widget
+	// Activate blogroll widget
 	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
 	add_filter( 'stylesheet_uri', 'yst_stylesheet_uri', 10, 2 );
@@ -157,7 +157,7 @@ function child_theme_setup() {
 	add_action( 'genesis_after_content_sidebar_wrap', 'yst_fullwidth_sitebars_genesis' );
 	add_action( 'genesis_before_comments', 'yst_after_post_sitebar_genesis' );
 
-//* Reposition the breadcrumbs
+	// Reposition the breadcrumbs
 	add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 	remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 
@@ -233,14 +233,14 @@ function yst_after_header_genesis() {
 	if ( is_front_page() ) {
 		echo '<div id="yoast-after-header-container"><div class="wrap">';
 
-		$areas = array( 'yoast-after-header-1', 'yoast-after-header-2', 'yoast-after-header-3' );
+		$areas = array( '1', '2', '3' );
 		if ( 'sidebar-content' == genesis_site_layout() ) {
 			$areas = array_reverse( $areas );
 		}
 
 		foreach ( $areas as $area ) {
 			genesis_widget_area( $area, array(
-				'before' => '<div id="' . $area . '" class="yoast-after-header-widget">',
+				'before' => '<div id="yoast-after-header-' . $area . '" class="yoast-after-header-widget">',
 				'after'  => '</div>',
 			) );
 		}
@@ -265,18 +265,16 @@ function yst_after_header_genesis() {
 function yst_fullwidth_sitebars_genesis() {
 	if ( 'full-width-content' == genesis_site_layout() ) {
 		echo '<div id="yoast-fullwidth-bottom-container"><div class="wrap">';
-		genesis_widget_area( 'yoast-fullwidth-widgetarea-1', array(
-			'before' => '<div id="yoast-fullwidth-widgetarea-1" class="yoast-fullwidth-widget">',
-			'after'  => '</div>',
-		) );
-		genesis_widget_area( 'yoast-fullwidth-widgetarea-2', array(
-			'before' => '<div id="yoast-fullwidth-widgetarea-2" class="yoast-fullwidth-widget">',
-			'after'  => '</div>',
-		) );
-		genesis_widget_area( 'yoast-fullwidth-widgetarea-3', array(
-			'before' => '<div id="yoast-fullwidth-widgetarea-3" class="yoast-fullwidth-widget">',
-			'after'  => '</div>',
-		) );
+
+		$i = 1;
+		while ( $i < 4 ) {
+			genesis_widget_area( 'yoast-fullwidth-widgetarea-' . $i, array(
+					'before' => '<div id="yoast-fullwidth-widgetarea-' . $i . '" class="yoast-fullwidth-widget">',
+					'after'  => '</div>',
+				) );
+			$i ++;
+		}
+
 		echo '</div></div>';
 	}
 }
@@ -299,12 +297,10 @@ function yst_after_post_sitebar_genesis() {
  * Add top-right widget area for search-widget
  */
 function yst_add_top_right_area() {
-	if ( true ) {
-		genesis_widget_area( 'yoast-top-right', array(
-			'before' => '<div id="yoast-top-right" class="widget-area yoast-top-right-widget">',
-			'after'  => '</div>',
-		) );
-	}
+	genesis_widget_area( 'yoast-top-right', array(
+		'before' => '<div id="yoast-top-right" class="widget-area yoast-top-right-widget">',
+		'after'  => '</div>',
+	) );
 }
 
 /**
@@ -314,7 +310,7 @@ function yst_add_top_right_area() {
  * @return string
  */
 function yst_get_read_more_link() {
-	return '&hellip; <div class="exerptreadmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>';
+	return '&hellip; <div class="excerpt_readmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>';
 }
 
 /**
