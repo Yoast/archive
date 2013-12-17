@@ -713,10 +713,9 @@ add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
  * Override the image size for full-width designs, user settings are now completely ignored.
  */
 function yst_override_content_thumbnail_setting( $size = null ) {
-	$layout = genesis_site_layout();
 
-	if ( false !== strpos( $layout, 'full-width' ) ) {
-		$size = 'fullwidth-thumb';
+	if ( false !== strpos( genesis_site_layout(), 'full-width' ) ) {
+		return 'fullwidth-thumb';
 	}
 
 	return $size;
