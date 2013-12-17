@@ -99,7 +99,6 @@ a {
   img {
     margin: {
       bottom:-4px;
-      bottom: -0.4rem;
     }
   }
   &:focus {
@@ -130,7 +129,6 @@ ul {
 blockquote {
   color: $c_BlockquoteText;
   margin: 40px 40px 24px;
-  margin: 4rem 4rem 2.4rem;
   ::before {
     color: $c_blockquoteBefore;
     content: "\201C";
@@ -336,7 +334,6 @@ header {
     }
     line-height: 1;
     margin: 0 0 8px;
-    margin: 0 0 0.8rem;
     text: {
       transform: none;
     }
@@ -357,7 +354,6 @@ header {
   section.widget {
     margin: {
       bottom: 10px;
-      bottom: 1rem;
     }
     &.widget_search {
      form {
@@ -425,7 +421,6 @@ header {
   .content {
     padding: {
       left: 60px;
-      left: 6rem;
     }
   }
 }
@@ -2221,6 +2216,20 @@ table {
 }
 #yoast-after-header-3 {
   width: $d_sidebar;
+}
+.sidebar-content {
+  #yoast-after-header-container {
+    #yoast-after-header-1 {
+      margin: {
+        left: 60px;
+        right: 60px;
+      }
+    }
+    #yoast-after-header-2 {
+      float:right;
+      margin: 0;
+    }
+  }
 }
 
 /**
