@@ -1471,70 +1471,66 @@ table td {
   background-color: white;
   margin-bottom: 40px;
 }
-/* line 1522, ../sass/style.scss */
-.entry .back-to-top {
-  text-align: right;
-}
 
-/* line 1527, ../sass/style.scss */
+/* line 1524, ../sass/style.scss */
 .entry-content a {
   color: #028aaf;
   font-weight: 700;
   text-decoration: underline;
 }
-/* line 1535, ../sass/style.scss */
+/* line 1532, ../sass/style.scss */
 .entry-content a:hover {
   color: #e25918;
   text-decoration: none;
 }
-/* line 1542, ../sass/style.scss */
+/* line 1539, ../sass/style.scss */
 .entry-content p {
   margin-bottom: 26px;
 }
-/* line 1547, ../sass/style.scss */
+/* line 1544, ../sass/style.scss */
 .entry-content ol {
   margin-bottom: 26px;
   margin-left: 40px;
 }
-/* line 1552, ../sass/style.scss */
+/* line 1549, ../sass/style.scss */
 .entry-content ol li {
   list-style-type: decimal;
 }
-/* line 1555, ../sass/style.scss */
+/* line 1552, ../sass/style.scss */
 .entry-content ol ol {
   margin-bottom: 0;
 }
-/* line 1561, ../sass/style.scss */
+/* line 1558, ../sass/style.scss */
 .entry-content ul {
   margin-bottom: 26px;
   margin-left: 40px;
 }
-/* line 1566, ../sass/style.scss */
+/* line 1563, ../sass/style.scss */
 .entry-content ul li {
   list-style-type: disc;
 }
-/* line 1569, ../sass/style.scss */
+/* line 1566, ../sass/style.scss */
 .entry-content ul ul {
   margin-bottom: 0;
 }
-/* line 1576, ../sass/style.scss */
+/* line 1573, ../sass/style.scss */
 .entry-content .attachment a {
   border: 0;
 }
-/* line 1581, ../sass/style.scss */
+/* line 1578, ../sass/style.scss */
 .entry-content .gallery a {
   border: none;
 }
-/* line 1585, ../sass/style.scss */
+/* line 1582, ../sass/style.scss */
 .entry-content .search-form {
   width: 50%;
 }
-/* line 1588, ../sass/style.scss */
+/* line 1585, ../sass/style.scss */
 .entry-content .exerptreadmore {
   text-align: right;
   text-decoration: none;
 }
-/* line 1593, ../sass/style.scss */
+/* line 1590, ../sass/style.scss */
 .entry-content .exerptreadmore a {
   text-align: right;
   text-decoration: none;
@@ -1542,65 +1538,70 @@ table td {
   font-weight: 700;
   border-bottom: none;
 }
-/* line 1605, ../sass/style.scss */
+/* line 1602, ../sass/style.scss */
 .entry-content .exerptreadmore a:hover {
   font-weight: 700;
   color: #e25918;
 }
-/* line 1611, ../sass/style.scss */
+/* line 1608, ../sass/style.scss */
 .entry-content .exerptreadmore a:after {
   content: '»';
   padding-left: 5px;
   font-size: 1.2em;
 }
 
-/* line 1628, ../sass/style.scss */
+/* line 1620, ../sass/style.scss */
+.back-to-top {
+  text-align: right;
+}
+
+/* line 1627, ../sass/style.scss */
 .blog .content {
   width: 620px;
 }
-/* line 1632, ../sass/style.scss */
+/* line 1631, ../sass/style.scss */
 .blog.sidebar-content .content {
   width: 740px;
 }
-/* line 1637, ../sass/style.scss */
+/* line 1636, ../sass/style.scss */
 .blog .entry-content p {
   margin-bottom: 0;
 }
-/* line 1642, ../sass/style.scss */
+/* line 1641, ../sass/style.scss */
 .blog .entry-content img.alignleft {
   margin: 7px 24px 10px 0;
 }
-/* line 1645, ../sass/style.scss */
+/* line 1644, ../sass/style.scss */
 .blog .entry-content img.alignright {
   margin: 7px 0 24px 10px;
 }
-/* line 1649, ../sass/style.scss */
+/* line 1648, ../sass/style.scss */
 .blog .entry-footer {
   display: none;
   visibility: hidden;
 }
 
-/* line 1656, ../sass/style.scss */
+/* line 1655, ../sass/style.scss */
 .term-intro {
   padding-bottom: 24px;
 }
-/* line 1660, ../sass/style.scss */
+/* line 1659, ../sass/style.scss */
 .term-intro h1 {
   color: #666666;
 }
-/* line 1663, ../sass/style.scss */
+/* line 1662, ../sass/style.scss */
 .term-intro p {
   color: #333333;
   font-weight: 700;
 }
 
-/* line 1673, ../sass/style.scss */
+/* line 1672, ../sass/style.scss */
 .full-width-content .content {
   width: 990px;
   max-width: 100%;
   float: none;
 }
-/* line 1682, ../sass/style.scss */
+/* line 1681, ../sass/style.scss */
 .full-width-content .content p,
 .full-width-content .content ul,
 .full-width-content .content ol,
@@ -1610,36 +1611,37 @@ table td {
   max-width: 740px;
 }
 
-/* line 1687, ../sass/style.scss */
+/* line 1686, ../sass/style.scss */
 .quote-caption {
   margin-bottom: 26px;
 }
 
-/* line 1692, ../sass/style.scss */
+/* line 1691, ../sass/style.scss */
 .entry-meta {
   color: #666666;
   font-size: 14px;
   font-size: 0.875rem;
 }
-/* line 1698, ../sass/style.scss */
+/* line 1697, ../sass/style.scss */
 .entry-meta a {
   font-weight: 700;
 }
 
-/* line 1705, ../sass/style.scss */
+/* line 1704, ../sass/style.scss */
 .entry-header .entry-meta {
   margin-bottom: 26px;
   margin-top: 5px;
   font-weight: 700;
 }
-/* line 1713, ../sass/style.scss */
+/* line 1712, ../sass/style.scss */
 .entry-header .entry-meta .entry-author-name {
   text-transform: capitalize;
 }
 
-/* line 1719, ../sass/style.scss */
-.entry-footer .entry-meta {
-  padding: 32px 40px 8px 0;
+/* line 1718, ../sass/style.scss */
+.entry-footer p.entry-meta {
+  margin: 0;
+  padding: 0;
 }
 
 /* line 1724, ../sass/style.scss */
@@ -2650,7 +2652,12 @@ table td {
   margin: 0 10px;
   width: 92%;
 }
-/* line 2874, ../sass/style.scss */
+/* line 2873, ../sass/style.scss */
+.widget-wrap .wpseo-opening-hours .time {
+  font-size: 14px;
+  font-size: 0.875rem;
+}
+/* line 2880, ../sass/style.scss */
 .widget-wrap .wpseo-map-canvas {
   width: 100% !important;
 }
@@ -2660,7 +2667,7 @@ table td {
  * @plugin(title: Jetpack by WordPress.com)
  * @link http://wordpress.org/plugins/jetpack/
  */
-/* line 2885, ../sass/style.scss */
+/* line 2891, ../sass/style.scss */
 img#wpstats {
   display: none;
   visibility: hidden;
@@ -2672,7 +2679,7 @@ img#wpstats {
 /**
  * Site Footer
  */
-/* line 2898, ../sass/style.scss */
+/* line 2904, ../sass/style.scss */
 .site-footer {
   background-color: #e2e2e2;
   border-top-width: 1px;
@@ -2683,24 +2690,24 @@ img#wpstats {
   font-size: 0.875rem;
   padding: 20px 10px;
 }
-/* line 2915, ../sass/style.scss */
+/* line 2921, ../sass/style.scss */
 .site-footer a {
   color: black;
   text-decoration: underline;
 }
-/* line 2918, ../sass/style.scss */
+/* line 2924, ../sass/style.scss */
 .site-footer a:hover {
   color: #e25918;
 }
-/* line 2922, ../sass/style.scss */
+/* line 2928, ../sass/style.scss */
 .site-footer h3 {
   color: black;
 }
-/* line 2925, ../sass/style.scss */
+/* line 2931, ../sass/style.scss */
 .site-footer h4 {
   color: black;
 }
-/* line 2928, ../sass/style.scss */
+/* line 2934, ../sass/style.scss */
 .site-footer p {
   margin-bottom: 0;
 }
@@ -2722,7 +2729,7 @@ img#wpstats {
  * regular screens and only shows the mobile options from a width of 640 pixels.
  */
 @media (min-width: 641px) {
-  /* line 2975, ../sass/style.scss */
+  /* line 2981, ../sass/style.scss */
   a.open, #sidr-left, #sidr-right {
     width: 0 !important;
     display: none !important;
@@ -2732,53 +2739,53 @@ img#wpstats {
  * iPad landscape
  */
 @media (max-width: 1024px) {
-  /* line 2986, ../sass/style.scss */
+  /* line 2992, ../sass/style.scss */
   .content {
     max-width: 67%;
   }
 
-  /* line 2989, ../sass/style.scss */
+  /* line 2995, ../sass/style.scss */
   .sidebar-primary {
     max-width: 25%;
   }
 
-  /* line 2993, ../sass/style.scss */
+  /* line 2999, ../sass/style.scss */
   .content-sidebar .sidebar-primary {
     margin-right: 10px;
   }
-  /* line 2998, ../sass/style.scss */
+  /* line 3004, ../sass/style.scss */
   .content-sidebar .content {
     padding-left: 10px;
     padding-right: 10px;
   }
 
-  /* line 3006, ../sass/style.scss */
+  /* line 3012, ../sass/style.scss */
   .sidebar-content .sidebar-primary {
     margin-left: 10px;
   }
-  /* line 3011, ../sass/style.scss */
+  /* line 3017, ../sass/style.scss */
   .sidebar-content .content {
     padding-left: 0;
     padding-right: 10px;
   }
 
-  /* line 3019, ../sass/style.scss */
+  /* line 3025, ../sass/style.scss */
   .full-width-content .content {
     padding-left: 10px;
     padding-right: 0;
   }
 
-  /* line 3027, ../sass/style.scss */
+  /* line 3033, ../sass/style.scss */
   .site-header .title-area {
     background-size: 100%;
     max-width: 40%;
     overflow: hidden;
   }
-  /* line 3033, ../sass/style.scss */
+  /* line 3039, ../sass/style.scss */
   .site-header .title-area a {
     min-height: 140px;
   }
-  /* line 3038, ../sass/style.scss */
+  /* line 3044, ../sass/style.scss */
   .site-header .header-widget-area,
   .site-header #yoast-top-right {
     padding-right: 20px;
@@ -2786,58 +2793,58 @@ img#wpstats {
     overflow: hidden;
   }
 
-  /* line 3046, ../sass/style.scss */
+  /* line 3052, ../sass/style.scss */
   .breadcrumb {
     padding-left: 10px;
   }
 
-  /* line 3051, ../sass/style.scss */
+  /* line 3057, ../sass/style.scss */
   #yoast-after-header-container {
     padding-left: 20px;
   }
-  /* line 3055, ../sass/style.scss */
+  /* line 3061, ../sass/style.scss */
   #yoast-after-header-container .yoast-after-header-widget {
     width: 30%;
   }
-  /* line 3058, ../sass/style.scss */
+  /* line 3064, ../sass/style.scss */
   #yoast-after-header-container #yoast-after-header-2 {
     margin: 0 30px;
   }
 
-  /* line 3062, ../sass/style.scss */
+  /* line 3068, ../sass/style.scss */
   #yoast-fullwidth-bottom-container {
     padding-left: 20px;
     padding-right: 20px;
   }
-  /* line 3067, ../sass/style.scss */
+  /* line 3073, ../sass/style.scss */
   #yoast-fullwidth-bottom-container .yoast-fullwidth-widget {
     width: 30%;
   }
-  /* line 3070, ../sass/style.scss */
+  /* line 3076, ../sass/style.scss */
   #yoast-fullwidth-bottom-container #yoast-fullwidth-widgetarea-2 {
     margin: 0 30px;
   }
 
-  /* line 3074, ../sass/style.scss */
+  /* line 3080, ../sass/style.scss */
   .footer-widgets {
     padding-left: 10px;
     padding-right: 10px;
   }
-  /* line 3079, ../sass/style.scss */
+  /* line 3085, ../sass/style.scss */
   .footer-widgets .widget-area {
     width: 22%;
   }
-  /* line 3081, ../sass/style.scss */
+  /* line 3087, ../sass/style.scss */
   .footer-widgets .widget-area.footer-widgets-2 {
     margin: 0 3%;
   }
-  /* line 3084, ../sass/style.scss */
+  /* line 3090, ../sass/style.scss */
   .footer-widgets .widget-area.footer-widgets-3 {
     margin-right: 3%;
   }
 
   /* Making the FB Like box responsive */
-  /* line 3094, ../sass/style.scss */
+  /* line 3100, ../sass/style.scss */
   .fb-like-box,
   .fb-like-box span,
   .fb-like-box span iframe[style] {
@@ -2845,80 +2852,80 @@ img#wpstats {
   }
 }
 @media (max-width: 655px) and (min-width: 640px) {
-  /* line 3101, ../sass/style.scss */
+  /* line 3107, ../sass/style.scss */
   #yoast-fullwidth-bottom-container #yoast-fullwidth-widgetarea-2 {
     margin: 0 15px;
   }
 }
 @media (max-width: 640px) {
-  /* line 3108, ../sass/style.scss */
+  /* line 3114, ../sass/style.scss */
   .content {
     width: 100%;
     max-width: 100%;
   }
 
-  /* line 3112, ../sass/style.scss */
+  /* line 3118, ../sass/style.scss */
   .sidebar-primary {
     width: 100%;
     max-width: 100%;
   }
 
-  /* line 3116, ../sass/style.scss */
+  /* line 3122, ../sass/style.scss */
   .entry {
     padding: 0;
     margin-left: 0;
     margin-right: 0;
   }
 
-  /* line 3123, ../sass/style.scss */
+  /* line 3129, ../sass/style.scss */
   #yoast-after-header-container {
     display: none;
     visibility: hidden;
   }
 
-  /* line 3127, ../sass/style.scss */
+  /* line 3133, ../sass/style.scss */
   .breadcrumb {
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 1em;
   }
 
-  /* line 3138, ../sass/style.scss */
+  /* line 3144, ../sass/style.scss */
   .content-sidebar .sidebar-primary,
   .sidebar-content .sidebar-primary {
     width: 100%;
     padding-left: 20px;
   }
-  /* line 3143, ../sass/style.scss */
+  /* line 3149, ../sass/style.scss */
   .content-sidebar .sidebar-primary .widget,
   .sidebar-content .sidebar-primary .widget {
     width: 100%;
   }
 
-  /* line 3149, ../sass/style.scss */
+  /* line 3155, ../sass/style.scss */
   .sidebar-content .content {
     margin: 0;
     padding-left: 10px;
   }
-  /* line 3155, ../sass/style.scss */
+  /* line 3161, ../sass/style.scss */
   .sidebar-content .sidebar-primary {
     margin: 0;
     padding-right: 10px;
     padding-left: 10px;
   }
 
-  /* line 3165, ../sass/style.scss */
+  /* line 3171, ../sass/style.scss */
   .featured-content.featuredpost img,
   .featured-content.featuredpage img {
     float: left;
     margin-right: 10px;
   }
 
-  /* line 3172, ../sass/style.scss */
+  /* line 3178, ../sass/style.scss */
   #yoast-after-header-container {
     padding: 0 10px;
   }
-  /* line 3176, ../sass/style.scss */
+  /* line 3182, ../sass/style.scss */
   #yoast-after-header-container #yoast-after-header-1,
   #yoast-after-header-container #yoast-after-header-2,
   #yoast-after-header-container #yoast-after-header-3 {
@@ -2929,17 +2936,17 @@ img#wpstats {
     max-width: 100%;
   }
 
-  /* line 3186, ../sass/style.scss */
+  /* line 3192, ../sass/style.scss */
   .yoast-tagline-after-header-widget {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 3192, ../sass/style.scss */
+  /* line 3198, ../sass/style.scss */
   #yoast-fullwidth-bottom-container {
     padding: 0 10px;
   }
-  /* line 3196, ../sass/style.scss */
+  /* line 3202, ../sass/style.scss */
   #yoast-fullwidth-bottom-container #yoast-fullwidth-widgetarea-1,
   #yoast-fullwidth-bottom-container #yoast-fullwidth-widgetarea-2,
   #yoast-fullwidth-bottom-container #yoast-fullwidth-widgetarea-3 {
@@ -2950,21 +2957,21 @@ img#wpstats {
     max-width: 100%;
   }
 
-  /* line 3206, ../sass/style.scss */
+  /* line 3212, ../sass/style.scss */
   .footer-widgets {
     padding-left: 10px;
     padding-right: 10px;
   }
-  /* line 3211, ../sass/style.scss */
+  /* line 3217, ../sass/style.scss */
   .footer-widgets .widget-area {
     width: 100%;
   }
-  /* line 3214, ../sass/style.scss */
+  /* line 3220, ../sass/style.scss */
   .footer-widgets .widget-area.footer-widgets-2, .footer-widgets .widget-area.footer-widgets-3 {
     margin: 0;
   }
 
-  /* line 3219, ../sass/style.scss */
+  /* line 3225, ../sass/style.scss */
   .site-footer {
     text-align: center;
   }
@@ -2972,18 +2979,18 @@ img#wpstats {
   /**
    * Enter the mobile menu
    */
-  /* line 3225, ../sass/style.scss */
+  /* line 3231, ../sass/style.scss */
   body {
     border: 0;
     padding-top: 44px;
   }
 
-  /* line 3229, ../sass/style.scss */
+  /* line 3235, ../sass/style.scss */
   .nav-primary {
     display: none !important;
   }
 
-  /* line 3233, ../sass/style.scss */
+  /* line 3239, ../sass/style.scss */
   header.site-header {
     border-bottom: 5px solid #e25918;
     display: inline-block;
@@ -2994,7 +3001,7 @@ img#wpstats {
     top: 0;
     width: 100%;
   }
-  /* line 3246, ../sass/style.scss */
+  /* line 3252, ../sass/style.scss */
   header.site-header .title-area,
   header.site-header .header-widget-area,
   header.site-header #yoast-top-right {
@@ -3002,7 +3009,7 @@ img#wpstats {
     visibility: hidden;
   }
 
-  /* line 3253, ../sass/style.scss */
+  /* line 3259, ../sass/style.scss */
   a.open {
     display: inline-block;
     text-indent: -10000px;
@@ -3013,7 +3020,7 @@ img#wpstats {
     padding: 10px;
     margin: 0;
   }
-  /* line 3263, ../sass/style.scss */
+  /* line 3269, ../sass/style.scss */
   a#sidr-left {
     float: left;
     margin: 2px 0;
@@ -3022,7 +3029,7 @@ img#wpstats {
     border-right-style: solid;
     border-right-color: #b2b8b8;
   }
-  /* line 3275, ../sass/style.scss */
+  /* line 3281, ../sass/style.scss */
   a#sidr-right {
     float: right;
     margin: 2px 0;
@@ -3032,23 +3039,23 @@ img#wpstats {
     border-left-color: #b2b8b8;
   }
 
-  /* line 3291, ../sass/style.scss */
+  /* line 3297, ../sass/style.scss */
   body.sticky-menu .site-container a#sidr-left {
     position: relative;
     top: 0;
     left: 0;
   }
-  /* line 3296, ../sass/style.scss */
+  /* line 3302, ../sass/style.scss */
   body.sticky-menu .site-container a#sidr-right {
     position: relative;
     top: 0;
     right: 0;
   }
-  /* line 3303, ../sass/style.scss */
+  /* line 3309, ../sass/style.scss */
   body.sticky-menu .site-header {
     background-position: center top;
   }
-  /* line 3306, ../sass/style.scss */
+  /* line 3312, ../sass/style.scss */
   body.sticky-menu .site-header .title-area .site-title a {
     position: fixed;
     top: 0;
@@ -3058,32 +3065,32 @@ img#wpstats {
   /* end mobile menu */
 }
 @media (max-width: 512px) {
-  /* line 3321, ../sass/style.scss */
+  /* line 3327, ../sass/style.scss */
   .sidebar-primary .widget_bigbutton, .sidebar-primary form {
     max-width: 100%;
   }
 }
 @media (max-width: 330px) {
-  /* line 3332, ../sass/style.scss */
+  /* line 3338, ../sass/style.scss */
   .entry img.alignleft, .entry img.alignright, .entry img.aligncenter {
     display: block;
     float: none;
     margin: 1em auto;
   }
 
-  /* line 3341, ../sass/style.scss */
+  /* line 3347, ../sass/style.scss */
   .blog.sidebar-content .content {
     width: 100%;
     padding: 0 1%;
     margin: 0;
   }
 
-  /* line 3351, ../sass/style.scss */
+  /* line 3357, ../sass/style.scss */
   .sidebar .widget-wrap li:after {
     content: "";
     padding: 0;
   }
-  /* line 3358, ../sass/style.scss */
+  /* line 3364, ../sass/style.scss */
   .sidebar .featured-content img {
     display: none;
     visibility: hidden;
@@ -3092,14 +3099,14 @@ img#wpstats {
 /**
  * WordPress Admin bar fixes for menu
  */
-/* line 3373, ../sass/style.scss */
+/* line 3379, ../sass/style.scss */
 body.admin-bar .sidr,
 body.admin-bar .site-header,
 body.admin-bar .nav-primary {
   top: 32px;
 }
 @media (max-width: 782px) {
-  /* line 3373, ../sass/style.scss */
+  /* line 3379, ../sass/style.scss */
   body.admin-bar .sidr,
   body.admin-bar .site-header,
   body.admin-bar .nav-primary {
@@ -3107,20 +3114,20 @@ body.admin-bar .nav-primary {
   }
 }
 
-/* line 3382, ../sass/style.scss */
+/* line 3388, ../sass/style.scss */
 body.sticky-menu.admin-bar .site-header,
 body.sticky-menu.admin-bar .nav-primary {
   top: 32px;
 }
 @media (max-width: 782px) {
-  /* line 3382, ../sass/style.scss */
+  /* line 3388, ../sass/style.scss */
   body.sticky-menu.admin-bar .site-header,
   body.sticky-menu.admin-bar .nav-primary {
     top: 46px;
   }
 }
 
-/* line 3389, ../sass/style.scss */
+/* line 3395, ../sass/style.scss */
 #wpadminbar {
   position: absolute !important;
   position: fixed !important;

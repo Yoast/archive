@@ -434,11 +434,18 @@ add_filter( 'genesis_search_text', 'yst_change_search_text' );
  *
  * @fixme If there is a better solid way to do this or Genesis fixes this feature, use that
  */
-function yst_add_backtotop_to_post_footer() {
+function yst_add_backtotop() {
 	echo '<p class="back-to-top"><a href="#">' . __( 'Back to top', 'yoast-theme' ) . ' &#9652;</a></p>';
 }
 
-add_action( 'genesis_entry_footer', 'yst_add_backtotop_to_post_footer', 14 );
+function yst_conditional_add_backtotop() {
+	if ( is_single() ) {
+		add_action( 'genesis_entry_footer', 'yst_add_backtotop', 14 );
+	}
+	add_action( 'genesis_after_endwhile', 'yst_add_backtotop', 14 );
+}
+
+add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
 
 /**
  * @param $profile_fields
@@ -590,6 +597,7 @@ if ( function_exists( 'add_image_size' ) ) {
 }
 
 /**
+<<<<<<< HEAD
  * Comment List Arguments, modify to change the callback function
  *
  * @param array $args
@@ -668,3 +676,20 @@ function yst_comment_callback( $comment, $args, $depth ) {
 	//* No ending </li> tag because of comment threading
 
 }
+
+/**
+ * Customize the post meta function, only show categories and tags on single()
+ *
+ * @param string $post_meta Contains the current value of post meta data
+ *
+ * @return string Returns new post meta data
+ */
+function yst_post_meta_filter( $post_meta ) {
+	if ( is_single() ) {
+		$post_meta = '[post_categories before="Filed Under: "] [post_tags before="Tagged: "]';
+
+		return $post_meta;
+	}
+}
+
+add_filter( 'genesis_post_meta', 'yst_post_meta_filter' );
