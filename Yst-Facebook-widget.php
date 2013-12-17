@@ -62,7 +62,7 @@ class YST_Facebook_Widget extends WP_Widget {
 		// Loop through all the variables to display them
 		foreach ( $this->labels as $var => $label ) {
 			$input_attr = 'name="' . $this->get_field_name( $var ) . '" id="' . $this->get_field_id( $var ) . '"';
-			$label      = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
+			$label      = '<label for="' . $this->get_field_id( $var ) . '">' . $label . '</label>';
 
 			echo '<p>';
 			if ( $var == 'title' ) {
