@@ -114,15 +114,15 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 							$class = "btn-default";
 					}
 
-					$input_attr = 'class= "' . $class . '" name="' . $var . '" id="' . $this->get_field_id( $var ) . '"';
+					$input_attr = apply_filters('yst_sw_input_attributes', 'name="' . $var . '" ');
 
 					if ( $var == 'yst_title' ) {
 						continue;
 					} else {
 						if ( $var == 'yst_rss' ) {
-							echo '<a href="' . site_url( "feed" ) . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( (int) $instance[( $var . '_flw' )] ) . '</div></div></a>';
+							echo '<div class="' . $class . '"" id="' . $this->get_field_id( $var ) . '"><a href="' . site_url( "feed" ) . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( (int) $instance[( $var . '_flw' )] ) . '</div></div></a></div>';
 						} else {
-							echo '<a href="' . $instance[$var] . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( (int) $instance[( $var . '_flw' )] ) . '</div></div></a>';
+							echo '<div class="' . $class . '"" id="' . $this->get_field_id( $var ) . '"><a href="' . $instance[$var] . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( (int) $instance[( $var . '_flw' )] ) . '</div></div></a></div>';
 						}
 					}
 				}
