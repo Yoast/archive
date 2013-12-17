@@ -330,7 +330,23 @@ function yst_activate_sidr_and_sticky_menu() {
 			$('#sidr-left').sidr({
 				name       : 'sidr-menu-left',
 				source     : function () {
-					return "<h1><?php _e("Navigation","yoast-theme"); ?></h1><ul>" + $('.menu-primary').html() + "</ul>";
+					var menu = "<h1><?php _e( "Navigation", "yoast-theme" ); ?></h1>";
+					if ( $('.menu-primary').length > 0 ) {
+						menu += "<ul>" + $('.menu-primary').html() + "</ul>";
+					} else if ( $('.nav-header').length > 0 ) {
+						menu += "<ul>" + $('.nav-header ul').html() + "</ul>";
+					}
+					if ( $('.widget_categories').length > 0 ) {
+						menu += '<h1>' + $('.widget_categories .widgettitle').html() + '</h1><ul>';
+						menu += $('.widget_categories ul').html();
+						menu += '</ul>';
+					}
+					if ( $('.widget_recent_entries').length > 0 ) {
+						menu += '<h1>' + $('.widget_recent_entries .widgettitle').html() + '</h1><ul>';
+						menu += $('.widget_recent_entries ul').html();
+						menu += '</ul>';
+					}
+					return menu;
 				},
 				coverScreen: true
 			});
@@ -615,7 +631,87 @@ if ( function_exists( 'add_image_size' ) ) {
 }
 
 /**
- * * Customize the post meta function, only show categories and tags on single()
+ * Comment List Arguments, modify to change the callback function
+ *
+ * @param array $args
+ *
+ * @return array
+ */
+function yst_comment_list_args( $args ) {
+	$args['callback'] = 'yst_comment_callback';
+	return $args;
+}
+
+add_filter( 'genesis_comment_list_args', 'yst_comment_list_args' );
+
+/**
+ * Comment Callback Function
+ *
+ * @param stdClass $comment
+ * @param array    $args
+ * @param integer  $depth
+ */
+function yst_comment_callback( $comment, $args, $depth ) {
+	$GLOBALS['comment'] = $comment; ?>
+
+<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+	<article <?php echo genesis_attr( 'comment' ); ?>>
+
+		<?php do_action( 'genesis_before_comment' ); ?>
+
+		<header class="comment-header">
+			<p <?php echo genesis_attr( 'comment-author' ); ?>>
+				<?php
+
+				$author = get_comment_author();
+				$url    = get_comment_author_url();
+
+				if ( ! empty( $url ) && 'http://' !== $url ) {
+					$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
+				}
+
+				printf( 'By <span itemprop="name">%s</span> ', $author );
+
+				$pattern = '<time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
+				printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
+				?>
+			</p>
+		</header>
+		<div class="avatar">
+			<?php
+			$avatar_size = 1 == $depth ? 126 : 80;
+			echo get_avatar( $comment, $avatar_size );
+			?>
+		</div>
+		<div class="comment-content" itemprop="commentText">
+			<?php if ( ! $comment->comment_approved ) : ?>
+				<p class="alert"><?php echo apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation.', 'genesis' ) ); ?></p>
+			<?php endif; ?>
+
+			<?php comment_text(); ?>
+
+			<p class="comment-actions">
+			<?php
+			comment_reply_link( array_merge( $args, array(
+				'depth'  => $depth,
+				'before' => '<span class="comment-reply">',
+				'after'  => '</span>',
+			) ) );
+			edit_comment_link( __( 'Edit comment', 'yoast-theme' ), ' <span class="edit">', '</span>' );
+			?>
+			</p>
+		</div>
+
+		<?php do_action( 'genesis_after_comment' ); ?>
+
+	</article>
+	<?php
+	//* No ending </li> tag because of comment threading
+
+}
+
+/**
+ * Customize the post meta function, only show categories and tags on single()
  *
  * @param string $post_meta Contains the current value of post meta data
  *
@@ -630,3 +726,33 @@ function yst_post_meta_filter( $post_meta ) {
 }
 
 add_filter( 'genesis_post_meta', 'yst_post_meta_filter' );
+
+/**
+ * By default, Genesis lack a space after the raquo and laquo, this adds it.
+ *
+ * @param string $link
+ *
+ * @return string
+ */
+function yst_add_spacing_next_prev( $link ) {
+	$link = str_replace( '&#x000BB;', ' &#x000BB;', $link );
+	$link = str_replace( '&#x000AB;', '&#x000AB; ', $link );
+	return $link;
+}
+
+add_filter( 'genesis_next_link_text', 'yst_add_spacing_next_prev' );
+add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
+
+/**
+ * Override the image size for full-width designs, user settings are now completely ignored.
+ */
+function yst_override_content_thumbnail_setting( $size = null ) {
+
+	if ( false !== strpos( genesis_site_layout(), 'full-width' ) ) {
+		return 'fullwidth-thumb';
+	}
+
+	return $size;
+}
+
+add_filter( 'genesis_pre_get_option_image_size', 'yst_override_content_thumbnail_setting' );
