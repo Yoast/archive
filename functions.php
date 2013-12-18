@@ -2,7 +2,6 @@
 
 // @TODO: Clean up this file and add some structure to it.
 
-//* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'Tailor Made' );
 define( 'CHILD_THEME_URL', 'http://yoast.com/wordpress/themes/tailor-made/' );
 define( 'CHILD_THEME_VERSION', '0.0.1' );
@@ -10,13 +9,13 @@ define( 'CHILD_THEME_VERSION', '0.0.1' );
 add_action( 'genesis_setup', 'child_theme_setup', 15 );
 
 /**
- *
+ * Creates the child theme actions, filters and settings
  */
 function child_theme_setup() {
 	global $content_width;
 
 	// Defines the content width of the content-sidebar design, as that's the default and this is needed for oEmbed.
-	$content_width = 560;
+	$content_width = 680;
 
 	// Used for defaults in for instance the banner widget.
 	define( 'YST_SIDEBAR_WIDTH', 261 );
@@ -24,28 +23,32 @@ function child_theme_setup() {
 	//* Start the engine
 	include_once( get_template_directory() . '/lib/init.php' );
 
-	// Setup Theme Settings
-	// @todo Does this always have to be loaded or just in admin?
-	include_once( CHILD_DIR . '/lib/functions/child-theme-settings.php' );
+	require_once 	CHILD_DIR . '/lib/functions/theme-customizer.php';
+
+	if ( is_admin() ) {
+
+		// Setup Theme Settings
+		include_once( CHILD_DIR . '/lib/functions/child-theme-settings.php' );
+
+		// Editor Styles
+		add_editor_style( 'assets/css/editor-style.css' );
+	}
 
 	/** Load widgets from /lib/widgets/ */
 	foreach ( glob( CHILD_DIR . "/lib/widgets/*-widget.php" ) as $file ) {
 		require_once $file;
 	}
 
-	//include_once( get_stylesheet_directory_uri . '/lib/functions/yst-colourscheme-settings.php' );
-	require_once( 'lib/functions/yst-colourscheme-settings.php' );
-
-	//* Add HTML5 markup structure
+	// Add HTML5 markup structure
 	add_theme_support( 'html5' );
 
-	//* Add viewport meta tag for mobile browsers
+	// Just allow for primary navigation
+	add_theme_support( 'genesis-menus', array( 'primary' => __( 'Primary Navigation Menu', 'genesis' ) ) );
+
+	// Add viewport meta tag for mobile browsers
 	add_theme_support( 'genesis-responsive-viewport' );
 
-//* Add support for custom background
-	add_theme_support( 'custom-background' );
-
-//* Add support for 3-column footer widgets
+	// Add support for 3-column footer widgets
 	add_theme_support( 'genesis-footer-widgets', 4 );
 
 	// Disable site layouts that must not be used
@@ -133,18 +136,16 @@ function child_theme_setup() {
 		}
 	}
 
-	if ( function_exists( 'add_image_size' ) ) {
-		add_image_size( 'archive-thumb', 180, 120, true );
-		add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
-		add_image_size( 'fullwidth-thumb', 290, 193, true );
-	}
+	add_image_size( 'archive-thumb', 180, 120, true );
+	add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
+	add_image_size( 'fullwidth-thumb', 290, 193, true );
 
 	// Activate blogroll widget
 	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
+	// Change the main stylesheet URL
 	add_filter( 'stylesheet_uri', 'yst_stylesheet_uri', 10, 2 );
 
-	add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting', 5 );
 	add_action( 'wp_enqueue_scripts', 'enqueue_form_styles', 25 );
 	add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
@@ -190,13 +191,6 @@ function child_theme_setup() {
 }
 
 /**
- * Helperfunctions to load colourscheme-css.
- */
-function yst_load_css_from_setting() {
-	wp_enqueue_style( 'yst_custom_css', get_stylesheet_directory_uri() . genesis_get_option( 'yst_colourscheme' ), array( 'google-font-quattrocento_sans', 'admin-bar', 'theme001' ) );
-}
-
-/**
  * Change stylesheet URL.
  *
  * @param string $stylesheet_uri
@@ -205,7 +199,7 @@ function yst_load_css_from_setting() {
  * @return string
  */
 function yst_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
-	return $stylesheet_dir_uri . '/assets/css/style.css';
+	return $stylesheet_dir_uri . '/assets/css/' . get_theme_mod( 'yst_colour_scheme' ) . '.css';
 }
 
 /**
@@ -497,8 +491,8 @@ function yst_filter_content_archive_image( $img, $args ) {
  * @since 1.0.0
  */
 function yst_display_logo() {
-	$yst_logo                = genesis_get_option( 'yst-logo', 'child-settings' );
-	$yst_mobile_logo         = genesis_get_option( 'yst-mobile-logo', 'child-settings' );
+	$yst_logo                = get_theme_mod( 'yst_logo' );
+	$yst_mobile_logo         = get_theme_mod( 'yst_mobile_logo' );
 	$yst_use_alt_mobile_logo = absint( genesis_get_option( 'yst-use-alt-mobile-logo', 'child-settings' ) );
 
 	if ( ( isset( $yst_logo ) && ! empty ( $yst_logo ) ) || ( ( isset( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) ) ) {
@@ -510,7 +504,7 @@ function yst_display_logo() {
 			?>
 			@media (min-width: 640px) {
 				.site-header .title-area {
-					background-image: url(<?php echo genesis_get_option( 'yst-logo', 'child-settings' ); ?>);
+					background-image: url(<?php echo $yst_logo; ?>);
 				}
 			}
 
@@ -521,7 +515,7 @@ function yst_display_logo() {
 			?>
 			@media ( max-width: 640px ) {
 				header.site-header {
-					background-image: url( <?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?> );
+					background-image: url( <?php echo $yst_mobile_logo ?> );
 					background-repeat: no-repeat;
 					background-position: 50% 0;
 				}
