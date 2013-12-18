@@ -199,7 +199,11 @@ function child_theme_setup() {
  * @return string
  */
 function yst_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
-	return $stylesheet_dir_uri . '/assets/css/' . get_theme_mod( 'yst_colour_scheme' ) . '.css';
+	$colour_scheme = get_theme_mod( 'yst_colour_scheme' );
+	if ( ! $colour_scheme || empty( $colour_scheme) )
+		$colour_scheme = 'WarmBlue';
+
+	return $stylesheet_dir_uri . '/assets/css/' . $colour_scheme . '.css';
 }
 
 /**
@@ -500,8 +504,16 @@ function yst_filter_content_archive_image( $img, $args ) {
  * @since 1.0.0
  */
 function yst_display_logo() {
-	$yst_logo                = get_theme_mod( 'yst_logo' );
-	$yst_mobile_logo         = get_theme_mod( 'yst_mobile_logo' );
+	$yst_logo = get_theme_mod( 'yst_logo' );
+	if ( ! $yst_logo ) {
+		$yst_logo = get_stylesheet_directory_uri() . '/assets/images/logo.png';
+	}
+
+	$yst_mobile_logo = get_theme_mod( 'yst_mobile_logo' );
+	if ( ! $yst_mobile_logo ) {
+		$yst_mobile_logo = get_stylesheet_directory_uri() . '/assets/images/logo-mobile.png';
+	}
+
 	$yst_use_alt_mobile_logo = absint( genesis_get_option( 'yst-use-alt-mobile-logo', 'child-settings' ) );
 
 	if ( ( isset( $yst_logo ) && ! empty ( $yst_logo ) ) || ( ( isset( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) ) ) {
@@ -524,9 +536,7 @@ function yst_display_logo() {
 			?>
 			@media ( max-width: 640px ) {
 				header.site-header {
-					background-image: url( <?php echo $yst_mobile_logo ?> );
-					background-repeat: no-repeat;
-					background-position: 50% 0;
+					background: url( <?php echo $yst_mobile_logo ?> ) no-repeat 50% 0;
 				}
 			}
 
@@ -542,9 +552,7 @@ function yst_display_logo() {
 			@media ( max-width: 640px ) {
 				.site-container {
 					padding-top: <?php echo absint( genesis_get_option( 'yst-use-alt-mobile-logo-height', 'child-settings' ) ); ?>px; /* img height - 41 and - 46 if logged in */
-					background-image: url( <?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?> );
-					background-repeat: no-repeat;
-					background-position: 50% 0;
+					background: url( <?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?> ) no-repeat 50% 0;
 					background-size: auto;
 				}
 			}
