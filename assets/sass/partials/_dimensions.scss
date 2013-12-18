@@ -1,27 +1,14 @@
 // dimensions for Theme 001
 $d_full:                    990px;
-$d_homepageMainColumn:      620px;
+$d_homepageMainColumn:      680px;
 $d_homepageMainMargin:      120px;
 $d_headerLogo:              360px;
 $d_headerAside:             630px;
 $d_sidebar:                 250px;
-$d_mainColumn:              ($d-full - $d_sidebar);
+$d_mainColumn:              $d_homepageMainColumn;
 $d_mainContent:             560px;
 $d_columnOne:               310px;
 $d_columnTwo:               310px;
 $d_ThreeEqualColumns:       290px;
 $d_FourEqualColumns:        200px;
 $d_navSubWidth:             200px;
-
-
-// retina dimensions for Theme 001
-$d_full-x2:                 1880px;
-$d_mainColumn-x2:           1120px;
-$d_columnOne-x2:            620px;
-$d_columnTwo-x2:            620px;
-$d_sidebar-x2:              500px;
-$d_marginBetweenColumns-x2: 120px;
-$d_ThreeEqualColumns-x2:    580px;
-
-$d_commentAvatar-x2:        128px;
-$d_commentReplyAvatar-x2:   64px;
