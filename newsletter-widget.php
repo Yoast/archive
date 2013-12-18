@@ -28,10 +28,12 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 			'email'      => '',
 			'faf'        => '',
 			'extrahtml'  => '',
-			'name_name'  => 'yst_ns_name',
-			'name_email' => 'yst_ns_email',
+			'name_name'  => '',
+			'name_email' => '',
 			'hide_name'  => false
 		);
+
+		var $placeholders = array();
 
 		/**
 		 * Constructor
@@ -43,11 +45,18 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 				'text'       => __( 'Text', 'yoast-theme' ),
 				'name'       => __( 'Name', 'yoast-theme' ),
 				'email'      => __( 'E-mail address', 'yoast-theme' ),
-				'faf'        => __( 'Form Action Field', 'yoast-theme' ),
+				'faf'        => __( 'Form Action Field', 'yoast-theme' ) . ' *',
 				'extrahtml'  => __( 'Extra HTML', 'yoast-theme' ),
-				'name_name'  => __( 'Name of name-field', 'yoast-theme' ),
-				'name_email' => __( 'Name of email-field', 'yoast-theme' ),
-				'hide_name'  => __( 'Hide name', 'yoast-theme' ),
+				'name_name'  => __( 'Value of name-attribute of inputfield \'name\'', 'yoast-theme' ) . ' *',
+				'name_email' => __( 'Value of name-attribute of inputfield \'email\'', 'yoast-theme' ) . ' *',
+				'hide_name'  => __( 'Hide inputfield \'name\'', 'yoast-theme' ),
+			);
+
+			$this->placeholders = array(
+				'faf'        => __( 'For example; Mailchimp.', 'yoast-theme' ),
+				'name_name'  => __( 'For example; NAME_OF_USER', 'yoast-theme' ),
+				'name_email' => __( 'For example; EMAIL', 'yoast-theme' ),
+				'extrahtml' => __( 'For example; <input type=hidden ... />', 'yoast-theme' ),
 			);
 
 			$widget_ops = array( 'classname' => 'widget-yns' );
@@ -66,20 +75,22 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 		 **/
 		public function widget( $args, $instance ) {
 			// Return if no value is entered for the Form Action Field
-			if ( ! isset( $instance['faf'] ) || empty( $instance['faf'] ) )
+			if ( ! isset( $instance['faf'] ) || empty( $instance['faf'] ) || ! isset( $instance['name_name'] ) || empty( $instance['name_name'] ) || ! isset( $instance['name_email'] ) || empty( $instance['name_email'] ) ) {
 				return;
+			}
 
 
 			$out = '';
 			if ( isset ( $instance['title'] ) && ! empty( $instance['title'] ) ) {
 				$out .= $args['before_title'] . $instance['title'] . $args['after_title'];
-				if ( isset ( $instance['text'] ) && ! empty ( $instance['text'] ) )
+				if ( isset ( $instance['text'] ) && ! empty ( $instance['text'] ) ) {
 					$out .= '<p class="newslettersubscription-text">' . $instance['text'] . '</p>';
+				}
 				$out .= '<p><form name="' . $instance['title'] . '" method=post action="' . $instance['faf'] . '">';
-			}
-			else {
-				if ( isset ( $instance['text'] ) && ! empty ( $instance['text'] ) )
+			} else {
+				if ( isset ( $instance['text'] ) && ! empty ( $instance['text'] ) ) {
 					$out .= '<p class="newslettersubscription-text">' . $instance['text'] . '</p>';
+				}
 				$out .= '<p><form name="yst-newslettersubscription-form" method=post action="' . $instance['faf'] . '">';
 
 			}
@@ -113,38 +124,40 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 		public function form( $instance ) {
 
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
-			echo '<p class="ssl_hint">' . __( 'We suggest you use SSL for all forms. Read more about setting up SSL on <a href="http://yoast.com/wordpress-ssl-setup/" alt="WordPress SSL Setup by Yoast" target="_blank">Yoast.com</a>.', 'yoast-theme' ) . '</p>';
+			echo '<p class="ssl_hint">' . __( 'We suggest you use SSL for all forms. Read more about setting up SSL on', 'yoast-theme' ) . '<a href="http://yoast.com/wordpress-ssl-setup/" alt="WordPress SSL Setup by Yoast" target="_blank">Yoast.com</a>.</p>';
 
 			foreach ( $this->vars as $var => $label ) {
 				$varlabel = $label;
 				echo '<p>';
-				$label      = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
+				$label      = '<label for="' . $this->get_field_id( $var ) . '">' . $label . '</label>';
 				$input_attr = 'title="' . $varlabel . '" name="' . $this->get_field_name( $var ) . '" id="' . $this->get_field_id( $var ) . '" ';
 
 				if ( $var == 'name' || $var == 'email' ) {
 					continue;
-				}
-				else if ( $var == 'faf' ) {
-					$input_attr .= 'required ';
-					echo $label;
-					echo '<input class="widefat" ' . $input_attr . ' type="text" placeholder="For example; Mailchimp." value="' . esc_html( $instance[$var] ) . '" />';
-					echo "<span class=\"yst_required_field\">This is a required field</span>";
-				}
-				else if ( $var == 'extrahtml' ) {
-					$input_attr .= 'required ';
-					echo $label;
-					echo '<input class="widefat" ' . $input_attr . ' type="text" placeholder="For example; <input type=hidden ... />" value="' . esc_html( $instance[$var] ) . '" />';
-				}
-				else if ( $var == 'hide_name' ) {
-					echo '<input class="checkbox" ' . $input_attr . ' type="checkbox" ' . checked( $instance[$var], true, false ) . '/> ';
-					echo $label;
-				}
-				else {
-					echo $label;
-					echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . esc_html( $instance[$var] ) . '" />';
+				} else {
+					if ( $var == 'faf' || $var == 'name_name' || $var == "name_email" ) {
+						$input_attr .= 'required ';
+						echo $label;
+						echo '<input class="widefat" ' . $input_attr . ' type="text" placeholder="' . $this->placeholders[$var] . '" value="' . esc_html( $instance[$var] ) . '" />';
+					} else {
+						if ( $var == 'extrahtml' ) {
+							echo $label;
+							echo '<textarea class="widefat" ' . $input_attr . ' placeholder="' . $this->placeholders[$var] . '" wrap="soft" rows="4" cols="50">' . esc_html( $instance[$var] ) . '</textarea>';
+							//echo '<input class="widefat" ' . $input_attr . ' type="textarea" placeholder="For example; <input type=hidden ... />" value="' . esc_html( $instance[$var] ) . '" />';
+						} else {
+							if ( $var == 'hide_name' ) {
+								echo '<input class="checkbox" ' . $input_attr . ' type="checkbox" ' . checked( $instance[$var], true, false ) . '/> ';
+								echo $label;
+							} else {
+								echo $label;
+								echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . esc_html( $instance[$var] ) . '" />';
+							}
+						}
+					}
 				}
 				echo '</p>';
 			}
+			echo '<p style="text-align:right;">* ' . __( 'Required field', 'yoast-theme' ) . '</p>';
 		}
 
 		/**
@@ -166,8 +179,9 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 			$new_instance['name_name']  = sanitize_text_field( $new_instance['name_name'] );
 			$new_instance['name_email'] = sanitize_text_field( $new_instance['name_email'] );
 
-			if ( isset( $new_instance['hide_name'] ) )
+			if ( isset( $new_instance['hide_name'] ) ) {
 				$new_instance['hide_name'] = true;
+			}
 
 			return $new_instance;
 		}
