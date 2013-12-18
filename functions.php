@@ -188,6 +188,7 @@ function child_theme_setup() {
 	add_filter( 'genesis_search_text', 'yst_change_search_text' );
 	add_filter( 'genesis_next_link_text', 'yst_add_spacing_next_prev' );
 	add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
+	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
 }
 
 /**
@@ -257,7 +258,7 @@ function yst_after_header_genesis() {
 		$tagline = get_bloginfo( 'description' );
 		if ( isset ( $tagline ) && ! empty( $tagline ) ) {
 			$output = apply_filters( 'yst_tagline_afterheader_container_before', '<div id="yoast-tagline-after-header-container">' );
-			$output .= apply_filters( 'yst_tagline_afterheader_before', '<p id="yoast-tagline-afterheader" class="yoast-tagline-afterheader">' );
+			$output .= apply_filters( 'yst_tagline_afterheader_before', '<p id="yoast-tagline" class="yoast-tagline">' );
 			$output .= apply_filters( 'yst_tagline_afterheader_tagline', $tagline );
 			$output .= apply_filters( 'yst_tagline_afterheader_after', '</p>' );
 			$output .= apply_filters( 'yst_tagline_afterheader_container_after', '</div>' );
