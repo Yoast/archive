@@ -249,7 +249,16 @@ function yst_after_header_genesis() {
 			'after'  => '</div>',
 		) );
 		echo '</div></div>';
-
+	} else {
+		$tagline = get_bloginfo( 'description' );
+		if ( isset ( $tagline ) && ! empty( $tagline ) ) {
+			$output = apply_filters( 'yst_tagline_afterheader_container_before', '<div id="yoast-tagline-after-header-container">' );
+			$output .= apply_filters( 'yst_tagline_afterheader_before', '<p id="yoast-tagline-afterheader" class="yoast-tagline-afterheader">' );
+			$output .= apply_filters( 'yst_tagline_afterheader_tagline', $tagline );
+			$output .= apply_filters( 'yst_tagline_afterheader_after', '</p>' );
+			$output .= apply_filters( 'yst_tagline_afterheader_container_after', '</div>' );
+			echo $output;
+		}
 	}
 }
 
