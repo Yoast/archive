@@ -466,7 +466,7 @@ header .wrap {
 /* line 410, ../sass/style.scss */
 .content {
   float: right;
-  width: 740px;
+  width: 680px;
   max-width: 100%;
 }
 /* line 414, ../sass/style.scss */
@@ -1559,11 +1559,11 @@ table td {
 
 /* line 1634, ../sass/style.scss */
 .blog .content {
-  width: 620px;
+  width: 680px;
 }
 /* line 1638, ../sass/style.scss */
 .blog.sidebar-content .content {
-  width: 740px;
+  width: 680px;
 }
 /* line 1643, ../sass/style.scss */
 .blog .entry-content p {
@@ -1610,7 +1610,7 @@ table td {
 .full-width-content .content blockquote,
 .full-width-content .content div,
 .full-width-content .content table {
-  max-width: 740px;
+  max-width: 680px;
 }
 
 /* line 1693, ../sass/style.scss */
