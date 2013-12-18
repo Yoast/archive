@@ -26,10 +26,6 @@ function child_theme_setup() {
 	require_once 	CHILD_DIR . '/lib/functions/theme-customizer.php';
 
 	if ( is_admin() ) {
-
-		// Setup Theme Settings
-		include_once( CHILD_DIR . '/lib/functions/child-theme-settings.php' );
-
 		// Editor Styles
 		add_editor_style( 'assets/css/editor-style.css' );
 	}
@@ -327,7 +323,7 @@ function yst_get_read_more_link() {
  * @link http://www.berriart.com/sidr/#documentation
  */
 function yst_include_sidr() {
-	wp_enqueue_script( 'yst_sidr', get_stylesheet_directory_uri() . '/lib/js/jquery.sidr.js', array( 'jquery' ) );
+	wp_enqueue_script( 'yst_sidr', get_stylesheet_directory_uri() . '/lib/js/jquery.sidr.js', array( 'jquery' ), false, true );
 }
 
 /**
@@ -401,15 +397,11 @@ function yst_mobile_nav() {
  * @param string $footer_creds_text
  *
  * @return string
- *
- * @fixme If this becomes something you can change in the settings, just retrieve the option here and return it.
  */
 function yst_footer_creds_text( $footer_creds_text ) {
-	$yst_footer = '<p class="custom_footer">';
-	$yst_footer .= trim( genesis_get_option( 'footer', 'child-settings' ) ) . '</p><p class="hardcoded-footer">';
-	$yst_footer .= sprintf( __( 'Copyright &copy; %s. %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a>', 'yoast-theme' ), date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="' . CHILD_THEME_URL . '" rel="nofollow">' . CHILD_THEME_NAME . '</a>', 'Yoast' );
-	$yst_footer .= '</p>';
-
+	$yst_footer = get_theme_mod( 'yst_footer' );
+	if ( ! $yst_footer || empty( $yst_footer ) )
+		return $footer_creds_text;
 	return $yst_footer;
 }
 
