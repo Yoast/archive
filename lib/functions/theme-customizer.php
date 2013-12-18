@@ -119,4 +119,4 @@ class Yoast_Theme_Customizer {
 
 }
 
-$customize = new Yoast_Theme_Customizer();
+$yst_customize = new Yoast_Theme_Customizer();
