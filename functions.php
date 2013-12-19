@@ -23,11 +23,13 @@ function child_theme_setup() {
 	//* Start the engine
 	include_once( get_template_directory() . '/lib/init.php' );
 
-	require_once 	CHILD_DIR . '/lib/functions/theme-customizer.php';
+	require_once CHILD_DIR . '/lib/functions/theme-customizer.php';
 
 	if ( is_admin() ) {
 		// Editor Styles
 		add_editor_style( 'assets/css/editor-style.css' );
+
+		add_action( 'current_screen', 'fake_genesis_custom_header_thinking' );
 	}
 
 	/** Load widgets from /lib/widgets/ */
@@ -185,6 +187,37 @@ function child_theme_setup() {
 	add_filter( 'genesis_next_link_text', 'yst_add_spacing_next_prev' );
 	add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
 	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
+
+	// Integration between Genesis and theme customizer
+	add_filter( 'genesis_pre_get_option_site_layout', 'get_site_layout_from_theme_mod' );
+	add_action( 'genesis_admin_before_metaboxes', 'remove_genesis_settings_boxes' );
+}
+
+/**
+ * Fake Genesis into thinking we support a custom header
+ */
+function fake_genesis_custom_header_thinking() {
+	global $pagenow;
+	if ( 'admin.php' == $pagenow && isset( $_GET['page'] ) && 'genesis' == $_GET['page'] ) {
+		add_theme_support( 'custom-header' );
+	}
+}
+
+/**
+ * @return string
+ */
+function get_site_layout_from_theme_mod() {
+	return get_theme_mod( 'yst_default_layout' );
+}
+
+/**
+ * Remove the Genesis layout settings and nav metaboxes
+ */
+function remove_genesis_settings_boxes() {
+	global $wp_meta_boxes;
+//	var_dump( $wp_meta_boxes );
+	unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-layout'] );
+	unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-nav'] );
 }
 
 /**
@@ -197,8 +230,9 @@ function child_theme_setup() {
  */
 function yst_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
 	$colour_scheme = get_theme_mod( 'yst_colour_scheme' );
-	if ( ! $colour_scheme || empty( $colour_scheme) )
+	if ( ! $colour_scheme || empty( $colour_scheme ) ) {
 		$colour_scheme = 'WarmBlue';
+	}
 
 	return $stylesheet_dir_uri . '/assets/css/' . $colour_scheme . '.css';
 }
@@ -400,8 +434,10 @@ function yst_mobile_nav() {
  */
 function yst_footer_creds_text( $footer_creds_text ) {
 	$yst_footer = get_theme_mod( 'yst_footer' );
-	if ( ! $yst_footer || empty( $yst_footer ) )
+	if ( ! $yst_footer || empty( $yst_footer ) ) {
 		return $footer_creds_text;
+	}
+
 	return $yst_footer;
 }
 
@@ -497,64 +533,38 @@ function yst_filter_content_archive_image( $img, $args ) {
  * @since 1.0.0
  */
 function yst_display_logo() {
-	$yst_logo = get_theme_mod( 'yst_logo' );
-	if ( ! $yst_logo ) {
-		$yst_logo = get_stylesheet_directory_uri() . '/assets/images/logo.png';
+	// This holds the CSS that will be echoed
+	$css = '';
+
+	// Normal logo
+	$logo = get_theme_mod( 'yst_logo' );
+	if ( isset( $logo ) && ! empty ( $logo ) ) {
+		$css .= '@media(min-width: 640px){.site-header .title-area {background-image: url(' . $logo . ');}}';
 	}
 
-	$yst_mobile_logo = get_theme_mod( 'yst_mobile_logo' );
-	if ( ! $yst_mobile_logo ) {
-		$yst_mobile_logo = get_stylesheet_directory_uri() . '/assets/images/logo-mobile.png';
-	}
+	// Mobile logo, positioning depends on whether the logo is wider than 230px and / or higher than 36px, if it is, alternate positioning is used.
+	$mobile_logo = get_theme_mod( 'yst_mobile_logo' );
+	if ( isset ( $mobile_logo ) ) {
+		$yst_mobile_logo_details = get_theme_mod( 'yst_mobile_logo_details' );
 
-	$yst_use_alt_mobile_logo = absint( genesis_get_option( 'yst-use-alt-mobile-logo', 'child-settings' ) );
+		$use_alt_positioning = false;
+		if ( isset( $yst_mobile_logo_details ) && is_array( $yst_mobile_logo_details ) && ( $yst_mobile_logo_details['width'] > 230 || $yst_mobile_logo_details['height'] > 36 ) ) {
+			$use_alt_positioning = true;
+		}
 
-	if ( ( isset( $yst_logo ) && ! empty ( $yst_logo ) ) || ( ( isset( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) ) ) {
-		?>
-		<style text="text/css">
-			<?php
-			/* Use normal logo when screensize >= 640px */
-			if ( isset ( $yst_logo ) && ! empty ( $yst_logo ) ) {
-			?>
-			@media (min-width: 640px) {
-				.site-header .title-area {
-					background-image: url(<?php echo $yst_logo; ?>);
-				}
-			}
-
-			<?php
-			}
-			/* Use mobile logo positioning when screensize < 640px and alternative mobile logo is set to 0 */
-			if ( ( isset ( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) && ( ! isset ( $yst_use_alt_mobile_logo ) || empty ( $yst_use_alt_mobile_logo ) ) ) {
-			?>
-			@media ( max-width: 640px ) {
-				header.site-header {
-					background: url( <?php echo $yst_mobile_logo ?> ) no-repeat 50% 0;
-				}
-			}
-
-			<?php
-			}
-			/* Use mobile logo positioning when screensize < 640px and alternative mobile logo is set to 1 */
-			if ( ( isset ( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) && ( isset ( $yst_use_alt_mobile_logo ) && ! empty ( $yst_use_alt_mobile_logo ) ) ) {
-			$yst_mobile_logo_height = absint( genesis_get_option( 'yst-use-alt-mobile-logo-height', 'child-settings' ) - 41 );
+		if ( ! $use_alt_positioning ) {
+			$css .= '@media(max-width: 640px){header.site-header {background: url(' . $mobile_logo . ') no-repeat 50% 0;	}}';
+		} else {
+			$mobile_logo_height = $yst_mobile_logo_details['height'] - 41;
 			if ( is_user_logged_in() ) {
-				$yst_mobile_logo_height -= 46;
+				$mobile_logo_height -= 46;
 			}
-			?>
-			@media ( max-width: 640px ) {
-				.site-container {
-					padding-top: <?php echo absint( genesis_get_option( 'yst-use-alt-mobile-logo-height', 'child-settings' ) ); ?>px; /* img height - 41 and - 46 if logged in */
-					background: url( <?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?> ) no-repeat 50% 0;
-					background-size: auto;
-				}
-			}
+			$css .= '@media(max-width: 640px){.site-container {padding-top:' . $mobile_logo_height . 'px;background: url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
+		}
+	}
 
-			<?php
-			}
-			?>
-		</style>
-	<?php
+	if ( ! empty( $css ) ) {
+		echo '<style>' . $css . '</style>';
 	}
 }
 
