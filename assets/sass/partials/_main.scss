@@ -610,7 +610,7 @@ textarea {
     height: 1.5em;
     padding: 16px 32px 16px 16px;
     background: {
-      image: url('../images/icon-search.png');
+      image: image-url('icon-search.png');
       position: 95% 50%;
       repeat: no-repeat;
     }
@@ -2557,7 +2557,7 @@ table {
       right:10px;
     }
     background: {
-      image: url('../images/social_sprites.png');
+      image: image-url('social_sprites.png');
       repeat: no-repeat;
     }
   }
@@ -3305,7 +3305,7 @@ img#wpstats {
     &#sidr-left {
       float: left;
       margin:2px 0;
-      background: url('../images/hamburger.png') 7px 10px no-repeat;
+      background: image-url('hamburger.png') 7px 10px no-repeat;
       border: {
         right: {
           width:2px;
@@ -3317,7 +3317,7 @@ img#wpstats {
     &#sidr-right {
       float: right;
       margin:2px 0;
-      background: url('../images/search.png') 6px 8px no-repeat;
+      background: image-url('search.png') 6px 8px no-repeat;
       border: {
         left: {
           width:2px;
