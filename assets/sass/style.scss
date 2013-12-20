@@ -242,7 +242,6 @@ header {
 
 
 .site-inner, //this is where the main wrapper is set for the content area
-#yoast-after-header-container,
 .breadcrumb {
   margin: 0 auto;
   max-width: $d_full;
@@ -2106,15 +2105,6 @@ table {
       }
     }
   }
-}
-
-/**
- * After Header Widgets
- */
-
-// testing no widgets and tagline below menu
-#yoast-after-header-container {
-    display:none;
 }
 
 /**
