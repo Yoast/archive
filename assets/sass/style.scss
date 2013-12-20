@@ -261,14 +261,35 @@ header {
 }
 .site-inner {
   padding: {
-    top: 312px;
+    top: 32px;
   }
+}
+
+/**
+ * TEMP FOR HEADER IMAGE
+ */
+.home {
+  .site-inner {
+    padding: {
+      top: 312px;
+    }
+    background: {
+      image: image-url('macarons1.jpg');
+      position: 0 0;
+      repeat: no-repeat;
+    }
+  }
+}
+.breadcrumb {
+  padding-top: 302px !important;
   background: {
     image: image-url('macarons1.jpg');
     position: 0 0;
     repeat: no-repeat;
   }
 }
+/* end */
+
 .wrap {
   @extend .floatclearing;
   margin: 0 auto;
@@ -686,7 +707,6 @@ textarea {
     display: block;
     position: relative;
     color: $c_navMainLink;
-    padding: 0 20px;
     margin: 0;
     font: {
       family: $f_navFont;
@@ -708,6 +728,9 @@ textarea {
       position: static;
     }
   }
+  .menu-item {
+    padding: 0 20px;
+  }
   .current-menu-item,
   .current-menu-parent,
   .current-menu-ancestor {
@@ -720,9 +743,6 @@ textarea {
         size: contain;
       }
     }
-    > a:hover {
-      color: $c_navMainTextActive;
-    }
   }
   .sub-menu {
     left: -9999px;
@@ -730,10 +750,7 @@ textarea {
     position: absolute;
     width: ($d_navSubWidth + 20);
     z-index: 99;
-    margin: {
-      top: -1px;
-    }
-    padding:0 20px;
+    padding:0;
     border: {
       width:1px;
       style:solid;
@@ -744,11 +761,13 @@ textarea {
     }
     a {
       color: $c_navSubLink;
-      text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+      text-align:left;
       border: {
-        width: 0 0 1px;
-        style: solid;
-        color: $c_navSubBorder;
+        bottom: {
+          width: 1px;
+          style: solid;
+          color: $c_navSubBorder;
+        }
       }
       font: {
         family: $f_baseFont;
@@ -1044,7 +1063,7 @@ textarea {
 }
 
 /**
- * Sticky Menu - scrolling
+ * sticky Menu - scrolling
  */
 
 // body.sticky,
@@ -1103,10 +1122,30 @@ body.sticky-menu {
     li {
       a {
         color: $c_navMainLink;
+        &.current-menu-item {
+          background: {
+            image: none;
+          }
+          color:$c_navMainLinkHover;
+        }
         &:hover {
           color:$c_navMainLinkHover;
         }
         &:after {
+          content: "";
+        }
+      }
+      > a:after // set up the top level arrows first
+      {
+        content: "▼";
+        font-size: .5em;
+        vertical-align: middle;
+        padding: {
+          left: 5px;
+        }
+      }
+      &.menu-item {
+        > a:only-child:after { // clear if only child
           content: "";
         }
       }
@@ -1118,7 +1157,9 @@ body.sticky-menu {
       &.current-menu-item,
       &.current-menu-parent,
       &.current-page-ancestor {
-        color:$c_navMainLinkHover;
+        a {
+          color:$c_navMainLinkHover !important;
+        }
       }
       &.menu-item-search {
         display:inline;
