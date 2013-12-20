@@ -262,7 +262,12 @@ header {
 }
 .site-inner {
   padding: {
-    top: 32px;
+    top: 312px;
+  }
+  background: {
+    image: image-url('macarons1.jpg');
+    position: 0 0;
+    repeat: no-repeat;
   }
 }
 .wrap {
@@ -514,6 +519,8 @@ button {
 input {
   font: {
     family: $f_codeFont;
+    size: $f_inputText-px;
+    size: $f_inputText;
   }
   background: {
     color: $c_inputBg;
@@ -525,10 +532,6 @@ input {
   }
   // @include box-shadow(1px 1px 3px $c_inputBoxShadow inset);
   color: $c_inputText;
-  font: {
-    size: $f_inputText-px;
-    size: $f_inputText;
-  }
   padding: 8px;
   width: 100%;
   margin:0;
@@ -764,6 +767,9 @@ textarea {
           weight: 700;
         }
       }
+    }
+    .current-menu-item a {
+
     }
     .menu-item {
       display:block;
@@ -1100,9 +1106,6 @@ body.sticky-menu {
         color: $c_navMainLink;
         &:hover {
           color:$c_navMainLinkHover;
-          background: {
-            image: image-url($c_linkBorderImage);
-          }
         }
         &:after {
           content: "";
@@ -1116,13 +1119,7 @@ body.sticky-menu {
       &.current-menu-item,
       &.current-menu-parent,
       &.current-page-ancestor {
-        background: {
-          color: $c_navMainBgActive;
-        }
-        a {
-          color: $c_navMainTextActive;
-          text-shadow: 1px 1px 1px $c_navMainLinkShadow;
-        }
+        color:$c_navMainLinkHover;
       }
       &.menu-item-search {
         display:inline;
@@ -1484,6 +1481,7 @@ table {
     image: image-url($c_fullwidthDivider);
     size: 100% auto;
     repeat: no-repeat;
+    position: 50% bottom;
 
   }
 }
@@ -2116,23 +2114,7 @@ table {
 
 // testing no widgets and tagline below menu
 #yoast-after-header-container {
-  width:$d_full;
-  margin:0 auto;
-  padding: 0 $d_paddingLeftRightFull;
-  height: 280px;
-  background: {
-    image: image-url('macarons1.jpg');
-    position: 0 0;
-    repeat: no-repeat;
-  }
-  border: {
-    width:0 1px;
-    style: solid;
-    color: $c_mainBorder;
-  }
-  .widget {
     display:none;
-  }
 }
 
 /**
