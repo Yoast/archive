@@ -41,7 +41,7 @@ function child_theme_setup() {
 	add_theme_support( 'custom-background' );
 
 //* Add support for 3-column footer widgets
-	add_theme_support( 'genesis-footer-widgets', 4 );
+	add_theme_support( 'genesis-footer-widgets', 3 );
 
 	// Disable site layouts that must not be used
 	genesis_unregister_layout( 'content-sidebar-sidebar' );
@@ -252,7 +252,7 @@ function yst_add_top_right_area() {
  * @return string
  */
 function yst_get_read_more_link() {
-	return '...&nbsp;<div class="exerptreadmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>';
+	return '&hellip;&nbsp;<div class="excerpt_readmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>';
 }
 
 /**
@@ -315,7 +315,7 @@ function yst_activate_sidr_and_sticky_menu() {
 			});
 			$(window).scroll(function () {
 				var yPos = ( $(window).scrollTop() );
-				if (yPos > 70) {
+				if (yPos > 50) {
 					$("body").addClass("sticky-menu");
 				} else {
 					$("body").removeClass("sticky-menu");
@@ -344,9 +344,9 @@ function yst_mobile_nav() {
  * @fixme If this becomes something you can change in the settings, just retrieve the option here and return it.
  */
 function yst_footer_creds_text( $footer_creds_text ) {
-	$yst_footer = '<p class="custom_footer">';
-	$yst_footer .= trim( genesis_get_option( 'footer', 'child-settings' ) ) . '</p><p class="hardcoded-footer">';
-	$yst_footer .= sprintf( __( '&#x000B7; Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a> &#x000B7;', 'yoast-theme' ), date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com/wordpress/themes/vintage/" rel="nofollow">Vintage</a>', 'Yoast' );
+	$yst_footer = '<p class="custom_footer"><strong>';
+	$yst_footer .= trim( genesis_get_option( 'footer', 'child-settings' ) ) . '</strong></p><p class="hardcoded-footer">';
+	$yst_footer .= sprintf( __( 'Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a>', 'yoast-theme' ), date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com/wordpress/themes/vintage/" rel="nofollow">Vintage</a>', 'Yoast' );
 	$yst_footer .= '</p>';
 	return $yst_footer;
 }

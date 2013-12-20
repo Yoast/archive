@@ -17,77 +17,77 @@
  * @plugin(title: Gravity Forms)
  * @link http://www.gravityforms.com/
  */
-/* line 35, ../sass/forms.scss */
+/* line 34, ../sass/forms.scss */
 .gform_wrapper .gf_progressbar_wrapper {
   border-bottom-width: 1px;
   border-bottom-style: solid !important;
-  border-bottom-color: #e25918 !important;
+  border-bottom-color: #2a9ea5 !important;
 }
-/* line 44, ../sass/forms.scss */
+/* line 43, ../sass/forms.scss */
 .gform_wrapper .gf_progressbar_wrapper h3.gf_progressbar_title {
   color: black;
   opacity: 1 !important;
   font-size: 16px !important;
   font-size: 1rem !important;
 }
-/* line 55, ../sass/forms.scss */
+/* line 54, ../sass/forms.scss */
 .gform_wrapper ul.gfield_radio li {
   padding-left: 1px !important;
   padding-left: 0.1rem !important;
 }
-/* line 68, ../sass/forms.scss */
+/* line 67, ../sass/forms.scss */
 .gform_wrapper input[type="Email"], .gform_wrapper input[type="Text"], .gform_wrapper input[type="Url"], .gform_wrapper input[type="Tel"], .gform_wrapper input[type="Number"], .gform_wrapper input[type="Password"] {
-  font-size: 14px !important;
-  font-size: 0.875rem !important;
+  font-size: 16px !important;
+  font-size: 1rem !important;
   padding: 8px;
 }
-/* line 75, ../sass/forms.scss */
+/* line 74, ../sass/forms.scss */
 .gform_wrapper input[value="Other"] {
   max-width: 80%;
 }
-/* line 79, ../sass/forms.scss */
+/* line 78, ../sass/forms.scss */
 .gform_wrapper input[type="radio"], .gform_wrapper input[type="checkbox"] {
   margin-left: 4px;
 }
-/* line 85, ../sass/forms.scss */
+/* line 84, ../sass/forms.scss */
 .gform_wrapper textarea {
-  font-size: 14px !important;
-  font-size: 0.875rem !important;
+  font-size: 16px !important;
+  font-size: 1rem !important;
   padding: 8px;
   padding: 0.8rem;
 }
-/* line 93, ../sass/forms.scss */
+/* line 92, ../sass/forms.scss */
 .gform_wrapper select {
-  font-size: 14px !important;
-  font-size: 0.875rem !important;
+  font-size: 16px !important;
+  font-size: 1rem !important;
 }
-/* line 100, ../sass/forms.scss */
+/* line 99, ../sass/forms.scss */
 .gform_wrapper .ginput_complex label {
-  font-size: 14px !important;
-  font-size: 0.875rem !important;
+  font-size: 16px !important;
+  font-size: 1rem !important;
   padding: 0;
 }
-/* line 108, ../sass/forms.scss */
+/* line 107, ../sass/forms.scss */
 .gform_wrapper li {
   margin: 8px 0 0;
   margin: 0.8rem 0 0;
 }
-/* line 113, ../sass/forms.scss */
+/* line 112, ../sass/forms.scss */
 .gform_wrapper form li {
   margin: 8px 0 0;
   margin: 0.8rem 0 0;
 }
-/* line 120, ../sass/forms.scss */
+/* line 119, ../sass/forms.scss */
 .gform_wrapper .gform_footer input [type="submit"] {
-  font-size: 14px !important;
-  font-size: 0.875rem !important;
+  font-size: 16px !important;
+  font-size: 1rem !important;
 }
 
-/* line 131, ../sass/forms.scss */
+/* line 130, ../sass/forms.scss */
 .gform_widget .gform_wrapper .small {
   width: 50% !important;
 }
-/* line 134, ../sass/forms.scss */
+/* line 133, ../sass/forms.scss */
 .gform_widget .gform_wrapper .medium {
   width: 100% !important;
 }
@@ -97,14 +97,14 @@
  * @plugin(title: Contact Form 7)
  * @link http://www.gravityforms.com/
  */
-/* line 150, ../sass/forms.scss */
+/* line 149, ../sass/forms.scss */
 .wpcf7 .wpcf7-form .wpcf7-checkbox .wpcf7-list-item,
 .wpcf7 .wpcf7-form .wpcf7-radio .wpcf7-list-item,
 .wpcf7 .wpcf7-form .wpcf7-form-control-wrap .wpcf7-list-item {
   display: block;
   margin-left: 0;
 }
-/* line 157, ../sass/forms.scss */
+/* line 156, ../sass/forms.scss */
 .wpcf7 .wpcf7-form .wpcf7-checkbox input[type="checkbox"],
 .wpcf7 .wpcf7-form .wpcf7-checkbox input[type="radio"],
 .wpcf7 .wpcf7-form .wpcf7-radio input[type="checkbox"],
@@ -116,7 +116,7 @@
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 162, ../sass/forms.scss */
+/* line 161, ../sass/forms.scss */
 .wpcf7 .wpcf7-form .wpcf7-checkbox input[type="number"],
 .wpcf7 .wpcf7-form .wpcf7-checkbox input[type="date"],
 .wpcf7 .wpcf7-form .wpcf7-radio input[type="number"],
@@ -126,7 +126,7 @@
   width: 150px;
   max-width: 100%;
 }
-/* line 166, ../sass/forms.scss */
+/* line 165, ../sass/forms.scss */
 .wpcf7 .wpcf7-form .wpcf7-checkbox input[type="range"],
 .wpcf7 .wpcf7-form .wpcf7-radio input[type="range"],
 .wpcf7 .wpcf7-form .wpcf7-form-control-wrap input[type="range"] {

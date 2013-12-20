@@ -1,15 +1,17 @@
-// font dimensions for Tailor Made
+// font dimensions for Vintage
 // Always have the fonts scaled from the browser default
 // Usually that is 16px / 100%, so 1rem should correspond with that
 
-$f_baseFont:            'Quattrocento Sans', Helvetica, Arial, sans-serif;
-$f_extraFont:           'Lekton', 'Courier New', Courier, serif;
-$f_codeFont:            'Lekton', 'Courier New', Courier, serif;
+$f_baseFont:            'PT Sans', Helvetica, Arial, sans-serif;
+$f_headingFont:         'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_extraFont:           'Dancing Script', Georgia, 'Times New Roman', Times, serif;
+$f_codeFont:            'Courier New', Courier, serif;
 
 // font sizes
 $f_main-px:             16px;
 $f_main:                1rem;
 
+$f_taglineTop:         'Josefin Sans', Helvetica, Arial, sans-serif;
 $f_taglineTop-px:       20px;
 $f_taglineTop:          1.25rem;
 $f_taglineFullWidth-px: 26px;
@@ -21,14 +23,16 @@ $f_breadcrumbs:         0.875rem;
 $f_metaAtPost-px:       14px;
 $f_metaAtPost:          0.875rem;
 
-$f_pagenav-px:          14px;
-$f_pagenav:             0.875rem;
+$f_pagenav-px:          16px;
+$f_pagenav:             1rem;
+$f_pagenavActive-px:    20px;
+$f_pagenav:             1.25rem;
 
 $f_linkToArchives-px:   20px;
 $f_linkToArchives:      1.25rem;
 
-$f_commentHTMLtags-px:  15px;
-$f_commentHTMLtags:     0.9375rem;
+$f_commentHTMLtags-px:  14px;
+$f_commentHTMLtags:     0.875rem;
 
 // header
 $f_header-px:           16px;
@@ -39,68 +43,67 @@ $f_headerH4-px:         20px;
 $f_headerH4:            1.25rem;
 
 // navigation
-$f_navFont:             'Quattrocento Sans', Helvetica, Arial, sans-serif;
-$f_navMainLink-px:      18px;
-$f_navMainLink:         1.125rem;
-$f_navSubLink-px:       14px;
-$f_navSubLink:          0.875rem;
-
-// mobile menu
-//$sidr-font-family:      'lucida grande',tahoma,verdana,arial,sans-serif;
-//$sidr-font-size-px:     $f_main-px;
-//$sidr-font-size:        $f_main;
+$f_navFont:             'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_navMainLink-px:      22px;
+$f_navMainLink:         1.375rem;
+$f_navSubLink-px:       16px;
+$f_navSubLink:          1rem;
 
 // main content
-$f_H1Font:              'Quattrocento Sans', Helvetica, Arial, sans-serif;
-$f_H2Font:              'Quattrocento Sans', Helvetica, Arial, sans-serif;
-$f_H3Font:              'Quattrocento Sans', Helvetica, Arial, sans-serif;
-$f_H4Font:              'Quattrocento Sans', Helvetica, Arial, sans-serif;
-$f_H5Font:              'Quattrocento Sans', Helvetica, Arial, sans-serif;
-$f_H6Font:              'Quattrocento Sans', Helvetica, Arial, sans-serif;
-$f_mainH1-px:           32px;
-$f_mainH1:              2.0rem;
-$f_mainH2-px:           24px;
-$f_mainH2:              1.5rem;
-$f_mainH3-px:           20px;
-$f_mainH3:              1.25rem;
-$f_mainH4-px:           20px;
-$f_mainH4:              1.25rem;
-$f_mainH5-px:           16px;
-$f_mainH5:              1.0rem;
-$f_mainH6-px:           14px;
-$f_mainH6:              0.875rem;
+$f_H1Font:              'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_H2Font:              'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_H3Font:              'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_H4Font:              'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_H5Font:              'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_H6Font:              'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_mainH1-px:           38px;
+$f_mainH1:              2.375rem;
+$f_mainH2-px:           32px;
+$f_mainH2:              2rem;
+$f_mainH3-px:           26px;
+$f_mainH3:              1.625rem;
+$f_mainH4-px:           22px;
+$f_mainH4:              1.375rem;
+$f_mainH5-px:           18px;
+$f_mainH5:              1.125rem;
+$f_mainH6-px:           16px;
+$f_mainH6:              1rem;
 
-$f_sidebarH1-px:        20px;
-$f_sidebarH1:           1.25rem;
-$f_sidebarH2-px:        20px;
-$f_sidebarH2:           1.25rem;
-$f_sidebarH3-px:        20px;
-$f_sidebarH3:           1.25rem;
+// table
+$f_table-px:             16px;
+$f_table:                1.0rem;
+$f_tableSmall-px:        14px;
+$f_tableSmall:           0.875rem;
 
 // blockquote
 $f_blockquoteBefore-px: 30px;
 $f_blockquoteBefore:    1.875rem;
 
 // input
-$f_inputText-px:        14px;
-$f_inputText:           0.875rem;
+$f_inputText-px:        16px;
+$f_inputText:           1rem;
 
 // call-to-action
-$f_ctaText-px:          24px;
-$f_ctaText:             1.5rem;
+$f_ctaText-px:          26px;
+$f_ctaText:             1.625rem;
 
 // sidebar
-$f_sidebarH3-px:        20px;
-$f_sidebarH3:           1.25rem;
-$f_sidebarH4-px:        20px;
-$f_sidebarH4:           1.25rem;
+$f_sidebarHeadingFont:  'Dancing Script', Georgia, 'Times New Roman', Times, serif;
+$f_sidebarH1-px:        26px;
+$f_sidebarH1:           1.625rem;
+$f_sidebarH2-px:        26px;
+$f_sidebarH2:           1.625rem;
+$f_sidebarH3-px:        26px;
+$f_sidebarH3:           1.625rem;
+$f_sidebarH4-px:        26px;
+$f_sidebarH4:           1.625rem;
 $f_sidebarLabel-px:     16px;
 $f_sidebarLabel:        1.0rem;
 
 // footer
 $f_footerBaseFont-px:   14px;
 $f_footerBaseFont:      0.875rem;
-$f_footerH3-px:         16px;
-$f_footerH3:            1.0rem;
-$f_footerH4-px:         16px;
-$f_footerH4:            1.0rem;
+$f_footerH3-px:         20px;
+$f_footerH3:            1.25rem;
+$f_footerH4-px:         20px;
+$f_footerH4:            1.25rem;
