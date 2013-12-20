@@ -176,8 +176,20 @@ function child_theme_setup() {
 	// Change the comment handling function
 	add_filter( 'genesis_comment_list_args', 'yst_comment_list_args' );
 
-	// Stuff with images
+	// Override Genesis settings with theme mod settings
 	add_filter( 'genesis_pre_get_option_image_size', 'yst_override_content_thumbnail_setting' );
+	add_filter( 'genesis_pre_get_option_content_archive', 'yst_override_content_archive_setting' );
+	add_filter( 'genesis_pre_get_option_content_archive_thumbnail', 'yst_override_content_archive_thumbnail' );
+	add_filter( 'genesis_pre_get_option_posts_nav', 'yst_override_posts_nav' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_front_page', 'yst_override_breadcrumb_front_page' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_posts_page', 'yst_override_breadcrumb_posts_page' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_home', 'yst_override_breadcrumb_home' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_single', 'yst_override_breadcrumb_single' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_page', 'yst_override_breadcrumb_page' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_archive', 'yst_override_breadcrumb_archive' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_404', 'yst_override_breadcrumb_404' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_attachment', 'yst_override_breadcrumb_attachment' );
+
 	add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
 
 	add_filter( 'user_contactmethods', 'yst_modify_contact_methods' );
@@ -218,6 +230,8 @@ function remove_genesis_settings_boxes() {
 //	var_dump( $wp_meta_boxes );
 	unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-layout'] );
 	unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-nav'] );
+	unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-posts'] );
+	unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-breadcrumb'] );
 }
 
 /**
@@ -564,7 +578,7 @@ function yst_display_logo() {
 	}
 
 	if ( ! empty( $css ) ) {
-		echo '<style>' . $css . '</style>';
+		echo '<style id="tailor-made-inline-css">' . $css . '</style>';
 	}
 }
 
@@ -694,13 +708,155 @@ function yst_add_spacing_next_prev( $link ) {
 
 /**
  * Override the image size for full-width designs, user settings are now completely ignored.
+ *
+ * @param null|string $size
+ *
+ * @return null|string
  */
 function yst_override_content_thumbnail_setting( $size = null ) {
-
 	if ( false !== strpos( genesis_site_layout(), 'full-width' ) ) {
 		return 'fullwidth-thumb';
 	}
-
 	return $size;
+}
+
+/**
+ * Function to override genesis settings with theme_mod settings
+ *
+ * @param string $setting
+ * @param string $value
+ * @param boolean $checkbox
+ *
+ * @return string
+ */
+function yst_override_genesis_setting( $setting, $value, $checkbox = false ) {
+	$theme_setting = get_theme_mod( $setting );
+	if ( isset( $theme_setting ) && !empty( $theme_setting ) ) {
+		return $theme_setting;
+	} else if ( $checkbox ) {
+		return false;
+	}
+	return $value;
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_content_archive_setting( $value = null ) {
+	return yst_override_genesis_setting( 'yst_content_archive', $value );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_content_archive_thumbnail( $value = null ) {
+	return yst_override_genesis_setting( 'yst_content_archive_thumbnail', $value, true );
+}
+
+/**
+ * Retrieve the posts_nav setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_posts_nav( $value = null ) {
+	return yst_override_genesis_setting( 'yst_posts_nav', $value );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_front_page( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_front_page', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_posts_page( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_posts_page', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_home( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_home', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_single( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_single', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_page( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_page', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_archive( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_archive', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_404( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_404', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_attachment( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_attachment', $value, true );
 }
 
