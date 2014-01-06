@@ -273,7 +273,7 @@ function yst_add_google_fonts() {
  * Add yst-after-header widget support for site. If widget not active, don't display
  */
 function yst_after_header_genesis() {
-	if ( is_front_page() ) {
+	if ( is_front_page() && ( is_active_sidebar( 'yoast-after-header-1' ) || is_active_sidebar( 'yoast-after-header-2' ) || is_active_sidebar( 'yoast-after-header-3' ) ) ) {
 		echo '<div id="yoast-after-header-container"><div class="wrap">';
 
 		$areas = array( 'yoast-after-header-1', 'yoast-after-header-2', 'yoast-after-header-3' );
