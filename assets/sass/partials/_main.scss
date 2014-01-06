@@ -3121,13 +3121,14 @@ img#wpstats {
   }
   #yoast-after-header-container {
     padding: {
-      left:20px;
+      left: 10px;
+      right: 10px;
     }
     .yoast-after-header-widget {
-      width:30%;
+      max-width:30%;
     }
-    #yoast-after-header-2 {
-      margin:0 30px;
+    #yoast-after-header-3 {
+      max-width:25%;
     }
   }
   #yoast-fullwidth-bottom-container {
@@ -3175,6 +3176,13 @@ img#wpstats {
   }
 }
 
+@media (max-width:835px) {
+  #yoast-after-header-container {
+    display:none;
+    visibility: hidden;
+  }
+}
+
 @media (max-width: 640px) {
   .content {
     width:100%;
@@ -3190,10 +3198,6 @@ img#wpstats {
       left:0;
       right:0;
     }
-  }
-  #yoast-after-header-container {
-    display:none;
-    visibility: hidden;
   }
   .breadcrumb {
     padding: {
