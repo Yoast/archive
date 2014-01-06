@@ -910,7 +910,10 @@ textarea {
         color: $c_sidr_headingBorder;
       }
     }
-    padding: 5px 15px 4px;
+    padding: 0 15px;
+    line: {
+      height: 39px;
+    }
     margin:0;
   }
   p {
