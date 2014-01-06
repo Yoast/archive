@@ -1118,9 +1118,6 @@ body.sticky-menu {
           color:$c_navMainLinkHover;
           text-shadow: 1px 1px 1px $c_navMainLinkShadow;
         }
-        &:after {
-          content: "";
-        }
       }
       li {
         a {
