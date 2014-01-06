@@ -1987,6 +1987,13 @@ table {
     bottom: 24px;
   }
 }
+.logged-in-as {
+  a {
+    font: {
+      weight: 700;
+    }
+  }
+}
 
 /**
  * SIDEBAR AND WIDGETS
