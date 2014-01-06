@@ -507,9 +507,6 @@ button {
 }
 
 input {
-  font: {
-    family: $f_codeFont;
-  }
   background: {
     color: $c_inputBg;
   }
@@ -604,9 +601,6 @@ textarea {
 
 .search-form {
   input {
-    font: {
-      family: $f_codeFont;
-    }
     height: 1.5em;
     padding: 16px 32px 16px 16px;
     background: {
