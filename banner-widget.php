@@ -106,7 +106,7 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 				echo $args['before_title'] . apply_filters( 'yst_banner_widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
 			}
 			$out = '<img ';
-			if ( ( isset ( $instance['image_width'] ) && ! empty( $instance['image_width'] ) ) || ( isset ( $instance['image_height'] ) && ! empty( $instance['image_width'] ) ) ) {
+			if ( ( isset ( $instance['image_width'] ) && ! empty( $instance['image_width'] ) ) || ( isset ( $instance['image_height'] ) && ! empty( $instance['image_height'] ) ) ) {
 				$out .= 'style="';
 				if ( ! empty( $instance['image_width'] ) ) {
 					$out .= 'width:' . $instance['image_width'] . ( $instance['size_type'] == 'perc' ? '%' : 'px' ) . '; ';
