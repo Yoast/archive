@@ -347,7 +347,7 @@ header {
   }
   section.widget {
     margin: {
-      bottom: 10px;
+      top: 10px;
     }
     &.widget_search {
      form {
@@ -610,7 +610,7 @@ textarea {
     height: 1.5em;
     padding: 16px 32px 16px 16px;
     background: {
-      image: image-url('icon-search.png');
+      image: image-url('search.png');
       position: 95% 50%;
       repeat: no-repeat;
     }
@@ -2070,9 +2070,6 @@ table {
  */
 
 .widget_calendar {
-  .widget-title {
-    display:none;
-  }
   #wp-calendar {
     margin: {
       bottom:0;
@@ -2112,9 +2109,11 @@ table {
       }
     }
     caption {
-      @extend .widget-title;
       line-height:1em;
       text-align:left;
+      padding: {
+        left: 10px;
+      }
       float:none;
       font: {
         weight: 700;
@@ -2507,7 +2506,7 @@ table {
   }
 }
 /**
- * Newletter Widget additions for after-post area
+ * Newletter Widget additions for the after-post area
  */
 
 .yoast-after-post-widget {
