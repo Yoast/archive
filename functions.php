@@ -291,21 +291,18 @@ function yst_after_header_genesis() {
 		echo '<div class="clearfloat"></div></div></div>';
 	}
 
-	if ( is_active_sidebar( 'yoast-tagline-after-header' ) && is_front_page() ) {
-		echo '<div id="yoast-tagline-after-header-container"><div class="wrap">';
-		genesis_widget_area( 'yoast-tagline-after-header', array(
-			'before' => '<div id="yoast-tagline-after-header" class="yoast-tagline-after-header-widget">',
-			'after'  => '</div>',
-		) );
-		echo '</div></div>';
-	} else {
-		$tagline = get_bloginfo( 'description' );
-		if ( isset ( $tagline ) && ! empty( $tagline ) ) {
-			$output = apply_filters( 'yst_tagline_afterheader_container_before', '<div id="yoast-tagline-after-header-container">' );
-			$output .= apply_filters( 'yst_tagline_afterheader_before', '<p id="yoast-tagline" class="yoast-tagline">' );
-			$output .= apply_filters( 'yst_tagline_afterheader_tagline', $tagline );
-			$output .= apply_filters( 'yst_tagline_afterheader_after', '</p>' );
-			$output .= apply_filters( 'yst_tagline_afterheader_container_after', '</div>' );
+	$tagline = get_bloginfo( 'description' );
+	if ( isset ( $tagline ) && ! empty( $tagline ) ) {
+		if (
+				( is_home() 											&& get_theme_mod( 'yst_tagline_home' ) ) ||
+				( is_front_page() && ! is_home() 	&& get_theme_mod( 'yst_tagline_front_page' ) ) ||
+				( is_home() && ! is_front_page() 	&& get_theme_mod( 'yst_tagline_posts_page' ) ) ||
+				( is_singular() 									&& get_theme_mod( 'yst_tagline_singular' ) ) ||
+				( is_archive() 										&& get_theme_mod( 'yst_tagline_archive' ) ) ||
+				( is_404() 												&& get_theme_mod( 'yst_tagline_404' ) ) ||
+				( is_attachment() 								&& get_theme_mod( 'yst_tagline_attachment' ) )
+		) {
+			$output = apply_filters( 'yst_tagline_afterheader', '<div id="yoast-tagline-after-header-container"><p class="yoast-tagline">' . $tagline . '</p></div>', $tagline );
 			echo $output;
 		}
 	}
@@ -717,25 +714,29 @@ function yst_override_content_thumbnail_setting( $size = null ) {
 	if ( false !== strpos( genesis_site_layout(), 'full-width' ) ) {
 		return 'fullwidth-thumb';
 	}
+
 	return $size;
 }
 
 /**
  * Function to override genesis settings with theme_mod settings
  *
- * @param string $setting
- * @param string $value
+ * @param string  $setting
+ * @param string  $value
  * @param boolean $checkbox
  *
  * @return string
  */
 function yst_override_genesis_setting( $setting, $value, $checkbox = false ) {
 	$theme_setting = get_theme_mod( $setting );
-	if ( isset( $theme_setting ) && !empty( $theme_setting ) ) {
+	if ( isset( $theme_setting ) && ! empty( $theme_setting ) ) {
 		return $theme_setting;
-	} else if ( $checkbox ) {
-		return false;
+	} else {
+		if ( $checkbox ) {
+			return false;
+		}
 	}
+
 	return $value;
 }
 
