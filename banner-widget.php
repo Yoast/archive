@@ -31,10 +31,10 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 			'size_type'    => 'px',
 			'class'        => '',
 			'alt'          => '',
-			'url'          => '',
 			'post_type'    => 'page',
 			'post_id'      => 0,
-			'nofollow'     => false
+			'url'          => '',
+			'nofollow'     => false,
 		);
 
 		/**
@@ -50,9 +50,9 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 				'size_type'    => __( 'Size in pixels or percentages', 'yoast-theme' ),
 				'class'        => __( 'CSS Class', 'yoast-theme' ),
 				'alt'          => __( 'Alt', 'yoast-theme' ),
-				'url'          => __( 'URL', 'yoast-theme' ),
 				'post_type'    => __( 'Post Type', 'yoast-theme' ),
 				'post_id'      => __( 'Page To Link To', 'yoast-theme' ),
+				'url'          => __( 'URL', 'yoast-theme' ),
 				'nofollow'     => __( 'Nofollow this link', 'yoast-theme' ),
 			);
 
