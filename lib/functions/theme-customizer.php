@@ -1,17 +1,31 @@
 <?php
 
+/**
+ * Class Yoast_Theme_Customizer
+ *
+ * Hooks the settings to the WordPress theme customizer
+ */
 class Yoast_Theme_Customizer {
 
+	/**
+	 * Class constructor
+	 */
 	function __construct() {
 		add_action( 'customize_register', array( $this, 'customize_register' ) );
 		add_action( 'customize_controls_print_styles', array( $this, 'style' ), 20 );
-		add_action( 'customize_preview_init', array( $this, 'live_preview' ) );
+		add_action( 'customize_preview_init', array( $this, 'enqueue' ) );
 	}
 
-	function live_preview() {
+	/**
+	 * Enqueue scripts
+	 */
+	function enqueue() {
 		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js', array( 'jquery', 'customize-preview' ), '0.1', true );
 	}
 
+	/**
+	 * Outputs customizer specific styles for our custom controls
+	 */
 	function style() {
 		?>
 		<style>
@@ -42,6 +56,11 @@ class Yoast_Theme_Customizer {
 	<?php
 	}
 
+	/**
+	 * Customize the customizer
+	 *
+	 * @param object $wp_customize
+	 */
 	function customize_register( $wp_customize ) {
 		/**
 		 * Add settings
@@ -118,7 +137,7 @@ class Yoast_Theme_Customizer {
 			'yst_breadcrumb_page'       => array( 'label' => __( 'Single Pages', 'yoast-theme' ), 'default' => true ),
 			'yst_breadcrumb_archive'    => array( 'label' => __( 'Archive Pages', 'yoast-theme' ), 'default' => true ),
 			'yst_breadcrumb_404'        => array( 'label' => __( '404 Pages', 'yoast-theme' ), 'default' => true ),
-			'yst_breadcrumb_attachment' => array( 'label' => __( 'Attachment Pages',  'yoast-theme' ), 'default' => true )
+			'yst_breadcrumb_attachment' => array( 'label' => __( 'Attachment Pages', 'yoast-theme' ), 'default' => true )
 		);
 
 		if ( 'page' == get_option( 'show_on_front' ) ) {
@@ -130,6 +149,32 @@ class Yoast_Theme_Customizer {
 		foreach ( $breadcrumb_settings as $breadcrumb_setting => $values ) {
 			$wp_customize->add_setting(
 				$breadcrumb_setting,
+				array(
+					'default'   => $values['default'],
+					'transport' => 'refresh'
+				)
+			);
+		}
+
+		$tagline_settings = array(
+			'yst_tagline_home'       => array( 'label' => __( 'Homepage', 'yoast-theme' ), 'default' => true ),
+			'yst_tagline_front_page' => array( 'label' => __( 'Front Page', 'yoast-theme' ), 'default' => true ),
+			'yst_tagline_posts_page' => array( 'label' => __( 'Posts Page', 'yoast-theme' ), 'default' => false ),
+			'yst_tagline_singular'   => array( 'label' => __( 'Single Posts, Pages & Post Types', 'yoast-theme' ), 'default' => false ),
+			'yst_tagline_archive'    => array( 'label' => __( 'Archive Pages', 'yoast-theme' ), 'default' => false ),
+			'yst_tagline_404'        => array( 'label' => __( '404 Pages', 'yoast-theme' ), 'default' => false ),
+			'yst_tagline_attachment' => array( 'label' => __( 'Attachment Pages', 'yoast-theme' ), 'default' => false )
+		);
+
+		if ( 'page' == get_option( 'show_on_front' ) ) {
+			unset( $tagline_settings['yst_tagline_home'] );
+		} else {
+			unset( $tagline_settings['yst_tagline_front_page'], $tagline_settings['yst_tagline_posts_page'] );
+		}
+
+		foreach ( $tagline_settings as $tagline_setting => $values ) {
+			$wp_customize->add_setting(
+				$tagline_setting,
 				array(
 					'default'   => $values['default'],
 					'transport' => 'refresh'
@@ -170,9 +215,8 @@ class Yoast_Theme_Customizer {
 		$wp_customize->add_section(
 			'yst_genesis_breadcrumbs',
 			array(
-				'title'       => __( 'Breadcrumbs', 'genesis' ),
-				'description' => __( 'Show breadcrumbs on:', 'yoast-theme' ),
-				'priority'    => 63
+				'title'    => __( 'Breadcrumbs', 'genesis' ),
+				'priority' => 63
 			)
 		);
 
@@ -189,15 +233,41 @@ class Yoast_Theme_Customizer {
 		/**
 		 * Start adding controls
 		 */
+		$i = 1;
 		foreach ( $breadcrumb_settings as $breadcrumb_setting => $values ) {
 			$wp_customize->add_control(
-				$breadcrumb_setting,
-				array(
-					'section' => 'yst_genesis_breadcrumbs',
-					'label'   => $values['label'],
-					'type'    => 'checkbox'
+				new Yoast_Customize_Control(
+					$wp_customize,
+					$breadcrumb_setting,
+					array(
+						'section'  => 'yst_genesis_breadcrumbs',
+						'label'    => $values['label'],
+						'type'     => 'checkbox',
+						'description' => ( ( 1 == $i ) ? '<strong>' . __( 'Show breadcrumbs on:' ) . '</strong>' : '' ),
+						'priority' => $i
+					)
 				)
 			);
+			$i ++;
+		}
+
+		$i = 100;
+		foreach ( $tagline_settings as $tagline_setting => $values ) {
+			$wp_customize->add_control(
+				new Yoast_Customize_Control(
+					$wp_customize,
+					$tagline_setting,
+					array(
+						'section'     => 'title_tagline',
+						'setting'     => $tagline_setting,
+						'label'       => $values['label'],
+						'description' => ( ( 100 == $i ) ? '<strong>' . __( 'Show tagline on:' ) . '</strong>' : '' ),
+						'type'        => 'checkbox',
+						'priority'    => $i
+					)
+				)
+			);
+			$i ++;
 		}
 
 		$wp_customize->add_control(
@@ -525,4 +595,35 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			$this->print_tab_image( $this->setting->default );
 		}
 	}
+
+	/**
+	 * Customized Control Class that has a description option.
+	 *
+	 * @package    WordPress
+	 * @subpackage Customize
+	 * @since      3.4.0
+	 */
+	class Yoast_Customize_Control extends WP_Customize_Control {
+
+		public $description = '';
+
+		/**
+		 * Render the control. Renders the control wrapper, then calls $this->render_content().
+		 *
+		 * @since 3.4.0
+		 */
+		protected function render() {
+			$id    = 'customize-control-' . str_replace( '[', '-', str_replace( ']', '', $this->id ) );
+			$class = 'customize-control customize-control-' . $this->type;
+
+			?>
+		<li id="<?php echo esc_attr( $id ); ?>" class="<?php echo esc_attr( $class ); ?>">
+			<?php if ( ! empty( $this->description ) ) {
+				echo wpautop( $this->description );
+			} ?>
+			<?php $this->render_content(); ?>
+			</li><?php
+		}
+	}
+
 }

@@ -2,7 +2,6 @@
 
 // @TODO: Clean up this file and add some structure to it.
 
-//* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'Vintage' );
 define( 'CHILD_THEME_URL', 'http://yoast.com/wordpress/themes/vintage/' );
 define( 'CHILD_THEME_VERSION', '0.0.1' );
@@ -63,6 +62,24 @@ function child_theme_setup() {
 	) );
 
 	genesis_register_sidebar( array(
+		'id'          => 'yoast-after-header-1',
+		'name'        => __( 'After Header 1', 'yoast-theme' ),
+		'description' => __( 'After Header 1 widget area.', 'yoast-theme' ),
+	) );
+
+	genesis_register_sidebar( array(
+		'id'          => 'yoast-after-header-2',
+		'name'        => __( 'After Header 2', 'yoast-theme' ),
+		'description' => __( 'After Header 2 widget area.', 'yoast-theme' ),
+	) );
+
+	genesis_register_sidebar( array(
+		'id'          => 'yoast-after-header-3',
+		'name'        => __( 'After Header 3', 'yoast-theme' ),
+		'description' => __( 'After Header 3 widget area.', 'yoast-theme' ),
+	) );
+
+	genesis_register_sidebar( array(
 		'id'          => 'yoast-fullwidth-widgetarea-1',
 		'name'        => __( 'Full Width 1', 'yoast-theme' ),
 		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
@@ -78,12 +95,6 @@ function child_theme_setup() {
 		'id'          => 'yoast-fullwidth-widgetarea-3',
 		'name'        => __( 'Full Width 3', 'yoast-theme' ),
 		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
-	) );
-
-	genesis_register_sidebar( array(
-		'id'          => 'yoast-tagline-after-header',
-		'name'        => __( 'Tagline After Header', 'yoast-theme' ),
-		'description' => __( 'Tagline After Header widget area.', 'yoast-theme' ),
 	) );
 
 	genesis_register_sidebar( array(
@@ -256,24 +267,37 @@ function yst_add_google_fonts() {
  * Add yst-after-header widget support for site. If widget not active, don't display
  */
 function yst_after_header_genesis() {
-	if ( is_front_page() ) {
-		if ( is_active_sidebar( 'yoast-tagline-after-header' ) && is_front_page() ) {
-			echo '<div id="yoast-tagline-after-header-container"><div class="wrap">';
-			genesis_widget_area( 'yoast-tagline-after-header', array(
-				'before' => '<div id="yoast-tagline-after-header" class="yoast-tagline-after-header-widget">',
+	if ( is_front_page() && ( is_active_sidebar( 'yoast-after-header-1' ) || is_active_sidebar( 'yoast-after-header-2' ) || is_active_sidebar( 'yoast-after-header-3' ) ) ) {
+		echo '<div id="yoast-after-header-container"><div class="wrap">';
+
+		$areas = array( 'yoast-after-header-1', 'yoast-after-header-2', 'yoast-after-header-3' );
+		if ( 'sidebar-content' == genesis_site_layout() ) {
+			$areas = array_reverse( $areas );
+		}
+
+		foreach ( $areas as $area ) {
+			genesis_widget_area( $area, array(
+				'before' => '<div id="' . $area . '" class="yoast-after-header-widget">',
 				'after'  => '</div>',
 			) );
-			echo '</div></div>';
-		} else {
-			$tagline = get_bloginfo( 'description' );
-			if ( isset ( $tagline ) && ! empty( $tagline ) ) {
-				$output = apply_filters( 'yst_tagline_afterheader_container_before', '<div id="yoast-tagline-after-header-container">' );
-				$output .= apply_filters( 'yst_tagline_afterheader_before', '<p id="yoast-tagline" class="yoast-tagline">' );
-				$output .= apply_filters( 'yst_tagline_afterheader_tagline', $tagline );
-				$output .= apply_filters( 'yst_tagline_afterheader_after', '</p>' );
-				$output .= apply_filters( 'yst_tagline_afterheader_container_after', '</div>' );
-				echo $output;
-			}
+		}
+
+		echo '<div class="clearfloat"></div></div></div>';
+	}
+
+	$tagline = get_bloginfo( 'description' );
+	if ( isset ( $tagline ) && ! empty( $tagline ) ) {
+		if (
+				( is_home() 											&& get_theme_mod( 'yst_tagline_home' ) ) ||
+				( is_front_page() && ! is_home() 	&& get_theme_mod( 'yst_tagline_front_page' ) ) ||
+				( is_home() && ! is_front_page() 	&& get_theme_mod( 'yst_tagline_posts_page' ) ) ||
+				( is_singular() 									&& get_theme_mod( 'yst_tagline_singular' ) ) ||
+				( is_archive() 										&& get_theme_mod( 'yst_tagline_archive' ) ) ||
+				( is_404() 												&& get_theme_mod( 'yst_tagline_404' ) ) ||
+				( is_attachment() 								&& get_theme_mod( 'yst_tagline_attachment' ) )
+		) {
+			$output = apply_filters( 'yst_tagline_afterheader', '<div id="yoast-tagline-after-header-container"><p class="yoast-tagline">' . $tagline . '</p></div>', $tagline );
+			echo $output;
 		}
 	}
 }
@@ -387,7 +411,7 @@ function yst_activate_sidr_and_sticky_menu() {
 			});
 			$(window).scroll(function () {
 				var yPos = ( $(window).scrollTop() );
-				if (yPos > 170) {
+				if (yPos > 50) {
 					$("body").addClass("sticky-menu");
 				} else {
 					$("body").removeClass("sticky-menu");
@@ -534,13 +558,13 @@ function yst_display_logo() {
 		}
 
 		if ( ! $use_alt_positioning ) {
-			$css .= '@media(max-width: 640px){header.site-header {background: url(' . $mobile_logo . ') no-repeat 50% 0;	}}';
+			$css .= '@media(max-width: 640px){header.site-header {background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;	}}';
 		} else {
 			$mobile_logo_height = $yst_mobile_logo_details['height'] - 41;
 			if ( is_user_logged_in() ) {
 				$mobile_logo_height -= 46;
 			}
-			$css .= '@media(max-width: 640px){.site-container {padding-top:' . $mobile_logo_height . 'px;background: url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
+			$css .= '@media(max-width: 640px){.site-container {padding-top:' . $mobile_logo_height . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
 		}
 	}
 
@@ -830,3 +854,4 @@ function yst_override_breadcrumb_404( $value = null ) {
 function yst_override_breadcrumb_attachment( $value = null ) {
 	return yst_override_genesis_setting( 'yst_breadcrumb_attachment', $value, true );
 }
+
