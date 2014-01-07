@@ -3,8 +3,8 @@
 // Usually that is 16px / 100%, so 1rem should correspond with that
 
 $f_baseFont:            'Quattrocento Sans', Helvetica, Arial, sans-serif;
-$f_extraFont:           'Lekton', 'Courier New', Courier, serif;
-$f_codeFont:            'Lekton', 'Courier New', Courier, serif;
+$f_extraFont:           'Courier New', Courier, serif;
+$f_codeFont:            'Courier New', Courier, serif;
 
 // font sizes
 $f_main-px:             16px;
@@ -76,6 +76,12 @@ $f_sidebarH2-px:        20px;
 $f_sidebarH2:           1.25rem;
 $f_sidebarH3-px:        20px;
 $f_sidebarH3:           1.25rem;
+
+// table
+$f_table-px:             16px;
+$f_table:                1.0rem;
+$f_tableSmall-px:        14px;
+$f_tableSmall:           0.875rem;
 
 // blockquote
 $f_blockquoteBefore-px: 30px;

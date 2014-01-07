@@ -1,4 +1,19 @@
-// color declarations
+// color declarations WarmBlue
+
+// color bar 1          #ec9e61
+// color bar 2          #e25918
+// color bar 3          #c34200
+// t1                   #028aaf
+// nav                  #b3d7e6
+// gray background      #eeeeee
+// gray border          #b2b8b8
+// T4                   #666666
+// black text           #000000
+// cta                  #6bbd1e
+// footer               #e2e2e2
+
+// #yoast-after-header-container check in list
+$c_ListCheckImage:      "../images/li-check-WarmBlue.png";
 
 // general
 $c_bodyTopLine:         #ec9e61;
@@ -31,12 +46,13 @@ $c_pagenavHoverLink:    #ffffff;
 $c_pagenavActiveBg:     #b3d7e6;
 $c_pagenavActiveLink:   #ffffff;
 
-$c_metaAtPost:          #333333;
+$c_metaAtPost:          #666666;
 $c_metaAtPostBorder:    #dddddd;
 $c_linkToArchives:      #028aaf;
 $c_commentHTMLtags:     #b2b8b8;
 
 $c_hrLine:              #e25918;
+$c_borderImg:           #b2b8b8;
 $c_randLine:            #b2b8b8; // random grey line
 
 $c_selectionText:       #028aaf;
@@ -81,13 +97,13 @@ $c_navSubBorder:       #ffffff;
 $c_navSubBorderBottom: #e25918;
 
 // mobile menu Sidr
-$sidr-background:               #e2e2e2; //#f8f8f8; //toevoegen
-$sidr-background-shadow-color:  #ebebeb; //toevoegen
-$sidr-text-color:               #333333; //toevoegen
+$sidr-background:               #e2e2e2;
+$sidr-background-shadow-color:  #ebebeb;
+$sidr-text-color:               #333333;
 $c_sidr_linkBg:                 #b2b8b8;
 $c_sidr_linkBorder:             #ffffff;
 $c_sidr_linkHoverBg:            #666666;
-$c_sidr_linkActiveBg:           #b2b8b8;
+$c_sidr_linkActiveBg:           #028aaf;
 $c_sidr_linkHoverText:          #ffffff;
 $c_sidr_headingText:            #666666;
 $c_sidr_headingBorder:          #ffffff;
@@ -111,8 +127,8 @@ $c_mainH5Hover:         #333333;
 $c_mainH6:              #000000;
 $c_mainH6Hover:         #333333;
 
-$c_taxonomyIntroText:   #333333; //toevoegen
-$c_taxonomyIntroH1:     #666666; //toevoegen
+$c_taxonomyIntroText:   #333333;
+$c_taxonomyIntroH1:     #666666;
 
 // blockquote
 $c_BlockquoteText:      #333333;
@@ -132,13 +148,13 @@ $c_inputBoxShadow:      #eeeeee;
 $c_inputBorderFocus:    #999999;
 $c_inputTextPlaceholder:#999999;
 
-$c_inputSubmitText:     #ffffff; //nakijken
-$c_inputSubmitTextHover:#ffffff; //nakijken
-$c_inputSubmitBg:       #028aaf; //nakijken
-$c_inputSubmitBgHover:  #e25918; //nakijken
-$c_inputSubmitBorder:   #028aaf; //nakijken
-$c_inputSubmitTextShadow: #333333; //nakijken
-$c_inputSubmitBoxShadow:  #ffffff; //nakijken
+$c_inputSubmitText:     #ffffff;
+$c_inputSubmitTextHover:#ffffff;
+$c_inputSubmitBg:       #028aaf;
+$c_inputSubmitBgHover:  #e25918;
+$c_inputSubmitBorder:   #028aaf;
+$c_inputSubmitTextShadow: #333333;
+$c_inputSubmitBoxShadow:  #ffffff;
 
 // comments
 $c_commentBg:           #ffffff;

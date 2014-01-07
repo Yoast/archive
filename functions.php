@@ -98,12 +98,6 @@ function child_theme_setup() {
 	) );
 
 	genesis_register_sidebar( array(
-		'id'          => 'yoast-tagline-after-header',
-		'name'        => __( 'Tagline After Header', 'yoast-theme' ),
-		'description' => __( 'Tagline After Header widget area.', 'yoast-theme' ),
-	) );
-
-	genesis_register_sidebar( array(
 		'id'          => 'yoast-after-post',
 		'name'        => __( 'After Post', 'yoast-theme' ),
 		'description' => __( 'Add a widget after the post on single pages.', 'yoast-theme' ),
@@ -117,6 +111,9 @@ function child_theme_setup() {
 
 			// Place the Secondary Sidebar into the Primary Sidebar area.
 			add_action( 'genesis_sidebar', 'yoast_do_fullwidth_sidebars' );
+
+			// Move the featured image to the right
+			add_action( 'genesis_entry_header', 'yst_image_full_width', 15 );
 		}
 	}
 
@@ -128,9 +125,28 @@ function child_theme_setup() {
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-3' );
 	}
 
+	/**
+	 * Show the after post sidebar
+	 */
 	function yoast_do_after_post_sidebar() {
 		if ( is_single() ) {
 			dynamic_sidebar( 'yoast-after-post' );
+		}
+	}
+
+	/**
+	 * Show the post thumbnail in the full width archives
+	 */
+	function yst_image_full_width() {
+		if ( ! get_theme_mod( 'yst_content_archive_thumbnail' ) ) {
+			return;
+		}
+
+		$thumbnail = get_the_post_thumbnail( null, 'fullwidth-thumb' );
+		if ( $thumbnail ) {
+			echo '<div class="alignright thumb">';
+			echo $thumbnail;
+			echo '</div>';
 		}
 	}
 
@@ -291,16 +307,17 @@ function yst_after_header_genesis() {
 		echo '<div class="clearfloat"></div></div></div>';
 	}
 
-	$tagline = get_bloginfo( 'description' );
+	// We explicitly allow for HTML in taglines.
+	$tagline = html_entity_decode( get_bloginfo( 'description' ) );
 	if ( isset ( $tagline ) && ! empty( $tagline ) ) {
 		if (
-				( is_home() 											&& get_theme_mod( 'yst_tagline_home' ) ) ||
-				( is_front_page() && ! is_home() 	&& get_theme_mod( 'yst_tagline_front_page' ) ) ||
-				( is_home() && ! is_front_page() 	&& get_theme_mod( 'yst_tagline_posts_page' ) ) ||
-				( is_singular() 									&& get_theme_mod( 'yst_tagline_singular' ) ) ||
-				( is_archive() 										&& get_theme_mod( 'yst_tagline_archive' ) ) ||
-				( is_404() 												&& get_theme_mod( 'yst_tagline_404' ) ) ||
-				( is_attachment() 								&& get_theme_mod( 'yst_tagline_attachment' ) )
+				( is_home() && get_theme_mod( 'yst_tagline_home' ) ) ||
+				( is_front_page() && ! is_home() && get_theme_mod( 'yst_tagline_front_page' ) ) ||
+				( is_home() && ! is_front_page() && get_theme_mod( 'yst_tagline_posts_page' ) ) ||
+				( is_singular() && get_theme_mod( 'yst_tagline_singular' ) ) ||
+				( is_archive() && get_theme_mod( 'yst_tagline_archive' ) ) ||
+				( is_404() && get_theme_mod( 'yst_tagline_404' ) ) ||
+				( is_attachment() && get_theme_mod( 'yst_tagline_attachment' ) )
 		) {
 			$output = apply_filters( 'yst_tagline_afterheader', '<div id="yoast-tagline-after-header-container"><p class="yoast-tagline">' . $tagline . '</p></div>', $tagline );
 			echo $output;
@@ -759,6 +776,10 @@ function yst_override_content_archive_setting( $value = null ) {
  * @return null|string
  */
 function yst_override_content_archive_thumbnail( $value = null ) {
+	if ( false !== strpos( genesis_site_layout(), 'full-width' ) ) {
+		return false;
+	}
+
 	return yst_override_genesis_setting( 'yst_content_archive_thumbnail', $value, true );
 }
 
@@ -860,4 +881,3 @@ function yst_override_breadcrumb_404( $value = null ) {
 function yst_override_breadcrumb_attachment( $value = null ) {
 	return yst_override_genesis_setting( 'yst_breadcrumb_attachment', $value, true );
 }
-
