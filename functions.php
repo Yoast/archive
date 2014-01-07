@@ -2,7 +2,6 @@
 
 // @TODO: Clean up this file and add some structure to it.
 
-//* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'Versatile' );
 define( 'CHILD_THEME_URL', 'http://yoast.com/wordpress/themes/versatile/' );
 define( 'CHILD_THEME_VERSION', '1.0.0' );
@@ -10,37 +9,44 @@ define( 'CHILD_THEME_VERSION', '1.0.0' );
 add_action( 'genesis_setup', 'child_theme_setup', 15 );
 
 /**
- *
+ * Creates the child theme actions, filters and settings
  */
 function child_theme_setup() {
+	global $content_width;
+
+	// Defines the content width of the content-sidebar design, as that's the default and this is needed for oEmbed.
+	$content_width = 680;
+
 	// Used for defaults in for instance the banner widget.
 	define( 'YST_SIDEBAR_WIDTH', 261 );
 
 	//* Start the engine
 	include_once( get_template_directory() . '/lib/init.php' );
 
-	// Setup Theme Settings
-	// @todo Does this always have to be loaded or just in admin?
-	include_once( CHILD_DIR . '/lib/functions/child-theme-settings.php' );
+	require_once CHILD_DIR . '/lib/functions/theme-customizer.php';
+
+	if ( is_admin() ) {
+		// Editor Styles
+		add_editor_style( 'assets/css/editor-style.css' );
+
+		add_action( 'current_screen', 'fake_genesis_custom_header_thinking' );
+	}
 
 	/** Load widgets from /lib/widgets/ */
 	foreach ( glob( CHILD_DIR . "/lib/widgets/*-widget.php" ) as $file ) {
 		require_once $file;
 	}
 
-	//include_once( get_stylesheet_directory_uri . '/lib/functions/yst-colourscheme-settings.php' );
-	require_once( 'lib/functions/yst-colourscheme-settings.php' );
-
-	//* Add HTML5 markup structure
+	// Add HTML5 markup structure
 	add_theme_support( 'html5' );
 
-	//* Add viewport meta tag for mobile browsers
+	// Just allow for primary navigation
+	add_theme_support( 'genesis-menus', array( 'primary' => __( 'Primary Navigation Menu', 'genesis' ) ) );
+
+	// Add viewport meta tag for mobile browsers
 	add_theme_support( 'genesis-responsive-viewport' );
 
-//* Add support for custom background
-	add_theme_support( 'custom-background' );
-
-//* Add support for 3-column footer widgets
+	// Add support for 3-column footer widgets
 	add_theme_support( 'genesis-footer-widgets', 4 );
 
 	// Disable site layouts that must not be used
@@ -97,6 +103,12 @@ function child_theme_setup() {
 		'description' => __( 'Tagline After Header widget area.', 'yoast-theme' ),
 	) );
 
+	genesis_register_sidebar( array(
+		'id'          => 'yoast-after-post',
+		'name'        => __( 'After Post', 'yoast-theme' ),
+		'description' => __( 'Add a widget after the post on single pages.', 'yoast-theme' ),
+	) );
+
 	function yst_show_fullwidth_sidebars() {
 		if ( 'full-width-content' == genesis_site_layout() ) {
 			// Remove the Primary Sidebar from the Primary Sidebar area.
@@ -116,21 +128,35 @@ function child_theme_setup() {
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-3' );
 	}
 
+	function yoast_do_after_post_sidebar() {
+		if ( is_single() ) {
+			dynamic_sidebar( 'yoast-after-post' );
+		}
+	}
+
+	add_image_size( 'archive-thumb', 180, 120, true );
+	add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
+	add_image_size( 'fullwidth-thumb', 290, 193, true );
+
 	// Activate blogroll widget
 	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
-	add_action( 'wp_enqueue_scripts', 'yst_load_css_from_setting', 5 );
-	add_action( 'wp_enqueue_scripts', 'enqueue_styles_basic', 5 );
+	// Change the main stylesheet URL
+	add_filter( 'stylesheet_uri', 'yst_stylesheet_uri', 10, 2 );
+
 	add_action( 'wp_enqueue_scripts', 'enqueue_form_styles', 25 );
 	add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
 
 	add_action( 'genesis_header', 'yst_mobile_nav' );
+	add_action( 'wp_head', 'yst_display_logo' );
+	add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
 
 	add_action( 'genesis_after_header', 'yst_after_header_genesis' );
 	add_action( 'genesis_after_content_sidebar_wrap', 'yst_fullwidth_sitebars_genesis' );
+	add_action( 'genesis_before_comments', 'yst_after_post_sitebar_genesis' );
 
-	//* Reposition the breadcrumbs
+	// Reposition the breadcrumbs
 	add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 	remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 
@@ -144,23 +170,85 @@ function child_theme_setup() {
 	add_filter( 'excerpt_more', 'yst_get_read_more_link' );
 	add_filter( 'the_content_more_link', 'yst_get_read_more_link' );
 
+	// Footer stuff
 	add_filter( 'genesis_footer_creds_text', 'yst_footer_creds_text' );
 
-	add_filter( 'genesis_comment_list_args', 'yst_comments_gravatar' );
+	// Change the comment handling function
+	add_filter( 'genesis_comment_list_args', 'yst_comment_list_args' );
+
+	// Override Genesis settings with theme mod settings
+	add_filter( 'genesis_pre_get_option_image_size', 'yst_override_content_thumbnail_setting' );
+	add_filter( 'genesis_pre_get_option_content_archive', 'yst_override_content_archive_setting' );
+	add_filter( 'genesis_pre_get_option_content_archive_thumbnail', 'yst_override_content_archive_thumbnail' );
+	add_filter( 'genesis_pre_get_option_posts_nav', 'yst_override_posts_nav' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_front_page', 'yst_override_breadcrumb_front_page' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_posts_page', 'yst_override_breadcrumb_posts_page' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_home', 'yst_override_breadcrumb_home' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_single', 'yst_override_breadcrumb_single' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_page', 'yst_override_breadcrumb_page' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_archive', 'yst_override_breadcrumb_archive' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_404', 'yst_override_breadcrumb_404' );
+	add_filter( 'genesis_pre_get_option_breadcrumb_attachment', 'yst_override_breadcrumb_attachment' );
+
+	add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
+
+	add_filter( 'user_contactmethods', 'yst_modify_contact_methods' );
+	add_filter( 'genesis_post_meta', 'yst_post_meta_filter' );
+
+	add_filter( 'genesis_search_text', 'yst_change_search_text' );
+	add_filter( 'genesis_next_link_text', 'yst_add_spacing_next_prev' );
+	add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
+	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
+
+	// Integration between Genesis and theme customizer
+	add_filter( 'genesis_pre_get_option_site_layout', 'get_site_layout_from_theme_mod' );
+	add_action( 'genesis_admin_before_metaboxes', 'remove_genesis_settings_boxes' );
 }
 
 /**
- * Helperfunctions to load colourscheme-css.
+ * Fake Genesis into thinking we support a custom header
  */
-function yst_load_css_from_setting() {
-	wp_enqueue_style( 'yst_custom_css', get_stylesheet_directory_uri() . genesis_get_option( 'yst_colourscheme' ), array( 'google-font-quattrocento_sans', 'admin-bar', 'theme001' ) );
+function fake_genesis_custom_header_thinking() {
+	global $pagenow;
+	if ( 'admin.php' == $pagenow && isset( $_GET['page'] ) && 'genesis' == $_GET['page'] ) {
+		add_theme_support( 'custom-header' );
+	}
 }
 
 /**
+ * @return string
+ */
+function get_site_layout_from_theme_mod() {
+	return get_theme_mod( 'yst_default_layout' );
+}
+
+/**
+ * Remove the Genesis layout settings and nav metaboxes
+ */
+function remove_genesis_settings_boxes() {
+	global $wp_meta_boxes;
+//	var_dump( $wp_meta_boxes );
+	unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-layout'] );
+	unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-nav'] );
+	unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-posts'] );
+	unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-breadcrumb'] );
+}
+
+/**
+ * Change stylesheet URL.
  *
+ * @param string $stylesheet_uri
+ * @param string $stylesheet_dir_uri
+ *
+ * @return string
  */
-function enqueue_styles_basic() {
-	wp_enqueue_style( 'style-basic', get_stylesheet_directory_uri() . '/assets/css/style.css' );
+function yst_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
+	$colour_scheme = get_theme_mod( 'yst_colour_scheme' );
+	if ( ! $colour_scheme || empty( $colour_scheme ) ) {
+		$colour_scheme = 'WarmBlue';
+	}
+
+	return $stylesheet_dir_uri . '/assets/css/' . $colour_scheme . '.css';
 }
 
 /**
@@ -185,48 +273,69 @@ function yst_add_google_fonts() {
  * Add yst-after-header widget support for site. If widget not active, don't display
  */
 function yst_after_header_genesis() {
-	if ( is_front_page() ) {
+	if ( is_front_page() && ( is_active_sidebar( 'yoast-after-header-1' ) || is_active_sidebar( 'yoast-after-header-2' ) || is_active_sidebar( 'yoast-after-header-3' ) ) ) {
 		echo '<div id="yoast-after-header-container"><div class="wrap">';
 
-		genesis_widget_area( 'yoast-after-header-1', array(
-			'before' => '<div id="yoast-after-header-1" class="yoast-after-header-widget">',
-			'after'  => '</div>',
-		) );
-		genesis_widget_area( 'yoast-after-header-2', array(
-			'before' => '<div id="yoast-after-header-2" class="yoast-after-header-widget">',
-			'after'  => '</div>',
-		) );
-		genesis_widget_area( 'yoast-after-header-3', array(
-			'before' => '<div id="yoast-after-header-3" class="yoast-after-header-widget">',
-			'after'  => '</div>',
-		) );
+		$areas = array( 'yoast-after-header-1', 'yoast-after-header-2', 'yoast-after-header-3' );
+		if ( 'sidebar-content' == genesis_site_layout() ) {
+			$areas = array_reverse( $areas );
+		}
+
+		foreach ( $areas as $area ) {
+			genesis_widget_area( $area, array(
+				'before' => '<div id="' . $area . '" class="yoast-after-header-widget">',
+				'after'  => '</div>',
+			) );
+		}
+
 		echo '<div class="clearfloat"></div></div></div>';
 	}
 
-	if ( is_active_sidebar( 'yoast-tagline-after-header' ) && is_front_page() ) {
-		echo '<div id="yoast-tagline-after-header-container"><div class="wrap">';
-		genesis_widget_area( 'yoast-tagline-after-header', array(
-			'before' => '<div id="yoast-tagline-after-header" class="yoast-tagline-after-header-widget">',
-			'after'  => '</div>',
-		) );
-		echo '</div></div>';
-
+	$tagline = get_bloginfo( 'description' );
+	if ( isset ( $tagline ) && ! empty( $tagline ) ) {
+		if (
+				( is_home() 											&& get_theme_mod( 'yst_tagline_home' ) ) ||
+				( is_front_page() && ! is_home() 	&& get_theme_mod( 'yst_tagline_front_page' ) ) ||
+				( is_home() && ! is_front_page() 	&& get_theme_mod( 'yst_tagline_posts_page' ) ) ||
+				( is_singular() 									&& get_theme_mod( 'yst_tagline_singular' ) ) ||
+				( is_archive() 										&& get_theme_mod( 'yst_tagline_archive' ) ) ||
+				( is_404() 												&& get_theme_mod( 'yst_tagline_404' ) ) ||
+				( is_attachment() 								&& get_theme_mod( 'yst_tagline_attachment' ) )
+		) {
+			$output = apply_filters( 'yst_tagline_afterheader', '<div id="yoast-tagline-after-header-container"><p class="yoast-tagline">' . $tagline . '</p></div>', $tagline );
+			echo $output;
+		}
 	}
 }
 
+/**
+ * @todo add documentation
+ */
 function yst_fullwidth_sitebars_genesis() {
 	if ( 'full-width-content' == genesis_site_layout() ) {
 		echo '<div id="yoast-fullwidth-bottom-container"><div class="wrap">';
-		genesis_widget_area( 'yoast-fullwidth-widgetarea-1', array(
-			'before' => '<div id="yoast-fullwidth-widgetarea-1" class="yoast-fullwidth-widget">',
-			'after'  => '</div>',
-		) );
-		genesis_widget_area( 'yoast-fullwidth-widgetarea-2', array(
-			'before' => '<div id="yoast-fullwidth-widgetarea-2" class="yoast-fullwidth-widget">',
-			'after'  => '</div>',
-		) );
-		genesis_widget_area( 'yoast-fullwidth-widgetarea-3', array(
-			'before' => '<div id="yoast-fullwidth-widgetarea-3" class="yoast-fullwidth-widget">',
+
+		$i = 1;
+		while ( $i < 4 ) {
+			genesis_widget_area( 'yoast-fullwidth-widgetarea-' . $i, array(
+					'before' => '<div id="yoast-fullwidth-widgetarea-' . $i . '" class="yoast-fullwidth-widget">',
+					'after'  => '</div>',
+				) );
+			$i ++;
+		}
+
+		echo '</div></div>';
+	}
+}
+
+/**
+ * @todo add documentation
+ */
+function yst_after_post_sitebar_genesis() {
+	if ( is_active_sidebar( 'yoast-after-post' ) && is_single() ) {
+		echo '<div id="yoast-after-post-container"><div class="wrap">';
+		genesis_widget_area( 'yoast-after-post', array(
+			'before' => '<div id="yoast-after-post-widgetarea" class="yoast-after-post-widget">',
 			'after'  => '</div>',
 		) );
 		echo '</div></div>';
@@ -237,12 +346,10 @@ function yst_fullwidth_sitebars_genesis() {
  * Add top-right widget area for search-widget
  */
 function yst_add_top_right_area() {
-	if ( true ) {
-		genesis_widget_area( 'yoast-top-right', array(
-			'before' => '<div id="yoast-top-right" class="widget-area yoast-top-right-widget">',
-			'after'  => '</div>',
-		) );
-	}
+	genesis_widget_area( 'yoast-top-right', array(
+		'before' => '<div id="yoast-top-right" class="widget-area yoast-top-right-widget">',
+		'after'  => '</div>',
+	) );
 }
 
 /**
@@ -252,29 +359,8 @@ function yst_add_top_right_area() {
  * @return string
  */
 function yst_get_read_more_link() {
-	return '...&nbsp;<div class="exerptreadmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>';
+	return '&hellip; <div class="excerpt_readmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>';
 }
-
-/**
- * Test adding widget on Theme-change
- */
-//add_action( 'after_switch_theme', 'yst_add_widget_after_activating_theme', 10, 2 );
-//
-//function yst_add_widget_after_activating_theme( $oldname, $oldtheme = false ) {
-//	$sidebar_id                    = 'yoast-after-header-3';
-//	$sidebars_widgets              = get_option( 'sidebars_widgets' );
-//	$id                            = count( $sidebars_widgets ) + 1;
-//	$sidebars_widgets[$sidebar_id] = array( "text-" . $id );
-//
-//	$ops      = get_option( 'widget_text' );
-//	$ops[$id] = array(
-//		'title' => 'Automatic Widget',
-//		'text'  => 'Works!',
-//	);
-//	update_option( 'widget_text', $ops );
-//	update_option( 'sidebars_widgets', $sidebars_widgets );
-//}
-
 
 /**
  * Includes SIDR
@@ -282,7 +368,7 @@ function yst_get_read_more_link() {
  * @link http://www.berriart.com/sidr/#documentation
  */
 function yst_include_sidr() {
-	wp_enqueue_script( 'yst_sidr', get_stylesheet_directory_uri() . '/lib/js/jquery.sidr.js', array( 'jquery' ) );
+	wp_enqueue_script( 'yst_sidr', get_stylesheet_directory_uri() . '/lib/js/jquery.sidr.js', array( 'jquery' ), false, true );
 }
 
 /**
@@ -301,7 +387,23 @@ function yst_activate_sidr_and_sticky_menu() {
 			$('#sidr-left').sidr({
 				name       : 'sidr-menu-left',
 				source     : function () {
-					return "<h1><?php _e("Navigation","yoast-theme"); ?></h1><ul>" + $('.menu-primary').html() + "</ul>";
+					var menu = "<h1><?php _e( "Navigation", "yoast-theme" ); ?></h1>";
+					if ($('.menu-primary').length > 0) {
+						menu += "<ul>" + $('.menu-primary').html() + "</ul>";
+					} else if ($('.nav-header').length > 0) {
+						menu += "<ul>" + $('.nav-header ul').html() + "</ul>";
+					}
+					if ($('.widget_categories').length > 0) {
+						menu += '<h1>' + $('.widget_categories .widgettitle').html() + '</h1><ul>';
+						menu += $('.widget_categories ul').html();
+						menu += '</ul>';
+					}
+					if ($('.widget_recent_entries').length > 0) {
+						menu += '<h1>' + $('.widget_recent_entries .widgettitle').html() + '</h1><ul>';
+						menu += $('.widget_recent_entries ul').html();
+						menu += '</ul>';
+					}
+					return menu;
 				},
 				coverScreen: true
 			});
@@ -315,7 +417,7 @@ function yst_activate_sidr_and_sticky_menu() {
 			});
 			$(window).scroll(function () {
 				var yPos = ( $(window).scrollTop() );
-				if (yPos > 70) {
+				if (yPos > 50) {
 					$("body").addClass("sticky-menu");
 				} else {
 					$("body").removeClass("sticky-menu");
@@ -340,14 +442,13 @@ function yst_mobile_nav() {
  * @param string $footer_creds_text
  *
  * @return string
- *
- * @fixme If this becomes something you can change in the settings, just retrieve the option here and return it.
  */
 function yst_footer_creds_text( $footer_creds_text ) {
-	$yst_footer = '<p class="custom_footer">';
-	$yst_footer .= trim( genesis_get_option( 'footer', 'child-settings' ) ) . '</p><p class="hardcoded-footer">';
-	$yst_footer .= sprintf( __( '&#x000B7; Copyright &copy; %s &#x000B7; %s uses %s by %s and is powered by <a href="http://www.wordpress.org">WordPress</a> &#x000B7;', 'yoast-theme' ), date( 'Y' ), '<a href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>', '<a href="http://yoast.com/wordpress/themes/vintage/" rel="nofollow">Vintage</a>', 'Yoast' );
-	$yst_footer .= '</p>';
+	$yst_footer = get_theme_mod( 'yst_footer' );
+	if ( ! $yst_footer || empty( $yst_footer ) ) {
+		return $footer_creds_text;
+	}
+
 	return $yst_footer;
 }
 
@@ -355,11 +456,13 @@ function yst_footer_creds_text( $footer_creds_text ) {
  * Displays a term archive intro
  */
 function yoast_term_archive_intro() {
-	if ( ! is_category() && ! is_tag() && ! is_tax() )
+	if ( ! is_category() && ! is_tag() && ! is_tax() ) {
 		return;
+	}
 
-	if ( get_query_var( 'paged' ) )
+	if ( get_query_var( 'paged' ) ) {
 		return;
+	}
 
 	echo '<div class="term-intro">';
 	echo '<h1>' . single_term_title( '', false ) . '</h1>';
@@ -374,38 +477,30 @@ function yoast_term_archive_intro() {
 }
 
 /**
- * Changes the gravatar size to 100
- *
- * @param array $args
- *
- * @return array
- *
- * @todo make sure this is filterable.
- */
-function yst_comments_gravatar( $args ) {
-	$args['avatar_size'] = 100;
-	return $args;
-}
-
-/**
  * Fix Search tekst
  */
 function yst_change_search_text() {
 	return __( 'Search', 'yoast-theme' ) . '&#x02026;';
 }
 
-add_filter( 'genesis_search_text', 'yst_change_search_text' );
-
 /**
  * Add back to top link
  *
  * @fixme If there is a better solid way to do this or Genesis fixes this feature, use that
  */
-function yst_add_backtotop_to_post_footer() {
+function yst_add_backtotop() {
 	echo '<p class="back-to-top"><a href="#">' . __( 'Back to top', 'yoast-theme' ) . ' &#9652;</a></p>';
 }
 
-add_action( 'genesis_entry_footer', 'yst_add_backtotop_to_post_footer', 14 );
+/**
+ * @todo add documentation
+ */
+function yst_conditional_add_backtotop() {
+	if ( is_single() ) {
+		add_action( 'genesis_entry_footer', 'yst_add_backtotop', 14 );
+	}
+	add_action( 'genesis_after_endwhile', 'yst_add_backtotop', 14 );
+}
 
 /**
  * @param $profile_fields
@@ -417,11 +512,9 @@ function yst_modify_contact_methods( $profile_fields ) {
 	// Add new fields
 	$profile_fields['pinterest'] = __( 'Pinterest profile URL', 'yoast-theme' );
 	$profile_fields['linkedin']  = __( 'LinkedIn profile URL', 'yoast-theme' );
+
 	return $profile_fields;
 }
-
-add_filter( 'user_contactmethods', 'yst_modify_contact_methods' );
-
 
 /**
  * Change default image alignment
@@ -439,10 +532,9 @@ function yst_filter_content_archive_image( $img, $args ) {
 			$img = str_replace( 'alignleft', 'alignright', $img );
 		}
 	}
+
 	return $img;
 }
-
-add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
 
 /**
  * Use the logo's set in the Child Theme Settings
@@ -452,40 +544,40 @@ add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
  * @since 1.0.0
  */
 function yst_display_logo() {
-	$yst_logo        = genesis_get_option( 'yst-logo', 'child-settings' );
-	$yst_mobile_logo = genesis_get_option( 'yst-mobile-logo', 'child-settings' );
+	// This holds the CSS that will be echoed
+	$css = '';
 
-	if ( ( isset( $yst_logo ) && ! empty ( $yst_logo ) ) || ( ( isset( $yst_mobile_logo ) && ! empty ( $yst_mobile_logo ) ) ) ) {
-		?>
-		<style text="text/css">
-			<?php
-			if (isset($yst_logo) && ! empty ($yst_logo)) {
-			?>
-			@media (min-width: 640px) {
-				.site-header .title-area {
-					background-image: url(<?php echo genesis_get_option( 'yst-logo', 'child-settings' ); ?>);
-				}
-            }
-			<?php
+	// Normal logo
+	$logo = get_theme_mod( 'yst_logo' );
+	if ( isset( $logo ) && ! empty ( $logo ) ) {
+		$css .= '@media(min-width: 640px){.site-header .title-area {background-image: url(' . $logo . ');}}';
+	}
+
+	// Mobile logo, positioning depends on whether the logo is wider than 230px and / or higher than 36px, if it is, alternate positioning is used.
+	$mobile_logo = get_theme_mod( 'yst_mobile_logo' );
+	if ( isset ( $mobile_logo ) ) {
+		$yst_mobile_logo_details = get_theme_mod( 'yst_mobile_logo_details' );
+
+		$use_alt_positioning = false;
+		if ( isset( $yst_mobile_logo_details ) && is_array( $yst_mobile_logo_details ) && ( $yst_mobile_logo_details['width'] > 230 || $yst_mobile_logo_details['height'] > 36 ) ) {
+			$use_alt_positioning = true;
+		}
+
+		if ( ! $use_alt_positioning ) {
+			$css .= '@media(max-width: 640px){header.site-header {background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;	}}';
+		} else {
+			$mobile_logo_height = $yst_mobile_logo_details['height'] - 41;
+			if ( is_user_logged_in() ) {
+				$mobile_logo_height -= 46;
 			}
-			if (isset($yst_mobile_logo) && ! empty ($yst_mobile_logo)) {
-			?>
-				@media (max-width: 640px) {
-					header.site-header {
-                        background-image: url(<?php echo genesis_get_option( 'yst-mobile-logo', 'child-settings' ); ?>);
-                        background-repeat: no-repeat;
-                        background-position: 50% 50%;
-					}
-				}
-			<?php
-			}
-			?>
-		</style>
-	<?php
+			$css .= '@media(max-width: 640px){.site-container {padding-top:' . $mobile_logo_height . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
+		}
+	}
+
+	if ( ! empty( $css ) ) {
+		echo '<style id="tailor-made-inline-css">' . $css . '</style>';
 	}
 }
-
-add_action( 'wp_head', 'yst_display_logo' );
 
 /**
  * Open wrapper around main content for alignment
@@ -503,6 +595,269 @@ function yst_add_wrapper_after_content() {
 	echo '</div>';
 }
 
-add_action( 'genesis_before_loop', 'yst_add_wrapper_before_content' );
-add_action( 'genesis_after_loop', 'yst_add_wrapper_after_content' );
+/**
+ * Comment List Arguments, modify to change the callback function
+ *
+ * @param array $args
+ *
+ * @return array
+ */
+function yst_comment_list_args( $args ) {
+	$args['callback'] = 'yst_comment_callback';
+
+	return $args;
+}
+
+/**
+ * Comment Callback Function
+ *
+ * @param stdClass $comment
+ * @param array    $args
+ * @param integer  $depth
+ */
+function yst_comment_callback( $comment, $args, $depth ) {
+	$GLOBALS['comment'] = $comment; ?>
+
+<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+	<article <?php echo genesis_attr( 'comment' ); ?>>
+
+		<?php do_action( 'genesis_before_comment' ); ?>
+
+		<header class="comment-header">
+			<p <?php echo genesis_attr( 'comment-author' ); ?>>
+				<?php
+
+				$author = get_comment_author();
+				$url = get_comment_author_url();
+
+				if ( ! empty( $url ) && 'http://' !== $url ) {
+					$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
+				}
+
+				printf( 'By <span itemprop="name">%s</span> ', $author );
+
+				$pattern = '<time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
+				printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
+				?>
+			</p>
+		</header>
+		<div class="avatar">
+			<?php
+			$avatar_size = 1 == $depth ? 126 : 80;
+			echo get_avatar( $comment, $avatar_size );
+			?>
+		</div>
+		<div class="comment-content" itemprop="commentText">
+			<?php if ( ! $comment->comment_approved ) : ?>
+				<p class="alert"><?php echo apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation.', 'genesis' ) ); ?></p>
+			<?php endif; ?>
+
+			<?php comment_text(); ?>
+
+			<p class="comment-actions">
+				<?php
+				comment_reply_link( array_merge( $args, array(
+					'depth'  => $depth,
+					'before' => '<span class="comment-reply">',
+					'after'  => '</span>',
+				) ) );
+				edit_comment_link( __( 'Edit comment', 'yoast-theme' ), ' <span class="edit">', '</span>' );
+				?>
+			</p>
+		</div>
+
+		<?php do_action( 'genesis_after_comment' ); ?>
+
+	</article>
+	<?php
+	//* No ending </li> tag because of comment threading
+
+}
+
+/**
+ * Customize the post meta function, only show categories and tags on single()
+ *
+ * @param string $post_meta Contains the current value of post meta data
+ *
+ * @return string Returns new post meta data
+ */
+function yst_post_meta_filter( $post_meta ) {
+	if ( is_single() ) {
+		$post_meta = '[post_categories before="Filed Under: "] [post_tags before="Tagged: "]';
+
+		return $post_meta;
+	}
+}
+
+/**
+ * By default, Genesis lack a space after the raquo and laquo, this adds it.
+ *
+ * @param string $link
+ *
+ * @return string
+ */
+function yst_add_spacing_next_prev( $link ) {
+	$link = str_replace( '&#x000BB;', ' &#x000BB;', $link );
+	$link = str_replace( '&#x000AB;', '&#x000AB; ', $link );
+
+	return $link;
+}
+
+/**
+ * Override the image size for full-width designs, user settings are now completely ignored.
+ *
+ * @param null|string $size
+ *
+ * @return null|string
+ */
+function yst_override_content_thumbnail_setting( $size = null ) {
+	if ( false !== strpos( genesis_site_layout(), 'full-width' ) ) {
+		return 'fullwidth-thumb';
+	}
+
+	return $size;
+}
+
+/**
+ * Function to override genesis settings with theme_mod settings
+ *
+ * @param string  $setting
+ * @param string  $value
+ * @param boolean $checkbox
+ *
+ * @return string
+ */
+function yst_override_genesis_setting( $setting, $value, $checkbox = false ) {
+	$theme_setting = get_theme_mod( $setting );
+	if ( isset( $theme_setting ) && ! empty( $theme_setting ) ) {
+		return $theme_setting;
+	} else {
+		if ( $checkbox ) {
+			return false;
+		}
+	}
+
+	return $value;
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_content_archive_setting( $value = null ) {
+	return yst_override_genesis_setting( 'yst_content_archive', $value );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_content_archive_thumbnail( $value = null ) {
+	return yst_override_genesis_setting( 'yst_content_archive_thumbnail', $value, true );
+}
+
+/**
+ * Retrieve the posts_nav setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_posts_nav( $value = null ) {
+	return yst_override_genesis_setting( 'yst_posts_nav', $value );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_front_page( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_front_page', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_posts_page( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_posts_page', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_home( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_home', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_single( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_single', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_page( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_page', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_archive( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_archive', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_404( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_404', $value, true );
+}
+
+/**
+ * Retrieve the content_archive setting from the theme settings
+ *
+ * @param null|string $value
+ *
+ * @return null|string
+ */
+function yst_override_breadcrumb_attachment( $value = null ) {
+	return yst_override_genesis_setting( 'yst_breadcrumb_attachment', $value, true );
+}
 
