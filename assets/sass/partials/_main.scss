@@ -2231,31 +2231,31 @@ table {
     top: 1px solid $c_hrLine;
     bottom: 1px solid $c_randLine;
   }
-}
-.yoast-tagline-after-header-widget, #yoast-tagline {
-  padding: 20px 0px 4px;
-  text-align: center;
-  font-size: 1.5em;
-  color: $c_taglineFullWidth;
-  strong {
-    color: $c_taglineFullWidthBold;
-    font-weight: 700;
-  }
-  a {
-    color: $c_taglineLink;
-    text-decoration: underline;
-    &:hover {
-      color: $c_taglineLinkHover;
-      text-decoration: none;
+  .yoast-tagline {
+    padding: 20px 0px 4px;
+    text-align: center;
+    font-size: 1.5em;
+    color: $c_taglineFullWidth;
+    strong {
+      color: $c_taglineFullWidthBold;
+      font-weight: 700;
     }
-  }
-  .widget,
-  .widget-wrap {
-    padding: {
-      bottom: 0;
+    a {
+      color: $c_taglineLink;
+      text-decoration: underline;
+      &:hover {
+        color: $c_taglineLinkHover;
+        text-decoration: none;
+      }
     }
-    margin: {
-      bottom: 0;
+    .widget,
+    .widget-wrap {
+      padding: {
+        bottom: 0;
+      }
+      margin: {
+        bottom: 0;
+      }
     }
   }
 }
@@ -3244,7 +3244,7 @@ img#wpstats {
       max-width:100%;
     }
   }
-  .yoast-tagline-after-header-widget {
+  .yoast-tagline {
     padding: {
       left:20px;
       right:20px;
