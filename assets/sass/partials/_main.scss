@@ -28,7 +28,7 @@
 
 // Import defaults for this theme
 @import "partials/reset";
-@import "partials/colorsDefault";
+@import "partials/colorsLoveGreen";
 @import "partials/dimensions";
 @import "partials/fonts";
 
@@ -378,7 +378,7 @@ header {
   }
   section.widget {
     margin: {
-      bottom: 10px;
+      top: 20px;
     }
     &.widget_search {
       form {
@@ -539,7 +539,7 @@ button {
 
 input {
   font: {
-    family: $f_codeFont;
+    family: $f_baseFont;
     size: $f_inputText-px;
     size: $f_inputText;
   }
@@ -634,7 +634,7 @@ textarea {
 .search-form {
   input {
     font: {
-      family: $f_codeFont;
+      family: $f_baseFont;
     }
     height: 1.5em;
     padding: 16px 32px 16px 16px;
@@ -759,6 +759,12 @@ textarea {
     }
     background: {
       color: $c_navSubBg;
+      image: image-url($c_submenuBorderImage);
+      position: 60px -20px;
+      repeat: no-repeat;
+    }
+    margin: {
+      top: -1px;
     }
     a {
       color: $c_navSubLink;
@@ -769,6 +775,9 @@ textarea {
           style: solid;
           color: $c_navSubBorder;
         }
+      }
+      background: {
+        image: none;
       }
       font: {
         family: $f_baseFont;
@@ -787,12 +796,14 @@ textarea {
         }
       }
     }
-    .current-menu-item a {
-
-    }
     .menu-item {
       display:block;
       width:100%;
+      &:last-child {
+        a {
+          border:0; // removes border below last item in submenu
+        }
+      }
     }
     > .menu-item {
       > a:after // set up the downward arrow for top level items
@@ -2354,13 +2365,14 @@ table {
   .button-green {
     a {
       background: {
-        image: image-url($c_ctaImage);
+        image: image-url($c_ctaImage); // @include background-image(linear-gradient($c_ctaBg, darken($c_ctaBg,10%)));
         size: 100% 100%;
         repeat:no-repeat;
         position:0 center;
+        color: $c_ctaBg; // on which element? span
       }
       display: block;
-      padding: 24px 40px;
+      padding: 24px 18%; // based upon total width, scaling to fit sidebar width
       color: $c_ctaTextWhite;
       text: {
         align: center;
@@ -2374,7 +2386,7 @@ table {
       @include text-shadow($c_ctaTextShadow 1px 1px 5px);
       &:hover {
         background: {
-          image: image-url($c_ctaImageHover);
+          color: darken($c_ctaBg,10%);
         }
         color: $c_ctaTextWhite;
       }
