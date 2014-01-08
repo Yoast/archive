@@ -156,32 +156,6 @@ class Yoast_Theme_Customizer {
 			);
 		}
 
-		$tagline_settings = array(
-			'yst_tagline_home'       => array( 'label' => __( 'Homepage', 'yoast-theme' ), 'default' => true ),
-			'yst_tagline_front_page' => array( 'label' => __( 'Front Page', 'yoast-theme' ), 'default' => true ),
-			'yst_tagline_posts_page' => array( 'label' => __( 'Posts Page', 'yoast-theme' ), 'default' => false ),
-			'yst_tagline_singular'   => array( 'label' => __( 'Single Posts, Pages & Post Types', 'yoast-theme' ), 'default' => false ),
-			'yst_tagline_archive'    => array( 'label' => __( 'Archive Pages', 'yoast-theme' ), 'default' => false ),
-			'yst_tagline_404'        => array( 'label' => __( '404 Pages', 'yoast-theme' ), 'default' => false ),
-			'yst_tagline_attachment' => array( 'label' => __( 'Attachment Pages', 'yoast-theme' ), 'default' => false )
-		);
-
-		if ( 'page' == get_option( 'show_on_front' ) ) {
-			unset( $tagline_settings['yst_tagline_home'] );
-		} else {
-			unset( $tagline_settings['yst_tagline_front_page'], $tagline_settings['yst_tagline_posts_page'] );
-		}
-
-		foreach ( $tagline_settings as $tagline_setting => $values ) {
-			$wp_customize->add_setting(
-				$tagline_setting,
-				array(
-					'default'   => $values['default'],
-					'transport' => 'refresh'
-				)
-			);
-		}
-
 		/**
 		 * Start adding sections
 		 */
@@ -245,25 +219,6 @@ class Yoast_Theme_Customizer {
 						'type'     => 'checkbox',
 						'description' => ( ( 1 == $i ) ? '<strong>' . __( 'Show breadcrumbs on:' ) . '</strong>' : '' ),
 						'priority' => $i
-					)
-				)
-			);
-			$i ++;
-		}
-
-		$i = 100;
-		foreach ( $tagline_settings as $tagline_setting => $values ) {
-			$wp_customize->add_control(
-				new Yoast_Customize_Control(
-					$wp_customize,
-					$tagline_setting,
-					array(
-						'section'     => 'title_tagline',
-						'setting'     => $tagline_setting,
-						'label'       => $values['label'],
-						'description' => ( ( 100 == $i ) ? '<strong>' . __( 'Show tagline on:' ) . '</strong>' : '' ),
-						'type'        => 'checkbox',
-						'priority'    => $i
 					)
 				)
 			);

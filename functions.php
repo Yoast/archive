@@ -284,22 +284,6 @@ function yst_after_header_genesis() {
 
 		echo '<div class="clearfloat"></div></div></div>';
 	}
-
-	$tagline = get_bloginfo( 'description' );
-	if ( isset ( $tagline ) && ! empty( $tagline ) ) {
-		if (
-				( is_home() 											&& get_theme_mod( 'yst_tagline_home' ) ) ||
-				( is_front_page() && ! is_home() 	&& get_theme_mod( 'yst_tagline_front_page' ) ) ||
-				( is_home() && ! is_front_page() 	&& get_theme_mod( 'yst_tagline_posts_page' ) ) ||
-				( is_singular() 									&& get_theme_mod( 'yst_tagline_singular' ) ) ||
-				( is_archive() 										&& get_theme_mod( 'yst_tagline_archive' ) ) ||
-				( is_404() 												&& get_theme_mod( 'yst_tagline_404' ) ) ||
-				( is_attachment() 								&& get_theme_mod( 'yst_tagline_attachment' ) )
-		) {
-			$output = apply_filters( 'yst_tagline_afterheader', '<div id="yoast-tagline-after-header-container"><p class="yoast-tagline">' . $tagline . '</p></div>', $tagline );
-			echo $output;
-		}
-	}
 }
 
 /**
