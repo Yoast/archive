@@ -621,7 +621,7 @@ function yst_comment_callback( $comment, $args, $depth ) {
 		</header>
 		<div class="avatar">
 			<?php
-			$avatar_size = 1 == $depth ? 126 : 80;
+			$avatar_size = 1 == $depth ? 95 : 65;
 			echo get_avatar( $comment, $avatar_size );
 			?>
 		</div>
