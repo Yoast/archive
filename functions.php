@@ -186,6 +186,8 @@ function child_theme_setup() {
 
 	add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
 
+	add_filter( 'genesis_author_box_gravatar_size', 'author_box_gravatar_size' );
+
 	add_filter( 'user_contactmethods', 'yst_modify_contact_methods' );
 	add_filter( 'genesis_post_meta', 'yst_post_meta_filter' );
 
@@ -486,10 +488,11 @@ function yst_conditional_add_backtotop() {
  * @return mixed
  */
 function yst_modify_contact_methods( $profile_fields ) {
-
-	// Add new fields
-	$profile_fields['pinterest'] = __( 'Pinterest profile URL', 'yoast-theme' );
-	$profile_fields['linkedin']  = __( 'LinkedIn profile URL', 'yoast-theme' );
+	$profile_fields['facebook']   = __( 'Facebook profile URL', 'yoast-theme' );
+	$profile_fields['twitter']    = __( 'Twitter username', 'yoast-theme' );
+	$profile_fields['googleplus'] = __( "Google+ posts URL", 'yoast-theme' );
+	$profile_fields['pinterest']  = __( 'Pinterest profile URL', 'yoast-theme' );
+	$profile_fields['linkedin']   = __( 'LinkedIn profile URL', 'yoast-theme' );
 
 	return $profile_fields;
 }
@@ -619,7 +622,7 @@ function yst_comment_callback( $comment, $args, $depth ) {
 						$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
 					}
 
-					printf( __( 'By %s', 'yoast-theme' ), '<span itemprop="name">%s</span> ', $author );
+					printf( __( 'By %s', 'yoast-theme' ), sprintf( '<span itemprop="name">%s</span> ', $author ) );
 					_e( ' on ', 'yoast-theme' );
 
 					$pattern = '<time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
@@ -841,3 +844,12 @@ function yst_override_breadcrumb_attachment( $value = null ) {
 	return yst_override_genesis_setting( 'yst_breadcrumb_attachment', $value, true );
 }
 
+
+/**
+ * Change the avatar size in  the author box
+ *
+ * @return string
+ */
+function author_box_gravatar_size() {
+	return '95';
+}
