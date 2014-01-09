@@ -3,7 +3,7 @@
 // Usually that is 16px / 100%, so 1rem should correspond with that
 
 $f_baseFont:            'PT Sans', Helvetica, Arial, sans-serif;
-$f_headingFont:         'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_headingFont:         'Dancing Script', Georgia, 'Times New Roman', Times, serif;
 $f_extraFont:           'Dancing Script', Georgia, 'Times New Roman', Times, serif;
 $f_codeFont:            'Courier New', Courier, serif;
 
@@ -11,7 +11,7 @@ $f_codeFont:            'Courier New', Courier, serif;
 $f_main-px:             16px;
 $f_main:                1rem;
 
-$f_taglineTop:         'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_taglineTop:         'Dancing Script', Georgia, 'Times New Roman', Times, serif;
 $f_taglineTop-px:       20px;
 $f_taglineTop:          1.25rem;
 $f_taglineFullWidth-px: 26px;
@@ -26,11 +26,13 @@ $f_metaAtPost:          0.875rem;
 $f_pagenav-px:          16px;
 $f_pagenav:             1rem;
 $f_pagenavActive-px:    20px;
-$f_pagenav:             1.25rem;
+$f_pagenavActive:       1.25rem;
 
 $f_linkToArchives-px:   20px;
 $f_linkToArchives:      1.25rem;
 
+$f_commentHeader-px:    14px;
+$f_commentHeader:       0.875rem;
 $f_commentHTMLtags-px:  14px;
 $f_commentHTMLtags:     0.875rem;
 
@@ -43,19 +45,19 @@ $f_headerH4-px:         20px;
 $f_headerH4:            1.25rem;
 
 // navigation
-$f_navFont:             'Dancing Script', Georgia, 'Times New Roman', Times, serif; //'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_navFont:             'Dancing Script', Georgia, 'Times New Roman', Times, serif;
 $f_navMainLink-px:      22px;
 $f_navMainLink:         1.375rem;
 $f_navSubLink-px:       16px;
 $f_navSubLink:          1rem;
 
 // main content
-$f_H1Font:              'Dancing Script', Georgia, 'Times New Roman', Times, serif; //'Josefin Sans', Helvetica, Arial, sans-serif;
-$f_H2Font:              'Dancing Script', Georgia, 'Times New Roman', Times, serif; //'Josefin Sans', Helvetica, Arial, sans-serif;
-$f_H3Font:              'Josefin Sans', Helvetica, Arial, sans-serif;
-$f_H4Font:              'Josefin Sans', Helvetica, Arial, sans-serif;
-$f_H5Font:              'Josefin Sans', Helvetica, Arial, sans-serif;
-$f_H6Font:              'Josefin Sans', Helvetica, Arial, sans-serif;
+$f_H1Font:              'Dancing Script', Georgia, 'Times New Roman', Times, serif;
+$f_H2Font:              'Dancing Script', Georgia, 'Times New Roman', Times, serif;
+$f_H3Font:              'Dancing Script', Georgia, 'Times New Roman', Times, serif;
+$f_H4Font:              'Dancing Script', Georgia, 'Times New Roman', Times, serif;
+$f_H5Font:              'Dancing Script', Georgia, 'Times New Roman', Times, serif;
+$f_H6Font:              'Dancing Script', Georgia, 'Times New Roman', Times, serif;
 $f_mainH1-px:           38px;
 $f_mainH1:              2.375rem;
 $f_mainH2-px:           32px;

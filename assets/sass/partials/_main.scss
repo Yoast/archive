@@ -26,11 +26,13 @@
 @import url("http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic");
 
 
+// @todo delete before live
+@import "colorsLoveGreen";
+
 // Import defaults for this theme
-@import "partials/reset";
-@import "partials/colorsLoveGreen";
-@import "partials/dimensions";
-@import "partials/fonts";
+@import "reset";
+@import "dimensions";
+@import "fonts";
 
 /**
  * GENERAL
@@ -439,14 +441,6 @@ header {
     float: left;
     width: $d_mainContent;
     max-width:100%;
-  }
-}
-
-.sidebar-content {
-  .content {
-    padding: {
-      left: $d_ThreeEqualColumnsPadding;
-    }
   }
 }
 
@@ -1081,7 +1075,7 @@ textarea {
 // body.sticky,
 body.sticky-menu {
   background: {
-    position: 50% -30px;
+    position: 50% -62px;
     attachment: fixed;
   }
   .site-header {
@@ -1289,17 +1283,40 @@ img.alignright,
 }
 
 .archive-description {
-  margin: {
-    bottom: 40px;
+  border: {
+    width:1px;
+    style:solid;
+    color: $c_hrLine;
   }
-  padding: 40px 40px 24px;
+  padding:24px;
+  margin: {
+    bottom: 24px;
+  }
+  h1 {
+    margin:0;
+  }
+  .archive-title {
+    font: {
+      size: $f_mainH3-px;
+      size: $f_mainH3;
+    }
+  }
 }
 
 .author-box {
   margin: 40px 0;
   padding: 10px;
-  background: {
-    color: $c_articleAuthorBg;
+  border: {
+    width:1px;
+    style:solid;
+    color: $c_hrLine;
+  }
+  padding:24px;
+  margin: {
+    bottom: 40px;
+  }
+  h1 {
+    margin:0;
   }
   .author-box-title {
     margin: {
@@ -1359,12 +1376,6 @@ h1 {
     size: $f_mainH1;
   }
 }
-.post {
-  h1 {
-    margin:0;
-  }
-}
-
 h2 {
   @extend .headingsDefault;
   color: $c_mainH2;
@@ -1381,6 +1392,11 @@ h2 {
 .full-width-content {
   h2 {
     margin:0;
+  }
+  &.search {
+    h2 {
+      margin:0 0 24px;
+    }
   }
 }
 
@@ -1441,14 +1457,6 @@ h6 {
     &:hover {
       color: $c_mainH1Hover;
     }
-  }
-}
-.archive-title {
-  font: {
-    size: 20px;
-  }
-  margin: {
-    bottom: 24px;
   }
 }
 
@@ -1530,11 +1538,34 @@ table {
     bottom: 25px;
   }
   background: {
-    image: image-url($c_fullwidthDivider);
+    image: image-url($c_ContentWidthDivider);
     size: 100% auto;
     repeat: no-repeat;
     position: 50% bottom;
-
+  }
+}
+.fullwidth {
+  .post {
+    background: {
+      image: image-url($c_fullwidthDivider);
+    }
+  }
+}
+.single {
+  .post {
+    background: {
+      image: image-url($c_fullwidthDivider);
+    }
+  }
+}
+.widget {
+  .post {
+    background: {
+      image: none;
+    }
+    padding: {
+      bottom: 0;
+    }
   }
 }
 .single { // reduce whitespace below back-to-top for single()
@@ -1551,6 +1582,13 @@ table {
   }
   margin: {
     bottom: 40px;
+  }
+}
+.widget {
+  .entry {
+    margin: {
+      bottom: 0;
+    }
   }
 }
 .entry-content {
@@ -1719,6 +1757,7 @@ table {
     }
   }
 }
+
 .quote-caption {
   margin: {
     bottom: 26px;
@@ -1738,10 +1777,7 @@ table {
 }
 .entry-header {
   .entry-meta {
-    margin: {
-      bottom: 26px;
-      top: 5px;
-    }
+    margin:0;
     font: {
       weight: 700;
     }
@@ -1866,9 +1902,6 @@ table {
   li {
     display: inline;
     a {
-      background: {
-        color: $c_pagenavBg;
-      }
       color: $c_pagenavLink;
       cursor: pointer;
       display: inline-block;
@@ -1876,15 +1909,25 @@ table {
       &:hover {
         color: $c_pagenavHoverLink;
         background: {
-          color: $c_pagenavHoverBg;
+          image: image-url($c_linkBorderImage);
+          position: 50% bottom;
+          repeat: no-repeat;
+          size: contain;
         }
       }
     }
     &.active {
       a {
         color: $c_pagenavActiveLink;
+        font: {
+          size: $f_pagenavActive-px;
+          size: $f_pagenavActive;
+        }
         background: {
-          color: $c_pagenavActiveBg;
+          image: image-url($c_linkBorderImage);
+          position: 50% bottom;
+          repeat: no-repeat;
+          size: contain;
         }
       }
     }
@@ -1912,40 +1955,35 @@ table {
  */
 
 #comments {
-
-  // NOG VERWIJDEREN NA NIEUWE OPZET COMMENTS
-  .avatar {
-    width: 63px;
-  }
-  .depth-2, .depth-3, .depth-4, depth-5 {
-    .avatar {
-      width:40px;
-    }
-  }
-  .comment-author, .comment-meta {
-    display:inline;
-  }
-  // EIND NOG VERWIJDEREN NA NIEUWE OPZET COMMENTS
-
-
-
   background: {
     color: $c_mainBg;
   }
+  header {
+    font: {
+      size: $f_commentHeader-px;
+      size: $f_commentHeader;
+    }
+    color: $c_mainText;
+  }
   .bypostauthor > article {
-    background: {
-      color: $c_commentByAuthorBg;
+    border: {
+      width:1px;
+      style:solid;
+      color: $c_hrLine;
     }
-    header {
-      background: {
-        color: $c_commentByAuthorBg;
-      }
-    }
-    padding:10px;
+    padding:16px;
   }
   a {
     font: {
       weight: 700;
+    }
+  }
+  .time {
+    a {
+      font: {
+        weight: 400;
+      }
+      color: $c_mainText;
     }
   }
   h3 {
@@ -2028,6 +2066,11 @@ table {
     size: $f_metaAtPost-px;
     size: $f_metaAtPost;
   }
+  code {
+    background: {
+      color: $c_mainBg;
+    }
+  }
 }
 .form-submit {
   padding: {
@@ -2084,7 +2127,7 @@ table {
     }
     line-height: 1.2em;
     a {
-      border: none;
+      border: 0;
       color: $c_mainLink;
       text: {
         decoration: none;
@@ -2650,7 +2693,7 @@ table {
   }
 
   #yoast-fullwidth-widgetarea-2 {
-    margin:0 60px;
+    margin:0 29px;
   }
   .widget {
     padding: {
@@ -2730,6 +2773,15 @@ table {
   .widget-area {
     width: $d_ThreeEqualColumns;
     float:left;
+  }
+  .widget_bigbutton {
+    .button-green {
+      a {
+        background: {
+          image: image-url($c_ctaImageFooter);
+        }
+      }
+    }
   }
   .footer-widgets-2 {
     margin: {

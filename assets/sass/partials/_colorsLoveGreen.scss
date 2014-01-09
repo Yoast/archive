@@ -4,8 +4,10 @@
 $c_ribbonImage:         'Ribbon_Beach-Love_Green.png';
 $c_borderBottomImage:   'double_borderBottom.png';
 $c_ctaImage:            'Vintage_CTA_Transparent.png';
+$c_ctaImageFooter:      'Vintage_CTA_Transparent_Gray.png';
 $c_linkBorderImage:     'link_borderBottom_Pink.png';
 $c_sidebarFooterDivider:'Element_SidebarFooter.png';
+$c_ContentWidthDivider: 'Element_Content_Width.png';
 $c_fullwidthDivider:    'Element_Full_Width.png';
 $c_submenuBorderImage:  'Dropdown_GreenYellow-GreenPink.png';
 
@@ -32,18 +34,18 @@ $c_breadcrumbsLink:     #e37374;
 $c_breadcrumbsLinkHover:#2a9ea5;
 
 $c_pagenavBg:           #eeeeee;
-$c_pagenavLink:         #e37374;
-$c_pagenavHoverBg:      #edf6f3;
-$c_pagenavHoverLink:    #ffffff;
-$c_pagenavActiveBg:     #edf6f3;
-$c_pagenavActiveLink:   #ffffff;
+$c_pagenavLink:         #2a9ea5;
+//$c_pagenavHoverBg:      #edf6f3;
+$c_pagenavHoverLink:    #e37374;
+//$c_pagenavActiveBg:     #ffffff;
+$c_pagenavActiveLink:   #e37374;
 
 $c_metaAtPost:          #333333;
 $c_metaAtPostBorder:    #dddddd;
 $c_linkToArchives:      #e37374;
 $c_commentHTMLtags:     #777777;
 
-$c_hrLine:              #2a9ea5;
+$c_hrLine:              #e37374;
 $c_borderImg:           #777777;
 $c_randLine:            #777777; // random grey line
 
@@ -207,7 +209,7 @@ $c_sidebarH4:           #2a9ea5;
 $c_sidebarH4Bg:         transparent;
 
 // footerwidgets
-$c_footerWidgetsBg:       #eeeeee;
+$c_footerWidgetsBg:       #f4f4f4;
 $c_footerWidgetsBorderTop:#777777;
 $c_footerWidgetsText:     #000000;
 $c_footerWidgetsLink:     #e37374;
