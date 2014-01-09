@@ -601,24 +601,6 @@ function yst_comment_callback( $comment, $args, $depth ) {
 
 		<?php do_action( 'genesis_before_comment' ); ?>
 
-		<header class="comment-header">
-			<p <?php echo genesis_attr( 'comment-author' ); ?>>
-				<?php
-
-				$author = get_comment_author();
-				$url = get_comment_author_url();
-
-				if ( ! empty( $url ) && 'http://' !== $url ) {
-					$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
-				}
-
-				printf( 'By <span itemprop="name">%s</span> ', $author );
-
-				$pattern = '<time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
-				printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
-				?>
-			</p>
-		</header>
 		<div class="avatar">
 			<?php
 			$avatar_size = 1 == $depth ? 95 : 65;
@@ -626,6 +608,25 @@ function yst_comment_callback( $comment, $args, $depth ) {
 			?>
 		</div>
 		<div class="comment-content" itemprop="commentText">
+			<header class="comment-header">
+				<p <?php echo genesis_attr( 'comment-author' ); ?>>
+					<?php
+
+					$author = get_comment_author();
+					$url = get_comment_author_url();
+
+					if ( ! empty( $url ) && 'http://' !== $url ) {
+						$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
+					}
+
+					printf( __( 'By %s', 'yoast-theme' ), '<span itemprop="name">%s</span> ', $author );
+					_e( ' on ', 'yoast-theme' );
+
+					$pattern = '<time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
+					printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
+					?>
+				</p>
+			</header>
 			<?php if ( ! $comment->comment_approved ) : ?>
 				<p class="alert"><?php echo apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation.', 'genesis' ) ); ?></p>
 			<?php endif; ?>
@@ -635,9 +636,10 @@ function yst_comment_callback( $comment, $args, $depth ) {
 			<p class="comment-actions">
 				<?php
 				comment_reply_link( array_merge( $args, array(
-					'depth'  => $depth,
-					'before' => '<span class="comment-reply">',
-					'after'  => '</span>',
+					'reply_text' => __( 'Reply &raquo;', 'yoast-theme' ),
+					'depth'      => $depth,
+					'before'     => '<span class="comment-reply">',
+					'after'      => '</span>',
 				) ) );
 				edit_comment_link( __( 'Edit comment', 'yoast-theme' ), ' <span class="edit">', '</span>' );
 				?>
