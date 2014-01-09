@@ -1,16 +1,13 @@
 @charset "UTF-8";
 /*
-	Theme Name: Tailor Made
-	Description: Tailor Made by Yoast
+	Theme Name: Versatile
+	Description: Versatile by Yoast
 	Author: Yoast BV
 	Author URI: http://yoast.com/
-	Version: 0.0.1
+	Version: 1.0.0
 
 	License: GPL-2.0+
 	License URI: http://www.opensource.org/licenses/gpl-license.php
-
-    v2
-
 */
 
 @import "compass";
@@ -18,18 +15,13 @@
 
 // Import defaults for this theme
 @import "reset";
-// @import "partials/colorsAutumn";
-// @import "partials/colorsBusinessBlue";
-// @import "partials/colorsCupcake";
-// @import "partials/colorsIceBlue";
-// @import "partials/colorsMediterranean";
-// @import "partials/colorsSand";
-// @import "partials/colorsSpring";
-// @import "partials/colorsSummer";
-// @import "partials/colorsWarmBlue";
-// @import "partials/colorsWarmpurple";
 @import "dimensions";
 @import "fonts";
+
+/**
+	* @fixme: remove before live
+	*/
+@import "colorsSolidOrange"; /*test*/
 
 /**
  * GENERAL
@@ -59,7 +51,7 @@ body {
   }
   border: {
     top: {
-      width: 5px;
+      width: 20px;
       style: solid;
       color: $c_bodyTopLine;
     }
@@ -250,7 +242,7 @@ header {
   @extend .floatclearing;
   clear: both;
   margin: 0 auto;
-  max-width: $d_full;
+  //max-width: $d_full;
   padding: {
     top: 32px;
   }
@@ -270,6 +262,36 @@ header {
   }
 }
 
+#around-header {
+	@extend .floatclearing;
+	clear: both;
+	margin: 0 auto;
+	background: {
+		color: $c_headerBg;
+	}
+	border: {
+		bottom: {
+			width: 3px;
+			style: solid;
+			color: $c_bodyTopLine;
+		}
+	}
+}
+
+#around-center {
+	@extend .floatclearing;
+	clear: both;
+	margin: -30px auto;
+	border: {
+			top: {
+			width: 3px;
+			style: solid;
+			color: $c_bodyTopLine;
+		}
+	}
+	max-width: $d_full;
+}
+
 /**
  * Title Area
  */
@@ -283,6 +305,11 @@ header {
   }
 }
 .site-header {
+	margin: 0 auto;
+	max-width: $d_full;
+	background: {
+		color: $c_headerBg;
+	}
   .wrap,
   .widget-wrap {
     padding: 0;
@@ -627,24 +654,10 @@ textarea {
   background: {
     color:  $c_navMainFullBg;
   }
-  border: {
-    bottom: {
-      width: 10px;
-      style: solid;
-      color: $c_navMainFullBorderBottom;
-    }
-  }
   &:after {
     content:"";
     width:100%;
     display:block;
-    border: {
-      top: {
-        width: 10px;
-        style: solid;
-        color: $c_navMainFullBorderTop;
-      }
-    }
   }
 }
 
@@ -656,9 +669,8 @@ textarea {
   }
   line-height: 1.5;
   width: 100%;
-  background: {
-    color:  $c_navMainBg;
-  }
+	@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
+	@include box-shadow(0px 1px 5px $c_navMainLinkShadow);
   .menu-item {
     display: inline-block;
     text: {
@@ -691,9 +703,12 @@ textarea {
     }
   }
   > li:nth-child(1) { //depending on whether home is item 1 in the menu or not, otherwise switch to 2
+		margin: {
+			left: 0px; // reset inline-block margin, space between items
+		}
     a {
       border: {
-        width: 0 1px;
+        width: 0 1px 0 0;
         style: solid;
         color: $c_navMainBorder;
       }
@@ -703,20 +718,21 @@ textarea {
     display: block;
     position: relative;
     color: $c_navMainLink;
-    padding: 10px 20px;
+    padding: 18px 40px;
     margin: 0;
     border: {
       width: 0 1px 0 0;
       style: solid;
       color: $c_navMainBorder;
     }
-    font: {
-      weight: 700;
-    }
     text: {
       decoration: none;
       transform: none;
     }
+		font: {
+			size: $f_navMainLink-px;
+			size: $f_navMainLink;
+		}
     .last {
       border: {
         right:0;
@@ -737,9 +753,11 @@ textarea {
     > a {
       color: $c_navSubLink;
       text-shadow: 1px 1px 1px $c_navMainLinkShadow;
-      background: {
-        color: $c_navMainBgActive;
-      }
+			@include background-image(linear-gradient($c_navMainBgActive, darken($c_navMainBgActive,10%)));
+			// @fixme:background darken makes the selected item slightly boring, instead of vivid.
+			font: {
+				weight: 700;
+			}
     }
     > a:hover {
       color: $c_navSubLinkHover;
@@ -2132,13 +2150,30 @@ table {
 
 // testing no widgets and tagline below menu
 #yoast-after-header-container {
-  color: $c_headerLink;
+  color: $c_afterHeaderText;
+	font: {
+		family: $f_extraFont;
+		size: $f_afterheader-px;
+		size: $f_afterheader;
+	}
   background: {
-    color: $c_headerBg;
+    color: $c_afterHeaderBg;
   }
   padding: {
     top: 24px; // this will be overwritten for Simple Image Plugin, so the image will be fixed to the top
   }
+	border: {
+		right: {
+			color: $c_maincontent_border;
+			width:1px;
+			style:solid;
+		}
+		left: {
+			color: $c_maincontent_border;
+			width:1px;
+			style:solid;
+		}
+	}
   .widget_simpleimage {
     .simple-image {
       img {
@@ -2154,8 +2189,14 @@ table {
     }
   }
   .widget-title {
+		font: {
+			family: $f_extraFont;
+			size: $f_headerH4-px;
+			size: $f_headerH4;
+			weight: 700;
+		}
     margin: 0;
-    color: $c_headerH3;
+    color: $c_afterHeaderH4;
     padding: 0 0 10px;
     + div {
       padding: {
@@ -2164,14 +2205,12 @@ table {
     }
   }
   a {
-    color: $c_headerLink;
+    color: $c_afterHeaderLink;
     text: {
       decoration: underline;
     }
-    font: {
-      weight: 700;
-    }
     &:hover {
+			color: $c_afterHeaderLinkHover;
       text: {
         decoration: none;
       }

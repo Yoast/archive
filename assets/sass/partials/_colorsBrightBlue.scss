@@ -12,98 +12,110 @@
 // cta                  #28a0ff
 // footer               #e2e2e2
 
+// Color declarations Versatile ColorSet1 BrightBlue
+
+// H1 / H3 / Button Field / BG Top					#0082be
+// T3 / Lines Color / NAV Active						#e74c21
+// T2 / H2 Gray / BG Footer Dark						#4a5358
+// CTA																			#6bbd1e
+// Lines / Spacers Gray / Buttons content		#a4a7ab
+// BG Content Top / BG Footer NAV Light			#e5edf3
+// Text black																#000000
+// BG																				#e6e6e6
+
+
 // #yoast-after-header-container check in list
 $c_ListCheckImage:      "../images/li-check-Autumn.png";
 
 // general
-$c_bodyTopLine:         #e0e7c3;
+$c_bodyTopLine:         #e74c21;
 
 $c_paragraph:           #000000;
-$c_link:                #71983f;
-$c_linkHover:           #e17816;
+$c_link:                #e74c21;
+$c_linkHover:           #e74c21;
 $c_linkBorder:          #dddddd;
 
-$c_logoText:            #999999;
-$c_logoTextLink:        #333333;
-$c_logoTextLinkHover:   #333333;
+$c_logoText:            #ffffff;
+$c_logoTextLink: 				#d2d2d2;
+$c_logoTextLinkHover:   #d2d2d2;
 
-$c_taglineTop:          #666666;
-$c_taglineTopBold:      #71983f;
-$c_taglineFullWidth:    #666666;
-$c_taglineFullWidthBold:#71983f;
+$c_taglineTop:          #ffffff;
+$c_taglineTopBold:      #e74c21;
+$c_taglineFullWidth:    #000000;
+$c_taglineFullWidthBold:#e74c21;
 $c_taglineBoxShadow:    #cccccc;
-$c_taglineLink:         #71983f;
-$c_taglineLinkHover:    #e17816;
+$c_taglineLink:         #e74c21;
+$c_taglineLinkHover:    #e74c21;
 
 $c_breadcrumbs:         #666666;
-$c_breadcrumbsLink:     #71983f;
-$c_breadcrumbsLinkHover:#e17816;
+$c_breadcrumbsLink:     #e74c21;
+$c_breadcrumbsLinkHover:#e74c21;
 
 $c_pagenavBg:           #eeeeee;
-$c_pagenavLink:         #71983f;
-$c_pagenavHoverBg:      #bece7d;
+$c_pagenavLink:         #e74c21;
+$c_pagenavHoverBg:      #4a5358;
 $c_pagenavHoverLink:    #ffffff;
-$c_pagenavActiveBg:     #bece7d;
+$c_pagenavActiveBg:     #4a5358;
 $c_pagenavActiveLink:   #ffffff;
 
 $c_metaAtPost:          #666666;
 $c_metaAtPostBorder:    #dddddd;
-$c_linkToArchives:      #71983f;
-$c_commentHTMLtags:     #b2b8b8;
+$c_linkToArchives:      #e74c21;
+$c_commentHTMLtags:     #e5edf3;
 
-$c_hrLine:              #e17816;
-$c_borderImg:           #b2b8b8;
-$c_randLine:            #b2b8b8; // random grey line
+$c_hrLine:              #a4a7ab;
+$c_borderImg:           #e5edf3;
+$c_randLine:            #a4a7ab; // random grey line
 
-$c_selectionText:       #71983f;
-$c_selectionBg:         #bece7d;
+$c_selectionText:       #e74c21;
+$c_selectionBg:         #4a5358;
 
 $c_fieldsetBorder:      #c0c0c0;
 
 // header
-$c_headerBg:            #eeeeee;
-$c_headerText:          #71983f;
-$c_headerLink:          #71983f;
-$c_headerLinkHover:     #e17816;
-$c_headerH3:            #e17816;
-$c_headerH4:            #e17816;
+$c_headerBg:            #e5edf3;
+$c_headerText:          #e5edf3;
+$c_headerLink:          #4a5853;
+$c_headerLinkHover:     #a4a7ab;
+$c_headerH3:            #000000;
+$c_headerH4:            #000000;
 
 // navigation
-$c_navMainFullBg:           #bece7d;
-$c_navMainFullBorderTop:    #e17816;
-$c_navMainFullBorderBottom: #d05816;
+$c_navMainFullBg:           #4a5358;
+$c_navMainFullBorderTop:    #e74c21;
+$c_navMainFullBorderBottom: #0082be;
 
-$c_navMainBg:           #bece7d;
-$c_navMainText:         #000000;
-$c_navMainLink:         #000000;
+$c_navMainBg:           #4a5358;
+$c_navMainText:         #ffffff;
+$c_navMainLink:         #ffffff;
 $c_navMainLinkHover:    #ffffff;
-$c_navMainLinkBg:       #bece7d;
-$c_navMainLinkBgHover:  #e17816;
-$c_navMainBgActive:     #e17816;
+$c_navMainLinkBg:       #4a5358;
+$c_navMainLinkBgHover:  #e74c21;
+$c_navMainBgActive:     #e74c21;
 $c_navMainTextActive:   #ffffff;
 $c_navMainLinkShadow:   #333333;
 $c_navMainBorder:       #ffffff;
-$c_navMainBorderBottom: #e17816;
+$c_navMainBorderBottom: #e74c21;
 $c_navMainShadow:       #999999;
 
-$c_navSubBg:           #e17816;
+$c_navSubBg:           #e74c21;
 $c_navSubText:         #ffffff;
 $c_navSubLink:         #ffffff;
 $c_navSubLinkHover:    #ffffff;
-$c_navSubLinkBg:       #bece7d;
-$c_navSubLinkBgHover:  #71983f;
-$c_navSubLinkActive:   #bece7d;
+$c_navSubLinkBg:       #4a5358;
+$c_navSubLinkBgHover:  #e74c21;
+$c_navSubLinkActive:   #4a5358;
 $c_navSubBorder:       #ffffff;
-$c_navSubBorderBottom: #e17816;
+$c_navSubBorderBottom: #e74c21;
 
 // mobile menu Sidr
 $sidr-background:               #e2e2e2;
 $sidr-background-shadow-color:  #ebebeb;
 $sidr-text-color:               #333333;
-$c_sidr_linkBg:                 #b2b8b8;
+$c_sidr_linkBg:                 #e5edf3;
 $c_sidr_linkBorder:             #ffffff;
 $c_sidr_linkHoverBg:            #666666;
-$c_sidr_linkActiveBg:           #71983f;
+$c_sidr_linkActiveBg:           #e74c21;
 $c_sidr_linkHoverText:          #ffffff;
 $c_sidr_headingText:            #666666;
 $c_sidr_headingBorder:          #ffffff;
@@ -112,14 +124,14 @@ $c_sidr_boxShadow:              #999999;
 // main content
 $c_mainBg:              #ffffff;
 $c_mainText:            #000000;
-$c_mainLink:            #71983f;
-$c_mainLinkHover:       #e17816;
-$c_mainH1:              #e17816;
-$c_mainH1Hover:         #71983f;
-$c_mainH2:              #e17816;
-$c_mainH2Hover:         #71983f;
-$c_mainH3:              #e17816;
-$c_mainH3Hover:         #71983f;
+$c_mainLink:            #e74c21;
+$c_mainLinkHover:       #e74c21;
+$c_mainH1:              #0082be;
+$c_mainH1Hover:         #0082be;
+$c_mainH2:              #e74c21;
+$c_mainH2Hover:         #e74c21;
+$c_mainH3:              #e74c21;
+$c_mainH3Hover:         #e74c21;
 $c_mainH4:              #000000;
 $c_mainH4Hover:         #333333;
 $c_mainH5:              #000000;
@@ -132,8 +144,8 @@ $c_taxonomyIntroH1:     #666666;
 
 // blockquote
 $c_BlockquoteText:      #333333;
-$c_BlockquoteLink:      #71983f;
-$c_BlockquoteLinkHover: #e17816;
+$c_BlockquoteLink:      #e74c21;
+$c_BlockquoteLinkHover: #e74c21;
 $c_BlockquoteBorder:    #dddddd;
 $c_BlockquoteBg:        #eeeeee;
 $c_blockquoteBefore:    #999999;
@@ -143,31 +155,31 @@ $c_inputText:           #000000;
 $c_inputTextFocus:      #000000;
 $c_inputBg:             #ffffff;
 $c_inputBgFocus:        #ffffff;
-$c_inputBorder:         #b2b8b8;
+$c_inputBorder:         #e5edf3;
 $c_inputBoxShadow:      #eeeeee;
 $c_inputBorderFocus:    #999999;
 $c_inputTextPlaceholder:#999999;
 
 $c_inputSubmitText:     #ffffff;
 $c_inputSubmitTextHover:#ffffff;
-$c_inputSubmitBg:       #71983f;
-$c_inputSubmitBgHover:  #e17816;
-$c_inputSubmitBorder:   #71983f;
+$c_inputSubmitBg:       #a4a7ab;
+$c_inputSubmitBgHover:  #a4a7ab;
+$c_inputSubmitBorder:   #a4a7ab;
 $c_inputSubmitTextShadow: #333333;
 $c_inputSubmitBoxShadow:  #ffffff;
 
 // comments
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
-$c_commentLink:         #e17816;
-$c_commentBorder:       #e17816;
+$c_commentLink:         #e74c21;
+$c_commentBorder:       #e74c21;
 $c_commentReplyBorder:  #dddddd;
 $c_commentByAuthorBg:   #eaf2f7;
 
 // author block
 $c_articleAuthorBg:     #eaf2f7;
-$c_articleAuthorH2:     #e17816;
-$c_articleAuthorH3:     #71983f;
+$c_articleAuthorH2:     #e74c21;
+$c_articleAuthorH3:     #e74c21;
 
 // call-to-action
 $c_ctaBg:               #28a0ff;
@@ -178,20 +190,20 @@ $c_ctaBoxShadow:        #ffffff;
 
 $c_ctaBgWhite:          #ffffff;
 $c_ctaBorderWhite:      #ffffff;
-$c_ctaBgGrey:           #b2b8b8;
-$c_ctaBorderGrey:       #b2b8b8;
+$c_ctaBgGrey:           #e5edf3;
+$c_ctaBorderGrey:       #e5edf3;
 $c_ctaTextBlack:        #000000;
 
 // tables
 $c_tableBg:             #ffffff;
 $c_tableText:           #000000;
-$c_tableRowAlt:         #bece7d;
-$c_tableHeaderBg:       #71983f;
+$c_tableRowAlt:         #4a5358;
+$c_tableHeaderBg:       #e74c21;
 $c_tableHeaderText:     #ffffff;
-$c_tableLink:           #71983f;
-$c_tableLinkHover:      #e17816;
+$c_tableLink:           #e74c21;
+$c_tableLinkHover:      #e74c21;
 $c_tableBorder:         #dddddd;
-$c_tableCaption:        #71983f;
+$c_tableCaption:        #e74c21;
 
 // code
 $c_codeBg:              #eeeeee;
@@ -205,18 +217,18 @@ $c_markText:            #000000;
 $c_sidebarBg:           #ffffff;
 $c_sidebarText:         #000000;
 $c_sidebarLink:         #000000;
-$c_sidebarLinkHover:    #71983f;
-$c_sidebarLinkArrow:    #71983f;
-$c_sidebarH3:           #71983f;
-$c_sidebarH3Bg:         #eeeeee;
+$c_sidebarLinkHover:    #e74c21;
+$c_sidebarLinkArrow:    #e74c21;
+$c_sidebarH3:           #e74c21;
+$c_sidebarH3Bg:         #e5edf3;
 $c_sidebarH4:           #666666;
 $c_sidebarH4Bg:         #ffffff;
 
 // footerwidgets
 $c_footerWidgetsBg:       #eeeeee;
-$c_footerWidgetsBorderTop:#e0e7c3;
+$c_footerWidgetsBorderTop:#e74c21;
 $c_footerWidgetsText:     #000000;
-$c_footerWidgetsLink:     #71983f;
+$c_footerWidgetsLink:     #e74c21;
 $c_footerWidgetsLinkHover:#000000;
 $c_footerWidgetsH3:       #666666;
 $c_footerWidgetsH4:       #666666;
@@ -226,6 +238,6 @@ $c_footerBg:            #e2e2e2;
 $c_footerBorderTop:     #cccccc;
 $c_footerText:          #000000;
 $c_footerLink:          #000000;
-$c_footerLinkHover:     #e17816;
+$c_footerLinkHover:     #e74c21;
 $c_footerH3:            #000000;
 $c_footerH4:            #000000;
