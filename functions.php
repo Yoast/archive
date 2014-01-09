@@ -28,8 +28,6 @@ function child_theme_setup() {
 	if ( is_admin() ) {
 		// Editor Styles
 		add_editor_style( 'assets/css/editor-style.css' );
-
-		add_action( 'current_screen', 'fake_genesis_custom_header_thinking' );
 	}
 
 	/** Load widgets from /lib/widgets/ */
@@ -39,6 +37,20 @@ function child_theme_setup() {
 
 	// Add HTML5 markup structure
 	add_theme_support( 'html5' );
+
+	// No header callback function as we output it with the logo CSS
+	// @fixme replace the default header image.
+	$args = array(
+		'width'           => 940,
+		'height'          => 280,
+		'flex-height'     => true,
+		'header_image'    => get_stylesheet_directory_uri() . '/assets/images/macarons2.jpg',
+		'uploads'         => true,
+		'no_header_text'  => true,
+		'header_callback' => '__return_true',
+	);
+
+	add_theme_support( 'genesis-custom-header', $args );
 
 	// Just allow for primary navigation
 	add_theme_support( 'genesis-menus', array( 'primary' => __( 'Primary Navigation Menu', 'genesis' ) ) );
@@ -199,16 +211,6 @@ function child_theme_setup() {
 	// Integration between Genesis and theme customizer
 	add_filter( 'genesis_pre_get_option_site_layout', 'get_site_layout_from_theme_mod' );
 	add_action( 'genesis_admin_before_metaboxes', 'remove_genesis_settings_boxes' );
-}
-
-/**
- * Fake Genesis into thinking we support a custom header
- */
-function fake_genesis_custom_header_thinking() {
-	global $pagenow;
-	if ( 'admin.php' == $pagenow && isset( $_GET['page'] ) && 'genesis' == $_GET['page'] ) {
-		add_theme_support( 'custom-header' );
-	}
 }
 
 /**
@@ -531,7 +533,7 @@ function yst_display_logo() {
 	// Normal logo
 	$logo = get_theme_mod( 'yst_logo' );
 	if ( isset( $logo ) && ! empty ( $logo ) ) {
-		$css .= '@media(min-width: 640px){.site-header .title-area {background-image: url(' . $logo . ');}}';
+		$css .= '@media(min-width: 640px){.site-header .title-area{background-image: url(' . $logo . ');}}';
 	}
 
 	// Mobile logo, positioning depends on whether the logo is wider than 230px and / or higher than 36px, if it is, alternate positioning is used.
@@ -545,14 +547,18 @@ function yst_display_logo() {
 		}
 
 		if ( ! $use_alt_positioning ) {
-			$css .= '@media(max-width: 640px){header.site-header {background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;	}}';
+			$css .= '@media(max-width: 640px){header.site-header{background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;}}';
 		} else {
 			$mobile_logo_height = $yst_mobile_logo_details['height'] - 41;
 			if ( is_user_logged_in() ) {
 				$mobile_logo_height -= 46;
 			}
-			$css .= '@media(max-width: 640px){.site-container {padding-top:' . $mobile_logo_height . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
+			$css .= '@media(max-width:640px){.site-container{padding-top:' . $mobile_logo_height . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
 		}
+	}
+
+	if ( get_header_image() ) {
+		$css .= '#header-image{background-image: url(' . get_header_image() . ');height:' . get_custom_header()->height . 'px}';
 	}
 
 	if ( ! empty( $css ) ) {
@@ -881,3 +887,11 @@ function yst_modify_genesis_author_box( $box ) {
 }
 
 add_filter( 'genesis_author_box', 'yst_modify_genesis_author_box' );
+
+function yst_add_header_image( $nav_output ) {
+	$nav_output .= '<div id="header-image"></div>';
+
+	return $nav_output;
+}
+
+add_filter( 'genesis_do_nav', 'yst_add_header_image', 99 );

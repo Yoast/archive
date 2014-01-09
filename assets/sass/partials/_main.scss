@@ -268,29 +268,6 @@ header {
   }
 }
 
-/**
- * TEMP FOR HEADER IMAGE
- */
-.home {
-  .site-inner {
-    padding: {
-      top: 312px;
-    }
-    background: {
-      image: image-url('macarons1.jpg');
-      position: 0 0;
-      repeat: no-repeat;
-    }
-  }
-}
-.breadcrumb {
-  padding-top: 302px !important;
-  background: {
-    image: image-url('macarons1.jpg');
-    position: 0 0;
-    repeat: no-repeat;
-  }
-}
 /* end */
 
 .wrap {
@@ -306,6 +283,17 @@ header {
   font: {
     size: 0em;
   }
+}
+
+/**
+ * Header Image
+ */
+#header-image {
+	border-width: 0 1px;
+	border-style: solid;
+	border-color: #777777;
+	width: 960px;
+	margin: 0 auto;
 }
 
 /**
