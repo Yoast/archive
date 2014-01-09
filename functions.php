@@ -853,3 +853,31 @@ function yst_override_breadcrumb_attachment( $value = null ) {
 function author_box_gravatar_size() {
 	return '95';
 }
+
+/**
+ * Add a read all posts and social links to the author box
+ *
+ * @param $box
+ *
+ * @return mixed
+ */
+function yst_modify_genesis_author_box( $box ) {
+	global $authordata;
+
+	$out = '<p><a href="' . get_author_posts_url( $authordata->ID, $authordata->user_nicename ) . '">' . sprintf( __( 'View all posts by %s &raquo;', 'yoast-theme' ), get_the_author() ) . '</a></p>';
+
+	$social = '';
+	foreach ( array( 'facebook', 'twitter', 'linkedin', 'pinterest', 'googleplus' ) as $cm ) {
+		$social .= '<li class="' . $cm . '"><a href="' . get_user_meta( $authordata->ID, $cm, true ) . '">&nbsp;</a></li>';
+	}
+
+	if ( ! empty( $social ) ) {
+		$out = $out . '<ul class="author_social">' . $social . '</ul>';
+	}
+
+	$box = preg_replace( '|(</div></section>)|', $out . '</div></section>', $box );
+
+	return $box;
+}
+
+add_filter( 'genesis_author_box', 'yst_modify_genesis_author_box' );
