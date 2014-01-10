@@ -657,6 +657,8 @@ function yst_comment_callback( $comment, $args, $depth ) {
 
 		<?php do_action( 'genesis_after_comment' ); ?>
 
+        <div class="floatclearing"></div>
+
 	</article>
 	<?php
 	//* No ending </li> tag because of comment threading
