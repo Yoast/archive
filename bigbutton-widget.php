@@ -27,7 +27,7 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 			'text'       => '',
 			'url'        => '',
 			'intern_url' => '',
-			'class'      => 'button-green',
+			'class'      => 'cta-button',
 			'target'     => '_self',
 			'nofollow'   => false
 		);
@@ -110,8 +110,14 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 			if ( isset ( $link_attr ) )
 				$out .= $link_attr;
 
+			$out .= '>';
+			$out .= '<span>';
+
 			if ( ! empty( $instance['text'] ) )
-				$out .= '>' . $instance['text'] . '</a>';
+				$out .= $instance['text'];
+
+			$out .= '</span>';
+			$out .=  '</a>';
 
 			echo $out;
 
