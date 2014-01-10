@@ -2405,7 +2405,7 @@ table {
  */
 
 .widget_bigbutton {
-  .button-green {
+  .cta-button {
     a {
       background: {
         image: image-url($c_ctaImage); // @include background-image(linear-gradient($c_ctaBg, darken($c_ctaBg,10%)));
@@ -2775,7 +2775,7 @@ table {
     float:left;
   }
   .widget_bigbutton {
-    .button-green {
+    .cta-button {
       a {
         background: {
           image: image-url($c_ctaImageFooter);
@@ -3403,6 +3403,11 @@ body.sticky-menu.admin-bar { // why does WordPress have two heights for that!?
     top:32px;
     @media (max-width:782px) {
       top:46px;
+    }
+  }
+  &.sticky-menu {
+    background: {
+      position: 50% -30px;
     }
   }
 }
