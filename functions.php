@@ -59,7 +59,7 @@ function child_theme_setup() {
 	add_theme_support( 'genesis-responsive-viewport' );
 
 	// Add support for 3-column footer widgets
-	add_theme_support( 'genesis-footer-widgets', 4 );
+	add_theme_support( 'genesis-footer-widgets', 3 );
 
 	// Disable site layouts that must not be used
 	genesis_unregister_layout( 'content-sidebar-sidebar' );
