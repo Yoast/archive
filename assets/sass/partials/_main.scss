@@ -289,10 +289,12 @@ header {
  * Header Image
  */
 #header-image {
-	border-width: 0 1px;
-	border-style: solid;
-	border-color: #777777;
-	width: 960px;
+	border: {
+      width: 0 1px;
+      style: solid;
+      color: #777777;
+    }
+	width: 940px;
 	margin: 0 auto;
 }
 
@@ -1440,6 +1442,9 @@ h6 {
     align: left;
   }
   line-height: 1;
+  padding: {
+    bottom: 16px;
+  }
   a {
     color: $c_mainH1;
     &:hover {
