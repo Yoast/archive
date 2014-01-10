@@ -38,7 +38,7 @@ $c_logoText:            #999999;
 $c_logoTextLink:        #333333;
 $c_logoTextLinkHover:   #333333;
 
-$c_taglineTop:          #666666;
+$c_taglineTop:          #ffffff;
 $c_taglineTopBold:      #219149;
 $c_taglineFullWidth:    #666666;
 $c_taglineFullWidthBold:#219149;
@@ -46,9 +46,9 @@ $c_taglineBoxShadow:    #cccccc;
 $c_taglineLink:         #219149;
 $c_taglineLinkHover:    #e74c21;
 
-$c_breadcrumbs:         #666666;
-$c_breadcrumbsLink:     #219149;
-$c_breadcrumbsLinkHover:#e74c21;
+$c_breadcrumbs:         #4a5358;
+$c_breadcrumbsLink:     #e74c21;
+$c_breadcrumbsLinkHover:#4a5358;
 
 $c_pagenavBg:           #ffffff;
 $c_pagenavLink:         #e74c21;
@@ -62,7 +62,7 @@ $c_metaAtPostBorder:    #dddddd;
 $c_linkToArchives:      #219149;
 $c_commentHTMLtags:     #b2b8b8;
 
-$c_hrLine:              #a4afab;
+$c_hrLine:              #e6e6e6;
 $c_borderImg:           #b2b8b8;
 $c_randLine:            #b2b8b8; // random grey line
 
@@ -86,6 +86,7 @@ $c_afterHeaderLinkHover:	#4a5358;
 $c_afterHeaderH3:					#4a5358;
 $c_afterHeaderH4:					#4a5358;
 $c_afterHeaderText:				#0f495f;
+$c_afterHeaderBorder:			#e74c21;
 
 // navigation
 $c_navMainFullBg:           #4a5358;
@@ -96,7 +97,7 @@ $c_navMainBg:           #4a5358;
 $c_navMainText:         #ffffff;
 $c_navMainLink:         #ffffff;
 $c_navMainLinkHover:    #ffffff;
-$c_navMainLinkBg:       #c5e89c;
+$c_navMainLinkBg:       #4a5358;
 $c_navMainLinkBgHover:  #e74c21;
 $c_navMainBgActive:     #e74c21;
 $c_navMainTextActive:   #ffffff;
@@ -109,9 +110,10 @@ $c_navSubBg:           #e74c21;
 $c_navSubText:         #ffffff;
 $c_navSubLink:         #ffffff;
 $c_navSubLinkHover:    #ffffff;
-$c_navSubLinkBg:       #c5e89c;
-$c_navSubLinkBgHover:  #219149;
-$c_navSubLinkActive:   #c5e89c;
+$c_navSubLinkBg:       #4a5358;
+$c_navSubLinkBgHover:  #4a5358;
+$c_navSubLinkActive:   #ffffff;
+$c_navSubLinkActiveBg: #4a5358;
 $c_navSubBorder:       #ffffff;
 $c_navSubBorderBottom: #e74c21;
 
@@ -189,11 +191,11 @@ $c_articleAuthorH2:     #e74c21;
 $c_articleAuthorH3:     #e74c21;
 
 // call-to-action
-$c_ctaBg:               #28a0ff;
-$c_ctaBorder:           #28a0ff;
+$c_ctaBg:               #6bbd1e;
+$c_ctaBorder:           #6bbd1e;
 $c_ctaTextWhite:        #ffffff;
 $c_ctaTextShadow:       #333333;
-$c_ctaBoxShadow:        #ffffff;
+$c_ctaBoxShadow:        #000000;
 
 $c_ctaBgWhite:          #ffffff;
 $c_ctaBorderWhite:      #ffffff;
@@ -232,8 +234,8 @@ $c_sidebarH4:           #666666;
 $c_sidebarH4Bg:         #ffffff;
 
 // footerwidgets
-$c_footerWidgetsBg:       #eeeeee;
-$c_footerWidgetsBorderTop:#ecf7bf;
+$c_footerWidgetsBg:       #dce6f0;
+$c_footerWidgetsBorderTop:#e74c21;
 $c_footerWidgetsText:     #000000;
 $c_footerWidgetsLink:     #219149;
 $c_footerWidgetsLinkHover:#000000;
@@ -241,13 +243,16 @@ $c_footerWidgetsH3:       #666666;
 $c_footerWidgetsH4:       #666666;
 
 // footer
-$c_footerBg:            #e2e2e2;
-$c_footerBorderTop:     #cccccc;
-$c_footerText:          #000000;
-$c_footerLink:          #000000;
+$c_footerBg:            #4a5358;
+$c_footerBorderTop:     #e74c21;
+$c_footerText:          #ffffff;
+$c_footerLink:          #ffffff;
 $c_footerLinkHover:     #e74c21;
-$c_footerH3:            #000000;
-$c_footerH4:            #000000;
+$c_footerH3:            #ffffff;
+$c_footerH4:            #ffffff;
 
 // main content border
 $c_maincontent_border: 	#a4a7ab;
+
+// general widgets
+$c_widgetBorder:				#e74c21;

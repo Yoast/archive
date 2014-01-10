@@ -246,6 +246,40 @@ header {
   padding: {
     top: 32px;
   }
+	aside {
+		margin: {
+			right: -20px;
+		}
+		.widget-wrap {
+			padding: {
+				left: 20px;
+				top: 20px;
+				bottom: 20px;
+			}
+		}
+		.widget {
+			margin: {
+				bottom: 40px;
+			}
+			border: {
+				left: {
+					color: $c_widgetBorder;
+					width: 1px;
+					style: solid;
+				}
+				top: {
+					color: $c_widgetBorder;
+					width: 1px;
+					style: solid;
+				}
+				bottom: {
+					color: $c_widgetBorder;
+					width: 1px;
+					style: solid;
+				}
+			}
+		}
+	}
 }
 .wrap {
   @extend .floatclearing;
@@ -262,7 +296,7 @@ header {
   }
 }
 
-#around-header {
+#header-wrapper {
 	@extend .floatclearing;
 	clear: both;
 	margin: 0 auto;
@@ -278,7 +312,7 @@ header {
 	}
 }
 
-#around-center {
+#center-wrapper {
 	@extend .floatclearing;
 	clear: both;
 	margin: -30px auto;
@@ -290,6 +324,21 @@ header {
 		}
 	}
 	max-width: $d_full;
+}
+
+#afterheader-content-wrapper {
+	border: {
+		right: {
+			color: $c_maincontent_border;
+			width:2px;
+			style:solid;
+		}
+		left: {
+			color: $c_maincontent_border;
+			width:2px;
+			style:solid;
+		}
+	}
 }
 
 /**
@@ -382,6 +431,7 @@ header {
     text: {
       align: right;
     }
+		vertical-align: bottom;
     max-width: $d_headerAside;
     overflow-x:hidden;
     color: $c_taglineTop;
@@ -431,6 +481,13 @@ header {
     width: $d_mainContent;
     max-width:100%;
   }
+}
+
+.content-sidebar-wrap {
+	margin: {
+		left: 20px;
+		right: 20px;
+	}
 }
 
 .sidebar-content {
@@ -946,7 +1003,7 @@ textarea {
         }
         color: $sidr-text-color;
         font: {
-          weight: 700;
+          weight: 400;
         }
         &:hover,
         &.active,
@@ -1235,7 +1292,7 @@ img.alignright,
 .wp-caption-text {
   font: {
     size: 14px;
-    weight: 700;
+    weight: 400;
   }
   text: {
     align: center;
@@ -1265,13 +1322,13 @@ img.alignright,
 
 .breadcrumb {
   max-width: $d_full;
-  margin: 0 auto;
+  margin: 0 auto 0 20px;
   padding: 10px 0 0;
   color: $c_breadcrumbs;
   font: {
     size: $f_breadcrumbs-px;
     size: $f_breadcrumbs;
-    weight: 700;
+    weight: 400;
   }
   a {
     color: $c_breadcrumbsLink;
@@ -1337,7 +1394,7 @@ img.alignright,
 
 .headingsDefault {
   font: {
-    weight: 700;
+    weight: 400;
   }
   line-height: 1.2;
   margin: 0 0 24px;
@@ -1523,7 +1580,7 @@ table {
     bottom: 14px;
   }
   border: {
-    bottom: 1px solid $c_hrLine;
+    bottom: 2px solid $c_hrLine;
   }
 }
 .single { // reduce whitespace below back-to-top for single()
@@ -1543,10 +1600,15 @@ table {
   }
 }
 .entry-content {
+	font: {
+		family: $f_baseFont;
+		size: $f_entryContent-px;
+		size: $f_entryContent;
+	}
   a {
     color: $c_mainLink;
     font: {
-      weight: 700;
+      weight: 400;
     }
     text: {
       decoration:underline;
@@ -1687,7 +1749,7 @@ table {
   p {
     color:$c_taxonomyIntroText;
     font: {
-      weight: 700;
+      weight: 400;
     }
   }
 }
@@ -1721,7 +1783,7 @@ table {
   }
   a {
     font: {
-      weight: 700;
+      weight: 400;
     }
   }
 }
@@ -1731,11 +1793,11 @@ table {
       bottom: 26px;
       top: 5px;
     }
-    font: {
-      weight: 700;
-    }
     .entry-author-name {
       text-transform: capitalize;
+			font: {
+				weight: 700;
+			}
     }
   }
 }
@@ -1746,6 +1808,11 @@ table {
   }
 }
 .entry-comments-link {
+	a {
+		font: {
+			weight: 700;
+		}
+	}
   ::before {
     content: "\2014";
     margin: 0 6px 0 2px;
@@ -2159,19 +2226,12 @@ table {
   background: {
     color: $c_afterHeaderBg;
   }
-  padding: {
-    top: 24px; // this will be overwritten for Simple Image Plugin, so the image will be fixed to the top
-  }
+  padding: 24px; // this will be overwritten for 'top' for the Simple Image Plugin, so the image will be fixed to the top
 	border: {
-		right: {
-			color: $c_maincontent_border;
-			width:1px;
-			style:solid;
-		}
-		left: {
-			color: $c_maincontent_border;
-			width:1px;
-			style:solid;
+		bottom: {
+			width: 2px;
+			style: solid;
+			color: $c_afterHeaderBorder;
 		}
 	}
   .widget_simpleimage {
@@ -2181,11 +2241,6 @@ table {
           top: -24px;
         }
       }
-    }
-  }
-  > .wrap {
-    padding: {
-      bottom: 6px;
     }
   }
   .widget-title {
@@ -2256,9 +2311,18 @@ table {
   width: $d_columnTwo;
   max-width:50%;
   margin: {
-    left: 60px;
-    right: 60px;
+    left: 19px;
+    right: 19px;
   }
+	padding: {
+    left: 19px;
+    right: 19px;
+  }
+	border: {
+		width: 0 2px;
+		style: solid;
+		color: $c_randLine;
+	}
   vertical-align: middle;
 }
 #yoast-after-header-3 {
@@ -2268,8 +2332,8 @@ table {
   #yoast-after-header-container {
     #yoast-after-header-1 {
       margin: {
-        left: 60px;
-        right: 60px;
+        left: 40px;
+        right: 40px;
       }
     }
     #yoast-after-header-2 {
@@ -2331,13 +2395,11 @@ table {
 
 .widget-wrap {
   padding: {
-    bottom: 32px;
+    bottom: 16px;
+		right: 20px;
   }
   > p {
-    padding: {
-      left: 10px;
-    }
-    a {
+		a {
       text: {
         decoration: underline;
       }
@@ -2351,13 +2413,12 @@ table {
   > ul {
     margin: {
       left: 26px;
-      bottom:1em;
     }
   }
   li {
     list-style:square;
     margin: {
-      bottom:0;
+      bottom:	0;
     }
     line-height: 1.625em;
     a {
@@ -2428,7 +2489,6 @@ table {
     }
   }
   form {
-    padding: 0 10px;
     &.search-form {
       padding:0;
     }
@@ -2450,18 +2510,18 @@ table {
 }
 .widget-title {
   font: {
-    size:$f_sidebarH3-px;
-    size:$f_sidebarH3;
+		family: $f_extraFont;
+    size: $f_sidebarH3-px;
+    size: $f_sidebarH3;
+		weight: 700;
   }
   margin: {
-    bottom: 16px;
+    bottom: 10px;
   }
   text: {
     transform: none;
   }
-  background-color: $c_sidebarH3Bg;
   color: $c_sidebarH3;
-  padding: 10px;
   a {
     border:none;
     color: $c_sidebarH3;
@@ -2478,7 +2538,14 @@ table {
  */
 
 .widget_bigbutton {
-  .button-green {
+	border: none !important;
+	margin-right: 20px;
+
+	.widget-wrap {
+		padding: 0px !important;
+	}
+
+  .cta-button {
     a {
       display: block;
       padding: 15px;
@@ -2487,7 +2554,7 @@ table {
         style: solid;
         color: $c_ctaBorder;
       }
-      @include box-shadow(inset 0px 0 5px $c_ctaBoxShadow);
+      @include box-shadow(0px 1px 1px $c_ctaBoxShadow);
       @include background-image(linear-gradient(lighten($c_ctaBg,10%),$c_ctaBg));
       color: $c_ctaTextWhite;
       font: {
@@ -2519,8 +2586,8 @@ table {
   p,
   form {
     padding: {
-      left: 10px;
-      right: 10px;
+     // left: 10px;
+     // right: 10px;
     }
   }
   form {
@@ -2533,7 +2600,7 @@ table {
       }
     }
     input {
-      padding:8px;
+      //padding:8px;
       margin: {
         bottom: 10px;
       }
@@ -2748,14 +2815,6 @@ table {
 .yst_fb_widget,
 .widget_banner {
   .widget-title {
-    background: {
-      color: $c_mainBg;
-    }
-    color: $c_sidebarH4;
-    padding:10px 10px 0 0;
-    margin: {
-      bottom:16px;
-    }
     + div {
       padding: {
         left:0;
@@ -2828,9 +2887,9 @@ table {
   }
   border: {
     top: {
-      width:1px;
-      style: solid;
-      color: $c_footerWidgetsBorderTop;
+      width:	3px;
+      style: 	solid;
+      color: 	$c_footerWidgetsBorderTop;
     }
   }
   color: $c_footerWidgetsText;
@@ -2885,6 +2944,9 @@ table {
     margin-bottom: 24px;
     .widget-title {
       color: $c_footerWidgetsH3;
+			font: {
+				weight: 700;
+			}
     }
   }
 }
@@ -3028,7 +3090,7 @@ img#wpstats {
   }
   border: {
     top: {
-      width: 1px;
+      width: 3px;
       style: solid;
       color: $c_footerBorderTop;
     }
@@ -3037,6 +3099,7 @@ img#wpstats {
   font: {
     size: $f_footerBaseFont-px;
     size: $f_footerBaseFont;
+		weight: 700;
   }
   padding: 20px 10px;
   a {

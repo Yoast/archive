@@ -168,12 +168,12 @@ function child_theme_setup() {
 	add_action( 'wp_head', 'yst_display_logo' );
 	add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
 
-	add_action( 'genesis_after_header', 'yst_after_header_genesis' );
+	add_action( 'genesis_after_header', 'yst_after_header_genesis', 12 );
 	add_action( 'genesis_after_content_sidebar_wrap', 'yst_fullwidth_sitebars_genesis' );
 	add_action( 'genesis_before_comments', 'yst_after_post_sitebar_genesis' );
 
 	// Reposition the breadcrumbs
-	add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+	add_action( 'genesis_after_header', 'genesis_do_breadcrumbs', 12 );
 	remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 
 	add_action( 'genesis_header', 'yst_add_top_right_area' );
@@ -282,7 +282,8 @@ function enqueue_form_styles() {
  * Enqueue Google font
  */
 function yst_add_google_fonts() {
-	wp_enqueue_style( 'google-font-quattrocento_sans', '//fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);', array(), CHILD_THEME_VERSION );
+	wp_enqueue_style( 'google-font-open_sans', '//fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic);', array(), CHILD_THEME_VERSION );
+	wp_enqueue_style( 'google-font-ruda', '//fonts.googleapis.com/css?family=Ruda:400,700', array(), CHILD_THEME_VERSION );
 }
 
 /**
@@ -881,3 +882,37 @@ function yst_override_breadcrumb_404( $value = null ) {
 function yst_override_breadcrumb_attachment( $value = null ) {
 	return yst_override_genesis_setting( 'yst_breadcrumb_attachment', $value, true );
 }
+
+// @todo: add div around header
+// @todo: add div around nav, after header, breadcrumbs and content
+// @todo: add div around footer (incl footer widgets)
+
+
+function yst_open_div_before_header() {
+	echo '<div id="header-wrapper">';
+}
+
+function yst_close_div_after_header() {
+	echo '</div>';
+}
+
+add_action('genesis_before_header', 'yst_open_div_before_header');
+add_action('genesis_after_header', 'yst_close_div_after_header');
+
+function yst_open_div_before_nav() {
+	echo '<div id="center-wrapper">';
+}
+
+function yst_close_div_after_content() {
+	echo '</div>';
+}
+
+add_action('genesis_after_header', 'yst_open_div_before_nav');
+add_action('genesis_before_footer', 'yst_close_div_after_content');
+
+function yst_open_div_after_afterheader() {
+	echo '<div id="afterheader-content-wrapper">';
+}
+
+add_action('genesis_after_header', 'yst_open_div_after_afterheader', 11);
+add_action('genesis_after_content_sidebar_wrap', 'yst_close_div_after_content');
