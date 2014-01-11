@@ -90,6 +90,14 @@ class Yoast_Theme_Customizer {
 		);
 
 		$wp_customize->add_setting(
+			'yst_logo_position',
+			array(
+				'default'   => 'left',
+				'transport' => 'postMessage'
+			)
+		);
+
+		$wp_customize->add_setting(
 			'yst_default_layout',
 			array(
 				'default'   => 'content-sidebar',
@@ -214,11 +222,11 @@ class Yoast_Theme_Customizer {
 					$wp_customize,
 					$breadcrumb_setting,
 					array(
-						'section'  => 'yst_genesis_breadcrumbs',
-						'label'    => $values['label'],
-						'type'     => 'checkbox',
+						'section'     => 'yst_genesis_breadcrumbs',
+						'label'       => $values['label'],
+						'type'        => 'checkbox',
 						'description' => ( ( 1 == $i ) ? '<strong>' . __( 'Show breadcrumbs on:' ) . '</strong>' : '' ),
-						'priority' => $i
+						'priority'    => $i
 					)
 				)
 			);
@@ -315,6 +323,7 @@ class Yoast_Theme_Customizer {
 			)
 		);
 
+		// This control goes into the default Color section
 		$wp_customize->add_control(
 			new Yoast_Logo_Image_Control(
 				$wp_customize,
@@ -339,6 +348,19 @@ class Yoast_Theme_Customizer {
 					'setting'     => 'yst_mobile_logo',
 					'section'     => 'yst_logos',
 					'context'     => 'yst_mobile_logo',
+				)
+			)
+		);
+
+		$wp_customize->add_control(
+			'yst_logo_position',
+			array(
+				'section' => 'yst_logos',
+				'label'   => __( 'Logo positioning', 'yoast-theme' ),
+				'type'    => 'radio',
+				'choices' => array(
+					'left'   => __( 'Left', 'yoast-theme' ),
+					'middle' => __( 'Middle', 'yoast-theme' )
 				)
 			)
 		);

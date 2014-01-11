@@ -67,6 +67,10 @@ function child_theme_setup() {
 	genesis_unregister_layout( 'sidebar-content-sidebar' );
 
 	/** Register widget areas */
+	if ( 'middle' == get_theme_mod( 'yst_logo_position' ) ) {
+		unregister_sidebar( 'header-right' );
+	}
+
 	genesis_register_sidebar( array(
 		'id'          => 'yoast-top-right',
 		'name'        => __( 'Search', 'yoast-theme' ),
@@ -167,6 +171,8 @@ function child_theme_setup() {
 	remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 
 	add_action( 'genesis_header', 'yst_add_top_right_area' );
+
+	add_filter( 'body_class', 'yst_logo_position_body_class' );
 
 	add_action( 'genesis_before_loop', 'yoast_term_archive_intro', 20 );
 
@@ -332,6 +338,18 @@ function yst_add_top_right_area() {
 		'before' => '<div id="yoast-top-right" class="widget-area yoast-top-right-widget">',
 		'after'  => '</div>',
 	) );
+}
+
+/**
+ * Add a body class that determines whether the logo is on the left or in the middle.
+ *
+ * @param array $classes
+ *
+ * @return array $classes
+ */
+function yst_logo_position_body_class( $classes ) {
+	$classes[] = 'logo-position-' . get_theme_mod( 'yst_logo_position', 'left' );
+	return $classes;
 }
 
 /**
