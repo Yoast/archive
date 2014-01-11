@@ -2038,15 +2038,6 @@ table {
         color: $c_hrLine;
       }
       padding:16px;
-      .comment-author {
-        &:after {
-          font: {
-            weight: 700;
-          }
-          color: $c_link;
-          content: "♟Author"
-        }
-      }
     }
     .comment-actions {
       margin:0;

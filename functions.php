@@ -629,16 +629,18 @@ function yst_comment_callback( $comment, $args, $depth ) {
 						$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
 					}
 
-					if ( $comment->user_id === $post->post_author ) {
-						$author .= ' <span class="post_author_comment">' . __( 'Author', 'yoast-theme' ) . '</span>';
-					}
-
 					printf( __( 'By %s', 'yoast-theme' ), sprintf( '<span itemprop="name">%s</span> ', $author ) );
 					_e( ' on ', 'yoast-theme' );
 
 					$pattern = '<time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
 					printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
+
+					if ( $comment->user_id === $post->post_author ) {
+						echo ' <span class="post_author_comment">' . __( 'Author', 'yoast-theme' ) . '</span>';
+					}
+
 					?>
+
 				</p>
 			</header>
 			<?php if ( ! $comment->comment_approved ) : ?>
