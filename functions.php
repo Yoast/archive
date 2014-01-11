@@ -603,6 +603,7 @@ function yst_comment_list_args( $args ) {
  * @param integer  $depth
  */
 function yst_comment_callback( $comment, $args, $depth ) {
+	global $post;
 	$GLOBALS['comment'] = $comment; ?>
 
 <li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
@@ -626,6 +627,10 @@ function yst_comment_callback( $comment, $args, $depth ) {
 
 					if ( ! empty( $url ) && 'http://' !== $url ) {
 						$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
+					}
+
+					if ( $comment->user_id === $post->post_author ) {
+						$author .= ' <span class="post_author_comment">' . __( 'Author', 'yoast-theme' ) . '</span>';
 					}
 
 					printf( __( 'By %s', 'yoast-theme' ), sprintf( '<span itemprop="name">%s</span> ', $author ) );
@@ -880,6 +885,7 @@ function yst_modify_genesis_author_box( $box ) {
 		if ( 'twitter' == $cm ) {
 			$url = 'https://twitter.com/' . $url;
 		}
+		$rel = '';
 		if ( 'googleplus' == $cm ) {
 			$rel = 'rel="author"';
 		}
