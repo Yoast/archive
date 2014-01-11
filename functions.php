@@ -657,7 +657,7 @@ function yst_comment_callback( $comment, $args, $depth ) {
 
 		<?php do_action( 'genesis_after_comment' ); ?>
 
-        <div class="floatclearing"></div>
+		<div class="floatclearing"></div>
 
 	</article>
 	<?php
@@ -876,7 +876,14 @@ function yst_modify_genesis_author_box( $box ) {
 
 	$social = '';
 	foreach ( array( 'facebook', 'twitter', 'linkedin', 'pinterest', 'googleplus' ) as $cm ) {
-		$social .= '<li class="' . $cm . '"><a href="' . get_user_meta( $authordata->ID, $cm, true ) . '">&nbsp;</a></li>';
+		$url = get_user_meta( $authordata->ID, $cm, true );
+		if ( 'twitter' == $cm ) {
+			$url = 'https://twitter.com/' . $url;
+		}
+		if ( 'googleplus' == $cm ) {
+			$rel = 'rel="author"';
+		}
+		$social .= '<li class="' . $cm . '"><a ' . $rel . ' href="' . $url . '">&nbsp;</a></li>';
 	}
 
 	if ( ! empty( $social ) ) {
