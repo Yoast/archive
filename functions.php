@@ -214,6 +214,10 @@ function child_theme_setup() {
 	add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
 	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
 
+	add_filter ( 'yoast_theme_newsletter_submit_button_text', 'yst_change_newsletter_submit_button_text' );
+	add_filter( 'genesis_do_nav', 'yst_add_header_image', 99 );
+	add_filter( 'genesis_author_box', 'yst_modify_genesis_author_box' );
+
 	// Integration between Genesis and theme customizer
 	add_filter( 'genesis_pre_get_option_site_layout', 'get_site_layout_from_theme_mod' );
 	add_action( 'genesis_admin_before_metaboxes', 'remove_genesis_settings_boxes' );
@@ -890,9 +894,9 @@ function author_box_gravatar_size() {
 /**
  * Add a read all posts and social links to the author box
  *
- * @param $box
+ * @param string $box The current author box
  *
- * @return mixed
+ * @return string
  */
 function yst_modify_genesis_author_box( $box ) {
 	global $authordata;
@@ -921,12 +925,25 @@ function yst_modify_genesis_author_box( $box ) {
 	return $box;
 }
 
-add_filter( 'genesis_author_box', 'yst_modify_genesis_author_box' );
-
+/**
+ * Output a div that contains the header image.
+ *
+ * @param string $nav_output
+ *
+ * @return string
+ */
 function yst_add_header_image( $nav_output ) {
 	$nav_output .= '<div id="header-image"></div>';
 
 	return $nav_output;
 }
 
-add_filter( 'genesis_do_nav', 'yst_add_header_image', 99 );
+/**
+ * Change the submit button on the newsletter widget
+ *
+ * @return string
+ */
+function yst_change_newsletter_submit_button_text() {
+	return '&#9654;';
+}
+
