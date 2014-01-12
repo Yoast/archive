@@ -214,9 +214,10 @@ function child_theme_setup() {
 	add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
 	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
 
-	add_filter ( 'yoast_theme_newsletter_submit_button_text', 'yst_change_newsletter_submit_button_text' );
+	add_filter( 'yoast_theme_newsletter_submit_button_text', 'yst_change_newsletter_submit_button_text' );
 	add_filter( 'genesis_do_nav', 'yst_add_header_image', 99 );
 	add_filter( 'genesis_author_box', 'yst_modify_genesis_author_box' );
+	add_filter( 'genesis_do_nav', 'yst_add_search_in_nav', 90 );
 
 	// Integration between Genesis and theme customizer
 	add_filter( 'genesis_pre_get_option_site_layout', 'get_site_layout_from_theme_mod' );
@@ -353,6 +354,7 @@ function yst_add_top_right_area() {
  */
 function yst_logo_position_body_class( $classes ) {
 	$classes[] = 'logo-position-' . get_theme_mod( 'yst_logo_position', 'left' );
+
 	return $classes;
 }
 
@@ -947,3 +949,16 @@ function yst_change_newsletter_submit_button_text() {
 	return '&#9654;';
 }
 
+/**
+ * Add a search box in the navigation based on the theme mod
+ *
+ * @param string $output
+ *
+ * @return string
+ */
+function yst_add_search_in_nav( $output ) {
+	if ( get_theme_mod( 'yst_theme_search_in_nav', true ) ) {
+		return str_replace( '<div class="wrap">', '<div class="wrap"><div class="nav-search">' . genesis_search_form() . '</div>', $output );
+	}
+	return $output;
+}

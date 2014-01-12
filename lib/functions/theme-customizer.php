@@ -130,6 +130,14 @@ class Yoast_Theme_Customizer {
 		);
 
 		$wp_customize->add_setting(
+			'yst_theme_search_in_nav',
+			array(
+				'default'   => 'on',
+				'transport' => 'refresh'
+			)
+		);
+
+		$wp_customize->add_setting(
 			'yst_posts_nav',
 			array(
 				'default'   => 'numeric',
@@ -232,6 +240,15 @@ class Yoast_Theme_Customizer {
 			);
 			$i ++;
 		}
+
+		$wp_customize->add_control(
+			'yst_theme_search_in_nav',
+			array(
+				'section' => 'nav',
+				'label'   => __( 'Include Search in Nav bar', 'yoast-theme' ),
+				'type'    => 'checkbox'
+			)
+		);
 
 		$wp_customize->add_control(
 			'yst_content_archive',
