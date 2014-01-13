@@ -47,7 +47,7 @@ function child_theme_setup() {
 	add_theme_support( 'genesis-responsive-viewport' );
 
 	// Add support for 3-column footer widgets
-	add_theme_support( 'genesis-footer-widgets', 4 );
+	add_theme_support( 'genesis-footer-widgets', 3 );
 
 	// Disable site layouts that must not be used
 	genesis_unregister_layout( 'content-sidebar-sidebar' );
@@ -55,12 +55,6 @@ function child_theme_setup() {
 	genesis_unregister_layout( 'sidebar-content-sidebar' );
 
 	/** Register widget areas */
-	genesis_register_sidebar( array(
-		'id'          => 'yoast-top-right',
-		'name'        => __( 'Search', 'yoast-theme' ),
-		'description' => __( 'Search widget area. Intended for search widget. Changes drastically on mobile.', 'yoast-theme' ),
-	) );
-
 	genesis_register_sidebar( array(
 		'id'          => 'yoast-after-header-1',
 		'name'        => __( 'After Header 1', 'yoast-theme' ),
@@ -175,8 +169,6 @@ function child_theme_setup() {
 	// Reposition the breadcrumbs
 	add_action( 'genesis_after_header', 'genesis_do_breadcrumbs', 12 );
 	remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
-
-	add_action( 'genesis_header', 'yst_add_top_right_area' );
 
 	add_action( 'genesis_before_loop', 'yoast_term_archive_intro', 20 );
 
@@ -358,16 +350,6 @@ function yst_after_post_sitebar_genesis() {
 		) );
 		echo '</div></div>';
 	}
-}
-
-/**
- * Add top-right widget area for search-widget
- */
-function yst_add_top_right_area() {
-	genesis_widget_area( 'yoast-top-right', array(
-		'before' => '<div id="yoast-top-right" class="widget-area yoast-top-right-widget">',
-		'after'  => '</div>',
-	) );
 }
 
 /**

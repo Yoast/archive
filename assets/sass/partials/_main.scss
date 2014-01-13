@@ -21,11 +21,11 @@
 /**
 	* @fixme: remove before live
 	*/
-@import "colorsSolidOrange"; /*test*/
+@import "colorsSolidOrange";
 
 /**
  * GENERAL
- **********************************/
+ ******************************/
 
 * {
   @include box-sizing(border-box);
@@ -194,13 +194,6 @@ sup {
 sub {
   bottom:-0.25em;
 }
-img {
-  border: {
-    width: 1px;
-    style: solid;
-    color: $c_borderImg;
-  }
-}
 svg:not(:root) {
   overflow:hidden;
 }
@@ -279,6 +272,11 @@ header {
 				}
 			}
 		}
+	}
+}
+.sidebar-content {
+	.site-inner {
+		margin-top: 20px;
 	}
 }
 .wrap {
@@ -490,14 +488,6 @@ header {
 	}
 }
 
-.sidebar-content {
-  .content {
-    padding: {
-      left: 60px;
-    }
-  }
-}
-
 .content-sidebar {
   .content {
     float: left;
@@ -522,6 +512,13 @@ header {
 .sidebar-content {
   .sidebar-primary {
     float: left;
+		margin: -20px;
+		.widget {
+			border: {
+				left: none;
+				right: 1px solid $c_widgetBorder;
+			}
+		}
   }
 }
 
@@ -1117,7 +1114,7 @@ textarea {
   z-index: 888888;
   -webkit-tap-highlight-color: transparent;
   background: {
-    color: #000;
+    color: $c_headerBg;
   }
   @include opacity(0.3);
 }
@@ -1156,12 +1153,23 @@ textarea {
 
 // body.sticky,
 body.sticky-menu {
+	background: {
+		color: $c_headerBg;
+	}
   padding-top: 120px;
+	.site-container {
+		background: {
+			color: $c_mainBg;
+		}
+	}
   .site-header {
     position: absolute;
     position: fixed;
     top: 0;
-    background-position: center -30px;
+    background: {
+			position: center -30px;
+			color: $c_headerBg;
+		}
     z-index: 400;
     height: 44px;
     .wrap {
@@ -1194,6 +1202,7 @@ body.sticky-menu {
     position: fixed;
     top: 0;
     width: 100%;
+		max-width: $d_full;
     z-index: 500;
     height: 64px;
     padding: 0;
@@ -1273,9 +1282,20 @@ img.alignnone {
 }
 .alignleft {
   float: left;
+	max-width: 170px;
+	max-height: 115px;
+	height: auto;
+	width: auto;
   text-align: left;
 }
 .alignright {
+	margin: {
+		left: 10px;
+	}
+	max-width: 170px;
+	max-height: 115px;
+	height: auto;
+	width: auto;
   float: right;
   text: {
     align: right;
@@ -1492,6 +1512,9 @@ h6 {
       color: $c_mainH1Hover;
     }
   }
+	padding: {
+		bottom: 10px;
+	}
 }
 .archive-title {
   font: {
@@ -1515,10 +1538,10 @@ video,
   max-width: 100%;
 }
 
-img {
-  height: auto;
-  width: auto; // IE8
-}
+//img {				// @todo: check if this is needed for IE8
+//  height: auto;
+//  width: auto; // IE8
+//}
 
 /**
  * Tables
@@ -1600,6 +1623,9 @@ table {
   }
 }
 .entry-content {
+	margin: {
+		top: -16px;
+	}
 	font: {
 		family: $f_baseFont;
 		size: $f_entryContent-px;
@@ -1790,7 +1816,6 @@ table {
 .entry-header {
   .entry-meta {
     margin: {
-      bottom: 26px;
       top: 5px;
     }
     .entry-author-name {
@@ -2261,25 +2286,24 @@ table {
   }
   a {
     color: $c_afterHeaderLink;
-    text: {
-      decoration: underline;
-    }
+		float: right;
+		font: {
+			weight: 700;
+		}
+		&:after {
+			content: " »";
+		}
     &:hover {
 			color: $c_afterHeaderLinkHover;
-      text: {
-        decoration: none;
-      }
     }
   }
-  li {
+  li {																// @fixme: Is there a better way to do this?
     list: {
-      style: {
-        image: url($c_ListCheckImage);
-      }
+      style: none;
     }
-    margin: {
-      left: 24px;
-    }
+		&:before {
+			content: "－ ";
+		}
   }
   img {
     border: 0;
@@ -2330,13 +2354,13 @@ table {
 }
 .sidebar-content {
   #yoast-after-header-container {
-    #yoast-after-header-1 {
+    #yoast-after-header-2 {
       margin: {
-        left: 40px;
-        right: 40px;
+        left: 30px;
+        right: 30px;
       }
     }
-    #yoast-after-header-2 {
+    #yoast-after-header-1 {
       float:right;
       margin: 0;
     }
@@ -2526,11 +2550,6 @@ table {
     border:none;
     color: $c_sidebarH3;
   }
-  + div {
-    padding: {
-      left: 10px;
-    }
-  }
 }
 
 /**
@@ -2578,6 +2597,49 @@ table {
   }
 }
 
+.sidebar-content {
+	.widget_bigbutton {
+		border: none !important;
+		margin-left: 20px;
+
+		.widget-wrap {
+			padding: 0px !important;
+		}
+
+		.cta-button {
+			a {
+				display: block;
+				padding: 15px;
+				border: {
+					width: 1px;
+					style: solid;
+					color: $c_ctaBorder;
+				}
+				@include box-shadow(0px 1px 1px $c_ctaBoxShadow);
+				@include background-image(linear-gradient(lighten($c_ctaBg,10%),$c_ctaBg));
+				color: $c_ctaTextWhite;
+				font: {
+					size: $f_ctaText-px;
+					size: $f_ctaText;
+				}
+				line-height: 1em;
+				@include text-shadow($c_ctaTextShadow 1px 1px 5px);
+				&:after {
+					content: '▸';
+					padding: {
+						left: 5px;
+						top: 1px;
+					}
+				}
+				&:hover {
+					@include background-image(linear-gradient($c_ctaBg,lighten($c_ctaBg,10%)));
+					color: $c_ctaTextWhite;
+				}
+			}
+		}
+	}
+}
+
 /**
  * Newsletter Widget
  */
@@ -2615,6 +2677,7 @@ table {
     }
   }
 }
+
 /**
  * Newletter Widget additions for the after-post area
  */
@@ -2814,13 +2877,62 @@ table {
 
 .yst_fb_widget,
 .widget_banner {
-  .widget-title {
+	border: none !important;
+	margin-right: 20px;
+
+	.widget-wrap {
+		padding: 0px !important;
+	}
+	.widget-title {
     + div {
       padding: {
         left:0;
       }
     }
   }
+}
+
+.yst_fb_widget {
+	.widget {
+		border: none !important;
+
+		.span {
+			margin: {
+				right: 20px;
+			}
+		}
+	}
+}
+
+.sidebar-content {
+	.yst_fb_widget,
+	.widget_banner {
+		border: none !important;
+		margin-left: 20px;
+
+		.widget-wrap {
+			padding: 0px !important;
+		}
+		.widget-title {
+			+ div {
+				padding: {
+					left:0;
+				}
+			}
+		}
+	}
+
+	.yst_fb_widget {
+		.widget {
+			border: none !important;
+
+			.span {
+				margin: {
+					left: 20px;
+				}
+			}
+		}
+	}
 }
 /**
  * Optional styling for fb-widget
@@ -2878,6 +2990,11 @@ table {
  */
 
 .footer-widgets {
+	.widget-wrap {
+		margin: {
+			right: 0px;
+		}
+	}
   font: {
     size: $f_footerBaseFont-px;
     size: $f_footerBaseFont;
@@ -2900,6 +3017,9 @@ table {
   }
   a {
     color: $c_footerWidgetsLink;
+		&:after {
+			content: " »";
+		}
     &:hover {
       color: $c_footerWidgetsLinkHover;
     }
@@ -2924,22 +3044,26 @@ table {
     word-wrap: break-word;
   }
   .widget-area {
-    width: $d_FourEqualColumns;
+    width: $d_ThreeEqualColumns;
     float:left;
   }
   .footer-widgets-1 {
+		margin: {
+			left: 20px;
+			right: 20px;
+		}
   }
   .footer-widgets-2 {
     margin: {
-      left: 60px;
-      right: 60px;
+      left: 20px;
+      right: 20px;
     }
   }
-  .footer-widgets-3 {
-    margin: {
-      right: 60px;
-    }
-  }
+	.footer-widgets-3 {
+		margin: {
+			left: 20px;
+		}
+	}
   .widget {
     margin-bottom: 24px;
     .widget-title {
@@ -3329,16 +3453,9 @@ img#wpstats {
   .sidebar-content {
     .content {
       margin:0;
-      padding: {
-        left:10px;
-      }
     }
     .sidebar-primary {
       margin:0;
-      padding: {
-        right:10px;
-        left:10px;
-      }
     }
   }
   .featured-content.featuredpost,
