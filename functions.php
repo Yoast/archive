@@ -67,15 +67,9 @@ function child_theme_setup() {
 	genesis_unregister_layout( 'sidebar-content-sidebar' );
 
 	/** Register widget areas */
-	if ( 'middle' == get_theme_mod( 'yst_logo_position' ) ) {
+	if ( 'center' == get_theme_mod( 'yst_logo_position' ) ) {
 		unregister_sidebar( 'header-right' );
 	}
-
-	genesis_register_sidebar( array(
-		'id'          => 'yoast-top-right',
-		'name'        => __( 'Search', 'yoast-theme' ),
-		'description' => __( 'Search widget area. Intended for search widget. Changes drastically on mobile.', 'yoast-theme' ),
-	) );
 
 	genesis_register_sidebar( array(
 		'id'          => 'yoast-after-header-1',
@@ -212,7 +206,9 @@ function child_theme_setup() {
 	add_filter( 'genesis_search_text', 'yst_change_search_text' );
 	add_filter( 'genesis_next_link_text', 'yst_add_spacing_next_prev' );
 	add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
+
 	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
+	add_action( 'genesis_site_description', 'yst_site_description' );
 
 	add_filter( 'yoast_theme_newsletter_submit_button_text', 'yst_change_newsletter_submit_button_text' );
 	add_filter( 'genesis_do_nav', 'yst_add_header_image', 99 );
@@ -229,6 +225,13 @@ function child_theme_setup() {
  */
 function get_site_layout_from_theme_mod() {
 	return get_theme_mod( 'yst_default_layout' );
+}
+
+/**
+ * Outputs the site's tagline with support for HTML in the tagline.
+ */
+function yst_site_description() {
+	echo '<p class="site-description" itemprop="description">' . html_entity_decode( get_bloginfo( 'description' ) ) . '</p>';
 }
 
 /**
@@ -336,17 +339,7 @@ function yst_after_post_sitebar_genesis() {
 }
 
 /**
- * Add top-right widget area for search-widget
- */
-function yst_add_top_right_area() {
-	genesis_widget_area( 'yoast-top-right', array(
-		'before' => '<div id="yoast-top-right" class="widget-area yoast-top-right-widget">',
-		'after'  => '</div>',
-	) );
-}
-
-/**
- * Add a body class that determines whether the logo is on the left or in the middle.
+ * Add a body class that determines whether the logo is on the left or in the center.
  *
  * @param array $classes
  *
@@ -960,5 +953,6 @@ function yst_add_search_in_nav( $output ) {
 	if ( get_theme_mod( 'yst_theme_search_in_nav', true ) ) {
 		return str_replace( '<div class="wrap">', '<div class="wrap"><div class="nav-search">' . genesis_search_form() . '</div>', $output );
 	}
+
 	return $output;
 }

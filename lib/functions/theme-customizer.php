@@ -377,7 +377,7 @@ class Yoast_Theme_Customizer {
 				'type'    => 'radio',
 				'choices' => array(
 					'left'   => __( 'Left', 'yoast-theme' ),
-					'middle' => __( 'Middle', 'yoast-theme' )
+					'center' => __( 'Center', 'yoast-theme' )
 				)
 			)
 		);
