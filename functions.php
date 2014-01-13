@@ -164,9 +164,7 @@ function child_theme_setup() {
 	add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 	remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 
-	add_action( 'genesis_header', 'yst_add_top_right_area' );
-
-	add_filter( 'body_class', 'yst_logo_position_body_class' );
+	add_filter( 'body_class', 'yst_body_class' );
 
 	add_action( 'genesis_before_loop', 'yoast_term_archive_intro', 20 );
 
@@ -208,7 +206,7 @@ function child_theme_setup() {
 	add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
 
 	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
-	add_action( 'genesis_site_description', 'yst_site_description' );
+	add_action( 'genesis_header', 'yst_site_description', 14 );
 
 	add_filter( 'yoast_theme_newsletter_submit_button_text', 'yst_change_newsletter_submit_button_text' );
 	add_filter( 'genesis_do_nav', 'yst_add_header_image', 99 );
@@ -345,8 +343,11 @@ function yst_after_post_sitebar_genesis() {
  *
  * @return array $classes
  */
-function yst_logo_position_body_class( $classes ) {
+function yst_body_class( $classes ) {
 	$classes[] = 'logo-position-' . get_theme_mod( 'yst_logo_position', 'left' );
+
+	if ( get_theme_mod( 'yst_logo_frame', 'on' ) )
+		$classes[] = 'logo-frame';
 
 	return $classes;
 }

@@ -20,7 +20,7 @@ class Yoast_Theme_Customizer {
 	 * Enqueue scripts
 	 */
 	function enqueue() {
-		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js', array( 'jquery', 'customize-preview' ), '0.1', true );
+		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js?mod=' . filemtime( get_stylesheet_directory() . '/lib/js/theme-customizer.js' ), array( 'jquery', 'customize-preview' ), '0.1', true );
 	}
 
 	/**
@@ -93,6 +93,14 @@ class Yoast_Theme_Customizer {
 			'yst_logo_position',
 			array(
 				'default'   => 'left',
+				'transport' => 'postMessage'
+			)
+		);
+
+		$wp_customize->add_setting(
+			'yst_logo_frame',
+			array(
+				'default'   => 'on',
 				'transport' => 'postMessage'
 			)
 		);
@@ -379,6 +387,15 @@ class Yoast_Theme_Customizer {
 					'left'   => __( 'Left', 'yoast-theme' ),
 					'center' => __( 'Center', 'yoast-theme' )
 				)
+			)
+		);
+
+		$wp_customize->add_control(
+			'yst_logo_frame',
+			array(
+				'section' => 'yst_logos',
+				'label'   => __( 'Use a frame around the logo?', 'yoast-theme' ),
+				'type'    => 'checkbox',
 			)
 		);
 
