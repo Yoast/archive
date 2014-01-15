@@ -313,13 +313,14 @@ header {
  * Header Image
  */
 #header-image {
-	border: {
-		width: 0 1px;
-		style: solid;
-		color: #777777;
-	}
-	width: 940px;
-	margin: 0 auto;
+  clear:both;
+  border: {
+      width: 0 1px;
+      style: solid;
+      color: #777777;
+  }
+  width: 940px;
+  margin: 0 auto;
 }
 
 /**
@@ -354,16 +355,22 @@ header {
 		width: $d_headerLogo;
 	}
 	.site-description {
-		color: $c_logoText;
+        text: {
+          align:right;
+        }
+		color: $c_taglineTop;
 		font: {
-			size: 16px;
-			size: 1.6rem;
+			size: $f_taglineTop-px;
+			size: $f_taglineTop;
 			family: $f_headingFont;
 			weight: 300;
 		}
 		margin: {
 			bottom: 0;
+            top: 10px;
 		}
+      float:right;
+      width: $d_homepageMainColumn;
 	}
 	.site-title {
 		font: {
@@ -678,6 +685,7 @@ textarea {
 
 .nav-primary {
 	// entire width
+    clear:both;
 	padding: 27px 50px 26px;
 	div.wrap {
 		position: relative;
@@ -688,9 +696,15 @@ textarea {
 		}
 	}
 }
-
+.nav-search {
+  float:right;
+  input {
+    border: {
+      width: 0 0 2px;
+    }
+  }
+}
 .genesis-nav-menu {
-	clear: both;
 	color: $c_navMainLink;
 	font: {
 		family: $f_baseFont;
@@ -1077,28 +1091,6 @@ textarea {
 /**
  * Site Header Navigation
  */
-
-.logo-frame.logo-position-center {
-	.site-header {
-		background: {
-			image: image-url('vintage-logo-background.png');
-			position: 50% 10px;
-		}
-	}
-}
-
-.logo-frame.logo-position-left {
-	.site-header {
-		.wrap {
-			background: {
-				image: image-url('vintage-logo-background-left.png');
-				position: 0 10px;
-				repeat: no-repeat;
-			}
-		}
-	}
-}
-
 .logo-position-center {
 	.site-header {
 		.title-area {
@@ -1107,8 +1099,15 @@ textarea {
 			}
 		}
 	}
+  &.logo-frame {
+    .site-header {
+      background: {
+        image: image-url('vintage-logo-background.png');
+        position: 50% 10px;
+      }
+    }
+  }
 }
-
 .logo-position-left {
 	.site-header {
 		.wrap {
@@ -1120,6 +1119,24 @@ textarea {
 			}
 		}
 	}
+  &.logo-frame {
+    .site-header {
+      .wrap {
+        background: {
+          image: image-url('vintage-logo-background-left.png');
+          position: 0 10px;
+          repeat: no-repeat;
+        }
+        .title-area {
+          max-width: 260px; //was width:299px;
+          background: {
+            position: 32px 8px; //was: 50% 5px;
+            size: 227px 104px;
+          }
+        }
+      }
+    }
+  }
 }
 
 .site-header {
@@ -1630,11 +1647,19 @@ table {
 }
 
 .fullwidth {
-	.post {
-		background: {
-			image: image-url($c_fullwidthDivider);
-		}
-	}
+  .post {
+      background: {
+          image: image-url($c_fullwidthDivider);
+      }
+  }
+}
+.full-width-content {
+  /* pulling the thumb out of the stream */
+  .thumb {
+    img.attachment-fullwidth-thumb {
+      max-width: $d_sidebar;
+    }
+  }
 }
 
 .single {
@@ -2607,17 +2632,22 @@ table {
  */
 
 .yoast-after-post-widget {
-	border: {
-		width: 1px 0;
-		style: solid;
-		color: $c_hrLine;
-	}
+//	border: {
+//		width: 1px;
+//		style: solid;
+//		color: $c_hrLine;
+//	}
 	padding: {
-		top: 20px;
-	}
+      top:  20px;
+    }
 	margin: {
 		bottom: 36px;
 	}
+    .widget-title {
+      background: {
+        image: image-url($c_ContentWidthDivider);
+      }
+    }
 	.widget-yns {
 		.widget-title,
 		p,
