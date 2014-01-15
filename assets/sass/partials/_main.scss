@@ -1263,13 +1263,34 @@ img.alignright,
   }
 }
 
-.archive-description {
-  margin: {
-    bottom: 40px;
+.archive-description,
+.term-intro {
+  margin: 40px 0;
+  padding: 10px;
+  background: {
+    color: $c_articleAuthorBg;
   }
-  padding: 40px 40px 24px;
+  color:$c_taxonomyIntroText;
+  font: {
+    weight: 700;
+  }
+  .archive-title,
+  h1 {
+    color:$c_taxonomyIntroH1;
+    margin: {
+      bottom: 0;
+    }
+    font: {
+      size: $f_mainH2-px;
+      size: $f_mainH2;
+    }
+  }
+  p:last-of-type {
+    margin: {
+      bottom: 0;
+    }
+  }
 }
-
 .author-box {
   margin: 40px 0;
   padding: 10px;
@@ -1515,13 +1536,20 @@ table {
     }
   }
 }
-
 .entry {
   background: {
     color: $c_mainBg;
   }
   margin: {
     bottom: 40px;
+  }
+}
+.full-width-content {
+  /* pulling the thumb out of the stream */
+  .thumb {
+    img {
+      max-width: $d_sidebar;
+    }
   }
 }
 .entry-content {
@@ -1655,22 +1683,6 @@ table {
   .entry-footer {
     display:none;
     visibility: hidden;
-  }
-}
-
-// category intro
-.term-intro {
-  padding: {
-    bottom: 24px;
-  }
-  h1 {
-    color:$c_taxonomyIntroH1;
-  }
-  p {
-    color:$c_taxonomyIntroText;
-    font: {
-      weight: 700;
-    }
   }
 }
 
