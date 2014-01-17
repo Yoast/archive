@@ -1895,6 +1895,14 @@ table {
 .entry-tags {
   display: block;
 }
+.entry-comments {
+	h3 {
+		color: $c_entryCommentsH3;
+		margin: {
+			bottom: 10px;
+		}
+	}
+}
 
 /**
  * Column Classes
@@ -2022,113 +2030,161 @@ table {
 /**
  * Comments
  */
-
 #comments {
-
-  // NOG VERWIJDEREN NA NIEUWE OPZET COMMENTS
-  .avatar {
-    width: 63px;
-  }
-  .depth-2, .depth-3, .depth-4, depth-5 {
-    .avatar {
-      width:40px;
-    }
-  }
-  .comment-author, .comment-meta {
-    display:inline;
-  }
-  // EIND NOG VERWIJDEREN NA NIEUWE OPZET COMMENTS
-
-
-
-  background: {
-    color: $c_mainBg;
-  }
-  .bypostauthor > article {
-    background: {
-      color: $c_commentByAuthorBg;
-    }
-    header {
-      background: {
-        color: $c_commentByAuthorBg;
-      }
-    }
-    padding:10px;
-  }
-  a {
-    font: {
-      weight: 700;
-    }
-  }
-  h3 {
-    margin: {
-      bottom: 24px;
-    }
-  }
-  .comment-author {
-    img {
-      float:left;
-      margin: {
-        right: 16px;
-      }
-    }
-    span {
-      font: {
-        weight: 700;
-      }
-    }
-  }
-  .comment-content {
-    clear:left;
-  }
-  .comment-list {
-    li {
-      list-style-type: none;
-      article {
-        margin: {
-          bottom:24px;
-        }
-      }
-      &.depth-2,
-      &.depth-3,
-      &.depth-4,
-      &.depth-5 {
-        margin: {
-          left:10px;
-        }
-      }
-    }
-    .comment-respond {
-      a {
-        border-bottom: 1px solid $c_linkBorder;
-      }
-      input {
-        &[type="email"],
-        &[type="text"],
-        &[type="url"] {
-          width: 50%;
-        }
-      }
-      label {
-        display: block;
-        margin: {
-          right: 12px;
-        }
-      }
-    }
-  }
-  .entry-pings {
-    background: {
-      color: $c_mainBg;
-    }
-    margin: {
-      bottom: 40px;
-    }
-    padding: 40px 40px 16px;
-    .reply {
-      display: none;
-    }
-  }
+	background: {
+		color: $c_mainBg;
+	}
+	.comment-list {
+		li {
+			list-style-type: none;
+			article {
+				margin: {
+					bottom: 24px;
+				}
+			}
+		}
+		.comment-respond {
+			a {
+				border-bottom: 1px solid $c_linkBorder;
+			}
+			input {
+				&[type="email"],
+				&[type="text"],
+				&[type="url"] {
+					width: 50%;
+				}
+			}
+			label {
+				display: block;
+				margin: {
+					right: 12px;
+				}
+			}
+		}
+	}
+	// sizing & aligning elements
+	.comment {
+		div.avatar {
+			width: 16%;
+		}
+		.comment-content {
+			float: left;
+			width: 80%;
+		}
+		&.depth-2,
+		&.depth-3,
+		&.depth-4,
+		&.depth-5 {
+			padding: {
+				left: 25px;
+			}
+			div.avatar {
+				width: 15%;
+				height: auto;
+			}
+			.comment-content {
+				width: 85%;
+			}
+		}
+	}
+	.comment {
+		clear: both;
+		display: block;
+		&.depth-1 {
+			border: {
+				bottom: {
+					width: 1px;
+					style: solid;
+					color: $c_randLine;
+				}
+			}
+			margin: {
+				bottom: 24px;
+			}
+		}
+		header {
+			font: {
+				size: $f_commentHeader-px;
+				size: $f_comment;
+			}
+			color: $c_mainText;
+		}
+		.comment-author {
+			margin: 0;
+			span {
+				font: {
+					weight: 700;
+				}
+			}
+		}
+		.bypostauthor > article {
+			border: {
+				width: 1px;
+				style: solid;
+				color: $c_postAuthorBorder;
+			}
+			padding: 16px;
+		}
+		.comment-actions {
+			.comment-reply {
+				//@extend .floatclearing;
+			}
+			.comment-edit-link {
+				float: right;
+				font: {
+					weight: 400;
+					size: $f_commentEditLink;
+				}
+			}
+			margin: 0;
+		}
+		a {
+			font: {
+				weight: 700;
+			}
+		}
+		time {
+			a {
+				font: {
+					weight: 400;
+				}
+				color: $c_mainText;
+			}
+		}
+		h3 {
+			margin: {
+				bottom: 24px;
+			}
+		}
+	}
+	.entry-pings {
+		background: {
+			color: $c_mainBg;
+		}
+		margin: {
+			bottom: 40px;
+		}
+		padding: 40px 40px 16px;
+		.reply {
+			display: none;
+		}
+	}
+}
+#respond {
+	#reply-title {
+		color: $c_commentReplyTitle;
+		font: {
+			weight: 700;
+		}
+	}
+	.comment-form-comment {
+		label {
+			color: $c_commentFormTitle;
+			font: {
+				weight: 700;
+			}
+		}
+	}
 }
 .ping-list {
   li {
@@ -2136,10 +2192,16 @@ table {
   }
 }
 .form-allowed-tags {
+	color: $c_allowedTags;
   font: {
     size: $f_metaAtPost-px;
     size: $f_metaAtPost;
   }
+	code {
+		background: {
+			color: $c_allowedTagsBg;
+		}
+	}
 }
 .form-submit {
   padding: {
