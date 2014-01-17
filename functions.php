@@ -160,7 +160,7 @@ function child_theme_setup() {
 
 	add_action( 'genesis_header', 'yst_mobile_nav' );
 	add_action( 'wp_head', 'yst_display_logo' );
-	add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
+	//add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
 
 	add_action( 'genesis_after_header', 'yst_after_header_genesis', 12 );
 	add_action( 'genesis_after_content_sidebar_wrap', 'yst_fullwidth_sitebars_genesis' );
@@ -286,9 +286,6 @@ function yst_after_header_genesis() {
 		echo '<div id="yoast-after-header-container"><div class="wrap">';
 
 		$areas = array( 'yoast-after-header-1', 'yoast-after-header-2', 'yoast-after-header-3' );
-		if ( 'sidebar-content' == genesis_site_layout() ) {
-			$areas = array_reverse( $areas );
-		}
 
 		foreach ( $areas as $area ) {
 			genesis_widget_area( $area, array(
@@ -417,7 +414,7 @@ function yst_activate_sidr_and_sticky_menu() {
 			});
 			$(window).scroll(function () {
 				var yPos = ( $(window).scrollTop() );
-				if (yPos > 50) {
+				if (yPos > 178) {
 					$("body").addClass("sticky-menu");
 				} else {
 					$("body").removeClass("sticky-menu");
@@ -889,7 +886,7 @@ function yst_close_div_after_content() {
 	echo '</div>';
 }
 
-add_action('genesis_after_header', 'yst_open_div_before_nav');
+add_action('genesis_after_header', 'yst_open_div_before_nav', 11);
 add_action('genesis_before_footer', 'yst_close_div_after_content');
 
 function yst_open_div_after_afterheader() {

@@ -313,14 +313,7 @@ header {
 #center-wrapper {
 	@extend .floatclearing;
 	clear: both;
-	margin: -30px auto;
-	border: {
-			top: {
-			width: 3px;
-			style: solid;
-			color: $c_bodyTopLine;
-		}
-	}
+	margin: 30px auto;
 	max-width: $d_full;
 }
 
@@ -705,9 +698,17 @@ textarea {
  */
 
 .nav-primary { // entire width
-  background: {
-    color:  $c_navMainFullBg;
-  }
+	@extend .floatclearing;
+	clear: both;
+	margin: -30px auto;
+	border: {
+		top: {
+			width: 3px;
+			style: solid;
+			color: $c_bodyTopLine;
+		}
+	}
+	max-width: $d_full;
   &:after {
     content:"";
     width:100%;
@@ -726,6 +727,13 @@ textarea {
 	@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
 	@include box-shadow(0px 1px 5px $c_navMainLinkShadow);
   .menu-item {
+		.sub-menu {
+			.menu-item {
+				a {
+					@include background-image(none);
+				}
+			}
+		}
     display: inline-block;
     text: {
       align: left;
@@ -794,9 +802,10 @@ textarea {
     }
     &:hover {
       color: $c_navMainLinkHover;
-      background: {
-        color: $c_navMainLinkBgHover;
-      }
+			@include background-image(linear-gradient($c_navMainBgActive, darken($c_navMainBgActive,10%)));
+//      background: {
+//        color: $c_navMainLinkBgHover;
+//      }
       text-shadow: 1px 1px 1px $c_navMainLinkShadow;
       position: static;
     }
@@ -849,12 +858,11 @@ textarea {
       width: $d_navSubWidth;
       &:hover {
         color: $c_navSubLinkHover;
-        background: {
-          color: $c_navSubLinkBgHover;
-        }
+        background: none;
       }
     }
     > .menu-item {
+			@include background-image(linear-gradient($c_navSubLinkBgHover, darken($c_navSubLinkBgHover, 10%)));
       > a:after // set up the downward arrow for top level items
       {
         content: ' ▶';
@@ -1157,6 +1165,12 @@ body.sticky-menu {
 		color: $c_headerBg;
 	}
   padding-top: 120px;
+	#center-wrapper {
+		//max-width: 100%;
+	}
+	.after-header-content-wrapper {
+		max-width: $d_full;
+	}
 	.site-container {
 		background: {
 			color: $c_mainBg;
@@ -1197,17 +1211,26 @@ body.sticky-menu {
       }
     }
   }
+	.genesis-nav-menu {
+		@include box-shadow(none);
+	}
   .nav-primary {
     position: absolute;
     position: fixed;
     top: 0;
     width: 100%;
-		max-width: $d_full;
+		max-width: 100%;
     z-index: 500;
     height: 64px;
     padding: 0;
-    @include box-shadow(0 8px 8px -6px $c_navMainShadow);
-    margin: 0;
+   	border: none;
+    margin: 0px;
+		@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
+		.wrap {
+			width: 100%;
+			max-width: $d_full;
+			margin: 0 auto;
+		}
     li {
       a {
         color: $c_navMainLink;
@@ -1245,6 +1268,11 @@ body.sticky-menu {
           }
         }
       }
+			&:first-child {
+				border: {
+					left: 1px solid $c_navMainBorder;
+				}
+			}
     }
   }
 }
@@ -1611,6 +1639,10 @@ table {
     padding: {
       bottom:0;
     }
+		margin: 0;
+		border: {
+			bottom: none;
+		}
   }
 }
 
@@ -1807,6 +1839,20 @@ table {
     size: $f_metaAtPost-px;
     size: $f_metaAtPost;
   }
+	.entry-categories {
+		a {
+			font: {
+				weight: 700;
+			}
+		}
+	}
+	.entry-tags {
+		a {
+			font: {
+				weight: 700;
+			}
+		}
+	}
   a {
     font: {
       weight: 400;
@@ -2251,7 +2297,7 @@ table {
   background: {
     color: $c_afterHeaderBg;
   }
-  padding: 24px; // this will be overwritten for 'top' for the Simple Image Plugin, so the image will be fixed to the top
+  padding: 24px 20px 24px 20px; // this will be overwritten for 'top' for the Simple Image Plugin, so the image will be fixed to the top
 	border: {
 		bottom: {
 			width: 2px;
@@ -2297,13 +2343,10 @@ table {
 			color: $c_afterHeaderLinkHover;
     }
   }
-  li {																// @fixme: Is there a better way to do this?
+  li {
     list: {
-      style: none;
+      style: square;
     }
-		&:before {
-			content: "－ ";
-		}
   }
   img {
     border: 0;
@@ -2350,21 +2393,7 @@ table {
   vertical-align: middle;
 }
 #yoast-after-header-3 {
-  width: $d_sidebar;
-}
-.sidebar-content {
-  #yoast-after-header-container {
-    #yoast-after-header-2 {
-      margin: {
-        left: 30px;
-        right: 30px;
-      }
-    }
-    #yoast-after-header-1 {
-      float:right;
-      margin: 0;
-    }
-  }
+  width: $d_columnThree;
 }
 
 /**
@@ -2574,7 +2603,7 @@ table {
         color: $c_ctaBorder;
       }
       @include box-shadow(0px 1px 1px $c_ctaBoxShadow);
-      @include background-image(linear-gradient(lighten($c_ctaBg,10%),$c_ctaBg));
+      //@include background-image(linear-gradient(lighten($c_ctaBg,10%),$c_ctaBg));
       color: $c_ctaTextWhite;
       font: {
         size: $f_ctaText-px;
@@ -2590,7 +2619,7 @@ table {
         }
       }
       &:hover {
-        @include background-image(linear-gradient($c_ctaBg,lighten($c_ctaBg,10%)));
+        //@include background-image(linear-gradient($c_ctaBg,lighten($c_ctaBg,10%)));
         color: $c_ctaTextWhite;
       }
     }
@@ -2615,8 +2644,10 @@ table {
 					style: solid;
 					color: $c_ctaBorder;
 				}
-				@include box-shadow(0px 1px 1px $c_ctaBoxShadow);
-				@include background-image(linear-gradient(lighten($c_ctaBg,10%),$c_ctaBg));
+				@include box-shadow(0px 2px 2px $c_ctaBoxShadow);
+				background: {
+					color: $c_ctaBg;
+				}
 				color: $c_ctaTextWhite;
 				font: {
 					size: $f_ctaText-px;
@@ -2632,7 +2663,10 @@ table {
 					}
 				}
 				&:hover {
-					@include background-image(linear-gradient($c_ctaBg,lighten($c_ctaBg,10%)));
+					background: {
+						color: $c_ctaBg;
+					}
+					@include background-image(linear-gradient(lighten($c_ctaBg,10%), $c_ctaBg));
 					color: $c_ctaTextWhite;
 				}
 			}
@@ -2951,38 +2985,89 @@ table {
  */
 
 #yoast-fullwidth-bottom-container {
-  clear:both;
-  margin: {
-    top: 36px;
-  }
-  .yoast-fullwidth-widget {
-    float:left;
-    width: $d_ThreeEqualColumns;
-  }
-  #yoast-fullwidth-widgetarea-1,
-  #yoast-fullwidth-widgetarea-2,
-  #yoast-fullwidth-widgetarea-2 {
-    max-width:50%;
-  }
-
-  #yoast-fullwidth-widgetarea-2 {
-    margin:0 60px;
-  }
-  .widget {
-    padding: {
-      bottom:24px;
-    }
-  }
-  .widget-title {
-    @extend .widget-title;
-  }
-  .tagcloud,
-  .search-form {
-    padding: {
-      left:10px;
-      right:10px;
-    }
-  }
+	.widget-wrap {
+		margin: {
+			right: 0px;
+		}
+	}
+	font: {
+		size: $f_footerBaseFont-px;
+		size: $f_footerBaseFont;
+	}
+	color: $c_footerWidgetsText;
+	clear: both;
+	padding: 30px 0 16px;
+	margin: {
+		top:24px;
+	}
+	a {
+		color: $c_footerWidgetsLink;
+		&:after {
+			content: " »";
+		}
+		&:hover {
+			color: $c_footerWidgetsLinkHover;
+		}
+	}
+	h3,
+	h4 {
+		font: {
+			size: $f_footerH3-px;
+			size: $f_footerH3;
+		}
+	}
+	ul {
+		margin: {
+			left:20px;
+		}
+	}
+	li {
+		list-style-type: square;
+		word-wrap: break-word;
+	}
+	.yoast-fullwidth-widget {
+		width: $d_ThreeEqualColumns;
+		float:left;
+		border: {
+				color: $c_widgetBorder;
+				width: 1px;
+				style: solid;
+		}
+		padding: 10px 10px 10px 10px;
+	}
+	.wrap {
+		margin: {
+		left: 19px;
+		right: 19px;
+		}
+		#yoast-fullwidth-widgetarea-1 {
+			margin: {
+				//left: 20px;
+				right: 39px;
+			}
+		}
+		#yoast-fullwidth-widgetarea-2 {
+			margin: {
+				//left: 20px;
+				right: 39px;
+			}
+		}
+		#yoast-fullwidth-widgetarea-3 {
+			margin: {
+	//			left: 20px;
+	//			right: 20px;
+			}
+		}
+	}
+	.widget {
+		margin-bottom: 24px;
+		.widget-title {
+			color: $c_footerWidgetsH3;
+			font: {
+				weight: 700;
+			}
+		}
+	}
 }
 
 /**
@@ -3033,14 +3118,11 @@ table {
   }
   ul {
     margin: {
-      left:10px;
+      left:20px;
     }
   }
   li {
-    list-style-type: none;
-    margin: {
-      bottom: 6px;
-    }
+    list-style-type: square;
     word-wrap: break-word;
   }
   .widget-area {
@@ -3062,6 +3144,7 @@ table {
 	.footer-widgets-3 {
 		margin: {
 			left: 20px;
+			right: 20px;
 		}
 	}
   .widget {
