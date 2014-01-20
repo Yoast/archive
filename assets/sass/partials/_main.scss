@@ -2517,30 +2517,35 @@ table {
 			}
 		}
 	}
-	.featuredpost ul {
-		margin: {
-			bottom: 10px;
-		}
-		li a {
-			text-decoration: none;
-			&:after {
-				content: "»";
-				text: {
-					decoration: none !important;
-				}
-				padding: {
-					left: 5px;
-					top: 1px;
-				}
-				font: {
-					size: 1.2em;
-				}
-				color: $c_sidebarLinkArrow;
-			}
-			&:hover {
-				color: $c_mainLinkHover;
-			}
-		}
+	.featured-content {
+        .entry-title {
+            clear:both;
+        }
+        ul {
+            margin: {
+                bottom: 10px;
+            }
+            li a {
+                text-decoration: none;
+                &:after {
+                    content: "»";
+                    text: {
+                        decoration: none !important;
+                    }
+                    padding: {
+                        left: 5px;
+                        top: 1px;
+                    }
+                    font: {
+                        size: 1.2em;
+                    }
+                    color: $c_sidebarLinkArrow;
+                }
+                &:hover {
+                    color: $c_mainLinkHover;
+                }
+            }
+        }
 	}
 	.text-widget {
 		padding: 0 1em;
@@ -2590,6 +2595,11 @@ table {
 			}
 		}
 	}
+}
+.featuredpage {
+    .entry-title {
+        clear:both;
+    }
 }
 
 .widget-title {
