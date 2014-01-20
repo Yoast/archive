@@ -250,6 +250,11 @@ header {
 				bottom: 20px;
 			}
 		}
+		.cta-button {
+			padding: {
+				left: 0;
+			}
+		}
 		.widget {
 			margin: {
 				bottom: 40px;
@@ -313,7 +318,7 @@ header {
 #center-wrapper {
 	@extend .floatclearing;
 	clear: both;
-	margin: 30px auto;
+	margin: 30px auto 0 auto;
 	max-width: $d_full;
 }
 
@@ -1329,15 +1334,18 @@ img.alignnone {
     align: right;
   }
 }
+
 img.alignleft,
 .wp-caption.alignleft {
 	@extend .floatclearing;
-  margin: 0 24px 24px 0;
+  margin: 0 24px 0px 0;
+	max-height: none;
 }
 img.alignright,
 .wp-caption.alignright {
 	@extend .floatclearing;
-  margin: 0 0 24px 24px;
+  margin: 0 0 0px 24px;
+	max-height: none;
 }
 .wp-caption-text {
   font: {
@@ -2400,9 +2408,6 @@ table {
 		font: {
 			weight: 700;
 		}
-		&:after {
-			content: " »";
-		}
     &:hover {
 			color: $c_afterHeaderLinkHover;
     }
@@ -2422,9 +2427,6 @@ table {
       li {
         a {
           text-decoration:none;
-          &:after {
-            content: " »";
-          }
           &:hover {
             text: {
               decoration:underline;
@@ -2497,6 +2499,13 @@ table {
       }
     }
   }
+}
+.widget_text {
+	a {
+		&:after {
+			content: " »";
+		}
+	}
 }
 
 /**
@@ -2651,16 +2660,18 @@ table {
  */
 
 .widget_bigbutton {
-	border: none;
+	border: none !important;
 	margin: {
 		right: 20px;
 	}
 
 	.widget-wrap {
-		padding: 0px;
+		padding-left: 0;
 	}
 
   .cta-button {
+		padding-left: 0;
+
     a {
       display: block;
       padding: 15px;
@@ -2670,6 +2681,9 @@ table {
         color: $c_ctaBorder;
       }
       @include box-shadow(0px 1px 1px $c_ctaBoxShadow);
+			background: {
+				color: $c_ctaBg;
+			}
       //@include background-image(linear-gradient(lighten($c_ctaBg,10%),$c_ctaBg));
       color: $c_ctaTextWhite;
       font: {
@@ -2686,7 +2700,7 @@ table {
         }
       }
       &:hover {
-        //@include background-image(linear-gradient($c_ctaBg,lighten($c_ctaBg,10%)));
+        @include background-image(linear-gradient(lighten($c_ctaBg,10%), $c_ctaBg));
         color: $c_ctaTextWhite;
       }
     }
@@ -2695,14 +2709,14 @@ table {
 
 .sidebar-content {
 	.widget_bigbutton {
-		border: none;
+		border: none !important;
 		margin: {
 			left: 20px;
 			right: 0;
 		}
 
 		.widget-wrap {
-			padding: 0px !important;
+			padding: 0px;
 		}
 
 		.cta-button {
@@ -2788,16 +2802,16 @@ table {
 
 .yoast-after-post-widget {
   border: {
-    width:1px 0;
-    style:solid;
-    color:$c_hrLine;
+    width: 1px;
+    style: solid;
+    color: $c_afterPostBorder;
   }
-  padding: {
-    top: 20px;
-  }
+  padding: 20px;
   margin: {
-    bottom:36px;
-  }
+		top: 30px;
+		bottom: 30px;
+	}
+
   .widget {
     border: {
       width:1px 0 0;
@@ -2985,7 +2999,7 @@ table {
 	margin-right: 20px;
 
 	.widget-wrap {
-		padding: 0px !important;
+		padding: 0px;
 	}
 	.widget-title {
     + div {
@@ -3015,7 +3029,7 @@ table {
 		margin-left: 20px;
 
 		.widget-wrap {
-			padding: 0px !important;
+			padding: 0px;
 		}
 		.widget-title {
 			+ div {
@@ -3072,11 +3086,13 @@ table {
 	}
 	a {
 		color: $c_footerWidgetsLink;
-		&:after {
-			content: " »";
-		}
 		&:hover {
 			color: $c_footerWidgetsLinkHover;
+		}
+		img {
+			&:after {
+				content:"";
+			}
 		}
 	}
 	h3,
@@ -3098,12 +3114,14 @@ table {
 	.yoast-fullwidth-widget {
 		width: $d_ThreeEqualColumns;
 		float:left;
-		border: {
+		section {
+			border: {
 				color: $c_widgetBorder;
 				width: 1px;
 				style: solid;
+			}
+			padding: 10px 10px 10px 10px;
 		}
-		padding: 10px 10px 10px 10px;
 	}
 	.wrap {
 		margin: {
@@ -3140,6 +3158,7 @@ table {
 	}
 }
 
+
 /**
  * Footer Widgets
  */
@@ -3167,14 +3186,8 @@ table {
   color: $c_footerWidgetsText;
   clear: both;
   padding: 30px 0 16px;
-  margin: {
-    top:24px;
-  }
   a {
     color: $c_footerWidgetsLink;
-		&:after {
-			content: " »";
-		}
     &:hover {
       color: $c_footerWidgetsLinkHover;
     }

@@ -160,7 +160,7 @@ function child_theme_setup() {
 
 	add_action( 'genesis_header', 'yst_mobile_nav' );
 	add_action( 'wp_head', 'yst_display_logo' );
-	//add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
+	add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
 
 	add_action( 'genesis_after_header', 'yst_after_header_genesis', 12 );
 	add_action( 'genesis_after_content_sidebar_wrap', 'yst_fullwidth_sitebars_genesis' );
@@ -496,7 +496,9 @@ function yst_conditional_add_backtotop() {
 	if ( is_single() ) {
 		add_action( 'genesis_entry_footer', 'yst_add_backtotop', 14 );
 	}
-	add_action( 'genesis_after_endwhile', 'yst_add_backtotop', 14 );
+//	if ( is_singular() ) {
+//		add_action( 'genesis_after_endwhile', 'yst_add_backtotop', 14 );
+//	}
 }
 
 /**
@@ -886,8 +888,8 @@ function yst_close_div_after_header() {
 	echo '</div>';
 }
 
-add_action('genesis_before_header', 'yst_open_div_before_header');
-add_action('genesis_after_header', 'yst_close_div_after_header');
+add_action( 'genesis_before_header', 'yst_open_div_before_header' );
+add_action( 'genesis_after_header', 'yst_close_div_after_header' );
 
 function yst_open_div_before_nav() {
 	echo '<div id="center-wrapper">';
@@ -897,12 +899,12 @@ function yst_close_div_after_content() {
 	echo '</div>';
 }
 
-add_action('genesis_after_header', 'yst_open_div_before_nav', 11);
-add_action('genesis_before_footer', 'yst_close_div_after_content');
+add_action( 'genesis_after_header', 'yst_open_div_before_nav', 11 );
+add_action( 'genesis_before_footer', 'yst_close_div_after_content' );
 
 function yst_open_div_after_afterheader() {
 	echo '<div id="afterheader-content-wrapper">';
 }
 
-add_action('genesis_after_header', 'yst_open_div_after_afterheader', 11);
-add_action('genesis_after_content_sidebar_wrap', 'yst_close_div_after_content');
+add_action( 'genesis_after_header', 'yst_open_div_after_afterheader', 11 );
+add_action( 'genesis_after_content_sidebar_wrap', 'yst_close_div_after_content' );
