@@ -565,7 +565,7 @@ function yst_display_logo() {
 		}
 
 		if ( ! $use_alt_positioning ) {
-			$css .= '@media(max-width: 640px){header.site-header{background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;}}';
+			$css .= '@media(max-width: 640px){header.site-header {background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;}}';
 		} else {
 			$mobile_logo_height = $yst_mobile_logo_details['height'] - 41;
 			if ( is_user_logged_in() ) {
@@ -913,7 +913,7 @@ function yst_modify_genesis_author_box( $box ) {
 	}
 
 	if ( ! empty( $social ) ) {
-		$out = $out . '<ul class="author_social">' . $social . '</ul>';
+		$out = $out . '<ul class="author_social">' . $social . '</ul><div class="floatclearing"></div>';
 	}
 
 	$box = preg_replace( '|(</div></section>)|', $out . '</div></section>', $box );
@@ -940,7 +940,7 @@ function yst_add_header_image( $nav_output ) {
  * @return string
  */
 function yst_change_newsletter_submit_button_text() {
-	return '&#9654;';
+	return '&raquo;';
 }
 
 /**

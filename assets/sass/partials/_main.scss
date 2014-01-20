@@ -1092,21 +1092,74 @@ textarea {
  * Site Header Navigation
  */
 .logo-position-center {
+     background: {
+        position: 50% 236px;
+     }
 	.site-header {
 		.title-area {
 			background: {
 				position: 50% 5px;
 			}
+            margin: {
+                top: 0;
+            }
 		}
 	}
-  &.logo-frame {
-    .site-header {
-      background: {
-        image: image-url('vintage-logo-background.png');
-        position: 50% 10px;
-      }
+    &.logo-frame {
+        .site-header {
+            background: {
+               image: image-url('vintage-logo-background.png');
+                position: 50% 10px;
+            }
+            .site-title {
+                min-height: 132px;
+            }
+            .title-area {
+                background: {
+                  position: 50% 27px;
+                  size: 230px 107px;
+                }
+            }
+            .site-description {
+                font: {
+                    size: $f_taglineFullWidth-px;
+                    size: $f_taglineFullWidth;
+                }
+                width: 100%;
+                margin: {
+                    bottom: 20px;
+                }
+                padding: {
+                    left:20px;
+                }
+                text: {
+                  align: center;
+                }
+                &:before {
+                    content: " ";
+                    background: {
+                        image: image-url('Flower_Left.png');
+                        position: left top;
+                        repeat: no-repeat;
+                    }
+                    padding: {
+                        left: 55px;
+                    }
+                }
+                &:after {
+                    content: " ";
+                    background: {
+                        image: image-url('Flower_Right.png');
+                        position: right top;
+                        repeat: no-repeat;
+                    }
+                    padding: {
+                        right: 50px;
+                    }
+                }
+            }
+        }
     }
-  }
 }
 .logo-position-left {
 	.site-header {
@@ -2172,6 +2225,20 @@ table {
 				color: $c_hrLine;
 			}
 			padding: 16px;
+            .post_author_comment {
+              color: $c_hrLine;
+              padding: {
+                left: 16px;
+              }
+              margin: {
+                  left: 10px;
+              }
+              background: {
+                image: image-url($c_sprite);
+                position: -72px 0;
+                repeat: no-repeat;
+              }
+            }
 		}
 		.comment-actions {
 			margin: 0;
@@ -2617,12 +2684,12 @@ table {
 			&[type="text"] {
 				width: 80%;
 			}
-			&[type="submit"] {
-				font: {
-					size: 12px;
-				}
-				padding: 11px 11px 8px;
-			}
+            &[type="submit"] {
+                font: {
+                    size: 24px;
+                }
+                padding: 0 11px 3px;
+            }
 		}
 	}
 }
@@ -2632,11 +2699,6 @@ table {
  */
 
 .yoast-after-post-widget {
-//	border: {
-//		width: 1px;
-//		style: solid;
-//		color: $c_hrLine;
-//	}
 	padding: {
       top:  20px;
     }
@@ -2649,6 +2711,18 @@ table {
       }
     }
 	.widget-yns {
+        padding: 20px;
+        border: {
+        	width: 1px;
+        	style: solid;
+        	color: $c_hrLine;
+        }
+        margin: {
+            bottom: 32px;
+        }
+        .widget-wrap {
+            padding:0;
+        }
 		.widget-title,
 		p,
 		form {
@@ -2657,10 +2731,11 @@ table {
 			}
 		}
 		.widget-title {
-			margin: {
-				bottom: 0;
-			}
+            text-align:left;
+			margin: 0;
+            padding:0;
 			background: {
+                image: none;
 				color: $c_mainBg;
 			}
 		}
@@ -2823,6 +2898,7 @@ table {
 		float: left;
 		margin: {
 			right: 10px;
+            bottom: 8px;
 		}
 		background: {
 			image: image-url('social_sprites.png');
@@ -2834,7 +2910,7 @@ table {
 			position: -40.000030517578125px -80.00001525878906px;
 		}
 	}
-	.gogoleplus a {
+	.googleplus a {
 		background: {
 			position: -41.000030517578125px -40.00001525878906px;
 		}
@@ -3227,11 +3303,13 @@ img#wpstats {
  */
 
 @media (max-width: 1024px) {
-	body {
+	body.logo-position-left {
 		background: {
 			position: 50% 160px;
 		}
 	}
+    body.logo-position-center {
+    }
 	.content {
 		max-width: 67%;
 	}
@@ -3277,11 +3355,7 @@ img#wpstats {
 			background: {
 				size: 100%;
 			}
-			max-width: 40%;
 			overflow: hidden;
-			a {
-				min-height: 140px;
-			}
 		}
 		.header-widget-area,
 		#yoast-top-right {
@@ -3346,21 +3420,32 @@ img#wpstats {
 	}
 }
 
+@media (max-width: 940px) {
+    body {
+        background: {
+            image: none;
+        }
+    }
+    .nav-primary {
+        background: {
+            image: image-url($c_ribbonImage);
+            position:50% 0;
+        }
+        padding: {
+            left: 0;
+            right: 10px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-search {
+        width: 100px;
+    }
+}
+
 @media (max-width: 673px) {
-	body {
-		background: {
-			image: none;
-		}
-	}
 	.nav-primary {
-		background: {
-			color: $c_navMainBg;
-		}
-		border: {
-			width: 3px 0;
-			style: double;
-			color: $c_randLine;
-		}
 		.genesis-nav-menu {
 			.menu-item {
 				padding: 0 10px;
@@ -3379,10 +3464,14 @@ img#wpstats {
 
 @media (max-width: 640px) {
 	.site-container {
-		padding: {
-			left: 2px;
-			right: 2px;
-		}
+		border: {
+            width: 0 3px;
+            style:solid;
+            color: $c_BodyBg;
+        }
+        header {
+            margin-left: -3px; //correction for border in site container
+        }
 	}
 	header.site-header {
 		border: {
@@ -3397,6 +3486,12 @@ img#wpstats {
 		display: none;
 		visibility: hidden;
 	}
+    .site-inner {
+        padding: {
+            left: 10px;
+            right: 10px;
+        }
+    }
 	.content {
 		width: 100%;
 		max-width: 100%;
@@ -3406,12 +3501,17 @@ img#wpstats {
 		max-width: 100%;
 	}
 	.entry {
-		padding: 0;
+		padding: 0 0 20px;
 		margin: {
 			left: 0;
 			right: 0;
 		}
 	}
+    .post {
+        background: {
+            image: none;
+        }
+    }
 	#yoast-after-header-container {
 		display: none;
 		visibility: hidden;
@@ -3423,6 +3523,11 @@ img#wpstats {
 			top: 1em;
 		}
 	}
+    div.avatar {
+        img.avatar {
+            width: 80%;
+        }
+    }
 	.content-sidebar,
 	.sidebar-content {
 		.sidebar-primary {
@@ -3515,6 +3620,20 @@ img#wpstats {
 	body {
 		border: 0;
 		padding-top: 44px;
+        &.logo-position-center.logo-frame {
+            .site-header {
+                background-image:none;
+                .site-title {
+                    max-height: 36px;
+                }
+                .title-area {
+                    background: {
+                        position: 50% 0;
+                        size: 230px 36px;
+                    }
+                }
+            }
+        }
 	}
 	.nav-primary {
 		display: none !important;
@@ -3550,7 +3669,11 @@ img#wpstats {
 		&#sidr-left {
 			float: left;
 			margin: 2px 0;
-			background: image-url('hamburger.png') 7px 10px no-repeat;
+			background: {
+                image: image-url($c_sprite); //'hamburger.png'
+                position:0 0;
+                repeat: no-repeat;
+            }
 			border: {
 				right: {
 					width: 2px;
@@ -3562,7 +3685,11 @@ img#wpstats {
 		&#sidr-right {
 			float: right;
 			margin: 2px 0;
-			background: image-url('search.png') 6px 8px no-repeat;
+            background: {
+                image: image-url($c_sprite); //'search.png'
+                position:-36px 0;
+                repeat: no-repeat;
+            }
 			border: {
 				left: {
 					width: 2px;
