@@ -1286,18 +1286,6 @@ body.sticky-menu {
   }
 }
 
-body.sticky-menu-always {
-	.nav-primary {
-		border: {
-			bottom: {
-				width: 3px;
-				style: solid;
-				color: $c_bodyTopLine;
-			}
-		}
-	}
-}
-
 /**
  * WORDPRESS AND GENESIS
  **********************************/
@@ -3447,6 +3435,60 @@ img#wpstats {
 }
 .tagline_top_right {
 	text-align: right;
+}
+
+body.menu-at-top {
+	border: none;
+	.wrap {
+	}
+	.nav-primary {
+		border: {
+			bottom: {
+				width: 3px;
+				style: solid;
+				color: $c_footerBorderTop;
+			}
+			top: none;
+		}
+		@extend .floatclearing;
+		max-width: none;
+		clear: both;
+		margin: 0px auto;
+		@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
+		.genesis-nav-menu {
+			@include box-shadow(none);
+		}
+		li {
+			&:first-child {
+				border: {
+					left: 1px solid $c_navMainBorder;
+				}
+			}
+		}
+	}
+	#center-wrapper {
+		#yoast-after-header-container {
+			border: {
+				top: {
+					width: 3px;
+					style: solid;
+					color: $c_footerBorderTop;
+				}
+			}
+		}
+		margin: {
+			top: -30px;
+		}
+	}
+	#header-wrapper {
+//		border: {
+//			top: {
+//				width: 3px;
+//				style: solid;
+//				color: $c_footerBorderTop;
+//			}
+//		}
+	}
 }
 
 /**

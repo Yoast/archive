@@ -298,7 +298,7 @@ function yst_after_header_genesis() {
 	}
 }
 
-function yst_tagline () {
+function yst_tagline() {
 	// We explicitly allow for HTML in taglines.
 	$tagline = html_entity_decode( get_bloginfo( 'description' ) );
 	if ( isset ( $tagline ) && ! empty( $tagline ) ) {
@@ -318,15 +318,15 @@ function yst_tagline () {
 	}
 }
 
-add_action( 'genesis_before' , 'yst_tagline');
+add_action( 'genesis_before', 'yst_tagline' );
 
 function yst_test_site_desc_move() {
 	$tagline_positioner = get_theme_mod( 'yst_tagline_positioner' );
 	if ( isset( $tagline_positioner ) && ! empty ( $tagline_positioner ) ) {
-		if ($tagline_positioner == 'topright') {
+		if ( $tagline_positioner == 'topright' ) {
 			echo '<div class="tagline_top tagline_top_right">' . html_entity_decode( get_bloginfo( 'description' ) ) . '</div>';
 		}
-		if ($tagline_positioner == 'topleft') {
+		if ( $tagline_positioner == 'topleft' ) {
 			echo '<div class="tagline_top tagline_top_left">' . html_entity_decode( get_bloginfo( 'description' ) ) . '</div>';
 		}
 	}
@@ -395,13 +395,11 @@ function yst_include_sidr() {
  * @todo check whether yPos in sticky menu code is the right position to switch.
  */
 function yst_activate_sidr_and_sticky_menu() {
-	$yst_nav_pos = get_theme_mod('yst_nav_positioner');
-	if (isset($yst_nav_pos) && !empty($yst_nav_pos)) {
-		if ($yst_nav_pos == 'content') {
-			$yst_sticky_menu_pos = 178;
-		} else {
-			$yst_sticky_menu_pos = 0;
-		}
+	$yst_nav_pos = get_theme_mod ('yst_nav_positioner');
+	if ($yst_nav_pos == 'top') {
+		$yst_Ypos = 10;
+	} else {
+		$yst_Ypos = 178;
 	}
 	?>
 	<script>
@@ -437,22 +435,14 @@ function yst_activate_sidr_and_sticky_menu() {
 				coverScreen: true,
 				side       : 'right'
 			});
-			<?php if (get_theme_mod ('yst_nav_positioner') == 'content') { ?>
 			$(window).scroll(function () {
 				var yPos = ( $(window).scrollTop() );
-				if (yPos > 178) {
+				if (yPos > <?php echo $yst_Ypos; ?>) {
 					$("body").addClass("sticky-menu");
 				} else {
 					$("body").removeClass("sticky-menu");
 				}
 			});
-			<?php } else {
-			?>
-			$(window).ready( function () {
-				$("body").addClass("sticky-menu");
-				$("body").addClass("sticky-menu-always");
-			});
-		<?php } ?>
 		});
 	</script>
 <?php
@@ -941,3 +931,20 @@ function yst_open_div_after_afterheader() {
 
 add_action( 'genesis_after_header', 'yst_open_div_after_afterheader', 11 );
 add_action( 'genesis_after_content_sidebar_wrap', 'yst_close_div_after_content' );
+
+/** Move menu to top of page */
+function yst_move_nav_to_top() {
+	if ( get_theme_mod( 'yst_nav_positioner' ) == 'top' ) {
+		remove_action( 'genesis_after_header', 'genesis_do_nav' );
+		add_filter( 'body_class', 'yst_add_body_class' );
+		add_action( 'genesis_before', 'genesis_do_nav' );
+	}
+}
+
+add_action( 'after_setup_theme', 'yst_move_nav_to_top' );
+
+function yst_add_body_class( $classes ) {
+	$classes[] = 'menu-at-top';
+
+	return $classes;
+}
