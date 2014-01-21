@@ -51,7 +51,7 @@ body {
   }
   border: {
     top: {
-      width: 20px;
+      width: 16px;
       style: solid;
       color: $c_bodyTopLine;
     }
@@ -350,17 +350,18 @@ header {
   }
 }
 .site-header {
-	margin: 0 auto;
+	margin: 0 auto 35px;
 	max-width: $d_full;
 	background: {
 		color: $c_headerBg;
 	}
+	min-height: 120px;
   .wrap,
   .widget-wrap {
     padding: 0;
   }
   .title-area {
-    margin: 20px 0 0;
+    margin: 10px 0 0;
     background: {
       repeat: no-repeat;
       position: left;
@@ -370,6 +371,7 @@ header {
       family: $f_baseFont;
       weight: 700;
     }
+		min-height: 80px;
     width: $d_headerLogo;
   }
   .site-description {
@@ -381,7 +383,7 @@ header {
     font: {
       size: 16px;
       size: 1.6rem;
-      weight: 300;
+      weight: 400;
     }
     line-height: 1;
     margin: {
@@ -389,6 +391,8 @@ header {
     }
   }
   .site-title {
+		text-align: left;
+		vertical-align: top;
     font: {
       size: $f_mainH1-px;
       size: $f_mainH1;
@@ -408,7 +412,6 @@ header {
         indent: -9999px;
       }
       float: left;
-      min-height: 164px;
       width: 100%;
     }
   }
@@ -450,7 +453,7 @@ header {
   }
   .header-widget-area {
     margin: {
-      top: 20px;
+      top: 10px;
     }
   }
   .widget-title {
@@ -1194,6 +1197,7 @@ body.sticky-menu {
     .wrap {
       padding: 0;
     }
+		min-height: 0;
     aside,
     #yoast-top-right {
       display: none;
@@ -1280,6 +1284,18 @@ body.sticky-menu {
 			}
     }
   }
+}
+
+body.sticky-menu-always {
+	.nav-primary {
+		border: {
+			bottom: {
+				width: 3px;
+				style: solid;
+				color: $c_bodyTopLine;
+			}
+		}
+	}
 }
 
 /**
@@ -3413,6 +3429,27 @@ img#wpstats {
 }
 
 /**
+* TAGLINE Settings
+***********************************/
+.tagline_top {
+	width: $d_full;
+	max-width: $d_full;
+	clear:both;
+	color: $c_taglineTop;
+	font: {
+		size: $f_taglineTop-px;
+		size: $f_taglineTop;
+	}
+	margin: {
+		left: auto;
+		right: auto;
+	}
+}
+.tagline_top_right {
+	text-align: right;
+}
+
+/**
  * MEDIA QUERIES
  **********************************/
 
@@ -3772,6 +3809,7 @@ img#wpstats {
           top: 0;
           margin: {
             left: 50px;
+						bottom: 0;
           }
         }
       }
@@ -3779,7 +3817,6 @@ img#wpstats {
   }
 /* end mobile menu */
 }
-
 @media (max-width: 512px) {
   .sidebar-primary {
     .widget_bigbutton, form {

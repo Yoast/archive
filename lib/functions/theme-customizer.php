@@ -66,6 +66,22 @@ class Yoast_Theme_Customizer {
 		 * Add settings
 		 */
 		$wp_customize->add_setting(
+			'yst_nav_positioner',
+			array(
+				'default'   => 'content',
+				'transport' => 'refresh' //'postMessage'
+			)
+		);
+
+		$wp_customize->add_setting(
+			'yst_tagline_positioner',
+			array(
+				'default'   => 'topright',
+				'transport' => 'refresh' //'postMessage'
+			)
+		);
+
+		$wp_customize->add_setting(
 			'yst_colour_scheme',
 			array(
 				'default'   => 'WarmBlue',
@@ -356,7 +372,35 @@ class Yoast_Theme_Customizer {
 				'section' => 'yst_color_schemes',
 				'label'   => __( 'Color Scheme', 'yoast-theme' ),
 				'type'    => 'radio',
-				'choices' => $colours
+				'choices' => $colours,
+			)
+		);
+
+		// This control goes into the default Site Title & Tagline section
+		$wp_customize->add_control(
+			'yst_nav_positioner',
+			array(
+				'section' => 'nav',
+				'label'   => __( 'Position of navigation', 'yoast-theme' ),
+				'type'    => 'radio',
+				'choices' => array(
+					'content' => __( 'Above content', 'yoast-theme'),
+					'top' => __( 'At top of page', 'yoast-theme')),
+				'priority' => 200,
+			)
+		);
+
+		// This control goes into the default Site Title & Tagline section
+		$wp_customize->add_control(
+			'yst_tagline_positioner',
+			array(
+				'section' => 'title_tagline',
+				'label'   => __( 'Position of tagline', 'yoast-theme' ),
+				'type'    => 'radio',
+				'choices' => array(
+					'topright' => __( 'Top right', 'yoast-theme'),
+					'topleft' => __( 'Top left', 'yoast-theme')),
+				'priority' => 200,
 			)
 		);
 
