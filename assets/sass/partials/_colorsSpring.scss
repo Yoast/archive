@@ -1,8 +1,8 @@
 // color declarations
 
 // Added images for this colorscheme
-$c_sprite:              'spriteLoveGreen_BeachGreen.png';
-$c_ribbonImage:         'Ribbon_Beach-Love_Green.png';
+$c_sprite:              'spriteSpring.png';
+$c_ribbonImage:         'Ribbon_Spring-Cupcake_Yellow.png';
 $c_borderBottomImage:   'double_borderBottom.png';
 $c_ctaImage:            'Vintage_CTA_Transparent.png';
 $c_ctaImageFooter:      'Vintage_CTA_Transparent_Gray.png';
@@ -13,86 +13,86 @@ $c_fullwidthDivider:    'Element_Full_Width.png';
 
 // general
 $c_paragraph:           #000000;
-$c_link:                #e37374;
+$c_link:                #d42a0b;
 $c_linkHover:           #777777;
-$c_linkBorder:          #e37374;
+$c_linkBorder:          #d42a0b;
 
 $c_logoText:            #999999;
 $c_logoTextLink:        #333333;
 $c_logoTextLinkHover:   #333333;
 
 $c_taglineTop:          #777777;
-$c_taglineTopBold:      #e37374;
+$c_taglineTopBold:      #d42a0b;
 $c_taglineFullWidth:    #555555;
-$c_taglineFullWidthBold:#e37374;
+$c_taglineFullWidthBold:#d42a0b;
 $c_taglineBoxShadow:    #cccccc;
-$c_taglineLink:         #e37374;
-$c_taglineLinkHover:    #2a9ea5;
+$c_taglineLink:         #d42a0b;
+$c_taglineLinkHover:    #ed6a0b;
 
 $c_breadcrumbs:         #555555;
-$c_breadcrumbsLink:     #e37374;
-$c_breadcrumbsLinkHover:#2a9ea5;
+$c_breadcrumbsLink:     #d42a0b;
+$c_breadcrumbsLinkHover:#ed6a0b;
 
 $c_pagenavBg:           #eeeeee;
-$c_pagenavLink:         #2a9ea5;
-//$c_pagenavHoverBg:      #edf6f3;
-$c_pagenavHoverLink:    #e37374;
+$c_pagenavLink:         #ed6a0b;
+//$c_pagenavHoverBg:      #ffebc8;
+$c_pagenavHoverLink:    #d42a0b;
 //$c_pagenavActiveBg:     #ffffff;
-$c_pagenavActiveLink:   #e37374;
+$c_pagenavActiveLink:   #d42a0b;
 
 $c_metaAtPost:          #333333;
-$c_entryMetaLink:       #e37374;
+$c_entryMetaLink:       #d42a0b;
 $c_metaAtPostBorder:    #dddddd;
-$c_linkToArchives:      #e37374;
+$c_linkToArchives:      #d42a0b;
 $c_commentHTMLtags:     #777777;
 
-$c_hrLine:              #e37374;
+$c_hrLine:              #d42a0b;
 $c_borderImg:           #777777;
 $c_randLine:            #777777; // random grey line
 
 $c_selectionText:       #ffffff;
-$c_selectionBg:         #e37374;
+$c_selectionBg:         #d42a0b;
 
 $c_fieldsetBorder:      #c0c0c0;
 
 // header
 $c_headerBg:            #eeeeee;
-$c_headerText:          #e37374;
-$c_headerLink:          #e37374;
-$c_headerLinkHover:     #2a9ea5;
-$c_headerH3:            #2a9ea5;
-$c_headerH4:            #2a9ea5;
+$c_headerText:          #d42a0b;
+$c_headerLink:          #d42a0b;
+$c_headerLinkHover:     #ed6a0b;
+$c_headerH3:            #ed6a0b;
+$c_headerH4:            #ed6a0b;
 
 // navigation
-$c_navMainFullBg:           #edf6f3;
-$c_navMainFullBorderTop:    #2a9ea5;
+$c_navMainFullBg:           #ffebc8;
+$c_navMainFullBorderTop:    #ed6a0b;
 $c_navMainFullBorderBottom: #c34200;
 
-$c_navMainBg:           #edf6f3;
+$c_navMainBg:           #ffebc8;
 $c_navMainText:         #555555;
 $c_navMainLink:         #555555;
-$c_navMainLinkHover:    #e37374;
-$c_navMainLinkBg:       #edf6f3;
-$c_navMainLinkBgHover:  #edf6f3;
-$c_navMainBgActive:     #edf6f3;
-$c_navMainTextActive:   #2a9ea5;
+$c_navMainLinkHover:    #d42a0b;
+$c_navMainLinkBg:       #ffebc8;
+$c_navMainLinkBgHover:  #ffebc8;
+$c_navMainBgActive:     #ffebc8;
+$c_navMainTextActive:   #ed6a0b;
 $c_navMainLinkShadow:   transparent;
 $c_navMainBorder:       transparent;
 $c_navMainBorderBottom: transparent;
 $c_navMainShadow:       #777777;
 
 $c_navSubBg:           #ffffff;
-$c_navSubWrapBorder:   #e37374;
+$c_navSubWrapBorder:   #d42a0b;
 $c_navSubText:         #777777;
 $c_navSubLink:         #777777;
-$c_navSubLinkHover:    #e37374;
+$c_navSubLinkHover:    #d42a0b;
 $c_navSubLinkBg:       transparent;
 $c_navSubLinkBgHover:  transparent;
-$c_navSubLinkActive:   #e37374;
+$c_navSubLinkActive:   #d42a0b;
 $c_navSubBorder:       #777777;
 
 // mobile menu Sidr
-$sidr-background:               #edf6f3; //#f8f8f8; //toevoegen
+$sidr-background:               #ffebc8; //#f8f8f8; //toevoegen
 $sidr-background-shadow-color:  #ebebeb; //toevoegen
 $sidr-text-color:               #333333; //toevoegen
 $c_sidr_stickyBg:               #ffffff;
@@ -100,24 +100,24 @@ $c_sidr_linkBg:                 #777777;
 $c_sidr_linkBorder:             #999999;
 $c_sidr_linkHoverBg:            #ffffff;
 $c_sidr_linkActiveBg:           #ffffff;
-$c_sidr_linkHoverText:          #e37374;
+$c_sidr_linkHoverText:          #d42a0b;
 $c_sidr_headingText:            #555555;
-$c_sidr_headingBorder:          #e37374;
+$c_sidr_headingBorder:          #d42a0b;
 $c_sidr_boxShadow:              #999999;
 
 // main content
-$c_BodyBg:              #fae6e3;
+$c_BodyBg:              #eef3d6;
 $c_mainBg:              #ffffff;
 $c_mainBorder:          #777777;
 $c_mainText:            #000000;
-$c_mainLink:            #e37374;
+$c_mainLink:            #d42a0b;
 $c_mainLinkHover:       #777777;
-$c_mainH1:              #2a9ea5;
-$c_mainH1Hover:         #e37374;
-$c_mainH2:              #2a9ea5;
-$c_mainH2Hover:         #e37374;
-$c_mainH3:              #2a9ea5;
-$c_mainH3Hover:         #e37374;
+$c_mainH1:              #ed6a0b;
+$c_mainH1Hover:         #d42a0b;
+$c_mainH2:              #ed6a0b;
+$c_mainH2Hover:         #d42a0b;
+$c_mainH3:              #ed6a0b;
+$c_mainH3Hover:         #d42a0b;
 $c_mainH4:              #555555;
 $c_mainH4Hover:         #000000;
 $c_mainH5:              #555555;
@@ -130,8 +130,8 @@ $c_taxonomyIntroH1:     #555555; //toevoegen
 
 // blockquote
 $c_BlockquoteText:      #333333;
-$c_BlockquoteLink:      #e37374;
-$c_BlockquoteLinkHover: #2a9ea5;
+$c_BlockquoteLink:      #d42a0b;
+$c_BlockquoteLinkHover: #ed6a0b;
 $c_BlockquoteBorder:    #dddddd;
 $c_BlockquoteBg:        #eeeeee;
 $c_blockquoteBefore:    #999999;
@@ -148,24 +148,24 @@ $c_inputTextPlaceholder:#999999;
 
 $c_inputSubmitText:     #ffffff;
 $c_inputSubmitTextHover:#ffffff;
-$c_inputSubmitBg:       #2a9ea5;
-$c_inputSubmitBgHover:  #2a9ea5;
-$c_inputSubmitBorder:   #2a9ea5;
+$c_inputSubmitBg:       #ed6a0b;
+$c_inputSubmitBgHover:  #ed6a0b;
+$c_inputSubmitBorder:   #ed6a0b;
 $c_inputSubmitTextShadow: transparent;
 $c_inputSubmitBoxShadow:  transparent;
 
 // comments
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
-$c_commentLink:         #2a9ea5;
-$c_commentBorder:       #2a9ea5;
+$c_commentLink:         #ed6a0b;
+$c_commentBorder:       #ed6a0b;
 $c_commentReplyBorder:  #dddddd;
 $c_commentByAuthorBg:   #eaf2f7;
 
 // author block
 $c_articleAuthorBg:     #eaf2f7;
-$c_articleAuthorH2:     #2a9ea5;
-$c_articleAuthorH3:     #e37374;
+$c_articleAuthorH2:     #ed6a0b;
+$c_articleAuthorH3:     #d42a0b;
 
 // call-to-action
 $c_ctaBg:               #fd6e9d;
@@ -183,13 +183,13 @@ $c_ctaTextBlack:        #000000;
 // tables
 $c_tableBg:             #ffffff;
 $c_tableText:           #000000;
-$c_tableRowAlt:         #edf6f3;
-$c_tableHeaderBg:       #e37374;
+$c_tableRowAlt:         #ffebc8;
+$c_tableHeaderBg:       #d42a0b;
 $c_tableHeaderText:     #ffffff;
-$c_tableLink:           #e37374;
-$c_tableLinkHover:      #2a9ea5;
+$c_tableLink:           #d42a0b;
+$c_tableLinkHover:      #ed6a0b;
 $c_tableBorder:         #dddddd;
-$c_tableCaption:        #e37374;
+$c_tableCaption:        #d42a0b;
 
 // code
 $c_codeBg:              #eeeeee;
@@ -203,27 +203,27 @@ $c_markText:            #000000;
 $c_sidebarBg:           #ffffff;
 $c_sidebarText:         #000000;
 $c_sidebarLink:         #000000;
-$c_sidebarLinkHover:    #e37374;
-$c_sidebarLinkArrow:    #e37374;
-$c_sidebarH3:           #2a9ea5;
+$c_sidebarLinkHover:    #d42a0b;
+$c_sidebarLinkArrow:    #d42a0b;
+$c_sidebarH3:           #ed6a0b;
 $c_sidebarH3Bg:         transparent;
-$c_sidebarH4:           #2a9ea5;
+$c_sidebarH4:           #ed6a0b;
 $c_sidebarH4Bg:         transparent;
 
 // footerwidgets
 $c_footerWidgetsBg:       #f4f4f4;
 $c_footerWidgetsBorderTop:#777777;
 $c_footerWidgetsText:     #000000;
-$c_footerWidgetsLink:     #e37374;
+$c_footerWidgetsLink:     #d42a0b;
 $c_footerWidgetsLinkHover:#000000;
-$c_footerWidgetsH3:       #2a9ea5;
-$c_footerWidgetsH4:       #2a9ea5;
+$c_footerWidgetsH3:       #ed6a0b;
+$c_footerWidgetsH4:       #ed6a0b;
 
 // footer
-$c_footerBg:            #edf6f3;
+$c_footerBg:            #ffebc8;
 $c_footerBorderTop:     #777777;
 $c_footerText:          #000000;
 $c_footerLink:          #000000;
-$c_footerLinkHover:     #2a9ea5;
+$c_footerLinkHover:     #ed6a0b;
 $c_footerH3:            #000000;
 $c_footerH4:            #000000;
