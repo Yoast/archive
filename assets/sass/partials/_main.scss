@@ -2045,7 +2045,7 @@ table {
   font: {
     size: $f_pagenav-px;
     size: $f_pagenav;
-    weight:700;
+    weight:400;
   }
   div.pagination-next,
   div.pagination-previous {
@@ -2371,12 +2371,12 @@ table {
     tbody {
       border:0;
       a {
-        color: $c_linkHover;
+        color: $c_link;
         font: {
           weight: 700;
         }
         &:hover {
-          color: $c_link;
+          color: $c_linkHover;
         }
       }
     }
@@ -3185,7 +3185,7 @@ table {
 		section {
 			border: {
 				color: $c_widgetBorder;
-				width: 1px;
+				width: 2px;
 				style: solid;
 			}
 			padding: 10px 10px 10px 10px;
