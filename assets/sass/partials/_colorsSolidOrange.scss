@@ -27,7 +27,9 @@
 $c_ListCheckImage:      "../images/li-check-Spring.png";
 
 // general
-$c_bodyTopLine:         #e74c21;
+$c_bodyTopLineDark:     #e74c21;
+$c_bodyTopLineLight:    #0f495f;
+$c_bodyLine:						#e74c21;
 
 $c_paragraph:           #000000;
 $c_link:                #e74c21;
@@ -38,7 +40,8 @@ $c_logoText:            #a4a7ab;
 $c_logoTextLink:        #4a5358;
 $c_logoTextLinkHover:   #4a5358;
 
-$c_taglineTop:          #ffffff;
+$c_taglineTopLight:     #ffffff;
+$c_taglineTopDark:      #0f495f;
 $c_taglineTopBold:      #e74c21;
 $c_taglineFullWidth:    #e6e6e6;
 $c_taglineFullWidthBold:#e74c21;
@@ -63,7 +66,7 @@ $c_commentHTMLtags:     #e6e6e6;
 
 $c_hrLine:              #e6e6e6;
 $c_borderImg:           #e6e6e6;
-$c_randLine:            #e6e6e6; // random grey line
+$c_randLine:            #a4a7ab; // random grey line
 
 $c_selectionText:       #ffffff;
 $c_selectionBg:         #e74c21;
@@ -71,7 +74,8 @@ $c_selectionBg:         #e74c21;
 $c_fieldsetBorder:      #4a5358;
 
 // header
-$c_headerBg:            #0f495f;
+$c_headerBgDark:        #0f495f;
+$c_headerBgLight:       #ffffff;
 $c_headerText:          #000000;
 $c_headerLink:          #e74c21;
 $c_headerLinkHover:     #e74c21;
@@ -130,7 +134,8 @@ $c_sidr_headingBorder:          #ffffff;
 $c_sidr_boxShadow:              #a4a7ab;
 
 // main content
-$c_mainBg:              #ffffff;
+$c_mainBg:              #e6e6e6;
+$c_mainContentBg:				#ffffff;
 $c_mainText:            #000000;
 $c_mainLink:            #e74c21;
 $c_mainLinkHover:       #e74c21;

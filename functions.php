@@ -943,8 +943,22 @@ function yst_move_nav_to_top() {
 
 add_action( 'after_setup_theme', 'yst_move_nav_to_top' );
 
-function yst_add_body_class( $classes ) {
+function yst_add_body_class_for_nav( $classes ) {
 	$classes[] = 'menu-at-top';
 
 	return $classes;
 }
+
+function yst_add_body_class_for_header_style ( $classes ) {
+	$headerstyle = get_theme_mod( 'yst_header_color_picker' );
+	//die (var_dump($headerstyle));
+	if ($headerstyle == 'light' ) {
+		$classes[] = 'header-light';
+	} else {
+		$classes[] = 'header-dark';
+	}
+
+	return $classes;
+}
+
+add_action('body_class', 'yst_add_body_class_for_header_style');

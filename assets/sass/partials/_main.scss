@@ -49,13 +49,6 @@ body {
   background: {
     color: $c_mainBg;
   }
-  border: {
-    top: {
-      width: 16px;
-      style: solid;
-      color: $c_bodyTopLine;
-    }
-  }
   color: $c_mainText;
   font: {
     family: $f_baseFont;
@@ -64,6 +57,24 @@ body {
     weight: 300;
   }
   line-height: 1.625;
+}
+body.header-dark {
+	border: {
+		top: {
+			width: 16px;
+			style: solid;
+			color: $c_bodyTopLineDark;
+		}
+	}
+}
+body.header-light {
+	border: {
+		top: {
+			width: 16px;
+			style: solid;
+			color: $c_bodyTopLineLight;
+		}
+	}
 }
 ::-moz-selection {
   background: {
@@ -201,9 +212,9 @@ figure {
   margin:0;
 }
 header {
-  background: {
-    color: $c_mainBg
-  }
+//  background: {
+//    color: $c_mainBg;
+//  }
   .wrap {
     padding: 40px 0;
   }
@@ -303,14 +314,25 @@ header {
 	@extend .floatclearing;
 	clear: both;
 	margin: 0 auto;
-	background: {
-		color: $c_headerBg;
-	}
 	border: {
 		bottom: {
 			width: 3px;
 			style: solid;
-			color: $c_bodyTopLine;
+			color: $c_bodyLine;
+		}
+	}
+}
+.header-dark {
+	#header-wrapper {
+		background: {
+			color: $c_headerBgDark;
+		}
+	}
+}
+.header-light {
+	#header-wrapper {
+		background: {
+			color: $c_headerBgLight;
 		}
 	}
 }
@@ -320,6 +342,9 @@ header {
 	clear: both;
 	margin: 30px auto 0 auto;
 	max-width: $d_full;
+	background: {
+		color: $c_mainContentBg;
+	}
 }
 
 #afterheader-content-wrapper {
@@ -352,9 +377,6 @@ header {
 .site-header {
 	margin: 0 auto 35px;
 	max-width: $d_full;
-	background: {
-		color: $c_headerBg;
-	}
 	min-height: 120px;
   .wrap,
   .widget-wrap {
@@ -416,6 +438,7 @@ header {
     }
   }
   section.widget {
+		@extend .floatclearing;
     margin: {
       top: 10px;
     }
@@ -433,7 +456,7 @@ header {
 		vertical-align: bottom;
     max-width: $d_headerAside;
     overflow-x:hidden;
-    color: $c_taglineTop;
+    //color: $c_taglineTop;
     font: {
       size: $f_taglineTop-px;
       size: $f_taglineTop;
@@ -465,6 +488,21 @@ header {
       }
     }
   }
+}
+
+.header-dark {
+	.site-header {
+		background: {
+			color: $c_headerBgDark;
+		}
+	}
+}
+.header-light {
+	.site-header {
+		background: {
+			color: $c_headerBgLight;
+		}
+	}
 }
 
 /**
@@ -713,7 +751,7 @@ textarea {
 		top: {
 			width: 3px;
 			style: solid;
-			color: $c_bodyTopLine;
+			color: $c_bodyLine;
 		}
 	}
 	max-width: $d_full;
@@ -1129,10 +1167,21 @@ textarea {
   height: 100%;
   z-index: 888888;
   -webkit-tap-highlight-color: transparent;
-  background: {
-    color: $c_headerBg;
-  }
   @include opacity(0.3);
+}
+.header-dark {
+	.sidr-trap {
+	  background: {
+	    color: $c_headerBgDark;
+	  }
+	}
+}
+.header-light {
+	.sidr-trap {
+		background: {
+			color: $c_headerBgLight;
+		}
+	}
 }
 
 
@@ -1169,9 +1218,6 @@ textarea {
 
 // body.sticky,
 body.sticky-menu {
-	background: {
-		color: $c_headerBg;
-	}
   padding-top: 120px;
 	#center-wrapper {
 		//max-width: 100%;
@@ -1188,10 +1234,6 @@ body.sticky-menu {
     position: absolute;
     position: fixed;
     top: 0;
-    background: {
-			position: center -30px;
-			color: $c_headerBg;
-		}
     z-index: 400;
     height: 44px;
     .wrap {
@@ -1284,6 +1326,22 @@ body.sticky-menu {
 			}
     }
   }
+}
+body.sticky-menu.header-dark {
+	.site-header {
+			background: {
+				position: center -30px;
+				color: $c_headerBgDark;
+			}
+	}
+}
+body.sticky-menu.header-light {
+	.site-header {
+		background: {
+			position: center -30px;
+			color: $c_headerBgLight;
+		}
+	}
 }
 
 /**
@@ -1662,7 +1720,7 @@ table {
 
 .entry {
   background: {
-    color: $c_mainBg;
+    color: $c_mainContentBg;
   }
   margin: {
     bottom: 40px;
@@ -2046,7 +2104,7 @@ table {
  */
 #comments {
 	background: {
-		color: $c_mainBg;
+		color: $c_mainContentBg;
 	}
 	.comment-list {
 		li {
@@ -2173,7 +2231,7 @@ table {
 	}
 	.entry-pings {
 		background: {
-			color: $c_mainBg;
+			color: $c_mainContentBg;
 		}
 		margin: {
 			bottom: 40px;
@@ -2848,7 +2906,7 @@ table {
         bottom:0;
       }
       background: {
-        color: $c_mainBg;
+        color: $c_mainContentBg;
       }
     }
   }
@@ -3012,6 +3070,12 @@ table {
       }
     }
   }
+}
+
+.header-widget-area {
+	.widget_banner {
+		margin-right: 0;
+	}
 }
 
 .yst_fb_widget {
@@ -3423,7 +3487,6 @@ img#wpstats {
 	width: $d_full;
 	max-width: $d_full;
 	clear:both;
-	color: $c_taglineTop;
 	font: {
 		size: $f_taglineTop-px;
 		size: $f_taglineTop;
@@ -3435,6 +3498,16 @@ img#wpstats {
 }
 .tagline_top_right {
 	text-align: right;
+}
+.header-dark {
+	.tagline_top {
+		color: $c_taglineTopLight;
+	}
+}
+.header-light {
+	.tagline_top {
+		color: $c_taglineTopDark;
+	}
 }
 
 body.menu-at-top {

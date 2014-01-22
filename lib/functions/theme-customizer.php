@@ -82,6 +82,14 @@ class Yoast_Theme_Customizer {
 		);
 
 		$wp_customize->add_setting(
+			'yst_header_color_picker',
+			array(
+				'default'   => 'dark',
+				'transport' => 'refresh'
+			)
+		);
+
+		$wp_customize->add_setting(
 			'yst_colour_scheme',
 			array(
 				'default'   => 'WarmBlue',
@@ -390,6 +398,20 @@ class Yoast_Theme_Customizer {
 			)
 		);
 
+		// This control goes into the default Color section
+		$wp_customize->add_control(
+			'yst_header_color_picker',
+			array(
+				'section' => 'yst_color_schemes',
+				'label'   => __( 'Header Style', 'yoast-theme' ),
+				'type'    => 'radio',
+				'choices' => array(
+					'dark' => __( 'Dark header', 'yoast-theme'),
+					'light' => __( 'Light header', 'yoast-theme')),
+				'priority' => 200,
+			)
+		);
+
 		// This control goes into the default Site Title & Tagline section
 		$wp_customize->add_control(
 			'yst_tagline_positioner',
@@ -403,6 +425,8 @@ class Yoast_Theme_Customizer {
 				'priority' => 200,
 			)
 		);
+
+
 
 		$wp_customize->add_control(
 			new Yoast_Logo_Image_Control(
