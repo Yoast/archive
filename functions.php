@@ -251,10 +251,7 @@ function remove_genesis_settings_boxes() {
  * @return string
  */
 function yst_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
-	$colour_scheme = get_theme_mod( 'yst_colour_scheme' );
-	if ( ! $colour_scheme || empty( $colour_scheme ) ) {
-		$colour_scheme = 'WarmBlue';
-	}
+	$colour_scheme = get_theme_mod( 'yst_colour_scheme', 'BrightBlue' );
 
 	return $stylesheet_dir_uri . '/assets/css/' . $colour_scheme . '.css';
 }
@@ -950,9 +947,9 @@ function yst_add_body_class_for_nav( $classes ) {
 }
 
 function yst_add_body_class_for_header_style ( $classes ) {
-	$headerstyle = get_theme_mod( 'yst_header_color_picker' );
-	//die (var_dump($headerstyle));
-	if ($headerstyle == 'light' ) {
+	$header_style = get_theme_mod( 'yst_header_color_picker', 'light' );
+
+	if ( 'light' == $header_style ) {
 		$classes[] = 'header-light';
 	} else {
 		$classes[] = 'header-dark';

@@ -92,7 +92,7 @@ class Yoast_Theme_Customizer {
 		$wp_customize->add_setting(
 			'yst_colour_scheme',
 			array(
-				'default'   => 'WarmBlue',
+				'default'   => 'BrightBlue',
 				'transport' => 'postMessage'
 			)
 		);
