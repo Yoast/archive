@@ -2473,7 +2473,7 @@ table {
       line-height: 1em;
       @include text-shadow($c_ctaTextShadow 1px 1px 5px);
       &:after {
-        content: '▸';
+        content: '\25B8';
         padding: {
           left: 5px;
           top: 1px;
