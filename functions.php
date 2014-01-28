@@ -295,6 +295,9 @@ function yst_after_header_genesis() {
 	}
 }
 
+/**
+ * @todo: add documentation
+ */
 function yst_tagline() {
 	// We explicitly allow for HTML in taglines.
 	$tagline = html_entity_decode( get_bloginfo( 'description' ) );
@@ -308,16 +311,17 @@ function yst_tagline() {
 				( is_404() && get_theme_mod( 'yst_tagline_404' ) ) ||
 				( is_attachment() && get_theme_mod( 'yst_tagline_attachment' ) )
 		) {
-//			$output = apply_filters( 'yst_tagline_afterheader', '<div id="yoast-tagline-after-header-container"><p class="yoast-tagline">' . $tagline . '</p></div>', $tagline );
-//			echo $output;
-			add_action( 'genesis_header', 'yst_test_site_desc_move', 11 );
+			add_action( 'genesis_header', 'yst_show_tagline', 11 );
 		}
 	}
 }
 
 add_action( 'genesis_before', 'yst_tagline' );
 
-function yst_test_site_desc_move() {
+/**
+ * @todo: add documentation
+ */
+function yst_show_tagline() {
 	$tagline_positioner = get_theme_mod( 'yst_tagline_positioner' );
 	if ( isset( $tagline_positioner ) && ! empty ( $tagline_positioner ) ) {
 		if ( $tagline_positioner == 'topright' ) {
@@ -328,6 +332,34 @@ function yst_test_site_desc_move() {
 		}
 	}
 }
+
+/**
+ * Adds class to the body-element. Used in mobile menu.
+ *
+ * @param array $classes Contains all the current body-classes
+ *
+ * @return array The updated array of body-classes
+ */
+function yst_add_body_class_for_tagline( $classes ) {
+	$tagline_positioner = get_theme_mod( 'yst_tagline_positioner' );
+	$tagline = html_entity_decode( get_bloginfo( 'description' ) );
+	if ( isset( $tagline_positioner ) && ! empty ( $tagline_positioner ) && isset ( $tagline ) && ! empty( $tagline ) ) {
+		if (
+				( is_home() && get_theme_mod( 'yst_tagline_home' ) ) ||
+				( is_front_page() && ! is_home() && get_theme_mod( 'yst_tagline_front_page' ) ) ||
+				( is_home() && ! is_front_page() && get_theme_mod( 'yst_tagline_posts_page' ) ) ||
+				( is_singular() && get_theme_mod( 'yst_tagline_singular' ) ) ||
+				( is_archive() && get_theme_mod( 'yst_tagline_archive' ) ) ||
+				( is_404() && get_theme_mod( 'yst_tagline_404' ) ) ||
+				( is_attachment() && get_theme_mod( 'yst_tagline_attachment' ) )
+		) {
+			$classes[] = 'show_tagline';
+		}
+	}
+	return $classes;
+}
+
+add_action( 'body_class', 'yst_add_body_class_for_tagline' );
 
 /**
  * @todo add documentation
@@ -974,14 +1006,3 @@ function yst_add_body_class_for_header_style ( $classes ) {
 }
 
 add_action('body_class', 'yst_add_body_class_for_header_style');
-
-/** add div in header to use in mobile menu */
-//@todo: doesn't work yet; should allow me to draw the line between the menu and Tagline in mobile versions
-function yst_open_testdiv() {
-	echo '<div id="eenTest">';
-}
-function yst_close_testdiv() {
-	echo '</div>';
-}
-add_action('genesis_header', 'yst_open_testdiv', 9);
-add_action('genesis_header', 'yst_close_testdiv', 11);
