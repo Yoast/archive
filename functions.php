@@ -159,7 +159,7 @@ function child_theme_setup() {
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
 
 	add_action( 'genesis_header', 'yst_mobile_nav' );
-	add_action( 'wp_head', 'yst_display_logo' );
+	add_action( 'wp_head', 'yst_display_logo', 25 );
 	add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
 
 	add_action( 'genesis_after_header', 'yst_after_header_genesis', 12 );
@@ -322,15 +322,7 @@ add_action( 'genesis_before', 'yst_tagline' );
  * @todo: add documentation
  */
 function yst_show_tagline() {
-	$tagline_positioner = get_theme_mod( 'yst_tagline_positioner' );
-	if ( isset( $tagline_positioner ) && ! empty ( $tagline_positioner ) ) {
-		if ( $tagline_positioner == 'topright' ) {
-			echo '<div class="tagline_top tagline_top_right">' . html_entity_decode( get_bloginfo( 'description' ) ) . '</div>';
-		}
-		if ( $tagline_positioner == 'topleft' ) {
-			echo '<div class="tagline_top tagline_top_left">' . html_entity_decode( get_bloginfo( 'description' ) ) . '</div>';
-		}
-	}
+	echo '<div class="tagline_top tagline_' . get_theme_mod( 'yst_tagline_positioner', 'top_right' ) .'">' . html_entity_decode( get_bloginfo( 'description' ) ) . '</div>';
 }
 
 /**

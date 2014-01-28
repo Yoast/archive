@@ -20,7 +20,7 @@ class Yoast_Theme_Customizer {
 	 * Enqueue scripts
 	 */
 	function enqueue() {
-		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js', array( 'jquery', 'customize-preview' ), '0.1', true );
+		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js?v=' . filemtime( get_stylesheet_directory() . '/lib/js/theme-customizer.js' ), array( 'jquery', 'customize-preview' ), '0.1', true );
 	}
 
 	/**
@@ -69,15 +69,15 @@ class Yoast_Theme_Customizer {
 			'yst_nav_positioner',
 			array(
 				'default'   => 'content',
-				'transport' => 'refresh' //'postMessage'
+				'transport' => 'refresh'
 			)
 		);
 
 		$wp_customize->add_setting(
 			'yst_tagline_positioner',
 			array(
-				'default'   => 'topright',
-				'transport' => 'refresh' //'postMessage'
+				'default'   => 'top_right',
+				'transport' => 'postMessage'
 			)
 		);
 
@@ -85,7 +85,7 @@ class Yoast_Theme_Customizer {
 			'yst_header_color_picker',
 			array(
 				'default'   => 'dark',
-				'transport' => 'refresh'
+				'transport' => 'postMessage'
 			)
 		);
 
@@ -420,8 +420,8 @@ class Yoast_Theme_Customizer {
 				'label'   => __( 'Position of tagline', 'yoast-theme' ),
 				'type'    => 'radio',
 				'choices' => array(
-					'topright' => __( 'Top right', 'yoast-theme'),
-					'topleft' => __( 'Top left', 'yoast-theme')),
+					'top_right' => __( 'Right', 'yoast-theme'),
+					'top_left' => __( 'Left', 'yoast-theme')),
 				'priority' => 200,
 			)
 		);
@@ -434,7 +434,7 @@ class Yoast_Theme_Customizer {
 				'yst_logo',
 				array(
 					'label'       => __( 'Logo', 'yoast-theme' ),
-					'description' => __( 'Best size: 360px x 144px', 'yoast-theme' ),
+					'description' => __( 'Best size: 200px x 60px', 'yoast-theme' ),
 					'setting'     => 'yst_logo',
 					'section'     => 'yst_logos',
 					'context'     => 'yst_logo',

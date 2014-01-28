@@ -3525,6 +3525,17 @@ img#wpstats {
 }
 .tagline_top_right {
 	text-align: right;
+	text-indent: 0;
+	padding: {
+		right: 20px;
+	}
+}
+.tagline_top_left {
+	text-align: left;
+	text-indent: 0;
+	padding: {
+		left: 20px;
+	}
 }
 .header-dark {
 	.tagline_top {
@@ -3684,10 +3695,16 @@ body.menu-at-top {
   .site-header {
 		.wrap {
 			.tagline_top {
+				text-overflow: clip;
 				width: auto;
 			}
 			.tagline_top_right {
-				padding-right: 5px;
+				text-align: center;
+				padding-right: 2%;
+			}
+			.tagline_top_left {
+				text-align: center;
+				padding-left: 2%;
 			}
 		}
     .title-area {
@@ -4046,23 +4063,37 @@ body.menu-at-top {
 	}
 	.show_tagline {
 		.tagline_top {
-			width: 100%;
-			word-wrap: break-word;
-			word-break: break-all;
 			line-height: 3em;
-			vertical-align: center;
+			vertical-align: middle;
 			border: {
 				top: 8px solid $c_navMainBorderBottom;
 			}
-			background: {
-				color: $c_taglineBg;
-			};
+		}
+		&.header-dark {
+			.tagline_top {
+				color: $c_taglineTopDark;
+				background: {
+					color: $c_taglineBgAlt;
+				}
+			}
+		}
+		&.header-light {
+			.tagline_top {
+				color: $c_taglineTopLight;
+				background: {
+					color: $c_taglineBg;
+				}
+			}
 		}
 		header {
 			&.site-header {
 				border: {
 					bottom: 3px solid $c_taglineBorderMobile;
 				}
+				background: {
+					position-x: 50%;
+					position-y: 5px;
+				};
 			}
 		}
 	}
