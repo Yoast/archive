@@ -885,7 +885,7 @@ function yst_override_breadcrumb_404( $value = null ) {
 }
 
 /**
- * Retrieve the content_archive setting from the theme settings
+ * Retrieves the content_archive setting from the theme settings
  *
  * @param null|string $value
  *
@@ -895,10 +895,9 @@ function yst_override_breadcrumb_attachment( $value = null ) {
 	return yst_override_genesis_setting( 'yst_breadcrumb_attachment', $value, true );
 }
 
-// @todo: add div around header
-// @todo: add div around nav, after header, breadcrumbs and content
-// @todo: add div around footer (incl footer widgets)
-
+/***
+ **		@TODO: 	The following functions are used to create the needed HTML-structure, but still need proper naming and may be combined into less functions.
+ **/
 
 function yst_open_div_before_header() {
 	echo '<div id="header-wrapper">';
@@ -929,7 +928,9 @@ function yst_open_div_after_afterheader() {
 add_action( 'genesis_after_header', 'yst_open_div_after_afterheader', 11 );
 add_action( 'genesis_after_content_sidebar_wrap', 'yst_close_div_after_content' );
 
-/** Move menu to top of page */
+/**
+ * Moves menu to top of page
+ */
 function yst_move_nav_to_top() {
 	if ( get_theme_mod( 'yst_nav_positioner' ) == 'top' ) {
 		remove_action( 'genesis_after_header', 'genesis_do_nav' );
@@ -940,12 +941,26 @@ function yst_move_nav_to_top() {
 
 add_action( 'after_setup_theme', 'yst_move_nav_to_top' );
 
+/**
+ * Adds a class to the body-element to be used in checks for the location of the menu.
+ *
+ * @param array $classes contains all the current classes
+ *
+ * @return array Updated array of classes
+ */
 function yst_add_body_class_for_nav( $classes ) {
 	$classes[] = 'menu-at-top';
 
 	return $classes;
 }
 
+/**
+ * Adds a class to the body-element to be used in checks for light or dark header.
+ *
+ * @param array $classes contains all the current classes
+ *
+ * @return array Updated array of classes
+ */
 function yst_add_body_class_for_header_style ( $classes ) {
 	$header_style = get_theme_mod( 'yst_header_color_picker', 'light' );
 
@@ -959,3 +974,14 @@ function yst_add_body_class_for_header_style ( $classes ) {
 }
 
 add_action('body_class', 'yst_add_body_class_for_header_style');
+
+/** add div in header to use in mobile menu */
+//@todo: doesn't work yet; should allow me to draw the line between the menu and Tagline in mobile versions
+function yst_open_testdiv() {
+	echo '<div id="eenTest">';
+}
+function yst_close_testdiv() {
+	echo '</div>';
+}
+add_action('genesis_header', 'yst_open_testdiv', 9);
+add_action('genesis_header', 'yst_close_testdiv', 11);

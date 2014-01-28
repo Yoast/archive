@@ -248,7 +248,7 @@ header {
   margin: 0 auto;
   //max-width: $d_full;
   padding: {
-    top: 32px;
+    top: 12px;
   }
 	aside {
 		margin: {
@@ -551,7 +551,7 @@ header {
 .sidebar-content {
   .sidebar-primary {
     float: left;
-		margin: -20px;
+		margin: 0 -20px;
 		.widget {
 			border: {
 				left: none;
@@ -863,7 +863,6 @@ textarea {
       color: $c_navSubLink;
       text-shadow: 1px 1px 1px $c_navMainLinkShadow;
 			@include background-image(linear-gradient($c_navMainBgActive, darken($c_navMainBgActive,10%)));
-			// @fixme:background darken makes the selected item slightly boring, instead of vivid.
 			font: {
 				weight: 700;
 			}
@@ -1020,12 +1019,12 @@ textarea {
     }
     border: {
       bottom: {
-        width:5px;
+        width:2px;
         style:solid;
         color: $c_sidr_headingBorder;
       }
     }
-    padding: 0 15px;
+    padding: 10px 15px;
     line: {
       height: 39px;
     }
@@ -1040,7 +1039,7 @@ textarea {
     li {
       display: block;
       margin: 0;
-      line-height: 36px;
+      line-height: 45px;
       a /*, span */ { //No idea what the span is for
         padding: 0 15px;
         display: block;
@@ -1061,11 +1060,12 @@ textarea {
         &.sidr-class-active
         {
           border-top: none;
-          line-height: 36px;
+          line-height: 45px;
           color: $c_sidr_linkHoverText;
-          background: {
-            color: $c_sidr_linkHoverBg;
-          }
+//          background: {
+//            color: $c_sidr_linkHoverBg;
+//          }
+					@include background-image(linear-gradient($c_sidr_linkHoverBg, darken($c_sidr_linkHoverBg,10%)));
         }
         &.active,
         &.sidr-class-active {
@@ -1638,10 +1638,10 @@ video,
   max-width: 100%;
 }
 
-//img {				// @todo: check if this is needed for IE8
-//  height: auto;
-//  width: auto; // IE8
-//}
+img {
+  height: auto;
+  width: auto;
+}
 
 /**
  * Tables
@@ -2868,8 +2868,6 @@ table {
   p,
   form {
     padding: {
-     // left: 10px;
-     // right: 10px;
     }
   }
   form {
@@ -2882,7 +2880,6 @@ table {
       }
     }
     input {
-      //padding:8px;
       margin: {
         bottom: 10px;
       }
@@ -2893,6 +2890,7 @@ table {
         font: {
           size: 12px;
         }
+				max-width: 19%;
       }
     }
   }
@@ -3160,17 +3158,6 @@ table {
 		}
 	}
 }
-/**
- * Optional styling for fb-widget
- *
- * .yst_fb_widget {
- *  .fb-dark-bg {
- *  }
- *  .fb-light-bg {
- *  }
- *}
- *
- */
 
 /**
  * Full Width Widgets
@@ -3637,6 +3624,12 @@ body.menu-at-top {
   }
 }
 
+@media (max-width: 990px) {
+	#afterheader-content-wrapper {
+		border: none;
+	}
+}
+
 /*
  * iPad landscape
  */
@@ -3646,43 +3639,57 @@ body.menu-at-top {
     max-width:67%;
   }
   .sidebar-primary {
-    max-width:25%;
+    max-width:33%;
   }
   .content-sidebar {
     .sidebar-primary {
-      margin: {
-        right:10px;
-      }
+
     }
     .content {
       padding: {
-        left: 10px;
-        right:10px;
+        left: 2%;
+        right: 2%;
       }
     }
+		.widget_bigbutton {
+			margin: {
+				right: 2%;
+			}
+		}
   }
   .sidebar-content {
     .sidebar-primary {
-      margin: {
-        left:10px;
-      }
+
     }
     .content {
       padding: {
         left: 0;
-        right:10px;
+        right:2%;
       }
     }
+		.widget_bigbutton {
+			margin: {
+				left: 2%;
+			}
+		}
   }
   .full-width-content {
     .content {
       padding: {
-        left: 10px;
+        left: 2%;
         right:0;
       }
     }
   }
   .site-header {
+		.wrap {
+			.tagline_top {
+				width: auto;
+			}
+			.tagline_top_right {
+				padding-right: 5px;
+			}
+		}
     .title-area {
       background: {
         size: 100%;
@@ -3690,15 +3697,15 @@ body.menu-at-top {
       max-width:40%;
       overflow:hidden;
       a {
-        min-height:140px;
+        min-height:80px;
       }
     }
     .header-widget-area,
     #yoast-top-right {
       padding: {
-        right:20px;
+        right: 2%;
       }
-      max-width:60%;
+      max-width: 50%;
       overflow:hidden;
     }
   }
@@ -3709,14 +3716,21 @@ body.menu-at-top {
   }
   #yoast-after-header-container {
     padding: {
-      left: 10px;
-      right: 10px;
+      left: 2%;
+      right: 2%;
     }
+		#yoast-after-header-2 {
+			margin: {
+				left: 1%;
+				right: 1%;
+			}
+			padding: {
+				left: 1%;
+				right: 1%;
+			}
+		}
     .yoast-after-header-widget {
-      max-width:30%;
-    }
-    #yoast-after-header-3 {
-      max-width:25%;
+			width:31%;
     }
   }
   #yoast-fullwidth-bottom-container {
@@ -3732,19 +3746,23 @@ body.menu-at-top {
     }
   }
   .footer-widgets {
+		margin: 0;
     padding: {
-      left:10px;
-      right:10px;
     }
     .widget-area {
-      width:22%;
+			padding: {
+				left: 2%;
+				right: 2%;
+			}
+      width:29%;
+			&.footer-widgets-1 {
+				margin: 0 3%;
+			}
       &.footer-widgets-2 {
-        margin: 0 3%;
+        margin: 0;
       }
       &.footer-widgets-3 {
-        margin: {
-          right: 3%;
-        }
+        margin: 0 3%;
       }
     }
   }
@@ -3754,14 +3772,10 @@ body.menu-at-top {
   .fb-like-box span iframe[style] {
     width: 100% !important;
   }
-}
-
-@media (max-width:655px) AND (min-width:640px) {
-  #yoast-fullwidth-bottom-container {
-    #yoast-fullwidth-widgetarea-2 {
-      margin:0 15px;
-    }
-  }
+	.breadcrumb {
+		padding-left: 2%;
+		margin: 0 auto;
+	}
 }
 
 @media (max-width:835px) {
@@ -3769,6 +3783,32 @@ body.menu-at-top {
     display:none;
     visibility: hidden;
   }
+}
+
+@media (max-width:768px) {
+	body.sticky-menu {
+		.nav-primary {
+			height: 40px;
+		}
+	}
+	.genesis-nav-menu {
+		a {
+			padding: 9px 20px;
+		}
+	}
+	.widget-yns {
+		input[type="submit"] {
+			padding: 8px 2% 8px 2%;
+		}
+	}
+}
+
+@media (max-width:655px) AND (min-width:640px) {
+	#yoast-fullwidth-bottom-container {
+		#yoast-fullwidth-widgetarea-2 {
+			margin:0 15px;
+		}
+	}
 }
 
 @media (max-width: 640px) {
@@ -3800,29 +3840,36 @@ body.menu-at-top {
   .sidebar-content {
     .sidebar-primary {
       width:100%;
-      padding: {
-        left:20px;
-      }
-      .widget {
-        width:100%;
-      }
+//      .widget {
+//        width:100%;
+//      }
     }
   }
   .sidebar-content {
     .content {
       margin:0;
+			padding: 0;
     }
     .sidebar-primary {
       margin:0;
     }
   }
+	.content-sidebar {
+		.content {
+			margin:0;
+			padding: 0;
+		}
+		.sidebar-primary {
+			margin:0;
+		}
+	}
   .featured-content.featuredpost,
   .featured-content.featuredpage {
     img {
       float:left;
-      margin: {
-        right: 10px;
-      }
+//      margin: {
+//        right: 10px;
+//      }
     }
   }
   #yoast-after-header-container {
@@ -3859,19 +3906,49 @@ body.menu-at-top {
       max-width:100%;
     }
   }
+	.sidebar-content {
+		.sidebar-primary {
+			.widget {
+				border-left: 1px solid $c_widgetBorder;
+			}
+			.widget_bigbutton {
+				margin: 0;
+				margin-bottom: 40px;
+			}
+		}
+		.widget_banner {
+			margin: 0;
+			margin-bottom: 40px;
+		}
+		.yst_fb_widget {
+			margin: 0;
+			margin-bottom: 40px;
+		}
+	}
   .footer-widgets {
     padding: {
-      left:10px;
-      right:10px;
+      left: 3%;
+      right: 3%;
     }
     .widget-area {
       width:100%;
-      &.footer-widgets-2,
+			padding: 0;
+			&.footer-widgets-1,
+			&.footer-widgets-2,
       &.footer-widgets-3 {
         margin: 0;
       }
     }
   }
+	.site-inner {
+		margin: {
+			left: 3%;
+			right: 3%;
+		}
+		.content-sidebar-wrap {
+			margin: 0;
+		}
+	}
   .site-footer {
     text-align:center;
   }
@@ -3893,7 +3970,8 @@ body.menu-at-top {
       display: inline-block;
       text-indent: -10000px;
       z-index: 13;
-      height: 44px;
+      height: auto;
+			min-height: 0;
       position: fixed;
       top: 0;
       width:100%;
@@ -3956,20 +4034,16 @@ body.menu-at-top {
         }
       }
     }
-    .site-header {
-      background-position: center top;
-      .title-area {
-        .site-title a {
-          position: fixed;
-          top: 0;
-          margin: {
-            left: 50px;
-						bottom: 0;
-          }
-        }
-      }
-    }
   }
+	.tagline_top {
+		font: {
+			size: $f_taglineTopMobile-px;
+			size: $f_taglineTopMobile;
+		}
+	}
+	#center-wrapper {
+		margin: 0px;
+	}
 /* end mobile menu */
 }
 @media (max-width: 512px) {
@@ -3978,6 +4052,29 @@ body.menu-at-top {
       max-width:100%;
     }
   }
+}
+
+@media (max-width: 480px) {
+	.blog {
+		.entry-content {
+			img.alignright {
+				display:block;
+				float:none;
+				margin:1em auto;
+			}
+		}
+	}
+	.entry {
+		img {
+			&.alignleft,
+			&.alignright,
+			&.aligncenter {
+				display:block;
+				float:none;
+				margin:1em auto;
+			}
+		}
+	}
 }
 
 @media (max-width: 330px) {
