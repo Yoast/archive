@@ -2461,6 +2461,9 @@ table {
         color: $c_ctaBorder;
       }
       @include box-shadow(inset 0px 0 5px $c_ctaBoxShadow);
+      background: {
+          color: $c_ctaBg;
+      }
       @include background-image(linear-gradient(lighten($c_ctaBg,10%),$c_ctaBg));
       color: $c_ctaTextWhite;
       font: {
