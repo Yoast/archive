@@ -14,6 +14,9 @@ class Yoast_Theme_Customizer {
 		add_action( 'customize_register', array( $this, 'customize_register' ) );
 		add_action( 'customize_controls_print_styles', array( $this, 'style' ), 20 );
 		add_action( 'customize_preview_init', array( $this, 'enqueue' ) );
+
+		// Add customizer ajax hook - Update image details
+		add_action( 'customize_save_after', array( $this, 'update_image_details' ), 1 );
 	}
 
 	/**
@@ -21,6 +24,39 @@ class Yoast_Theme_Customizer {
 	 */
 	function enqueue() {
 		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js?v=' . filemtime( get_stylesheet_directory() . '/lib/js/theme-customizer.js' ), array( 'jquery', 'customize-preview' ), '0.1', true );
+	}
+
+	/**
+	 * Update image details
+	 */
+	public function update_image_details() {
+
+		// Decode JSON
+		$customized = json_decode( stripslashes($_POST['customized']) );
+
+		// Set src
+		$src = $customized->yst_mobile_logo;
+
+		// Set context
+		$context = 'yst_mobile_logo_details';
+
+		// Delete old details
+		remove_theme_mod( $context );
+
+		// Barry: I think this can be deleted
+		//$image_details = get_theme_mod( $this->context . '_details' );
+
+		// We might need more image details, so storing these in a separate theme mod for easy access.
+		global $wpdb;
+		$img_att = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid = '%s' LIMIT 1", $src ) );
+		if ( $img_att ) {
+			$image_details = wp_get_attachment_metadata( $img_att );
+
+			if ( isset ( $image_details ) && ! empty ( $image_details ) && is_array( $image_details ) ) {
+				// Store theme mod
+				set_theme_mod( $context, $image_details );
+			}
+		}
 	}
 
 	/**
@@ -555,9 +591,6 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			if ( isset( $this->setting->default ) ) {
 				$this->add_tab( 'default', __( 'Default' ), array( $this, 'tab_default_image' ) );
 			}
-
-			// Add customizer ajax hook - Update image details
-			add_action( 'wp_ajax_customize_save', array( $this, 'update_image_details' ) );
 		}
 
 		/**
@@ -572,31 +605,6 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			}
 
 			return $src;
-		}
-
-		/**
-		 * Update image details
-		 */
-		public function update_image_details() {
-			$src = $this->get_src();
-
-			// Delete old details
-			remove_theme_mod( $this->context . '_details' );
-
-			// Barry: I think this can be deleted
-			//$image_details = get_theme_mod( $this->context . '_details' );
-
-			// We might need more image details, so storing these in a separate theme mod for easy access.
-			global $wpdb;
-			$img_att = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid = '%s' LIMIT 1", $src ) );
-			if ( $img_att ) {
-				$image_details = wp_get_attachment_metadata( $img_att );
-
-				if ( isset ( $image_details ) && ! empty ( $image_details ) && is_array( $image_details ) ) {
-					// Store theme mod
-					set_theme_mod( $this->context . '_details', $image_details );
-				}
-			}
 		}
 
 		/**
