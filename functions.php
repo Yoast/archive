@@ -167,6 +167,7 @@ function child_theme_setup() {
 	add_action( 'genesis_header', 'yst_mobile_nav' );
 	add_action( 'wp_head', 'yst_display_logo' );
 	add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
+    add_action( 'wp_head', 'yst_conditional_comments' );
 
 	add_action( 'genesis_after_header', 'yst_after_header_genesis' );
 	add_action( 'genesis_after_content_sidebar_wrap', 'yst_fullwidth_sitebars_genesis' );
@@ -284,6 +285,18 @@ function enqueue_form_styles() {
 function yst_add_google_fonts() {
 	wp_enqueue_style( 'google-font-quattrocento_sans', '//fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);', array(), CHILD_THEME_VERSION );
 }
+
+/**
+ * Enable style filtering for <IE9
+ */
+function yst_conditional_comments() {
+    echo '<!--[if lte IE 7]>';
+        echo '<style type="text/css">';
+            echo '*:after {content:"";padding:0;}';
+        echo '</style>';
+    echo '<![endif]-->';
+}
+
 
 /**
  * Add yst-after-header widget support for site. If widget not active, don't display
