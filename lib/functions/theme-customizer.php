@@ -580,6 +580,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			if ( isset ( $image_details ) && ! empty ( $image_details ) && is_array( $image_details ) ) {
 				set_theme_mod( $this->context . '_details', $image_details );
+			}else {
+				remove_theme_mod( $this->context . '_details' );
 			}
 
 			?>
