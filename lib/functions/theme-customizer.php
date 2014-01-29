@@ -556,9 +556,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				$this->add_tab( 'default', __( 'Default' ), array( $this, 'tab_default_image' ) );
 			}
 
-			// Update image details
-			$this->update_image_details();
-
+			// Add customizer ajax hook - Update image details
+			add_action( 'wpajax_customize_save', array( $this, 'update_image_details' ) );
 		}
 
 		/**
@@ -578,7 +577,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		/**
 		 * Update image details
 		 */
-		private function update_image_details() {
+		public function update_image_details() {
 			$src = $this->get_src();
 
 			// Delete old details
