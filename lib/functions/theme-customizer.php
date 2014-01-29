@@ -32,31 +32,31 @@ class Yoast_Theme_Customizer {
 	public function update_image_details() {
 
 		// Decode JSON
-		$customized = json_decode( stripslashes($_POST['customized']) );
-
-		// Set src
-		$src = $customized->yst_mobile_logo;
+		$customized = json_decode( stripslashes( $_POST['customized'] ) );
 
 		// Set context
 		$context = 'yst_mobile_logo_details';
 
-		// Delete old details
-		remove_theme_mod( $context );
+		// Set src
+		if ( ! empty( $customized->yst_mobile_logo ) ) {
+			$src = $customized->yst_mobile_logo;
 
-		// Barry: I think this can be deleted
-		//$image_details = get_theme_mod( $this->context . '_details' );
+			// We might need more image details, so storing these in a separate theme mod for easy access.
+			global $wpdb;
+			$img_att = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid = '%s' LIMIT 1", $src ) );
+			if ( $img_att ) {
+				$image_details = wp_get_attachment_metadata( $img_att );
 
-		// We might need more image details, so storing these in a separate theme mod for easy access.
-		global $wpdb;
-		$img_att = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid = '%s' LIMIT 1", $src ) );
-		if ( $img_att ) {
-			$image_details = wp_get_attachment_metadata( $img_att );
-
-			if ( isset ( $image_details ) && ! empty ( $image_details ) && is_array( $image_details ) ) {
-				// Store theme mod
-				set_theme_mod( $context, $image_details );
+				if ( isset ( $image_details ) && ! empty ( $image_details ) && is_array( $image_details ) ) {
+					// Store theme mod
+					set_theme_mod( $context, $image_details );
+				}
 			}
+		} else {
+			// Delete details
+			remove_theme_mod( $context );
 		}
+
 	}
 
 	/**
