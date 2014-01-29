@@ -3699,11 +3699,9 @@ body.menu-at-top {
 				width: auto;
 			}
 			.tagline_top_right {
-				text-align: center;
 				padding-right: 2%;
 			}
 			.tagline_top_left {
-				text-align: center;
 				padding-left: 2%;
 			}
 		}
@@ -3853,6 +3851,7 @@ body.menu-at-top {
       top: 2em;
     }
   }
+
   .content-sidebar,
   .sidebar-content {
     .sidebar-primary {
@@ -4057,6 +4056,7 @@ body.menu-at-top {
 			size: $f_taglineTopMobile-px;
 			size: $f_taglineTopMobile;
 		}
+		text-align: center;
 	}
 	#center-wrapper {
 		margin: 0px;
