@@ -557,7 +557,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			}
 
 			// Add customizer ajax hook - Update image details
-			add_action( 'wpajax_customize_save', array( $this, 'update_image_details' ) );
+			add_action( 'wp_ajax_customize_save', array( $this, 'update_image_details' ) );
 		}
 
 		/**
