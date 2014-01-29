@@ -287,13 +287,11 @@ function yst_add_google_fonts() {
 }
 
 /**
- * Enable style filtering for <IE9
+ * Enable style filtering for IE8/9
  */
 function yst_conditional_comments() {
     echo '<!--[if lte IE 9]>';
-        echo '<style type="text/css">';
-            echo '*:after {content:"";padding:0;}';
-        echo '</style>';
+    echo '<link href="' . get_stylesheet_directory_uri() . '/assets/css/old-ie.css" rel="stylesheet" type="text/css">';
     echo '<![endif]-->';
 }
 

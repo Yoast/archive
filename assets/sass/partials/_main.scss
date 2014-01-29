@@ -2486,7 +2486,7 @@ table {
       line-height: 1em;
       @include text-shadow($c_ctaTextShadow 1px 1px 5px);
       &:after {
-        content: '\25B6';
+        content: ' \25B6';
         font: {
             family: "Lucinda Sans Unicode", sans-serif;
             size: 0.6em;
