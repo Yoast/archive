@@ -569,19 +569,22 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				$src = call_user_func( $this->get_url, $src );
 			}
 
-			$image_details = get_theme_mod( $this->context . '_details' );
+			// Delete old details
+			remove_theme_mod( $this->context . '_details' );
+
+			// Barry: I think this can be deleted
+			//$image_details = get_theme_mod( $this->context . '_details' );
 
 			// We might need more image details, so storing these in a separate theme mod for easy access.
 			global $wpdb;
 			$img_att = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid = '%s' LIMIT 1", $src ) );
 			if ( $img_att ) {
 				$image_details = wp_get_attachment_metadata( $img_att );
-			}
 
-			if ( isset ( $image_details ) && ! empty ( $image_details ) && is_array( $image_details ) ) {
-				set_theme_mod( $this->context . '_details', $image_details );
-			}else {
-				remove_theme_mod( $this->context . '_details' );
+				if ( isset ( $image_details ) && ! empty ( $image_details ) && is_array( $image_details ) ) {
+					// Store theme mod
+					set_theme_mod( $this->context . '_details', $image_details );
+				}
 			}
 
 			?>
