@@ -483,6 +483,9 @@ button {
     color: $c_inputSubmitBorder;
   }
   @include box-shadow(inset 0px 0 3px $c_inputSubmitBoxShadow);
+    background: {
+        color: $c_inputSubmitBg;
+    }
   @include background-image(linear-gradient(lighten($c_inputSubmitBg,5%),$c_inputSubmitBg));
   color: $c_inputSubmitText;
   cursor: pointer;
@@ -490,6 +493,9 @@ button {
   position:relative; // if there's a better way to align input and submit, please add 1/2
   top:1px; // if there's a better way to align input and submit, please add 2/2
   &:hover {
+      background: {
+          color: lighten($c_inputSubmitBg,5%);
+      }
     @include background-image(linear-gradient($c_inputSubmitBg,lighten($c_inputSubmitBg,5%)));
   }
   &[disabled] {
@@ -678,7 +684,10 @@ textarea {
     > a:after // set up the top level arrows first
     {
       content: '▼';
-      font-size: .5em;
+        font: {
+            family: "Lucinda Sans Unicode", sans-serif;
+            size: 0.5em;
+        }
       vertical-align: middle;
       padding: {
         left: 5px;
@@ -786,9 +795,10 @@ textarea {
       > a:after // set up the downward arrow for top level items
       {
         content: ' ▶';
-        font: {
-          size: .5em;
-        }
+          font: {
+              family: "Lucinda Sans Unicode", sans-serif;
+              size: 0.5em;
+          }
         vertical-align: middle;
         padding: {
           left: 5px;
@@ -1642,9 +1652,9 @@ table {
         padding: {
           left: 5px;
         }
-        font: {
-          size:1.2em;
-        }
+          font: {
+              family: "Lucinda Sans Unicode", sans-serif;
+          }
       }
     }
   }
@@ -2210,6 +2220,9 @@ table {
           text-decoration:none;
           &:after {
             content: " »";
+              font: {
+                  family: "Lucinda Sans Unicode", sans-serif;
+              }
           }
           &:hover {
             text: {
@@ -2361,9 +2374,9 @@ table {
           left: 5px;
           top: 1px;
         }
-        font: {
-          size: 1.2em;
-        }
+          font: {
+              family: "Lucinda Sans Unicode", sans-serif;
+          }
         color: $c_sidebarLinkArrow;
       }
       &:hover {
@@ -2475,14 +2488,17 @@ table {
       &:after {
         content: '\25B6';
         font: {
-            family: "lucinda sans unicode", sans-serif;
+            family: "Lucinda Sans Unicode", sans-serif;
+            size: 0.6em;
         }
         padding: {
           left: 5px;
-          top: 1px;
         }
       }
       &:hover {
+        background: {
+            color: lighten($c_ctaBg,10%);
+        }
         @include background-image(linear-gradient($c_ctaBg,lighten($c_ctaBg,10%)));
         color: $c_ctaTextWhite;
       }
@@ -2884,6 +2900,9 @@ table {
   .more {
     a:after {
       content: " »";
+        font: {
+            family: "Lucinda Sans Unicode", sans-serif;
+        }
     }
   }
 }
