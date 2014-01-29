@@ -572,13 +572,14 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			$image_details = get_theme_mod( $this->context . '_details' );
 
 			// We might need more image details, so storing these in a separate theme mod for easy access.
-			if ( ! $image_details || ! is_array( $image_details ) ) {
-				global $wpdb;
-				$img_att = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid = '%s' LIMIT 1", $src ) );
-				if ( $img_att ) {
-					$image_details = wp_get_attachment_metadata( $img_att );
-					set_theme_mod( $this->context . '_details', $image_details );
-				}
+			global $wpdb;
+			$img_att = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid = '%s' LIMIT 1", $src ) );
+			if ( $img_att ) {
+				$image_details = wp_get_attachment_metadata( $img_att );
+			}
+
+			if ( ! $image_details || empty ( $image_details ) || ! is_array( $image_details ) ) {
+				set_theme_mod( $this->context . '_details', $image_details );
 			}
 
 			?>
