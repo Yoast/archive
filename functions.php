@@ -602,7 +602,7 @@ function yst_display_logo() {
 		$yst_mobile_logo_details = get_theme_mod( 'yst_mobile_logo_details' );
 
 		$use_alt_positioning = false;
-		if ( isset( $yst_mobile_logo_details ) && is_array( $yst_mobile_logo_details ) && ( $yst_mobile_logo_details['width'] > 230 || $yst_mobile_logo_details['height'] > 36 ) ) {
+		if ( isset( $yst_mobile_logo_details ) && is_array( $yst_mobile_logo_details ) && ( ( 230 < $yst_mobile_logo_details['width'] ) || ( 36 < $yst_mobile_logo_details['height'] ) ) ) {
 			$use_alt_positioning = true;
 		}
 
@@ -613,7 +613,7 @@ function yst_display_logo() {
 			if ( is_user_logged_in() ) {
 				$mobile_logo_height -= 46;
 			}
-			$css .= '@media(max-width: 640px){.site-container {padding-top:' . $mobile_logo_height . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
+			$css .= '@media(max-width: 640px){.alt-mobile-logo {padding-top:' . $mobile_logo_height . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
 		}
 	}
 
@@ -998,3 +998,9 @@ function yst_add_body_class_for_header_style ( $classes ) {
 }
 
 add_action('body_class', 'yst_add_body_class_for_header_style');
+
+function yst_add_div_for_alt_mobile_logo() {
+	echo '<div id="alt-mobile-logo"></div>';
+}
+
+add_action( 'genesis_header', 'yst_add_div_for_alt_mobile_logo', 11 );

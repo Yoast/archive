@@ -578,7 +578,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				$image_details = wp_get_attachment_metadata( $img_att );
 			}
 
-			if ( ! $image_details || empty ( $image_details ) || ! is_array( $image_details ) ) {
+			if ( isset ( $image_details ) && ! empty ( $image_details ) && is_array( $image_details ) ) {
 				set_theme_mod( $this->context . '_details', $image_details );
 			}
 
