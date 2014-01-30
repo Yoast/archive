@@ -37,9 +37,6 @@ class Yoast_Theme_Customizer {
 		// Set context
 		$context = 'yst_mobile_logo_details';
 
-		// Delete details
-		remove_theme_mod( $context );
-
 		// Set src
 		if ( ! empty( $customized->yst_mobile_logo ) ) {
 			$src = $customized->yst_mobile_logo;
@@ -55,6 +52,9 @@ class Yoast_Theme_Customizer {
 					set_theme_mod( $context, $image_details );
 				}
 			}
+		} else {
+			// Delete details
+			remove_theme_mod( $context );
 		}
 
 	}
