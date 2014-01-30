@@ -12,8 +12,7 @@
 // cta                  #6bbd1e
 // footer               #e2e2e2
 
-// #yoast-after-header-container check in list
-$c_ListCheckImage:      "../images/li-check-IceBlue.png";
+$c_sprite:              "sprite-IceBlue.png";
 
 // general
 $c_bodyTopLine:         #efd4dc;
@@ -159,13 +158,15 @@ $c_inputSubmitBoxShadow:  #ffffff;
 // comments
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
+$c_commentHeader:       #666666;
+$c_commentAuthor:       #3f5da1;
 $c_commentLink:         #de8396;
 $c_commentBorder:       #de8396;
 $c_commentReplyBorder:  #dddddd;
-$c_commentByAuthorBg:   #eaf2f7;
+$c_commentByAuthorBg:   #eeeeee;
 
 // author block
-$c_articleAuthorBg:     #eaf2f7;
+$c_articleAuthorBg:     #eeeeee;
 $c_articleAuthorH2:     #de8396;
 $c_articleAuthorH3:     #3f5da1;
 

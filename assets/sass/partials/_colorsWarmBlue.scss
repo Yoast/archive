@@ -12,8 +12,7 @@
 // cta                  #6bbd1e
 // footer               #e2e2e2
 
-// #yoast-after-header-container check in list
-$c_ListCheckImage:      "../images/li-check-WarmBlue.png";
+$c_sprite:              "sprite-WarmBlue.png";
 
 // general
 $c_bodyTopLine:         #ec9e61;
@@ -159,13 +158,15 @@ $c_inputSubmitBoxShadow:  #ffffff;
 // comments
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
+$c_commentHeader:       #666666;
+$c_commentAuthor:       #028aaf;
 $c_commentLink:         #e25918;
 $c_commentBorder:       #e25918;
 $c_commentReplyBorder:  #dddddd;
-$c_commentByAuthorBg:   #eaf2f7;
+$c_commentByAuthorBg:   #eeeeee;
 
 // author block
-$c_articleAuthorBg:     #eaf2f7;
+$c_articleAuthorBg:     #eeeeee;
 $c_articleAuthorH2:     #e25918;
 $c_articleAuthorH3:     #028aaf;
 

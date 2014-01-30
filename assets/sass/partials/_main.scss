@@ -1664,6 +1664,13 @@ table {
   font: {
     weight:700;
   }
+  a:after {
+      content: ' \25b4';
+      font: {
+          family: "Lucinda Sans Unicode", sans-serif;
+          size: 0.5em;
+      }
+  }
 }
 
 
@@ -1890,69 +1897,32 @@ table {
  */
 
 #comments {
-
-  // NOG VERWIJDEREN NA NIEUWE OPZET COMMENTS
-  .avatar {
-    width: 63px;
-  }
-  .depth-2, .depth-3, .depth-4, depth-5 {
-    .avatar {
-      width:40px;
-    }
-  }
-  .comment-author, .comment-meta {
-    display:inline;
-  }
-  // EIND NOG VERWIJDEREN NA NIEUWE OPZET COMMENTS
-
-
-
   background: {
     color: $c_mainBg;
   }
-  .bypostauthor > article {
-    background: {
-      color: $c_commentByAuthorBg;
-    }
-    header {
-      background: {
-        color: $c_commentByAuthorBg;
-      }
-    }
-    padding:10px;
-  }
-  a {
-    font: {
-      weight: 700;
-    }
-  }
-  h3 {
-    margin: {
-      bottom: 24px;
-    }
-  }
-  .comment-author {
-    img {
-      float:left;
-      margin: {
-        right: 16px;
-      }
-    }
-    span {
-      font: {
-        weight: 700;
-      }
-    }
-  }
-  .comment-content {
-    clear:left;
-  }
   .comment-list {
+    div.avatar {
+      float: left;
+      width: $d_avatarDept2345;
+      margin: {
+        right:10px;
+        top: 7px;
+      }
+    }
+    .comment-content {
+      float:left;
+      width: 75%;
+    }
     li {
       list-style-type: none;
       article {
         margin: {
-          bottom:24px;
+            bottom:24px;
+        }
+      }
+      &.depth-1 {
+        div.avatar {
+          width: $d_avatarDept1;
         }
       }
       &.depth-2,
@@ -1960,7 +1930,10 @@ table {
       &.depth-4,
       &.depth-5 {
         margin: {
-          left:10px;
+            left:40px;
+        }
+        div.avatar {
+          width: $d_avatarDept2345;
         }
       }
     }
@@ -1972,14 +1945,74 @@ table {
         &[type="email"],
         &[type="text"],
         &[type="url"] {
-          width: 50%;
+            width: 50%;
         }
       }
       label {
         display: block;
         margin: {
-          right: 12px;
+            right: 12px;
         }
+      }
+    }
+  }
+  .bypostauthor > article {
+    background: {
+      color: $c_commentByAuthorBg;
+    }
+    header {
+      background: {
+        color: $c_commentByAuthorBg; // same as above
+      }
+    }
+    padding:10px;
+  }
+  a {
+    font: {
+      weight: 700;
+    }
+  }
+  time {
+    a {
+      color: $c_commentHeader;
+      &:hover {
+        text: {
+          decoration:none;
+        }
+      }
+    }
+    span {}
+  }
+  h3 {
+    margin: {
+      bottom: 24px;
+    }
+  }
+  .comment-header {
+    font: {
+      size:14px;
+      weight: 700;
+    }
+    color: $c_commentHeader;
+    p {
+      margin: {
+        bottom: 0;
+      }
+    }
+  }
+  .comment-author {
+    .post_author_comment {
+      background: {
+        image: image-url($c_sprite);
+        repeat:no-repeat;
+        position: -72px 0;
+      }
+      color: $c_commentAuthor;
+      padding: {
+        left: 16px;
+      }
+      margin: {
+        left: 10px;
       }
     }
   }
@@ -2201,11 +2234,14 @@ table {
   }
   li {
     list: {
-      style: {
-        image: url($c_ListCheckImage);
-      }
+      style: none;
     }
-    margin: {
+    background: {
+      image: image-url($c_sprite);
+      position: 0 -29px;
+      repeat:no-repeat;
+    }
+    padding: {
       left: 24px;
     }
   }
@@ -2538,6 +2574,10 @@ table {
       &[type="submit"] {
         font: {
           size: 12px;
+        }
+        padding: {
+          top:11px;
+          bottom:7px;
         }
       }
     }
@@ -3379,7 +3419,7 @@ img#wpstats {
     &#sidr-left {
       float: left;
       margin:2px 0;
-      background: image-url('hamburger.png') 7px 10px no-repeat;
+      background: image-url($c_sprite) 0 0 no-repeat;
       border: {
         right: {
           width:2px;
@@ -3391,7 +3431,7 @@ img#wpstats {
     &#sidr-right {
       float: right;
       margin:2px 0;
-      background: image-url('search.png') 6px 8px no-repeat;
+      background: image-url($c_sprite) -36px 0 no-repeat;
       border: {
         left: {
           width:2px;

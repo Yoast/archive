@@ -12,8 +12,7 @@
 // cta                  #28a0ff
 // footer               #e2e2e2
 
-// #yoast-after-header-container check in list
-$c_ListCheckImage:      "../images/li-check-Autumn.png";
+$c_sprite:              "sprite-Autumn.png";
 
 // general
 $c_bodyTopLine:         #e0e7c3;
@@ -159,13 +158,15 @@ $c_inputSubmitBoxShadow:  #ffffff;
 // comments
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
+$c_commentHeader:       #666666;
+$c_commentAuthor:       #71983f;
 $c_commentLink:         #e17816;
 $c_commentBorder:       #e17816;
 $c_commentReplyBorder:  #dddddd;
-$c_commentByAuthorBg:   #eaf2f7;
+$c_commentByAuthorBg:   #eeeeee;
 
 // author block
-$c_articleAuthorBg:     #eaf2f7;
+$c_articleAuthorBg:     #eeeeee;
 $c_articleAuthorH2:     #e17816;
 $c_articleAuthorH3:     #71983f;
 

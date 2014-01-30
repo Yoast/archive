@@ -12,8 +12,7 @@
 // cta                  #28a0ff
 // footer               #e2e2e2
 
-// #yoast-after-header-container check in list
-$c_ListCheckImage:      "../images/li-check-BusinessBlue.png";
+$c_sprite:              "sprite-BusinessBlue.png";
 
 // general
 $c_bodyTopLine:         #c91331;
@@ -159,13 +158,15 @@ $c_inputSubmitBoxShadow:  #ffffff;
 // comments
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
+$c_commentHeader:       #666666;
+$c_commentAuthor:       #c91331;
 $c_commentLink:         #494794;
 $c_commentBorder:       #494794;
 $c_commentReplyBorder:  #dddddd;
-$c_commentByAuthorBg:   #eaf2f7;
+$c_commentByAuthorBg:   #eeeeee;
 
 // author block
-$c_articleAuthorBg:     #eaf2f7;
+$c_articleAuthorBg:     #eeeeee;
 $c_articleAuthorH2:     #494794;
 $c_articleAuthorH3:     #211f6c;
 

@@ -27,5 +27,10 @@
         }
     }
 }
+.back-to-top {
+    a:after {
+        content: '';
+    }
+}
 
 

@@ -12,7 +12,7 @@
 // cta                  #28a0ff
 // footer               #e2e2e2
 
-$c_ListCheckImage:      "../images/li-check-Cupcake.png";
+$c_sprite:              "sprite-Cupcake.png";
 
 // general
 $c_bodyTopLine:         #efceba;
@@ -158,13 +158,15 @@ $c_inputSubmitBoxShadow:  #ffffff;
 // comments
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
+$c_commentHeader:       #666666;
+$c_commentAuthor:       #2a9ea5;
 $c_commentLink:         #cf4265;
 $c_commentBorder:       #cf4265;
 $c_commentReplyBorder:  #dddddd;
-$c_commentByAuthorBg:   #eaf2f7;
+$c_commentByAuthorBg:   #eeeeee;
 
 // author block
-$c_articleAuthorBg:     #eaf2f7;
+$c_articleAuthorBg:     #eeeeee;
 $c_articleAuthorH2:     #cf4265;
 $c_articleAuthorH3:     #2a9ea5;
 

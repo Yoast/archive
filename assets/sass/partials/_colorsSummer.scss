@@ -12,8 +12,7 @@
 // cta                  #6bbd1e
 // footer               #e2e2e2
 
-// #yoast-after-header-container check in list
-$c_ListCheckImage:      "../images/li-check-Summer.png";
+$c_sprite:              "sprite-Summer.png";
 
 // general
 $c_bodyTopLine:         #eaf6f4;
@@ -159,13 +158,15 @@ $c_inputSubmitBoxShadow:  #ffffff;
 // comments
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
+$c_commentHeader:       #666666;
+$c_commentAuthor:       #1799b8;
 $c_commentLink:         #f6aa51;
 $c_commentBorder:       #f6aa51;
 $c_commentReplyBorder:  #dddddd;
-$c_commentByAuthorBg:   #eaf2f7;
+$c_commentByAuthorBg:   #eeeeee;
 
 // author block
-$c_articleAuthorBg:     #eaf2f7;
+$c_articleAuthorBg:     #eeeeee;
 $c_articleAuthorH2:     #f6aa51;
 $c_articleAuthorH3:     #1799b8;
 

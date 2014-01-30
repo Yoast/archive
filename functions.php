@@ -517,7 +517,7 @@ function yst_change_search_text() {
  * @fixme If there is a better solid way to do this or Genesis fixes this feature, use that
  */
 function yst_add_backtotop() {
-	echo '<p class="back-to-top"><a href="#">' . __( 'Back to top', 'yoast-theme' ) . ' &#9652;</a></p>';
+	echo '<p class="back-to-top"><a href="#">' . __( 'Back to top', 'yoast-theme' ) . '</a></p>';
 }
 
 /**
@@ -644,6 +644,7 @@ function yst_comment_list_args( $args ) {
  * @param integer  $depth
  */
 function yst_comment_callback( $comment, $args, $depth ) {
+    global $post;
 	$GLOBALS['comment'] = $comment; ?>
 
 <li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
@@ -664,9 +665,15 @@ function yst_comment_callback( $comment, $args, $depth ) {
 
 				printf( 'By <span itemprop="name">%s</span> ', $author );
 
-				$pattern = '<time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
+				$pattern = 'on <time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
 				printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
-				?>
+
+                if ( $comment->user_id === $post->post_author ) {
+                echo ' <span class="post_author_comment">' . __( 'Author', 'yoast-theme' ) . '</span>';
+                }
+
+                ?>
+
 			</p>
 		</header>
 		<div class="avatar">
@@ -693,6 +700,7 @@ function yst_comment_callback( $comment, $args, $depth ) {
 				?>
 			</p>
 		</div>
+        <div class="clearfloat"></div>
 
 		<?php do_action( 'genesis_after_comment' ); ?>
 
