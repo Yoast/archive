@@ -1973,9 +1973,10 @@ table {
 }
 .entry-header {
   .entry-meta {
-    margin: {
-      top: 5px;
-    }
+		margin: {
+			top: 5px;
+			bottom: 5px;
+		}
     .entry-author-name {
       text-transform: capitalize;
 			font: {
