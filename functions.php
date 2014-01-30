@@ -245,6 +245,11 @@ function child_theme_setup() {
 function yst_archive_image() {
 	global $post;
 
+	// No inline image on full-width
+	if ( 'full-width-content' == genesis_site_layout() ) {
+		return;
+	}
+
 	// Set correct image alignment
 	$align = 'left';
 	if ( 'sidebar-content' == genesis_site_layout() ) {
