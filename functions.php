@@ -604,7 +604,7 @@ function yst_display_logo() {
 	if ( ! empty( $css ) ) {
 		echo '<style id="tailor-made-inline-css">' . $css . '</style>';
         echo '<!--[if lte IE 8]>';
-        echo '<style type="text/css">.site-header .title-area {background-image: url(' . $logo . ');</style>';
+        echo '<style type="text/css">.site-header .title-area {background-image: url(' . $logo . '); a#sidr-left, a#sidr-right {display:none;} </style>';
         echo '<![endif]-->';
 	}
 }
