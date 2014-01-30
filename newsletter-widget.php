@@ -124,7 +124,7 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 		public function form( $instance ) {
 
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
-			echo '<p class="ssl_hint">' . __( 'We suggest you use SSL for all forms. Read more about setting up SSL on', 'yoast-theme' ) . '<a href="http://yoast.com/wordpress-ssl-setup/" alt="WordPress SSL Setup by Yoast" target="_blank">Yoast.com</a>.</p>';
+			echo '<p class="ssl_hint">' . __( 'We suggest you use SSL for all forms. Read more about setting up SSL on', 'yoast-theme' ) . ' <a href="http://yoast.com/wordpress-ssl-setup/" alt="WordPress SSL Setup by Yoast" target="_blank">Yoast.com</a>.</p>';
 
 			foreach ( $this->vars as $var => $label ) {
 				$varlabel = $label;
