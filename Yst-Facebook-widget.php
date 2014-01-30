@@ -211,10 +211,10 @@ class YST_Facebook_Widget extends WP_Widget {
 		}
 
 		if ( $instance['data_colorscheme'] === 'dark' ) {
-			$class = 'class="fb-like-box fb-dark-bg widget"';
+			$class = 'class="fb-like-box fb-dark-bg"';
 		}
 		else {
-			$class = 'class="fb-like-box fb-light-bg widget"';
+			$class = 'class="fb-like-box fb-light-bg"';
 		}
 
 		?>
