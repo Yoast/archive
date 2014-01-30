@@ -144,6 +144,25 @@ function child_theme_setup() {
 		}
 	}
 
+	/**
+	 * Opens div to fix borders in mobile menu
+	 */
+	function yst_add_open_div_for_mobile_menu_borders() {
+		echo '<div id="mobile-menu-helper">';
+	}
+
+	add_action( 'genesis_header', 'yst_add_open_div_for_mobile_menu_borders', 11 );
+
+	/**
+	 * 	 Closes div to fix borders in mobile menu
+	 */
+	function yst_add_close_div_for_mobile_menu_borders() {
+		echo '<div class="clearfloat"></div></div>';
+	}
+
+	add_action( 'genesis_header', 'yst_add_close_div_for_mobile_menu_borders', 12 );
+
+
 	add_image_size( 'archive-thumb', 180, 120, true );
 	add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
 	add_image_size( 'fullwidth-thumb', 290, 193, true );
@@ -158,7 +177,7 @@ function child_theme_setup() {
 	add_action( 'wp_enqueue_scripts', 'yst_add_google_fonts' );
 	add_action( 'wp_enqueue_scripts', 'yst_include_sidr' );
 
-	add_action( 'genesis_header', 'yst_mobile_nav' );
+	add_action( 'genesis_header', 'yst_mobile_nav', 11 );
 	add_action( 'wp_head', 'yst_display_logo', 25 );
 	add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
 
@@ -311,7 +330,7 @@ function yst_tagline() {
 				( is_404() && get_theme_mod( 'yst_tagline_404' ) ) ||
 				( is_attachment() && get_theme_mod( 'yst_tagline_attachment' ) )
 		) {
-			add_action( 'genesis_header', 'yst_show_tagline', 11 );
+			add_action( 'genesis_header', 'yst_show_tagline', 13 );
 		}
 	}
 }
@@ -600,7 +619,6 @@ function yst_display_logo() {
 	$mobile_logo = get_theme_mod( 'yst_mobile_logo' );
 	if ( isset ( $mobile_logo ) ) {
 		$yst_mobile_logo_details = get_theme_mod( 'yst_mobile_logo_details' );
-
 		$use_alt_positioning = false;
 		if ( isset( $yst_mobile_logo_details ) && is_array( $yst_mobile_logo_details ) && ( ( 230 < $yst_mobile_logo_details['width'] ) || ( 36 < $yst_mobile_logo_details['height'] ) ) ) {
 			$use_alt_positioning = true;
@@ -609,11 +627,9 @@ function yst_display_logo() {
 		if ( ! $use_alt_positioning ) {
 			$css .= '@media(max-width: 640px){header.site-header {background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;	}}';
 		} else {
-			$mobile_logo_height = $yst_mobile_logo_details['height'] - 41;
-			if ( is_user_logged_in() ) {
-				$mobile_logo_height -= 46;
-			}
-			$css .= '@media(max-width: 640px){.alt-mobile-logo {padding-top:' . $mobile_logo_height . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
+			$mobile_logo_height = $yst_mobile_logo_details['height'];
+			$center_wrapper_margin = $mobile_logo_height + 40;
+			$css .= '@media(max-width: 640px){#center-wrapper { margin-top:' . absint($center_wrapper_margin) . 'px; } #alt-mobile-logo {clear: left; padding-top:' . absint($mobile_logo_height) . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
 		}
 	}
 
@@ -1003,4 +1019,4 @@ function yst_add_div_for_alt_mobile_logo() {
 	echo '<div id="alt-mobile-logo"></div>';
 }
 
-add_action( 'genesis_header', 'yst_add_div_for_alt_mobile_logo', 11 );
+add_action( 'genesis_header', 'yst_add_div_for_alt_mobile_logo', 13 );
