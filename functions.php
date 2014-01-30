@@ -560,7 +560,6 @@ function yst_filter_content_archive_image( $img, $args ) {
 			$img = str_replace( 'alignleft', 'alignright', $img );
 		}
 	}
-
 	return $img;
 }
 
@@ -578,7 +577,7 @@ function yst_display_logo() {
 	// Normal logo
 	$logo = get_theme_mod( 'yst_logo' );
 	if ( isset( $logo ) && ! empty ( $logo ) ) {
-		$css .= '@media(min-width: 640px){.site-header .title-area {background-image: url(' . $logo . ');}}';
+        $css .= '@media(min-width: 640px){.site-header .title-area {background-image: url(' . $logo . ');}}';
 	}
 
 	// Mobile logo, positioning depends on whether the logo is wider than 230px and / or higher than 36px, if it is, alternate positioning is used.
@@ -604,6 +603,9 @@ function yst_display_logo() {
 
 	if ( ! empty( $css ) ) {
 		echo '<style id="tailor-made-inline-css">' . $css . '</style>';
+        echo '<!--[if lte IE 8]>';
+        echo '<style type="text/css">.site-header .title-area {background-image: url(' . $logo . ');</style>';
+        echo '<![endif]-->';
 	}
 }
 
