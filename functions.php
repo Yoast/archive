@@ -107,7 +107,7 @@ function child_theme_setup() {
 			add_action( 'genesis_sidebar', 'yoast_do_fullwidth_sidebars' );
 
 			// Move the featured image to the right
-			add_action( 'genesis_entry_header', 'yst_image_full_width', 15 );
+			add_action( 'genesis_after_entry_content', 'yst_image_full_width', 15 );
 		}
 	}
 
@@ -138,7 +138,7 @@ function child_theme_setup() {
 
 		$thumbnail = get_the_post_thumbnail( null, 'fullwidth-thumb' );
 		if ( $thumbnail ) {
-			echo '<div class="alignright thumb">';
+			echo '<div class="thumb full-width-thumb">';
 			echo $thumbnail;
 			echo '</div>';
 		}

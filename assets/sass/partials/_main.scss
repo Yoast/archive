@@ -1930,6 +1930,18 @@ table {
       max-width:$d_mainColumn;
     }
   }
+	&.home .entry-content {
+//		max-width: 656px;
+		padding-right: 75px;
+		float: left;
+		p, .excerpt_readmore {
+			width: 100%; max-width: 100%;
+		}
+	}
+	&.home .full-width-thumb {
+		max-width: 290px;
+		float: left;
+	}
 }
 .quote-caption {
   margin: {
