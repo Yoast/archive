@@ -3548,6 +3548,12 @@ img#wpstats {
 	}
 }
 
+/******** Alt mobile logo ******/
+.alt-mobile-logo {
+	display: none;
+	visibility: hidden;
+}
+
 body.menu-at-top {
 	border: none;
 	.wrap {
@@ -3976,9 +3982,6 @@ body.menu-at-top {
   }
   header {
     &.site-header {
-      border: {
-        bottom: 8px solid $c_navMainBorderBottom;
-      }
       display: inline-block;
       text-indent: -10000px;
       z-index: 13;
@@ -4065,9 +4068,6 @@ body.menu-at-top {
 		.tagline_top {
 			line-height: 3em;
 			vertical-align: middle;
-			border: {
-				top: 8px solid $c_navMainBorderBottom;
-			}
 		}
 		&.header-dark {
 			.tagline_top {
@@ -4087,9 +4087,6 @@ body.menu-at-top {
 		}
 		header {
 			&.site-header {
-				border: {
-					bottom: 3px solid $c_taglineBorderMobile;
-				}
 				background: {
 					position-x: 50%;
 					position-y: 5px;
@@ -4098,6 +4095,16 @@ body.menu-at-top {
 		}
 	}
 /* end mobile menu */
+	#mobile-menu-helper {
+		border: {
+			bottom: 8px solid $c_navMainBorderBottom;
+		}
+	}
+	#alt-mobile-logo {
+		border: {
+			bottom: 2px solid $c_taglineBorderMobile;
+		}
+	}
 }
 @media (max-width: 512px) {
   .sidebar-primary {
