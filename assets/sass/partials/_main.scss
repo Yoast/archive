@@ -1851,6 +1851,17 @@ table {
     }
   }
 }
+
+.sidebar-content {
+	.entry-content {
+		.excerpt_readmore {
+			text: {
+				align: left;
+			}
+		}
+	}
+}
+
 .back-to-top {
   text-align:right;
   font: {
