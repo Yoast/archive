@@ -248,7 +248,7 @@ header {
   margin: 0 auto;
   //max-width: $d_full;
   padding: {
-    top: 12px;
+    top: 32px;
   }
 	aside {
 		margin: {
@@ -3857,6 +3857,9 @@ body.menu-at-top {
       top: 2em;
     }
   }
+	.yst-archive-image-link {
+		display: none;
+	}
 
   .content-sidebar,
   .sidebar-content {
@@ -3963,6 +3966,9 @@ body.menu-at-top {
 		margin: {
 			left: 3%;
 			right: 3%;
+		}
+		padding: {
+			top: 102px;
 		}
 		.content-sidebar-wrap {
 			margin: 0;
@@ -4114,6 +4120,7 @@ body.menu-at-top {
   }
 }
 
+/*
 @media (max-width: 480px) {
 	.blog {
 		.entry-content {
@@ -4136,6 +4143,7 @@ body.menu-at-top {
 		}
 	}
 }
+*/
 
 @media (max-width: 330px) {
   .entry {
