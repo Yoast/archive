@@ -223,7 +223,7 @@ function child_theme_setup() {
 	add_filter( 'genesis_pre_get_option_breadcrumb_404', 'yst_override_breadcrumb_404' );
 	add_filter( 'genesis_pre_get_option_breadcrumb_attachment', 'yst_override_breadcrumb_attachment' );
 
-	add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
+	//add_filter( 'genesis_get_image', 'yst_filter_content_archive_image', 10, 2 );
 
 	add_filter( 'user_contactmethods', 'yst_modify_contact_methods' );
 	add_filter( 'genesis_post_meta', 'yst_post_meta_filter' );
@@ -245,10 +245,16 @@ function child_theme_setup() {
 function yst_archive_image() {
 	global $post;
 
+	// Set correct image alignment
+	$align = 'left';
+	if ( 'sidebar-content' == genesis_site_layout() ) {
+		$align = 'right';
+	}
+
 	//setup thumbnail image args to be used with genesis_get_image();
 	$size = 'yst-archive-thumb'; // Change this to whatever add_image_size you want
 	$default_attr = array(
-			'class' => "alignleft attachment-$size $size",
+			'class' => "align{$align} attachment-{$size} {$size}",
 			'alt'   => $post->post_title,
 			'title' => $post->post_title,
 	);
@@ -615,6 +621,7 @@ function yst_modify_contact_methods( $profile_fields ) {
  *
  * @return string Image HTML output.
  */
+/*
 function yst_filter_content_archive_image( $img, $args ) {
 	if ( 'sidebar-content' == genesis_site_layout() || 'full-width-content' == genesis_site_layout() ) {
 		if ( 'archive' == $args['context'] ) {
@@ -624,6 +631,7 @@ function yst_filter_content_archive_image( $img, $args ) {
 
 	return $img;
 }
+*/
 
 /**
  * Use the logo's set in the Child Theme Settings
