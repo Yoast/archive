@@ -602,6 +602,9 @@ button {
     style: solid;
     color: $c_inputSubmitBorder;
   }
+	background: {
+		color: $c_inputSubmitBg;
+	}
   @include box-shadow(inset 0px 0 3px $c_inputSubmitBoxShadow);
   @include background-image(linear-gradient(lighten($c_inputSubmitBg,5%),$c_inputSubmitBg));
   color: $c_inputSubmitText;
@@ -610,6 +613,9 @@ button {
   position:relative; // if there's a better way to align input and submit, please add 1/2
   top:1px; // if there's a better way to align input and submit, please add 2/2
   &:hover {
+		background: {
+			color: $c_inputSubmitBg;
+		}
     @include background-image(linear-gradient($c_inputSubmitBg,lighten($c_inputSubmitBg,5%)));
   }
   &[disabled] {
@@ -770,6 +776,9 @@ textarea {
   }
   line-height: 1.5;
   width: 100%;
+	background: {
+		color: $c_navMainBg;
+	}
 	@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
 	@include box-shadow(0px 1px 5px $c_navMainLinkShadow);
   .menu-item {
@@ -848,6 +857,9 @@ textarea {
     }
     &:hover {
       color: $c_navMainLinkHover;
+			background: {
+				color: $c_navMainBgActive;
+			}
 			@include background-image(linear-gradient($c_navMainBgActive, darken($c_navMainBgActive,10%)));
 //      background: {
 //        color: $c_navMainLinkBgHover;
@@ -862,6 +874,9 @@ textarea {
     > a {
       color: $c_navSubLink;
       text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+			background: {
+				color: $c_navMainBgActive;
+			}
 			@include background-image(linear-gradient($c_navMainBgActive, darken($c_navMainBgActive,10%)));
 			font: {
 				weight: 700;
@@ -907,6 +922,9 @@ textarea {
       }
     }
     > .menu-item {
+			background: {
+				color: $c_navSubLinkBgHover;
+			}
 			@include background-image(linear-gradient($c_navSubLinkBgHover, darken($c_navSubLinkBgHover, 10%)));
       > a:after // set up the downward arrow for top level items
       {
@@ -1062,9 +1080,9 @@ textarea {
           border-top: none;
           line-height: 45px;
           color: $c_sidr_linkHoverText;
-//          background: {
-//            color: $c_sidr_linkHoverBg;
-//          }
+          background: {
+            color: $c_sidr_linkHoverBg;
+          }
 					@include background-image(linear-gradient($c_sidr_linkHoverBg, darken($c_sidr_linkHoverBg,10%)));
         }
         &.active,
@@ -1276,6 +1294,9 @@ body.sticky-menu {
     padding: 0;
    	border: none;
     margin: 0px;
+		background: {
+			color: $c_navMainBg;
+		}
 		@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
 		.wrap {
 			width: 100%;
@@ -2786,7 +2807,6 @@ table {
 			background: {
 				color: $c_ctaBg;
 			}
-      //@include background-image(linear-gradient(lighten($c_ctaBg,10%),$c_ctaBg));
       color: $c_ctaTextWhite;
       font: {
         size: $f_ctaText-px;
@@ -2802,6 +2822,9 @@ table {
         }
       }
       &:hover {
+				background: {
+					color: $c_ctaBg;
+				}
         @include background-image(linear-gradient(lighten($c_ctaBg,10%), $c_ctaBg));
         color: $c_ctaTextWhite;
       }
@@ -3043,7 +3066,7 @@ table {
     min-width: 20px;
     float: right;
     background: {
-      color: $c_ctaBgGrey; // fallback
+      color: $c_ctaBgGrey;
     }
     @include background-image(linear-gradient($c_ctaBgGrey, $c_ctaBgWhite));
     vertical-align: bottom;
@@ -3571,6 +3594,9 @@ body.menu-at-top {
 		max-width: none;
 		clear: both;
 		margin: 0px auto;
+		background: {
+			color: $c_navMainBg;
+		}
 		@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
 		.genesis-nav-menu {
 			@include box-shadow(none);
@@ -3967,9 +3993,6 @@ body.menu-at-top {
 			left: 3%;
 			right: 3%;
 		}
-		padding: {
-			top: 102px;
-		}
 		.content-sidebar-wrap {
 			margin: 0;
 		}
@@ -4068,7 +4091,7 @@ body.menu-at-top {
 		text-align: center;
 	}
 	#center-wrapper {
-		margin: 0px;
+		margin: 0px auto;
 	}
 	.show_tagline {
 		.tagline_top {
