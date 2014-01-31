@@ -359,6 +359,17 @@ header {
 		}
 	}
 }
+.menu-at-top {
+	#afterheader-content-wrapper {
+		border: {
+			top: {
+				color: $c_bodyLine;
+				width:2px;
+				style:solid;
+			}
+		}
+	}
+}
 
 /**
  * Title Area

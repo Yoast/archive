@@ -1066,7 +1066,7 @@ add_action( 'genesis_after_content_sidebar_wrap', 'yst_close_div_after_content' 
 function yst_move_nav_to_top() {
 	if ( get_theme_mod( 'yst_nav_positioner' ) == 'top' ) {
 		remove_action( 'genesis_after_header', 'genesis_do_nav' );
-		add_filter( 'body_class', 'yst_add_body_class' );
+		add_filter( 'body_class', 'yst_add_body_class_for_nav' );
 		add_action( 'genesis_before', 'genesis_do_nav' );
 	}
 }
