@@ -242,15 +242,20 @@ function child_theme_setup() {
 	add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
 	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
 
-	//add_filter( 'genesis_do_nav', 'yst_add_search_in_nav', 90 );
-
 	add_action( 'genesis_header_right', 'yst_header_search' );
+
+	add_filter( 'comment_form_defaults', 'yst_change_comment_form_submit_button_text' );
 
 	// Integration between Genesis and theme customizer
 	add_filter( 'genesis_pre_get_option_site_layout', 'get_site_layout_from_theme_mod' );
 	add_action( 'genesis_admin_before_metaboxes', 'remove_genesis_settings_boxes' );
 
 	add_action( 'genesis_before_entry_content', 'yst_single_image' );
+}
+
+function yst_change_comment_form_submit_button_text( $defaults ) {
+	$defaults['label_submit'] = 'Post Comment »';
+	return $defaults;
 }
 
 /**
