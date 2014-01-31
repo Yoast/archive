@@ -3750,6 +3750,9 @@ body.menu-at-top {
   .site-header {
 		.wrap {
 			.tagline_top {
+				border: {
+					bottom: 1px solid $c_taglineBorderMobile;
+				}
 				text-overflow: clip;
 				width: auto;
 			}
@@ -4149,12 +4152,26 @@ body.menu-at-top {
 /* end mobile menu */
 	#mobile-menu-helper {
 		border: {
-			bottom: 8px solid $c_navMainBorderBottom;
+			bottom: 10px solid $c_navMainBorderBottom;
 		}
 	}
 	#alt-mobile-logo {
 		border: {
-			bottom: 2px solid $c_taglineBorderMobile;
+			bottom: 1px solid $c_taglineBorderMobile;
+		}
+	}
+	.header-dark {
+		#alt-mobile-logo {
+			background: {
+				color: $c_headerBgDark;
+			}
+		}
+	}
+	.header-light {
+		#alt-mobile-logo {
+			background: {
+				color: $c_headerBgLight;
+			}
 		}
 	}
 }

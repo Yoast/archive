@@ -669,7 +669,7 @@ function yst_display_logo() {
 		} else {
 			$mobile_logo_height = $yst_mobile_logo_details['height'];
 			$center_wrapper_margin = $mobile_logo_height + 40;
-			$css .= '@media(max-width: 640px){#center-wrapper { margin-top:' . absint($center_wrapper_margin) . 'px; } #alt-mobile-logo {clear: left; padding-top:' . absint($mobile_logo_height) . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;background-size: auto;}}';
+			$css .= '@media(max-width: 640px){#center-wrapper { margin-top:' . absint($center_wrapper_margin) . 'px; } #alt-mobile-logo {clear: left; padding-top:' . absint($mobile_logo_height + 20) . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 10px;background-size: auto;}}';
 		}
 	}
 
