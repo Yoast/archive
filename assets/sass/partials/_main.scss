@@ -421,6 +421,12 @@ header {
 }
 
 .full-width-content {
+  .entry-content,
+  .entry-header,
+  .back-to-top {
+    margin:0 auto;
+    width: $d_mainColumn;
+  }
   .content {
     width: 100%;
   }
