@@ -54,6 +54,9 @@ function child_theme_setup() {
 	genesis_unregister_layout( 'sidebar-sidebar-content' );
 	genesis_unregister_layout( 'sidebar-content-sidebar' );
 
+	// Remove unused sidebars
+	unregister_sidebar( 'sidebar-alt' );
+
 	/** Register widget areas */
 	genesis_register_sidebar( array(
 		'id'          => 'yoast-after-header-1',
