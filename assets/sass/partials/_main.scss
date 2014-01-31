@@ -3500,6 +3500,19 @@ img#wpstats {
         margin:0;
       }
     }
+    .entry-content {
+      img.alignleft {
+        margin: {
+          left: 0;
+        }
+      }
+      img.alignright {
+        margin: {
+         right: 0;
+        }
+      }
+    }
+
   }
   .sidebar {
     .widget-wrap {
