@@ -212,9 +212,6 @@ figure {
   margin:0;
 }
 header {
-//  background: {
-//    color: $c_mainBg;
-//  }
   .wrap {
     padding: 40px 0;
   }
@@ -246,7 +243,6 @@ header {
   @extend .floatclearing;
   clear: both;
   margin: 0 auto;
-  //max-width: $d_full;
   padding: {
     top: 32px;
   }
@@ -1349,22 +1345,6 @@ body.sticky-menu {
 			}
     }
   }
-}
-body.sticky-menu.header-dark {
-	.site-header {
-			background: {
-				position: center -30px;
-				color: $c_headerBgDark;
-			}
-	}
-}
-body.sticky-menu.header-light {
-	.site-header {
-		background: {
-			position: center -30px;
-			color: $c_headerBgLight;
-		}
-	}
 }
 
 /**
@@ -3750,9 +3730,6 @@ body.menu-at-top {
   .site-header {
 		.wrap {
 			.tagline_top {
-				border: {
-					bottom: 1px solid $c_taglineBorderMobile;
-				}
 				text-overflow: clip;
 				width: auto;
 			}
@@ -3941,9 +3918,6 @@ body.menu-at-top {
   .featured-content.featuredpage {
     img {
       float:left;
-//      margin: {
-//        right: 10px;
-//      }
     }
   }
   #yoast-after-header-container {
@@ -4053,6 +4027,10 @@ body.menu-at-top {
       position: fixed;
       top: 0;
       width:100%;
+			background: {
+				position-x: 50%;
+				position-y: 5px;
+			}
       .title-area,
       .header-widget-area,
       #yoast-top-right {
@@ -4118,45 +4096,13 @@ body.menu-at-top {
     }
   }
 	.tagline_top {
-		font: {
-			size: $f_taglineTopMobile-px;
-			size: $f_taglineTopMobile;
-		}
-		text-align: center;
+		visibility: hidden;
+		display: none;
 	}
 	#center-wrapper {
 		margin: 0px auto;
 	}
-	.show_tagline {
-		.tagline_top {
-			line-height: 3em;
-			vertical-align: middle;
-		}
-		&.header-dark {
-			.tagline_top {
-				color: $c_taglineTopDark;
-				background: {
-					color: $c_taglineBgAlt;
-				}
-			}
-		}
-		&.header-light {
-			.tagline_top {
-				color: $c_taglineTopLight;
-				background: {
-					color: $c_taglineBg;
-				}
-			}
-		}
-		header {
-			&.site-header {
-				background: {
-					position-x: 50%;
-					position-y: 5px;
-				};
-			}
-		}
-	}
+
 /* end mobile menu */
 	#mobile-menu-helper {
 		border: {

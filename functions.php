@@ -655,22 +655,9 @@ function yst_display_logo() {
 		$css .= '@media(min-width: 640px){.site-header .title-area {background-image: url(' . $logo . ');}}';
 	}
 
-	// Mobile logo, positioning depends on whether the logo is wider than 230px and / or higher than 36px, if it is, alternate positioning is used.
 	$mobile_logo = get_theme_mod( 'yst_mobile_logo' );
-	if ( isset ( $mobile_logo ) ) {
-		$yst_mobile_logo_details = get_theme_mod( 'yst_mobile_logo_details' );
-		$use_alt_positioning = false;
-		if ( isset( $yst_mobile_logo_details ) && is_array( $yst_mobile_logo_details ) && ( ( 230 < $yst_mobile_logo_details['width'] ) || ( 36 < $yst_mobile_logo_details['height'] ) ) ) {
-			$use_alt_positioning = true;
-		}
-
-		if ( ! $use_alt_positioning ) {
-			$css .= '@media(max-width: 640px){header.site-header {background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;	}}';
-		} else {
-			$mobile_logo_height = $yst_mobile_logo_details['height'];
-			$center_wrapper_margin = $mobile_logo_height + 40;
-			$css .= '@media(max-width: 640px){#center-wrapper { margin-top:' . absint($center_wrapper_margin) . 'px; } #alt-mobile-logo {clear: left; padding-top:' . absint($mobile_logo_height + 20) . 'px;background:#fff url(' . $mobile_logo . ') no-repeat 50% 10px;background-size: auto;}}';
-		}
+	if ( isset ( $mobile_logo ) && ! empty ( $mobile_logo ) ) {
+		$css .= '@media(max-width: 640px){header.site-header {background-color:#fff; background-image: url(' . $mobile_logo . '); background-repeat: no-repeat;	}}';
 	}
 
 	if ( ! empty( $css ) ) {
@@ -1054,9 +1041,3 @@ function yst_add_body_class_for_header_style ( $classes ) {
 }
 
 add_action('body_class', 'yst_add_body_class_for_header_style');
-
-function yst_add_div_for_alt_mobile_logo() {
-	echo '<div id="alt-mobile-logo"></div>';
-}
-
-add_action( 'genesis_header', 'yst_add_div_for_alt_mobile_logo', 13 );
