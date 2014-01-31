@@ -1928,14 +1928,15 @@ table {
     }
   }
 	&.home .entry-content {
-//		max-width: 656px;
-		padding-right: 75px;
+		width: 70%;
+		padding-right: 2%;
 		float: left;
 		p, .excerpt_readmore {
 			width: 100%; max-width: 100%;
 		}
 	}
 	&.home .full-width-thumb {
+		width: 30%;
 		max-width: 290px;
 		float: left;
 	}
@@ -3885,6 +3886,15 @@ body.menu-at-top {
 }
 
 @media (max-width: 640px) {
+	.full-width-content {
+		&.home .entry-content {
+			width: 100%;
+			padding-right: 0;
+		}
+		&.home .full-width-thumb {
+			display: none;
+		}
+	}
   .content {
     width:100%;
     max-width:100%;
