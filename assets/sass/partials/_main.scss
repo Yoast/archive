@@ -3722,7 +3722,7 @@ img#wpstats {
 			background: {
                 color: $c_sidr_stickyBg;
                 image: image-url($c_sprite); //'hamburger.png'
-                position:0 0;
+                position:-36px 0;
                 repeat: no-repeat;
             }
 			border: {
@@ -3738,7 +3738,7 @@ img#wpstats {
             background: {
                 color: $c_sidr_stickyBg;
                 image: image-url($c_sprite); //'search.png'
-                position:-36px 0;
+                position:0 0;
                 repeat: no-repeat;
             }
 			border: {
