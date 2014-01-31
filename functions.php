@@ -239,11 +239,22 @@ function child_theme_setup() {
 	add_filter( 'genesis_prev_link_text', 'yst_add_spacing_next_prev' );
 	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
 
+	//add_filter( 'genesis_do_nav', 'yst_add_search_in_nav', 90 );
+
+	add_action( 'genesis_header_right', 'yst_header_search' );
+
 	// Integration between Genesis and theme customizer
 	add_filter( 'genesis_pre_get_option_site_layout', 'get_site_layout_from_theme_mod' );
 	add_action( 'genesis_admin_before_metaboxes', 'remove_genesis_settings_boxes' );
 
 	add_action( 'genesis_before_entry_content', 'yst_single_image' );
+}
+
+/**
+ * Display search box in header
+ */
+function yst_header_search() {
+	echo genesis_search_form();
 }
 
 /**
@@ -1105,3 +1116,20 @@ function yst_add_div_for_alt_mobile_logo() {
 }
 
 add_action( 'genesis_header', 'yst_add_div_for_alt_mobile_logo', 13 );
+
+/**
+ * Add a search box in the navigation based on the theme mod
+ *
+ * @param string $output
+ *
+ * @return string
+ */
+/*
+function yst_add_search_in_nav( $output ) {
+	if ( get_theme_mod( 'yst_theme_search_in_nav', true ) ) {
+		return str_replace( '<div class="wrap">', '<div class="wrap"><div class="nav-search">' . genesis_search_form() . '</div>', $output );
+	}
+
+	return $output;
+}
+*/
