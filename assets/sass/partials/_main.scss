@@ -1141,7 +1141,7 @@ textarea {
    }
   }
   form {
-    margin: 15px;
+    padding: 19px 15px 13px 15px;
   }
   label {
     font-size: inherit;
@@ -4031,6 +4031,14 @@ body.menu-at-top {
  */
   body {
     border: 0;
+		#sidr-menu-right {
+			.search-form {
+				background: {
+					color: $c_sidr_searchBg;
+				}
+				@include background-image(linear-gradient($c_sidr_searchBg,darken($c_sidr_searchBg, 10%)));
+			}
+		}
   }
   .nav-primary {
     display: none !important;
