@@ -132,6 +132,11 @@ function child_theme_setup() {
 	 * Show the post thumbnail in the full width archives
 	 */
 	function yst_image_full_width() {
+
+		if( ! is_front_page() ) {
+			return;
+		}
+
 		if ( ! get_theme_mod( 'yst_content_archive_thumbnail' ) ) {
 			return;
 		}
@@ -168,6 +173,7 @@ function child_theme_setup() {
 	add_image_size( 'fullwidth-thumb', 290, 193, true );
 
 	add_image_size( 'yst-archive-thumb', 170, 0, true );
+	add_image_size( 'yst-single', 620, 315, true );
 
 	// Activate blogroll widget
 	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
@@ -236,14 +242,56 @@ function child_theme_setup() {
 	// Integration between Genesis and theme customizer
 	add_filter( 'genesis_pre_get_option_site_layout', 'get_site_layout_from_theme_mod' );
 	add_action( 'genesis_admin_before_metaboxes', 'remove_genesis_settings_boxes' );
+
+	add_action( 'genesis_before_entry_content', 'yst_single_image' );
 }
 
 /**
- * @todo check if we're on the homepage or a page that has the blog archive template
- * @todo change alignleft to alignright on different template structure (sidebar left)
+ * Display the single image
+ */
+function yst_single_image() {
+	global $post;
+
+	// Only on single
+	if( ! is_single() ) {
+		return;
+	}
+
+	// Only when we have a thumbnail
+	if ( ! has_post_thumbnail() ) {
+		return;
+	}
+
+	// Set correct image alignment
+	$align = 'left';
+	if ( 'sidebar-content' == genesis_site_layout() ) {
+		$align = 'right';
+	}
+
+	//setup thumbnail image args to be used with genesis_get_image();
+	$size = 'yst-archive-thumb'; // Change this to whatever add_image_size you want
+	$default_attr = array(
+			'class' => "yst-single-image attachment-{$size} {$size}",
+			'alt'   => $post->post_title,
+			'title' => $post->post_title,
+	);
+
+	echo genesis_get_image( array( 'size' => 'yst-single', 'attr' => $default_attr ) );
+}
+
+/**
+ * Display the image thumb on front page
  */
 function yst_archive_image() {
 	global $post;
+
+	if( ! is_front_page() ) {
+		return;
+	}
+
+	if ( ! has_post_thumbnail() ) {
+		return;
+	}
 
 	// No inline image on full-width
 	if ( 'full-width-content' == genesis_site_layout() ) {
@@ -264,10 +312,7 @@ function yst_archive_image() {
 			'title' => $post->post_title,
 	);
 
-	// This is the most important part!  Checks to see if the post has a Post Thumbnail assigned to it. You can delete the if conditional if you want and assume that there will always be a thumbnail
-	if ( has_post_thumbnail() ) {
-		printf( '<a href="%s" title="%s" class="yst-archive-image-link">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
-	}
+	printf( '<a href="%s" title="%s" class="yst-archive-image-link">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
 }
 
 /**
