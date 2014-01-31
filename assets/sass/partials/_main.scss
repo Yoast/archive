@@ -541,6 +541,9 @@ button {
 	}
 	@include box-shadow(inset 1px 1px 3px $c_inputSubmitBoxShadow);
 	@include text-shadow(2px 2px 5px $c_inputSubmitBg);
+  background: {
+    color: $c_inputSubmitBg;
+  }
 	@include background-image(linear-gradient(lighten($c_inputSubmitBg, 10%), $c_inputSubmitBg));
 	color: $c_inputSubmitText;
 	cursor: pointer;
@@ -548,6 +551,9 @@ button {
 	position: relative; // if there"s a better way to align input and submit, please add 1/2
 	top: 1px; // if there"s a better way to align input and submit, please add 2/2
 	&:hover {
+    background: {
+      color: lighten($c_inputSubmitBg, 10%);
+    }
 		@include background-image(linear-gradient($c_inputSubmitBg, lighten($c_inputSubmitBg, 10%)));
 	}
 	&[disabled] {
@@ -2666,6 +2672,9 @@ table {
             max-width: 270px;
             margin: 0 auto;
 			display: block;
+      background: {
+        color: $c_ctaBg;
+      }
 			@include background-image(linear-gradient(lighten($c_ctaBg, 10%), $c_ctaBg));
 			span {
 				display: block;
@@ -2690,6 +2699,9 @@ table {
 				}
 			}
 			&:hover {
+        background: {
+          color: lighten($c_ctaBg, 10%);
+        }
 				@include background-image(linear-gradient($c_ctaBg, lighten($c_ctaBg, 10%)));
 			}
 		}
@@ -2996,17 +3008,13 @@ table {
     }
 }
 
-/**
- * Optional styling for fb-widget
- *
- * .yst_fb_widget {
- *  .fb-dark-bg {
- *  }
- *  .fb-light-bg {
- *  }
- *}
- *
- */
+//Optional styling for fb-widget
+//.yst_fb_widget {
+// .fb-dark-bg {
+// }
+// .fb-light-bg {
+// }
+//}
 
 /**
  * Full Width Widgets
@@ -3544,15 +3552,29 @@ img#wpstats {
 			right: 0;
 		}
 	}
-    .post {
-        background: {
-            image: none;
+  .blog {
+    .entry-content {
+      img.alignleft {
+        margin: {
+          left: 0;
         }
+      }
+      img.alignright {
+        margin: {
+          right: 0;
+        }
+      }
     }
-	#yoast-after-header-container {
-		display: none;
-		visibility: hidden;
-	}
+  }
+  .post {
+      background: {
+          image: none;
+      }
+  }
+//	#yoast-after-header-container {
+//		display: none;
+//		visibility: hidden;
+//	}
 	.breadcrumb {
 		padding: {
 			left: 10px;
@@ -3601,20 +3623,20 @@ img#wpstats {
 			}
 		}
 	}
-	#yoast-after-header-container {
-		padding: 0 10px;
-		#yoast-after-header-1,
-		#yoast-after-header-2,
-		#yoast-after-header-3 {
-			margin: 0;
-			padding: {
-				bottom: 1em;
-			}
-			float: none;
-			width: 100%;
-			max-width: 100%;
-		}
-	}
+//	#yoast-after-header-container {
+//		padding: 0 10px;
+//		#yoast-after-header-1,
+//		#yoast-after-header-2,
+//		#yoast-after-header-3 {
+//			margin: 0;
+//			padding: {
+//				bottom: 1em;
+//			}
+//			float: none;
+//			width: 100%;
+//			max-width: 100%;
+//		}
+//	}
 	.yoast-tagline-after-header-widget {
 		padding: {
 			left: 20px;
