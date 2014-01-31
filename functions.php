@@ -156,7 +156,7 @@ function child_theme_setup() {
 	add_action( 'wp_head', 'yst_display_logo' );
 	add_action( 'wp_head', 'yst_conditional_add_backtotop', 14 );
 
-	add_action( 'genesis_after_header', 'yst_after_header_genesis' );
+	//add_action( 'genesis_after_header', 'yst_after_header_genesis' );
 	add_action( 'genesis_after_content_sidebar_wrap', 'yst_fullwidth_sitebars_genesis' );
 	add_action( 'genesis_before_comments', 'yst_after_post_sitebar_genesis' );
 
