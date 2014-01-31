@@ -136,7 +136,7 @@ function child_theme_setup() {
 	 */
 	function yst_image_full_width() {
 
-		if( ! is_front_page() ) {
+		if ( ! is_front_page() ) {
 			return;
 		}
 
@@ -162,7 +162,7 @@ function child_theme_setup() {
 	add_action( 'genesis_header', 'yst_add_open_div_for_mobile_menu_borders', 11 );
 
 	/**
-	 * 	 Closes div to fix borders in mobile menu
+	 *   Closes div to fix borders in mobile menu
 	 */
 	function yst_add_close_div_for_mobile_menu_borders() {
 		echo '<div class="clearfloat"></div></div>';
@@ -267,7 +267,7 @@ function yst_single_image() {
 	global $post;
 
 	// Only on single
-	if( ! is_single() ) {
+	if ( ! is_single() ) {
 		return;
 	}
 
@@ -283,11 +283,11 @@ function yst_single_image() {
 	}
 
 	//setup thumbnail image args to be used with genesis_get_image();
-	$size = 'yst-archive-thumb'; // Change this to whatever add_image_size you want
+	$size         = 'yst-archive-thumb'; // Change this to whatever add_image_size you want
 	$default_attr = array(
-			'class' => "yst-single-image attachment-{$size} {$size}",
-			'alt'   => $post->post_title,
-			'title' => $post->post_title,
+		'class' => "yst-single-image attachment-{$size} {$size}",
+		'alt'   => $post->post_title,
+		'title' => $post->post_title,
 	);
 
 	echo genesis_get_image( array( 'size' => 'yst-single', 'attr' => $default_attr ) );
@@ -299,7 +299,7 @@ function yst_single_image() {
 function yst_archive_image() {
 	global $post;
 
-	if( ! is_front_page() ) {
+	if ( ! is_front_page() ) {
 		return;
 	}
 
@@ -319,11 +319,11 @@ function yst_archive_image() {
 	}
 
 	//setup thumbnail image args to be used with genesis_get_image();
-	$size = 'yst-archive-thumb'; // Change this to whatever add_image_size you want
+	$size         = 'yst-archive-thumb'; // Change this to whatever add_image_size you want
 	$default_attr = array(
-			'class' => "align{$align} attachment-{$size} {$size}",
-			'alt'   => $post->post_title,
-			'title' => $post->post_title,
+		'class' => "align{$align} attachment-{$size} {$size}",
+		'alt'   => $post->post_title,
+		'title' => $post->post_title,
 	);
 
 	printf( '<a href="%s" title="%s" class="yst-archive-image-link">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
@@ -438,7 +438,7 @@ add_action( 'genesis_before', 'yst_tagline' );
  * @todo: add documentation
  */
 function yst_show_tagline() {
-	echo '<div class="tagline_top tagline_' . get_theme_mod( 'yst_tagline_positioner', 'top_right' ) .'">' . html_entity_decode( get_bloginfo( 'description' ) ) . '</div>';
+	echo '<div class="tagline_top tagline_' . get_theme_mod( 'yst_tagline_positioner', 'top_right' ) . '">' . html_entity_decode( get_bloginfo( 'description' ) ) . '</div>';
 }
 
 /**
@@ -450,7 +450,7 @@ function yst_show_tagline() {
  */
 function yst_add_body_class_for_tagline( $classes ) {
 	$tagline_positioner = get_theme_mod( 'yst_tagline_positioner' );
-	$tagline = html_entity_decode( get_bloginfo( 'description' ) );
+	$tagline            = html_entity_decode( get_bloginfo( 'description' ) );
 	if ( isset( $tagline_positioner ) && ! empty ( $tagline_positioner ) && isset ( $tagline ) && ! empty( $tagline ) ) {
 		if (
 				( is_home() && get_theme_mod( 'yst_tagline_home' ) ) ||
@@ -464,6 +464,7 @@ function yst_add_body_class_for_tagline( $classes ) {
 			$classes[] = 'show_tagline';
 		}
 	}
+
 	return $classes;
 }
 
@@ -532,8 +533,8 @@ function yst_include_sidr() {
  * @todo check whether yPos in sticky menu code is the right position to switch.
  */
 function yst_activate_sidr_and_sticky_menu() {
-	$yst_nav_pos = get_theme_mod ('yst_nav_positioner');
-	if ($yst_nav_pos == 'top') {
+	$yst_nav_pos = get_theme_mod( 'yst_nav_positioner' );
+	if ( $yst_nav_pos == 'top' ) {
 		$yst_Ypos = 10;
 	} else {
 		$yst_Ypos = 178;
@@ -1022,7 +1023,7 @@ function yst_override_breadcrumb_attachment( $value = null ) {
 }
 
 /***
- **		@TODO: 	The following functions are used to create the needed HTML-structure, but still need proper naming and may be combined into less functions.
+ **    @TODO:  The following functions are used to create the needed HTML-structure, but still need proper naming and may be combined into less functions.
  **/
 
 function yst_open_div_before_header() {
@@ -1087,7 +1088,7 @@ function yst_add_body_class_for_nav( $classes ) {
  *
  * @return array Updated array of classes
  */
-function yst_add_body_class_for_header_style ( $classes ) {
+function yst_add_body_class_for_header_style( $classes ) {
 	$header_style = get_theme_mod( 'yst_header_color_picker', 'light' );
 
 	if ( 'light' == $header_style ) {
@@ -1099,4 +1100,10 @@ function yst_add_body_class_for_header_style ( $classes ) {
 	return $classes;
 }
 
-add_action('body_class', 'yst_add_body_class_for_header_style');
+add_action( 'body_class', 'yst_add_body_class_for_header_style' );
+
+function yst_change_size_of_attachment( $p ) {
+	return '<p class="attachment">' . wp_get_attachment_link( 0, 'full', false ) . '</p>';
+}
+
+add_filter( 'prepend_attachment', 'yst_change_size_of_attachment' );

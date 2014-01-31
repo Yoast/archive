@@ -2239,10 +2239,7 @@ table {
 				margin: {
 					left: 10px;
 				}
-				background: {
-					image: image-url($c_authorIcon);
-					repeat: no-repeat;
-				}
+				background: image-url($c_sprite) -72px 0 no-repeat;
 			}
 			margin: 0;
 		}
@@ -4063,7 +4060,6 @@ body.menu-at-top {
     &#sidr-left {
       float: left;
       margin:2px 0;
-      background: image-url('hamburger.png') 7px 10px no-repeat;
       border: {
         right: {
           width:2px;
@@ -4075,7 +4071,7 @@ body.menu-at-top {
     &#sidr-right {
       float: right;
       margin:2px 0;
-      background: image-url('search.png') 6px 8px no-repeat;
+      background: image-url($c_sprite) 0 0 no-repeat;
       border: {
         left: {
           width:2px;
@@ -4085,6 +4081,26 @@ body.menu-at-top {
       }
     }
   }
+	.header-dark {
+		a {
+			&#sidr-left {
+				background: image-url($c_sprite) -36px -36px no-repeat;
+			}
+			&#sidr-right {
+				background: image-url($c_sprite) 0 -36px no-repeat;
+			}
+		}
+	}
+	.header-light {
+		a {
+			&#sidr-left {
+				background: image-url($c_sprite) -36px 0 no-repeat;
+			}
+			&#sidr-right {
+				background: image-url($c_sprite) 0 0 no-repeat;
+			}
+		}
+	}
   body.sticky-menu {
 		.tagline_top {
 			display:none;
