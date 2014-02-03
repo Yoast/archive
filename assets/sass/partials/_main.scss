@@ -2717,7 +2717,6 @@ table {
     .yst-newsletter-input-wrapper {
       position:relative;
       height:38px;
-      background-color:red;
       input {
         padding: 8px;
         margin: {
@@ -2728,10 +2727,12 @@ table {
           top:0;
           height:100%;
           width: ($d_sidebar - ($d_sidebar/7));
+          max-width:80%;
         }
         &[type="submit"] {
           height:100%;
           width: ($d_sidebar - (($d_sidebar/7)*6));
+          max-width:20%;
           position: absolute;
           top:0;
           left: ($d_sidebar - ($d_sidebar/7));
