@@ -280,6 +280,15 @@ function yst_add_google_fonts() {
 }
 
 /**
+ * Enable style filtering for IE8/9
+ */
+function yst_conditional_comments() {
+    echo '<!--[if lte IE 9]>';
+    echo '<link href="' . get_stylesheet_directory_uri() . '/assets/css/old-ie.css" rel="stylesheet" type="text/css">';
+    echo '<![endif]-->';
+}
+
+/**
  * Add yst-after-header widget support for site. If widget not active, don't display
  */
 //function yst_after_header_genesis() {
