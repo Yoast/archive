@@ -2714,21 +2714,34 @@ table {
 				weight: 700;
 			}
 		}
-		input {
-			padding: 8px;
-			margin: {
-				bottom: 10px;
-			}
-			&[type="text"] {
-				width: 80%;
-			}
-        &[type="submit"] {
-          font: {
-            size: 23px;
-          }
-          padding: 0 11px 4px;
+    .yst-newsletter-input-wrapper {
+      position:relative;
+      height:38px;
+      background-color:red;
+      input {
+        padding: 8px;
+        margin: {
+          bottom: 10px;
         }
-		}
+        &[type="text"] {
+          position: absolute;
+          top:0;
+          height:100%;
+          width: ($d_sidebar - ($d_sidebar/7));
+        }
+        &[type="submit"] {
+          height:100%;
+          width: ($d_sidebar - (($d_sidebar/7)*6));
+          position: absolute;
+          top:0;
+          left: ($d_sidebar - ($d_sidebar/7));
+          font: {
+            size: 24px;
+          }
+          padding: 0 11px;
+        }
+      }
+    }
 	}
 }
 
