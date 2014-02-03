@@ -21,8 +21,6 @@
 @import url("http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,400italic,700italic");
 @import url("http://fonts.googleapis.com/css?family=Dancing+Script:400,700");
 @import url("http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic");
-// @todo delete before live
-//@import "colorsLoveGreen";
 
 // Import defaults for this theme
 @import "reset";
@@ -271,7 +269,7 @@ header {
 .breadcrumb {
 	margin: 0 auto;
   width: $d_full;
-	max-width: $d_full;
+	max-width: 100%;
 	padding: {
 		left: $d_paddingLeftRightFull;
 		right: $d_paddingLeftRightFull;
@@ -1205,8 +1203,7 @@ textarea {
         .title-area {
           max-width: 300px; //was width:299px;
           background: {
-            position: 32px 8px; //was: 50% 5px;
-            size: 227px 104px;
+            position: 50% 8px; //was: 50% 5px; //32
           }
         }
       }
@@ -1298,75 +1295,69 @@ body.sticky-menu {
 		padding: 5px 0;
 		@include box-shadow(0 8px 8px -6px $c_navMainShadow);
 		margin: 0;
-        .genesis-nav-menu {
-            li {
-                a {
-                    color: $c_navMainLink;
-                    &.current-menu-item {
-                        background: {
-                            image: none;
-                        }
-                        color: $c_navMainLinkHover;
-                        border:  {
-                            bottom: 0;
-                        }
-                    }
-                    &:hover {
-                        color: $c_navMainLinkHover;
-                        border:  {
-                            bottom: 0;
-                        }
-                    }
-                    &:after {
-                        content: "";
-                    }
-                }
-                > a:after // set up the top level arrows first
-                {
-                    content: "˅";
-                    font-size: .5em;
-                    vertical-align: middle;
-                    padding: {
-                        left: 5px;
-                    }
-                }
-                &.menu-item {
-                    > a:only-child:after {
-                        // clear if only child
-                        content: "";
-                    }
-                }
-                li {
-                    a {
-                        color: $c_navSubLink;
-                    }
-                }
-                &.current-menu-item,
-                &.current-menu-parent,
-                &.current-page-ancestor {
-                    a {
-                        color: $c_navMainLinkHover !important;
-                        border:  {
-                            bottom: 0;
-                        }
-                    }
-                }
-                &.menu-item-search {
-                    display: inline;
-                    visibility: visible;
-                    z-index: 700;
-                    float: right;
-                    width: 250px;
-                    input {
-                        width: 250px;
-                        margin: {
-                            top: 5px;
-                        }
-                    }
-                }
+      .genesis-nav-menu {
+        li {
+          a {
+            color: $c_navMainLink;
+            &.current-menu-item {
+              background: {
+                image: none;
+              }
+              color: $c_navMainLinkHover;
+              border:  {
+                bottom: 0;
+              }
             }
+            &:hover {
+              color: $c_navMainLinkHover;
+              border:  {
+                bottom: 0;
+              }
+            }
+            &:after {
+              content: "";
+            }
+          }
+          > a:after // set up the top level arrows first
+          {
+            content: "˅";
+            font-size: .5em;
+            vertical-align: middle;
+            padding: {
+              left: 5px;
+            }
+          }
+          &.menu-item {
+            > a:only-child:after {
+              // clear if only child
+              content: "";
+            }
+          }
+          li {
+            a {
+              color: $c_navSubLink;
+            }
+          }
+          &.current-menu-item,
+          &.current-menu-parent,
+          &.current-page-ancestor {
+            a {
+              color: $c_navMainLinkHover !important;
+              border:  {
+                bottom: 0;
+              }
+            }
+          }
         }
+      }
 	}
+  .search-form {
+    input {
+      padding: {
+        top: 6px;
+      }
+    }
+  }
 }
 
 /**
@@ -3356,8 +3347,6 @@ img#wpstats {
 			position: 50% 185px;
 		}
 	}
-    body.logo-position-center {
-    }
 	.content {
 		max-width: 67%;
 	}
@@ -3400,9 +3389,6 @@ img#wpstats {
 	}
 	.site-header {
 		.title-area {
-			background: {
-				size: 100%;
-			}
 			overflow: hidden;
 		}
 		.header-widget-area,
@@ -3507,13 +3493,13 @@ img#wpstats {
 @media (max-width: 640px) {
 	.site-container {
 		border: {
-            width: 0 3px;
-            style:solid;
-            color: $c_BodyBg;
-        }
-        header {
-            margin-left: -3px; //correction for border in site container
-        }
+        width: 0 3px;
+        style:solid;
+        color: $c_BodyBg;
+      }
+      header {
+        margin-left: -3px; //correction for border in site container
+      }
 	}
 	header.site-header {
 		border: {
@@ -3523,21 +3509,21 @@ img#wpstats {
 				color: $c_randLine;
 			}
 		}
-        background: {
-            color: $c_sidr_stickyBg;
-        }
-        padding: 2px 0;
+    background: {
+        color: $c_sidr_stickyBg;
+    }
+    padding: 2px 0;
 	}
 	#header-image {
 		display: none;
 		visibility: hidden;
 	}
-    .site-inner {
-        padding: {
-            left: 10px;
-            right: 10px;
-        }
+  .site-inner {
+    padding: {
+      left: 10px;
+      right: 10px;
     }
+  }
 	.content {
 		width: 100%;
 		max-width: 100%;
@@ -3557,12 +3543,12 @@ img#wpstats {
     .entry-content {
       img.alignleft {
         margin: {
-          left: 0;
+          right: 0;
         }
       }
       img.alignright {
         margin: {
-          right: 0;
+          left: 0;
         }
       }
     }
@@ -3694,7 +3680,6 @@ img#wpstats {
                 .title-area {
                     background: {
                         position: 50% 0;
-                        size: 230px 36px;
                     }
                 }
             }
@@ -3795,7 +3780,6 @@ img#wpstats {
 			}
 		}
 		.site-header {
-			background-position: center top;
 			.title-area {
 				.site-title a {
 					position: fixed;

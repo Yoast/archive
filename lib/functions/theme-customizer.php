@@ -394,7 +394,7 @@ class Yoast_Theme_Customizer {
 			'yst_logo_frame',
 			array(
 				'section' => 'yst_logos',
-				'label'   => __( 'Use a frame around the logo?', 'yoast-theme' ),
+				'label'   => __( 'Use a frame around the logo? Best logo size is within 227px x 104px', 'yoast-theme' ),
 				'type'    => 'checkbox',
 			)
 		);
