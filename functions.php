@@ -1,185 +1,62 @@
 <?php
 
+function __yoast_main() {
+	require_once( get_stylesheet_directory() . '/lib/classes/class-versatile.php' );
+	new Yoast_Versatile();
+}
+	add_action( 'genesis_setup', '__yoast_main', 15 );
+
 // @TODO: Clean up this file and add some structure to it.
 
-define( 'CHILD_THEME_NAME', 'Versatile' );
-define( 'CHILD_THEME_URL', 'http://yoast.com/wordpress/themes/versatile/' );
-define( 'CHILD_THEME_VERSION', '1.0.0' );
+//define( 'CHILD_THEME_NAME', 'Versatile' );
+//define( 'CHILD_THEME_URL', 'http://yoast.com/wordpress/themes/versatile/' );
+//define( 'CHILD_THEME_VERSION', '1.0.0' );
 
-add_action( 'genesis_setup', 'child_theme_setup', 15 );
+add_action( 'genesis_setup', 'child_theme_setup', 16 );
 
 /**
  * Creates the child theme actions, filters and settings
  */
 function child_theme_setup() {
-	global $content_width;
 
-	// Defines the content width of the content-sidebar design, as that's the default and this is needed for oEmbed.
-	$content_width = 680;
-
-	// Used for defaults in for instance the banner widget.
-	define( 'YST_SIDEBAR_WIDTH', 261 );
-
-	//* Start the engine
-	include_once( get_template_directory() . '/lib/init.php' );
-
-	require_once CHILD_DIR . '/lib/functions/theme-customizer.php';
-
+	/**
+	 * @todo refactor fake_genesis_custom_header_thinking action
+	 */
 	if ( is_admin() ) {
 		// Editor Styles
-		add_editor_style( 'assets/css/editor-style.css' );
+		//add_editor_style( 'assets/css/editor-style.css' );
 
 		add_action( 'current_screen', 'fake_genesis_custom_header_thinking' );
 	}
 
-	/** Load widgets from /lib/widgets/ */
-	foreach ( glob( CHILD_DIR . "/lib/widgets/*-widget.php" ) as $file ) {
-		require_once $file;
-	}
-
-	// Add HTML5 markup structure
-	add_theme_support( 'html5' );
-
-	// Just allow for primary navigation
-	add_theme_support( 'genesis-menus', array( 'primary' => __( 'Primary Navigation Menu', 'genesis' ) ) );
-
-	// Add viewport meta tag for mobile browsers
-	add_theme_support( 'genesis-responsive-viewport' );
-
-	// Add support for 3-column footer widgets
-	add_theme_support( 'genesis-footer-widgets', 3 );
-
-	// Disable site layouts that must not be used
-	genesis_unregister_layout( 'content-sidebar-sidebar' );
-	genesis_unregister_layout( 'sidebar-sidebar-content' );
-	genesis_unregister_layout( 'sidebar-content-sidebar' );
-
-	// Remove unused sidebars
-	unregister_sidebar( 'sidebar-alt' );
-
-	/** Register widget areas */
-	genesis_register_sidebar( array(
-		'id'          => 'yoast-after-header-1',
-		'name'        => __( 'After Header 1', 'yoast-theme' ),
-		'description' => __( 'After Header 1 widget area.', 'yoast-theme' ),
-	) );
-
-	genesis_register_sidebar( array(
-		'id'          => 'yoast-after-header-2',
-		'name'        => __( 'After Header 2', 'yoast-theme' ),
-		'description' => __( 'After Header 2 widget area.', 'yoast-theme' ),
-	) );
-
-	genesis_register_sidebar( array(
-		'id'          => 'yoast-after-header-3',
-		'name'        => __( 'After Header 3', 'yoast-theme' ),
-		'description' => __( 'After Header 3 widget area.', 'yoast-theme' ),
-	) );
-
-	genesis_register_sidebar( array(
-		'id'          => 'yoast-fullwidth-widgetarea-1',
-		'name'        => __( 'Full Width 1', 'yoast-theme' ),
-		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
-	) );
-
-	genesis_register_sidebar( array(
-		'id'          => 'yoast-fullwidth-widgetarea-2',
-		'name'        => __( 'Full Width 2', 'yoast-theme' ),
-		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
-	) );
-
-	genesis_register_sidebar( array(
-		'id'          => 'yoast-fullwidth-widgetarea-3',
-		'name'        => __( 'Full Width 3', 'yoast-theme' ),
-		'description' => __( 'Shows only on pages with full-width layout.', 'yoast-theme' ),
-	) );
-
-	genesis_register_sidebar( array(
-		'id'          => 'yoast-after-post',
-		'name'        => __( 'After Post', 'yoast-theme' ),
-		'description' => __( 'Add a widget after the post on single pages.', 'yoast-theme' ),
-	) );
-
+	/**
+	 * @todo check if this is used
+	 */
+	/*
 	function yst_show_fullwidth_sidebars() {
+
 		if ( 'full-width-content' == genesis_site_layout() ) {
 			// Remove the Primary Sidebar from the Primary Sidebar area.
 			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
-			remove_action( 'genesis_sidebar_alt', 'genesis_do_sidebar_alt' );
 
 			// Place the Secondary Sidebar into the Primary Sidebar area.
 			add_action( 'genesis_sidebar', 'yoast_do_fullwidth_sidebars' );
-
-			// Move the featured image to the right
-			add_action( 'genesis_after_entry_content', 'yst_image_full_width', 15 );
 		}
 	}
+	*/
 
-	add_action( 'genesis_after_header', 'yst_show_fullwidth_sidebars' );
+	//add_action( 'genesis_after_header', 'yst_show_fullwidth_sidebars' );
 
+	/**
+	 * @todo check if this is used
+	 */
+	/*
 	function yoast_do_fullwidth_sidebars() {
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-1' );
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-2' );
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-3' );
 	}
-
-	/**
-	 * Show the after post sidebar
-	 */
-	function yoast_do_after_post_sidebar() {
-		if ( is_single() ) {
-			dynamic_sidebar( 'yoast-after-post' );
-		}
-	}
-
-	/**
-	 * Show the post thumbnail in the full width archives
-	 */
-	function yst_image_full_width() {
-
-		if ( ! is_front_page() ) {
-			return;
-		}
-
-		if ( ! get_theme_mod( 'yst_content_archive_thumbnail' ) ) {
-			return;
-		}
-
-		$thumbnail = get_the_post_thumbnail( null, 'fullwidth-thumb' );
-		if ( $thumbnail ) {
-			echo '<div class="thumb full-width-thumb">';
-			echo $thumbnail;
-			echo '</div>';
-		}
-	}
-
-	/**
-	 * Opens div to fix borders in mobile menu
-	 */
-	function yst_add_open_div_for_mobile_menu_borders() {
-		echo '<div id="mobile-menu-helper">';
-	}
-
-	add_action( 'genesis_header', 'yst_add_open_div_for_mobile_menu_borders', 11 );
-
-	/**
-	 *   Closes div to fix borders in mobile menu
-	 */
-	function yst_add_close_div_for_mobile_menu_borders() {
-		echo '<div class="clearfloat"></div></div>';
-	}
-
-	add_action( 'genesis_header', 'yst_add_close_div_for_mobile_menu_borders', 12 );
-
-
-	add_image_size( 'archive-thumb', 180, 120, true );
-	add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
-	add_image_size( 'fullwidth-thumb', 290, 193, true );
-
-	add_image_size( 'yst-archive-thumb', 170, 0, true );
-	add_image_size( 'yst-single', 620, 315, true );
-
-	// Activate blogroll widget
-	add_filter( 'pre_option_link_manager_enabled', '__return_true' );
+	*/
 
 	// Change the main stylesheet URL
 	add_filter( 'stylesheet_uri', 'yst_stylesheet_uri', 10, 2 );
@@ -662,9 +539,6 @@ function yst_conditional_add_backtotop() {
 	if ( is_single() ) {
 		add_action( 'genesis_entry_footer', 'yst_add_backtotop', 14 );
 	}
-//	if ( is_singular() ) {
-//		add_action( 'genesis_after_endwhile', 'yst_add_backtotop', 14 );
-//	}
 }
 
 /**
@@ -680,28 +554,6 @@ function yst_modify_contact_methods( $profile_fields ) {
 
 	return $profile_fields;
 }
-
-/**
- * Change default image alignment
- *
- * @since 1.0.0
- *
- * @param string $img  Image HTML output
- * @param array  $args Arguments for the image
- *
- * @return string Image HTML output.
- */
-/*
-function yst_filter_content_archive_image( $img, $args ) {
-	if ( 'sidebar-content' == genesis_site_layout() || 'full-width-content' == genesis_site_layout() ) {
-		if ( 'archive' == $args['context'] ) {
-			$img = str_replace( 'alignleft', 'alignright', $img );
-		}
-	}
-
-	return $img;
-}
-*/
 
 /**
  * Use the logo's set in the Child Theme Settings
