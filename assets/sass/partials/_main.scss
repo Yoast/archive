@@ -547,8 +547,8 @@ button {
 	color: $c_inputSubmitText;
 	cursor: pointer;
 	width: auto;
-	position: relative; // if there"s a better way to align input and submit, please add 1/2
-	top: 1px; // if there"s a better way to align input and submit, please add 2/2
+//	position: relative; // if there"s a better way to align input and submit, please add 1/2
+//	top: 1px; // if there"s a better way to align input and submit, please add 2/2
 	&:hover {
     background: {
       color: lighten($c_inputSubmitBg, 10%);
@@ -2722,12 +2722,12 @@ table {
 			&[type="text"] {
 				width: 80%;
 			}
-            &[type="submit"] {
-                font: {
-                    size: 24px;
-                }
-                padding: 0 11px 3px;
-            }
+        &[type="submit"] {
+          font: {
+            size: 23px;
+          }
+          padding: 0 11px 4px;
+        }
 		}
 	}
 }
