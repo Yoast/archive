@@ -270,6 +270,7 @@ header {
 .site-inner, //this is where the main wrapper is set for the content area
 .breadcrumb {
 	margin: 0 auto;
+  width: $d_full;
 	max-width: $d_full;
 	padding: {
 		left: $d_paddingLeftRightFull;
@@ -669,7 +670,7 @@ textarea {
 		font: {
 			family: $f_baseFont;
 		}
-		height: 1.5em;
+		height: normal;
 		padding: 16px 32px 16px 16px;
 		background: {
 			image: image-url('search.png');
