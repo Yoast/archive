@@ -18,16 +18,6 @@
 
 // Import defaults for this theme
 @import "reset";
-// @import "partials/colorsAutumn";
-// @import "partials/colorsBusinessBlue";
-// @import "partials/colorsCupcake";
-// @import "partials/colorsIceBlue";
-// @import "partials/colorsMediterranean";
-// @import "partials/colorsSand";
-// @import "partials/colorsSpring";
-// @import "partials/colorsSummer";
-// @import "partials/colorsWarmBlue";
-// @import "partials/colorsWarmpurple";
 @import "dimensions";
 @import "fonts";
 
@@ -496,8 +486,8 @@ button {
   color: $c_inputSubmitText;
   cursor: pointer;
   width: auto;
-  position:relative; // if there's a better way to align input and submit, please add 1/2
-  top:1px; // if there's a better way to align input and submit, please add 2/2
+  position: relative; // if there's a better way to align input and submit, please add 1/2
+  top: 1px; // if there's a better way to align input and submit, please add 2/2
   &:hover {
       background: {
           color: lighten($c_inputSubmitBg,5%);
@@ -691,7 +681,6 @@ textarea {
     {
       content: '▼';
         font: {
-            family: "Lucinda Sans Unicode", sans-serif;
             size: 0.5em;
         }
       vertical-align: middle;
@@ -801,10 +790,10 @@ textarea {
       > a:after // set up the downward arrow for top level items
       {
         content: ' ▶';
-          font: {
-              family: "Lucinda Sans Unicode", sans-serif;
-              size: 0.5em;
-          }
+        font: {
+            family: "Lucinda Sans Unicode", sans-serif;
+            size: 0.5em;
+        }
         vertical-align: middle;
         padding: {
           left: 5px;
@@ -815,7 +804,7 @@ textarea {
       }
     }
     .sub-menu {
-      margin: -54px 0 0 199px;
+      margin: -53px 0 0 199px;
     }
   }
   > .first {

@@ -7,25 +7,39 @@
   * @link https://www.google.com/chrome/
   */
 
+// Hover anything in IE8
+body {
+  behavior: url("csshover3.htc");
+}
+
 // change :after as IE8/9 do not read Unicode well
 .genesis-nav-menu {
-    .sub-menu {
-        > .menu-item {
-            > a:after // set up the downward arrow for top level items
-                {
-                    content: ' >';
-            }
-        }
+  a:after { // set unicode font for all » characters
+    font: {
+      family: "Lucinda Sans Unicode", sans-serif;
     }
+  }
+  .sub-menu {
+    > .menu-item {
+      > a:after // set up the downward arrow for top level items
+        {
+          content: ' >';
+      }
+    }
+  }
 }
+
 .widget_bigbutton {
-    .cta-button {
-        a {
-            &:after {
-                content: ' >';
-            }
+  .cta-button {
+    a {
+      &:after {
+        content: ' >';
+        font: {
+          family: "Lucinda Sans Unicode", sans-serif;
         }
+      }
     }
+  }
 }
 .back-to-top {
     a:after {
