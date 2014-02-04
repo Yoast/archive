@@ -48,7 +48,9 @@ body {
 }
 .sub-menu {
   .sub-menu {
-    margin-left:200px;
+    float:none;
+    position:relative;
+    left:200px;
     .sub-menu {
       left:400px;
       .sub-menu {
