@@ -1,16 +1,10 @@
 @charset "UTF-8";
-@import "partials/colorsMediterranean";
 
 /**
   * All settings that are just for IE8/9
   * Please update your browser if you can read this, or try chrome
   * @link https://www.google.com/chrome/
   */
-
-// Hover anything in IE8
-body {
-  behavior: url("../../lib/csshover3.htc");
-}
 
 // change :after as IE8/9 do not read Unicode well
 .genesis-nav-menu {
