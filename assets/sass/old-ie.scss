@@ -26,8 +26,12 @@ body {
           content: ' >';
       }
     }
+    width:200px;
     .sub-menu {
       width:400px;
+      .sub-menu {
+        width:600px;
+      }
     }
   }
 }
