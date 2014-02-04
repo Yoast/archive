@@ -293,7 +293,6 @@ function yst_conditional_comments() {
     echo '<!--[if lte IE 9]>';
     echo '<link href="' . get_stylesheet_directory_uri() . '/assets/css/old-ie.css" rel="stylesheet" type="text/css" />';
     echo '<![endif]-->';
-    echo '<script src="' . get_stylesheet_directory_uri() . '/lib/js/modernizr.js" type="text/javascript" />';
 }
 
 
