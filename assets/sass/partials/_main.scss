@@ -702,6 +702,15 @@ textarea {
         color: $c_navMainBorder;
       }
     }
+    li a { // for first submenu
+      border: {
+        bottom: {
+          width: 1px;
+          style: solid;
+          color: $c_navMainBorder;
+        }
+      }
+    }
   }
   a {
     display: block;
