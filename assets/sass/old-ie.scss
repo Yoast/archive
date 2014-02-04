@@ -48,12 +48,10 @@ body {
 }
 .sub-menu {
   .sub-menu {
-    float:none;
-    position:relative;
-    top:0px;
-    left:200px;
+    padding-left:200px/9;
+    text-align:right/9;
     .sub-menu {
-      left:400px;
+      padding-left:400px/9;
       .sub-menu {
         left:600px;
         .sub-menu {
