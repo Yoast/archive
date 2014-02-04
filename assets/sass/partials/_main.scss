@@ -756,12 +756,12 @@ textarea {
     left: -9999px;
     @include opacity(0);
     position: absolute;
+    width: $d_navSubWidth;
     z-index: 99;
     margin: {
       left: 4px; // correction for killing inline-block margin
     }
     a {
-      width: $d_navSubWidth;
       background: {
         color: $c_navSubBg;
       }

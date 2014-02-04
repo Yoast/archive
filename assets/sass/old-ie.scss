@@ -20,29 +20,10 @@ body {
   }
   .sub-menu {
     width:200px;
-    .menu-item {
-      &:hover {
-        position: static;
-        .sub-menu {
-          left: auto;
-          @include opacity(1);
-        }
-      }
-    }
     > .menu-item {
       > a:after // set up the downward arrow for top level items
         {
           content: ' >';
-      }
-    }
-    .sub-menu {
-      position:absolute;
-      right:-200px;
-      .sub-menu {
-        margin-right:-200px;
-        .sub-menu {
-          margin-right:-200px;
-        }
       }
     }
   }
