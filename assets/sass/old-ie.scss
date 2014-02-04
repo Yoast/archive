@@ -19,10 +19,20 @@ body {
     }
   }
   .sub-menu {
+    width:200px;
     > .menu-item {
       > a:after // set up the downward arrow for top level items
         {
           content: ' >';
+      }
+    }
+    .sub-menu {
+      width:200px;
+      .sub-menu {
+        width:200px;
+        .sub-menu {
+          width:200px;
+        }
       }
     }
   }
