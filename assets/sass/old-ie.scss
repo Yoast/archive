@@ -19,7 +19,6 @@ body {
     }
   }
   .sub-menu {
-    width:200px;
     > .menu-item {
       > a:after // set up the downward arrow for top level items
         {
@@ -27,11 +26,11 @@ body {
       }
     }
     .sub-menu {
-      width:200px;
+      margin-left:-200px;
       .sub-menu {
-        width:200px;
+        margin-left:-200px;
         .sub-menu {
-          width:200px;
+          margin-left:-200px;
         }
       }
     }
