@@ -370,6 +370,11 @@ header {
       top: 20px;
     }
   }
+  #yoast-top-right {
+    margin: {
+      bottom: 10px;
+    }
+  }
   .widget-title {
     display:none;
     visibility:hidden;
@@ -3197,11 +3202,6 @@ img#wpstats {
       }
       max-width:60%;
       overflow:hidden;
-    }
-    #yoast-top-right {
-      margin: {
-        bottom: 10px;
-      }
     }
   }
   .breadcrumb {
