@@ -331,7 +331,7 @@ header {
     }
   }
   section.widget {
-    margin: {
+    padding: {
       top: 10px;
     }
     &.widget_search {
@@ -368,6 +368,9 @@ header {
   .header-widget-area {
     margin: {
       top: 20px;
+    }
+    padding: {
+      bottom: 10px;
     }
   }
   #yoast-top-right {
