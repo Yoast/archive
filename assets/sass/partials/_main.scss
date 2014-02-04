@@ -337,6 +337,8 @@ header {
 }
 
 .site-header {
+  max-height: 184px;
+  overflow: hidden;
 	.wrap,
 	.widget-wrap {
 		padding: 0;
@@ -396,13 +398,8 @@ header {
 			width: 100%;
 		}
 	}
-  #yoast-top-right {
-    margin: {
-      bottom: 10px;
-    }
-  }
 	section.widget {
-		margin: {
+		padding: {
 			top: 20px;
 		}
 		&.widget_search {
