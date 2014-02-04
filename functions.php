@@ -292,7 +292,7 @@ function yst_add_google_fonts() {
 function yst_conditional_comments() {
     echo '<!--[if lte IE 9]>';
     echo '<link href="' . get_stylesheet_directory_uri() . '/assets/css/old-ie.css" rel="stylesheet" type="text/css" />';
-    echo '<script src="' . get_stylesheet_directory_uri() . '/lib/js/modernizr.custom.24347.js" type="text/javascript" />';
+    echo '<script src="' . get_stylesheet_directory_uri() . '/lib/js/modernizr.custom.01100.js" type="text/javascript" />';
     echo '<![endif]-->';
 }
 
