@@ -497,6 +497,13 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	}
 
 	/**
+	 * Add back to top link in footer
+	 */
+	public function display_back_to_top_link() {
+		echo '<p class="back-to-top"><a href="#">' . __( 'Back to top', 'yoast-theme' ) . ' &#9652;</a></p>';
+	}
+
+	/**
 	 * Set the correct site layout
 	 *
 	 * @return string
