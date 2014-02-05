@@ -32,6 +32,17 @@ class Yoast_Versatile extends Yoast_Theme {
 		// Set the content width
 		$this->set_content_width( 680 );
 
+		// Set the default color scheme
+		add_filter( 'yst_default_color_scheme', array( $this, 'set_default_color_scheme' ) );
+
+		// Set the menu top offset
+		$yst_nav_pos = get_theme_mod( 'yst_nav_positioner' );
+		$menu_offset = 178;
+		if ( $yst_nav_pos == 'top' ) {
+			$menu_offset = 10;
+		}
+		add_filter( 'yoast_menu_top_offset', $menu_offset );
+
 		// Add support for 3-column footer widgets
 		add_theme_support( 'genesis-footer-widgets', 3 );
 
@@ -63,9 +74,6 @@ class Yoast_Versatile extends Yoast_Theme {
 		// Load Google fonts
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_google_fonts' ) );
 
-		// Mobile navigation
-		add_action( 'genesis_header', array( $this, 'mobile_nav' ), 11 );
-
 		// Display the logo
 		add_action( 'wp_head', array( $this, 'display_logo' ), 25 );
 
@@ -84,9 +92,6 @@ class Yoast_Versatile extends Yoast_Theme {
 		// Reposition the breadcrumbs
 		add_action( 'genesis_after_header', 'genesis_do_breadcrumbs', 12 );
 		remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
-
-		// Displays a term archive intro
-		add_action( 'genesis_before_loop', array( $this, 'term_archive_intro' ), 20 );
 
 		// Change image output
 		remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
@@ -205,6 +210,15 @@ class Yoast_Versatile extends Yoast_Theme {
 	}
 
 	/**
+	 * Set the default color scheme
+	 *
+	 * @return string
+	 */
+	public function set_default_color_scheme() {
+		return 'BrightBlue';
+	}
+
+	/**
 	 * Opens div to fix borders in mobile menu
 	 */
 	public function add_open_div_for_mobile_menu_borders() {
@@ -224,14 +238,6 @@ class Yoast_Versatile extends Yoast_Theme {
 	public function load_google_fonts() {
 		wp_enqueue_style( 'google-font-open_sans', '//fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic);', array(), $this->get_version() );
 		wp_enqueue_style( 'google-font-ruda', '//fonts.googleapis.com/css?family=Ruda:400,700', array(), $this->get_version() );
-	}
-
-	/**
-	 * Output mobile navigation links
-	 */
-	public function mobile_nav() {
-		echo '<a class="open" id="sidr-left" href="#sidr-left">' . __( 'Open Navigation', 'yoast-theme' ) . '</a>';
-		echo '<a class="open" id="sidr-right" href="#sidr-right">' . __( 'Open Search', 'yoast-theme' ) . '</a>';
 	}
 
 	/**
@@ -268,13 +274,6 @@ class Yoast_Versatile extends Yoast_Theme {
 		if ( is_single() ) {
 			add_action( 'genesis_entry_footer', array( $this, 'display_back_to_top_link' ), 14 );
 		}
-	}
-
-	/**
-	 * Add back to top link in footer
-	 */
-	public function display_back_to_top_link() {
-		echo '<p class="back-to-top"><a href="#">' . __( 'Back to top', 'yoast-theme' ) . ' &#9652;</a></p>';
 	}
 
 	/**
@@ -335,34 +334,6 @@ class Yoast_Versatile extends Yoast_Theme {
 			) );
 			echo '</div></div>';
 		}
-	}
-
-	/**
-	 * Displays a term archive intro
-	 */
-	public function term_archive_intro() {
-		if ( ! is_category() && ! is_tag() && ! is_tax() ) {
-			return;
-		}
-
-		if ( get_query_var( 'paged' ) ) {
-			return;
-		}
-
-		echo '<div class="term-intro">';
-		echo '<h1>' . single_term_title( '', false ) . '</h1>';
-		echo '<div class="entry-content">';
-
-		/**
-		 * This action allows you to output extra content in a term archive intro section.
-		 *
-		 * @todo Document this hook
-		 */
-		do_action( 'yoast_term_archive_intro' );
-
-		echo wpautop( term_description() );
-		echo '</div>';
-		echo '</div>';
 	}
 
 	/**
