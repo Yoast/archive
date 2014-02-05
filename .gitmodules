@@ -1,3 +1,6 @@
 [submodule "lib/widgets"]
 	path = lib/widgets
 	url = git@github.com:Yoast/yoast-widgets.git
+[submodule "lib/framework"]
+	path = lib/framework
+	url = git@github.com:Yoast/theme-framework.git
