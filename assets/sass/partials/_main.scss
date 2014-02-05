@@ -49,6 +49,11 @@ body {
   background: {
     color: $c_mainBg;
   }
+	.site-container {
+		background: {
+			color: $c_mainBg;
+		}
+	}
   color: $c_mainText;
   font: {
     family: $f_baseFont;
@@ -59,6 +64,9 @@ body {
   line-height: 1.625;
 }
 body.header-dark {
+	background: {
+		color: $c_headerBgDark;
+	}
 	border: {
 		top: {
 			width: 16px;
@@ -68,6 +76,9 @@ body.header-dark {
 	}
 }
 body.header-light {
+	background: {
+		color: $c_headerBgLight;
+	}
 	border: {
 		top: {
 			width: 16px;
@@ -1247,7 +1258,6 @@ textarea {
 body.sticky-menu {
   padding-top: 120px;
 	#center-wrapper {
-		//max-width: 100%;
 	}
 	.after-header-content-wrapper {
 		max-width: $d_full;
