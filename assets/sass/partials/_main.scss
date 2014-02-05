@@ -1114,74 +1114,84 @@ textarea {
  * Site Header Navigation
  */
 .logo-position-center {
-     background: {
-        position: 50% 237px;
-     }
+  background: {
+    position: 50% 185px;
+  }
 	.site-header {
 		.title-area {
 			background: {
 				position: 50% 5px;
 			}
-            margin: {
-                top: 0;
-            }
+      margin: {
+        top: 0;
+      }
+      a {
+        min-height:120px;
+      }
 		}
 	}
-    &.logo-frame {
-        .site-header {
-            background: {
-               image: image-url('vintage-logo-background.png');
-                position: 50% 10px;
-            }
-            min-height: 236px;
-            .site-title {
-                min-height: 132px;
-            }
-            .title-area {
-                background: {
-                  position: 50% 27px;
-                }
-            }
-            .site-description {
-                font: {
-                    size: $f_taglineFullWidth-px;
-                    size: $f_taglineFullWidth;
-                }
-                width: 100%;
-                margin: {
-                    bottom: 20px;
-                }
-                padding: {
-                    left:20px;
-                }
-                text: {
-                  align: center;
-                }
-                &:before {
-                    content: " ";
-                    background: {
-                        image: image-url('Flower_Left.png');
-                        position: left top;
-                        repeat: no-repeat;
-                    }
-                    padding: {
-                        left: 55px;
-                    }
-                }
-                &:after {
-                    content: " ";
-                    background: {
-                        image: image-url('Flower_Right.png');
-                        position: right top;
-                        repeat: no-repeat;
-                    }
-                    padding: {
-                        right: 50px;
-                    }
-                }
-            }
-        }
+  .site-description {
+    font: {
+      size: $f_taglineFullWidth-px;
+      size: $f_taglineFullWidth;
     }
+    width: 100%;
+    margin: {
+      bottom: 20px;
+    }
+    padding: {
+      left:20px;
+    }
+    text: {
+      align: center;
+    }
+    &:before {
+      content: " ";
+      background: {
+        image: image-url('Flower_Left.png');
+        position: left top;
+        repeat: no-repeat;
+      }
+      padding: {
+        left: 55px;
+      }
+    }
+    &:after {
+      content: " ";
+      background: {
+        image: image-url('Flower_Right.png');
+        position: right top;
+        repeat: no-repeat;
+      }
+      padding: {
+        right: 50px;
+      }
+    }
+  }
+  &.logo-frame {
+    background: {
+      position: 50% 237px;
+    }
+    .site-header {
+      background: {
+       image: image-url('vintage-logo-background.png');
+       position: 50% 10px;
+      }
+      min-height: 236px;
+      .site-title {
+        min-height: 132px;
+      }
+      .title-area {
+        background: {
+          position: 50% 25px;
+        }
+        a {
+          min-height:164px;
+        }
+      }
+
+    }
+  }
 }
 .logo-position-left {
 	.site-header {
@@ -1205,7 +1215,7 @@ textarea {
         .title-area {
           max-width: 300px; //was width:299px;
           background: {
-            position: 50% 8px; //was: 50% 5px; //32
+            position: 50% 5px;
           }
         }
       }
