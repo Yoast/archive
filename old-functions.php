@@ -19,10 +19,6 @@ function child_theme_setup() {
 	 */
 	define( 'YST_SIDEBAR_WIDTH', 261 );
 
-
-
-
-
 }
 
 
