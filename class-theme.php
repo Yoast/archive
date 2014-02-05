@@ -389,8 +389,11 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	public function modify_contact_methods( $profile_fields ) {
 
 		// Add new fields
-		$profile_fields['pinterest'] = __( 'Pinterest profile URL', 'yoast-theme' );
-		$profile_fields['linkedin']  = __( 'LinkedIn profile URL', 'yoast-theme' );
+		$profile_fields['facebook']   = __( 'Facebook profile URL', 'yoast-theme' );
+		$profile_fields['twitter']    = __( 'Twitter username', 'yoast-theme' );
+		$profile_fields['googleplus'] = __( "Google+ posts URL", 'yoast-theme' );
+		$profile_fields['pinterest']  = __( 'Pinterest profile URL', 'yoast-theme' );
+		$profile_fields['linkedin']   = __( 'LinkedIn profile URL', 'yoast-theme' );
 
 		return $profile_fields;
 	}
