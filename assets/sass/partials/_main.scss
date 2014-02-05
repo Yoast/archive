@@ -2691,7 +2691,7 @@ table {
 			@include background-image(linear-gradient(lighten($c_ctaBg, 10%), $c_ctaBg));
 			span {
 				display: block;
-				padding: 24px 18%; // based upon total width, scaling to fit sidebar width
+				padding: 33px 18%; // based upon total width, scaling to fit sidebar width
 				color: $c_ctaTextWhite;
 				text: {
 					align: center;
