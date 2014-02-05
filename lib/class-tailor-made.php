@@ -74,7 +74,6 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 
 	    // Add support for yoast after header widget
 		add_action( 'genesis_after_header', array( $this, 'after_header_genesis' ) );
-		add_action( 'genesis_after_content_sidebar_wrap', array( $this, 'fullwidth_sitebars_genesis' ) );
 		add_action( 'genesis_before_comments', array( $this, 'after_post_sitebar_genesis' ) );
 	
 		add_action( 'genesis_after_header', array( $this, 'show_fullwidth_sidebars' ) );
@@ -256,26 +255,6 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 				$output = apply_filters( 'yst_tagline_afterheader', '<div id="yoast-tagline-after-header-container"><p class="yoast-tagline">' . $tagline . '</p></div>', $tagline );
 				echo $output;
 			}
-		}
-	}
-
-	/**
-	 * @todo add documentation
-	 */
-	public function fullwidth_sitebars_genesis() {
-		if ( 'full-width-content' == genesis_site_layout() ) {
-			echo '<div id="yoast-fullwidth-bottom-container"><div class="wrap">';
-
-			$i = 1;
-			while ( $i < 4 ) {
-				genesis_widget_area( 'yoast-fullwidth-widgetarea-' . $i, array(
-						'before' => '<div id="yoast-fullwidth-widgetarea-' . $i . '" class="yoast-fullwidth-widget">',
-						'after'  => '</div>',
-					) );
-				$i ++;
-			}
-
-			echo '</div></div>';
 		}
 	}
 
