@@ -329,7 +329,7 @@ class Yoast_Theme_Customizer {
 
 			preg_match( '/(.+).css/', $file, $matches );
 			if ( isset ( $matches[1] ) ) {
-				if ( in_array( $matches[1], array( 'forms', 'editor-style' ) ) ) {
+				if ( in_array( $matches[1], array( 'forms', 'editor-style', 'old-ie' ) ) ) {
 					continue;
 				}
 
