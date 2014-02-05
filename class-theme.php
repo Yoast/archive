@@ -245,12 +245,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 * @todo check whether yPos in sticky menu code is the right position to switch.
 	 */
 	public function activate_sidr_and_sticky_menu() {
-		$yst_nav_pos = get_theme_mod( 'yst_nav_positioner' );
-		if ( $yst_nav_pos == 'top' ) {
-			$yst_Ypos = 10;
-		} else {
-			$yst_Ypos = 178;
-		}
+		$menu_offset = apply_filters( 'yoast_menu_top_offset', 0 );
 		?>
 		<script type="text/javascript">
 			jQuery(document).ready(function ($) {
@@ -287,7 +282,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 				});
 				$(window).scroll(function () {
 					var yPos = ( $(window).scrollTop() );
-					if (yPos > <?php echo $yst_Ypos; ?>) {
+					if (yPos > <?php echo $menu_offset; ?>) {
 						$("body").addClass("sticky-menu");
 					} else {
 						$("body").removeClass("sticky-menu");
