@@ -1259,6 +1259,15 @@ body.sticky-menu {
 		position: 50% -62px;
 		attachment: fixed;
 	}
+  &.logo-position-center.logo-frame .site-header,
+  &.logo-position-left.logo-frame .site-header {
+    background: {
+      image: none;
+    }
+  }
+  .site-description {
+    display:none;
+  }
 	.site-header {
 		position: absolute;
 		position: fixed;
@@ -3376,7 +3385,24 @@ img#wpstats {
 		background: {
 			position: 50% 185px;
 		}
+    &.logo-frame .site-header,
+    .site-header {
+      min-height: 0;
+      max-height: none;
+    }
 	}
+  body.logo-position-center {
+    &.logo-frame .site-header,
+    .site-header {
+      min-height: 0;
+      max-height: none;
+      .site-description {
+        max-width: 100%;
+        float:none;
+        clear:both;
+      }
+    }
+  }
 	.content {
 		max-width: 67%;
 	}
