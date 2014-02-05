@@ -36,12 +36,7 @@ class Yoast_Versatile extends Yoast_Theme {
 		add_filter( 'yst_default_color_scheme', array( $this, 'set_default_color_scheme' ) );
 
 		// Set the menu top offset
-		$yst_nav_pos = get_theme_mod( 'yst_nav_positioner' );
-		$menu_offset = 178;
-		if ( $yst_nav_pos == 'top' ) {
-			$menu_offset = 10;
-		}
-		add_filter( 'yoast_menu_top_offset', $menu_offset );
+		add_filter( 'yoast_menu_top_offset', array( $this, 'set_menu_top_offset' ) );
 
 		// Add support for 3-column footer widgets
 		add_theme_support( 'genesis-footer-widgets', 3 );
@@ -216,6 +211,20 @@ class Yoast_Versatile extends Yoast_Theme {
 	 */
 	public function set_default_color_scheme() {
 		return 'SolidOrange';
+	}
+
+	/**
+	 * Set the menu top offset
+	 *
+	 * @return int
+	 */
+	public function set_menu_top_offset() {
+		$yst_nav_pos = get_theme_mod( 'yst_nav_positioner' );
+		$menu_offset = 178;
+		if ( $yst_nav_pos == 'top' ) {
+			$menu_offset = 10;
+		}
+		return $menu_offset;
 	}
 
 	/**
