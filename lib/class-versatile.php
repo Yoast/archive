@@ -1,7 +1,7 @@
 <?php
 
 // Load the Yoast_Theme class
-require_once( 'class-theme.php' );
+require_once( 'framework/class-theme.php' );
 
 /**
  * Class Versatile

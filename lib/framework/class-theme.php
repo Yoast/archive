@@ -109,7 +109,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 			$file_name = 'class-' . strtolower( str_ireplace( '_', '-', str_ireplace( 'Yoast_', '', $class ) ) ) . '.php';
 
 			// Full file path
-			$full_path = get_stylesheet_directory() . '/lib/classes/' . $file_name;
+			$full_path = get_stylesheet_directory() . '/lib/framework/' . $file_name;
 
 			// Load file
 			if ( file_exists( $full_path ) ) {
