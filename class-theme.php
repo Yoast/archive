@@ -67,6 +67,9 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		add_filter( 'excerpt_more', array( $this, 'read_more_link' ) );
 		add_filter( 'the_content_more_link', array( $this, 'read_more_link' ) );
 
+		// Displays a term archive intro
+		add_action( 'genesis_before_loop', array( $this, 'term_archive_intro' ), 20 );
+
 		// Footer creds
 		add_filter( 'genesis_footer_creds_text', array( $this, 'footer_creds_text' ) );
 
@@ -463,6 +466,34 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	public function mobile_nav() {
 		echo '<a class="open" id="sidr-left" href="#sidr-left">' . __( 'Open Navigation', 'yoast-theme' ) . '</a>';
 		echo '<a class="open" id="sidr-right" href="#sidr-right">' . __( 'Open Search', 'yoast-theme' ) . '</a>';
+	}
+
+	/**
+	 * Displays a term archive intro
+	 */
+	public function term_archive_intro() {
+		if ( ! is_category() && ! is_tag() && ! is_tax() ) {
+			return;
+		}
+
+		if ( get_query_var( 'paged' ) ) {
+			return;
+		}
+
+		echo '<div class="term-intro">';
+		echo '<h1>' . single_term_title( '', false ) . '</h1>';
+		echo '<div class="entry-content">';
+
+		/**
+		 * This action allows you to output extra content in a term archive intro section.
+		 *
+		 * @todo Document this hook
+		 */
+		do_action( 'yoast_term_archive_intro' );
+
+		echo wpautop( term_description() );
+		echo '</div>';
+		echo '</div>';
 	}
 
 	/**
