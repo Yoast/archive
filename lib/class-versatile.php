@@ -215,7 +215,7 @@ class Yoast_Versatile extends Yoast_Theme {
 	 * @return string
 	 */
 	public function set_default_color_scheme() {
-		return 'BrightBlue';
+		return 'SolidOrange';
 	}
 
 	/**
