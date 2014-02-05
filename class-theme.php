@@ -213,7 +213,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 * @return string
 	 */
 	public function alter_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
-		$color_scheme = get_theme_mod( 'yst_colour_scheme', apply_filters( 'yst_default_color_scheme', 'BrightBlue' ) );
+		$color_scheme = get_theme_mod( 'yst_colour_scheme', apply_filters( 'yst_default_color_scheme', '' ) );
 
 		return $stylesheet_dir_uri . '/assets/css/' . $color_scheme . '.css';
 	}
