@@ -424,8 +424,8 @@ header {
 		overflow-x: hidden;
 		color: $c_taglineTop;
 		font: {
-			size: $f_taglineTop-px;
-			size: $f_taglineTop;
+			size: $f_header-px;
+			size: $f_header;
 		}
 		strong {
 			color: $c_taglineTopBold;
