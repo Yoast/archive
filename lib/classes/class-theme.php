@@ -5,6 +5,7 @@
  */
 interface iYoast_Theme {
 	public function setup_theme();
+	public function comment_callback( $comment, $args, $depth );
 }
 
 /**
@@ -132,6 +133,8 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		// Add viewport meta tag for mobile browsers
 		add_theme_support( 'genesis-responsive-viewport' );
 
+		// Change the comment handling function
+		add_filter( 'genesis_comment_list_args', array( $this, 'comment_list_args' ) );
 	}
 
 	/**
@@ -152,6 +155,21 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		if ( is_admin() ) {
 			require_once( get_stylesheet_directory() . '/lib/functions/theme-customizer.php' );
 		}
+	}
+
+	/**
+	 * Comment List Arguments, modify to change the callback function
+	 *
+	 * @todo move this method to Yoast_Theme and add comment_callback to interface so each theme should have it's own comment implementation
+	 *
+	 * @param array $args
+	 *
+	 * @return array
+	 */
+	public function comment_list_args( $args ) {
+		$args['callback'] = array( $this, 'comment_callback' );
+
+		return $args;
 	}
 
 	/**
