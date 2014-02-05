@@ -63,6 +63,9 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		// Mobile navigation
 		add_action( 'genesis_header', array( $this, 'mobile_nav' ), 11 );
 
+		// Display the after header widget area
+		add_action( 'genesis_after_content_sidebar_wrap', array( $this, 'full_width_sidebars' ) );
+
 		// Add Read More Link to Excerpts
 		add_filter( 'excerpt_more', array( $this, 'read_more_link' ) );
 		add_filter( 'the_content_more_link', array( $this, 'read_more_link' ) );
@@ -70,7 +73,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		// Displays a term archive intro
 		add_action( 'genesis_before_loop', array( $this, 'term_archive_intro' ), 20 );
 
-		// Footer creds
+		// Footer credits
 		add_filter( 'genesis_footer_creds_text', array( $this, 'footer_creds_text' ) );
 
 		// Override Genesis settings with theme mod settings
@@ -81,6 +84,9 @@ abstract class Yoast_Theme implements iYoast_Theme {
 
 		// Modify contact methods
 		add_filter( 'user_contactmethods', array( $this, 'modify_contact_methods' ) );
+
+		//  Display the yoast-after-post widget area
+		add_action( 'genesis_before_comments', array( $this, 'after_post_sidebar' ) );
 
 		// Customize the post meta function, only show categories and tags on single()
 		add_filter( 'genesis_post_meta', array( $this, 'post_meta_filter' ) );
@@ -307,6 +313,28 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	}
 
 	/**
+	 * Display full width widget areas in genesis_after_content_sidebar_wrap
+	 *
+	 * @note This is sidebar / widget related
+	 */
+	public function full_width_sidebars() {
+		if ( 'full-width-content' == genesis_site_layout() ) {
+			echo '<div id="yoast-fullwidth-bottom-container"><div class="wrap">';
+
+			$i = 1;
+			while ( $i < 4 ) {
+				genesis_widget_area( 'yoast-fullwidth-widgetarea-' . $i, array(
+						'before' => '<div id="yoast-fullwidth-widgetarea-' . $i . '" class="yoast-fullwidth-widget">',
+						'after'  => '</div>',
+				) );
+				$i ++;
+			}
+
+			echo '</div></div>';
+		}
+	}
+
+	/**
 	 * Replace the Genesis footer creds text with our own template.
 	 *
 	 * @param string $footer_creds_text
@@ -411,6 +439,22 @@ abstract class Yoast_Theme implements iYoast_Theme {
 			$post_meta = '[post_categories before="Filed Under: "] [post_tags before="Tagged: "]';
 
 			return $post_meta;
+		}
+	}
+
+	/**
+	 * Display the yoast-after-post widget area
+	 *
+	 * @note This is sidebar / widget related
+	 */
+	public function after_post_sidebar() {
+		if ( is_active_sidebar( 'yoast-after-post' ) && is_single() ) {
+			echo '<div id="yoast-after-post-container"><div class="wrap">';
+			genesis_widget_area( 'yoast-after-post', array(
+					'before' => '<div id="yoast-after-post-widgetarea" class="yoast-after-post-widget">',
+					'after'  => '</div>',
+			) );
+			echo '</div></div>';
 		}
 	}
 
