@@ -55,6 +55,7 @@ class Yoast_Versatile extends Yoast_Theme {
 		// Image sizes
 		add_image_size( 'yst-archive-thumb', 170, 0, true );
 		add_image_size( 'yst-single', 620, 315, true );
+		add_image_size( 'fullwidth-thumb', 290, 193, true );
 
 		// Activate blogroll widget
 		add_filter( 'pre_option_link_manager_enabled', '__return_true' );
@@ -93,9 +94,6 @@ class Yoast_Versatile extends Yoast_Theme {
 
 		// Display the image on a single page
 		add_action( 'genesis_before_entry_content', array( $this, 'display_single_image' ) );
-
-		// Change the comment handling function
-		add_filter( 'genesis_comment_list_args', array( $this, 'comment_list_args' ) );
 
 		// Display search box in header
 		add_action( 'genesis_header_right', array( $this, 'header_search' ) );
@@ -434,21 +432,6 @@ class Yoast_Versatile extends Yoast_Theme {
 		);
 
 		echo genesis_get_image( array( 'size' => 'yst-single', 'attr' => $default_attr ) );
-	}
-
-	/**
-	 * Comment List Arguments, modify to change the callback function
-	 *
-	 * @todo move this method to Yoast_Theme and add comment_callback to interface so each theme should have it's own comment implementation
-	 *
-	 * @param array $args
-	 *
-	 * @return array
-	 */
-	public function comment_list_args( $args ) {
-		$args['callback'] = array( $this, 'comment_callback' );
-
-		return $args;
 	}
 
 	/**

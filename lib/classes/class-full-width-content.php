@@ -13,9 +13,6 @@ class Yoast_Full_Width_Content extends Yoast_Layout {
 
 		// Do hooks
 		$this->hooks();
-
-		// Setup the layout
-		$this->setup();
 	}
 
 	/**
@@ -23,13 +20,6 @@ class Yoast_Full_Width_Content extends Yoast_Layout {
 	 */
 	private function hooks() {
 		add_action( 'genesis_after_entry_content', array( $this, 'image_full_width' ), 15 );
-	}
-
-	/**
-	 * Setup layout
-	 */
-	private function setup() {
-		add_image_size( 'fullwidth-thumb', 290, 193, true );
 	}
 
 	/**
