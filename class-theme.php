@@ -60,6 +60,9 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		// Activate SIDR
 		add_action( 'wp_footer', array( $this, 'activate_sidr_and_sticky_menu' ) );
 
+		// Mobile navigation
+		add_action( 'genesis_header', array( $this, 'mobile_nav' ), 11 );
+
 		// Add Read More Link to Excerpts
 		add_filter( 'excerpt_more', array( $this, 'read_more_link' ) );
 		add_filter( 'the_content_more_link', array( $this, 'read_more_link' ) );
@@ -207,7 +210,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 * @return string
 	 */
 	public function alter_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
-		$color_scheme = get_theme_mod( 'yst_colour_scheme', 'BrightBlue' );
+		$color_scheme = get_theme_mod( 'yst_colour_scheme', apply_filter( 'yst_default_color_scheme', 'BrightBlue' ) );
 
 		return $stylesheet_dir_uri . '/assets/css/' . $color_scheme . '.css';
 	}
@@ -457,6 +460,14 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-nav'] );
 		unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-posts'] );
 		unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-breadcrumb'] );
+	}
+
+	/**
+	 * Output mobile navigation links
+	 */
+	public function mobile_nav() {
+		echo '<a class="open" id="sidr-left" href="#sidr-left">' . __( 'Open Navigation', 'yoast-theme' ) . '</a>';
+		echo '<a class="open" id="sidr-right" href="#sidr-right">' . __( 'Open Search', 'yoast-theme' ) . '</a>';
 	}
 
 	/**
