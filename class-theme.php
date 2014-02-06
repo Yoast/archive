@@ -228,7 +228,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 
 		// Load our custom theme updater
 		if ( ! class_exists( 'EDD_SL_Theme_Updater' ) ) {
-			require_once( 'EDD_SL_Theme_Updater.php' );
+			require_once( 'class-edd-sl-theme-updater.php' );
 		}
 
 		// Setup the updater
