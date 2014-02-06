@@ -67,26 +67,30 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 		add_action( 'wp_head', array( $this, 'display_logo') );
 
 		// Add back to top link (conditional)
-		add_action( 'wp_head', array( $this, 'conditional_add_backtotop' ), 14 );
+		add_action( 'wp_head', array( $this, 'conditional_add_back_to_top_link' ), 14 );
 
 		// Add conditional comments (ie)
 	    add_action( 'wp_head', array( $this, 'conditional_comments' ) );
 
 	    // Add support for yoast after header widget
 		add_action( 'genesis_after_header', array( $this, 'after_header_genesis' ) );
+
+		// Add after post widget area
 		add_action( 'genesis_before_comments', array( $this, 'after_post_sitebar_genesis' ) );
 	
+		// Conditionally add full width sidebars
 		add_action( 'genesis_after_header', array( $this, 'show_fullwidth_sidebars' ) );
 
 		// Reposition the breadcrumbs
 		add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 		remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 
+		// Add top right widget area (for search widget)
 		add_action( 'genesis_header', array( $this, 'add_top_right_area' ) );
 
 		// Fake Genesis Custom Header
 		if ( is_admin() ) {
-			add_action( 'current_screen', 'fake_genesis_custom_header_thinking' );
+			add_action( 'current_screen', array($this, 'fake_genesis_custom_header' ) );
 		}
 	}
 
@@ -259,7 +263,7 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 	}
 
 	/**
-	 * @todo add documentation
+	 * Do widget area after single posts.
 	 */
 	public function after_post_sitebar_genesis() {
 		if ( is_active_sidebar( 'yoast-after-post' ) && is_single() ) {
@@ -272,12 +276,16 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 		}
 	}
 
+	/**
+	* Sets the default color scheme, used in Yoast_Theme class 
+	* @return string Name of default color scheme
+	*/
 	public function set_default_color_scheme() {
 		return 'WarmBlue';
 	}
 
 	/**
-	 * Enqueue Google font
+	 * Enqueue Google fonts
 	 */
 	public function load_google_fonts() {
 		wp_enqueue_style( 'google-font-quattrocento_sans', '//fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);', array(), $this->get_version() );
@@ -294,24 +302,23 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 	}
 
 	/**
-	 * Add back to top link
-	 *
-	 * @fixme If there is a better solid way to do this or Genesis fixes this feature, use that
+	 * Display a "back to top" link
 	 */
-	public function add_backtotop() {
+	public function display_back_to_top_link() {
 		echo '<p class="back-to-top"><a href="#">' . __( 'Back to top', 'yoast-theme' ) . '</a></p>';
 	}
 
 	/**
-	 * @todo add documentation
+	 * Add a genesis footer action if it's a 'single' page
 	 */
-	public function conditional_add_backtotop() {
+	public function conditional_add_back_to_top_link() {
 
 		if ( is_single() ) {
-			add_action( 'genesis_entry_footer', array( $this, 'add_backtotop' ), 14 );
+			add_action( 'genesis_entry_footer', array( $this, 'display_back_to_top_link' ), 14 );
 		}
 
-		add_action( 'genesis_after_endwhile', array( $this, 'add_backtotop' ), 14 );
+		// @barry -> this action hook is not used in versatile. 
+		add_action( 'genesis_after_endwhile', array( $this, 'display_back_to_top_link' ), 14 );
 	}
 
 	/**
@@ -323,7 +330,12 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 	    echo '<![endif]-->';
 	}
 
-	public function show_fullwidth_sidebars() {
+	/**
+	* Remove genesis sidebars and add full width widget areas
+	*
+	* @note This is sidebar / widget related
+	*/
+	public function show_full_width_sidebars() {
 		if ( 'full-width-content' == genesis_site_layout() ) {
 			// Remove the Primary Sidebar from the Primary Sidebar area.
 			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
@@ -337,6 +349,11 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 		}
 	}
 
+	/**
+	* Show 'yoast-fullwidth-widgetarea' full width widget areas
+	* 
+	* @note This is sidebar / widget related
+	*/
 	public function do_fullwidth_sidebars() {
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-1' );
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-2' );
@@ -345,6 +362,8 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 
 	/**
 	 * Show the post thumbnail in the full width archives
+	 *
+	 * @note This is sidebar / widget related
 	 */
 	public function image_full_width() {
 		if ( ! get_theme_mod( 'yst_content_archive_thumbnail' ) ) {
