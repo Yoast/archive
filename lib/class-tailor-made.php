@@ -79,7 +79,7 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 		add_action( 'genesis_before_comments', array( $this, 'after_post_sitebar_genesis' ) );
 	
 		// Conditionally add full width sidebars
-		add_action( 'genesis_after_header', array( $this, 'show_fullwidth_sidebars' ) );
+		add_action( 'genesis_after_header', array( $this, 'show_full_width_sidebars' ) );
 
 		// Reposition the breadcrumbs
 		add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
@@ -335,14 +335,14 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 	*
 	* @note This is sidebar / widget related
 	*/
-	public function show_full_width_sidebars() {
+	public function add_full_width_sidebars() {
 		if ( 'full-width-content' == genesis_site_layout() ) {
 			// Remove the Primary Sidebar from the Primary Sidebar area.
 			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
 			remove_action( 'genesis_sidebar_alt', 'genesis_do_sidebar_alt' );
 
 			// Place the Secondary Sidebar into the Primary Sidebar area.
-			add_action( 'genesis_sidebar', array( $this, 'do_fullwidth_sidebars' ) );
+			add_action( 'genesis_sidebar', array( $this, 'show_full_width_image' ) );
 
 			// Move the featured image to the right
 			add_action( 'genesis_entry_header', array( $this, 'image_full_width' ), 15 );
@@ -354,7 +354,7 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 	* 
 	* @note This is sidebar / widget related
 	*/
-	public function do_fullwidth_sidebars() {
+	public function show_full_width_sidebars() {
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-1' );
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-2' );
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-3' );
@@ -362,10 +362,8 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 
 	/**
 	 * Show the post thumbnail in the full width archives
-	 *
-	 * @note This is sidebar / widget related
 	 */
-	public function image_full_width() {
+	public function show_full_width_image() {
 		if ( ! get_theme_mod( 'yst_content_archive_thumbnail' ) ) {
 			return;
 		}
