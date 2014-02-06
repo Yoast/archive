@@ -1737,12 +1737,6 @@ table {
 	padding: {
 		bottom: 25px;
 	}
-	background: {
-		image: image-url($c_ContentWidthDivider);
-		size: 100% auto;
-		repeat: no-repeat;
-		position: 50% bottom;
-	}
 }
 
 .full-width-content {
@@ -1868,7 +1862,7 @@ table {
 	}
 	.excerpt_readmore {
 		text: {
-			align: right;
+			align: left;
 			decoration: none;
 		}
 		a {
@@ -1946,12 +1940,20 @@ table {
 	}
 	h1 {
 		color: $c_taxonomyIntroH1;
+    font: {
+      size: $f_taxonomyIntroH1-px;
+      size: $f_taxonomyIntroH1;
+    }
 	}
 	p {
 		color: $c_taxonomyIntroText;
 		font: {
 			weight: 700;
 		}
+    font: {
+      size: $f_taxonomyIntro-px;
+      size: $f_taxonomyIntro;
+    }
 	}
 }
 
