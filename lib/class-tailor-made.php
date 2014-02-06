@@ -74,9 +74,9 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 
 	    // Add support for yoast after header widget
 		add_action( 'genesis_after_header', array( $this, 'after_header_genesis' ) );
-			
+
 		// Conditionally add full width sidebars
-		add_action( 'genesis_after_header', array( $this, 'show_full_width_sidebars' ) );
+		add_action( 'genesis_after_header', array( $this, 'add_full_width_sidebars' ) );
 
 		// Reposition the breadcrumbs
 		add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
@@ -317,10 +317,10 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 			remove_action( 'genesis_sidebar_alt', 'genesis_do_sidebar_alt' );
 
 			// Place the Secondary Sidebar into the Primary Sidebar area.
-			add_action( 'genesis_sidebar', array( $this, 'show_full_width_image' ) );
+			add_action( 'genesis_sidebar', array( $this, 'show_full_width_sidebars' ) );
 
 			// Move the featured image to the right
-			add_action( 'genesis_entry_header', array( $this, 'image_full_width' ), 15 );
+			add_action( 'genesis_entry_header', array( $this, 'show_full_width_image' ), 15 );
 		}
 	}
 
