@@ -299,7 +299,7 @@ class Yoast_Vintage extends Yoast_Theme {
 			}
 
 			if ( ! $use_alt_positioning ) {
-				$css .= '@media(max-width: 640px){header.site-header, body.logo-position-center.logo-frame .site-header {background-color:#fff;background-image: url(' . $mobile_logo . ');background-repeat:no-repeat;background-position:50% 2px;}}';
+				$css .= '@media(max-width: 640px){header.site-header, body.logo-position-center.logo-frame .site-header, body.sticky-menu.logo-position-center.logo-frame .site-header, body.sticky-menu.logo-position-left.logo-frame .site-header {background-color:#fff;background-image: url(' . $mobile_logo . ');background-repeat:no-repeat;background-position:50% 2px;}}';
 			} else {
 				$mobile_logo_height = $yst_mobile_logo_details['height'] - 41;
 				if ( is_user_logged_in() ) {
