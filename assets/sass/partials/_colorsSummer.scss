@@ -1,231 +1,262 @@
-// color declarations ColorSet10
+//@TODO: Has 9 colors!
 
-// color bar 1          #b3d7e6
-// color bar 2          #db363f
-// color bar 3          #c50721
-// t1                   #4288bc
-// nav                  #bdafc5
-// gray background      #eeeeee
-// gray border          #b2b8b8
-// T4                   #666666
-// black text           #000000
-// cta                  #6bbd1e
-// footer               #e2e2e2
+// Color declarations Versatile ColorSet1 BrightBlue
+
+// H1 / H3 / Button Field / BG Top					#kleur1
+// T3 / Lines Color / NAV Active						#kleur2
+// T2 / H2 Gray / BG Footer Dark						#kleur3
+// CTA																			#kleur4
+// Lines / Spacers Gray / Buttons content		#kleur5
+// BG Content Top / BG Footer NAV Light			#kleur6
+// Text black																#kleur7
+// BG																				#kleur8
 
 // #yoast-after-header-container check in list
-$c_ListCheckImage:      "../images/li-check-WarmPurple.png";
+$c_sprite:          "Versatile_Sprite_BrightBlue.png";
 
 // general
-$c_bodyTopLine:         #b3d7e6;
+$c_bodyTopLineDark:     #kleur2;
+$c_bodyTopLineLight:    #kleur1;
+$c_bodyLine:						#kleur2;
 
-$c_paragraph:           #000000;
-$c_link:                #4288bc;
-$c_linkHover:           #db363f;
-$c_linkBorder:          #dddddd;
+$c_paragraph:           #kleur7;
+$c_link:                #kleur2;
+$c_linkHover:           #kleur4;
+$c_linkBorder:          #kleur6;
 
-$c_logoText:            #999999;
-$c_logoTextLink:        #333333;
-$c_logoTextLinkHover:   #333333;
+$c_logoText:            #kleur5;
+$c_logoTextLink:        #kleur3;
+$c_logoTextLinkHover:   #kleur3;
 
-$c_taglineTop:          #666666;
-$c_taglineTopBold:      #4288bc;
-$c_taglineFullWidth:    #666666;
-$c_taglineFullWidthBold:#4288bc;
-$c_taglineBoxShadow:    #cccccc;
-$c_taglineLink:         #4288bc;
-$c_taglineLinkHover:    #db363f;
+$c_taglineTopLight:     #ffffff;
+$c_taglineTopDark:      #kleur1;
+$c_taglineTopBold:      #kleur2;
+$c_taglineFullWidth:    #kleur8;
+$c_taglineFullWidthBold:#kleur2;
+$c_taglineBoxShadow:    #kleur8;
+$c_taglineLink:         #kleur2;
+$c_taglineLinkHover:    #kleur4;
+$c_taglineBg:						#kleur1;
+$c_taglineBgAlt:				#kleur6;
+$c_taglineBorderMobile:	#kleur5;
 
-$c_breadcrumbs:         #666666;
-$c_breadcrumbsLink:     #4288bc;
-$c_breadcrumbsLinkHover:#db363f;
+$c_breadcrumbs:         #kleur3;
+$c_breadcrumbsLink:     #kleur2;
+$c_breadcrumbsLinkHover:#kleur4;
 
-$c_pagenavBg:           #eeeeee;
-$c_pagenavLink:         #4288bc;
-$c_pagenavHoverBg:      #bdafc5;
+$c_pagenavBg:           #kleur5;
+$c_pagenavLink:         #ffffff;
+$c_pagenavHoverBg:      #kleur4;
 $c_pagenavHoverLink:    #ffffff;
-$c_pagenavActiveBg:     #bdafc5;
+$c_pagenavActiveBg:     #kleur2;
 $c_pagenavActiveLink:   #ffffff;
 
-$c_metaAtPost:          #666666;
-$c_metaAtPostBorder:    #dddddd;
-$c_linkToArchives:      #4288bc;
-$c_commentHTMLtags:     #b2b8b8;
+$c_metaAtPost:          #kleur3;
+$c_metaAtPostBorder:    #kleur6;
+$c_commentHTMLtags:     #kleur8;
 
-$c_hrLine:              #db363f;
-$c_borderImg:           #b2b8b8;
-$c_randLine:            #b2b8b8; // random grey line
+$c_hrLine:              #kleur8;
+$c_borderImg:           #kleur8;
+$c_randLine:            #kleur5; // random grey line
 
-$c_selectionText:       #4288bc;
-$c_selectionBg:         #bdafc5;
+$c_selectionText:       #ffffff;
+$c_selectionBg:         #kleur2;
 
-$c_fieldsetBorder:      #c0c0c0;
+$c_fieldsetBorder:      #kleur3;
 
 // header
-$c_headerBg:            #eeeeee;
-$c_headerText:          #4288bc;
-$c_headerLink:          #4288bc;
-$c_headerLinkHover:     #db363f;
-$c_headerH3:            #db363f;
-$c_headerH4:            #db363f;
+$c_headerBgDark:        #kleur1;
+$c_headerBgLight:       #ffffff;
+$c_headerText:          #kleur7;
+$c_headerLink:          #kleur2;
+$c_headerLinkHover:     #kleur2;
+$c_headerH3:            #kleur3;
+$c_headerH4:            #kleur3;
+
+// after header widgets
+$c_afterHeaderBg:					#kleur6;
+$c_afterHeaderLink:				#kleur2;
+$c_afterHeaderLinkHover:	#kleur4;
+$c_afterHeaderH3:					#kleur3;
+$c_afterHeaderH4:					#kleur3;
+$c_afterHeaderText:				#kleur1;
+$c_afterHeaderBorder:			#kleur2;
 
 // navigation
-$c_navMainFullBg:           #bdafc5;
-$c_navMainFullBorderTop:    #db363f;
-$c_navMainFullBorderBottom: #c50721;
+$c_navMainFullBg:           #kleur3;
+$c_navMainFullBorderTop:    #kleur2;
+$c_navMainFullBorderBottom: #kleur2;
 
-$c_navMainBg:           #bdafc5;
-$c_navMainText:         #000000;
-$c_navMainLink:         #000000;
+$c_navMainBg:           #kleur3;
+$c_navMainText:         #ffffff;
+$c_navMainLink:         #ffffff;
 $c_navMainLinkHover:    #ffffff;
-$c_navMainLinkBg:       #bdafc5;
-$c_navMainLinkBgHover:  #db363f;
-$c_navMainBgActive:     #db363f;
+$c_navMainLinkBg:       #kleur3;
+$c_navMainLinkBgHover:  #kleur2;
+$c_navMainBgActive:     #kleur2;
 $c_navMainTextActive:   #ffffff;
-$c_navMainLinkShadow:   #333333;
+$c_navMainLinkShadow:   #kleur3;
 $c_navMainBorder:       #ffffff;
-$c_navMainBorderBottom: #db363f;
-$c_navMainShadow:       #999999;
+$c_navMainBorderBottom: #kleur2;
+$c_navMainShadow:       #kleur5;
 
-$c_navSubBg:           #db363f;
+$c_navSubBg:           #kleur3;
 $c_navSubText:         #ffffff;
 $c_navSubLink:         #ffffff;
 $c_navSubLinkHover:    #ffffff;
-$c_navSubLinkBg:       #bdafc5;
-$c_navSubLinkBgHover:  #4288bc;
-$c_navSubLinkActive:   #bdafc5;
-$c_navSubBorder:       #ffffff;
-$c_navSubBorderBottom: #db363f;
+$c_navSubLinkBg:       #kleur3;
+$c_navSubLinkBgHover:  #kleur2;
+$c_navSubLinkActive:   #ffffff;
+$c_navSubLinkActiveBg: #kleur3;
+$c_navSubBorder:       #kleur8;
+$c_navSubBorderBottom: #kleur2;
 
 // mobile menu Sidr
-$sidr-background:               #e2e2e2;
-$sidr-background-shadow-color:  #ebebeb;
-$sidr-text-color:               #333333;
-$c_sidr_linkBg:                 #b2b8b8;
-$c_sidr_linkBorder:             #ffffff;
-$c_sidr_linkHoverBg:            #666666;
-$c_sidr_linkActiveBg:           #4288bc;
+$sidr-background:               #kleur3;
+$sidr-background-shadow-color:  #kleur3;
+$sidr-text-color:               #ffffff;
+$c_sidr_linkBg:                 #kleur8;
+$c_sidr_linkBorder:             #kleur5;
+$c_sidr_linkHoverBg:            #kleur2;
+$c_sidr_linkActiveBg:           #kleur2;
 $c_sidr_linkHoverText:          #ffffff;
-$c_sidr_headingText:            #666666;
-$c_sidr_headingBorder:          #ffffff;
-$c_sidr_boxShadow:              #999999;
+$c_sidr_headingText:            #kleur8;
+$c_sidr_headingBorder:          #kleur5;
+$c_sidr_boxShadow:              #kleur3;
+$c_sidr_searchBg:								#kleur2;
 
 // main content
-$c_mainBg:              #ffffff;
-$c_mainText:            #000000;
-$c_mainLink:            #4288bc;
-$c_mainLinkHover:       #db363f;
-$c_mainH1:              #db363f;
-$c_mainH1Hover:         #4288bc;
-$c_mainH2:              #db363f;
-$c_mainH2Hover:         #4288bc;
-$c_mainH3:              #db363f;
-$c_mainH3Hover:         #4288bc;
-$c_mainH4:              #000000;
-$c_mainH4Hover:         #333333;
-$c_mainH5:              #000000;
-$c_mainH5Hover:         #333333;
-$c_mainH6:              #000000;
-$c_mainH6Hover:         #333333;
+$c_mainBg:              #kleur8;
+$c_mainContentBg:				#ffffff;
+$c_mainText:            #kleur7;
+$c_mainLink:            #kleur2;
+$c_mainLinkHover:       #kleur4;
+$c_mainH1:              #kleur1;
+$c_mainH1Hover:         #kleur4;
+$c_mainH2:              #kleur3;
+$c_mainH2Hover:         #kleur4;
+$c_mainH3:              #kleur3;
+$c_mainH3Hover:         #kleur4;
+$c_mainH4:              #kleur7;
+$c_mainH4Hover:         #kleur4;
+$c_mainH5:              #kleur7;
+$c_mainH5Hover:         #kleur4;
+$c_mainH6:              #kleur7;
+$c_mainH6Hover:         #kleur4;
 
-$c_taxonomyIntroText:   #333333;
-$c_taxonomyIntroH1:     #666666;
+$c_taxonomyIntroText:   #kleur3;
+$c_taxonomyIntroH1:     #kleur8;
 
 // blockquote
-$c_BlockquoteText:      #333333;
-$c_BlockquoteLink:      #4288bc;
-$c_BlockquoteLinkHover: #db363f;
-$c_BlockquoteBorder:    #dddddd;
-$c_BlockquoteBg:        #eeeeee;
-$c_blockquoteBefore:    #999999;
+$c_BlockquoteText:      #kleur3;
+$c_BlockquoteLink:      #kleur2;
+$c_BlockquoteLinkHover: #kleur2;
+$c_BlockquoteBorder:    #kleur6;
+$c_BlockquoteBg:        #kleur6;
+$c_blockquoteBefore:    #kleur5;
 
 // input
-$c_inputText:           #000000;
-$c_inputTextFocus:      #000000;
+$c_inputText:           #kleur7;
+$c_inputTextFocus:      #kleur7;
 $c_inputBg:             #ffffff;
 $c_inputBgFocus:        #ffffff;
-$c_inputBorder:         #b2b8b8;
-$c_inputBoxShadow:      #eeeeee;
-$c_inputBorderFocus:    #999999;
-$c_inputTextPlaceholder:#999999;
+$c_inputBorder:         #kleur8;
+$c_inputBoxShadow:      #kleur6;
+$c_inputBorderFocus:    #kleur5;
+$c_inputTextPlaceholder:#kleur5;
 
 $c_inputSubmitText:     #ffffff;
 $c_inputSubmitTextHover:#ffffff;
-$c_inputSubmitBg:       #4288bc;
-$c_inputSubmitBgHover:  #db363f;
-$c_inputSubmitBorder:   #4288bc;
-$c_inputSubmitTextShadow: #333333;
+$c_inputSubmitBg:       #kleur5;
+$c_inputSubmitBgHover:  #kleur5;
+$c_inputSubmitBorder:   #kleur5;
+$c_inputSubmitTextShadow: #kleur3;
 $c_inputSubmitBoxShadow:  #ffffff;
 
 // comments
 $c_commentBg:           #ffffff;
-$c_commentText:         #000000;
-$c_commentLink:         #db363f;
-$c_commentBorder:       #db363f;
-$c_commentReplyBorder:  #dddddd;
-$c_commentByAuthorBg:   #eaf2f7;
+$c_commentText:         #kleur7;
+$c_commentLink:         #kleur2;
+$c_commentBorder:       #kleur2;
+$c_commentReplyBorder:  #kleur6;
+$c_commentByAuthorBg:   #kleur6;
+$c_commentAuthor: 			#kleur1;
+$c_entryCommentsH3:			#kleur1;
+$c_postAuthorBorder: 		#kleur2;
+$c_commentReplyTitle: 	#kleur1;
+$c_commentFormTitle: 		#kleur3;
+$c_allowedTags: 				#kleur3;
+$c_allowedTagsBg:				#kleur8;
 
 // author block
-$c_articleAuthorBg:     #eaf2f7;
-$c_articleAuthorH2:     #db363f;
-$c_articleAuthorH3:     #4288bc;
+$c_articleAuthorBg:     #kleur6;
+$c_articleAuthorH2:     #kleur2;
+$c_articleAuthorH3:     #kleur2;
 
 // call-to-action
-$c_ctaBg:               #6bbd1e;
-$c_ctaBorder:           #6bbd1e;
+$c_ctaBg:               #kleur4;
+$c_ctaBorder:           #kleur4;
 $c_ctaTextWhite:        #ffffff;
-$c_ctaTextShadow:       #333333;
-$c_ctaBoxShadow:        #ffffff;
+$c_ctaTextShadow:       #kleur3;
+$c_ctaBoxShadow:        #kleur7;
 
 $c_ctaBgWhite:          #ffffff;
 $c_ctaBorderWhite:      #ffffff;
-$c_ctaBgGrey:           #b2b8b8;
-$c_ctaBorderGrey:       #b2b8b8;
-$c_ctaTextBlack:        #000000;
+$c_ctaBgGrey:           #kleur8;
+$c_ctaBorderGrey:       #kleur8;
+$c_ctaTextBlack:        #kleur7;
 
 // tables
 $c_tableBg:             #ffffff;
-$c_tableText:           #000000;
-$c_tableRowAlt:         #bdafc5;
-$c_tableHeaderBg:       #4288bc;
+$c_tableText:           #kleur7;
+$c_tableRowAlt:         #kleur8;
+$c_tableHeaderBg:       #kleur5;
 $c_tableHeaderText:     #ffffff;
-$c_tableLink:           #4288bc;
-$c_tableLinkHover:      #db363f;
-$c_tableBorder:         #dddddd;
-$c_tableCaption:        #4288bc;
+$c_tableLink:           #kleur5;
+$c_tableLinkHover:      #kleur2;
+$c_tableBorder:         #kleur6;
+$c_tableCaption:        #kleur5;
 
 // code
-$c_codeBg:              #eeeeee;
-$c_codeText:            #333333;
+$c_codeBg:              #kleur6;
+$c_codeText:            #kleur3;
 
 // mark
 $c_markBg:              #ffff00;
-$c_markText:            #000000;
+$c_markText:            #kleur7;
 
 // sidebar
 $c_sidebarBg:           #ffffff;
-$c_sidebarText:         #000000;
-$c_sidebarLink:         #000000;
-$c_sidebarLinkHover:    #4288bc;
-$c_sidebarLinkArrow:    #4288bc;
-$c_sidebarH3:           #4288bc;
-$c_sidebarH3Bg:         #eeeeee;
-$c_sidebarH4:           #666666;
+$c_sidebarText:         #kleur7;
+$c_sidebarLink:         #kleur7;
+$c_sidebarLinkHover:    #kleur2;
+$c_sidebarLinkArrow:    #kleur2;
+$c_sidebarH3:           #kleur1;
+$c_sidebarH3Bg:         #kleur6;
+$c_sidebarH4:           #kleur8;
 $c_sidebarH4Bg:         #ffffff;
 
 // footerwidgets
-$c_footerWidgetsBg:       #eeeeee;
-$c_footerWidgetsBorderTop:#b3d7e6;
-$c_footerWidgetsText:     #000000;
-$c_footerWidgetsLink:     #4288bc;
-$c_footerWidgetsLinkHover:#000000;
-$c_footerWidgetsH3:       #666666;
-$c_footerWidgetsH4:       #666666;
+$c_footerWidgetsBg:       #kleur6;
+$c_footerWidgetsBorderTop:#kleur2;
+$c_footerWidgetsText:     #kleur7;
+$c_footerWidgetsLink:     #kleur3;
+$c_footerWidgetsLinkHover:#kleur4;
+$c_footerWidgetsH3:       #kleur7;
+$c_footerWidgetsH4:       #kleur8;
 
 // footer
-$c_footerBg:            #e2e2e2;
-$c_footerBorderTop:     #cccccc;
-$c_footerText:          #000000;
-$c_footerLink:          #000000;
-$c_footerLinkHover:     #db363f;
-$c_footerH3:            #000000;
-$c_footerH4:            #000000;
+$c_footerBg:            #kleur3;
+$c_footerBorderTop:     #kleur2;
+$c_footerText:          #ffffff;
+$c_footerLink:          #ffffff;
+$c_footerLinkHover:     #kleur4;
+$c_footerH3:            #ffffff;
+$c_footerH4:            #ffffff;
+
+// main content border
+$c_maincontent_border: 	#kleur5;
+
+// general widgets
+$c_widgetBorder:				#kleur2;
+$c_afterPostBorder: 		#kleur2;

@@ -1,201 +1,223 @@
-// color declarations ColorSet3
+// Color declarations Versatile ColorSet1 BrightBlue
 
-// color bar 1          #c91331
-// color bar 2          #494794
-// color bar 3          #211f6c
-// t1                   #211f6c
-// nav                  #bddbed
-// gray background      #eeeeee
-// gray border          #b2b8b8
-// T4                   #666666
-// black text           #000000
-// cta                  #28a0ff
-// footer               #e2e2e2
+// H1 / H3 / Button Field / BG Top					#0f495f
+// T3 / Lines Color / NAV Active						#008cc8
+// T2 / H2 Gray / BG Footer Dark						#4a5358
+// CTA																			#e74c21
+// Lines / Spacers Gray / Buttons content		#a4a7ab
+// BG Content Top / BG Footer NAV Light			#dce6f0
+// Text black																#000000
+// BG																				#e6e6e6
 
 // #yoast-after-header-container check in list
-$c_ListCheckImage:      "../images/li-check-BusinessBlue.png";
+$c_sprite:          "Versatile_Sprite_Business.png";
 
 // general
-$c_bodyTopLine:         #c91331;
+$c_bodyTopLineDark:     #008cc8;
+$c_bodyTopLineLight:    #0f495f;
+$c_bodyLine:						#008cc8;
 
 $c_paragraph:           #000000;
-$c_link:                #211f6c;
-$c_linkHover:           #494794;
-$c_linkBorder:          #dddddd;
+$c_link:                #008cc8;
+$c_linkHover:           #e74c21;
+$c_linkBorder:          #dce6f0;
 
-$c_logoText:            #999999;
-$c_logoTextLink:        #333333;
-$c_logoTextLinkHover:   #333333;
+$c_logoText:            #a4a7ab;
+$c_logoTextLink:        #4a5358;
+$c_logoTextLinkHover:   #4a5358;
 
-$c_taglineTop:          #666666;
-$c_taglineTopBold:      #211f6c;
-$c_taglineFullWidth:    #666666;
-$c_taglineFullWidthBold:#211f6c;
-$c_taglineBoxShadow:    #cccccc;
-$c_taglineLink:         #211f6c;
-$c_taglineLinkHover:    #494794;
+$c_taglineTopLight:     #ffffff;
+$c_taglineTopDark:      #0f495f;
+$c_taglineTopBold:      #008cc8;
+$c_taglineFullWidth:    #e6e6e6;
+$c_taglineFullWidthBold:#008cc8;
+$c_taglineBoxShadow:    #e6e6e6;
+$c_taglineLink:         #008cc8;
+$c_taglineLinkHover:    #e74c21;
+$c_taglineBg:						#0f495f;
+$c_taglineBgAlt:				#dce6f0;
+$c_taglineBorderMobile:	#a4a7ab;
 
-$c_breadcrumbs:         #666666;
-$c_breadcrumbsLink:     #211f6c;
-$c_breadcrumbsLinkHover:#494794;
+$c_breadcrumbs:         #4a5358;
+$c_breadcrumbsLink:     #008cc8;
+$c_breadcrumbsLinkHover:#e74c21;
 
-$c_pagenavBg:           #eeeeee;
-$c_pagenavLink:         #211f6c;
-$c_pagenavHoverBg:      #bddbed;
+$c_pagenavBg:           #a4a7ab;
+$c_pagenavLink:         #ffffff;
+$c_pagenavHoverBg:      #e74c21;
 $c_pagenavHoverLink:    #ffffff;
-$c_pagenavActiveBg:     #bddbed;
+$c_pagenavActiveBg:     #008cc8;
 $c_pagenavActiveLink:   #ffffff;
 
-$c_metaAtPost:          #666666;
-$c_metaAtPostBorder:    #dddddd;
-$c_linkToArchives:      #211f6c;
-$c_commentHTMLtags:     #b2b8b8;
+$c_metaAtPost:          #4a5358;
+$c_metaAtPostBorder:    #dce6f0;
+$c_commentHTMLtags:     #e6e6e6;
 
-$c_hrLine:              #494794;
-$c_borderImg:           #b2b8b8;
-$c_randLine:            #b2b8b8; // random grey line
+$c_hrLine:              #e6e6e6;
+$c_borderImg:           #e6e6e6;
+$c_randLine:            #a4a7ab; // random grey line
 
-$c_selectionText:       #211f6c;
-$c_selectionBg:         #bddbed;
+$c_selectionText:       #ffffff;
+$c_selectionBg:         #008cc8;
 
-$c_fieldsetBorder:      #c0c0c0;
+$c_fieldsetBorder:      #4a5358;
 
 // header
-$c_headerBg:            #eeeeee;
-$c_headerText:          #211f6c;
-$c_headerLink:          #211f6c;
-$c_headerLinkHover:     #494794;
-$c_headerH3:            #494794;
-$c_headerH4:            #494794;
+$c_headerBgDark:        #0f495f;
+$c_headerBgLight:       #ffffff;
+$c_headerText:          #000000;
+$c_headerLink:          #008cc8;
+$c_headerLinkHover:     #008cc8;
+$c_headerH3:            #4a5358;
+$c_headerH4:            #4a5358;
+
+// after header widgets
+$c_afterHeaderBg:					#dce6f0;
+$c_afterHeaderLink:				#008cc8;
+$c_afterHeaderLinkHover:	#e74c21;
+$c_afterHeaderH3:					#4a5358;
+$c_afterHeaderH4:					#4a5358;
+$c_afterHeaderText:				#0f495f;
+$c_afterHeaderBorder:			#008cc8;
 
 // navigation
-$c_navMainFullBg:           #bddbed;
-$c_navMainFullBorderTop:    #494794;
-$c_navMainFullBorderBottom: #211f6c;
+$c_navMainFullBg:           #4a5358;
+$c_navMainFullBorderTop:    #008cc8;
+$c_navMainFullBorderBottom: #008cc8;
 
-$c_navMainBg:           #bddbed;
-$c_navMainText:         #000000;
-$c_navMainLink:         #000000;
+$c_navMainBg:           #4a5358;
+$c_navMainText:         #ffffff;
+$c_navMainLink:         #ffffff;
 $c_navMainLinkHover:    #ffffff;
-$c_navMainLinkBg:       #bddbed;
-$c_navMainLinkBgHover:  #494794;
-$c_navMainBgActive:     #494794;
+$c_navMainLinkBg:       #4a5358;
+$c_navMainLinkBgHover:  #008cc8;
+$c_navMainBgActive:     #008cc8;
 $c_navMainTextActive:   #ffffff;
-$c_navMainLinkShadow:   #333333;
+$c_navMainLinkShadow:   #4a5358;
 $c_navMainBorder:       #ffffff;
-$c_navMainBorderBottom: #494794;
-$c_navMainShadow:       #999999;
+$c_navMainBorderBottom: #008cc8;
+$c_navMainShadow:       #a4a7ab;
 
-$c_navSubBg:           #494794;
+$c_navSubBg:           #4a5358;
 $c_navSubText:         #ffffff;
 $c_navSubLink:         #ffffff;
 $c_navSubLinkHover:    #ffffff;
-$c_navSubLinkBg:       #bddbed;
-$c_navSubLinkBgHover:  #211f6c;
-$c_navSubLinkActive:   #bddbed;
-$c_navSubBorder:       #ffffff;
-$c_navSubBorderBottom: #494794;
+$c_navSubLinkBg:       #4a5358;
+$c_navSubLinkBgHover:  #008cc8;
+$c_navSubLinkActive:   #ffffff;
+$c_navSubLinkActiveBg: #4a5358;
+$c_navSubBorder:       #e6e6e6;
+$c_navSubBorderBottom: #008cc8;
 
 // mobile menu Sidr
-$sidr-background:               #e2e2e2;
-$sidr-background-shadow-color:  #ebebeb;
-$sidr-text-color:               #333333;
-$c_sidr_linkBg:                 #b2b8b8;
-$c_sidr_linkBorder:             #ffffff;
-$c_sidr_linkHoverBg:            #666666;
-$c_sidr_linkActiveBg:           #211f6c;
+$sidr-background:               #4a5358;
+$sidr-background-shadow-color:  #4a5358;
+$sidr-text-color:               #ffffff;
+$c_sidr_linkBg:                 #e6e6e6;
+$c_sidr_linkBorder:             #a4a7ab;
+$c_sidr_linkHoverBg:            #008cc8;
+$c_sidr_linkActiveBg:           #008cc8;
 $c_sidr_linkHoverText:          #ffffff;
-$c_sidr_headingText:            #666666;
-$c_sidr_headingBorder:          #ffffff;
-$c_sidr_boxShadow:              #999999;
+$c_sidr_headingText:            #e6e6e6;
+$c_sidr_headingBorder:          #a4a7ab;
+$c_sidr_boxShadow:              #4a5358;
+$c_sidr_searchBg:								#008cc8;
 
 // main content
-$c_mainBg:              #ffffff;
+$c_mainBg:              #e6e6e6;
+$c_mainContentBg:				#ffffff;
 $c_mainText:            #000000;
-$c_mainLink:            #211f6c;
-$c_mainLinkHover:       #494794;
-$c_mainH1:              #494794;
-$c_mainH1Hover:         #211f6c;
-$c_mainH2:              #494794;
-$c_mainH2Hover:         #211f6c;
-$c_mainH3:              #494794;
-$c_mainH3Hover:         #211f6c;
+$c_mainLink:            #008cc8;
+$c_mainLinkHover:       #e74c21;
+$c_mainH1:              #0f495f;
+$c_mainH1Hover:         #e74c21;
+$c_mainH2:              #4a5358;
+$c_mainH2Hover:         #e74c21;
+$c_mainH3:              #4a5358;
+$c_mainH3Hover:         #e74c21;
 $c_mainH4:              #000000;
-$c_mainH4Hover:         #333333;
+$c_mainH4Hover:         #e74c21;
 $c_mainH5:              #000000;
-$c_mainH5Hover:         #333333;
+$c_mainH5Hover:         #e74c21;
 $c_mainH6:              #000000;
-$c_mainH6Hover:         #333333;
+$c_mainH6Hover:         #e74c21;
 
-$c_taxonomyIntroText:   #333333;
-$c_taxonomyIntroH1:     #666666;
+$c_taxonomyIntroText:   #4a5358;
+$c_taxonomyIntroH1:     #e6e6e6;
 
 // blockquote
-$c_BlockquoteText:      #333333;
-$c_BlockquoteLink:      #211f6c;
-$c_BlockquoteLinkHover: #494794;
-$c_BlockquoteBorder:    #dddddd;
-$c_BlockquoteBg:        #eeeeee;
-$c_blockquoteBefore:    #999999;
+$c_BlockquoteText:      #4a5358;
+$c_BlockquoteLink:      #008cc8;
+$c_BlockquoteLinkHover: #008cc8;
+$c_BlockquoteBorder:    #dce6f0;
+$c_BlockquoteBg:        #dce6f0;
+$c_blockquoteBefore:    #a4a7ab;
 
 // input
 $c_inputText:           #000000;
 $c_inputTextFocus:      #000000;
 $c_inputBg:             #ffffff;
 $c_inputBgFocus:        #ffffff;
-$c_inputBorder:         #b2b8b8;
-$c_inputBoxShadow:      #eeeeee;
-$c_inputBorderFocus:    #999999;
-$c_inputTextPlaceholder:#999999;
+$c_inputBorder:         #e6e6e6;
+$c_inputBoxShadow:      #dce6f0;
+$c_inputBorderFocus:    #a4a7ab;
+$c_inputTextPlaceholder:#a4a7ab;
 
 $c_inputSubmitText:     #ffffff;
 $c_inputSubmitTextHover:#ffffff;
-$c_inputSubmitBg:       #211f6c;
-$c_inputSubmitBgHover:  #494794;
-$c_inputSubmitBorder:   #211f6c;
-$c_inputSubmitTextShadow: #333333;
+$c_inputSubmitBg:       #a4a7ab;
+$c_inputSubmitBgHover:  #a4a7ab;
+$c_inputSubmitBorder:   #a4a7ab;
+$c_inputSubmitTextShadow: #4a5358;
 $c_inputSubmitBoxShadow:  #ffffff;
 
 // comments
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
-$c_commentLink:         #494794;
-$c_commentBorder:       #494794;
-$c_commentReplyBorder:  #dddddd;
-$c_commentByAuthorBg:   #eaf2f7;
+$c_commentLink:         #008cc8;
+$c_commentBorder:       #008cc8;
+$c_commentReplyBorder:  #dce6f0;
+$c_commentByAuthorBg:   #dce6f0;
+$c_commentAuthor: 			#0f495f;
+$c_entryCommentsH3:			#0f495f;
+$c_postAuthorBorder: 		#008cc8;
+$c_commentReplyTitle: 	#0f495f;
+$c_commentFormTitle: 		#4a5358;
+$c_allowedTags: 				#4a5358;
+$c_allowedTagsBg:				#e6e6e6;
 
 // author block
-$c_articleAuthorBg:     #eaf2f7;
-$c_articleAuthorH2:     #494794;
-$c_articleAuthorH3:     #211f6c;
+$c_articleAuthorBg:     #dce6f0;
+$c_articleAuthorH2:     #008cc8;
+$c_articleAuthorH3:     #008cc8;
 
 // call-to-action
-$c_ctaBg:               #28a0ff;
-$c_ctaBorder:           #28a0ff;
+$c_ctaBg:               #e74c21;
+$c_ctaBorder:           #e74c21;
 $c_ctaTextWhite:        #ffffff;
-$c_ctaTextShadow:       #333333;
-$c_ctaBoxShadow:        #ffffff;
+$c_ctaTextShadow:       #4a5358;
+$c_ctaBoxShadow:        #000000;
 
 $c_ctaBgWhite:          #ffffff;
 $c_ctaBorderWhite:      #ffffff;
-$c_ctaBgGrey:           #b2b8b8;
-$c_ctaBorderGrey:       #b2b8b8;
+$c_ctaBgGrey:           #e6e6e6;
+$c_ctaBorderGrey:       #e6e6e6;
 $c_ctaTextBlack:        #000000;
 
 // tables
 $c_tableBg:             #ffffff;
 $c_tableText:           #000000;
-$c_tableRowAlt:         #bddbed;
-$c_tableHeaderBg:       #211f6c;
+$c_tableRowAlt:         #e6e6e6;
+$c_tableHeaderBg:       #a4a7ab;
 $c_tableHeaderText:     #ffffff;
-$c_tableLink:           #211f6c;
-$c_tableLinkHover:      #494794;
-$c_tableBorder:         #dddddd;
-$c_tableCaption:        #211f6c;
+$c_tableLink:           #a4a7ab;
+$c_tableLinkHover:      #008cc8;
+$c_tableBorder:         #dce6f0;
+$c_tableCaption:        #a4a7ab;
 
 // code
-$c_codeBg:              #eeeeee;
-$c_codeText:            #333333;
+$c_codeBg:              #dce6f0;
+$c_codeText:            #4a5358;
 
 // mark
 $c_markBg:              #ffff00;
@@ -205,27 +227,34 @@ $c_markText:            #000000;
 $c_sidebarBg:           #ffffff;
 $c_sidebarText:         #000000;
 $c_sidebarLink:         #000000;
-$c_sidebarLinkHover:    #211f6c;
-$c_sidebarLinkArrow:    #211f6c;
-$c_sidebarH3:           #211f6c;
-$c_sidebarH3Bg:         #eeeeee;
-$c_sidebarH4:           #666666;
+$c_sidebarLinkHover:    #008cc8;
+$c_sidebarLinkArrow:    #008cc8;
+$c_sidebarH3:           #0f495f;
+$c_sidebarH3Bg:         #dce6f0;
+$c_sidebarH4:           #e6e6e6;
 $c_sidebarH4Bg:         #ffffff;
 
 // footerwidgets
-$c_footerWidgetsBg:       #eeeeee;
-$c_footerWidgetsBorderTop:#c91331;
+$c_footerWidgetsBg:       #dce6f0;
+$c_footerWidgetsBorderTop:#008cc8;
 $c_footerWidgetsText:     #000000;
-$c_footerWidgetsLink:     #211f6c;
-$c_footerWidgetsLinkHover:#000000;
-$c_footerWidgetsH3:       #666666;
-$c_footerWidgetsH4:       #666666;
+$c_footerWidgetsLink:     #4a5358;
+$c_footerWidgetsLinkHover:#e74c21;
+$c_footerWidgetsH3:       #000000;
+$c_footerWidgetsH4:       #e6e6e6;
 
 // footer
-$c_footerBg:            #e2e2e2;
-$c_footerBorderTop:     #cccccc;
-$c_footerText:          #000000;
-$c_footerLink:          #000000;
-$c_footerLinkHover:     #494794;
-$c_footerH3:            #000000;
-$c_footerH4:            #000000;
+$c_footerBg:            #4a5358;
+$c_footerBorderTop:     #008cc8;
+$c_footerText:          #ffffff;
+$c_footerLink:          #ffffff;
+$c_footerLinkHover:     #e74c21;
+$c_footerH3:            #ffffff;
+$c_footerH4:            #ffffff;
+
+// main content border
+$c_maincontent_border: 	#a4a7ab;
+
+// general widgets
+$c_widgetBorder:				#008cc8;
+$c_afterPostBorder: 		#008cc8;
