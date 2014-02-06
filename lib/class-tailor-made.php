@@ -74,10 +74,7 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 
 	    // Add support for yoast after header widget
 		add_action( 'genesis_after_header', array( $this, 'after_header_genesis' ) );
-
-		// Add after post widget area
-		add_action( 'genesis_before_comments', array( $this, 'after_post_sitebar_genesis' ) );
-	
+			
 		// Conditionally add full width sidebars
 		add_action( 'genesis_after_header', array( $this, 'show_full_width_sidebars' ) );
 
@@ -263,20 +260,6 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 	}
 
 	/**
-	 * Do widget area after single posts.
-	 */
-	public function after_post_sitebar_genesis() {
-		if ( is_active_sidebar( 'yoast-after-post' ) && is_single() ) {
-			echo '<div id="yoast-after-post-container"><div class="wrap">';
-			genesis_widget_area( 'yoast-after-post', array(
-				'before' => '<div id="yoast-after-post-widgetarea" class="yoast-after-post-widget">',
-				'after'  => '</div>',
-			) );
-			echo '</div></div>';
-		}
-	}
-
-	/**
 	* Sets the default color scheme, used in Yoast_Theme class 
 	* @return string Name of default color scheme
 	*/
@@ -302,14 +285,7 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 	}
 
 	/**
-	 * Display a "back to top" link
-	 */
-	public function display_back_to_top_link() {
-		echo '<p class="back-to-top"><a href="#">' . __( 'Back to top', 'yoast-theme' ) . '</a></p>';
-	}
-
-	/**
-	 * Add a genesis footer action if it's a 'single' page
+	 * Add hook to display a "back to top" link after posts or after The Loop
 	 */
 	public function conditional_add_back_to_top_link() {
 
@@ -317,7 +293,6 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 			add_action( 'genesis_entry_footer', array( $this, 'display_back_to_top_link' ), 14 );
 		}
 
-		// @barry -> this action hook is not used in versatile. 
 		add_action( 'genesis_after_endwhile', array( $this, 'display_back_to_top_link' ), 14 );
 	}
 
