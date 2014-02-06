@@ -2407,9 +2407,6 @@ table {
  */
 
 .widget_calendar {
-	.widget-title {
-		display: none;
-	}
 	#wp-calendar {
 		margin: {
 			bottom: 0;
@@ -2449,10 +2446,12 @@ table {
 			}
 		}
 		caption {
-			@extend .widget-title;
 			line-height: 1em;
 			text-align: left;
 			float: none;
+      padding: {
+        left: 10px;
+      }
 			font: {
 				weight: 700;
 			}
