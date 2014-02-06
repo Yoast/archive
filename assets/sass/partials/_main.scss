@@ -334,11 +334,7 @@ header {
     padding: {
       top: 10px;
     }
-    &.widget_search {
-     form {
-       float: right;
-     }
-    }
+    
   }
   .widget-area {
     float: right;
@@ -371,6 +367,9 @@ header {
     }
     padding: {
       bottom: 10px;
+    }
+    .widget {
+      margin-bottom:10px;
     }
   }
   #yoast-top-right {
