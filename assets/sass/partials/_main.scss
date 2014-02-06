@@ -1473,14 +1473,14 @@ img.alignright,
  */
 
 .breadcrumb {
-	max-width: $d_full;
+	max-width: 100%;
 	margin: 0 auto;
 	padding: 10px 35px 0;
 	color: $c_breadcrumbs;
 	font: {
 		size: $f_breadcrumbs-px;
 		size: $f_breadcrumbs;
-		weight: 700;
+		weight: 400;
 	}
 	a {
 		color: $c_breadcrumbsLink;
@@ -1751,14 +1751,6 @@ table {
             image: image-url($c_fullwidthDivider);
         }
     }
-}
-
-.single {
-	.post {
-		background: {
-			image: image-url($c_ContentWidthDivider);
-		}
-	}
 }
 
 .widget {
