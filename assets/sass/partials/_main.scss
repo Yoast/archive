@@ -386,6 +386,7 @@ header {
       }
     }
   }
+
 }
 
 /**
@@ -2503,6 +2504,11 @@ table {
   + div {
     padding: {
       left: 10px;
+    }
+  }
+  + div#calendar_wrap{ 
+    padding: {
+      left: 0;
     }
   }
 }
