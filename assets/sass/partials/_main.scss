@@ -2827,8 +2827,14 @@ table {
 	}
 }
 
+p.yst-social-readmore {
+  margin: {
+    bottom: 6px;
+  }
+}
+
 #yst_social_widget,
-.yst-user-profile .social {
+.widget.user-profile .social {
 	line-height: 32px;
 	margin: {
 		bottom: 40px;
