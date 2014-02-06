@@ -320,7 +320,7 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 			add_action( 'genesis_sidebar', array( $this, 'show_full_width_sidebars' ) );
 
 			// Move the featured image to the right
-			add_action( 'genesis_entry_header', array( $this, 'show_full_width_image' ), 15 );
+			add_action( 'genesis_entry_header', array( $this, 'show_full_width_image' ), 0 );
 		}
 	}
 
@@ -339,7 +339,7 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 	 * Show the post thumbnail in the full width archives
 	 */
 	public function show_full_width_image() {
-		if ( ! get_theme_mod( 'yst_content_archive_thumbnail' ) ) {
+		if ( ! is_single() || ! get_theme_mod( 'yst_content_archive_thumbnail' ) ) {
 			return;
 		}
 

@@ -418,17 +418,7 @@ header {
   }
 }
 
-.full-width-content {
-  .entry-content,
-  .entry-header,
-  .back-to-top {
-    margin:0 auto;
-    width: $d_mainColumn;
-  }
-  .content {
-    width: 100%;
-  }
-}
+
 
 /*
  * Primary Sidebar
@@ -1569,9 +1559,17 @@ table {
 .full-width-content {
   /* pulling the thumb out of the stream */
   .thumb {
+    max-width: 30%;
+    float: right;
+
     img {
-      max-width: $d_sidebar;
+      max-width: 100%;
     }
+  }
+
+  .entry-content {
+    max-width: 65%;
+    float: left; 
   }
 }
 .entry-content {
@@ -1721,14 +1719,6 @@ table {
     width: 990px;
     max-width:100%;
     float:none;
-    p,
-    ul,
-    ol,
-    blockquote,
-    div,
-    table {
-      max-width:$d_mainColumn;
-    }
   }
 }
 .quote-caption {
