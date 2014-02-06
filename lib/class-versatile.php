@@ -78,12 +78,6 @@ class Yoast_Versatile extends Yoast_Theme {
 		// Display the after header widget area
 		add_action( 'genesis_after_header', array( $this, 'after_header_widget_area' ), 12 );
 
-		// Display the after header widget area
-		add_action( 'genesis_after_content_sidebar_wrap', array( $this, 'full_width_sidebars' ) );
-
-		//  Display the yoast-after-post widget area
-		add_action( 'genesis_before_comments', array( $this, 'after_post_sidebar' ) );
-
 		// Reposition the breadcrumbs
 		add_action( 'genesis_after_header', 'genesis_do_breadcrumbs', 12 );
 		remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
@@ -304,44 +298,6 @@ class Yoast_Versatile extends Yoast_Theme {
 			}
 
 			echo '<div class="clearfloat"></div></div></div>';
-		}
-	}
-
-	/**
-	 * Display full width widget areas in genesis_after_content_sidebar_wrap
-	 *
-	 * @note This is sidebar / widget related
-	 */
-	public function full_width_sidebars() {
-		if ( 'full-width-content' == genesis_site_layout() ) {
-			echo '<div id="yoast-fullwidth-bottom-container"><div class="wrap">';
-
-			$i = 1;
-			while ( $i < 4 ) {
-				genesis_widget_area( 'yoast-fullwidth-widgetarea-' . $i, array(
-						'before' => '<div id="yoast-fullwidth-widgetarea-' . $i . '" class="yoast-fullwidth-widget">',
-						'after'  => '</div>',
-				) );
-				$i ++;
-			}
-
-			echo '</div></div>';
-		}
-	}
-
-	/**
-	 * Display the yoast-after-post widget area
-	 *
-	 * @note This is sidebar / widget related
-	 */
-	public function after_post_sidebar() {
-		if ( is_active_sidebar( 'yoast-after-post' ) && is_single() ) {
-			echo '<div id="yoast-after-post-container"><div class="wrap">';
-			genesis_widget_area( 'yoast-after-post', array(
-					'before' => '<div id="yoast-after-post-widgetarea" class="yoast-after-post-widget">',
-					'after'  => '</div>',
-			) );
-			echo '</div></div>';
 		}
 	}
 
