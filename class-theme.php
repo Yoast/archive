@@ -5,6 +5,7 @@
  */
 interface iYoast_Theme {
 	public function setup_theme();
+
 	public function comment_callback( $comment, $args, $depth );
 }
 
@@ -16,6 +17,8 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	private $name;
 	private $url;
 	private $version;
+
+	private $license_key = '';
 
 	private $breadcrumb;
 
@@ -38,6 +41,12 @@ abstract class Yoast_Theme implements iYoast_Theme {
 
 		// Load customizer
 		$this->load_theme_customizer();
+
+		// Setup theme updater
+		add_action( 'admin_init', array( $this, 'setup_updater' ) );
+
+		// Check the license key
+		$this->check_license_key();
 
 		// Load editor style
 		$this->load_editor_style();
@@ -167,6 +176,81 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		if ( is_admin() ) {
 			require_once( get_stylesheet_directory() . '/lib/functions/theme-customizer.php' );
 		}
+	}
+
+	/**
+	 * Get the license key option name
+	 *
+	 * @return string
+	 */
+	private function get_license_key_option_name() {
+		return 'yoast_theme_license_key_' . sanitize_title_with_dashes( $this->get_name() );
+	}
+
+	/**
+	 * Get the theme license key
+	 *
+	 * @return string
+	 */
+	private function get_license_key() {
+		if ( '' == $this->license_key ) {
+			$this->license_key = get_option( $this->get_license_key_option_name(), '' );
+		}
+
+		return $this->license_key;
+	}
+
+	/**
+	 * Save the license key in the database
+	 *
+	 * @param $license_key
+	 */
+	private function set_license_key( $license_key ) {
+		$this->license_key = $license_key;
+		update_option( $this->get_license_key_option_name(), $this->license_key );
+	}
+
+	/**
+	 * Check the license key, display an admin notice if the license key is empty
+	 */
+	private function check_license_key() {
+		if ( is_admin() ) {
+			if ( '' == $this->get_license_key() ) {
+				add_action( 'admin_notices', array( $this, 'display_license_admin_notice' ) );
+			}
+		}
+	}
+
+	/**
+	 * Setup the theme updater
+	 */
+	public function setup_updater() {
+
+		// Load our custom theme updater
+		if ( ! class_exists( 'EDD_SL_Theme_Updater' ) ) {
+			require_once( 'EDD_SL_Theme_Updater.php' );
+		}
+
+		// Setup the updater
+		$edd_updater = new EDD_SL_Theme_Updater( array(
+						'remote_api_url' => 'https://yoast.com', // Our store URL that is running EDD
+						'version'        => $this->get_version(), // The current theme version we are running
+						'license'        => $this->get_license_key(), // The license key (used get_option above to retrieve from DB)
+						'item_name'      => $this->get_name(), // The name of this theme
+						'author'         => 'Yoast'
+				)
+		);
+
+	}
+
+	/**
+	 * Display the license key admin notice
+	 */
+	public function display_license_admin_notice() {
+
+		echo '<div class="updated"><p>';
+		printf( __( 'The Yoast license key is not valid', 'yoast-theme' ), '%URL%' );
+		echo "</p></div>";
 	}
 
 	/**
@@ -490,6 +574,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 */
 	public function change_comment_form_submit_button_text( $defaults ) {
 		$defaults['label_submit'] = __( 'Post Comment', 'yoast-theme' ) . ' »';
+
 		return $defaults;
 	}
 
