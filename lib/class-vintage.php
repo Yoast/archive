@@ -450,21 +450,13 @@ class Yoast_Vintage extends Yoast_Theme {
 			return;
 		}
 
-		// No inline image on full-width
-		if ( 'full-width-content' == genesis_site_layout() ) {
-			return;
-		}
-
 		// Set correct image alignment
-		$align = 'left';
-		if ( 'sidebar-content' == genesis_site_layout() ) {
-			$align = 'right';
-		}
+		$align = 'right';
 
 		//setup thumbnail image args to be used with genesis_get_image();
-		$size         = 'archive-thumb'; // Change this to whatever add_image_size you want
+		$size         = ( is_single() ) ? null : 'archive-thumb'; // Change this to whatever add_image_size you want
 		$default_attr = array(
-				'class' => "align{$align} attachment-{$size} {$size}",
+				'class' => "align{$align}",
 				'alt'   => $post->post_title,
 				'title' => $post->post_title,
 		);

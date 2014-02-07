@@ -473,12 +473,6 @@ header {
 }
 
 .full-width-content {
-  .entry-content,
-  .entry-header,
-  .back-to-top {
-    margin:0 auto;
-    width: $d_mainColumn;
-  }
 	.content {
 		width: 100%;
 	}
@@ -1954,14 +1948,6 @@ table {
 		width: 990px;
 		max-width: 100%;
 		float: none;
-		p,
-		ul,
-		ol,
-		blockquote,
-		div,
-		table {
-			max-width: $d_mainColumn;
-		}
 	}
 }
 
