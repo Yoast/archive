@@ -1211,11 +1211,19 @@ img.alignnone {
 .alignleft {
   float: left;
   text-align: left;
+  margin: {
+    right: 10px;
+    bottom: 10px;
+  }
 }
 .alignright {
   float: right;
   text: {
     align: right;
+  }
+  margin: {
+    left: 10px;
+    bottom: 10px;
   }
 }
 img.alignleft,
@@ -1559,18 +1567,11 @@ table {
 .full-width-content {
   /* pulling the thumb out of the stream */
   .thumb {
-    max-width: 30%;
-    float: right;
-
     img {
       max-width: 100%;
     }
   }
 
-  .entry-content {
-    max-width: 65%;
-    float: left; 
-  }
 }
 .entry-content {
   a {
@@ -2189,7 +2190,6 @@ table {
 
 // testing no widgets and tagline below menu
 #yoast-after-header-container {
-  color: $c_headerLink;
   background: {
     color: $c_headerBg;
   }
@@ -2309,7 +2309,7 @@ table {
 
 #yoast-tagline-after-header-container {
   border: {
-    top: 1px solid $c_hrLine;
+    top: 1px solid $c_randLine;
     bottom: 1px solid $c_randLine;
   }
   .yoast-tagline {
@@ -2373,12 +2373,7 @@ table {
       }
     }
   }
-  > ul {
-    margin: {
-      left: 26px;
-      bottom:1em;
-    }
-  }
+
   li {
     list-style:square;
     margin: {
