@@ -4063,6 +4063,13 @@ body.menu-at-top {
 		.content-sidebar-wrap {
 			margin: 0;
 		}
+		aside {
+			.widget {
+				border: {
+					left: none;
+				}
+			}
+		}
 	}
   .site-footer {
     text-align:center;
