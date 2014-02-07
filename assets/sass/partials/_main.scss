@@ -1256,8 +1256,7 @@ textarea {
 // body.sticky,
 body.sticky-menu {
 	background: {
-		position: 50% -62px;
-		attachment: fixed;
+		image: none;
 	}
   &.logo-position-center.logo-frame .site-header,
   &.logo-position-left.logo-frame .site-header {
