@@ -461,7 +461,7 @@ class Yoast_Vintage extends Yoast_Theme {
 				'title' => $post->post_title,
 		);
 
-		printf( '<a href="%s" title="%s" class="yst-archive-image-link">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
+		printf( '<a href="%s" title="%s" class="post-thumbnail yst-archive-image-link">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
 	}
 
 	/**

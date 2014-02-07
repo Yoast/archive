@@ -2198,13 +2198,7 @@ table {
 		&.depth-4,
 		&.depth-5 {
 			padding: {
-				left: 10px;
-			}
-			div.avatar {
-				width: 15%;
-			}
-			.comment-content {
-				width: 85%;
+				left: 7.5%;
 			}
 		}
 	}
@@ -2238,7 +2232,7 @@ table {
 				}
 			}
 		}
-		.bypostauthor > article {
+		&.bypostauthor > article {
 			border: {
 				width: 1px;
 				style: solid;
@@ -3601,6 +3595,9 @@ img#wpstats {
       background: {
           image: none;
       }
+  }
+  .post-thumbnail {
+  	display: none;
   }
 //	#yoast-after-header-container {
 //		display: none;
