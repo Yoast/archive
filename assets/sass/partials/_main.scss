@@ -840,6 +840,11 @@ textarea {
         color: $c_navMainBorder;
       }
     }
+    .sub-menu {
+      a {
+        border: 0;
+      }
+    }
   }
   a {
     display: block;
