@@ -454,7 +454,7 @@ header {
   }
   section.widget {
 		@extend .floatclearing;
-    margin: {
+    padding: {
       top: 10px;
     }
     &.widget_search {
@@ -481,6 +481,7 @@ header {
     }
     .search-form {
       width: $d_sidebar;
+      float:right;
     }
     a {
       color: $c_taglineLink;
