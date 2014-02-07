@@ -454,7 +454,7 @@ header {
   }
   section.widget {
 		@extend .floatclearing;
-    margin: {
+    padding: {
       top: 10px;
     }
     &.widget_search {
@@ -481,6 +481,7 @@ header {
     }
     .search-form {
       width: $d_sidebar;
+      float:right;
     }
     a {
       color: $c_taglineLink;
@@ -3920,6 +3921,9 @@ body.menu-at-top {
 }
 
 @media (max-width: 640px) {
+  body { 
+    margin-top: 35px;
+  }
 	.full-width-content {
 		&.home .entry-content {
 			width: 100%;
@@ -3948,9 +3952,6 @@ body.menu-at-top {
     padding: {
       left:10px;
       right:10px;
-    }
-    margin: {
-      top: 2em;
     }
   }
 	.yst-archive-image-link {
