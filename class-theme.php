@@ -33,13 +33,16 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		spl_autoload_register( array( $this, 'autoload' ) );
 
 		// Load widgets
+		add_action( 'genesis_setup', array( $this, 'load_widgets' ), 15 );
 		$this->load_widgets();
 
 		// Setup theme basic settings
-		$this->setup_theme_basic();
+		//$this->setup_theme_basic();
+		add_action( 'genesis_setup', array( $this, 'setup_theme_basic' ), 16 );
 
 		// Setup the current loaded theme
-		$this->setup_theme();
+		//$this->setup_theme();
+		add_action( 'genesis_setup', array( $this, 'setup_theme' ), 17 );
 
 		// Load customizer
 		$this->load_theme_customizer();
@@ -145,7 +148,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	/**
 	 * Setup the basic theme settings
 	 */
-	private function setup_theme_basic() {
+	public function setup_theme_basic() {
 
 		// Add HTML5 markup structure
 		add_theme_support( 'html5' );
@@ -165,7 +168,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 *
 	 * @todo rewrite the way widgets load
 	 */
-	private function load_widgets() {
+	public function load_widgets() {
 		foreach ( glob( get_stylesheet_directory() . "/lib/widgets/*-widget.php" ) as $file ) {
 			require_once( $file );
 		}
@@ -175,11 +178,11 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 * Load the theme customizer
 	 */
 	private function load_theme_customizer() {
-		if ( is_admin() ) {
+//		if ( is_admin() ) {
 			require_once( get_stylesheet_directory() . '/lib/functions/theme-customizer.php' );
 
 			$this->theme_customizer = new Yoast_Theme_Customizer( $this->get_name() );
-		}
+//		}
 	}
 
 	/**
@@ -312,6 +315,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 * @return string
 	 */
 	public function alter_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
+
 		$color_scheme = get_theme_mod( 'yst_colour_scheme', apply_filters( 'yst_default_color_scheme', '' ) );
 
 		return $stylesheet_dir_uri . '/assets/css/' . $color_scheme . '.css';
