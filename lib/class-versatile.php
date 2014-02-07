@@ -267,6 +267,9 @@ class Yoast_Versatile extends Yoast_Theme {
 
 		if ( ! empty( $css ) ) {
 			echo '<style id="versatile-inline-css">' . $css . '</style>';
+            echo '<!--[if lte IE 8]>';
+            echo '<style type="text/css">.site-header .title-area { background-image: url(' . $logo . '); } a#sidr-left, a#sidr-right { display:none;visibility:hidden; } </style>';
+            echo '<![endif]-->';
 		}
 	}
 
@@ -573,5 +576,14 @@ class Yoast_Versatile extends Yoast_Theme {
 	public function open_content_wrapper() {
 		echo '<div id="afterheader-content-wrapper">';
 	}
+
+    /**
+     * Enable style filtering for IE8/9
+     */
+    public function conditional_comments() {
+        echo '<!--[if lte IE 9]>';
+        echo '<link href="' . get_stylesheet_directory_uri() . '/assets/css/old-ie.css" rel="stylesheet" type="text/css">';
+        echo '<![endif]-->';
+    }
 
 }
