@@ -3923,6 +3923,9 @@ body.menu-at-top {
 }
 
 @media (max-width: 640px) {
+  body { 
+    margin-top: 35px;
+  }
 	.full-width-content {
 		&.home .entry-content {
 			width: 100%;
@@ -3951,9 +3954,6 @@ body.menu-at-top {
     padding: {
       left:10px;
       right:10px;
-    }
-    margin: {
-      top: 2em;
     }
   }
 	.yst-archive-image-link {
@@ -4066,6 +4066,13 @@ body.menu-at-top {
 		.content-sidebar-wrap {
 			margin: 0;
 		}
+		aside {
+			.widget {
+				border: {
+					left: none;
+				}
+			}
+		}
 	}
   .site-footer {
     text-align:center;
@@ -4099,7 +4106,7 @@ body.menu-at-top {
       width:100%;
 			background: {
 				position-x: 50%;
-				position-y: 5px;
+				position-y: 8px;
 			}
       .title-area,
       .header-widget-area,
