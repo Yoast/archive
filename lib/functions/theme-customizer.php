@@ -541,8 +541,6 @@ class Yoast_Theme_Customizer {
 
 }
 
-$yst_customize = new Yoast_Theme_Customizer();
-
 if ( class_exists( 'WP_Customize_Control' ) ) {
 
 	/**
