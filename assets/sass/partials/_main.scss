@@ -860,15 +860,17 @@ textarea {
         right:0;
       }
     }
+    &:last-child {
+      border: {
+        right: 0;
+      }
+    }
     &:hover {
       color: $c_navMainLinkHover;
 			background: {
 				color: darken($c_navMainBgActive,10%);
 			}
 			@include background-image(linear-gradient($c_navMainBgActive, darken($c_navMainBgActive,10%)));
-//      background: {
-//        color: $c_navMainLinkBgHover;
-//      }
       text-shadow: 1px 1px 1px $c_navMainLinkShadow;
       position: static;
     }
