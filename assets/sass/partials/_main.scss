@@ -899,6 +899,7 @@ textarea {
   background: $sidr-background;
   color: $sidr-text-color;
   h1, h2, h3, h4, h5, h6 {
+    background: $c_sidr_headingBg;
     color: $c_sidr_headingText;
     font: {
       size: $f_main-px;
