@@ -20,6 +20,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 
 	private $license_key = '';
 
+	private $theme_customizer;
 	private $breadcrumb;
 
 	/**
@@ -175,6 +176,8 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	private function load_theme_customizer() {
 		if ( is_admin() ) {
 			require_once( get_stylesheet_directory() . '/lib/functions/theme-customizer.php' );
+
+			$this->theme_customizer = new Yoast_Theme_Customizer();
 		}
 	}
 
