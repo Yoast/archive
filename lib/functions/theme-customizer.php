@@ -7,10 +7,15 @@
  */
 class Yoast_Theme_Customizer {
 
+	private $theme_name = '';
+
 	/**
 	 * Class constructor
 	 */
-	function __construct() {
+	function __construct( $theme_name ) {
+
+		$this->theme_name = $theme_name;
+
 		add_action( 'customize_register', array( $this, 'customize_register' ) );
 		add_action( 'customize_controls_print_styles', array( $this, 'style' ), 20 );
 		add_action( 'customize_preview_init', array( $this, 'enqueue' ) );
@@ -231,6 +236,36 @@ class Yoast_Theme_Customizer {
 		);
 
 		/**
+		 * License
+		 */
+		$license_option_name = Yoast_Option_Helper::get_license_key_option_name( $this->theme_name );
+		$wp_customize->add_setting(
+				$license_option_name,
+				array(
+						'default'           => '',
+						'transport'         => 'postMessage',
+						'sanitize_callback' => array( $this, 'license_callback' )
+				)
+		);
+
+		$wp_customize->add_section(
+				'yst_license_section',
+				array(
+						'title'       => __( 'License', 'yoast-theme' ),
+						'description' => __( 'Enter your theme license key to receive updates and support.', 'yoast-theme' ),
+						'priority'    => 1
+				)
+		);
+
+		$wp_customize->add_control(
+				$license_option_name,
+				array(
+						'label'   => 'License key',
+						'section' => 'yst_license_section',
+						'type'    => 'text',
+				) );
+
+		/**
 		 * Start adding controls
 		 */
 		$i = 1;
@@ -407,9 +442,51 @@ class Yoast_Theme_Customizer {
 
 	}
 
-}
+	/**
+	 * The license key save callback
+	 *
+	 * @param $license_key
+	 *
+	 * @return string
+	 */
+	public function license_callback( $license_key ) {
 
-$yst_customize = new Yoast_Theme_Customizer();
+		// Get the current license key
+		$current_license_key = get_theme_mod( Yoast_Option_Helper::get_license_key_option_name( $this->theme_name ) );
+
+		// Only do the license dance if the new license is different that the current one
+		if( $current_license_key != $license_key ) {
+
+			// Try to activate the license
+			$license_key = trim( $license_key );
+			$api_params = array(
+					'edd_action' => 'activate_license',
+					'license'    => $license_key,
+					'item_name'  => urlencode( $this->theme_name )
+			);
+
+			/**
+			 * @todo change url to constant
+			 */
+			$response = wp_remote_get( add_query_arg( $api_params, 'https://yoast.com' ), array( 'timeout' => 15, 'sslverify' => false ) );
+
+			// Check the response for errors
+			if ( is_wp_error( $response ) ) {
+				return $license_key;
+			}
+
+			// Get the license data
+			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+			// Save the new license status
+			set_theme_mod( Yoast_Option_Helper::get_license_status_option_name( $this->theme_name ), $license_data->license );
+
+		}
+
+		return $license_key;
+	}
+
+}
 
 if ( class_exists( 'WP_Customize_Control' ) ) {
 
