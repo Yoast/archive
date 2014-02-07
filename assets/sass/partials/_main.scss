@@ -3292,6 +3292,13 @@ img#wpstats {
       right:0;
     }
   }
+  .full-width-content.home .entry-content {
+    width: 100%; 
+    float: none;
+  }
+  .thumb{ 
+    display: none;
+  }
   .breadcrumb {
     padding: {
       left:10px;
@@ -3357,6 +3364,7 @@ img#wpstats {
       right:20px;
     }
   }
+
   #yoast-fullwidth-bottom-container {
     padding:0 10px;
     #yoast-fullwidth-widgetarea-1,
