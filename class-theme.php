@@ -19,6 +19,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	private $version;
 
 	private $license_key = '';
+	private $license_status = 'inactive';
 
 	private $theme_customizer;
 	private $breadcrumb;
@@ -195,6 +196,20 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	}
 
 	/**
+	 * Get the license status
+	 *
+	 * @return string
+	 */
+	public function get_license_status() {
+
+		if ( '' == $this->license_status ) {
+			$this->license_status = get_theme_mod( Yoast_Option_Helper::get_license_status_option_name( $this->get_name() ), 'inactive' );
+		}
+
+		return $this->license_status;
+	}
+
+	/**
 	 * Save the license key in the database
 	 *
 	 * @param $license_key
@@ -209,7 +224,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 */
 	private function check_license_key() {
 		if ( is_admin() ) {
-			if ( '' == $this->get_license_key() ) {
+			if ( 'valid' != $this->get_license_status() ) {
 				add_action( 'admin_notices', array( $this, 'display_license_admin_notice' ) );
 			}
 		}

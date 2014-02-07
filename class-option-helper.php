@@ -35,4 +35,15 @@ class Yoast_Option_Helper {
 		return 'yoast_theme_license_key_' . sanitize_title_with_dashes( $theme_name );
 	}
 
+	/**
+	 * Get the license status option name
+	 *
+	 * @param $theme_name
+	 *
+	 * @return string
+	 */
+	public static function get_license_status_option_name( $theme_name ) {
+		return 'yoast_theme_license_status_' . sanitize_title_with_dashes( $theme_name );
+	}
+
 } 
