@@ -248,7 +248,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 */
 	public function display_license_admin_notice() {
 
-		echo '<div class="updated"><p>';
+		echo '<div class="error"><p>';
 		printf( __( 'The Yoast license key is not valid', 'yoast-theme' ), '%URL%' );
 		echo "</p></div>";
 	}
