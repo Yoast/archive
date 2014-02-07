@@ -1739,17 +1739,12 @@ table {
 }
 
 .full-width-content {
-    /* pulling the thumb out of the stream */
-    .thumb {
-        img.attachment-fullwidth-thumb {
-        max-width: $d_sidebar;
-        }
+  /* pulling the thumb out of the stream */
+  .thumb {
+    img.attachment-fullwidth-thumb {
+    max-width: $d_sidebar;
     }
-    .post {
-        background: {
-            image: image-url($c_fullwidthDivider);
-        }
-    }
+  }
 }
 
 .widget {
