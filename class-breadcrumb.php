@@ -27,8 +27,7 @@ class Yoast_Breadcrumb {
 	 * @return null|string
 	 */
 	public function override_breadcrumb_front_page( $value = null ) {
-		$settings_helper = new Yoast_Settings_Helper();
-		return $settings_helper->override_setting( 'yst_breadcrumb_front_page', $value, true );
+		return Yoast_Option_Helper::override_setting( 'yst_breadcrumb_front_page', $value, true );
 	}
 
 	/**
@@ -39,8 +38,7 @@ class Yoast_Breadcrumb {
 	 * @return null|string
 	 */
 	public function override_breadcrumb_posts_page( $value = null ) {
-		$settings_helper = new Yoast_Settings_Helper();
-		return $settings_helper->override_setting( 'yst_breadcrumb_posts_page', $value, true );
+		return Yoast_Option_Helper::override_setting( 'yst_breadcrumb_posts_page', $value, true );
 	}
 
 	/**
@@ -51,8 +49,7 @@ class Yoast_Breadcrumb {
 	 * @return null|string
 	 */
 	public function override_breadcrumb_home( $value = null ) {
-		$settings_helper = new Yoast_Settings_Helper();
-		return $settings_helper->override_setting( 'yst_breadcrumb_home', $value, true );
+		return Yoast_Option_Helper::override_setting( 'yst_breadcrumb_home', $value, true );
 	}
 
 	/**
@@ -63,8 +60,7 @@ class Yoast_Breadcrumb {
 	 * @return null|string
 	 */
 	public function override_breadcrumb_single( $value = null ) {
-		$settings_helper = new Yoast_Settings_Helper();
-		return $settings_helper->override_setting( 'yst_breadcrumb_single', $value, true );
+		return Yoast_Option_Helper::override_setting( 'yst_breadcrumb_single', $value, true );
 	}
 
 	/**
@@ -75,8 +71,7 @@ class Yoast_Breadcrumb {
 	 * @return null|string
 	 */
 	public function override_breadcrumb_page( $value = null ) {
-		$settings_helper = new Yoast_Settings_Helper();
-		return $settings_helper->override_setting( 'yst_breadcrumb_page', $value, true );
+		return Yoast_Option_Helper::override_setting( 'yst_breadcrumb_page', $value, true );
 	}
 
 	/**
@@ -87,8 +82,7 @@ class Yoast_Breadcrumb {
 	 * @return null|string
 	 */
 	public function override_breadcrumb_archive( $value = null ) {
-		$settings_helper = new Yoast_Settings_Helper();
-		return $settings_helper->override_setting( 'yst_breadcrumb_archive', $value, true );
+		return Yoast_Option_Helper::override_setting( 'yst_breadcrumb_archive', $value, true );
 	}
 
 	/**
@@ -99,8 +93,7 @@ class Yoast_Breadcrumb {
 	 * @return null|string
 	 */
 	public function override_breadcrumb_404( $value = null ) {
-		$settings_helper = new Yoast_Settings_Helper();
-		return $settings_helper->override_setting( 'yst_breadcrumb_404', $value, true );
+		return Yoast_Option_Helper::override_setting( 'yst_breadcrumb_404', $value, true );
 	}
 
 	/**
@@ -111,8 +104,7 @@ class Yoast_Breadcrumb {
 	 * @return null|string
 	 */
 	public function override_breadcrumb_attachment( $value = null ) {
-		$settings_helper = new Yoast_Settings_Helper();
-		return $settings_helper->override_setting( 'yst_breadcrumb_attachment', $value, true );
+		return Yoast_Option_Helper::override_setting( 'yst_breadcrumb_attachment', $value, true );
 	}
 
 } 

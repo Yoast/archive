@@ -177,17 +177,8 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		if ( is_admin() ) {
 			require_once( get_stylesheet_directory() . '/lib/functions/theme-customizer.php' );
 
-			$this->theme_customizer = new Yoast_Theme_Customizer();
+			$this->theme_customizer = new Yoast_Theme_Customizer( $this->get_name() );
 		}
-	}
-
-	/**
-	 * Get the license key option name
-	 *
-	 * @return string
-	 */
-	private function get_license_key_option_name() {
-		return 'yoast_theme_license_key_' . sanitize_title_with_dashes( $this->get_name() );
 	}
 
 	/**
@@ -197,7 +188,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 */
 	private function get_license_key() {
 		if ( '' == $this->license_key ) {
-			$this->license_key = get_option( $this->get_license_key_option_name(), '' );
+			$this->license_key = get_option( Yoast_Option_Helper::get_license_key_option_name( $this->get_name() ), '' );
 		}
 
 		return $this->license_key;
@@ -210,7 +201,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 */
 	private function set_license_key( $license_key ) {
 		$this->license_key = $license_key;
-		update_option( $this->get_license_key_option_name(), $this->license_key );
+		update_option( Yoast_Option_Helper::get_license_key_option_name( $this->get_name() ), $this->license_key );
 	}
 
 	/**
@@ -460,9 +451,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 * @return null|string
 	 */
 	public function override_content_archive_setting( $value = null ) {
-		$settings_helper = new Yoast_Settings_Helper();
-
-		return $settings_helper->override_setting( 'yst_content_archive', $value );
+		return Yoast_Option_Helper::override_setting( 'yst_content_archive', $value );
 	}
 
 	/**
@@ -477,9 +466,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 			return false;
 		}
 
-		$settings_helper = new Yoast_Settings_Helper();
-
-		return $settings_helper->override_setting( 'yst_content_archive_thumbnail', $value, true );
+		return Yoast_Option_Helper::override_setting( 'yst_content_archive_thumbnail', $value, true );
 	}
 
 	/**
@@ -490,9 +477,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 * @return null|string
 	 */
 	public function override_posts_nav( $value = null ) {
-		$settings_helper = new Yoast_Settings_Helper();
-
-		return $settings_helper->override_setting( 'yst_posts_nav', $value );
+		return Yoast_Option_Helper::override_setting( 'yst_posts_nav', $value );
 	}
 
 	/**
