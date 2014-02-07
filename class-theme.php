@@ -188,7 +188,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 */
 	private function get_license_key() {
 		if ( '' == $this->license_key ) {
-			$this->license_key = get_option( Yoast_Option_Helper::get_license_key_option_name( $this->get_name() ), '' );
+			$this->license_key = get_theme_mod( Yoast_Option_Helper::get_license_key_option_name( $this->get_name() ), '' );
 		}
 
 		return $this->license_key;
