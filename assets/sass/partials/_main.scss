@@ -760,11 +760,11 @@ textarea {
 		display: block;
 		position: relative;
 		color: $c_navMainLink;
-        border: {
-            width: 0 0 1px;
-            style: solid;
-            color: $c_navMainBg;
-        }
+      border: {
+        width: 0 0 1px;
+        style: solid;
+        color: $c_navMainBg;
+      }
 		margin: 0;
 		font: {
 			family: $f_navFont;
@@ -778,8 +778,8 @@ textarea {
 		&:hover {
 			color: $c_navMainLinkHover;
 			border: {
-                bottom: 1px solid $c_navMainLinkHover;
-            }
+        bottom: 1px solid $c_navMainLinkHover;
+      }
 			position: static;
 		}
 	}
@@ -791,22 +791,22 @@ textarea {
 	.current-menu-ancestor {
 		> a {
 			color: $c_navMainLinkHover;
-            border: {
-                width: 0 0 1px;
-                style: solid;
-                color: $c_navMainLinkHover;
-            }
+        border: {
+          width: 0 0 1px;
+          style: solid;
+          color: $c_navMainLinkHover;
+        }
 		}
     }
     .menu-item-has-children:hover {
-        a {
-            border: {
-                color: $c_navMainBg;
-            }
-            margin: {
-                bottom: -1px;
-            }
+      a {
+        border: {
+          color: $c_navMainBg;
         }
+        margin: {
+          bottom: -1px;
+        }
+      }
 	}
 	.sub-menu {
 		left: -9999px;
