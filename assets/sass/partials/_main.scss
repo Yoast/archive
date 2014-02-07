@@ -526,13 +526,13 @@ header {
 
 .content {
   float: right;
-  width: $d_mainColumn;
+  //width: $d_mainColumn;
   max-width: 100%;
-  #main-content-wrap {
-    float: left;
-    width: $d_mainContent;
-    max-width:100%;
-  }
+//  #main-content-wrap {
+//    float: left;
+//    width: $d_mainContent;
+//    max-width:100%;
+//  }
 }
 
 .content-sidebar-wrap {
@@ -3887,6 +3887,9 @@ body.menu-at-top {
 	.widget-yns {
 		input[type="submit"] {
 			padding: 8px 2% 8px 2%;
+			border: {
+				color: $c_widgetYnsInputfieldBorder;
+			}
 		}
 	}
 }
