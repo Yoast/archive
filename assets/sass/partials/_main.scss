@@ -624,7 +624,7 @@ button {
   top:1px; // if there's a better way to align input and submit, please add 2/2
   &:hover {
 		background: {
-			color: $c_inputSubmitBg;
+			color: lighten($c_inputSubmitBg,5%);
 		}
     @include background-image(linear-gradient($c_inputSubmitBg,lighten($c_inputSubmitBg,5%)));
   }
@@ -786,6 +786,7 @@ textarea {
   }
   line-height: 1.5;
   width: 100%;
+  overflow:hidden;
 	background: {
 		color: $c_navMainBg;
 	}
@@ -873,7 +874,7 @@ textarea {
     &:hover {
       color: $c_navMainLinkHover;
 			background: {
-				color: $c_navMainBgActive;
+				color: darken($c_navMainBgActive,10%);
 			}
 			@include background-image(linear-gradient($c_navMainBgActive, darken($c_navMainBgActive,10%)));
 //      background: {
@@ -2858,7 +2859,7 @@ table {
       }
       &:hover {
 				background: {
-					color: $c_ctaBg;
+					color: lighten($c_ctaBg,10%);
 				}
         @include background-image(linear-gradient(lighten($c_ctaBg,10%), $c_ctaBg));
         color: $c_ctaTextWhite;
@@ -2908,7 +2909,7 @@ table {
 				}
 				&:hover {
 					background: {
-						color: $c_ctaBg;
+						color: lighten($c_ctaBg,10%);
 					}
 					@include background-image(linear-gradient(lighten($c_ctaBg,10%), $c_ctaBg));
 					color: $c_ctaTextWhite;
@@ -3640,6 +3641,15 @@ body.menu-at-top {
 				}
 			}
 		}
+    .sub-menu {
+      li {
+        &:first-child {
+          border: {
+            left: 0;
+          }
+        }
+      }
+    }
 	}
 	#center-wrapper {
 		#yoast-after-header-container {
