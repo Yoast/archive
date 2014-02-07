@@ -2908,7 +2908,6 @@ table {
 /**
  * Newsletter Widget
  */
-
 .widget-yns {
   p,
   form {
@@ -2929,7 +2928,7 @@ table {
         bottom: 10px;
       }
       &[type="text"] {
-        width:80%;
+        width:88%;
       }
       &[type="submit"] {
         font: {
@@ -2939,6 +2938,33 @@ table {
       }
     }
   }
+	.yst-newsletter-input-wrapper {
+		position:relative;
+		height:38px;
+		max-width:100%;
+		input {
+			padding: 8px;
+			margin: {
+				bottom: 10px;
+			}
+			&[type="text"] {
+				position: absolute;
+				top:0;
+				height:100%;
+				border: {
+					color: $c_widgetYnsInputfieldBorder;
+				}
+			}
+			&[type="submit"] {
+				height:100%;
+				position: absolute;
+				top:0;
+				right:0;
+				padding: 0 11px;
+				margin:0;
+			}
+		}
+	}
 }
 
 /**
@@ -3878,9 +3904,6 @@ body.menu-at-top {
 	.widget-yns {
 		input[type="submit"] {
 			padding: 8px 2% 8px 2%;
-			border: {
-				color: $c_widgetYnsInputfieldBorder;
-			}
 		}
 	}
 }
