@@ -7,10 +7,15 @@
  */
 class Yoast_Theme_Customizer {
 
+	private $theme_name = '';
+
 	/**
 	 * Class constructor
 	 */
-	function __construct() {
+	function __construct( $theme_name ) {
+
+		$this->theme_name = $theme_name;
+
 		add_action( 'customize_register', array( $this, 'customize_register' ) );
 		add_action( 'customize_controls_print_styles', array( $this, 'style' ), 20 );
 		add_action( 'customize_preview_init', array( $this, 'enqueue' ) );
@@ -66,102 +71,102 @@ class Yoast_Theme_Customizer {
 		 * Add settings
 		 */
 		$wp_customize->add_setting(
-			'yst_colour_scheme',
-			array(
-				'default'   => 'WarmBlue',
-				'transport' => 'postMessage'
-			)
+				'yst_colour_scheme',
+				array(
+						'default'   => 'WarmBlue',
+						'transport' => 'postMessage'
+				)
 		);
 
 		$wp_customize->add_setting(
-			'yst_logo',
-			array(
-				'default'   => get_stylesheet_directory_uri() . '/assets/images/logo.png',
-				'transport' => 'postMessage'
-			)
+				'yst_logo',
+				array(
+						'default'   => get_stylesheet_directory_uri() . '/assets/images/logo.png',
+						'transport' => 'postMessage'
+				)
 		);
 
 		$wp_customize->add_setting(
-			'yst_mobile_logo',
-			array(
-				'default'   => get_stylesheet_directory_uri() . '/assets/images/logo-mobile.png',
-				'transport' => 'postMessage'
-			)
+				'yst_mobile_logo',
+				array(
+						'default'   => get_stylesheet_directory_uri() . '/assets/images/logo-mobile.png',
+						'transport' => 'postMessage'
+				)
 		);
 
 		$wp_customize->add_setting(
-			'yst_logo_position',
-			array(
-				'default'   => 'left',
-				'transport' => 'postMessage'
-			)
+				'yst_logo_position',
+				array(
+						'default'   => 'left',
+						'transport' => 'postMessage'
+				)
 		);
 
 		$wp_customize->add_setting(
-			'yst_logo_frame',
-			array(
-				'default'   => 'on',
-				'transport' => 'postMessage'
-			)
+				'yst_logo_frame',
+				array(
+						'default'   => 'on',
+						'transport' => 'postMessage'
+				)
 		);
 
 		$wp_customize->add_setting(
-			'yst_default_layout',
-			array(
-				'default'   => 'content-sidebar',
-				'transport' => 'refresh'
-			)
+				'yst_default_layout',
+				array(
+						'default'   => 'content-sidebar',
+						'transport' => 'refresh'
+				)
 		);
 
 		$wp_customize->add_setting(
-			'yst_footer',
-			array(
-				'default'   => sprintf( '[footer_copyright before="%s "] &#x000B7; [footer_childtheme_link before="" after=" %s"] Genesis &#x000B7; [footer_wordpress_link] &#x000B7;', __( 'Copyright', 'genesis' ), __( 'on', 'genesis' ) ),
-				'transport' => 'refresh'
-			)
+				'yst_footer',
+				array(
+						'default'   => sprintf( '[footer_copyright before="%s "] &#x000B7; [footer_childtheme_link before="" after=" %s"] Genesis &#x000B7; [footer_wordpress_link] &#x000B7;', __( 'Copyright', 'genesis' ), __( 'on', 'genesis' ) ),
+						'transport' => 'refresh'
+				)
 		);
 
 		$wp_customize->add_setting(
-			'yst_content_archive',
-			array(
-				'default'   => 'excerpts',
-				'transport' => 'refresh'
-			)
+				'yst_content_archive',
+				array(
+						'default'   => 'excerpts',
+						'transport' => 'refresh'
+				)
 		);
 
 		$wp_customize->add_setting(
-			'yst_content_archive_thumbnail',
-			array(
-				'default'   => 'on',
-				'transport' => 'refresh'
-			)
+				'yst_content_archive_thumbnail',
+				array(
+						'default'   => 'on',
+						'transport' => 'refresh'
+				)
 		);
 
 		$wp_customize->add_setting(
-			'yst_theme_search_in_nav',
-			array(
-				'default'   => 'on',
-				'transport' => 'refresh'
-			)
+				'yst_theme_search_in_nav',
+				array(
+						'default'   => 'on',
+						'transport' => 'refresh'
+				)
 		);
 
 		$wp_customize->add_setting(
-			'yst_posts_nav',
-			array(
-				'default'   => 'numeric',
-				'transport' => 'refresh'
-			)
+				'yst_posts_nav',
+				array(
+						'default'   => 'numeric',
+						'transport' => 'refresh'
+				)
 		);
 
 		$breadcrumb_settings = array(
-			'yst_breadcrumb_home'       => array( 'label' => __( 'Homepage', 'yoast-theme' ), 'default' => false ),
-			'yst_breadcrumb_front_page' => array( 'label' => __( 'Front Page', 'yoast-theme' ), 'default' => false ),
-			'yst_breadcrumb_posts_page' => array( 'label' => __( 'Posts Page', 'yoast-theme' ), 'default' => false ),
-			'yst_breadcrumb_single'     => array( 'label' => __( 'Single Posts', 'yoast-theme' ), 'default' => true ),
-			'yst_breadcrumb_page'       => array( 'label' => __( 'Single Pages', 'yoast-theme' ), 'default' => true ),
-			'yst_breadcrumb_archive'    => array( 'label' => __( 'Archive Pages', 'yoast-theme' ), 'default' => true ),
-			'yst_breadcrumb_404'        => array( 'label' => __( '404 Pages', 'yoast-theme' ), 'default' => true ),
-			'yst_breadcrumb_attachment' => array( 'label' => __( 'Attachment Pages', 'yoast-theme' ), 'default' => true )
+				'yst_breadcrumb_home'       => array( 'label' => __( 'Homepage', 'yoast-theme' ), 'default' => false ),
+				'yst_breadcrumb_front_page' => array( 'label' => __( 'Front Page', 'yoast-theme' ), 'default' => false ),
+				'yst_breadcrumb_posts_page' => array( 'label' => __( 'Posts Page', 'yoast-theme' ), 'default' => false ),
+				'yst_breadcrumb_single'     => array( 'label' => __( 'Single Posts', 'yoast-theme' ), 'default' => true ),
+				'yst_breadcrumb_page'       => array( 'label' => __( 'Single Pages', 'yoast-theme' ), 'default' => true ),
+				'yst_breadcrumb_archive'    => array( 'label' => __( 'Archive Pages', 'yoast-theme' ), 'default' => true ),
+				'yst_breadcrumb_404'        => array( 'label' => __( '404 Pages', 'yoast-theme' ), 'default' => true ),
+				'yst_breadcrumb_attachment' => array( 'label' => __( 'Attachment Pages', 'yoast-theme' ), 'default' => true )
 		);
 
 		if ( 'page' == get_option( 'show_on_front' ) ) {
@@ -172,11 +177,11 @@ class Yoast_Theme_Customizer {
 
 		foreach ( $breadcrumb_settings as $breadcrumb_setting => $values ) {
 			$wp_customize->add_setting(
-				$breadcrumb_setting,
-				array(
-					'default'   => $values['default'],
-					'transport' => 'refresh'
-				)
+					$breadcrumb_setting,
+					array(
+							'default'   => $values['default'],
+							'transport' => 'refresh'
+					)
 			);
 		}
 
@@ -184,49 +189,79 @@ class Yoast_Theme_Customizer {
 		 * Start adding sections
 		 */
 		$wp_customize->add_section(
-			'yst_color_schemes',
-			array(
-				'title'       => __( 'Color Scheme', 'genesis' ),
-				'description' => __( 'Determine the color scheme for your site. You can change as often as you want!', 'yoast-theme' ),
-				'priority'    => 61
-			)
+				'yst_color_schemes',
+				array(
+						'title'       => __( 'Color Scheme', 'genesis' ),
+						'description' => __( 'Determine the color scheme for your site. You can change as often as you want!', 'yoast-theme' ),
+						'priority'    => 61
+				)
 		);
 
 		$wp_customize->add_section(
-			'yst_genesis_layout',
-			array(
-				'title'       => __( 'Layout', 'genesis' ),
-				'description' => __( 'This determines the default layout of your site. You can override this on individual pages.', 'yoast-theme' ),
-				'priority'    => 61
-			)
+				'yst_genesis_layout',
+				array(
+						'title'       => __( 'Layout', 'genesis' ),
+						'description' => __( 'This determines the default layout of your site. You can override this on individual pages.', 'yoast-theme' ),
+						'priority'    => 61
+				)
 		);
 
 		$wp_customize->add_section(
-			'yst_genesis_content_archives',
-			array(
-				'title'       => __( 'Content Archives', 'genesis' ),
-				'description' => __( 'Determine what your archive sections will look like:', 'yoast-theme' ),
-				'priority'    => 62
-			)
+				'yst_genesis_content_archives',
+				array(
+						'title'       => __( 'Content Archives', 'genesis' ),
+						'description' => __( 'Determine what your archive sections will look like:', 'yoast-theme' ),
+						'priority'    => 62
+				)
 		);
 
 		$wp_customize->add_section(
-			'yst_genesis_breadcrumbs',
-			array(
-				'title'    => __( 'Breadcrumbs', 'genesis' ),
-				'priority' => 63
-			)
+				'yst_genesis_breadcrumbs',
+				array(
+						'title'    => __( 'Breadcrumbs', 'genesis' ),
+						'priority' => 63
+				)
 		);
 
 		// This adds a new section for Logo uploads
 		$wp_customize->add_section(
-			'yst_logos',
-			array(
-				'title'       => 'Logo',
-				'description' => __( 'Upload a logo and a mobile logo here:', 'yoast-theme' ),
-				'priority'    => 81
-			)
+				'yst_logos',
+				array(
+						'title'       => 'Logo',
+						'description' => __( 'Upload a logo and a mobile logo here:', 'yoast-theme' ),
+						'priority'    => 81
+				)
 		);
+
+		/**
+		 * License
+		 */
+		$license_option_name = Yoast_Option_Helper::get_license_key_option_name( $this->theme_name );
+		$wp_customize->add_setting(
+				$license_option_name,
+				array(
+						'default'           => '',
+						'transport'         => 'postMessage',
+						'sanitize_callback' => array( $this, 'license_callback' )
+				)
+		);
+
+		$wp_customize->add_section(
+				'yst_license_section',
+				array(
+						'title'       => __( 'License', 'yoast-theme' ),
+						'description' => __( 'Enter your theme license key to receive updates and support.', 'yoast-theme' ),
+						'priority'    => 1
+				)
+		);
+
+		$wp_customize->add_control(
+				$license_option_name,
+				array(
+						'label'   => 'License key',
+						'section' => 'yst_license_section',
+						'type'    => 'text',
+				) );
 
 		/**
 		 * Start adding controls
@@ -234,76 +269,76 @@ class Yoast_Theme_Customizer {
 		$i = 1;
 		foreach ( $breadcrumb_settings as $breadcrumb_setting => $values ) {
 			$wp_customize->add_control(
-				new Yoast_Customize_Control(
-					$wp_customize,
-					$breadcrumb_setting,
-					array(
-						'section'     => 'yst_genesis_breadcrumbs',
-						'label'       => $values['label'],
-						'type'        => 'checkbox',
-						'description' => ( ( 1 == $i ) ? '<strong>' . __( 'Show breadcrumbs on:' ) . '</strong>' : '' ),
-						'priority'    => $i
+					new Yoast_Customize_Control(
+							$wp_customize,
+							$breadcrumb_setting,
+							array(
+									'section'     => 'yst_genesis_breadcrumbs',
+									'label'       => $values['label'],
+									'type'        => 'checkbox',
+									'description' => ( ( 1 == $i ) ? '<strong>' . __( 'Show breadcrumbs on:' ) . '</strong>' : '' ),
+									'priority'    => $i
+							)
 					)
-				)
 			);
 			$i ++;
 		}
 
 		$wp_customize->add_control(
-			'yst_theme_search_in_nav',
-			array(
-				'section' => 'nav',
-				'label'   => __( 'Include Search in Nav bar', 'yoast-theme' ),
-				'type'    => 'checkbox'
-			)
-		);
-
-		$wp_customize->add_control(
-			'yst_content_archive',
-			array(
-				'section' => 'yst_genesis_content_archives',
-				'label'   => __( 'Content Archive Settings', 'yoast-theme' ),
-				'type'    => 'radio',
-				'choices' => array(
-					'full'     => __( 'Display post content', 'genesis' ),
-					'excerpts' => __( 'Display post excerpts', 'genesis' ),
+				'yst_theme_search_in_nav',
+				array(
+						'section' => 'nav',
+						'label'   => __( 'Include Search in Nav bar', 'yoast-theme' ),
+						'type'    => 'checkbox'
 				)
-			)
 		);
 
 		$wp_customize->add_control(
-			'yst_content_archive',
-			array(
-				'section' => 'yst_genesis_content_archives',
-				'label'   => __( 'Content Archive Settings', 'yoast-theme' ),
-				'type'    => 'radio',
-				'choices' => array(
-					'full'     => __( 'Display post content', 'genesis' ),
-					'excerpts' => __( 'Display post excerpts', 'genesis' ),
+				'yst_content_archive',
+				array(
+						'section' => 'yst_genesis_content_archives',
+						'label'   => __( 'Content Archive Settings', 'yoast-theme' ),
+						'type'    => 'radio',
+						'choices' => array(
+								'full'     => __( 'Display post content', 'genesis' ),
+								'excerpts' => __( 'Display post excerpts', 'genesis' ),
+						)
 				)
-			)
 		);
 
 		$wp_customize->add_control(
-			'yst_content_archive_thumbnail',
-			array(
-				'section' => 'yst_genesis_content_archives',
-				'label'   => __( 'Include the Featured Image?', 'genesis' ),
-				'type'    => 'checkbox'
-			)
-		);
-
-		$wp_customize->add_control(
-			'yst_posts_nav',
-			array(
-				'section' => 'yst_genesis_content_archives',
-				'label'   => __( 'Post Navigation Technique', 'yoast-theme' ),
-				'type'    => 'radio',
-				'choices' => array(
-					'prev-next' => __( 'Previous / Next', 'genesis' ),
-					'numeric'   => __( 'Numeric', 'genesis' ),
+				'yst_content_archive',
+				array(
+						'section' => 'yst_genesis_content_archives',
+						'label'   => __( 'Content Archive Settings', 'yoast-theme' ),
+						'type'    => 'radio',
+						'choices' => array(
+								'full'     => __( 'Display post content', 'genesis' ),
+								'excerpts' => __( 'Display post excerpts', 'genesis' ),
+						)
 				)
-			)
+		);
+
+		$wp_customize->add_control(
+				'yst_content_archive_thumbnail',
+				array(
+						'section' => 'yst_genesis_content_archives',
+						'label'   => __( 'Include the Featured Image?', 'genesis' ),
+						'type'    => 'checkbox'
+				)
+		);
+
+		$wp_customize->add_control(
+				'yst_posts_nav',
+				array(
+						'section' => 'yst_genesis_content_archives',
+						'label'   => __( 'Post Navigation Technique', 'yoast-theme' ),
+						'type'    => 'radio',
+						'choices' => array(
+								'prev-next' => __( 'Previous / Next', 'genesis' ),
+								'numeric'   => __( 'Numeric', 'genesis' ),
+						)
+				)
 		);
 
 		foreach ( genesis_get_layouts( 'site' ) as $id => $data ) {
@@ -311,16 +346,16 @@ class Yoast_Theme_Customizer {
 		}
 
 		$wp_customize->add_control(
-			new Yoast_Radio_Image_Control(
-				$wp_customize,
-				'yst_default_layout',
-				array(
-					'label'    => __( 'Choose the default layout', 'yoast-theme' ),
-					'settings' => 'yst_default_layout',
-					'section'  => 'yst_genesis_layout',
-					'choices'  => $layouts
+				new Yoast_Radio_Image_Control(
+						$wp_customize,
+						'yst_default_layout',
+						array(
+								'label'    => __( 'Choose the default layout', 'yoast-theme' ),
+								'settings' => 'yst_default_layout',
+								'section'  => 'yst_genesis_layout',
+								'choices'  => $layouts
+						)
 				)
-			)
 		);
 		foreach ( glob( CHILD_DIR . "/assets/css/*.css" ) as $file ) {
 
@@ -339,88 +374,130 @@ class Yoast_Theme_Customizer {
 
 		// This control goes into the default Color section
 		$wp_customize->add_control(
-			'yst_colour_scheme',
-			array(
-				'section' => 'yst_color_schemes',
-				'label'   => __( 'Color Scheme', 'yoast-theme' ),
-				'type'    => 'radio',
-				'choices' => $colours
-			)
+				'yst_colour_scheme',
+				array(
+						'section' => 'yst_color_schemes',
+						'label'   => __( 'Color Scheme', 'yoast-theme' ),
+						'type'    => 'radio',
+						'choices' => $colours
+				)
 		);
 
 		// This control goes into the default Color section
 		$wp_customize->add_control(
-			new Yoast_Logo_Image_Control(
-				$wp_customize,
-				'yst_logo',
+				new Yoast_Logo_Image_Control(
+						$wp_customize,
+						'yst_logo',
+						array(
+								'label'       => __( 'Logo', 'yoast-theme' ),
+								'description' => __( 'Best size: 360px x 144px', 'yoast-theme' ),
+								'setting'     => 'yst_logo',
+								'section'     => 'yst_logos',
+								'context'     => 'yst_logo',
+						)
+				)
+		);
+
+		$wp_customize->add_control(
+				new Yoast_Logo_Image_Control(
+						$wp_customize,
+						'yst_mobile_logo',
+						array(
+								'label'       => __( 'Mobile Logo', 'yoast-theme' ),
+								'description' => __( 'Best size: 230px x 36px', 'yoast-theme' ),
+								'setting'     => 'yst_mobile_logo',
+								'section'     => 'yst_logos',
+								'context'     => 'yst_mobile_logo',
+						)
+				)
+		);
+
+		$wp_customize->add_control(
+				'yst_logo_position',
 				array(
-					'label'       => __( 'Logo', 'yoast-theme' ),
-					'description' => __( 'Best size: 360px x 144px', 'yoast-theme' ),
-					'setting'     => 'yst_logo',
-					'section'     => 'yst_logos',
-					'context'     => 'yst_logo',
+						'section' => 'yst_logos',
+						'label'   => __( 'Logo positioning', 'yoast-theme' ),
+						'type'    => 'radio',
+						'choices' => array(
+								'left'   => __( 'Left', 'yoast-theme' ),
+								'center' => __( 'Center', 'yoast-theme' )
+						)
 				)
-			)
 		);
 
 		$wp_customize->add_control(
-			new Yoast_Logo_Image_Control(
-				$wp_customize,
-				'yst_mobile_logo',
+				'yst_logo_frame',
 				array(
-					'label'       => __( 'Mobile Logo', 'yoast-theme' ),
-					'description' => __( 'Best size: 230px x 36px', 'yoast-theme' ),
-					'setting'     => 'yst_mobile_logo',
-					'section'     => 'yst_logos',
-					'context'     => 'yst_mobile_logo',
+						'section' => 'yst_logos',
+						'label'   => __( 'Use a frame around the logo? Best logo size is within 227px x 104px', 'yoast-theme' ),
+						'type'    => 'checkbox',
 				)
-			)
-		);
-
-		$wp_customize->add_control(
-			'yst_logo_position',
-			array(
-				'section' => 'yst_logos',
-				'label'   => __( 'Logo positioning', 'yoast-theme' ),
-				'type'    => 'radio',
-				'choices' => array(
-					'left'   => __( 'Left', 'yoast-theme' ),
-					'center' => __( 'Center', 'yoast-theme' )
-				)
-			)
-		);
-
-		$wp_customize->add_control(
-			'yst_logo_frame',
-			array(
-				'section' => 'yst_logos',
-				'label'   => __( 'Use a frame around the logo? Best logo size is within 227px x 104px', 'yoast-theme' ),
-				'type'    => 'checkbox',
-			)
 		);
 
 		// This adds a new section for Footer settings
 		$wp_customize->add_section(
-			'yst_footer',
-			array(
-				'title'    => 'Footer',
-				'priority' => 202
-			)
+				'yst_footer',
+				array(
+						'title'    => 'Footer',
+						'priority' => 202
+				)
 		);
 
 		$wp_customize->add_control(
-			'yst_footer',
-			array(
-				'label'   => 'Footer text',
-				'section' => 'yst_footer',
-				'type'    => 'text',
-			) );
+				'yst_footer',
+				array(
+						'label'   => 'Footer text',
+						'section' => 'yst_footer',
+						'type'    => 'text',
+				) );
 
 	}
 
-}
+	/**
+	 * The license key save callback
+	 *
+	 * @param $license_key
+	 *
+	 * @return string
+	 */
+	public function license_callback( $license_key ) {
 
-$yst_customize = new Yoast_Theme_Customizer();
+		// Get the current license key
+		$current_license_key = get_theme_mod( Yoast_Option_Helper::get_license_key_option_name( $this->theme_name ) );
+
+		// Only do the license dance if the new license is different that the current one
+		if( $current_license_key != $license_key ) {
+
+			// Try to activate the license
+			$license_key = trim( $license_key );
+			$api_params = array(
+					'edd_action' => 'activate_license',
+					'license'    => $license_key,
+					'item_name'  => urlencode( $this->theme_name )
+			);
+
+			/**
+			 * @todo change url to constant
+			 */
+			$response = wp_remote_get( add_query_arg( $api_params, 'https://yoast.com' ), array( 'timeout' => 15, 'sslverify' => false ) );
+
+			// Check the response for errors
+			if ( is_wp_error( $response ) ) {
+				return $license_key;
+			}
+
+			// Get the license data
+			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+			// Save the new license status
+			set_theme_mod( Yoast_Option_Helper::get_license_status_option_name( $this->theme_name ), $license_data->license );
+
+		}
+
+		return $license_key;
+	}
+
+}
 
 if ( class_exists( 'WP_Customize_Control' ) ) {
 
@@ -483,10 +560,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function __construct( $manager, $id, $args ) {
 			parent::__construct( $manager, $args['setting'], array(
-				'label'   => $args['label'],
-				'section' => $args['section'],
-				'context' => $args['context'],
-				'get_url' => array( $this, 'get_image' ),
+					'label'   => $args['label'],
+					'section' => $args['section'],
+					'context' => $args['context'],
+					'get_url' => array( $this, 'get_image' ),
 			) );
 
 			$this->add_tab( 'upload-new', __( 'Upload' ), array( $this, 'tab_upload_new' ) );
@@ -579,11 +656,11 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function tab_uploaded() {
 			$images = get_posts( array(
-				'post_type'  => 'attachment',
-				'meta_key'   => '_wp_attachment_context',
-				'meta_value' => $this->context,
-				'orderby'    => 'none',
-				'nopaging'   => true
+					'post_type'  => 'attachment',
+					'meta_key'   => '_wp_attachment_context',
+					'meta_value' => $this->context,
+					'orderby'    => 'none',
+					'nopaging'   => true
 			) );
 
 			?>
