@@ -1530,10 +1530,6 @@ table {
   }
 }
 
-.footer-widgets table{ 
-  background: transparent; 
-}
-
 /**
  * Content Area
  */
@@ -2933,6 +2929,10 @@ table {
     .widget-title {
       color: $c_footerWidgetsH3;
     }
+  }
+
+  table {
+    background: transparent;
   }
 }
 
