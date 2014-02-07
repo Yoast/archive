@@ -66,6 +66,10 @@ class Yoast_Vintage extends Yoast_Theme {
 		add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
 		add_image_size( 'fullwidth-thumb', 290, 193, true );
 
+		// Change image output
+		remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
+		add_action( 'genesis_entry_content', array( $this, 'do_post_image' ), 8 );
+
 		// Activate blogroll widget
 		add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
@@ -434,6 +438,38 @@ class Yoast_Vintage extends Yoast_Theme {
 		}
 
 		return $img;
+	}
+
+	/**
+	 * Display the image thumb on front page
+	 */
+	public function do_post_image() {
+		global $post;
+		
+		if ( ! has_post_thumbnail() ) {
+			return;
+		}
+
+		// No inline image on full-width
+		if ( 'full-width-content' == genesis_site_layout() ) {
+			return;
+		}
+
+		// Set correct image alignment
+		$align = 'left';
+		if ( 'sidebar-content' == genesis_site_layout() ) {
+			$align = 'right';
+		}
+
+		//setup thumbnail image args to be used with genesis_get_image();
+		$size         = 'archive-thumb'; // Change this to whatever add_image_size you want
+		$default_attr = array(
+				'class' => "align{$align} attachment-{$size} {$size}",
+				'alt'   => $post->post_title,
+				'title' => $post->post_title,
+		);
+
+		printf( '<a href="%s" title="%s" class="yst-archive-image-link">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
 	}
 
 	/**
