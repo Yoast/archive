@@ -243,7 +243,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	public function display_license_admin_notice() {
 
 		echo '<div class="error"><p>';
-		printf( __( '<b>Warning!</b> The %s theme license key is not valid, you\'re missing out on updates and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', 'yoast-theme' ), $this->get_name(), '%URL%', 'https://yoast.com/wordpress/themes/' . sanitize_title_with_dashes( $this->get_name() ) );
+		printf( __( '<b>Warning!</b> The %s theme license key is not valid, you\'re missing out on updates and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', 'yoast-theme' ), $this->get_name(), admin_url() . 'cutomize.php', 'https://yoast.com/wordpress/themes/' . sanitize_title_with_dashes( $this->get_name() ) );
 		echo "</p></div>";
 	}
 
