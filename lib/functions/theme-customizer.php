@@ -7,10 +7,15 @@
  */
 class Yoast_Theme_Customizer {
 
+	private $theme_name = '';
+
 	/**
 	 * Class constructor
 	 */
-	function __construct() {
+	function __construct( $theme_name ) {
+
+		$this->theme_name = $theme_name;
+
 		add_action( 'customize_register', array( $this, 'customize_register' ) );
 		add_action( 'customize_controls_print_styles', array( $this, 'style' ), 20 );
 		add_action( 'customize_preview_init', array( $this, 'enqueue' ) );
