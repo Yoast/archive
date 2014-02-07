@@ -1565,11 +1565,19 @@ table {
   }
 }
 .full-width-content {
-  /* pulling the thumb out of the stream */
-  .thumb {
-    img {
-      max-width: 100%;
+
+  &.home .entry-content {
+    width: 70%;
+    padding-right: 2%;
+    float: left;
+    p, .excerpt_readmore {
+      width: 100%; max-width: 100%;
     }
+  }
+  &.home .full-width-thumb {
+    width: 30%;
+    max-width: 290px;
+    float: left;
   }
 
 }
