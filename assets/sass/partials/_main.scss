@@ -840,6 +840,11 @@ textarea {
         color: $c_navMainBorder;
       }
     }
+    .sub-menu {
+      a {
+        border: 0;
+      }
+    }
   }
   a {
     display: block;
@@ -1247,8 +1252,6 @@ textarea {
 // body.sticky,
 body.sticky-menu {
   padding-top: 120px;
-	#center-wrapper {
-	}
 	.after-header-content-wrapper {
 		max-width: $d_full;
 	}
@@ -2509,8 +2512,10 @@ table {
 	}
   background: {
     color: $c_afterHeaderBg;
+    image: image-url('dividerAfterHeader.png');
+    position: 33.3333333333% 0;
+    repeat: repeat-y;
   }
-  padding: 24px 20px 24px 20px; // this will be overwritten for 'top' for the Simple Image Plugin, so the image will be fixed to the top
 	border: {
 		bottom: {
 			width: 2px;
@@ -2518,6 +2523,21 @@ table {
 			color: $c_afterHeaderBorder;
 		}
 	}
+  .wrap {
+    border: {
+      color: $c_afterHeaderBg;
+      style: solid;
+      width: 24px 20px;
+    }
+    background: {
+      image: image-url('dividerAfterHeader.png');
+      position: 67.3333333333% 0;
+      repeat: repeat-y;
+    }
+  }
+  .widget-wrap {
+    margin:0;
+  }
   .widget_simpleimage {
     .simple-image {
       img {
@@ -2564,6 +2584,7 @@ table {
   }
   .yoast-after-header-widget {
     float: left;
+    box-sizing: border-box;
     ul {
       li {
         a {
@@ -2580,30 +2601,21 @@ table {
 }
 #yoast-after-header-1 {
   width: $d_columnOne;
-  max-width:50%;
+  max-width:33.3333333333%;
 }
 #yoast-after-header-2 {
   width: $d_columnTwo;
-  max-width:50%;
+  max-width:33.3333333333%;
   margin: {
-    left: 19px;
-    right: 19px;
+    left: 38px;
+    right: 38px;
   }
-	padding: {
-    left: 19px;
-    right: 19px;
-  }
-	border: {
-		width: 0 2px;
-		style: solid;
-		color: $c_randLine;
-	}
   vertical-align: middle;
 }
 #yoast-after-header-3 {
   width: $d_columnThree;
+  max-width: 33.3333333333%;
 }
-
 /**
  * Tagline Widgets
  */
@@ -3786,14 +3798,18 @@ body.menu-at-top {
       left: 2%;
       right: 2%;
     }
+    background: {
+      position: 33.6666666667% 0;
+    }
+    .wrap {
+      background: {
+        position: 66.6666666667% 0;
+      }
+    }
 		#yoast-after-header-2 {
 			margin: {
-				left: 1%;
-				right: 1%;
-			}
-			padding: {
-				left: 1%;
-				right: 1%;
+				left: 3%;
+				right: 3%;
 			}
 		}
     .yoast-after-header-widget {

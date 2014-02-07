@@ -12,7 +12,7 @@ class Yoast_Theme_Customizer {
 	/**
 	 * Class constructor
 	 */
-	function __construct( $theme_name ) {
+	public function __construct( $theme_name ) {
 
 		$this->theme_name = $theme_name;
 
@@ -27,7 +27,7 @@ class Yoast_Theme_Customizer {
 	/**
 	 * Enqueue scripts
 	 */
-	function enqueue() {
+	public function enqueue() {
 		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js?v=' . filemtime( get_stylesheet_directory() . '/lib/js/theme-customizer.js' ), array( 'jquery', 'customize-preview' ), '0.1', true );
 	}
 
@@ -67,7 +67,7 @@ class Yoast_Theme_Customizer {
 	/**
 	 * Outputs customizer specific styles for our custom controls
 	 */
-	function style() {
+	public function style() {
 		?>
 		<style>
 			.image-input-label {
@@ -102,7 +102,7 @@ class Yoast_Theme_Customizer {
 	 *
 	 * @param object $wp_customize
 	 */
-	function customize_register( $wp_customize ) {
+	public function customize_register( $wp_customize ) {
 
 		/**
 		 * Add settings
@@ -299,11 +299,13 @@ class Yoast_Theme_Customizer {
 		/**
 		 * License
 		 */
+		$license_option_name = Yoast_Option_Helper::get_license_key_option_name( $this->theme_name );
 		$wp_customize->add_setting(
-				'yst_license_key',
+				$license_option_name,
 				array(
-						'default'   => '',
-						'transport' => 'postMessage'
+						'default'           => '',
+						'transport'         => 'postMessage',
+						'sanitize_callback' => array( $this, 'license_callback' )
 				)
 		);
 
@@ -317,7 +319,7 @@ class Yoast_Theme_Customizer {
 		);
 
 		$wp_customize->add_control(
-				'yst_license_key',
+				$license_option_name,
 				array(
 						'label'   => 'License key',
 						'section' => 'yst_license_section',
@@ -542,6 +544,50 @@ class Yoast_Theme_Customizer {
 						'type'    => 'text',
 				) );
 
+	}
+
+	/**
+	 * The license key save callback
+	 *
+	 * @param $license_key
+	 *
+	 * @return string
+	 */
+	public function license_callback( $license_key ) {
+
+		// Get the current license key
+		$current_license_key = get_theme_mod( Yoast_Option_Helper::get_license_key_option_name( $this->theme_name ) );
+
+		// Only do the license dance if the new license is different that the current one
+		if( $current_license_key != $license_key ) {
+
+			// Try to activate the license
+			$license_key = trim( $license_key );
+			$api_params = array(
+					'edd_action' => 'activate_license',
+					'license'    => $license_key,
+					'item_name'  => urlencode( $this->theme_name )
+			);
+			
+			/**
+			 * @todo change url to constant
+			 */
+			$response = wp_remote_get( add_query_arg( $api_params, 'https://yoast.com' ), array( 'timeout' => 15, 'sslverify' => false ) );
+
+			// Check the response for errors
+			if ( is_wp_error( $response ) ) {
+				return $license_key;
+			}
+
+			// Get the license data
+			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+			// Save the new license status
+			set_theme_mod( Yoast_Option_Helper::get_license_status_option_name( $this->theme_name ), $license_data->license );
+
+		}
+
+		return $license_key;
 	}
 
 }
