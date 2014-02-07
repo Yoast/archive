@@ -98,6 +98,7 @@ class Yoast_Theme_Customizer {
 	 * @param object $wp_customize
 	 */
 	function customize_register( $wp_customize ) {
+
 		/**
 		 * Add settings
 		 */
@@ -289,6 +290,34 @@ class Yoast_Theme_Customizer {
 						'priority'    => 81
 				)
 		);
+
+		/**
+		 * License
+		 */
+		$wp_customize->add_setting(
+				'yst_license_key',
+				array(
+						'default'   => '',
+						'transport' => 'postMessage'
+				)
+		);
+
+		$wp_customize->add_section(
+				'yst_license_section',
+				array(
+						'title'       => __( 'License', 'yoast-theme' ),
+						'description' => __( 'Enter your theme license key to receive updates and support.', 'yoast-theme' ),
+						'priority'    => 1
+				)
+		);
+
+		$wp_customize->add_control(
+				'yst_license_key',
+				array(
+						'label'   => 'License key',
+						'section' => 'yst_license_section',
+						'type'    => 'text',
+				) );
 
 		/**
 		 * Start adding controls
