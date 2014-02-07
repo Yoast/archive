@@ -53,7 +53,7 @@ $f_afterheader-px:			14px;
 $f_afterheader:					0.875rem;
 
 // navigation
-$f_navFont:             'Open Sans', Helvetica, Arial, sans-serif;
+$f_navFont:             $f_baseFont;
 $f_navMainLink-px:      16px;
 $f_navMainLink:         1rem;
 $f_navSubLink-px:       14px;
@@ -65,24 +65,24 @@ $f_navSubLink:          0.875rem;
 //$sidr-font-size:        $f_main;
 
 // main content
-$f_H1Font:              'Open Sans', Helvetica, Arial, sans-serif;
-$f_H2Font:              'Open Sans', Helvetica, Arial, sans-serif;
-$f_H3Font:              'Open Sans', Helvetica, Arial, sans-serif;
-$f_H4Font:              'Open Sans', Helvetica, Arial, sans-serif;
-$f_H5Font:              'Open Sans', Helvetica, Arial, sans-serif;
-$f_H6Font:              'Open Sans', Helvetica, Arial, sans-serif;
+$f_H1Font:              $f_baseFont;
+$f_H2Font:              $f_baseFont;
+$f_H3Font:              $f_baseFont;
+$f_H4Font:              $f_baseFont;
+$f_H5Font:              $f_extraFont;
+$f_H6Font:              $f_baseFont;
 $f_mainH1-px:           32px;
 $f_mainH1:              2.0rem;
 $f_mainH2-px:           30px;
 $f_mainH2:              1.875rem;
-$f_mainH3-px:           20px;
-$f_mainH3:              1.25rem;
+$f_mainH3-px:           24px;
+$f_mainH3:              1.5rem;
 $f_mainH4-px:           20px;
 $f_mainH4:              1.25rem;
 $f_mainH5-px:           16px;
 $f_mainH5:              1.0rem;
-$f_mainH6-px:           14px;
-$f_mainH6:              0.875rem;
+$f_mainH6-px:           15px;
+$f_mainH6:              0.9375rem;
 $f_entryContent-px:			15px;
 $f_entryContent:				0.9375rem;
 

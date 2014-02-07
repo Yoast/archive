@@ -1526,9 +1526,6 @@ img.alignright,
  */
 
 .headingsDefault {
-  font: {
-    weight: 400;
-  }
   line-height: 1.2;
   margin: 0 0 24px;
 }
@@ -1540,6 +1537,7 @@ h1 {
     family: $f_H1Font;
     size: $f_mainH1-px;
     size: $f_mainH1;
+		weight: 400;
   }
 }
 .post {
@@ -1555,6 +1553,7 @@ h2 {
     family: $f_H2Font;
     size: $f_mainH2-px;
     size: $f_mainH2;
+		weight: 400;
   }
 }
 
@@ -1575,6 +1574,7 @@ h3 {
     family: $f_H3Font;
     size: $f_mainH3-px;
     size: $f_mainH3;
+		weight: 400;
   }
 }
 
@@ -1586,6 +1586,7 @@ h4 {
     family: $f_H4Font;
     size: $f_mainH4-px;
     size: $f_mainH4;
+		weight: 400;
   }
 }
 
@@ -1597,6 +1598,7 @@ h5 {
     family: $f_H5Font;
     size: $f_mainH5-px;
     size: $f_mainH5;
+		weight: 700;
   }
 }
 h6 {
@@ -1607,6 +1609,7 @@ h6 {
     family: $f_H6Font;
     size: $f_mainH6-px;
     size: $f_mainH6;
+		weight: 700;
   }
 }
 
