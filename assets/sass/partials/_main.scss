@@ -2690,7 +2690,7 @@ table {
   }
   > ul {
     margin: {
-      left: 26px;
+      left: 20px;
     }
   }
   li {
@@ -2803,6 +2803,11 @@ table {
   a {
     border:none;
     color: $c_sidebarH3;
+  }
+  + div#calendar_wrap{ 
+    padding: {
+      left: 0;
+    }
   }
 }
 
