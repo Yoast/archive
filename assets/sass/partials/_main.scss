@@ -617,15 +617,10 @@ button {
     transform:none
   }
   -webkit-appearance:button;
-  border: {
-    width: 1px;
-    style: solid;
-    color: $c_inputSubmitBorder;
-  }
+  border: 0;
 	background: {
 		color: $c_inputSubmitBg;
 	}
-  @include box-shadow(inset 0px 0 3px $c_inputSubmitBoxShadow);
   @include background-image(linear-gradient(lighten($c_inputSubmitBg,5%),$c_inputSubmitBg));
   color: $c_inputSubmitText;
   cursor: pointer;
