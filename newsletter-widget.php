@@ -79,6 +79,9 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 				return;
 			}
 
+			// Loading the default values, prevents notices
+			$instance = wp_parse_args( (array) $instance, $this->defaults );
+
 
 			$out = '';
 			if ( isset ( $instance['title'] ) && ! empty( $instance['title'] ) ) {
