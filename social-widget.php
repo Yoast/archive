@@ -190,6 +190,7 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 		 **/
 		function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, $this->defaults );
+			$instance = wp_parse_args( (array) $instance, $this->defaults_flw );
 
 			foreach ( $this->vars as $var => $label ) {
 				$flw_var = $var . "_flw";
