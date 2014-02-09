@@ -148,7 +148,7 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 
 			foreach ( $this->vars as $var => $label ) {
 				echo '<p>';
-				$label = '<label for="' . $this->get_field_name( $var ) . '">' . $label . '</label>';
+				$label = '<label for="' . $this->get_field_id( $var ) . '">' . $label . '</label>';
 
 				$input_attr = 'name="' . $this->get_field_name( $var ) . '" id="' . $this->get_field_id( $var ) . '"';
 
