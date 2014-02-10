@@ -392,7 +392,6 @@ header {
     background: {
       repeat: no-repeat;
       position: left;
-      size: contain;
     }
     float: left;
     font: {
@@ -750,7 +749,7 @@ textarea {
   font: {
     family: $f_baseFont;
   }
-  line-height: 1.5;
+  line-height: 1.6;
   width: 100%;
   overflow:hidden;
 	background: {
@@ -758,6 +757,11 @@ textarea {
 	}
 	@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
 	@include box-shadow(0px 1px 5px $c_navMainLinkShadow);
+  li:last-child a {
+    border: {
+      right: 0;
+    }
+  }	
   .menu-item {
 		.sub-menu {
 			.menu-item {
@@ -823,11 +827,6 @@ textarea {
     .last {
       border: {
         right:0;
-      }
-    }
-    &:last-child {
-      border: {
-        right: 0;
       }
     }
     &:hover {
@@ -2828,10 +2827,10 @@ table {
         color: $c_ctaBorder;
       }
       @include box-shadow(0px 1px 1px $c_ctaBoxShadow);
-			background: {
+		background: {
 				color: $c_ctaBg;
 			}
-      color: $c_ctaTextWhite;
+      color: $c_ctaTextWhite !important;
       font: {
         size: $f_ctaText-px;
         size: $f_ctaText;
