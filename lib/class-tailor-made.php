@@ -42,9 +42,13 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 		$this->register_sidebars();
 
 		// Image Sizes
-		add_image_size( 'archive-thumb', 180, 120, true );
+		add_image_size( 'yst-archive-thumb', 180, 0, true );
 		add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
 		add_image_size( 'fullwidth-thumb', 290, 193, true );
+
+		// Change image output
+		remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
+		add_action( 'genesis_entry_content', array( $this, 'archive_image' ), 8 );
 
 		// Activate blogroll widget
 		add_filter( 'pre_option_link_manager_enabled', '__return_true' );
@@ -65,9 +69,9 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 		add_action( 'wp_head', array( $this, 'conditional_add_back_to_top_link' ), 14 );
 
 		// Add conditional comments (ie)
-	    add_action( 'wp_head', array( $this, 'conditional_comments' ) );
+	  add_action( 'wp_head', array( $this, 'conditional_comments' ) );
 
-	    // Add support for yoast after header widget
+	  // Add support for yoast after header widget
 		add_action( 'genesis_after_header', array( $this, 'after_header_genesis' ) );
 
 		// Conditionally add full width sidebars
@@ -137,6 +141,42 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 			'name'        => __( 'After Post', 'yoast-theme' ),
 			'description' => __( 'Add a widget after the post on single pages.', 'yoast-theme' ),
 		) );
+	}
+
+	/**
+	 * Display the image thumb on front page
+	 */
+	public function archive_image() {
+		global $post;
+
+		if ( ! is_front_page() ) {
+			return;
+		}
+
+		if ( ! has_post_thumbnail() ) {
+			return;
+		}
+
+		// No inline image on full-width
+		if ( 'full-width-content' == genesis_site_layout() ) {
+			return;
+		}
+
+		// Set correct image alignment
+		$align = 'left';
+		if ( 'sidebar-content' == genesis_site_layout() ) {
+			$align = 'right';
+		}
+
+		//setup thumbnail image args to be used with genesis_get_image();
+		$size         = 'yst-archive-thumb'; // Change this to whatever add_image_size you want
+		$default_attr = array(
+				'class' => "align{$align} attachment-{$size} {$size}",
+				'alt'   => $post->post_title,
+				'title' => $post->post_title,
+		);
+
+		printf( '<a href="%s" title="%s" class="yst-archive-image-link">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
 	}
 
 	/**
