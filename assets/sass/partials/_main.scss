@@ -252,16 +252,16 @@ header {
   padding: {
     top: 32px;
   }
+  .widget-wrap {
+      padding: {
+        left: 20px;
+        top: 20px;
+        bottom: 20px;
+      }
+  }
 	aside {
 		margin: {
 			right: -20px;
-		}
-		.widget-wrap {
-			padding: {
-				left: 20px;
-				top: 20px;
-				bottom: 20px;
-			}
 		}
 		.cta-button {
 			padding: {
@@ -3254,7 +3254,6 @@ table {
 				width: 2px;
 				style: solid;
 			}
-			padding: 10px 10px 10px 10px;
 		}
 	}
 	.wrap {
@@ -3470,8 +3469,8 @@ table {
  */
 .widget-wrap {
   .wpseo-opening-hours {
-    margin:0 10px;
-    width:92%;
+    margin:0;
+    width:100%;
     tbody {
       border:0;
     }
