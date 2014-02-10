@@ -47,7 +47,7 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 			);
 
 			$widget_ops = array( 'classname' => 'widget_bigbutton' );
-			$this->WP_Widget( 'yst_bigbutton_widget', __( 'Yoast &mdash; Bigbutton', 'yoast-theme' ), $widget_ops );
+			$this->WP_Widget( 'yst_bigbutton_widget', __( 'Yoast &mdash; Big Button', 'yoast-theme' ), $widget_ops );
 		}
 
 		/**
