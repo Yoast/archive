@@ -104,7 +104,7 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 			}
 			$out .= '<label for="yst-newslettersubscription-' . $instance['name_email'] . '">' . __( 'E-mail address', 'yoast-theme' ) . '</label>';
 			$out .= '<div class="yst-newsletter-input-wrapper">';
-			$out .= '<input type="text" name="' . $instance['name_email'] . '" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" placeholder="john@doe.com" autocomplete="on" id="yst-newslettersubscription-'. $instance['name_email'] .' required>';
+			$out .= '<input type="text" name="' . $instance['name_email'] . '" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" placeholder="john@doe.com" autocomplete="on" id="yst-newslettersubscription-'. $instance['name_email'] .'" required>';
 			$out .= '<input type="submit" value="' . apply_filters( 'yoast_theme_newsletter_submit_button_text', '&#9654;' ) . '" />';
 			$out .= '</div>';
 			$out .= $instance['extrahtml'];
