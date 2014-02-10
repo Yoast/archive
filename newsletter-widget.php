@@ -109,7 +109,6 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 			$out .= '</div>';
 			$out .= $instance['extrahtml'];
 			$out .= '</form>';
-			$out .= '</p>';
 
 
 			echo $args['before_widget'];
