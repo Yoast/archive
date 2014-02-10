@@ -344,7 +344,7 @@ header {
 #center-wrapper {
 	@extend .floatclearing;
 	clear: both;
-	margin: 30px auto 0 auto;
+	margin: 27px auto 0 auto;
 	max-width: $d_full;
 	background: {
 		color: $c_mainContentBg;
@@ -352,18 +352,8 @@ header {
 }
 
 #afterheader-content-wrapper {
-	border: {
-		right: {
-			color: $c_maincontent_border;
-			width:2px;
-			style:solid;
-		}
-		left: {
-			color: $c_maincontent_border;
-			width:2px;
-			style:solid;
-		}
-	}
+	border: 2px solid $c_maincontent_border;
+  border-bottom: 0;
 }
 .menu-at-top {
 	#afterheader-content-wrapper {
