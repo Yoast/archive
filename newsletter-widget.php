@@ -74,8 +74,14 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 		 * @return void Echoes its output
 		 **/
 		public function widget( $args, $instance ) {
+
 			// Return if no value is entered for the Form Action Field
-			if ( ! isset( $instance['faf'] ) || empty( $instance['faf'] ) || ! isset( $instance['name_name'] ) || empty( $instance['name_name'] ) || ! isset( $instance['name_email'] ) || empty( $instance['name_email'] ) ) {
+			if ( ! isset( $instance['faf'] ) || empty( $instance['faf'] ) || ! isset( $instance['name_email'] ) || empty( $instance['name_email'] ) ) {
+				return;
+			}
+
+			// Do a separate check on the name
+			if( ( false === $instance['hide_name'] || ! isset( $instance['hide_name'] ) ) && ( ! isset( $instance['name_name'] ) || empty( $instance['name_name'] ) ) ) {
 				return;
 			}
 
