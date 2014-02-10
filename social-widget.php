@@ -87,7 +87,7 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 
 			echo '<div id="yst_social_widget">';
 			foreach ( $this->vars as $var => $label ) {
-				if ( isset ( $instance[$var] ) && ! empty ( $instance[$var] ) ) {
+				if ( isset ( $instance[$var] ) && ! empty ( $instance[$var] ) && (int) $instance[ ($var . '_flw' ) ] > 0 ) {
 					switch ( $var ) {
 						case 'yst_facebook':
 							$class = "btn-fb";
