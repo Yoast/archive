@@ -31,7 +31,7 @@ class YST_Facebook_Widget extends WP_Widget {
 
 		$this->defaults = array(
 			'title'            => __( 'Find us on Facebook', 'yoast-theme' ),
-			'data_href'        => 'http://www.facebook.com/FacebookDevelopers',
+			'data_href'        => 'https://www.facebook.com/yoast',
 			'data_width'       => 250,
 			'data_height'      => 300,
 			'data_colorscheme' => 'light',
