@@ -28,8 +28,7 @@ class Yoast_Theme_Customizer {
 	 * Enqueue scripts
 	 */
 	public function enqueue() {
-//		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js?v=' . filemtime( get_stylesheet_directory() . '/lib/js/theme-customizer.js' ), array( 'jquery', 'customize-preview' ), '0.1', true );
-		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js?v=' . time(), array( 'jquery', 'customize-preview' ), '0.1', true );
+		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js?v=' . filemtime( get_stylesheet_directory() . '/lib/js/theme-customizer.js' ), array( 'jquery', 'customize-preview' ), '0.1', true );
 	}
 
 	/**
