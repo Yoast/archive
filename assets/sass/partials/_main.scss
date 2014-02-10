@@ -402,6 +402,7 @@ header {
     background: {
       repeat: no-repeat;
       position: left;
+      size: contain;
     }
     float: left;
     font: {
@@ -410,46 +411,20 @@ header {
     }
 		min-height: 80px;
     width: $d_headerLogo;
+    position: relative;
   }
   .site-description {
-    display: block;
-    text: {
-      indent: -9999px;
-    }
-    color: $c_logoText;
-    font: {
-      size: 16px;
-      size: 1.6rem;
-      weight: 400;
-    }
-    line-height: 1;
-    margin: {
-      bottom: 0;
-    }
+    display: none;
   }
   .site-title {
-		text-align: left;
-		vertical-align: top;
-    font: {
-      size: $f_mainH1-px;
-      size: $f_mainH1;
-    }
-    line-height: 1;
-    margin: 0 0 8px;
-    text: {
-      transform: none;
-    }
+    text-indent: -9999px;
     a {
-      color: $c_logoTextLink;
-      &:hover {
-        color: $c_logoTextLinkHover;
-      }
-      display: block;
-      text: {
-        indent: -9999px;
-      }
-      float: left;
       width: 100%;
+      height: 100%;
+      display:block;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   }
   section.widget {
