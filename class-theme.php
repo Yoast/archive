@@ -577,6 +577,14 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		// Format layout class name
 		$class_name = 'Yoast_' . str_ireplace( ' ', '_', ucwords( str_ireplace( '-', ' ', genesis_site_layout() ) ) );
 
+		// Format class path
+		$class_path = get_stylesheet_directory() . '/lib/class-' . genesis_site_layout() . '.php';
+
+		// Load class file if not loaded yet
+		if( file_exists( $class_path ) ) {
+			require_once( $class_path );
+		}
+
 		// Create an instance of chosen layout
 		if ( class_exists( $class_name ) ) {
 			new $class_name();
