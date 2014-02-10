@@ -2361,6 +2361,9 @@ table {
 
 .sidebar {
   color: $c_sidebarText;
+  ul, ol {
+	  padding-left: 25px;
+  }
 }
 
 /**
@@ -2530,7 +2533,7 @@ table {
           color: $c_ctaBg;
       }
       @include background-image(linear-gradient(lighten($c_ctaBg,10%),$c_ctaBg));
-      color: $c_ctaTextWhite;
+      color: $c_ctaTextWhite !important;
       font: {
         size: $f_ctaText-px;
         size: $f_ctaText;
@@ -2547,6 +2550,7 @@ table {
           left: 5px;
         }
       }
+	  text-decoration: none !important;
       &:hover {
         background: {
             color: lighten($c_ctaBg,10%);
