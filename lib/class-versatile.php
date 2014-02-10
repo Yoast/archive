@@ -120,7 +120,7 @@ class Yoast_Versatile extends Yoast_Theme {
 		add_action( 'genesis_after_header', array( $this, 'open_content_wrapper' ), 11 );
 
 		// Close the content wrapper
-		add_action( 'genesis_before_footer', array( $this, 'close_div' ) );
+		add_action( 'genesis_before_footer', array( $this, 'close_div' ), 1 );
 
 		// Close the sidebar wrapper
 		add_action( 'genesis_after_content_sidebar_wrap', array( $this, 'close_div' ) );
@@ -554,6 +554,13 @@ class Yoast_Versatile extends Yoast_Theme {
 	 */
 	public function change_size_of_attachment() {
 		return '<p class="attachment">' . wp_get_attachment_link( 0, 'full', false ) . '</p>';
+	}
+
+	/**
+	* Open site wrapper
+	*/
+	public function open_site_wrapper() {
+		echo '<div>';
 	}
 
 	/**
