@@ -1851,13 +1851,30 @@ table {
 
 // category intro
 .term-intro {
-  padding: {
+	padding: 20px;
+  margin: {
     bottom: 24px;
   }
+	border: {
+		bottom: 1px solid $c_termIntroBorder;
+	}
+	background: {
+		color: $c_termIntroBg;
+	}
   h1 {
+		font: {
+			family: $f_termIntroH1Font;
+			size: $f_termIntroH1-px;
+			size: $f_termIntroH1;
+		}
     color:$c_taxonomyIntroH1;
   }
   p {
+		font: {
+			family: $f_termIntroFont;
+			size: $f_termIntro-px;
+			size: $f_termIntro;
+		}
     color:$c_taxonomyIntroText;
     font: {
       weight: 400;
