@@ -18,7 +18,7 @@ class Yoast_Theme_License {
 
 	private function hooks() {
 		// Setup the admin notice
-		add_action( 'admin_init', array( $this, 'check_display_admin_notice' ) );
+		add_action( 'admin_head', array( $this, 'check_display_admin_notice' ) );
 
 		// Setup the updater
 		add_action( 'admin_init', array( $this, 'setup_updater' ) );
@@ -28,7 +28,7 @@ class Yoast_Theme_License {
 	}
 
 	/**
-	 * The license key save callback
+	 * Activate the Yoast theme license
 	 *
 	 * @param $license_key
 	 *
@@ -36,54 +36,31 @@ class Yoast_Theme_License {
 	 */
 	private function activate_license( $license_key ) {
 
-		// Get the theme options, get_theme_mod can't be used here because that will create an infinite loop
-		$theme_slug = get_option( 'stylesheet' );
-		$mods       = get_option( "theme_mods_$theme_slug" );
+		// Try to activate the license
+		$license_key = trim( $license_key );
+		$api_params  = array(
+				'edd_action' => 'activate_license',
+				'license'    => $license_key,
+				'item_name'  => urlencode( $this->theme_name )
+		);
 
-		// Get the current license key
-		$current_license_key = $mods[Yoast_Option_Helper::get_license_key_option_name( $this->theme_name )];
+		// Do the request
+		$response = wp_remote_get( add_query_arg( $api_params, 'https://yoast.com' ), array( 'timeout' => 15, 'sslverify' => false ) );
 
-		// Only do the license dance if the new license is different that the current one
-		if ( $current_license_key != $license_key ) {
-
-			// Try to activate the license
-			$license_key = trim( $license_key );
-			$api_params  = array(
-					'edd_action' => 'activate_license',
-					'license'    => $license_key,
-					'item_name'  => urlencode( $this->theme_name )
-			);
-
-			/**
-			 * @todo change url to constant
-			 */
-			$response = wp_remote_get( add_query_arg( $api_params, 'https://yoast.com' ), array( 'timeout' => 15, 'sslverify' => false ) );
-
-			// Check the response for errors
-			if ( is_wp_error( $response ) ) {
-				return $license_key;
-			}
-
-			// Get the license data
-			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
-			// Save the new license status
-			$mods[ Yoast_Option_Helper::get_license_status_option_name( $this->theme_name ) ] = $license_data->license;
-
-			var_dump($license_data);
-			var_dump($mods);
-
-			update_option( "theme_mods_$theme_slug", $mods );
-			exit;
-
-
-
+		// Check the response for errors
+		if ( is_wp_error( $response ) ) {
+			return false;
 		}
 
-		var_dump('test');
-		exit;
+		// Get the license data
+		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-		return $license_key;
+		// Save the new license
+		$new_license = array( 'key' => $license_key, 'status' => $license_data->license );
+		$this->save_license( $new_license );
+
+		// Return
+		return true;
 	}
 
 	/**
@@ -110,17 +87,6 @@ class Yoast_Theme_License {
 	}
 
 	/**
-	 * Save the license key in the database
-	 *
-	 * @param $license_key
-	 */
-	private function set_license_key( $license_key ) {
-		$license        = $this->get_license();
-		$license['key'] = $license_key;
-		update_option( $this->option_name, $license );
-	}
-
-	/**
 	 * Get the theme license key
 	 *
 	 * @return string
@@ -140,17 +106,6 @@ class Yoast_Theme_License {
 		$license = $this->get_license();
 
 		return $license['status'];
-	}
-
-	/**
-	 * Save the license key in the database
-	 *
-	 * @param $license_status
-	 */
-	private function set_license_status( $license_status ) {
-		$license           = $this->get_license();
-		$license['status'] = $license_status;
-		update_option( $this->option_name, $license );
 	}
 
 	/**
@@ -218,7 +173,16 @@ class Yoast_Theme_License {
 	 * Catch the license post
 	 */
 	public function catch_license_post() {
+		if ( isset( $_POST['yoast_theme_license_key'] ) ) {
 
+			// Only continue is the posted license key is different than the current license key
+			if ( $this->get_license_key() != $_POST['yoast_theme_license_key'] ) {
+				if( $this->activate_license( $_POST['yoast_theme_license_key'] ) ) {
+					remove_action( 'admin_init', array( $this, 'check_display_admin_notice' ) );
+				}
+			}
+
+		}
 	}
 
 	/**
@@ -238,8 +202,8 @@ class Yoast_Theme_License {
 						<?php _e( 'License Key', 'yoast-theme' ); ?>
 					</th>
 					<td>
-						<input id="edd_sample_theme_license_key" name="edd_sample_theme_license_key" type="text" class="regular-text" value="<?php esc_attr( $this->get_license_key() ); ?>" />
-						<label class="description" for="edd_sample_theme_license_key"><?php _e( 'Enter your license key', 'yoast-theme' ); ?></label>
+						<input id="yoast_theme_license_key" name="yoast_theme_license_key" type="text" class="regular-text" value="<?php echo esc_attr( $this->get_license_key() ); ?>" />
+						<label class="description" for="yoast_theme_license_key"><?php _e( 'Enter your license key', 'yoast-theme' ); ?></label>
 					</td>
 				</tr>
 				</tbody>
