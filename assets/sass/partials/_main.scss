@@ -1385,6 +1385,11 @@ img.alignright,
     align: center;
   }
 }
+.gallery {
+	padding: {
+		bottom: 20px;
+	}
+}
 .gallery-caption {
 }
 .widget_calendar {
@@ -1896,6 +1901,15 @@ table {
     table {
       max-width:$d_mainColumn;
     }
+		div {
+			max-width: none;
+			p {
+				max-width: $d_mainColumn;
+			}
+		}
+		img {
+			max-width: $d_mainColumn;
+		}
   }
 	&.home .entry-content {
 		width: 70%;
@@ -3605,6 +3619,20 @@ img#wpstats {
 .alt-mobile-logo {
 	display: none;
 	visibility: hidden;
+}
+
+body.attachment {
+	.content {
+		.entry-content {
+			max-width: none;
+		}
+		.attachment {
+			max-width: none;
+		}
+		.attachment-full {
+			max-width: 100%;
+		}
+	}
 }
 
 body.menu-at-top {
