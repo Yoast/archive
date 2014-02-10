@@ -16,18 +16,13 @@ class Yoast_Vintage extends Yoast_Theme {
 	 * Constructor
 	 */
 	public function __construct() {
-		parent::__construct();
+		parent::__construct( self::NAME, self::URL, self::VERSION );
 	}
 
 	/**
 	 * Setup the theme
 	 */
 	public function setup_theme() {
-
-		// Set the theme properties
-		$this->set_name( self::NAME );
-		$this->set_url( self::URL );
-		$this->set_version( self::VERSION );
 
 		// Set the content width
 		$this->set_content_width( 680 );
