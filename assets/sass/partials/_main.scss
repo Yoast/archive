@@ -2799,6 +2799,8 @@ table {
       font: {
         size: $f_ctaText-px;
         size: $f_ctaText;
+        family: $f_extraFont;
+        weight: bold;
       }
       line-height: 1em;
       @include text-shadow($c_ctaTextShadow 1px 1px 5px);
@@ -3557,6 +3559,7 @@ img#wpstats {
 	font: {
 		size: $f_taglineTop-px;
 		size: $f_taglineTop;
+    family: $f_extraFont;
 	}
 	margin: {
 		left: auto;
