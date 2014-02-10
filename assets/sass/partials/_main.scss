@@ -527,13 +527,7 @@ header {
 
 .content {
   float: right;
-  //width: $d_mainColumn;
-  max-width: 100%;
-//  #main-content-wrap {
-//    float: left;
-//    width: $d_mainContent;
-//    max-width:100%;
-//  }
+  width: $d_mainColumn;
 }
 
 .content-sidebar-wrap {
@@ -546,6 +540,7 @@ header {
 .content-sidebar {
   .content {
     float: left;
+    width: $d_homepageMainColumn;
   }
 }
 
