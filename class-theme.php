@@ -22,19 +22,24 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	private $license_status = 'inactive';
 
 	private $theme_customizer;
+	private $theme_license;
 	private $breadcrumb;
 
 	/**
 	 * Constructor
 	 */
-	public function __construct() {
+	public function __construct( $name, $url, $version ) {
+
+		$this->name    = $name;
+		$this->url     = $url;
+		$this->version = $version;
 
 		// Setup autoloader
 		spl_autoload_register( array( $this, 'autoload' ) );
 
 		// Load widgets
 		add_action( 'genesis_setup', array( $this, 'load_widgets' ), 15 );
-		$this->load_widgets();
+		//$this->load_widgets();
 
 		// Setup theme basic settings
 		//$this->setup_theme_basic();
@@ -47,11 +52,8 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		// Load customizer
 		$this->load_theme_customizer();
 
-		// Setup theme updater
-		add_action( 'admin_init', array( $this, 'setup_updater' ) );
-
-		// Check the license key
-		$this->check_license_key();
+		// Setup the Theme License
+		$this->theme_license = new Yoast_Theme_License( $this->get_name(), $this->get_version() );
 
 		// Load editor style
 		$this->load_editor_style();
@@ -179,90 +181,10 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 */
 	private function load_theme_customizer() {
 //		if ( is_admin() ) {
-			require_once( get_stylesheet_directory() . '/lib/functions/theme-customizer.php' );
+		require_once( get_stylesheet_directory() . '/lib/functions/theme-customizer.php' );
 
-			$this->theme_customizer = new Yoast_Theme_Customizer( $this->get_name() );
+		$this->theme_customizer = new Yoast_Theme_Customizer( $this->get_name() );
 //		}
-	}
-
-	/**
-	 * Get the theme license key
-	 *
-	 * @return string
-	 */
-	private function get_license_key() {
-		if ( '' == $this->license_key ) {
-			$this->license_key = get_theme_mod( Yoast_Option_Helper::get_license_key_option_name( $this->get_name() ), '' );
-		}
-
-		return $this->license_key;
-	}
-
-	/**
-	 * Get the license status
-	 *
-	 * @return string
-	 */
-	public function get_license_status() {
-
-		if ( '' == $this->license_status ) {
-			$this->license_status = get_theme_mod( Yoast_Option_Helper::get_license_status_option_name( $this->get_name() ), 'inactive' );
-		}
-
-		return $this->license_status;
-	}
-
-	/**
-	 * Save the license key in the database
-	 *
-	 * @param $license_key
-	 */
-	private function set_license_key( $license_key ) {
-		$this->license_key = $license_key;
-		update_option( Yoast_Option_Helper::get_license_key_option_name( $this->get_name() ), $this->license_key );
-	}
-
-	/**
-	 * Check the license key, display an admin notice if the license key is empty
-	 */
-	private function check_license_key() {
-		if ( is_admin() ) {
-			if ( 'valid' != $this->get_license_status() ) {
-				add_action( 'admin_notices', array( $this, 'display_license_admin_notice' ) );
-			}
-		}
-	}
-
-	/**
-	 * Setup the theme updater
-	 */
-	public function setup_updater() {
-
-		// Load our custom theme updater
-		if ( ! class_exists( 'EDD_SL_Theme_Updater' ) ) {
-			require_once( 'class-edd-sl-theme-updater.php' );
-		}
-
-		// Setup the updater
-		$edd_updater = new EDD_SL_Theme_Updater( array(
-						'remote_api_url' => 'https://yoast.com', // Our store URL that is running EDD
-						'version'        => $this->get_version(), // The current theme version we are running
-						'license'        => $this->get_license_key(), // The license key (used get_option above to retrieve from DB)
-						'item_name'      => $this->get_name(), // The name of this theme
-						'author'         => 'Yoast'
-				)
-		);
-
-	}
-
-	/**
-	 * Display the license key admin notice
-	 */
-	public function display_license_admin_notice() {
-
-		echo '<div class="error"><p>';
-		printf( __( '<b>Warning!</b> The %s theme license key is not valid, you\'re missing out on updates and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', 'yoast-theme' ), $this->get_name(), admin_url() . 'customize.php', 'https://yoast.com/wordpress/themes/' . sanitize_title_with_dashes( $this->get_name() ) );
-		echo "</p></div>";
 	}
 
 	/**
@@ -673,15 +595,6 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	}
 
 	/**
-	 * Set the theme name
-	 *
-	 * @param $name
-	 */
-	public function set_name( $name ) {
-		$this->name = $name;
-	}
-
-	/**
 	 * Get the theme name
 	 *
 	 * @return mixed
@@ -691,30 +604,12 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	}
 
 	/**
-	 * Set the theme URL
-	 *
-	 * @param $url
-	 */
-	public function set_url( $url ) {
-		$this->url = $url;
-	}
-
-	/**
 	 * Get the theme URL
 	 *
 	 * @return mixed
 	 */
 	public function get_url() {
 		return $this->url;
-	}
-
-	/**
-	 * Set the theme version
-	 *
-	 * @param $version
-	 */
-	public function set_version( $version ) {
-		$this->version = $version;
 	}
 
 	/**
