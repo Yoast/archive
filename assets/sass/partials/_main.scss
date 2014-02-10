@@ -2897,6 +2897,9 @@ table {
       }
       &[type="text"] {
         width:88%;
+        border: {
+          color: $c_widgetYnsInputfieldBorder;
+        }
       }
       &[type="submit"] {
         font: {
@@ -2919,9 +2922,6 @@ table {
 				position: absolute;
 				top:0;
 				height:100%;
-				border: {
-					color: $c_widgetYnsInputfieldBorder;
-				}
 			}
 			&[type="submit"] {
 				height:100%;
