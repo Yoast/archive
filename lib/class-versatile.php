@@ -557,13 +557,6 @@ class Yoast_Versatile extends Yoast_Theme {
 	}
 
 	/**
-	* Open site wrapper
-	*/
-	public function open_site_wrapper() {
-		echo '<div>';
-	}
-
-	/**
 	 * Open the header wrapper
 	 */
 	public function open_header_wrapper() {
