@@ -1564,17 +1564,17 @@ table {
 .full-width-content {
 
   &.home .entry-content {
-    width: 70%;
-    padding-right: 2%;
+    width: $d_mainContent;
+    padding-right: 15px;
     float: left;
     p, .excerpt_readmore {
       width: 100%; max-width: 100%;
     }
   }
   &.home .full-width-thumb {
-    width: 30%;
+    margin-top: -61px;
     max-width: 290px;
-    float: left;
+    float: right;
   }
 
 }
@@ -1593,6 +1593,14 @@ table {
         decoration: none;
       }
     }
+  }
+  p,
+  ul,
+  ol,
+  blockquote,
+  div,
+  table {
+     max-width: $d_mainColumn;
   }
   p {
     margin: {
@@ -3274,6 +3282,7 @@ img#wpstats {
     display:none;
     visibility: hidden;
   }
+  .full-width-thumb{ display: none; }
 }
 
 @media (max-width: 640px) {
