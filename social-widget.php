@@ -17,25 +17,25 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 		 * @var array The defaults for the values
 		 */
 		var $defaults = array(
-			'yst_title'      => '',
-			'yst_facebook'   => '',
-			'yst_twitter'    => '',
-			'yst_linkedin'   => '',
-			'yst_googleplus' => '',
-			'yst_youtube'    => '',
-			'yst_pinterest'  => '',
-			'yst_rss'        => ''
+				'yst_title'      => '',
+				'yst_facebook'   => '',
+				'yst_twitter'    => '',
+				'yst_linkedin'   => '',
+				'yst_googleplus' => '',
+				'yst_youtube'    => '',
+				'yst_pinterest'  => '',
+				'yst_rss'        => ''
 		);
 
 		var $defaults_flw = array(
-			'yst_title_flw'      => '',
-			'yst_facebook_flw'   => '',
-			'yst_twitter_flw'    => '',
-			'yst_linkedin_flw'   => '',
-			'yst_googleplus_flw' => '',
-			'yst_youtube_flw'    => '',
-			'yst_pinterest_flw'  => '',
-			'yst_rss_flw'        => '',
+				'yst_title_flw'      => '',
+				'yst_facebook_flw'   => '',
+				'yst_twitter_flw'    => '',
+				'yst_linkedin_flw'   => '',
+				'yst_googleplus_flw' => '',
+				'yst_youtube_flw'    => '',
+				'yst_pinterest_flw'  => '',
+				'yst_rss_flw'        => '',
 		);
 
 		/**
@@ -43,24 +43,24 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 		 */
 		function __construct() {
 			$this->vars = array(
-				'yst_title'      => __( 'Title', 'yoast-theme' ),
-				'yst_facebook'   => __( 'Facebook', 'yoast-theme' ),
-				'yst_twitter'    => __( 'Twitter', 'yoast-theme' ),
-				'yst_linkedin'   => __( 'LinkedIn', 'yoast-theme' ),
-				'yst_googleplus' => __( 'Google+', 'yoast-theme' ),
-				'yst_youtube'    => __( 'YouTube', 'yoast-theme' ),
-				'yst_pinterest'  => __( 'Pinterest', 'yoast-theme' ),
-				'yst_rss'        => __( 'RSS', 'yoast-theme' ),
+					'yst_title'      => __( 'Title', 'yoast-theme' ),
+					'yst_facebook'   => __( 'Facebook', 'yoast-theme' ),
+					'yst_twitter'    => __( 'Twitter', 'yoast-theme' ),
+					'yst_linkedin'   => __( 'LinkedIn', 'yoast-theme' ),
+					'yst_googleplus' => __( 'Google+', 'yoast-theme' ),
+					'yst_youtube'    => __( 'YouTube', 'yoast-theme' ),
+					'yst_pinterest'  => __( 'Pinterest', 'yoast-theme' ),
+					'yst_rss'        => __( 'RSS', 'yoast-theme' ),
 			);
 
 			$this->flw = array(
-				'yst_facebook_flw'   => __( 'Facebook Likes', 'yoast-theme' ),
-				'yst_twitter_flw'    => __( 'Twitter Followers', 'yoast-theme' ),
-				'yst_linkedin_flw'   => __( 'LinkedIn Connections', 'yoast-theme' ),
-				'yst_googleplus_flw' => __( 'Google+ Pluses', 'yoast-theme' ),
-				'yst_youtube_flw'    => __( 'YouTube Subscribers', 'yoast-theme' ),
-				'yst_pinterest_flw'  => __( 'Pinterest Followers', 'yoast-theme' ),
-				'yst_rss_flw'        => __( 'RSS Readers', 'yoast-theme' ),
+					'yst_facebook_flw'   => __( 'Facebook Likes', 'yoast-theme' ),
+					'yst_twitter_flw'    => __( 'Twitter Followers', 'yoast-theme' ),
+					'yst_linkedin_flw'   => __( 'LinkedIn Connections', 'yoast-theme' ),
+					'yst_googleplus_flw' => __( 'Google+ Pluses', 'yoast-theme' ),
+					'yst_youtube_flw'    => __( 'YouTube Subscribers', 'yoast-theme' ),
+					'yst_pinterest_flw'  => __( 'Pinterest Followers', 'yoast-theme' ),
+					'yst_rss_flw'        => __( 'RSS Readers', 'yoast-theme' ),
 			);
 
 			$control_ops = array( 'width' => 300 );
@@ -87,7 +87,7 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 
 			echo '<div id="yst_social_widget">';
 			foreach ( $this->vars as $var => $label ) {
-				if ( isset ( $instance[$var] ) && ! empty ( $instance[$var] ) && (int) $instance[ ($var . '_flw' ) ] > 0 ) {
+				if ( isset ( $instance[$var] ) && ! empty ( $instance[$var] ) ) {
 					switch ( $var ) {
 						case 'yst_facebook':
 							$class = "btn-fb";
@@ -114,16 +114,26 @@ if ( ! class_exists( 'YST_Social_Widget' ) ) {
 							$class = "btn-default";
 					}
 
-					$input_attr = apply_filters('yst_sw_input_attributes', 'name="' . $var . '" ');
+					$input_attr = apply_filters( 'yst_sw_input_attributes', 'name="' . $var . '" ' );
 
 					if ( $var == 'yst_title' ) {
 						continue;
 					} else {
-						if ( $var == 'yst_rss' ) {
-							echo '<div class="' . $class . '"" id="' . $this->get_field_id( $var ) . '"><a href="' . site_url( "feed" ) . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( (int) $instance[( $var . '_flw' )] ) . '</div></div></a></div>';
-						} else {
-							echo '<div class="' . $class . '"" id="' . $this->get_field_id( $var ) . '"><a href="' . $instance[$var] . '" ' . $input_attr . ' alt="' . $label . '" target="_blank"><div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( (int) $instance[( $var . '_flw' )] ) . '</div></div></a></div>';
+
+						// Set the base URL
+						$base_url = $instance[$var];
+
+						// Change the base URL for RSS
+						if ( 'yst_rss' == $var ) {
+							$base_url = site_url( "feed" );
 						}
+
+						// Ouput the button
+						echo '<div class="' . $class . '"" id="' . $this->get_field_id( $var ) . '"><a href="' . $base_url . '" ' . $input_attr . ' alt="' . $label . '" target="_blank">';
+						if ( (int) $instance[( $var . '_flw' )] > 0 ) {
+							echo '<div class="ysw_flw_wrapper"><div class="ysw_flw">' . $this->kformat( (int) $instance[( $var . '_flw' )] ) . '</div></div>';
+						}
+						echo '</a></div>';
 					}
 				}
 			}
