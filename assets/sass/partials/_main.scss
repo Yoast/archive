@@ -2996,7 +2996,6 @@ p.yst-social-readmore {
  * Banner widget
  */
 
-.yst_fb_widget,
 .widget_banner {
 	.widget-title {
 		background: {
@@ -3126,6 +3125,9 @@ p.yst-social-readmore {
 		}
 		word-wrap: break-word;
 	}
+	table {
+    	background-color: transparent;
+  	}
 	.widget-area {
 		width: $d_ThreeEqualColumns;
 		float: left;
