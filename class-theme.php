@@ -5,7 +5,6 @@
  */
 interface iYoast_Theme {
 	public function setup_theme();
-
 	public function comment_callback( $comment, $args, $depth );
 }
 
@@ -39,7 +38,6 @@ abstract class Yoast_Theme implements iYoast_Theme {
 
 		// Load widgets
 		add_action( 'genesis_setup', array( $this, 'load_widgets' ), 15 );
-		//$this->load_widgets();
 
 		// Setup theme basic settings
 		//$this->setup_theme_basic();
@@ -123,6 +121,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		// Integration between Genesis and theme customizer
 		add_filter( 'genesis_pre_get_option_site_layout', array( $this, 'get_site_layout_from_theme_mod' ) );
 		add_action( 'genesis_admin_before_metaboxes', array( $this, 'remove_genesis_settings_boxes' ) );
+		add_filter( 'genesis_site_layout', array( $this, 'set_page_specific_layout') );
 	}
 
 	/**
@@ -189,8 +188,6 @@ abstract class Yoast_Theme implements iYoast_Theme {
 
 	/**
 	 * Comment List Arguments, modify to change the callback function
-	 *
-	 * @todo move this method to Yoast_Theme and add comment_callback to interface so each theme should have it's own comment implementation
 	 *
 	 * @param array $args
 	 *
@@ -269,8 +266,6 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 * sidr takes the HTML from the elements referenced in source and puts them in the left hand menu.
 	 *
 	 * @link http://www.berriart.com/sidr/#documentation
-	 *
-	 * @todo check whether yPos in sticky menu code is the right position to switch.
 	 */
 	public function activate_sidr_and_sticky_menu() {
 		$menu_offset = apply_filters( 'yoast_menu_top_offset', 0 );
@@ -322,13 +317,14 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	}
 
 	/**
+	 * Change the read more link
 	 *
 	 * @todo make sure this has a filter.
 	 *
 	 * @return string
 	 */
 	public function read_more_link() {
-		return '&hellip; <div class="excerpt_readmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>';
+		return apply_filters( 'yoast_read_more', '&hellip; <div class="excerpt_readmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>' );
 	}
 
 	/**
@@ -544,8 +540,6 @@ abstract class Yoast_Theme implements iYoast_Theme {
 
 		/**
 		 * This action allows you to output extra content in a term archive intro section.
-		 *
-		 * @todo Document this hook
 		 */
 		do_action( 'yoast_term_archive_intro' );
 
@@ -568,6 +562,19 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 */
 	public function get_site_layout_from_theme_mod() {
 		return get_theme_mod( 'yst_default_layout' );
+	}
+
+	/**
+	 * Override the layout by page specific layout
+	 *
+	 * @return string
+	 */
+	public function set_page_specific_layout() {
+		global $post;
+		$page_layout = trim( get_post_meta($post->ID, '_genesis_layout', true) );
+		if( '' != $page_layout) {
+			return $page_layout;
+		}
 	}
 
 	/**
