@@ -207,16 +207,6 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	}
 
 	/**
-	 * Fake Genesis into thinking we support a custom header
-	 */
-	public function fake_genesis_custom_header() {
-		global $pagenow;
-		if ( 'admin.php' == $pagenow && isset( $_GET['page'] ) && 'genesis' == $_GET['page'] ) {
-			add_theme_support( 'custom-header' );
-		}
-	}
-
-	/**
 	 * Load editor style
 	 */
 	private function load_editor_style() {
@@ -531,6 +521,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 */
 	public function remove_genesis_settings_boxes() {
 		global $wp_meta_boxes;
+		unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-header'] );
 		unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-layout'] );
 		unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-nav'] );
 		unset( $wp_meta_boxes['toplevel_page_genesis']['main']['default']['genesis-theme-settings-posts'] );
