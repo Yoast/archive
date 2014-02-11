@@ -24,6 +24,7 @@ class Yoast_Vintage extends Yoast_Theme {
 	 */
 	public function setup_theme() {
 
+
 		// Set the content width
 		$this->set_content_width( 680 );
 
