@@ -119,11 +119,6 @@ class Yoast_Versatile extends Yoast_Theme {
 
 		// Close the sidebar wrapper
 		add_action( 'genesis_after_content_sidebar_wrap', array( $this, 'close_div' ) );
-
-		// Fake genesis custom header
-		if ( is_admin() ) {
-			add_action( 'current_screen', array( $this, 'fake_genesis_custom_header' ) );
-		}
 	}
 
 	/**
