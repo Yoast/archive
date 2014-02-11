@@ -757,7 +757,6 @@ textarea {
 		color: $c_navMainBg;
 	}
 	@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
-	@include box-shadow(0px 1px 5px $c_navMainLinkShadow);
   .menu-item {
 		.sub-menu {
 			.menu-item {
@@ -1265,6 +1264,7 @@ body.sticky-menu {
 			color: $c_navMainBg;
 		}
 		@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
+    @include box-shadow(0px 1px 5px $c_navMainLinkShadow);
 		.wrap {
 			width: 100%;
 			max-width: $d_full;
