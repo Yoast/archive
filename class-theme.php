@@ -571,6 +571,11 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 */
 	public function set_page_specific_layout() {
 		global $post;
+
+		if( ! is_object( $post ) ) {
+			return;
+		}
+
 		$page_layout = trim( get_post_meta($post->ID, '_genesis_layout', true) );
 		if( '' != $page_layout) {
 			return $page_layout;
