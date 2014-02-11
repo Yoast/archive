@@ -95,6 +95,12 @@ if ( ! class_exists( 'YST_Sub_Pages_Widget' ) ) {
 				'orderby'     => 'menu_order',
 				'order'       => 'ASC',
 				'meta_query'  => array(
+					'relation' => 'OR',
+					array(
+						'key'     => '_yoast_wpseo_meta-robots-noindex',
+						'value'   => '1', // This is bogus but needed due to a bug in WP_Query
+						'compare' => 'NOT EXISTS'
+					),
 					array(
 						'key'     => '_yoast_wpseo_meta-robots-noindex',
 						'value'   => '1',
