@@ -338,7 +338,13 @@ class Yoast_Vintage extends Yoast_Theme {
 	 * @todo check if this can be moved to base theme
 	 */
 	public function show_tag_line() {
-		echo '<p class="site-description" itemprop="description">' . html_entity_decode( get_bloginfo( 'description' ) ) . '</p>';
+		$tagline = get_bloginfo( 'description' );
+
+		if( empty( $tagline ) ) { 
+			return;
+		}
+
+		echo '<p class="site-description" itemprop="description">' . html_entity_decode( $tagline ) . '</p>';
 	}
 
 	/**
