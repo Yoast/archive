@@ -498,7 +498,7 @@ class Yoast_Versatile extends Yoast_Theme {
 	 * @return array Updated array of classes
 	 */
 	public function add_body_class_for_header_style( $classes ) {
-		$header_style = get_theme_mod( 'yst_header_color_picker', 'light' );
+		$header_style = get_theme_mod( 'yst_header_color_picker', 'dark' );
 
 		if ( 'light' == $header_style ) {
 			$classes[] = 'header-light';
