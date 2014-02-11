@@ -81,7 +81,7 @@ if ( ! class_exists( 'YST_NewsletterSubscription_Widget' ) ) {
 			}
 
 			// Do a separate check on the name
-			if( ( false === $instance['hide_name'] || ! isset( $instance['hide_name'] ) ) && ( ! isset( $instance['name_name'] ) || empty( $instance['name_name'] ) ) ) {
+			if( ( ! isset( $instance['hide_name'] ) || false === $instance['hide_name'] ) && ( ! isset( $instance['name_name'] ) || empty( $instance['name_name'] ) ) ) {
 				return;
 			}
 
