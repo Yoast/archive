@@ -81,7 +81,8 @@ class Yoast_Vintage extends Yoast_Theme {
 		// Check if we should add a back to top link
 		add_action( 'wp_head', array( $this, 'add_back_to_top' ), 14 );
 
-		// Show Tag Line
+		// Move Tag Line
+		remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
 		add_action( 'genesis_header', array( $this, 'show_tag_line' ), 14 );
 
 		// Change news letter button label
