@@ -268,7 +268,6 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 * @link http://www.berriart.com/sidr/#documentation
 	 */
 	public function activate_sidr_and_sticky_menu() {
-		$menu_offset = apply_filters( 'yoast_menu_top_offset', 0 );
 		?>
 		<script type="text/javascript">
 			jQuery(document).ready(function ($) {
@@ -303,14 +302,38 @@ abstract class Yoast_Theme implements iYoast_Theme {
 					coverScreen: true,
 					side       : 'right'
 				});
-				$(window).scroll(function () {
-					var yPos = ( $(window).scrollTop() );
-					if (yPos > <?php echo $menu_offset; ?>) {
-						$("body").addClass("sticky-menu");
-					} else {
-						$("body").removeClass("sticky-menu");
+				
+				// give elements a chance to load to reliably calculate menu offset
+				$(window).load(function() {
+					var $primaryNav = $(".nav-primary");
+				 
+					if($primaryNav.length > 0) {
+						var primaryNavHeight = $primaryNav.outerHeight();
+						var menuOffset = $primaryNav.offset().top;
+				 
+						$(window).scroll(function () {
+							
+							var pageHeight = $(document).height();
+							var windowHeight = $(window).height();
+				 
+							if( pageHeight <= windowHeight ) { 
+								return; 
+							}
+				 
+							var yPos = $(window).scrollTop();
+							if($("body").hasClass('sticky-menu')) {
+								yPos += primaryNavHeight;
+							}
+							
+							if (yPos > menuOffset) {
+								$("body").addClass("sticky-menu");
+							} else {
+								$("body").removeClass("sticky-menu");
+							}
+						});
 					}
 				});
+
 			});
 		</script>
 	<?php
