@@ -155,7 +155,8 @@ class Yoast_Theme_License {
 						'version'        => $this->theme_version, // The current theme version we are running
 						'license'        => $this->get_license_key(), // The license key (used get_option above to retrieve from DB)
 						'item_name'      => $this->theme_name, // The name of this theme
-						'author'         => 'Yoast'
+						'author'         => 'Yoast',
+						'theme_slug'     => sanitize_title_with_dashes( $this->theme_name )
 				)
 		);
 
@@ -177,7 +178,7 @@ class Yoast_Theme_License {
 
 			// Only continue is the posted license key is different than the current license key
 			if ( $this->get_license_key() != $_POST['yoast_theme_license_key'] ) {
-				if( $this->activate_license( $_POST['yoast_theme_license_key'] ) ) {
+				if ( $this->activate_license( $_POST['yoast_theme_license_key'] ) ) {
 					remove_action( 'admin_init', array( $this, 'check_display_admin_notice' ) );
 				}
 			}
