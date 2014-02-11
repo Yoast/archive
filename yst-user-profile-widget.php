@@ -63,7 +63,7 @@ if ( ! class_exists( 'YST_User_Profile_Widget' ) ) {
 			);
 
 			//$this->WP_Widget( 'widget-yst-up', __( 'Yoast &mdash; User Profile', 'yoast-theme' ), $widget_ops );
-			parent::__construct( 'yst-user-profile', __( 'Yoast - Extended User Profile', 'yoast-theme' ), $widget_ops, $control_ops );
+			parent::__construct( 'yst-user-profile', __( 'Yoast &mdash; Extended User Profile', 'yoast-theme' ), $widget_ops, $control_ops );
 		}
 
 		/**
