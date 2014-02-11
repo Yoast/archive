@@ -16,18 +16,13 @@ class Yoast_Versatile extends Yoast_Theme {
 	 * Constructor
 	 */
 	public function __construct() {
-		parent::__construct();
+		parent::__construct( self::NAME, self::URL, self::VERSION );
 	}
 
 	/**
 	 * Setup the theme
 	 */
 	public function setup_theme() {
-
-		// Set the theme properties
-		$this->set_name( self::NAME );
-		$this->set_url( self::URL );
-		$this->set_version( self::VERSION );
 
 		// Set the content width
 		$this->set_content_width( 680 );
@@ -85,9 +80,6 @@ class Yoast_Versatile extends Yoast_Theme {
 		// Change image output
 		remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
 		add_action( 'genesis_entry_content', array( $this, 'archive_image' ), 8 );
-
-		// Display the image on a single page
-		add_action( 'genesis_before_entry_content', array( $this, 'display_single_image' ) );
 
 		// Display search box in header
 		add_action( 'genesis_header_right', array( $this, 'header_search' ) );
@@ -338,39 +330,6 @@ class Yoast_Versatile extends Yoast_Theme {
 		);
 
 		printf( '<a href="%s" title="%s" class="yst-archive-image-link">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
-	}
-
-	/**
-	 * Displays the single image
-	 */
-	public function display_single_image() {
-		global $post;
-
-		// Only on single
-		if ( ! is_single() ) {
-			return;
-		}
-
-		// Only when we have a thumbnail
-		if ( ! has_post_thumbnail() ) {
-			return;
-		}
-
-		// Set correct image alignment
-		$align = 'left';
-		if ( 'sidebar-content' == genesis_site_layout() ) {
-			$align = 'right';
-		}
-
-		//setup thumbnail image args to be used with genesis_get_image();
-		$size         = 'yst-archive-thumb'; // Change this to whatever add_image_size you want
-		$default_attr = array(
-				'class' => "yst-single-image attachment-{$size} {$size}",
-				'alt'   => $post->post_title,
-				'title' => $post->post_title,
-		);
-
-		echo genesis_get_image( array( 'size' => 'yst-single', 'attr' => $default_attr ) );
 	}
 
 	/**
