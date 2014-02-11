@@ -400,7 +400,7 @@ header {
     }
     min-height: 80px;
     width: $d_headerLogo;
-    position: relative;
+    position: static;
   }
   .site-description {
     display: none;
