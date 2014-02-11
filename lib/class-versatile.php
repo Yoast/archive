@@ -87,6 +87,9 @@ class Yoast_Versatile extends Yoast_Theme {
 		// Adds class to the body-element. Used in mobile menu.
 		add_action( 'body_class', array( $this, 'add_body_class_for_tagline' ) );
 
+		// remove duplicate tag line
+		remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
+
 		// Check if we should display the tag line
 		add_action( 'genesis_before', array( $this, 'check_tag_line' ) );
 
