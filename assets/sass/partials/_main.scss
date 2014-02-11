@@ -738,7 +738,7 @@ textarea {
       background: {
         color: $c_navMainLinkBgHover;
       }
-      text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+      //text-shadow: 1px 1px 1px $c_navMainLinkShadow;
       position: static;
     }
   }
@@ -747,7 +747,7 @@ textarea {
   .current-menu-ancestor {
     > a {
       color: $c_navSubLink;
-      text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+      //text-shadow: 1px 1px 1px $c_navMainLinkShadow;
       background: {
         color: $c_navMainBgActive;
       }
@@ -773,7 +773,7 @@ textarea {
         color: $c_navSubBg;
       }
       color: $c_navSubLink;
-      text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+      //text-shadow: 1px 1px 1px $c_navMainLinkShadow;
       border: {
         width: 0 0 1px;
         style: solid;
