@@ -34,6 +34,9 @@ class Yoast_Vintage extends Yoast_Theme {
 		// Set the menu top offset
 		add_filter( 'yoast_menu_top_offset', array( $this, 'set_menu_top_offset' ) );
 
+		// This theme supports custom headers
+		add_theme_support( 'custom_header' );
+
 		// Set custom header
 		$this->set_custom_header();
 
