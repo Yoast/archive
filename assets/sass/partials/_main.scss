@@ -400,20 +400,21 @@ header {
     }
     min-height: 80px;
     width: $d_headerLogo;
-    position: static;
+    position: relative;
   }
   .site-description {
     display: none;
   }
   .site-title {
     text-indent: -9999px;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
     a {
       width: 100%;
       height: 100%;
       display:block;
-      position: absolute;
-      top: 0;
-      left: 0;
     }
   }
   section.widget {
