@@ -107,6 +107,11 @@ if ( ! class_exists( 'YST_Banner_Widget' ) ) {
 			}
 			$out = '<img ';
 			if ( ( isset ( $instance['image_width'] ) && ! empty( $instance['image_width'] ) ) || ( isset ( $instance['image_height'] ) && ! empty( $instance['image_height'] ) ) ) {
+
+				if ( ! isset( $instance['size_type'] ) ) {
+					$instance['size_type'] = 'px';
+				}
+				
 				$out .= 'style="';
 				if ( ! empty( $instance['image_width'] ) ) {
 					$out .= 'width:' . $instance['image_width'] . ( $instance['size_type'] == 'perc' ? '%' : 'px' ) . '; ';
