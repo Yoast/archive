@@ -155,7 +155,7 @@ class Yoast_Vintage extends Yoast_Theme {
 				'width'           => 940,
 				'height'          => 280,
 				'flex-height'     => true,
-				'header_image'    => get_stylesheet_directory_uri() . '/assets/images/macarons2.jpg',
+				'header_image'    => get_stylesheet_directory_uri() . '/assets/images/header-vintage.png',
 				'uploads'         => true,
 				'no_header_text'  => true,
 				'header_callback' => '__return_true',
