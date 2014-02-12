@@ -33,6 +33,14 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		$this->url     = $url;
 		$this->version = $version;
 
+		if ( ! defined( 'CHILD_THEME_NAME' ) ) {
+			define( 'CHILD_THEME_NAME', $this->name );
+		}
+
+		if ( ! defined( 'CHILD_THEME_URL' ) ) {
+			define( 'CHILD_THEME_URL', $this->url );
+		}
+
 		// Setup autoloader
 		spl_autoload_register( array( $this, 'autoload' ) );
 
