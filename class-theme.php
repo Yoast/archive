@@ -122,6 +122,9 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		add_filter( 'genesis_pre_get_option_site_layout', array( $this, 'get_site_layout_from_theme_mod' ) );
 		add_action( 'genesis_admin_before_metaboxes', array( $this, 'remove_genesis_settings_boxes' ) );
 		add_filter( 'genesis_site_layout', array( $this, 'set_page_specific_layout') );
+
+		// Change Genesis favicon to Yoast
+		add_filter( 'genesis_favicon_url', array( $this, 'change_favicon_url' ) );
 	}
 
 	/**
@@ -239,6 +242,17 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		if ( wp_style_is( 'gforms_browsers_css', $list = 'enqueued' ) || wp_style_is( 'contact-form-7', $list = 'enqueued' ) ) {
 			wp_enqueue_style( 'yst-form-style', get_stylesheet_directory_uri() . '/assets/css/forms.css' );
 		}
+	}
+
+	/**
+	 * Replace the favicon with a Yoast favicon
+	 *
+	 * @param string $favicon_url
+	 *
+	 * @return string $favicon_url
+	 */
+	public function change_favicon_url( $favicon_url ) {
+		return get_stylesheet_directory_uri() . '/lib/framework/assets/images/favicon.ico';
 	}
 
 	/**
