@@ -166,7 +166,7 @@ class Yoast_Theme_Customizer {
 		$wp_customize->add_setting(
 				'yst_footer',
 				array(
-						'default'   => sprintf( '[footer_copyright before="%s "] &#x000B7; [footer_childtheme_link before="" after=" %s"] Genesis &#x000B7; [footer_wordpress_link] &#x000B7;', __( 'Copyright', 'genesis' ), __( 'on', 'genesis' ) ),
+						'default'   => sprintf( '[footer_copyright before="%s "] &#x000B7; [footer_childtheme_link before="" after=" %s"] Genesis &#x000B7; [footer_wordpress_link]', __( 'Copyright', 'genesis' ), __( 'on', 'genesis' ) ),
 						'transport' => 'refresh'
 				)
 		);
