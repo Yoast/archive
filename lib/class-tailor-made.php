@@ -10,7 +10,7 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 
 	const NAME    = 'Tailor Made';
 	const URL     = 'http://yoast.com/wordpress/themes/tailor-made/';
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1';
 
 	/**
 	 * Constructor
