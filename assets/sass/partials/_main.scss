@@ -1162,7 +1162,16 @@ textarea {
         right: 50px;
       }
     }
+    &.no-tagline:before, 
+    &.no-tagline:after { 
+    	background: none;
+    	padding{
+    		left: 0;
+    		right: 0;
+    	}
+    }
   }
+
   &.logo-frame {
     background: {
       position: 50% 237px;

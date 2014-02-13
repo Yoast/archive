@@ -340,11 +340,9 @@ class Yoast_Vintage extends Yoast_Theme {
 	public function show_tag_line() {
 		$tagline = get_bloginfo( 'description' );
 
-		if( empty( $tagline ) ) { 
-			return;
-		}
+		$class = ( empty( $tagline ) ) ? 'site-description no-tagline' : 'site-description';
 
-		echo '<p class="site-description" itemprop="description">' . html_entity_decode( $tagline ) . '</p>';
+		echo '<p class="'. $class .'" itemprop="description">' . html_entity_decode( $tagline ) . '</p>';
 	}
 
 	/**
