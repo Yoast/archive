@@ -1214,38 +1214,6 @@ body.sticky-menu {
       color: $c_mainBg;
     }
   }
-  .site-header {
-    position: absolute;
-    position: fixed;
-    top: 0;
-    z-index: 400;
-    height: 44px;
-    .wrap {
-      padding: 0;
-    }
-    min-height: 0;
-    aside,
-    #yoast-top-right {
-      display: none;
-      visibility: hidden;
-    }
-    .title-area {
-      background: none !important;
-      position: fixed;
-      top: 0;
-      padding: 0;
-      margin: 0;
-      z-index: 600;
-      width: 0;
-      height: 0;
-      .site-title {
-        a {
-          width:0;
-          height:0
-        }
-      }
-    }
-  }
   .nav-primary {
     position: absolute;
     position: fixed;
