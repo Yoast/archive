@@ -83,11 +83,6 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 
 		// Add top right widget area (for search widget)
 		add_action( 'genesis_header', array( $this, 'add_top_right_area' ) );
-
-		// Fake Genesis Custom Header
-		if ( is_admin() ) {
-			add_action( 'current_screen', array($this, 'fake_genesis_custom_header' ) );
-		}
 	}
 
 	/**
