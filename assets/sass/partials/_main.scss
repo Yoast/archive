@@ -2159,10 +2159,16 @@ table {
         size: $f_comment;
         weight: 700;
       }
+      margin: {
+        right: 2%;
+      }
+      img {
+        max-width: 100%;
+      }
     }
     .comment-content {
       float: left;
-      width: 80%;
+      width: 82%;
     }
     &.depth-2,
     &.depth-3,
@@ -2172,8 +2178,7 @@ table {
         left: 25px;
       }
       div.avatar {
-        width: 15%;
-        height: auto;
+        width: 13%;
       }
       .comment-content {
         width: 85%;
