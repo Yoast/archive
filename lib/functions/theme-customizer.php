@@ -43,6 +43,7 @@ class Yoast_Theme_Customizer {
 		// For some stupid reason, core doesn't define the ajaxurl in the preview page, so we can't do AJAX in the preview customize script unless we do define it.
 		echo "<script>\n
 		var ajaxurl = '" . admin_url( 'admin-ajax.php', 'relative' ) . "';\n
+		var yoast_child_theme_name = '" . strtolower( CHILD_THEME_NAME ) . "';
 		var yoast_ajax_nonce = '" . wp_create_nonce( 'yoast_ajax_nonce' ) . "';\n
 </script>";
 	}
