@@ -10,7 +10,7 @@ class Yoast_Vintage extends Yoast_Theme {
 
 	const NAME    = 'Vintage';
 	const URL     = 'http://yoast.com/wordpress/themes/vintage/';
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1';
 
 	/**
 	 * Constructor
