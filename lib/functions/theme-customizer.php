@@ -22,6 +22,19 @@ class Yoast_Theme_Customizer {
 
 		// Add customizer ajax hook - Update image details
 		add_action( 'customize_save_after', array( $this, 'update_image_details' ), 1 );
+
+		// Hook theme customizer AJAX update
+		add_action( 'wp_ajax_yst_footer_update', array( $this, 'ajax_footer_update_callback' ) );
+	}
+
+	/**
+	 * Run the new footer through do_shortcode to get the actual text and return it.
+	 */
+	function ajax_footer_update_callback() {
+		check_ajax_referer( 'yoast_ajax_nonce', 'nonce' );
+
+		echo do_shortcode( stripslashes( $_POST['footer'] ) );
+		die();
 	}
 
 	/**
@@ -29,6 +42,13 @@ class Yoast_Theme_Customizer {
 	 */
 	public function enqueue() {
 		wp_enqueue_script( 'yst-theme-customizer', get_stylesheet_directory_uri() . '/lib/js/theme-customizer.js?v=' . filemtime( get_stylesheet_directory() . '/lib/js/theme-customizer.js' ), array( 'jquery', 'customize-preview' ), '0.1', true );
+
+		// For some stupid reason, core doesn't define the ajaxurl in the preview page, so we can't do AJAX in the preview customize script unless we do define it.
+		echo "<script>\n
+		var ajaxurl = '" . admin_url( 'admin-ajax.php', 'relative' ) . "';\n
+		var yoast_child_theme_name = '" . strtolower( CHILD_THEME_NAME ) . "';
+		var yoast_ajax_nonce = '" . wp_create_nonce( 'yoast_ajax_nonce' ) . "';\n
+</script>";
 	}
 
 	/**
@@ -167,7 +187,7 @@ class Yoast_Theme_Customizer {
 				'yst_footer',
 				array(
 						'default'   => sprintf( '[footer_copyright before="%s "] &#x000B7; [footer_childtheme_link before="" after=" %s"] Genesis &#x000B7; [footer_wordpress_link]', __( 'Copyright', 'genesis' ), __( 'on', 'genesis' ) ),
-						'transport' => 'refresh'
+						'transport' => 'postMessage'
 				)
 		);
 
