@@ -10,7 +10,7 @@ class Yoast_Versatile extends Yoast_Theme {
 
 	const NAME    = 'Versatile';
 	const URL     = 'http://yoast.com/wordpress/themes/versatile/';
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1';
 
 	/**
 	 * Constructor
