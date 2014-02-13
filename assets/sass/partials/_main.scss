@@ -398,7 +398,8 @@ header {
       family: $f_baseFont;
       weight: 700;
     }
-    min-height: 80px;
+    
+    height: 80px;
     width: $d_headerLogo;
   }
   .site-description {
