@@ -10,19 +10,19 @@ $f_codeFont:            'Courier New', Courier, serif;
 $f_main-px:             16px;
 $f_main:                1rem;
 
-$f_taglineTop-px:       20px;
-$f_taglineTop:          1.25rem;
+$f_taglineTop-px:       24px;
+$f_taglineTop:          1.5rem;
 $f_taglineFullWidth-px: 26px;
 $f_taglineFullWidth:    1.625rem;
 
-$f_breadcrumbs-px:      14px;
-$f_breadcrumbs:         0.875rem;
+$f_breadcrumbs-px:      16px;
+$f_breadcrumbs:         1rem;
 
 $f_metaAtPost-px:       14px;
 $f_metaAtPost:          0.875rem;
 
-$f_pagenav-px:          14px;
-$f_pagenav:             0.875rem;
+$f_pagenav-px:          18px;
+$f_pagenav:             1.125rem;
 
 $f_linkToArchives-px:   20px;
 $f_linkToArchives:      1.25rem;
@@ -45,11 +45,6 @@ $f_navMainLink:         1.125rem;
 $f_navSubLink-px:       14px;
 $f_navSubLink:          0.875rem;
 
-// mobile menu
-//$sidr-font-family:      'lucida grande',tahoma,verdana,arial,sans-serif;
-//$sidr-font-size-px:     $f_main-px;
-//$sidr-font-size:        $f_main;
-
 // main content
 $f_H1Font:              $f_baseFont;
 $f_H2Font:              $f_baseFont;
@@ -57,25 +52,42 @@ $f_H3Font:              $f_baseFont;
 $f_H4Font:              $f_baseFont;
 $f_H5Font:              $f_baseFont;
 $f_H6Font:              $f_baseFont;
-$f_mainH1-px:           32px;
-$f_mainH1:              2.0rem;
-$f_mainH2-px:           28px;
+
+// H1
+$f_mainH1-px:           25px;
+$f_mainH1:              1.5625rem;
+
+// H2
+$f_mainH2-px:           22px;
 $f_mainH2:              1.75rem;
-$f_mainH3-px:           24px;
-$f_mainH3:              1.5rem;
-$f_mainH4-px:           20px;
-$f_mainH4:              1.25rem;
-$f_mainH5-px:           20px;
-$f_mainH5:              1.25rem;
+
+// H3
+$f_mainH3-px:           20px;
+$f_mainH3:              1.25rem;
+
+// H4
+$f_mainH4-px:           18px;
+$f_mainH4:              1.125rem;
+
+// H5
+$f_mainH5-px:           16px;
+$f_mainH5:              1rem;
+
+//H6
 $f_mainH6-px:           16px;
 $f_mainH6:              1rem;
 
+// Sidebar
 $f_sidebarH1-px:        20px;
 $f_sidebarH1:           1.25rem;
 $f_sidebarH2-px:        20px;
 $f_sidebarH2:           1.25rem;
 $f_sidebarH3-px:        20px;
 $f_sidebarH3:           1.25rem;
+$f_sidebarH4-px:        18px;
+$f_sidebarH4:           1.125rem;
+$f_sidebarLabel-px:     16px;
+$f_sidebarLabel:        1.0rem;
 
 // table
 $f_table-px:             16px;
@@ -88,20 +100,14 @@ $f_blockquoteBefore-px: 30px;
 $f_blockquoteBefore:    1.875rem;
 
 // input
-$f_inputText-px:        14px;
-$f_inputText:           0.875rem;
+$f_inputText-px:        15px;
+$f_inputText:           0.9375rem;
 
 // call-to-action
 $f_ctaText-px:          24px;
-$f_ctaText:             1.5rem;
-
-// sidebar
-$f_sidebarH3-px:        20px;
-$f_sidebarH3:           1.25rem;
-$f_sidebarH4-px:        20px;
-$f_sidebarH4:           1.25rem;
-$f_sidebarLabel-px:     16px;
-$f_sidebarLabel:        1.0rem;
+$f_ctaText:          		1.5rem;
+$f_ctaAfterHeader-px:		18px;
+$f_ctaAfterHeader:			1.125rem;
 
 // footer
 $f_footerBaseFont-px:   14px;
