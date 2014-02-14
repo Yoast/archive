@@ -44,8 +44,18 @@ class YST_Facebook_Widget extends WP_Widget {
 
 		$widget_ops = array( 'classname' => 'yst_fb_widget', 'description' => __( 'Yoast Facebook Widget: Easily add a Facebook Like-box to your widgets!', 'yoast-theme' ) );
 		$this->WP_Widget( 'widget-yst-fb', __( 'Yoast &mdash; Facebook', 'yoast-theme' ), $widget_ops );
+		
 
-		add_action( 'get_header', array( $this, 'output_fb_root_div' ), 1 );
+		// check if this widget is displayed on the frontend
+		if ( is_active_widget( false, false, $this->id_base, true ) ) {
+
+			// output <div id="fb-root"></div> right after opening body tag
+			add_action( 'genesis_before', array( $this, 'output_fb_root_div' ), 1 );
+
+			// output facebook script loader in footer
+			add_action( 'wp_footer', array( $this, 'output_fb_script' ), 11 );		
+		}
+		
 	}
 
 	/**
@@ -200,8 +210,6 @@ class YST_Facebook_Widget extends WP_Widget {
 				return;
 			}
 		}
-
-		add_action( 'wp_footer', array( $this, 'output_fb_script' ) );
 
 		echo $args['before_widget'];
 
