@@ -44,6 +44,8 @@ class YST_Facebook_Widget extends WP_Widget {
 
 		$widget_ops = array( 'classname' => 'yst_fb_widget', 'description' => __( 'Yoast Facebook Widget: Easily add a Facebook Like-box to your widgets!', 'yoast-theme' ) );
 		$this->WP_Widget( 'widget-yst-fb', __( 'Yoast &mdash; Facebook', 'yoast-theme' ), $widget_ops );
+
+		add_action( 'get_header', array( $this, 'output_fb_root_div' ), 1 );
 	}
 
 	/**
@@ -71,7 +73,7 @@ class YST_Facebook_Widget extends WP_Widget {
 			}
 			else if ( $var == 'data_href' ) {
 				echo $label;
-				echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . esc_html( $instance[$var] ) . '" />';
+				echo '<input class="widefat" ' . $input_attr . ' type="text" value="' . esc_html( $instance[$var] ) . '" placeholder="' . esc_attr( $this->defaults['data_href'] ) . '" />';
 			}
 			else if ( $var == 'data_colorscheme' ) {
 				echo $label;
@@ -160,8 +162,8 @@ class YST_Facebook_Widget extends WP_Widget {
 	 *
 	 * @since 1.0.0
 	 */
-	function yst_add_fb_widget_root_div() {
-		echo '<div id="fb-root"></div>';
+	function output_fb_root_div() {
+		?><div id="fb-root"></div><?php
 	}
 
 	/**
@@ -169,15 +171,14 @@ class YST_Facebook_Widget extends WP_Widget {
 	 *
 	 * @since 1.0.0
 	 */
-	function yst_add_fb_widget_script() {
-		echo '<script>(function (d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s);
-				js.id = id;
-				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-				fjs.parentNode.insertBefore(js, fjs);
-			}(document, \'script\', \'facebook-jssdk\'));</script>';
+	function output_fb_script() {
+		?><script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script><?php
 	}
 
 	/**
@@ -192,6 +193,7 @@ class YST_Facebook_Widget extends WP_Widget {
 	 *
 	 */
 	function widget( $args, $instance ) {
+
 		foreach ( $this->labels as $var => $label ) {
 			if ( ! isset ( $instance[$var] ) || ( $instance[$var] != false && empty ( $instance[$var] ) ) ) {
 				echo '<p class="widget widget-error">' . __( 'Please fill in the details of the Yoast Facebook Widget', 'yoast-theme' ) . '</p>';
@@ -199,8 +201,7 @@ class YST_Facebook_Widget extends WP_Widget {
 			}
 		}
 
-		add_action( 'genesis_before_header', array( $this, 'yst_add_fb_widget_root_div' ) );
-		add_action( 'wp_footer', array( $this, 'yst_add_fb_widget_script' ) );
+		add_action( 'wp_footer', array( $this, 'output_fb_script' ) );
 
 		echo $args['before_widget'];
 
@@ -222,7 +223,7 @@ class YST_Facebook_Widget extends WP_Widget {
 				data-href="<?php echo esc_url( $instance['data_href'] ); ?>"
 				data-width="<?php echo absint( $instance['data_width'] ); ?>"
 				data-height="<?php echo absint( $instance['data_height'] ); ?>"
-				data-colorscheme="<?php echo strip_tags( $instance['data_colorscheme'] ); ?>"
+				data-colorscheme="<?php echo esc_attr( $instance['data_colorscheme'] ); ?>"
 				data-show-faces="<?php echo( $instance['data_show_faces'] == true ? 'true' : 'false' ); ?>"
 				data-header="<?php echo( $instance['data_header'] == true ? 'true' : 'false' ); ?>"
 				data-stream="<?php echo( $instance['data_stream'] == true ? 'true' : 'false' ); ?>"
