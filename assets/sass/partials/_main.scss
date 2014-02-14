@@ -376,11 +376,6 @@ header {
       margin-bottom:10px;
     }
   }
-  #yoast-top-right {
-    margin: {
-      bottom: 10px;
-    }
-  }
   .widget-title {
     display:none;
     visibility:hidden;
@@ -1101,8 +1096,7 @@ body.sticky-menu {
     .wrap {
       padding: 0;
     }
-    aside,
-    #yoast-top-right {
+    aside {
       display: none;
       visibility: hidden;
     }
@@ -1542,7 +1536,18 @@ table {
     bottom: 1px solid $c_hrLine;
   }
 }
-.single { // reduce whitespace below back-to-top for single()
+.category {
+	.content {
+		max-width: $d_categoryMainColumn;
+	}
+}
+
+.single {
+	.content {
+		max-width: $d_categoryMainColumn;
+	}
+
+	// reduce whitespace below back-to-top for single()
   .post {
     padding: {
       bottom:0;
@@ -1558,10 +1563,8 @@ table {
   }
 }
 .full-width-content {
-
   &.home .entry-content {
-    width: $d_mainContent;
-    padding-right: 15px;
+    width: $d_fullwidthMainColumn;
     float: left;
     p, .excerpt_readmore {
       width: 100%; max-width: 100%;
@@ -2915,14 +2918,11 @@ table {
   }
   .footer-widgets-2 {
     margin: {
-      left: 60px;
-      right: 60px;
+      left: 45px;
+      right: 45px;
     }
   }
   .footer-widgets-3 {
-    margin: {
-      right: 60px;
-    }
   }
   .widget {
     margin-bottom: 24px;
@@ -3198,8 +3198,7 @@ img#wpstats {
         min-height:140px;
       }
     }
-    .header-widget-area,
-    #yoast-top-right {
+    .header-widget-area {
       padding: {
         right:20px;
       }
@@ -3422,8 +3421,7 @@ img#wpstats {
       top: 0;
       width:100%;
       .title-area,
-      .header-widget-area,
-      #yoast-top-right {
+      .header-widget-area {
         display:none;
         visibility:hidden;
       }

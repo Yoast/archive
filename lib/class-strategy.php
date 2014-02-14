@@ -94,11 +94,6 @@ class Yoast_Strategy extends Yoast_Theme {
 	 * Register widget area's
 	 */
 	public function register_sidebars() {
-		genesis_register_sidebar( array(
-			'id'          => 'yoast-top-right',
-			'name'        => __( 'Search', 'yoast-theme' ),
-			'description' => __( 'Search widget area. Intended for search widget. Changes drastically on mobile.', 'yoast-theme' ),
-		) );
 
 		genesis_register_sidebar( array(
 			'id'          => 'yoast-after-header-1',
@@ -307,16 +302,6 @@ class Yoast_Strategy extends Yoast_Theme {
 	 */
 	public function load_google_fonts() {
 		wp_enqueue_style( 'google-font-quattrocento_sans', '//fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic);', array(), $this->get_version() );
-	}
-
-	/**
-	 * Add top-right widget area for search-widget
-	 */
-	public function add_top_right_area() {
-		genesis_widget_area( 'yoast-top-right', array(
-			'before' => '<div id="yoast-top-right" class="widget-area yoast-top-right-widget">',
-			'after'  => '</div>',
-		) );
 	}
 
 	/**
