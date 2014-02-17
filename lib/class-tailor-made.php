@@ -69,9 +69,9 @@ class Yoast_Tailor_Made extends Yoast_Theme {
 		add_action( 'wp_head', array( $this, 'conditional_add_back_to_top_link' ), 14 );
 
 		// Add conditional comments (ie)
-	  add_action( 'wp_head', array( $this, 'conditional_comments' ) );
+	  	add_action( 'wp_head', array( $this, 'conditional_comments' ) );
 
-	  // Add support for yoast after header widget
+	  	// Add support for yoast after header widget
 		add_action( 'genesis_after_header', array( $this, 'after_header_genesis' ) );
 
 		// Conditionally add full width sidebars
