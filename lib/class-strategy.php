@@ -32,6 +32,7 @@ class Yoast_Strategy extends Yoast_Theme {
 
 		// Add support for 3-column footer widgets
 		add_theme_support( 'genesis-footer-widgets', 3 );
+		//add_theme_support( 'genesis-connect-woocommerce' );
 
 		// Disable site layouts that must not be used
 		genesis_unregister_layout( 'content-sidebar-sidebar' );
@@ -81,13 +82,8 @@ class Yoast_Strategy extends Yoast_Theme {
 		add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 		remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 
-		// Add top right widget area (for search widget)
-		add_action( 'genesis_header', array( $this, 'add_top_right_area' ) );
-
-		// Fake Genesis Custom Header
-		if ( is_admin() ) {
-			add_action( 'current_screen', array( $this, 'fake_genesis_custom_header' ) );
-		}
+		// Show menubar at the set position
+		add_action( 'wp_head', array( $this, 'show_primary_nav' ) );
 	}
 
 	/**
@@ -437,5 +433,15 @@ class Yoast_Strategy extends Yoast_Theme {
 		return $img;
 	}
 
-
+	/**
+	 * Show menu bar
+	 *
+	 * @since 1.0
+	 */
+	public function show_primary_nav() {
+		if ( 'topright' == get_theme_mod( 'yst_primary_nav_position' ) ) {
+			remove_action( 'genesis_after_header', 'genesis_do_nav' );
+			add_action( 'genesis_header_right', 'genesis_do_nav' );
+		}
+	}
 }

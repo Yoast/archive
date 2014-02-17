@@ -71,6 +71,22 @@ class Yoast_Theme_Customizer {
 		 * Add settings
 		 */
 		$wp_customize->add_setting(
+			'yst_primary_nav_position',
+			array(
+				'default'   => 'topright',
+				'transport' => 'postMessage'
+			)
+		);
+
+		$wp_customize->add_setting(
+			'yst_tagline_positioner',
+			array(
+				'default'   => 'top_right',
+				'transport' => 'postMessage'
+			)
+		);
+
+		$wp_customize->add_setting(
 				'yst_colour_scheme',
 				array(
 						'default'   => 'GreenBright',
@@ -353,6 +369,20 @@ class Yoast_Theme_Customizer {
 				$colours[$matches[1]] = trim( preg_replace( '/([A-Z])/', ' $1', $matches[1] ) );
 			}
 		}
+
+		// This control goes into the default Navigation section
+		$wp_customize->add_control(
+			'yst_primary_nav_position',
+			array(
+				'section' => 'nav',
+				'label'   => __( 'Location of primary navigation', 'yoast-theme' ),
+				'type'    => 'radio',
+				'choices' => array(
+					'topright'     => __( 'Show on the top-right', 'genesis' ),
+					'centerleft' => __( 'Show below the logo', 'genesis' ),
+				)
+			)
+		);
 
 		// This control goes into the default Color section
 		$wp_customize->add_control(
