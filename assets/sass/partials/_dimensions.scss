@@ -1,13 +1,13 @@
 // Dimensions for Strategy
 $d_full:                    990px;
+$d_contentColumn:						580px;
 $d_homepageMainColumn:      620px;
-$d_categoryMainColumn:			580px;
+$d_categoryMainColumn:			$d_contentColumn;
+$d_singleMainColumn:				$d_contentColumn;
 $d_fullwidthMainColumn:			620px;
 $d_headerLogo:              300px;
 $d_headerAside:             645px;
 $d_sidebar:                 300px;
-$d_mainColumn:              645px;
-$d_mainContent:             645px;
 $d_columnOne:               300px;
 $d_columnTwo:               300px;
 $d_ThreeEqualColumns:       300px;

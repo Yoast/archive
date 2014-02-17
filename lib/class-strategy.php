@@ -63,15 +63,15 @@ class Yoast_Strategy extends Yoast_Theme {
 		add_filter( 'yst_default_color_scheme', array( $this, 'set_default_color_scheme' ) );
 
 		// Display logo
-		add_action( 'wp_head', array( $this, 'display_logo') );
+		add_action( 'wp_head', array( $this, 'display_logo' ) );
 
 		// Add back to top link (conditional)
 		add_action( 'wp_head', array( $this, 'conditional_add_back_to_top_link' ), 14 );
 
 		// Add conditional comments (ie)
-	  add_action( 'wp_head', array( $this, 'conditional_comments' ) );
+		add_action( 'wp_head', array( $this, 'conditional_comments' ) );
 
-	  // Add support for yoast after header widget
+		// Add support for yoast after header widget
 		add_action( 'genesis_after_header', array( $this, 'after_header_genesis' ) );
 
 		// Conditionally add full width sidebars
@@ -86,7 +86,7 @@ class Yoast_Strategy extends Yoast_Theme {
 
 		// Fake Genesis Custom Header
 		if ( is_admin() ) {
-			add_action( 'current_screen', array($this, 'fake_genesis_custom_header' ) );
+			add_action( 'current_screen', array( $this, 'fake_genesis_custom_header' ) );
 		}
 	}
 
@@ -166,9 +166,9 @@ class Yoast_Strategy extends Yoast_Theme {
 		//setup thumbnail image args to be used with genesis_get_image();
 		$size         = 'yst-archive-thumb'; // Change this to whatever add_image_size you want
 		$default_attr = array(
-				'class' => "align{$align} attachment-{$size} {$size}",
-				'alt'   => $post->post_title,
-				'title' => $post->post_title,
+			'class' => "align{$align} attachment-{$size} {$size}",
+			'alt'   => $post->post_title,
+			'title' => $post->post_title,
 		);
 
 		printf( '<a href="%s" title="%s" class="yst-archive-image-link">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
@@ -183,68 +183,68 @@ class Yoast_Strategy extends Yoast_Theme {
 	 *
 	 * @todo create a template partial containing this HTML block
 	 */
-	public function comment_callback($comment, $args, $depth) {
+	public function comment_callback( $comment, $args, $depth ) {
 		global $post;
 		$GLOBALS['comment'] = $comment; ?>
 
-		<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
-			<article <?php echo genesis_attr( 'comment' ); ?>>
+	<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+		<article <?php echo genesis_attr( 'comment' ); ?>>
 
-				<?php do_action( 'genesis_before_comment' ); ?>
+			<?php do_action( 'genesis_before_comment' ); ?>
 
-				<header class="comment-header">
-					<p <?php echo genesis_attr( 'comment-author' ); ?>>
-						<?php
-
-						$author = get_comment_author();
-						$url = get_comment_author_url();
-
-						if ( ! empty( $url ) && 'http://' !== $url ) {
-							$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
-						}
-
-						printf( 'By <span itemprop="name">%s</span> ', $author );
-
-						$pattern = 'on <time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
-						printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
-
-		                if ( $comment->user_id === $post->post_author ) {
-		                echo ' <span class="post_author_comment">' . __( 'Author', 'yoast-theme' ) . '</span>';
-		                }
-
-		                ?>
-
-					</p>
-				</header>
-				<div class="avatar">
+			<header class="comment-header">
+				<p <?php echo genesis_attr( 'comment-author' ); ?>>
 					<?php
-					$avatar_size = 1 == $depth ? 126 : 80;
-					echo get_avatar( $comment, $avatar_size );
+
+					$author = get_comment_author();
+					$url = get_comment_author_url();
+
+					if ( ! empty( $url ) && 'http://' !== $url ) {
+						$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
+					}
+
+					printf( 'By <span itemprop="name">%s</span> ', $author );
+
+					$pattern = 'on <time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
+					printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
+
+					if ( $comment->user_id === $post->post_author ) {
+						echo ' <span class="post_author_comment">' . __( 'Author', 'yoast-theme' ) . '</span>';
+					}
+
 					?>
-				</div>
-				<div class="comment-content" itemprop="commentText">
-					<?php if ( ! $comment->comment_approved ) : ?>
-						<p class="alert"><?php echo apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation.', 'genesis' ) ); ?></p>
-					<?php endif; ?>
 
-					<?php comment_text(); ?>
+				</p>
+			</header>
+			<div class="avatar">
+				<?php
+				$avatar_size = 1 == $depth ? 126 : 80;
+				echo get_avatar( $comment, $avatar_size );
+				?>
+			</div>
+			<div class="comment-content" itemprop="commentText">
+				<?php if ( ! $comment->comment_approved ) : ?>
+					<p class="alert"><?php echo apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation.', 'genesis' ) ); ?></p>
+				<?php endif; ?>
 
-					<p class="comment-actions">
-						<?php
-						comment_reply_link( array_merge( $args, array(
-							'depth'  => $depth,
-							'before' => '<span class="comment-reply">',
-							'after'  => '</span>',
-						) ) );
-						edit_comment_link( __( 'Edit comment', 'yoast-theme' ), ' <span class="edit">', '</span>' );
-						?>
-					</p>
-				</div>
-		        <div class="clearfloat"></div>
+				<?php comment_text(); ?>
 
-				<?php do_action( 'genesis_after_comment' ); ?>
+				<p class="comment-actions">
+					<?php
+					comment_reply_link( array_merge( $args, array(
+						'depth'  => $depth,
+						'before' => '<span class="comment-reply">',
+						'after'  => '</span>',
+					) ) );
+					edit_comment_link( __( 'Edit comment', 'yoast-theme' ), ' <span class="edit">', '</span>' );
+					?>
+				</p>
+			</div>
+			<div class="clearfloat"></div>
 
-			</article>
+			<?php do_action( 'genesis_after_comment' ); ?>
+
+		</article>
 		<?php
 		//* No ending </li> tag because of comment threading
 	}
@@ -290,9 +290,9 @@ class Yoast_Strategy extends Yoast_Theme {
 	}
 
 	/**
-	* Sets the default color scheme, used in Yoast_Theme class 
-	* @return string Name of default color scheme
-	*/
+	 * Sets the default color scheme, used in Yoast_Theme class
+	 * @return string Name of default color scheme
+	 */
 	public function set_default_color_scheme() {
 		return 'GreenBright';
 	}
@@ -319,17 +319,17 @@ class Yoast_Strategy extends Yoast_Theme {
 	/**
 	 * Enable style filtering for IE8/9
 	 */
-	public  function conditional_comments() {
-	    echo '<!--[if lte IE 9]>';
-	    echo '<link href="' . get_stylesheet_directory_uri() . '/assets/css/old-ie.css" rel="stylesheet" type="text/css" />';
-	    echo '<![endif]-->';
+	public function conditional_comments() {
+		echo '<!--[if lte IE 9]>';
+		echo '<link href="' . get_stylesheet_directory_uri() . '/assets/css/old-ie.css" rel="stylesheet" type="text/css" />';
+		echo '<![endif]-->';
 	}
 
 	/**
-	* Remove genesis sidebars and add full width widget areas
-	*
-	* @note This is sidebar / widget related
-	*/
+	 * Remove genesis sidebars and add full width widget areas
+	 *
+	 * @note This is sidebar / widget related
+	 */
 	public function add_full_width_sidebars() {
 		if ( 'full-width-content' == genesis_site_layout() ) {
 			// Remove the Primary Sidebar from the Primary Sidebar area.
@@ -345,10 +345,10 @@ class Yoast_Strategy extends Yoast_Theme {
 	}
 
 	/**
-	* Show 'yoast-fullwidth-widgetarea' full width widget areas
-	* 
-	* @note This is sidebar / widget related
-	*/
+	 * Show 'yoast-fullwidth-widgetarea' full width widget areas
+	 *
+	 * @note This is sidebar / widget related
+	 */
 	public function show_full_width_sidebars() {
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-1' );
 		dynamic_sidebar( 'yoast-fullwidth-widgetarea-2' );
@@ -385,7 +385,7 @@ class Yoast_Strategy extends Yoast_Theme {
 		// Normal logo
 		$logo = get_theme_mod( 'yst_logo' );
 		if ( isset( $logo ) && ! empty ( $logo ) ) {
-	        $css .= '@media(min-width: 640px){.site-header .title-area {background-image: url(' . $logo . ');}}';
+			$css .= '@media(min-width: 640px){.site-header .title-area {background-image: url(' . $logo . ');}}';
 		}
 
 		// Mobile logo, positioning depends on whether the logo is wider than 230px and / or higher than 36px, if it is, alternate positioning is used.
@@ -401,7 +401,7 @@ class Yoast_Strategy extends Yoast_Theme {
 			if ( ! $use_alt_positioning ) {
 				$css .= '@media(max-width: 640px){header.site-header {background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;	}}';
 			} else {
-				$mobile_logo_height = $yst_mobile_logo_details['height'];// - 41;
+				$mobile_logo_height = $yst_mobile_logo_details['height']; // - 41;
 				//if ( is_user_logged_in() ) {
 				//	$mobile_logo_height -= 46;
 				//}
@@ -411,9 +411,9 @@ class Yoast_Strategy extends Yoast_Theme {
 
 		if ( ! empty( $css ) ) {
 			echo '<style id="strategy-inline-css">' . $css . '</style>';
-	        echo '<!--[if lte IE 8]>';
-	        echo '<style type="text/css">.site-header .title-area { background-image: url(' . $logo . '); } a#sidr-left, a#sidr-right { display:none;visibility:hidden; } </style>';
-	        echo '<![endif]-->';
+			echo '<!--[if lte IE 8]>';
+			echo '<style type="text/css">.site-header .title-area { background-image: url(' . $logo . '); } a#sidr-left, a#sidr-right { display:none;visibility:hidden; } </style>';
+			echo '<![endif]-->';
 		}
 	}
 
@@ -433,9 +433,9 @@ class Yoast_Strategy extends Yoast_Theme {
 				$img = str_replace( 'alignleft', 'alignright', $img );
 			}
 		}
+
 		return $img;
 	}
-
 
 
 }
