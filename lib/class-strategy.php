@@ -72,8 +72,11 @@ class Yoast_Strategy extends Yoast_Theme {
 		// Add conditional comments (ie)
 		add_action( 'wp_head', array( $this, 'conditional_comments' ) );
 
+		// Add support for yoast after header widget on frontpage
+		add_action( 'genesis_after_header', array( $this, 'after_header_widgetareas_front_page' ) );
+
 		// Add support for yoast after header widget
-		add_action( 'genesis_after_header', array( $this, 'after_header_genesis' ) );
+		add_action( 'genesis_after_header', array( $this, 'after_header_widgetareas' ) );
 
 		// Conditionally add full width sidebars
 		add_action( 'genesis_after_header', array( $this, 'add_full_width_sidebars' ) );
@@ -92,21 +95,39 @@ class Yoast_Strategy extends Yoast_Theme {
 	public function register_sidebars() {
 
 		genesis_register_sidebar( array(
+			'id'          => 'yoast-after-header-fp-1',
+			'name'        => __( 'After Header for Front Page 1', 'yoast-theme' ),
+			'description' => __( 'After Header 1 widget area. Will only display on the front page.', 'yoast-theme' ),
+		) );
+
+		genesis_register_sidebar( array(
+			'id'          => 'yoast-after-header-fp-2',
+			'name'        => __( 'After Header for Front Page 2', 'yoast-theme' ),
+			'description' => __( 'After Header 2 widget area. Will only display on the front page.', 'yoast-theme' ),
+		) );
+
+		genesis_register_sidebar( array(
+			'id'          => 'yoast-after-header-fp-3',
+			'name'        => __( 'After Header for Front Page 3', 'yoast-theme' ),
+			'description' => __( 'After Header 3 widget area. Will only display on the front page.', 'yoast-theme' ),
+		) );
+
+		genesis_register_sidebar( array(
 			'id'          => 'yoast-after-header-1',
 			'name'        => __( 'After Header 1', 'yoast-theme' ),
-			'description' => __( 'After Header 1 widget area.', 'yoast-theme' ),
+			'description' => __( 'After Header 1 widget area. Will display on all pages, except the front page.', 'yoast-theme' ),
 		) );
 
 		genesis_register_sidebar( array(
 			'id'          => 'yoast-after-header-2',
 			'name'        => __( 'After Header 2', 'yoast-theme' ),
-			'description' => __( 'After Header 2 widget area.', 'yoast-theme' ),
+			'description' => __( 'After Header 2 widget area. Will display on all pages, except the front page.', 'yoast-theme' ),
 		) );
 
 		genesis_register_sidebar( array(
 			'id'          => 'yoast-after-header-3',
 			'name'        => __( 'After Header 3', 'yoast-theme' ),
-			'description' => __( 'After Header 3 widget area.', 'yoast-theme' ),
+			'description' => __( 'After Header 3 widget area. Will display on all pages, except the front page.', 'yoast-theme' ),
 		) );
 
 		genesis_register_sidebar( array(
@@ -246,20 +267,20 @@ class Yoast_Strategy extends Yoast_Theme {
 	}
 
 	/**
-	 * Add yst-after-header widget support for site. If widget not active, don't display
+	 * Add yst-after-header widget support for front page. If widget not active, don't display
 	 */
-	public function after_header_genesis() {
-		if ( is_front_page() && ( is_active_sidebar( 'yoast-after-header-1' ) || is_active_sidebar( 'yoast-after-header-2' ) || is_active_sidebar( 'yoast-after-header-3' ) ) ) {
+	public function after_header_widgetareas_front_page() {
+		if ( is_front_page() && ( is_active_sidebar( 'yoast-after-header-fp-1' ) || is_active_sidebar( 'yoast-after-header-fp-2' ) || is_active_sidebar( 'yoast-after-header-fp-3' ) ) ) {
 			echo '<div id="yoast-after-header-container"><div class="wrap">';
 
-			$areas = array( 'yoast-after-header-1', 'yoast-after-header-2', 'yoast-after-header-3' );
+			$areas = array( 'yoast-after-header-fp-1', 'yoast-after-header-fp-2', 'yoast-after-header-fp-3' );
 			if ( 'sidebar-content' == genesis_site_layout() ) {
 				$areas = array_reverse( $areas );
 			}
 
 			foreach ( $areas as $area ) {
 				genesis_widget_area( $area, array(
-					'before' => '<div id="' . $area . '" class="yoast-after-header-widget">',
+					'before' => '<div id="' . $area . '" class="yoast-after-header-fp-widget">',
 					'after'  => '</div>',
 				) );
 			}
@@ -284,6 +305,31 @@ class Yoast_Strategy extends Yoast_Theme {
 			}
 		}
 	}
+
+	/**
+	 * Add yst-after-header widget support for site. If widget not active, don't display
+	 */
+	public function after_header_widgetareas() {
+		if ( ! is_front_page() && ( is_active_sidebar( 'yoast-after-header-1' ) || is_active_sidebar( 'yoast-after-header-2' ) || is_active_sidebar( 'yoast-after-header-3' ) ) ) {
+			echo '<div id="yoast-after-header-container"><div class="wrap">';
+
+			$areas = array( 'yoast-after-header-1', 'yoast-after-header-2', 'yoast-after-header-3' );
+			if ( 'sidebar-content' == genesis_site_layout() ) {
+				$areas = array_reverse( $areas );
+			}
+
+			foreach ( $areas as $area ) {
+				genesis_widget_area( $area, array(
+					'before' => '<div id="' . $area . '" class="yoast-after-header-widget">',
+					'after'  => '</div>',
+				) );
+			}
+
+			echo '<div class="clearfloat"></div></div></div>';
+		}
+	}
+
+
 
 	/**
 	 * Sets the default color scheme, used in Yoast_Theme class
