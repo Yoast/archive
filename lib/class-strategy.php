@@ -51,6 +51,9 @@ class Yoast_Strategy extends Yoast_Theme {
 		remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
 		add_action( 'genesis_entry_content', array( $this, 'archive_image' ), 8 );
 
+		// Display search box in header
+		add_action( 'genesis_header_right', array( $this, 'header_search' ), 11 );
+
 		// Activate blogroll widget
 		add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
@@ -329,8 +332,6 @@ class Yoast_Strategy extends Yoast_Theme {
 		}
 	}
 
-
-
 	/**
 	 * Sets the default color scheme, used in Yoast_Theme class
 	 * @return string Name of default color scheme
@@ -489,5 +490,12 @@ class Yoast_Strategy extends Yoast_Theme {
 			remove_action( 'genesis_after_header', 'genesis_do_nav' );
 			add_action( 'genesis_header_right', 'genesis_do_nav' );
 		}
+	}
+
+	/**
+	 * Display search box in header
+	 */
+	public function header_search() {
+		echo genesis_search_form() . '<div class="clearfloat"></div>';
 	}
 }
