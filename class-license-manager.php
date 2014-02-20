@@ -54,6 +54,11 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	private $license_constant_is_defined = false;
 
 	/**
+	* @var array Array of notices
+	*/
+	private $notices = array();
+
+	/**
 	 * Constructor
 	 *
 	 * @param string $item_name The item name in the EDD shop
@@ -83,7 +88,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	*/
 	private function hooks() {
 		// show admin notice if license is not active
-		add_action( 'admin_notices', array( $this, 'maybe_display_admin_notice' ) );
+		add_action( 'admin_notices', array( $this, 'display_admin_notices' ) );
 		add_action( 'admin_init', array( $this, 'catch_post_request') );
 
 		// setup item type (plugin|theme) specific hooks
@@ -91,19 +96,44 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	}
 
 	/**
-	* Display admin notice if there is no active license
+	* Display license specific admin notices
 	*/
-	public function maybe_display_admin_notice() {
+	public function display_admin_notices() {
 
-		// do not show notice if license is valid
-		if( $this->license_is_valid() ) {
+		if( ! empty( $this->notices ) ) {
+			foreach( $this->notices as $notice ) {
+				$class = ( $notice['type'] === 'success' ) ? 'updated' : 'error';
+				?>
+				<div class="<?php echo $class; ?>">
+					<p><?php echo $notice['message']; ?></p>
+				</div>
+				<?php
+			}
+
+			// don't show any more notices if we have custom notices
 			return;
 		}
+
+		// show notice if license is invalid
+		if( ! $this->license_is_valid() ) {
 		?>
 		<div class="error">
-			<p><?php printf( __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updated and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>', $this->text_domain ), $this->item_name, admin_url( $this->license_page ), $this->item_url ); ?></p>
+			<p><?php printf( __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updated and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', $this->text_domain ), $this->item_name, admin_url( $this->license_page ), $this->item_url ); ?></p>
 		</div>
 		<?php
+		}
+	}
+
+	/**
+	* Set a notice to display in the admin area
+	* @param string $type error|updated
+	* @param string $message The (translated) message to display
+	*/
+	public function set_notice( $type, $message ) {
+		$this->notices[] = array( 
+			'type' => $type, 
+			'message' => $message 
+		);
 	}
 
 	/**
@@ -115,6 +145,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		$result = $this->call_license_api( 'activate' );
 
 		if( $result ) {
+			$this->set_notice( 'success', sprintf( __( "Hi %s. Your %s license has been activated. You will now receive updates.", $this->text_domain ), $result->customer_name, $this->item_name ) );
 			$this->set_license_status( $result->license );
 		}
 
@@ -131,6 +162,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		$result = $this->call_license_api( 'deactivate' );
 
 		if( $result ) {
+			$this->set_notice( 'success', sprintf( __( "Hi %s. Your %s license has been deactivated. You're missing out on updates!", $this->text_domain ), $result->customer_name, $this->item_name ) );
 			$this->set_license_status( $result->license );
 		}
 
@@ -245,13 +277,14 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @return boolean True if license is active
 	*/
 	public function license_is_valid() {
-		return ($this->get_license_status() === 'valid');
+		return ( $this->get_license_status() === 'valid' );
 	}
 
 	/**
 	* Show a form where users can enter their license key
+	* @param boolean $open_form Should a new <form> tag be opened or are we embedded in another form? Defaults to true.
 	*/
-	public function show_license_form() {
+	public function show_license_form( $open_form = true ) {
 
 		$key_name = $this->option_prefix . '_license_key';
 		$nonce_name = $this->option_prefix . '_license_nonce';
@@ -272,16 +305,19 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 			<?php if( $this->license_is_valid() ) { ?>
 				<span style="color: white; background: green; padding:3px 6px;">ACTIVE</span> - &nbsp; you are receiving updates.
 			<?php } else { ?>
-				<span style="color:white; background: red; padding: 3px 6px;">INACTIVE</span> - &nbsp; you are <strong>not</strong> receiving plugin updates.
+				<span style="color:white; background: red; padding: 3px 6px;">INACTIVE</span> - &nbsp; you are <strong>not</strong> receiving updates.
 			<?php } ?>
 			</small>
 		</h3>
+		<?php 
 
-		<form method="post" action="" id="yoast-license-form">
+		if( $open_form ) { 
+			echo '<form method="post" action="">';
+		}
 
-			<?php wp_nonce_field( $nonce_name, $nonce_name ); ?>
+		wp_nonce_field( $nonce_name, $nonce_name ); ?>
 
-			<table class="form-table">
+			<table class="form-table" id="yoast-license-form">
 				<tbody>
 					<tr valign="top">
 						<th scope="row" valign="top"><?php _e('Toggle license status', $this->text_domain ); ?></th>
@@ -320,9 +356,10 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 			if( $readonly === false ) {
 				submit_button();
 			} 
-			?>
-		</form>
-		<?php
+		
+		if( $open_form ) {
+			echo '</form>';
+		}
 
 		// enqueue script in the footer
 		add_action( 'admin_footer', array( $this, 'output_script'), 99 );
