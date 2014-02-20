@@ -262,6 +262,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		} else {
 			$visible_license_key = $this->get_license_key();
 		}
+
+		// make license key readonly when license key is valid or license is defined with a constant
+		$readonly = ( $this->license_is_valid() || $this->license_constant_is_defined );
 		?>
 		<h3>
 			<?php printf( __( "%s License Settings", $this->text_domain ), $this->item_name ); ?>&nbsp; &nbsp; 
@@ -302,7 +305,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 					<tr valign="top">
 						<th scope="row" valign="top"><?php _e( 'License Key', $this->text_domain ); ?></th>
 						<td>
-							<input id="yoast-license-key-field" name="<?php echo esc_attr( $key_name ); ?>" type="text" class="regular-text" value="<?php echo esc_attr( $visible_license_key ); ?>" placeholder="<?php echo esc_attr( sprintf( __( 'Paste your %s license key here..', $this->text_domain ), $this->item_name ) ); ?>" <?php if( $this->license_is_valid() ) { echo 'readonly'; } ?> />
+							<input id="yoast-license-key-field" name="<?php echo esc_attr( $key_name ); ?>" type="text" class="regular-text" value="<?php echo esc_attr( $visible_license_key ); ?>" placeholder="<?php echo esc_attr( sprintf( __( 'Paste your %s license key here..', $this->text_domain ), $this->item_name ) ); ?>" <?php if( $readonly ) { echo 'readonly="readonly"'; } ?> />
 						</td>
 					</tr>
 					
@@ -310,8 +313,8 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 			</table>
 
 			<?php 
-			// only show "Save Changes" button if license is not activated
-			if( ! $this->license_is_valid() ) {
+			// only show "Save Changes" button if license is not activated and not defined with a constant
+			if( $readonly === false ) {
 				submit_button();
 			} 
 			?>
