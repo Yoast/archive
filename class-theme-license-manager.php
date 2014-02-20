@@ -12,6 +12,7 @@ class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 	 */
 	public function __construct( $item_name, $item_url, $version, $text_domain ) {
 
+		// store the license page url
 		$license_page = 'themes.php?page=theme-license';
 
 		parent::__construct( $item_name, $item_url, $version, $license_page, $text_domain );

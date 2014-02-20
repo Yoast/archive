@@ -399,12 +399,18 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 			var YoastLicenseManager = (function () {
 
 				var self = this;
-				var $actionButton, $licenseForm, $keyInput;
+				var $actionButton,
+					$licenseForm, 
+					$keyInput,
+					$submitButtons;
 
 				function init() {
 					$licenseForm = $("#yoast-license-form");
 					$keyInput = $licenseForm.find("#yoast-license-key-field");
-					$actionButton = $('#yoast-license-toggler button');
+					$actionButton = $licenseForm.find('#yoast-license-toggler button');
+					$submitButtons = $licenseForm.find('input[type="submit"], button[type="submit"]');
+
+					$submitButtons.click( addDisableEvent );
 					$actionButton.click( actOnLicense );
 					$keyInput.click( setEmptyValue );
 				}
@@ -422,17 +428,19 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 						.attr( 'name', $(this).attr('name') )
 						.val( $(this).val() )
 						.appendTo($licenseForm);
-					
-					$licenseForm.submit( disableButton );
-				}
-
-				function disableButton() {
-					// disable button to prevent multiple requests
-					$actionButton.prop( 'disabled', true );
 
 					// change button text to show we're working..
 					var text = ( $actionButton.hasClass('yoast-license-activate') ) ? "Activating..." : "Deactivating...";
 					$actionButton.text( text );
+				}
+
+				function addDisableEvent() {
+					$licenseForm.submit( disableButtons );
+				}
+
+				function disableButtons() {
+					// disable submit buttons to prevent multiple requests
+					$submitButtons.prop( 'disabled', true );
 				}
 
 				return {
