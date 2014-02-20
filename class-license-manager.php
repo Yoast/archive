@@ -54,6 +54,11 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	private $license_constant_is_defined = false;
 
 	/**
+	* @var boolean True if remote license activation just failed
+	*/
+	private $remote_license_activation_failed = false;
+
+	/**
 	* @var array Array of notices
 	*/
 	private $notices = array();
@@ -151,6 +156,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 				$this->set_notice( 'success', sprintf( __( "Hi %s. Your %s license has been activated.", $this->text_domain ), $result->customer_name, $this->item_name ) );
 			} else {
 				$this->set_notice( 'error', sprintf( __( "Your %s license key seems to be invalid.", $this->text_domain ), $this->item_name ) );
+				$this->remote_license_activation_failed = true;
 			}
 
 			$this->set_license_status( $result->license );
@@ -309,10 +315,12 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		$nonce_name = $this->option_prefix . '_license_nonce';
 		$action_name = $this->option_prefix . '_license_action';
 
-		if( strlen($this->get_license_key() ) > 4) {
+		$visible_license_key = $this->get_license_key();
+
+		// obfuscate license key
+		$obfuscate = ( $this->license_is_valid() || ! $this->remote_license_activation_failed );
+		if($obfuscate) {
 			$visible_license_key = str_repeat('*', strlen( $this->get_license_key() ) - 4) . substr( $this->get_license_key(), -4 );
-		} else {
-			$visible_license_key = $this->get_license_key();
 		}
 
 		// make license key readonly when license key is valid or license is defined with a constant
@@ -360,7 +368,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 					<tr valign="top">
 						<th scope="row" valign="top"><?php _e( 'License Key', $this->text_domain ); ?></th>
 						<td>
-							<input id="yoast-license-key-field" name="<?php echo esc_attr( $key_name ); ?>" type="text" class="regular-text" value="<?php echo esc_attr( $visible_license_key ); ?>" placeholder="<?php echo esc_attr( sprintf( __( 'Paste your %s license key here..', $this->text_domain ), $this->item_name ) ); ?>" <?php if( $readonly ) { echo 'readonly="readonly"'; } ?> />
+							<input id="yoast-license-key-field" name="<?php echo esc_attr( $key_name ); ?>" type="text" class="regular-text <?php if( $obfuscate ) { ?>yoast-license-obfuscate<?php } ?>" value="<?php echo esc_attr( $visible_license_key ); ?>" placeholder="<?php echo esc_attr( sprintf( __( 'Paste your %s license key here..', $this->text_domain ), $this->item_name ) ); ?>" <?php if( $readonly ) { echo 'readonly="readonly"'; } ?> />
 							<?php if( $this->license_constant_is_defined ) { ?>
 							<p class="help"><?php printf( __( "You defined your license key using the %s PHP constant.", $this->text_domain ), '<code>' . $this->license_constant_name . '</code>' ); ?></p>
 							<?php } ?>
@@ -468,7 +476,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 				function init() {
 					$licenseForm = $("#yoast-license-form").closest('form');
-					$keyInput = $licenseForm.find("#yoast-license-key-field");
+					$keyInput = $licenseForm.find("#yoast-license-key-field.yoast-license-obfuscate");
 					$actionButton = $licenseForm.find('#yoast-license-toggler button');
 					$submitButtons = $licenseForm.find('input[type="submit"], button[type="submit"]');
 
