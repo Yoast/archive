@@ -16,7 +16,7 @@
 $c_sprite:              "sprite-WarmBlue.png";
 
 // general
-$c_bodyTopLine:         #91b71b;
+$c_bodyTopLine:         #008293;
 
 $c_paragraph:           #000000;
 $c_link:                #888888;
@@ -40,14 +40,15 @@ $c_breadcrumbsLink:     #888888;
 $c_breadcrumbsLinkHover:#009d38;
 
 $c_pagenavBg:           #eeeeee;
-$c_pagenavLink:         #888888;
+$c_pagenavLink:         #088293;
 $c_pagenavHoverBg:      #ffffff;
-$c_pagenavHoverLink:    #ffffff;
+$c_pagenavHoverLink:    #009d38;
 $c_pagenavActiveBg:     #ffffff;
-$c_pagenavActiveLink:   #ffffff;
+$c_pagenavActiveLink:   #888888;
 
-$c_metaAtPost:          #666666;
+$c_metaAtPost:          #b5b5b5;
 $c_metaAtPostBorder:    #dddddd;
+$c_metaAtPostAuthor:    #008293;
 $c_linkToArchives:      #888888;
 $c_commentHTMLtags:     #b5b5b5;
 
@@ -115,18 +116,18 @@ $c_mainBg:              #ffffff;
 $c_mainText:            #000000;
 $c_mainLink:            #888888;
 $c_mainLinkHover:       #009d38;
-$c_mainH1:              #009d38;
-$c_mainH1Hover:         #888888;
-$c_mainH2:              #009d38;
-$c_mainH2Hover:         #888888;
-$c_mainH3:              #009d38;
-$c_mainH3Hover:         #888888;
+$c_mainH1:              #91b71b;
+$c_mainH1Hover:         #009d38;
+$c_mainH2:              #91b71b;
+$c_mainH2Hover:         #009d38;
+$c_mainH3:              #888888;
+$c_mainH3Hover:         #009d38;
 $c_mainH4:              #009d38;
-$c_mainH4Hover:         #888888;
-$c_mainH5:              #666666;
-$c_mainH5Hover:         #333333;
-$c_mainH6:              #000000;
-$c_mainH6Hover:         #333333;
+$c_mainH4Hover:         #91b71b;
+$c_mainH5:              #008293;
+$c_mainH5Hover:         #009d38;
+$c_mainH6:              #888888;
+$c_mainH6Hover:         #009d38;
 
 $c_taxonomyIntroText:   #333333;
 $c_taxonomyIntroH1:     #666666;
