@@ -2,6 +2,12 @@
 
 class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 
+
+	/**
+	* @var string $theme_slug
+	*/
+	private $theme_slug;
+
 	/**
 	 * Constructor
 	 *
@@ -10,12 +16,20 @@ class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 	 * @param string $text_domain The text domain used for translating strings
 	 * @param string $version The version number of the item 
 	 */
-	public function __construct( $item_name, $item_url, $version, $text_domain ) {
+	public function __construct( $item_name, $item_url, $theme_slug, $version, $text_domain = null ) {
 
 		// store the license page url
 		$license_page = 'themes.php?page=theme-license';
 
 		parent::__construct( $item_name, $item_url, $version, $license_page, $text_domain );
+
+		$this->theme_slug = $theme_slug;
+
+		if( $this->license_is_valid() ) {
+			// setup auto updater
+			require dirname( __FILE__ ) . '/class-theme-update-manager.php'; // @TODO: Autoload?
+			new Yoast_Theme_Update_Manager( $item_name, $this->api_url, $this->get_license_key(), $this->theme_slug, $this->version, 'Yoast' );
+		}
 	}
 	
 	/**
@@ -42,7 +56,7 @@ class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 	public function show_license_page() {
 		?>
 		<div class="wrap">
-			<?php $this->show_license_form(); ?>
+			<?php $this->show_license_form( false ); ?>
 		</div>
 		<?php
 	}

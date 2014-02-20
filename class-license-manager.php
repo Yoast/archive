@@ -67,20 +67,26 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	 * @param string $text_domain The text domain used for translating strings
 	 * @param string $version The version number of the item 
 	 */
-	public function __construct( $item_name, $item_url, $version, $license_page, $text_domain ) {
+	public function __construct( $item_name, $item_url, $version, $license_page, $text_domain = null ) {
 
 		$this->item_name = $item_name;
 		$this->item_url = $item_url;
 		$this->version = $version;	
 		$this->license_page = $license_page;
-		$this->text_domain = $text_domain;
+
+		// set text domain, if given
+		if( $text_domain !== null) {
+			$this->text_domain = $text_domain;
+		}
+
+		// set option prefix
 		$this->option_prefix = 'yoast_' . sanitize_title_with_dashes( $item_name, null, 'save' );
 
 		// setup hooks
 		$this->hooks();
 
 		// maybe set license key from constant
-		$this->maybe_set_license_key_from_constant();
+		$this->maybe_set_license_key_from_constant();		
 	}
 
 	/**
@@ -325,9 +331,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 						<th scope="row" valign="top"><?php _e( 'License status', $this->text_domain ); ?></th>
 						<td>
 						<?php if( $this->license_is_valid() ) { ?>
-							<span style="color: white; background: green; padding:3px 6px;">ACTIVE</span> - &nbsp; you are receiving updates.
+							<span style="color: white; background: green; padding:3px 6px;">ACTIVE</span> &nbsp; - &nbsp; you are receiving updates.
 						<?php } else { ?>
-							<span style="color:white; background: red; padding: 3px 6px;">INACTIVE</span> - &nbsp; you are <strong>not</strong> receiving updates.
+							<span style="color:white; background: red; padding: 3px 6px;">INACTIVE</span> &nbsp; - &nbsp; you are <strong>not</strong> receiving updates.
 						<?php } ?>
 						</td>
 					</tr>
