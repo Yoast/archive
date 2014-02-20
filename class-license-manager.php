@@ -306,6 +306,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 						<th scope="row" valign="top"><?php _e( 'License Key', $this->text_domain ); ?></th>
 						<td>
 							<input id="yoast-license-key-field" name="<?php echo esc_attr( $key_name ); ?>" type="text" class="regular-text" value="<?php echo esc_attr( $visible_license_key ); ?>" placeholder="<?php echo esc_attr( sprintf( __( 'Paste your %s license key here..', $this->text_domain ), $this->item_name ) ); ?>" <?php if( $readonly ) { echo 'readonly="readonly"'; } ?> />
+							<?php if( $this->license_constant_is_defined ) { ?>
+							<p class="help"><?php printf( __( "You defined your license key using the %s PHP constant.", $this->text_domain ), '<code>' . $this->license_constant_name . '</code>' ); ?></p>
+							<?php } ?>
 						</td>
 					</tr>
 					
