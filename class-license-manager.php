@@ -59,11 +59,6 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	private $remote_license_activation_failed = false;
 
 	/**
-	* @var array Array of notices
-	*/
-	private $notices = array();
-
-	/**
 	 * Constructor
 	 *
 	 * @param string $item_name The item name in the EDD shop
@@ -105,20 +100,6 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	*/
 	public function display_admin_notices() {
 
-		if( ! empty( $this->notices ) ) {
-			foreach( $this->notices as $notice ) {
-				$class = ( $notice['type'] === 'success' ) ? 'updated' : 'error';
-				?>
-				<div class="<?php echo $class; ?>">
-					<p><?php echo $notice['message']; ?></p>
-				</div>
-				<?php
-			}
-
-			// don't show any more notices if we have custom notices
-			return;
-		}
-
 		// show notice if license is invalid
 		if( ! $this->license_is_valid() ) {
 		?>
@@ -135,10 +116,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @param string $message The (translated) message to display
 	*/
 	public function set_notice( $type, $message ) {
-		$this->notices[] = array( 
-			'type' => $type, 
-			'message' => $message 
-		);
+		
+		add_settings_error( $this->option_prefix . '_license', $type, $message );
+
 	}
 
 	/**
@@ -307,9 +287,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 	/**
 	* Show a form where users can enter their license key
-	* @param boolean $open_form Should a new <form> tag be opened or are we embedded in another form? Defaults to true.
+	* @param boolean $embedded Boolean indicating whether this form is embedded in another form?
 	*/
-	public function show_license_form( $open_form = true ) {
+	public function show_license_form( $embedded = true ) {
 
 		$key_name = $this->option_prefix . '_license_key';
 		$nonce_name = $this->option_prefix . '_license_nonce';
@@ -330,17 +310,10 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		?>
 		<h2>
 			<?php printf( __( "%s License Settings", $this->text_domain ), $this->item_name ); ?>&nbsp; &nbsp; 
-			<small style="font-weight: normal;">
-			<?php if( $this->license_is_valid() ) { ?>
-				<span style="color: white; background: green; padding:3px 6px;">ACTIVE</span> - &nbsp; you are receiving updates.
-			<?php } else { ?>
-				<span style="color:white; background: red; padding: 3px 6px;">INACTIVE</span> - &nbsp; you are <strong>not</strong> receiving updates.
-			<?php } ?>
-			</small>
 		</h2>
 		<?php 
 
-		if( $open_form ) { 
+		if( ! $embedded ) { 
 			echo '<form method="post" action="">';
 		}
 
@@ -348,6 +321,16 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 			<table class="form-table" id="yoast-license-form">
 				<tbody>
+					<tr valign="top">
+						<th scope="row" valign="top"><?php _e( 'License status', $this->text_domain ); ?></th>
+						<td>
+						<?php if( $this->license_is_valid() ) { ?>
+							<span style="color: white; background: green; padding:3px 6px;">ACTIVE</span> - &nbsp; you are receiving updates.
+						<?php } else { ?>
+							<span style="color:white; background: red; padding: 3px 6px;">INACTIVE</span> - &nbsp; you are <strong>not</strong> receiving updates.
+						<?php } ?>
+						</td>
+					</tr>
 					<tr valign="top">
 						<th scope="row" valign="top"><?php _e('Toggle license status', $this->text_domain ); ?></th>
 						<td id="yoast-license-toggler">
@@ -359,9 +342,8 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 								<?php if( $this->get_license_key() !== '') { ?>
 									<button name="<?php echo esc_attr( $action_name ); ?>" type="submit" class="button-secondary yoast-license-activate" value="activate" /><?php echo esc_html_e('Activate License', $this->text_domain ); ?></button> &nbsp; 
-									<small><?php _e( '(activate your license to enable updates and support)', $this->text_domain ); ?></small>
 								<?php } else { ?>
-									<small><?php _e( 'Please enter a license key in the field below first.', $this->text_domain ); ?></small>
+									<?php _e( 'Please enter a license key in the field below first.', $this->text_domain ); ?>
 								<?php } ?>
 								
 							<?php } ?>
@@ -380,15 +362,18 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 				</tbody>
 			</table>
 
-			<?php 
-			// only show "Save Changes" button if license is not activated and not defined with a constant
-			if( $readonly === false ) {
-				submit_button();
-			} 
-		
-		if( $open_form ) {
-			echo '</form>';
-		}
+			<?php 	
+
+			// Only show a "Save Changes" button and end form if we're not embedded in another form.
+			if( ! $embedded ) {
+
+				// only show "Save Changes" button if license is not activated and not defined with a constant
+				if( $readonly === false ) {
+					submit_button();
+				} 
+			
+				echo '</form>';
+			}
 
 		// enqueue script in the footer
 		add_action( 'admin_footer', array( $this, 'output_script'), 99 );
