@@ -23,7 +23,7 @@ class Yoast_Plugin_License_Manager extends Yoast_License_Manager {
 	/**
 	* Setup hooks
 	*/
-	private function specific_hooks() {
+	public function specific_hooks() {
 		// deactivate the license remotely on plugin deactivation
 		register_deactivation_hook( $this->file, array($this, 'deactivate_license') );
 	}

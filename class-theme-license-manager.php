@@ -33,7 +33,7 @@ class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 	 * Add license page and add it to Themes menu
 	 */
 	public function add_license_menu() {
-		$theme_page = add_theme_page( 'Theme License', 'Theme License', 'manage_options', 'theme-license', array( $this, 'show_license_page' ) );
+		$theme_page = add_theme_page( sprintf( __( '%s License', $this->text_domain ), $this->item_name ), __( 'Theme License', $this->text_domain ), 'manage_options', 'theme-license', array( $this, 'show_license_page' ) );
 	}
 	
 	/**

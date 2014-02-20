@@ -289,7 +289,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		if( $license_key === false ) {
 			// insert empty license key, enables autoloading of option
-			$this->set_license_key('');
+			add_option( $this->option_prefix . '_license_key', '');
 			return '';
 		}
 
@@ -315,10 +315,12 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		$nonce_name = $this->option_prefix . '_license_nonce';
 		$action_name = $this->option_prefix . '_license_action';
 
-		$visible_license_key = $this->get_license_key();
+		
+		$visible_license_key = $this->get_license_key();	
 
 		// obfuscate license key
-		$obfuscate = ( strlen($this->get_license_key() > 5) && ( $this->license_is_valid() || ! $this->remote_license_activation_failed ) );
+		$obfuscate = ( strlen( $this->get_license_key() ) > 5 && ( $this->license_is_valid() || ! $this->remote_license_activation_failed ) );
+
 		if($obfuscate) {
 			$visible_license_key = str_repeat('*', strlen( $this->get_license_key() ) - 4) . substr( $this->get_license_key(), -4 );
 		}
@@ -326,7 +328,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		// make license key readonly when license key is valid or license is defined with a constant
 		$readonly = ( $this->license_is_valid() || $this->license_constant_is_defined );
 		?>
-		<h3>
+		<h2>
 			<?php printf( __( "%s License Settings", $this->text_domain ), $this->item_name ); ?>&nbsp; &nbsp; 
 			<small style="font-weight: normal;">
 			<?php if( $this->license_is_valid() ) { ?>
@@ -335,7 +337,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 				<span style="color:white; background: red; padding: 3px 6px;">INACTIVE</span> - &nbsp; you are <strong>not</strong> receiving updates.
 			<?php } ?>
 			</small>
-		</h3>
+		</h2>
 		<?php 
 
 		if( $open_form ) { 
