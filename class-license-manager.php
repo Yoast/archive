@@ -145,13 +145,21 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		$result = $this->call_license_api( 'activate' );
 
 		if( $result ) {
-			$this->set_notice( 'success', sprintf( __( "Hi %s. Your %s license has been activated. You will now receive updates.", $this->text_domain ), $result->customer_name, $this->item_name ) );
+
+			// show success notice if license is valid
+			if($result->license === 'valid') {
+				$this->set_notice( 'success', sprintf( __( "Hi %s. Your %s license has been activated.", $this->text_domain ), $result->customer_name, $this->item_name ) );
+			} else {
+				$this->set_notice( 'error', sprintf( __( "Your %s license key seems to be invalid.", $this->text_domain ), $this->item_name ) );
+			}
+
 			$this->set_license_status( $result->license );
 		}
 
 		return ( $this->license_is_valid() );
 	}
 
+	// valid, invalid, deactivated, failed
 
 	/**
 	 * Remotely deactivate License
@@ -162,7 +170,14 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		$result = $this->call_license_api( 'deactivate' );
 
 		if( $result ) {
-			$this->set_notice( 'success', sprintf( __( "Hi %s. Your %s license has been deactivated. You're missing out on updates!", $this->text_domain ), $result->customer_name, $this->item_name ) );
+			
+			// show notice if license is deactivated
+			if( $result->license === 'deactivated' ) {
+				$this->set_notice( 'success', sprintf( __( "Hi %s. Your %s license has been deactivated.", $this->text_domain ), $result->customer_name, $this->item_name ) );				
+			} else {
+				$this->set_notice( 'error', sprintf( __( "Failed to deactivate your %s license.", $this->text_domain ), $this->item_name ) );		
+			}
+
 			$this->set_license_status( $result->license );
 		}
 
@@ -202,6 +217,10 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		// make sure response came back okay
 		if( is_wp_error( $response ) ) {
+
+			// set notice, useful for debugging why remote requests are failing
+			$this->set_notice( 'error', sprintf( __( "Request error: %s", $this->text_domain ), $response->get_error_message() ) );
+
 			return false;
 		}
 
@@ -448,7 +467,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 					$submitButtons;
 
 				function init() {
-					$licenseForm = $("#yoast-license-form");
+					$licenseForm = $("#yoast-license-form").closest('form');
 					$keyInput = $licenseForm.find("#yoast-license-key-field");
 					$actionButton = $licenseForm.find('#yoast-license-toggler button');
 					$submitButtons = $licenseForm.find('input[type="submit"], button[type="submit"]');
@@ -478,7 +497,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 				}
 
 				function addDisableEvent() {
-					$licenseForm.submit( disableButtons );
+					$licenseForm.submit(disableButtons);
 				}
 
 				function disableButtons() {
@@ -512,8 +531,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* Maybe set license key from a defined constant
 	*/
 	private function maybe_set_license_key_from_constant() {
-		// generate license constant name
+		
 		if( $this->license_constant_name === '') {
+			// generate license constant name
 			$this->set_license_constant_name('YOAST_' . strtoupper( str_replace( array(' ', '-' ), '', sanitize_key( $this->item_name ) ) ) . '_LICENSE');
 		}
 
