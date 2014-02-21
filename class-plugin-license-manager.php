@@ -21,6 +21,7 @@ class Yoast_Plugin_License_Manager extends Yoast_License_Manager {
 		
 		if( $this->license_is_valid() ) {
 			// setup auto updater
+			require dirname( __FILE__ ) . '/class-update-manager.php';
 			require dirname( __FILE__ ) . '/class-plugin-update-manager.php'; // @TODO: Autoload?
 			new Yoast_Plugin_Update_Manager( $item_name, $this->api_url, $this->get_license_key(), $this->file_slug, $this->version, 'Yoast' );
 		}
@@ -29,9 +30,9 @@ class Yoast_Plugin_License_Manager extends Yoast_License_Manager {
 	/**
 	* Setup hooks
 	*/
-	private function specific_hooks() {
+	public function specific_hooks() {
 		// deactivate the license remotely on plugin deactivation
-		register_deactivation_hook( $this->file, array($this, 'deactivate_license') );
+		register_deactivation_hook( $this->file_slug, array($this, 'deactivate_license') );
 	}
 
 }

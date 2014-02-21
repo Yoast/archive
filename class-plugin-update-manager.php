@@ -1,40 +1,7 @@
 <?php
 
-/**
-* TODO: Documentation, fill in methods, create base class, etc..
-*/
-class Yoast_Plugin_Update_Manager {
+class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 	
-	/**
-	* @var string
-	*/
-	private $api_url;
-
-	/**
-	* @var string
-	*/
-	private $item_name;
-
-	/**
-	* @var string
-	*/
-	private $slug;
-
-	/**
-	* @var string
-	*/
-	private $license_key;
-
-	/**
-	* @var string
-	*/
-	private $version;
-
-	/**
-	* @var string
-	*/
-	private $author;
-
 	/**
 	* Constructor
 	*
@@ -45,13 +12,9 @@ class Yoast_Plugin_Update_Manager {
 	* @param string $version
 	* @param string $author (optional)
 	*/
-	public function __construct( $api_url, $item_name, $license_key, $slug, $version, $author = '') {
-		$this->api_url = $api_url;
-		$this->item_name = $item_name;
-		$this->license_key = $license_key;
-		$this->slug = $slug;
-		$this->version = $version;
-		$this->author = $author;
+	public function __construct( $api_url, $item_name, $license_key, $slug, $version, $author = '' ) {
+		
+		parent::__construct( $api_url, $item_name, $license_key, $slug, $version, $author );
 
 		// setup hooks
 		$this->setup_hooks();
@@ -60,7 +23,7 @@ class Yoast_Plugin_Update_Manager {
 	/**
 	* Setup hooks
 	*/
-	public function setup_hooks() {
+	private function setup_hooks() {
 		// check for updates
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'set_updates_available_data' ) );
 		
@@ -91,7 +54,7 @@ class Yoast_Plugin_Update_Manager {
 		if ( version_compare( $this->version, $api_response->new_version, '<' ) ) {
 
 			// remote version is newer, add to data
-			$data->response[$this->name] = $api_response;
+			$data->response[ $this->item_name ] = $api_response;
 
 		}
 
@@ -126,49 +89,5 @@ class Yoast_Plugin_Update_Manager {
 		// return api response
 		return $api_response;
 	}
-
-	/**
-	 * Calls the API and, if successfull, returns the object delivered by the API.
-	 *
-	 * @uses         get_bloginfo()
-	 * @uses         wp_remote_post()
-	 * @uses         is_wp_error()
-	 *
-	 * @return false||object
-	 */
-	private function call_remote_api() {
-
-		global $wp_version;
-
-		// setup api parameters
-		$api_params = array(
-				'edd_action' => 'get_version',
-				'license'    => $this->license_key,
-				'name'       => $this->item_name,
-				'slug'       => $this->slug,
-				'author'     => $this->author
-		);
-
-		// setup request parameters
-		$request_params = array( 
-			'timeout' => 15, 
-			'sslverify' => false, 
-			'body' => $api_params 
-		);
-
-		// call remote api
-		$response = wp_remote_post( $this->api_url, $request_params );
-
-		// wp / http error?
-		if( is_wp_error( $response) ) {
-			return false;
-		}
-
-		// decode response
-		$response = json_decode( wp_remote_retrieve_body( $response ) );
-		$response->sections = maybe_unserialize( $response->sections );
-		return $response;
-	}
-
 
 }

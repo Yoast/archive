@@ -27,6 +27,7 @@ class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 
 		if( $this->license_is_valid() ) {
 			// setup auto updater
+			require dirname( __FILE__ ) . '/class-update-manager.php';
 			require dirname( __FILE__ ) . '/class-theme-update-manager.php'; // @TODO: Autoload?
 			new Yoast_Theme_Update_Manager( $item_name, $this->api_url, $this->get_license_key(), $this->theme_slug, $this->version, 'Yoast' );
 		}
