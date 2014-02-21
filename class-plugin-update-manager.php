@@ -1,6 +1,6 @@
 <?php
 
-// set_site_transient( 'update_plugins', null );
+//set_site_transient( 'update_plugins', null );
 
 class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 	

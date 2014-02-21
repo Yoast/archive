@@ -32,6 +32,11 @@ class Yoast_Update_Manager {
 	*/
 	protected $author;
 
+	/**
+	* @var WP_Error 
+	*/
+	protected $wp_error;
+
 	public function __construct( $api_url, $item_name, $license_key, $slug, $version, $author = '' ) {
 
 		$this->api_url = $api_url;
@@ -41,6 +46,19 @@ class Yoast_Update_Manager {
 		$this->version = $version;
 		$this->author = $author;
 
+	}
+
+	public function show_update_error() {
+		
+		if( $this->wp_error === null ) {
+			return;
+		}
+
+		?>
+		<div class="error">
+			<p><?php printf( __( '%s failed to check for updates because of the following error: <em>%s</em>', $this->text_domain ), $this->item_name, $this->wp_error->get_error_message() ); ?></p>
+		</div>
+		<?php
 	}
 
 	/**
@@ -75,6 +93,8 @@ class Yoast_Update_Manager {
 
 		// wp / http error?
 		if( is_wp_error( $response) ) {
+			$this->wp_error = $response;
+			add_action( 'admin_notices', array( $this, 'show_update_error') );
 			return false;
 		}
 
