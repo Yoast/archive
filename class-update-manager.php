@@ -37,6 +37,16 @@ class Yoast_Update_Manager {
 	*/
 	protected $wp_error;
 
+	/**
+	* Constructor
+	*
+	* @param string $api_url The url to the EDD shop
+	* @param string $item_name The item name in the EDD shop
+	* @param string $license_key The (valid) license key
+	* @param string $slug The slug. This is either the plugin main file path or the theme slug.
+	* @param string $version The current plugin or theme version
+	* @param string $author (optional) The item author.
+	*/
 	public function __construct( $api_url, $item_name, $license_key, $slug, $version, $author = '' ) {
 
 		$this->api_url = $api_url;
@@ -48,6 +58,9 @@ class Yoast_Update_Manager {
 
 	}
 
+	/**
+	* If the update check returned a WP_Error, show it to the user
+	*/ 
 	public function show_update_error() {
 		
 		if( $this->wp_error === null ) {
