@@ -20,9 +20,9 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 	* @param string $theme_version
 	* @param string $author (optional)
 	*/
-	public function __construct( $api_url, $item_name, $license_key, $slug, $version = '', $author = '') {
+	public function __construct( $api_url, $item_name, $license_key, $slug, $version = '', $author = '', $text_domain = null) {
 		
-		parent::__construct( $api_url, $item_name, $license_key, $slug, $version, $author );
+		parent::__construct( $api_url, $item_name, $license_key, $slug, $version, $author, $text_domain );
 
 		$this->response_key = $this->slug . '-update-response';
 

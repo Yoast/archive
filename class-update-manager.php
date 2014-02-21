@@ -33,6 +33,11 @@ class Yoast_Update_Manager {
 	protected $author;
 
 	/**
+	* @var string
+	*/
+	protected $text_domain = 'yoast';
+
+	/**
 	* @var WP_Error 
 	*/
 	protected $wp_error;
@@ -47,7 +52,7 @@ class Yoast_Update_Manager {
 	* @param string $version The current plugin or theme version
 	* @param string $author (optional) The item author.
 	*/
-	public function __construct( $api_url, $item_name, $license_key, $slug, $version, $author = '' ) {
+	public function __construct( $api_url, $item_name, $license_key, $slug, $version, $author, $text_domain ) {
 
 		$this->api_url = $api_url;
 		$this->item_name = $item_name;
@@ -55,7 +60,7 @@ class Yoast_Update_Manager {
 		$this->slug = $slug;
 		$this->version = $version;
 		$this->author = $author;
-
+		$this->text_domain = $text_domain;
 	}
 
 	/**

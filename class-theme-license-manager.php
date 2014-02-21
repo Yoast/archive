@@ -2,34 +2,33 @@
 
 class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 
-
-	/**
-	* @var string $theme_slug
-	*/
-	private $theme_slug;
-
 	/**
 	 * Constructor
 	 *
 	 * @param string $item_name The item name in the EDD shop
 	 * @param string $item_url The absolute url on which users can purchase a license
-	 * @param string $text_domain The text domain used for translating strings
-	 * @param string $version The version number of the item 
+	 * @param string $slug The theme slug
+	 * @param string $version The theme version
+	 * @param string $text_domain The text domain used for translating strings (optional)
+	 * @param string $author The theme author (optional)
 	 */
-	public function __construct( $item_name, $item_url, $theme_slug, $version, $text_domain = null ) {
+	public function __construct( $item_name, $item_url, $slug, $version, $text_domain = null, $author = null) {
 
 		// store the license page url
 		$license_page = 'themes.php?page=theme-license';
 
-		parent::__construct( $item_name, $item_url, $version, $license_page, $text_domain );
+		parent::__construct( $item_name, $item_url, $slug, $version, $license_page, $text_domain, $author);
+	}
 
-		$this->theme_slug = $theme_slug;
-
+	/**
+	* Setup auto updater for themes
+	*/
+	public function setup_auto_updater() {
 		if( $this->license_is_valid() ) {
 			// setup auto updater
 			require dirname( __FILE__ ) . '/class-update-manager.php';
 			require dirname( __FILE__ ) . '/class-theme-update-manager.php'; // @TODO: Autoload?
-			new Yoast_Theme_Update_Manager( $this->api_url, $this->item_name, $this->get_license_key(), $this->theme_slug, $this->version, 'Yoast' );
+			new Yoast_Theme_Update_Manager( $this->api_url, $this->item_name, $this->get_license_key(), $this->slug, $this->version, $this->author, $this->text_domain );
 		}
 	}
 	

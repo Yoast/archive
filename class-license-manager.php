@@ -3,6 +3,7 @@
 interface iYoast_License_Manager {
 
 	public function specific_hooks();
+	public function setup_auto_updater();
 
 }
 
@@ -12,6 +13,16 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @var string The item name in the EDD shop.
 	*/
 	protected $item_name;
+
+	/**
+	* @var string The theme slug or plugin file
+	*/
+	protected $slug;
+
+	/**
+	* @var string The version number of the item
+	*/ 
+	protected $version;
 
 	/**
 	* @var string The absolute url on which users can purchase a license
@@ -26,7 +37,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	/**
 	* @var string Relative admin URL on which users can enter their license key.
 	*/
-	protected $license_page;
+	protected $license_page = '';
 
 	/**
 	* @var string The text domain used for translating strings
@@ -39,9 +50,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	protected $option_prefix;
 
 	/**
-	* @var string The version number of the item
+	* @var string The item author
 	*/ 
-	protected $version;
+	protected $author = 'Yoast';
 
 	/**
 	* @var string 
@@ -62,24 +73,32 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	 * Constructor
 	 *
 	 * @param string $item_name The item name in the EDD shop
+	 * @param string $slug The theme slug or plugin file
+	 * @param string $version The version number of the item 
 	 * @param string $item_url The absolute url on which users can purchase a license
 	 * @param string $license_page Relative admin URL on which users can enter their license key
 	 * @param string $text_domain The text domain used for translating strings
-	 * @param string $version The version number of the item 
+	 * @param stirng $author The plugin or theme author
 	 */
-	public function __construct( $item_name, $item_url, $version, $license_page, $text_domain = null ) {
+	public function __construct( $item_name, $slug, $version, $item_url = '', $license_page = '', $text_domain = null, $author = null ) {
 
 		$this->item_name = $item_name;
-		$this->item_url = $item_url;
+		$this->slug = $slug;
 		$this->version = $version;	
+		$this->item_url = $item_url;
 		$this->license_page = $license_page;
-
+		
 		// set text domain, if given
 		if( $text_domain !== null) {
 			$this->text_domain = $text_domain;
 		}
 
-		// set option prefix
+		// set author, if given
+		if( $author !== null ) {
+			$this->author = $author;
+		}
+
+		// create and set option prefix
 		$this->option_prefix = 'yoast_' . sanitize_title_with_dashes( $item_name, null, 'save' );
 
 		// setup hooks
@@ -99,6 +118,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		// setup item type (plugin|theme) specific hooks
 		$this->specific_hooks();
+		$this->setup_auto_updater();
 	}
 
 	/**

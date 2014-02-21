@@ -1,6 +1,6 @@
 <?php
 
-//set_site_transient( 'update_plugins', null );
+// set_site_transient( 'update_plugins', null );
 
 class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 	
@@ -13,10 +13,10 @@ class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 	* @param string $slug The path to the main plugin file, relative to plugins dir
 	* @param string $version
 	* @param string $author (optional)
+	* @param string $text_domain 
 	*/
-	public function __construct( $api_url, $item_name, $license_key, $slug, $version, $author = '' ) {
-		
-		parent::__construct( $api_url, $item_name, $license_key, $slug, $version, $author );
+	public function __construct( $api_url, $item_name, $license_key, $slug, $version, $author = '', $text_domain = null) {
+		parent::__construct( $api_url, $item_name, $license_key, $slug, $version, $author, $text_domain );
 
 		// setup hooks
 		$this->setup_hooks();
