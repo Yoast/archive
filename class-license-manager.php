@@ -21,7 +21,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	/**
 	* @var string The URL of the shop running the EDD API. 
 	*/
-	protected $api_url = 'https://yoast.com';
+	protected $api_url = 'https://dannyvankooten.com';
 
 	/**
 	* @var string Relative admin URL on which users can enter their license key.
@@ -121,9 +121,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @param string $type error|updated
 	* @param string $message The (translated) message to display
 	*/
-	public function set_notice( $type, $message ) {
-		
-		add_settings_error( $this->option_prefix . '_license', $type, $message );
+	public function set_notice( $message, $success = true ) {
+		$css_class = ( $success ) ? 'updated' : 'error';
+		add_settings_error( $this->option_prefix . '_license', 'license-notice', $message, $css_class );
 
 	}
 
@@ -139,9 +139,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 			// show success notice if license is valid
 			if($result->license === 'valid') {
-				$this->set_notice( 'success', sprintf( __( "Hi %s. Your %s license has been activated.", $this->text_domain ), $result->customer_name, $this->item_name ) );
+				$this->set_notice( sprintf( __( "Hi %s. Your %s license has been activated.", $this->text_domain ), $result->customer_name, $this->item_name ) );
 			} else {
-				$this->set_notice( 'error', sprintf( __( "Your %s license key seems to be invalid.", $this->text_domain ), $this->item_name ) );
+				$this->set_notice( sprintf( __( "Your %s license key seems to be invalid.", $this->text_domain ), $this->item_name ), false );
 				$this->remote_license_activation_failed = true;
 			}
 
@@ -165,9 +165,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 			
 			// show notice if license is deactivated
 			if( $result->license === 'deactivated' ) {
-				$this->set_notice( 'success', sprintf( __( "Hi %s. Your %s license has been deactivated.", $this->text_domain ), $result->customer_name, $this->item_name ) );				
+				$this->set_notice( sprintf( __( "Hi %s. Your %s license has been deactivated.", $this->text_domain ), $result->customer_name, $this->item_name ) );				
 			} else {
-				$this->set_notice( 'error', sprintf( __( "Failed to deactivate your %s license.", $this->text_domain ), $this->item_name ) );		
+				$this->set_notice( sprintf( __( "Failed to deactivate your %s license.", $this->text_domain ), $this->item_name ), false );		
 			}
 
 			$this->set_license_status( $result->license );
@@ -211,7 +211,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		if( is_wp_error( $response ) ) {
 
 			// set notice, useful for debugging why remote requests are failing
-			$this->set_notice( 'error', sprintf( __( "Request error: %s", $this->text_domain ), $response->get_error_message() ) );
+			$this->set_notice( sprintf( __( "Request error: %s", $this->text_domain ), $response->get_error_message() ), false );
 
 			return false;
 		}

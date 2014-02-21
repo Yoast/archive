@@ -62,13 +62,13 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 			return;
 		}
 
-		$update_url = wp_nonce_url( 'update.php?action=upgrade-theme&amp;theme=' . urlencode( $this->theme_slug ), 'upgrade-theme_' . $this->theme_slug );
+		$update_url = wp_nonce_url( 'update.php?action=upgrade-theme&amp;theme=' . urlencode( $this->slug ), 'upgrade-theme_' . $this->slug );
 		$update_onclick = ' onclick="if ( confirm(\'' . esc_js( __( "Updating this theme will lose any customizations you have made. 'Cancel' to stop, 'OK' to update." ) ) . '\') ) {return true;}return false;"';
 		?>
 		<div id="update-nag">
 			<?php
 				printf( 
-					__( '<strong>%1%s %2$s</strong> is available. <a href="%3$s" class="thickbox" title="%4$s">Check out what\s new</a> or <a href="%5$s" %6$s>update now</a>.' ),
+					__( '<strong>%s version %s</strong> is available. <a href="%s" class="thickbox" title="%s">Check out what\'s new</a> or <a href="%s" %s>update now</a>.' ),
 					$this->item_name,
 					$update_data->new_version,
 					'#TB_inline?width=640&amp;inlineId=' . $this->slug . '_changelog',
@@ -91,7 +91,8 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 		$update_data = $this->get_update_data();
 
 		if( $update_data ) {
-			$value->response[ $this->slug ] = $update_data;
+			// add update data to "updates available" array. convert object to array.
+			$value->response[ $this->slug ] = (array) $update_data;
 		}
 
 		return $value;
@@ -114,7 +115,7 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 	* This gets the update data from a transient (12 hours), if set.
 	* If not, it will make a remote request and get the update data.
 	*
-	* @return array $update_data Array containing the update data
+	* @return object $update_data Object containing the update data
 	*/
 	public function get_update_data() {
 		
@@ -148,7 +149,7 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 		}	
 
 		// an update is available
-		return (array) $update_data;
+		return $update_data;
 	}
 
 	/**
