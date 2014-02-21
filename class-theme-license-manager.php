@@ -56,6 +56,8 @@ class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 	public function show_license_page() {
 		?>
 		<div class="wrap">
+			<?php settings_errors(); ?>
+
 			<?php $this->show_license_form( false ); ?>
 		</div>
 		<?php
