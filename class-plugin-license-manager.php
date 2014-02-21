@@ -23,7 +23,7 @@ class Yoast_Plugin_License_Manager extends Yoast_License_Manager {
 			// setup auto updater
 			require dirname( __FILE__ ) . '/class-update-manager.php';
 			require dirname( __FILE__ ) . '/class-plugin-update-manager.php'; // @TODO: Autoload?
-			new Yoast_Plugin_Update_Manager( $item_name, $this->api_url, $this->get_license_key(), $this->file_slug, $this->version, 'Yoast' );
+			new Yoast_Plugin_Update_Manager( $this->api_url, $item_name, $this->get_license_key(), $this->file_slug, $this->version, 'Yoast' );
 		}
 	}
 

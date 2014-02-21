@@ -1,5 +1,7 @@
 <?php
 
+set_site_transient( 'update_plugins', null );
+
 class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 	
 	/**
@@ -8,7 +10,7 @@ class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 	* @param string $api_url
 	* @param string $item_name
 	* @param string $license_key
-	* @param string $slug
+	* @param string $slug The path to the main plugin file, relative to plugins dir
 	* @param string $version
 	* @param string $author (optional)
 	*/
@@ -54,7 +56,7 @@ class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 		if ( version_compare( $this->version, $api_response->new_version, '<' ) ) {
 
 			// remote version is newer, add to data
-			$data->response[ $this->item_name ] = $api_response;
+			$data->response[ $this->slug ] = $api_response;
 
 		}
 
