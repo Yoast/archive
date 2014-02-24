@@ -45,11 +45,6 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	protected $text_domain = 'yoast';
 
 	/**
-	* @var string The option prefix. Used to prefix license related options.
-	*/
-	protected $option_prefix;
-
-	/**
 	* @var string The item author
 	*/ 
 	protected $author = 'Yoast';
@@ -68,6 +63,16 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @var boolean True if remote license activation just failed
 	*/
 	private $remote_license_activation_failed = false;
+
+	/**
+	* @var array Array of license related options
+	*/
+	private $options = array();
+
+	/**
+	* @var string Used to prefix ID's, option names, etc..
+	*/
+	protected $prefix;
 
 	/**
 	 * Constructor
@@ -98,8 +103,8 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 			$this->author = $author;
 		}
 
-		// create and set option prefix
-		$this->option_prefix = 'yoast_' . sanitize_title_with_dashes( $item_name, null, 'save' );
+		// set prefix
+		$this->prefix = sanitize_title_with_dashes( $this->author . '_' . $item_name, null, 'save' );
 
 		// setup hooks
 		$this->hooks();
@@ -141,9 +146,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @param string $type error|updated
 	* @param string $message The (translated) message to display
 	*/
-	public function set_notice( $message, $success = true ) {
+	protected function set_notice( $message, $success = true ) {
 		$css_class = ( $success ) ? 'updated' : 'error';
-		add_settings_error( $this->option_prefix . '_license', 'license-notice', $message, $css_class );
+		add_settings_error( $this->prefix . '_license', 'license-notice', $message, $css_class );
 
 	}
 
@@ -248,7 +253,12 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @param string $license_status
 	*/
 	public function set_license_status( $license_status ) {
-		update_option( $this->option_prefix . '_license_status', $license_status);
+		// update status
+		$options = $this->get_options();
+		$options['status'] = $license_status;
+
+		// save options
+		$this->set_options( $options );
 	}
 
 	/**
@@ -257,15 +267,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @return string $license_status;
 	*/
 	public function get_license_status() {
-
-		$license_status = get_option( $this->option_prefix . '_license_status', false );
-
-		if( $license_status === false ) {
-			// insert empty license status, enables autoloading of option
-			$this->set_license_status('');
-			return '';
-		}
-
+		$license_status = $this->get_option('status');
 		return trim( $license_status );
 	}
 
@@ -275,13 +277,12 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @param string $license_key 
 	*/
 	public function set_license_key( $license_key ) {
+		// update key
+		$options = $this->get_options();
+		$options['key'] = $license_key;
 
-		// only update option if license key is different
-		if( $license_key === $this->get_license_key() ) {
-			return;
-		}
-
-		update_option( $this->option_prefix . '_license_key', $license_key);
+		// save options
+		$this->set_options( $options );
 	}
 
 	/**
@@ -290,15 +291,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @return string $license_key
 	*/
 	public function get_license_key() {
-
-		$license_key = get_option( $this->option_prefix . '_license_key', false );
-
-		if( $license_key === false ) {
-			// insert empty license key, enables autoloading of option
-			add_option( $this->option_prefix . '_license_key', '');
-			return '';
-		}
-
+		$license_key = $this->get_option( 'key' );
 		return trim( $license_key );
 	}
 
@@ -312,14 +305,60 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	}
 
 	/**
+	* Get all license related options
+	*
+	* @return array Array of license options
+	*/
+	protected function get_options() {
+
+		// create option name
+		$option_name = $this->prefix . '_license';
+
+		// get array of options from db
+		$options = get_option( $option_name, array( ) );
+
+		// setup array of defaults
+		$defaults = array(
+			'key' => '',
+			'status' => ''
+		);
+
+		// merge options with defaults
+		$this->options = wp_parse_args( $options, $defaults );
+
+		return $this->options;
+	}
+
+	/**
+	* Gets a license related option
+	*
+	* @return mixed The option
+	*/
+	protected function get_option( $name ) {
+		$options = $this->get_options();
+		return $options[ $name ];
+	}
+
+	/**
+	* Set license related options
+	*/
+	public function set_options( array $options ) {
+		// create option name
+		$option_name = $this->prefix . '_license';
+
+		// update db
+		update_option( $option_name, $options );
+	}
+
+	/**
 	* Show a form where users can enter their license key
 	* @param boolean $embedded Boolean indicating whether this form is embedded in another form?
 	*/
 	public function show_license_form( $embedded = true ) {
 
-		$key_name = $this->option_prefix . '_license_key';
-		$nonce_name = $this->option_prefix . '_license_nonce';
-		$action_name = $this->option_prefix . '_license_action';
+		$key_name = $this->prefix . '_license_key';
+		$nonce_name = $this->prefix . '_license_nonce';
+		$action_name = $this->prefix . '_license_action';
 
 		
 		$visible_license_key = $this->get_license_key();	
@@ -410,7 +449,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	*/
 	public function catch_post_request() {
 
-		$name = $this->option_prefix . '_license_key';
+		$name = $this->prefix . '_license_key';
 
 		// check if license key was posted and not empty
 		if( ! isset( $_POST[$name] ) ) {
@@ -418,7 +457,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		}
 
 		// run a quick security check
-		$nonce_name = $this->option_prefix . '_license_nonce';
+		$nonce_name = $this->prefix . '_license_nonce';
 
 		if ( ! check_admin_referer( $nonce_name, $nonce_name ) ) {
 			return; 
@@ -447,7 +486,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		}	
 
-		$action_name = $this->option_prefix . '_license_action';
+		$action_name = $this->prefix . '_license_action';
 
 		// was one of the action buttons clicked?
 		if( isset( $_POST[ $action_name ] ) ) {
