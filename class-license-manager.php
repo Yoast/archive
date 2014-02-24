@@ -267,7 +267,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @return string $license_status;
 	*/
 	public function get_license_status() {
-		$license_status = $this->get_option('status');
+		$license_status = $this->get_option( 'status' );
 		return trim( $license_status );
 	}
 
@@ -341,8 +341,10 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 	/**
 	* Set license related options
+	*
+	* @param array $options Array of new license options
 	*/
-	public function set_options( array $options ) {
+	protected function set_options( array $options ) {
 		// create option name
 		$option_name = $this->prefix . '_license';
 
@@ -352,6 +354,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 	/**
 	* Show a form where users can enter their license key
+	*
 	* @param boolean $embedded Boolean indicating whether this form is embedded in another form?
 	*/
 	public function show_license_form( $embedded = true ) {
