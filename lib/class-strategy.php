@@ -76,10 +76,7 @@ class Yoast_Strategy extends Yoast_Theme {
 		add_action( 'wp_head', array( $this, 'conditional_comments' ) );
 
 		// Add support for yoast after header widget on frontpage
-		add_action( 'genesis_after_header', array( $this, 'after_header_widgetareas_front_page' ) );
-
-		// Add support for yoast after header widget
-		add_action( 'genesis_after_header', array( $this, 'after_header_widgetareas' ) );
+		add_action( 'genesis_after_header', array( $this, 'show_after_header' ) );
 
 		// Conditionally add full width sidebars
 		add_action( 'genesis_after_header', array( $this, 'add_full_width_sidebars' ) );
@@ -270,65 +267,27 @@ class Yoast_Strategy extends Yoast_Theme {
 	}
 
 	/**
-	 * Add yst-after-header widget support for front page. If widget not active, don't display
+	 * Adds the tagline and the after-header widgetareas to the page.
+	 * The order of the items is based on the settings in the customizer. If the primary navigation is at the lower setting (below the logo) the tagline can only be below the after-header-widgets (setting: middle).
+	 *
+	 * @since 1.0
 	 */
-	public function after_header_widgetareas_front_page() {
-		if ( is_front_page() && ( is_active_sidebar( 'yoast-after-header-fp-1' ) || is_active_sidebar( 'yoast-after-header-fp-2' ) || is_active_sidebar( 'yoast-after-header-fp-3' ) ) ) {
-			echo '<div id="yoast-after-header-container"><div class="wrap">';
+	public function show_after_header() {
+		$tagline_position = 'middle';
 
-			$areas = array( 'yoast-after-header-fp-1', 'yoast-after-header-fp-2', 'yoast-after-header-fp-3' );
-			if ( 'sidebar-content' == genesis_site_layout() ) {
-				$areas = array_reverse( $areas );
-			}
-
-			foreach ( $areas as $area ) {
-				genesis_widget_area( $area, array(
-					'before' => '<div id="' . $area . '" class="yoast-after-header-fp-widget">',
-					'after'  => '</div>',
-				) );
-			}
-
-			echo '<div class="clearfloat"></div></div></div>';
+		if ( get_theme_mod( 'yst_primary_nav_position' ) == 'topright' && get_theme_mod( 'yst_tagline_positioner' ) == 'top' ) {
+			$tagline_position = 'top';
 		}
-
-		// We explicitly allow for HTML in taglines.
-		$tagline = html_entity_decode( get_bloginfo( 'description' ) );
-		if ( isset ( $tagline ) && ! empty( $tagline ) ) {
-			if (
-					( is_home() && get_theme_mod( 'yst_tagline_home' ) ) ||
-					( is_front_page() && ! is_home() && get_theme_mod( 'yst_tagline_front_page' ) ) ||
-					( is_home() && ! is_front_page() && get_theme_mod( 'yst_tagline_posts_page' ) ) ||
-					( is_singular() && get_theme_mod( 'yst_tagline_singular' ) ) ||
-					( is_archive() && get_theme_mod( 'yst_tagline_archive' ) ) ||
-					( is_404() && get_theme_mod( 'yst_tagline_404' ) ) ||
-					( is_attachment() && get_theme_mod( 'yst_tagline_attachment' ) )
-			) {
-				$output = apply_filters( 'yst_tagline_afterheader', '<div id="yoast-tagline-after-header-container"><p class="yoast-tagline">' . $tagline . '</p></div>', $tagline );
-				echo $output;
-			}
+		if ( $tagline_position == 'top') {
+			$this->show_tagline( $tagline_position );
 		}
-	}
-
-	/**
-	 * Add yst-after-header widget support for site. If widget not active, don't display
-	 */
-	public function after_header_widgetareas() {
-		if ( ! is_front_page() && ( is_active_sidebar( 'yoast-after-header-1' ) || is_active_sidebar( 'yoast-after-header-2' ) || is_active_sidebar( 'yoast-after-header-3' ) ) ) {
-			echo '<div id="yoast-after-header-container"><div class="wrap">';
-
-			$areas = array( 'yoast-after-header-1', 'yoast-after-header-2', 'yoast-after-header-3' );
-			if ( 'sidebar-content' == genesis_site_layout() ) {
-				$areas = array_reverse( $areas );
-			}
-
-			foreach ( $areas as $area ) {
-				genesis_widget_area( $area, array(
-					'before' => '<div id="' . $area . '" class="yoast-after-header-widget">',
-					'after'  => '</div>',
-				) );
-			}
-
-			echo '<div class="clearfloat"></div></div></div>';
+		if ( is_home() || is_front_page() ) {
+			$this->show_after_header_widgetareas_front_page();
+		} else {
+			$this->show_after_header_widgetareas();
+		}
+		if ( $tagline_position != 'top') {
+			$this->show_tagline( $tagline_position );
 		}
 	}
 
@@ -497,5 +456,84 @@ class Yoast_Strategy extends Yoast_Theme {
 	 */
 	public function header_search() {
 		echo genesis_search_form() . '<div class="clearfloat"></div>';
+	}
+
+	/**
+	 * Shows the after header widgetareas for the front page
+	 * These widgetareas differ from the ones shown on all other pages.
+	 *
+	 * @since 1.0
+	 */
+	private function show_after_header_widgetareas_front_page() {
+		if ( is_front_page() && ( is_active_sidebar( 'yoast-after-header-fp-1' ) || is_active_sidebar( 'yoast-after-header-fp-2' ) || is_active_sidebar( 'yoast-after-header-fp-3' ) ) ) {
+			echo '<div id="yoast-after-header-container"><div class="wrap">';
+
+			$areas = array( 'yoast-after-header-fp-1', 'yoast-after-header-fp-2', 'yoast-after-header-fp-3' );
+			if ( 'sidebar-content' == genesis_site_layout() ) {
+				$areas = array_reverse( $areas );
+			}
+
+			foreach ( $areas as $area ) {
+				genesis_widget_area( $area, array(
+					'before' => '<div id="' . $area . '" class="yoast-after-header-fp-widget">',
+					'after'  => '</div>',
+				) );
+			}
+
+			echo '<div class="clearfloat"></div></div></div>';
+		}
+	}
+
+	/**
+	 * Adds tagline to the page based on the settings in the customizer.
+	 *
+	 * @since 1.0
+	 *
+	 * @param string $location string used for customizing the class of the container.
+	 */
+	private function show_tagline( $location ) {
+		$location = ( sanitize_text_field( $location ) == 'top' ? 'top' : 'middle' );
+		// We explicitly allow for HTML in taglines.
+		$tagline = html_entity_decode( get_bloginfo( 'description' ) );
+		if ( isset ( $tagline ) && ! empty( $tagline ) ) {
+			if (
+				( is_home() && get_theme_mod( 'yst_tagline_home' ) ) ||
+				( is_front_page() && ! is_home() && get_theme_mod( 'yst_tagline_front_page' ) ) ||
+				( is_home() && ! is_front_page() && get_theme_mod( 'yst_tagline_posts_page' ) ) ||
+				( is_singular() && get_theme_mod( 'yst_tagline_singular' ) ) ||
+				( is_archive() && get_theme_mod( 'yst_tagline_archive' ) ) ||
+				( is_404() && get_theme_mod( 'yst_tagline_404' ) ) ||
+				( is_attachment() && get_theme_mod( 'yst_tagline_attachment' ) )
+			) {
+				$output = apply_filters( 'yst_tagline_afterheader', '<div id="yoast-tagline-after-header-container" class="tagline-'.$location.'"><p class="yoast-tagline">' . $tagline . '</p></div>', $tagline );
+				echo $output;
+			}
+		}
+	}
+
+	/**
+	 * Shows the after header widgetareas
+	 * These widgetareas differ from the one shown on the front page.
+	 *
+	 * @since 1.0
+	 */
+	private function show_after_header_widgetareas() {
+		if ( ! is_front_page() && ( is_active_sidebar( 'yoast-after-header-1' ) || is_active_sidebar( 'yoast-after-header-2' ) || is_active_sidebar( 'yoast-after-header-3' ) ) ) {
+			echo '<div id="yoast-after-header-container"><div class="wrap">';
+
+			$areas = array( 'yoast-after-header-1', 'yoast-after-header-2', 'yoast-after-header-3' );
+			if ( 'sidebar-content' == genesis_site_layout() ) {
+				$areas = array_reverse( $areas );
+			}
+
+			foreach ( $areas as $area ) {
+				genesis_widget_area( $area, array(
+					'before' => '<div id="' . $area . '" class="yoast-after-header-widget">',
+					'after'  => '</div>',
+				) );
+			}
+
+			echo '<div class="clearfloat"></div></div></div>';
+		}
 	}
 }

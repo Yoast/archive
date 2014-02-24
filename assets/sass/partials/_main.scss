@@ -2351,7 +2351,6 @@ table {
 /**
  * Tagline Widgets
  */
-
 #yoast-tagline-after-header-container {
 	border: {
 		bottom: 1px solid $c_tagline_middle_border_bottom;
@@ -2389,17 +2388,11 @@ table {
 		}
 	}
 }
-.tagline-top {
-	#yoast-tageline-after-header-container {
-		border: {
-			top: 1px solid $c_tagline_top_border_top;
-			bottom: 1px solid $c_tagline_top_border_bottom;
-		}
-	}
-}
-.tagline-middle {
-	#yoast-tageline-after-header-container {
 
+#yoast-tagline-after-header-container.tagline-top {
+	border: {
+		top: 1px solid $c_tagline_top_border_top;
+		bottom: 1px solid $c_tagline_top_border_bottom;
 	}
 }
 

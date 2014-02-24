@@ -81,7 +81,7 @@ class Yoast_Theme_Customizer {
 		$wp_customize->add_setting(
 			'yst_tagline_positioner',
 			array(
-				'default'   => 'top_right',
+				'default'   => 'middle',
 				'transport' => 'postMessage'
 			)
 		);
@@ -381,6 +381,20 @@ class Yoast_Theme_Customizer {
 					'topright'     => __( 'Show on the top-right', 'genesis' ),
 					'centerleft' => __( 'Show below the logo', 'genesis' ),
 				)
+			)
+		);
+
+		// This control goes into the default Site Title & Tagline section
+		$wp_customize->add_control(
+			'yst_tagline_positioner',
+			array(
+				'section'  => 'title_tagline',
+				'label'    => __( 'Position of tagline', 'yoast-theme' ),
+				'type'     => 'radio',
+				'choices'  => array(
+					'top' => __( 'Top', 'yoast-theme' ),
+					'middle'  => __( 'Middle', 'yoast-theme' ) ),
+				'priority' => 200,
 			)
 		);
 
