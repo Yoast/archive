@@ -275,7 +275,7 @@ class Yoast_Strategy extends Yoast_Theme {
 	public function show_after_header() {
 		$tagline_position = 'middle';
 
-		if ( get_theme_mod( 'yst_primary_nav_position' ) == 'topright' && get_theme_mod( 'yst_tagline_positioner' ) == 'top' ) {
+		if ( ( get_theme_mod( 'yst_primary_nav_position' ) == 'topright' || ! has_nav_menu( 'primary' ) ) && get_theme_mod( 'yst_tagline_positioner' ) == 'top' ) {
 			$tagline_position = 'top';
 		}
 		if ( $tagline_position == 'top') {
