@@ -263,7 +263,6 @@ header {
 }
 
 .site-container {
-	max-width: $d_fullWrapper;
 	margin: 0 auto;
 	border: {
 		top: {
@@ -2222,8 +2221,6 @@ table {
 
 // testing no widgets and tagline below menu
 #yoast-after-header-container {
-	width: $d_fullWrapper;
-	max-width: $d_fullWrapper;
 	margin: 0 auto;
 	background: {
 		color: $c_headerBg;
