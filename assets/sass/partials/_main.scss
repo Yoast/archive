@@ -2354,16 +2354,19 @@ table {
 
 #yoast-tagline-after-header-container {
 	border: {
-		top: 1px solid $c_randLine;
-		bottom: 1px solid $c_randLine;
+		bottom: 1px solid $c_tagline_middle_border_bottom;
 	}
 	.yoast-tagline {
 		margin: 0 auto;
 		max-width: $d_full;
 		padding: 20px 10px;
-		font-size: 1.5em;
+		font: {
+			family: $f_baseFont;
+			size: $f_taglineTop-px;
+			size: $f_taglineTop;
+		}
 		color: $c_taglineFullWidth;
-		strong {
+		strong, b {
 			color: $c_taglineFullWidthBold;
 			font-weight: 700;
 		}
@@ -2384,6 +2387,19 @@ table {
 				bottom: 0;
 			}
 		}
+	}
+}
+.tagline-top {
+	#yoast-tageline-after-header-container {
+		border: {
+			top: 1px solid $c_tagline_top_border_top;
+			bottom: 1px solid $c_tagline_top_border_bottom;
+		}
+	}
+}
+.tagline-middle {
+	#yoast-tageline-after-header-container {
+
 	}
 }
 
