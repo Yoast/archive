@@ -14,6 +14,7 @@
 */
 @import "compass";
 @import "compass/css3";
+@import "compass/css3/transform";
 // Import defaults for this theme
 @import "reset";
 @import "dimensions";
@@ -51,13 +52,6 @@ audio:not([controls]) {
 body {
 	background: {
 		color: $c_mainBg;
-	}
-	border: {
-		top: {
-			width: 5px;
-			style: solid;
-			color: $c_bodyTopLine;
-		}
 	}
 	color: $c_mainText;
 	font: {
@@ -268,6 +262,18 @@ header {
 	@extend .floatclearing;
 }
 
+.site-container {
+	max-width: $d_fullWrapper;
+	margin: 0 auto;
+	border: {
+		top: {
+			width: 5px;
+			style: solid;
+			color: $c_bodyTopLine;
+		}
+	}
+}
+
 .site-inner {
 	@extend .floatclearing;
 	clear: both;
@@ -313,7 +319,7 @@ header {
 		padding: 0;
 	}
 	.title-area {
-		margin: 10px 0;
+		margin: 10px 0 0 0;
 		background: {
 			repeat: no-repeat;
 			position: left;
@@ -406,6 +412,9 @@ header {
 		.widget {
 			margin-bottom: 10px;
 		}
+	}
+	.search-form {
+		float: right;
 	}
 	.widget-title {
 		display: none;
@@ -650,45 +659,27 @@ textarea {
 	background: {
 		color: $c_navMainFullBg;
 	}
-	border: {
-		bottom: {
-			width: 10px;
-			style: solid;
-			color: $c_navMainFullBorderBottom;
-		}
+	margin: {
+		bottom: 15px;
 	}
-	&:after {
-		content: "";
-		width: 100%;
-		display: block;
-		border: {
-			top: {
-				width: 10px;
-				style: solid;
-				color: $c_navMainFullBorderTop;
-			}
-		}
+	font: {
+		family: $f_baseFont;
+		size: $f_pagenav-px;
+		size: $f_pagenav;
 	}
 }
 
 .genesis-nav-menu {
 	clear: both;
 	color: $c_navMainLink;
-	font: {
-		family: $f_baseFont;
-	}
 	line-height: 1.5;
 	width: 100%;
-	background: {
-		color: $c_navMainBg;
-	}
 	.menu-item {
 		display: inline-block;
 		text: {
 			align: left;
 		}
 		margin: {
-			left: -4px; // kill inline-block margin, space between items
 			bottom: 0;
 		}
 		&:hover {
@@ -700,9 +691,9 @@ textarea {
 		}
 		> a:after // set up the top level arrows first
      {
-			content: '▼';
+			content: '˅';
 			font: {
-				size: 0.5em;
+				size: 1.1em;
 			}
 			vertical-align: middle;
 			padding: {
@@ -716,39 +707,14 @@ textarea {
 			content: '';
 		}
 	}
-	> li:nth-child(1) {
-		//depending on whether home is item 1 in the menu or not, otherwise switch to 2
-		a {
-			border: {
-				width: 0 1px;
-				style: solid;
-				color: $c_navMainBorder;
-			}
-		}
-		li a {
-			// for first submenu
-			border: {
-				bottom: {
-					width: 1px;
-					style: solid;
-					color: $c_navMainBorder;
-				}
-			}
-		}
-	}
 	a {
 		display: block;
 		position: relative;
 		color: $c_navMainLink;
-		padding: 10px 20px;
-		margin: 0;
-		border: {
-			width: 0 1px 0 0;
-			style: solid;
-			color: $c_navMainBorder;
-		}
+		padding: 10px 0px;
+		margin: 0px 20px;
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 		text: {
 			decoration: none;
@@ -759,30 +725,42 @@ textarea {
 				right: 0;
 			}
 		}
-		&:hover {
-			color: $c_navMainLinkHover;
-			background: {
-				color: $c_navMainLinkBgHover;
+		border: {
+			bottom: {
+				width: 4px;
+				style: solid;
+				color: $c_navMainFullBg;
 			}
-			//text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+		}
+		&:hover {
 			position: static;
+			border: {
+				bottom: {
+					width: 4px;
+					style: solid;
+					color: $c_navMainFullBorderBottom;
+				}
+			}
 		}
 	}
 	.current-menu-item,
 	.current-menu-parent,
 	.current-menu-ancestor {
+		a {
+			border: {
+				bottom: {
+					width: 4px;
+					style: solid;
+					color: $c_navMainFullBorderBottom;
+				}
+			}
+		}
 		> a {
-			color: $c_navSubLink;
-			//text-shadow: 1px 1px 1px $c_navMainLinkShadow;
-			background: {
-				color: $c_navMainBgActive;
+			font: {
+				weight: 700;
 			}
 		}
 		> a:hover {
-			color: $c_navSubLinkHover;
-			background: {
-				color: $c_navSubLinkBgHover;
-			}
 		}
 	}
 	.sub-menu {
@@ -791,10 +769,13 @@ textarea {
 		position: absolute;
 		width: $d_navSubWidth;
 		z-index: 99;
+		@include box-shadow( 1px 2px 4px $c_navSubLink );
 		margin: {
 			left: 4px; // correction for killing inline-block margin
+			top: -4px;
 		}
 		a {
+			margin: 0 1px;
 			background: {
 				color: $c_navSubBg;
 			}
@@ -817,6 +798,16 @@ textarea {
 				background: {
 					color: $c_navSubLinkBgHover;
 				}
+				@include background-image(linear-gradient(lighten($c_navSubLinkBgHover, 10%), $c_navSubLinkBgHover));
+			}
+		}
+		> .menu-item:first-of-type {
+			border: {
+				top: {
+					width: 4px;
+					style: solid;
+					color: $c_navMainFullBorderBottom;
+				}
 			}
 		}
 		> .menu-item {
@@ -838,7 +829,7 @@ textarea {
 			}
 		}
 		.sub-menu {
-			margin: -54px 0 0 204px;
+			margin: -58px 0 0 201px;
 		}
 	}
 	> .first {
@@ -1095,18 +1086,18 @@ textarea {
 
 .site-header {
 	.sub-menu {
-		border: {
-			top: {
-				width: 1px;
-				style: solid;
-				color: $c_navSubBorder;
-			}
-		}
-		.sub-menu {
-			margin: {
-				top: -55px;
-			}
-		}
+//		border: {
+//			top: {
+//				width: 1px;
+//				style: solid;
+//				color: $c_navSubBorder;
+//			}
+//		}
+//		.sub-menu {
+//			margin: {
+//				top: -55px;
+//			}
+//		}
 	}
 }
 
@@ -1121,40 +1112,7 @@ textarea {
  */
 
 // body.sticky,
-body.sticky-menu {
-	padding-top: 120px;
-	.site-header {
-		position: absolute;
-		position: fixed;
-		top: 0;
-		background-position: center -30px;
-		z-index: 400;
-		height: 44px;
-		.wrap {
-			padding: 0;
-		}
-		aside {
-			display: none;
-			visibility: hidden;
-		}
-		.title-area {
-			background: none !important;
-			position: fixed;
-			top: 0;
-			padding: 0;
-			margin: 0;
-			z-index: 600;
-			width: 0;
-			height: 0;
-			.site-title {
-				a {
-					width: 0;
-					height: 0
-				}
-			}
-		}
-	}
-	.nav-primary {
+.sticky-nav {
 		position: absolute;
 		position: fixed;
 		top: 0;
@@ -1202,7 +1160,7 @@ body.sticky-menu {
 				}
 			}
 		}
-	}
+
 }
 
 /**
@@ -1806,7 +1764,14 @@ table {
 			weight: 700;
 		}
 		.entry-author-name {
+			color: $c_metaAtPostAuthor;
 			text-transform: capitalize;
+		}
+		.entry-comments-link {
+			color: $c_metaAtPost;
+			a {
+				color: $c_metaAtPost;
+			}
 		}
 	}
 }
@@ -2257,6 +2222,9 @@ table {
 
 // testing no widgets and tagline below menu
 #yoast-after-header-container {
+	width: $d_fullWrapper;
+	max-width: $d_fullWrapper;
+	margin: 0 auto;
 	background: {
 		color: $c_headerBg;
 	}
@@ -2317,7 +2285,8 @@ table {
 	img {
 		border: 0;
 	}
-	.yoast-after-header-widget {
+	.yoast-after-header-widget,
+	.yoast-after-header-fp-widget {
 		float: left;
 		ul {
 			li {
@@ -2340,12 +2309,14 @@ table {
 	}
 }
 
-#yoast-after-header-1 {
+#yoast-after-header-1,
+#yoast-after-header-fp-1 {
 	width: $d_columnOne;
 	max-width: 50%;
 }
 
-#yoast-after-header-2 {
+#yoast-after-header-2,
+#yoast-after-header-fp-2 {
 	width: $d_columnTwo;
 	max-width: 50%;
 	margin: {
@@ -2355,19 +2326,22 @@ table {
 	vertical-align: middle;
 }
 
-#yoast-after-header-3 {
+#yoast-after-header-3,
+#yoast-after-header-fp-3 {
 	width: $d_sidebar;
 }
 
 .sidebar-content {
 	#yoast-after-header-container {
-		#yoast-after-header-1 {
+		#yoast-after-header-1,
+		#yoast-after-header-fp-1 {
 			margin: {
-				left: 60px;
-				right: 60px;
+				left: 45px;
+				right: 45px;
 			}
 		}
-		#yoast-after-header-2 {
+		#yoast-after-header-2,
+		#yoast-after-header-fp-2 {
 			float: right;
 			margin: 0;
 		}
