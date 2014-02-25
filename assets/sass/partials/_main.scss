@@ -1084,20 +1084,6 @@ textarea {
  */
 
 .site-header {
-	.sub-menu {
-//		border: {
-//			top: {
-//				width: 1px;
-//				style: solid;
-//				color: $c_navSubBorder;
-//			}
-//		}
-//		.sub-menu {
-//			margin: {
-//				top: -55px;
-//			}
-//		}
-	}
 }
 
 .nav-secondary {
@@ -1109,57 +1095,78 @@ textarea {
 /**
  * Sticky Menu - scrolling
  */
-
+.menu-right {
+	.sticky-nav {
+		text-align: right;
+	}
+}
 // body.sticky,
 .sticky-nav {
-		position: absolute;
-		position: fixed;
-		top: 0;
-		width: 100%;
-		z-index: 500;
-		height: 64px;
-		padding: 0;
-		@include box-shadow(0 8px 8px -6px $c_navMainShadow);
-		margin: 0;
+	position: absolute;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 500;
+	padding: 0;
+	@include box-shadow(0 8px 8px -6px $c_navMainShadow);
+	margin: 0;
+	background: {
+		color: $c_navMainBgSticky;
+	}
+	font: {
+		weight:400;
+	}
+	margin: 0;
+	a {
+		border: none;
+	}
+	li {
+		border: none;
+		a {
+			color: $c_navMainLinkSticky;
+			&:hover {
+				border: none;
+				color: $c_navMainLinkSticky;
+			}
+		}
 		li {
 			a {
-				color: $c_navMainLink;
-				&:hover {
-					color: $c_navMainLinkHover;
-					text-shadow: 1px 1px 1px $c_navMainLinkShadow;
-				}
+				color: $c_navSubLink;
 			}
-			li {
-				a {
-					color: $c_navSubLink;
-				}
+		}
+		&.current-menu-item,
+		&.current-menu-parent,
+		&.current-page-ancestor {
+			a {
+				border: none;
 			}
-			&.current-menu-item,
-			&.current-menu-parent,
-			&.current-page-ancestor {
-				background: {
-					color: $c_navMainBgActive;
-				}
-				a {
-					color: $c_navMainTextActive;
-					text-shadow: 1px 1px 1px $c_navMainLinkShadow;
-				}
-			}
-			&.menu-item-search {
-				display: inline;
-				visibility: visible;
-				z-index: 700;
-				float: right;
+		}
+		&.menu-item-search {
+			display: inline;
+			visibility: visible;
+			z-index: 700;
+			float: right;
+			width: 250px;
+			input {
 				width: 250px;
-				input {
-					width: 250px;
-					margin: {
-						top: 5px;
-					}
+				margin: {
+					top: 5px;
 				}
 			}
 		}
-
+		.sub-menu {
+			margin: {
+				top: 0;
+			}
+		}
+	}
+	.genesis-nav-menu {
+		.sub-menu {
+			.sub-menu {
+				margin: -57px 0 0 201px;
+			}
+		}
+	}
 }
 
 /**

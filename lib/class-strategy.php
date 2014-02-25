@@ -9,7 +9,7 @@ require_once( 'framework/class-theme.php' );
 class Yoast_Strategy extends Yoast_Theme {
 
 	const NAME    = 'Strategy';
-	const URL     = 'http://yoast.com/wordpress/themes/strategy/';
+	const URL     = 'https://yoast.com/wordpress/themes/strategy/';
 	const VERSION = '1.0.0';
 
 	/**
@@ -87,6 +87,9 @@ class Yoast_Strategy extends Yoast_Theme {
 
 		// Show menubar at the set position
 		add_action( 'wp_head', array( $this, 'show_primary_nav' ) );
+
+		// Adds class to the body-element. Used in sticky menu.
+		add_action( 'body_class', array( $this, 'add_body_class_for_sticky_nav' ) );
 	}
 
 	/**
@@ -535,5 +538,19 @@ class Yoast_Strategy extends Yoast_Theme {
 
 			echo '<div class="clearfloat"></div></div></div>';
 		}
+	}
+
+	/**
+	 * Adds a class to the body-element to be used in checks for location of primary navigation (menu).
+	 *
+	 * @param array $classes contains all the current classes
+	 *
+	 * @return array Updated array of classes
+	 */
+	public function add_body_class_for_sticky_nav( $classes ) {
+		if ( get_theme_mod( 'yst_primary_nav_position' ) == 'topright' ) {
+			$classes[] = 'menu-right';
+		}
+		return $classes;
 	}
 }
