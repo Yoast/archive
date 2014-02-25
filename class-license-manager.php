@@ -164,9 +164,22 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 			// show success notice if license is valid
 			if($result->license === 'valid') {
-				$this->set_notice( sprintf( __( "Hi %s. Your %s license has been activated.", $this->text_domain ), $result->customer_name, $this->item_name ) );
+				$message = sprintf( __( "Your %s license has been activated. You have %d activations left. ", $this->text_domain ), $this->item_name, ($result->activations_left - 1) );
+				
+				// add upgrade notice if user has less than 3 activations left
+				if( $result->activations_left < 3) {
+					$message .= sprintf( __( '<a href="%s">Did you know you can upgrade your license?</a>', $this->text_domain ), $this->item_url );
+				}
+
+				$this->set_notice( $message, true );
 			} else {
-				$this->set_notice( sprintf( __( "Your %s license key seems to be invalid.", $this->text_domain ), $this->item_name ), false );
+
+				if( $result->error === 'no_activations_left' ) {
+					$this->set_notice( sprintf( __('You\'ve reached your activation limit. You must <a href="%s">upgrade your license</a> to use it on this site.', $this->text_domain ), $this->item_url ), false );
+				} else {
+					$this->set_notice( __( "Failed to activate your license, your license key seems to be invalid.", $this->text_domain ) );
+				}
+
 				$this->remote_license_activation_failed = true;
 			}
 
@@ -175,8 +188,6 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		return ( $this->license_is_valid() );
 	}
-
-	// valid, invalid, deactivated, failed
 
 	/**
 	 * Remotely deactivate License
@@ -190,7 +201,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 			
 			// show notice if license is deactivated
 			if( $result->license === 'deactivated' ) {
-				$this->set_notice( sprintf( __( "Hi %s. Your %s license has been deactivated.", $this->text_domain ), $result->customer_name, $this->item_name ) );				
+				$this->set_notice( sprintf( __( "Your %s license has been deactivated.", $this->text_domain ), $this->item_name ) );				
 			} else {
 				$this->set_notice( sprintf( __( "Failed to deactivate your %s license.", $this->text_domain ), $this->item_name ), false );		
 			}
@@ -552,7 +563,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 						.attr('type', 'hidden')
 						.attr( 'name', $(this).attr('name') )
 						.val( $(this).val() )
-						.appendTo($licenseForm);
+						.appendTo( $licenseForm );
 
 					// change button text to show we're working..
 					var text = ( $actionButton.hasClass('yoast-license-activate') ) ? "Activating..." : "Deactivating...";

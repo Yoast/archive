@@ -109,12 +109,17 @@ class Yoast_Update_Manager {
 		// call remote api
 		$response = wp_remote_post( $this->api_url, $request_params );
 
+
 		// wp / http error?
 		if( is_wp_error( $response) ) {
 			$this->wp_error = $response;
+
+			// show error to user
 			add_action( 'admin_notices', array( $this, 'show_update_error') );
+
 			return false;
 		}
+
 
 		// decode response
 		$response = json_decode( wp_remote_retrieve_body( $response ) );
