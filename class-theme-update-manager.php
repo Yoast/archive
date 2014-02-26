@@ -31,6 +31,22 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 	}
 
 	/**
+	* Get the current theme version
+	*
+	* @return string The version number
+	*/
+	private function get_theme_version() {
+
+		// if version was not set, get it from the Theme stylesheet
+		if( $this->version === '' ) {
+			$theme = wp_get_theme( $this->slug );
+			return $theme->get( 'Version' );
+		}
+
+		return $this->version;
+	}
+
+	/**
 	* Setup hooks
 	*/
 	private function setup_hooks() {
@@ -39,6 +55,35 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 		add_action( 'load-update-core.php', array( $this, 'delete_theme_update_transient' ) );
 		add_action( 'load-themes.php', array( $this, 'delete_theme_update_transient' ) );
 		add_action( 'load-themes.php', array( $this, 'load_themes_screen' ) );
+	}
+
+	/*
+	* Deletes "updates available" transient
+	*/
+	public function delete_theme_update_transient() {
+		delete_transient( $this->response_key );
+	}
+
+	/**
+	* Return "updates available" transient
+	* @return mixed
+	*/
+	public function get_theme_update_transient() {
+		return get_transient( $this->response_key );
+	}
+
+	/**
+	* Set "updates available" transient
+	*/
+	public function set_theme_update_transient( $value ) {
+		$update_data = $this->get_update_data();
+
+		if( $update_data ) {
+			// add update data to "updates available" array. convert object to array.
+			$value->response[ $this->slug ] = (array) $update_data;
+		}
+
+		return $value;
 	}
 
 	/**
@@ -84,31 +129,7 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 		<?php
 	}
 
-	/**
-	* Set "updates available" transient
-	*/
-	public function set_theme_update_transient( $value ) {
-		$update_data = $this->get_update_data();
-
-		if( $update_data ) {
-			// add update data to "updates available" array. convert object to array.
-			$value->response[ $this->slug ] = (array) $update_data;
-		}
-
-		return $value;
-	}
-
-	public function get_theme_update_transient() {
-		return get_transient( $this->response_key );
-	}
-
-	/*
-	* Deletes "updates available" transient
-	*/
-	public function delete_theme_update_transient() {
-		delete_transient( $this->response_key );
-	}
-
+	
 	/**
 	* Get update data
 	*
@@ -150,22 +171,6 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 
 		// an update is available
 		return $update_data;
-	}
-
-	/**
-	* Get the current theme version
-	*
-	* @return string The version number
-	*/
-	private function get_theme_version() {
-
-		// if version was not set, get it from the Theme stylesheet
-		if( $this->version === '' ) {
-			$theme = wp_get_theme( $this->slug );
-			return $theme->get( 'Version' );
-		}
-
-		return $this->version;
 	}
 
 

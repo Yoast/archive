@@ -5,6 +5,7 @@ class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 	/**
 	 * Constructor
 	 *
+	 * @param string $api_url The URL running the EDD API
 	 * @param string $item_name The item name in the EDD shop
 	 * @param string $item_url The absolute url on which users can purchase a license
 	 * @param string $slug The theme slug
@@ -12,12 +13,12 @@ class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 	 * @param string $text_domain The text domain used for translating strings (optional)
 	 * @param string $author The theme author (optional)
 	 */
-	public function __construct( $item_name, $item_url, $slug, $version, $text_domain = null, $author = null) {
+	public function __construct( $api_url, $item_name, $item_url, $slug, $version, $text_domain = '', $author = '') {
 
 		// store the license page url
 		$license_page = 'themes.php?page=theme-license';
 
-		parent::__construct( $item_name, $item_url, $slug, $version, $license_page, $text_domain, $author);
+		parent::__construct( $api_url, $item_name, $item_url, $slug, $version, $license_page, $text_domain, $author);
 	}
 
 	/**

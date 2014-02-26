@@ -10,6 +10,11 @@ interface iYoast_License_Manager {
 abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 	/**
+	* @var string The URL of the shop running the EDD API. 
+	*/
+	protected $api_url = 'http://localhost/wp/latest/';
+
+	/**
 	* @var string The item name in the EDD shop.
 	*/
 	protected $item_name;
@@ -30,14 +35,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	protected $item_url = 'https://yoast.com';
 
 	/**
-	* @var string The URL of the shop running the EDD API. 
+	* @var string Absolute admin URL on which users can enter their license key.
 	*/
-	protected $api_url = 'http://localhost/wp/latest/';
-
-	/**
-	* @var string Relative admin URL on which users can enter their license key.
-	*/
-	protected $license_page = '';
+	protected $license_page_url = '';
 
 	/**
 	* @var string The text domain used for translating strings
@@ -77,6 +77,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	/**
 	 * Constructor
 	 *
+	 * @param string $api_url The url running the EDD API
 	 * @param string $item_name The item name in the EDD shop
 	 * @param string $slug The theme slug or plugin file
 	 * @param string $version The version number of the item 
@@ -85,32 +86,80 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	 * @param string $text_domain The text domain used for translating strings
 	 * @param stirng $author The plugin or theme author
 	 */
-	public function __construct( $item_name, $slug, $version, $item_url = '', $license_page = '', $text_domain = null, $author = null ) {
+	public function __construct( $api_url, $item_name, $slug, $version, $item_url = '', $license_page = '', $text_domain = '', $author = '' ) {
 
+		$this->api_url = $api_url;
 		$this->item_name = $item_name;
 		$this->slug = $slug;
 		$this->version = $version;	
-		$this->item_url = $item_url;
-		$this->license_page = $license_page;
 		
+		// set item_url or default to shop url
+		if( $this->item_url !== '' ) {
+			$this->item_url = $item_url;
+		} else {
+			$this->item_url = $this->api_url;
+		}
+
+		// set page on which users can enter their license
+		$this->license_page_url = admin_url( $license_page );
+				
 		// set text domain, if given
-		if( $text_domain !== null) {
+		if( $text_domain !== '' ) {
 			$this->text_domain = $text_domain;
 		}
 
 		// set author, if given
-		if( $author !== null ) {
+		if( $author !== '' ) {
 			$this->author = $author;
 		}
 
 		// set prefix
-		$this->prefix = sanitize_title_with_dashes( $this->author . '_' . $item_name, null, 'save' );
+		$this->prefix = sanitize_title_with_dashes( $this->author . '_' . $this->item_name, null, 'save' );
 
 		// setup hooks
 		$this->hooks();
 
 		// maybe set license key from constant
 		$this->maybe_set_license_key_from_constant();		
+	}
+
+	/**
+	* Sets the store URL on which users can purchase, upgrade or renew their license.
+	* 
+	* @param string $item_url
+	*/
+	public function set_item_url( $item_url ) {
+		$this->item_url = $item_url;
+	}
+
+	/**
+	* Sets the URL on which users can enter their license key
+	*
+	* @param string $license_page Relative admin URL on which users can enter their license key
+	*/
+	public function set_license_page( $license_page ) {
+		$this->license_page_url = admin_url( $license_page );
+	}
+
+	/**
+	* Sets the item author
+	*
+	* @param string $author
+	*/ 
+	public function set_author( $author ) {
+		$this->author = $author;
+
+		// update prefix
+		$this->prefix = sanitize_title_with_dashes( $this->author . '_' . $this->item_name, null, 'save' );
+	}
+
+	/**
+	* Sets the item text domain
+	*
+	* @param string $text_domain
+	*/
+	public function set_text_domain( $text_domain ) {
+		$this->text_domain = $text_domain;
 	}
 
 	/**
@@ -123,6 +172,8 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		// setup item type (plugin|theme) specific hooks
 		$this->specific_hooks();
+
+		// setup the auto updater
 		$this->setup_auto_updater();
 	}
 
@@ -135,7 +186,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		if( ! $this->license_is_valid() ) {
 		?>
 		<div class="error">
-			<p><?php printf( __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updated and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', $this->text_domain ), $this->item_name, admin_url( $this->license_page ), $this->item_url ); ?></p>
+			<p><?php printf( __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updated and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', $this->text_domain ), $this->item_name, $this->license_page_url, $this->item_url ); ?></p>
 		</div>
 		<?php
 		}
@@ -176,6 +227,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 				}
 
 				$this->set_notice( $message, true );
+
 			} else {
 
 				// show notice if user is at their activation limit
