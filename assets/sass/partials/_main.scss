@@ -1945,6 +1945,18 @@ table {
 	h3 {
 		color: $c_commentReplyTitle;
 	}
+	.comment-form-comment {
+		font: {
+			weight: 700;
+		}
+	}
+	.form-submit {
+		input {
+			background: {
+				color: red;
+			}
+		}
+	}
 }
 
 #comments {
@@ -1952,6 +1964,13 @@ table {
 		color: $c_mainBg;
 	}
 	.comment-list {
+		border: {
+			top: 1px solid $c_commentBorder;
+			bottom: 1px solid $c_commentBorder;
+		}
+		padding: {
+			top: 20px;
+		}
 		div.avatar {
 			float: left;
 			width: $d_avatarDept2345;
@@ -2036,6 +2055,7 @@ table {
 		}
 	}
 	h3 {
+		color: $c_commentTitle;
 		margin: {
 			bottom: 24px;
 		}
@@ -2053,13 +2073,15 @@ table {
 		}
 	}
 	.comment-author {
+		a {
+			color: $c_commentAuthor;
+		}
 		.post_author_comment {
 			background: {
 				image: image-url($c_sprite);
 				repeat: no-repeat;
 				position: -72px 0;
 			}
-			color: $c_commentAuthor;
 			padding: {
 				left: 16px;
 			}
@@ -2078,6 +2100,15 @@ table {
 		padding: 40px 40px 16px;
 		.reply {
 			display: none;
+		}
+	}
+	.comment-reply-link {
+		color: $c_commentReplyLink;
+		&:after {
+			content: ' \bb';
+			padding: {
+				left: 2px;
+			}
 		}
 	}
 }
@@ -2107,6 +2138,7 @@ table {
 
 .logged-in-as {
 	a {
+		color: $c_logged_in_as;
 		font: {
 			weight: 700;
 		}

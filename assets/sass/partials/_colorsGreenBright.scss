@@ -168,7 +168,7 @@ $c_inputTextPlaceholder:#999999;
 
 $c_inputSubmitText:     #ffffff;
 $c_inputSubmitTextHover:#ffffff;
-$c_inputSubmitBg:       #888888;
+$c_inputSubmitBg:       #008293;
 $c_inputSubmitBgHover:  #009d38;
 $c_inputSubmitBorder:   #888888;
 $c_inputSubmitTextShadow: #333333;
@@ -179,11 +179,14 @@ $c_commentReplyTitle:		#009d38;
 $c_commentBg:           #ffffff;
 $c_commentText:         #000000;
 $c_commentHeader:       #666666;
-$c_commentAuthor:       #888888;
+$c_commentTitle:				#009d38;
+$c_commentAuthor:       #008293;
 $c_commentLink:         #009d38;
-$c_commentBorder:       #009d38;
+$c_commentReplyLink: 		#008293;
+$c_commentBorder:       #888888;
 $c_commentReplyBorder:  #dddddd;
-$c_commentByAuthorBg:   #eeeeee;
+$c_commentByAuthorBg:   #f0f0f0;
+$c_logged_in_as:				#008293;
 
 // author block
 $c_articleAuthorBg:   #f0f0f0;
