@@ -32,7 +32,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	/**
 	* @var string The URL of the shop running the EDD API. 
 	*/
-	protected $api_url = 'https://dannyvankooten.com';
+	protected $api_url = 'http://localhost/wp/latest/';
 
 	/**
 	* @var string Relative admin URL on which users can enter their license key.
@@ -143,13 +143,13 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 	/**
 	* Set a notice to display in the admin area
+	*
 	* @param string $type error|updated
-	* @param string $message The (translated) message to display
+	* @param string $message The message to display
 	*/
 	protected function set_notice( $message, $success = true ) {
 		$css_class = ( $success ) ? 'updated' : 'error';
 		add_settings_error( $this->prefix . '_license', 'license-notice', $message, $css_class );
-
 	}
 
 	/**
@@ -160,22 +160,31 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		$result = $this->call_license_api( 'activate' );
 
-		if( $result ) {
+		if( $result ) {	
 
 			// show success notice if license is valid
 			if($result->license === 'valid') {
-				$message = sprintf( __( "Your %s license has been activated. You have %d activations left. ", $this->text_domain ), $this->item_name, ($result->activations_left - 1) );
-				
+				$message = sprintf( __( "Your %s license has been activated. You have used %d/%d activations. ", $this->text_domain ), $this->item_name, $result->site_count, $result->license_limit );
+			
 				// add upgrade notice if user has less than 3 activations left
-				if( $result->activations_left < 3) {
+				if( $result->license_limit > 0 && ( $result->license_limit - $result->site_count ) <= 3 ) {
 					$message .= sprintf( __( '<a href="%s">Did you know you can upgrade your license?</a>', $this->text_domain ), $this->item_url );
+				// add extend notice if license is expiring in less than 1 month
+				} elseif( strtotime( $result->expires ) < strtotime( "+1 month" ) ) {
+					$days_left = round( ( strtotime( $result->expires ) - strtotime( "now" ) ) / 86400 );
+					$message .= sprintf( __( '<a href="%s">Your license is expiring in %d days, would you like to extend it?</a>', $this->text_domain ), $this->item_url, $days_left );
 				}
 
 				$this->set_notice( $message, true );
 			} else {
 
+				// show notice if user is at their activation limit
 				if( $result->error === 'no_activations_left' ) {
 					$this->set_notice( sprintf( __('You\'ve reached your activation limit. You must <a href="%s">upgrade your license</a> to use it on this site.', $this->text_domain ), $this->item_url ), false );
+				// show notice if the license is expired
+				} elseif( $result->error == "expired" ) {
+					$this->set_notice( sprintf( __('Your license is expired. You must <a href="%s">extend your license</a> in order to use it again.', $this->text_domain ), $this->item_url ), false );
+				// show a general notice if it's any other error
 				} else {
 					$this->set_notice( __( "Failed to activate your license, your license key seems to be invalid.", $this->text_domain ) );
 				}
@@ -346,7 +355,8 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	/**
 	* Gets a license related option
 	*
-	* @return mixed The option
+	* @param string $name The option name
+	* @return mixed The option value
 	*/
 	protected function get_option( $name ) {
 		$options = $this->get_options();
@@ -356,8 +366,8 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	/**
 	* Set a license related option
 	*
-	* @param string $name
-	* @param string $value
+	* @param string $name The option name
+	* @param mixed $value The option value
 	*/
 	protected function set_option( $name, $value ) {
 		// get options
@@ -399,6 +409,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		</h2>
 		<?php 
 
+		// Output form tags if we're not embedded in another form
 		if( ! $embedded ) { 
 			echo '<form method="post" action="">';
 		}
