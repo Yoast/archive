@@ -1548,9 +1548,6 @@ table {
 	padding: {
 		bottom: 14px;
 	}
-	border: {
-		bottom: 1px solid $c_hrLine;
-	}
 }
 
 .category {
@@ -1678,7 +1675,7 @@ table {
 				align: right;
 				decoration: none;
 			}
-			color: $c_mainLink;
+			color: $c_excerpt_readmore;
 			font: {
 				weight: 700;
 			}
@@ -1706,8 +1703,12 @@ table {
 
 .back-to-top {
 	text-align: right;
+	color: $c_back_to_top;
 	font: {
 		weight: 700;
+	}
+	a {
+		color: $c_back_to_top;
 	}
 }
 

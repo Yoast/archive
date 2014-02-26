@@ -46,9 +46,10 @@ class Yoast_Strategy extends Yoast_Theme {
 		unregister_sidebar( 'sidebar-alt' );
 
 		// Image Sizes
-		add_image_size( 'yst-archive-thumb', 180, 0, true );
+		add_image_size( 'yst-archive-thumb', 180, 0, true );			// Used on archive pages except frontpage
+		add_image_size( 'yst-frontpage-thumb', 255, 0, true );			// Used on front page only
 		add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
-		add_image_size( 'fullwidth-thumb', 290, 193, true );
+		add_image_size( 'fullwidth-thumb', 300, 200, true );			// Used on full width pages only
 
 		// Change image output
 		remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
@@ -167,10 +168,6 @@ class Yoast_Strategy extends Yoast_Theme {
 	public function archive_image() {
 		global $post;
 
-		if ( ! is_front_page() ) {
-			return;
-		}
-
 		if ( ! has_post_thumbnail() ) {
 			return;
 		}
@@ -188,6 +185,9 @@ class Yoast_Strategy extends Yoast_Theme {
 
 		//setup thumbnail image args to be used with genesis_get_image();
 		$size         = 'yst-archive-thumb'; // Change this to whatever add_image_size you want
+		if ( is_front_page() ) {
+			$size = 'yst-frontpage-thumb';
+		}
 		$default_attr = array(
 			'class' => "align{$align} attachment-{$size} {$size}",
 			'alt'   => $post->post_title,
