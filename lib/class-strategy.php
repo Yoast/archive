@@ -42,6 +42,9 @@ class Yoast_Strategy extends Yoast_Theme {
 		// Register theme sidebars
 		$this->register_sidebars();
 
+		// Unregister sidebars
+		unregister_sidebar( 'sidebar-alt' );
+
 		// Image Sizes
 		add_image_size( 'yst-archive-thumb', 180, 0, true );
 		add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
