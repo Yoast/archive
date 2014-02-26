@@ -2225,16 +2225,16 @@ table {
 /**
  * After Header Widgets
  */
-
 // testing no widgets and tagline below menu
 #yoast-after-header-container {
 	margin: 0 auto;
 	background: {
-		color: $c_headerBg;
+		color: $c_afterHeaderBg;
 	}
 	padding: {
 		top: 24px; // this will be overwritten for Simple Image Plugin, so the image will be fixed to the top
 	}
+	@include box-shadow(0 8px 8px -6px $c_afterHeaderBoxShadow, 0 8px 8px -6px $c_afterHeaderBoxShadow inset);
 	.widget_simpleimage {
 		.simple-image {
 			img {
@@ -2251,7 +2251,7 @@ table {
 	}
 	.widget-title {
 		margin: 0;
-		color: $c_headerH3;
+		color: $c_afterHeaderH3;
 		padding: 0 0 10px;
 		+ div {
 			padding: {
@@ -2403,7 +2403,6 @@ table {
 /**
  * Sidebars
  */
-
 .sidebar {
 	color: $c_sidebarText;
 	ul, ol {
@@ -2561,9 +2560,12 @@ table {
 }
 
 /**
- * Sidebar Widgets
+ * Special styling for Widgets
  */
 
+/**
+ * Big Button widget. Shows a big button with text.
+ */
 .widget_bigbutton {
 	.cta-button {
 		a {
@@ -2581,19 +2583,16 @@ table {
 			@include background-image(linear-gradient(lighten($c_ctaBg, 10%), $c_ctaBg));
 			color: $c_ctaTextWhite !important;
 			font: {
-				size: $f_ctaText-px;
-				size: $f_ctaText;
+				size: $f_ctaAfterHeader-px;
+				size: $f_ctaAfterHeader;
+				weight: 400;
 			}
 			line-height: 1em;
 			@include text-shadow($c_ctaTextShadow 1px 1px 5px);
 			&:after {
-				content: ' \25B6';
-				font: {
-					family: "Lucinda Sans Unicode", sans-serif;
-					size: 0.6em;
-				}
+				content: ' \bb';
 				padding: {
-					left: 5px;
+					left: 3px;
 				}
 			}
 			text-decoration: none !important;
@@ -2603,6 +2602,45 @@ table {
 				}
 				@include background-image(linear-gradient($c_ctaBg, lighten($c_ctaBg, 10%)));
 				color: $c_ctaTextWhite;
+			}
+		}
+	}
+	.cta-button-1 {
+		@extend .cta-button;
+		a {
+			border-color: $c_ctaBg_1;
+			@include background-image(linear-gradient(lighten($c_ctaBg_1, 10%), $c_ctaBg_1));
+			&:hover {
+				background: {
+					color: lighten($c_ctaBg_1, 10%);
+				}
+				@include background-image(linear-gradient($c_ctaBg_1, lighten($c_ctaBg_1, 10%)));
+			}
+		}
+	}
+	.cta-button-2 {
+		@extend .cta-button;
+		a {
+			border-color: $c_ctaBg_2;
+			@include background-image(linear-gradient(lighten($c_ctaBg_2, 10%), $c_ctaBg_2));
+			&:hover {
+				background: {
+					color: lighten($c_ctaBg_2, 10%);
+				}
+				@include background-image(linear-gradient($c_ctaBg_2, lighten($c_ctaBg_2, 10%)));
+			}
+		}
+	}
+	.cta-button-3 {
+		@extend .cta-button;
+		a {
+			border-color: $c_ctaBg_3;
+			@include background-image(linear-gradient(lighten($c_ctaBg_3, 10%), $c_ctaBg_3));
+			&:hover {
+				background: {
+					color: lighten($c_ctaBg_3, 10%);
+				}
+				@include background-image(linear-gradient($c_ctaBg_3, lighten($c_ctaBg_3, 10%)));
 			}
 		}
 	}
