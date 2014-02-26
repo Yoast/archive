@@ -264,12 +264,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @param string $license_status
 	*/
 	public function set_license_status( $license_status ) {
-		// update status
-		$options = $this->get_options();
-		$options['status'] = $license_status;
-
-		// save options
-		$this->set_options( $options );
+		$this->set_option( 'status', $license_status );
 	}
 
 	/**
@@ -288,12 +283,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	* @param string $license_key 
 	*/
 	public function set_license_key( $license_key ) {
-		// update key
-		$options = $this->get_options();
-		$options['key'] = $license_key;
-
-		// save options
-		$this->set_options( $options );
+		$this->set_option( 'key', $license_key );
 	}
 
 	/**
@@ -341,16 +331,6 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	}
 
 	/**
-	* Gets a license related option
-	*
-	* @return mixed The option
-	*/
-	protected function get_option( $name ) {
-		$options = $this->get_options();
-		return $options[ $name ];
-	}
-
-	/**
 	* Set license related options
 	*
 	* @param array $options Array of new license options
@@ -361,6 +341,33 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		// update db
 		update_option( $option_name, $options );
+	}
+
+	/**
+	* Gets a license related option
+	*
+	* @return mixed The option
+	*/
+	protected function get_option( $name ) {
+		$options = $this->get_options();
+		return $options[ $name ];
+	}
+
+	/**
+	* Set a license related option
+	*
+	* @param string $name
+	* @param string $value
+	*/
+	protected function set_option( $name, $value ) {
+		// get options
+		$options = $this->get_options();
+
+		// update option
+		$options[ $name ] = $value;
+
+		// save options
+		$this->set_options( $options );
 	}
 
 	/**
