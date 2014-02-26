@@ -14,7 +14,6 @@
 */
 @import "compass";
 @import "compass/css3";
-@import "compass/css3/transform";
 // Import defaults for this theme
 @import "reset";
 @import "dimensions";
@@ -109,6 +108,7 @@ strong {
 	font: {
 		weight: 700;
 	}
+	color: $c_strong;
 }
 
 ol,
@@ -1271,7 +1271,7 @@ img.alignright,
 .breadcrumb {
 	max-width: $d_full;
 	margin: 0 auto;
-	padding: 10px 0 0;
+	padding: 20px 0 0;
 	color: $c_breadcrumbs;
 	font: {
 		size: $f_breadcrumbs-px;
@@ -1314,16 +1314,24 @@ img.alignright,
 .author-box {
 	margin: 40px 0;
 	padding: 10px;
+	color: $c_articleAuthorText;
 	background: {
 		color: $c_articleAuthorBg;
 	}
+	font: {
+		family: $f_baseFont;
+		size: $f_articleAuthor-px;
+		size: $f_articleAuthor;
+	}
 	.author-box-title {
+		color: $c_articleAuthorTitle;
 		margin: {
 			bottom: 4px;
 		}
 		font: {
-			size: $f_mainH2-px;
-			size: $f_mainH2;
+			family: $f_baseFont;
+			size: $f_articleAuthorTitle-px;
+			size: $f_articleAuthorTitle;
 		}
 	}
 	p {
@@ -1932,6 +1940,12 @@ table {
 /**
  * Comments
  */
+
+#respond {
+	h3 {
+		color: $c_commentReplyTitle;
+	}
+}
 
 #comments {
 	background: {
@@ -2694,23 +2708,14 @@ table {
  */
 
 .yoast-after-post-widget {
-	border: {
-		width: 1px 0;
-		style: solid;
-		color: $c_hrLine;
+	background: {
+		color: $c_afterPostBg;
 	}
-	padding: {
-		top: 20px;
-	}
+	padding: 20px;
 	margin: {
 		bottom: 36px;
 	}
 	.widget {
-		border: {
-			width: 1px 0 0;
-			style: solid;
-			color: $c_hrLine;
-		}
 		padding: {
 			top: 20px;
 		}
@@ -2733,11 +2738,12 @@ table {
 			}
 		}
 		.widget-title {
+			color: $c_afterPost_widget_title;
 			margin: {
 				bottom: 0;
 			}
 			background: {
-				color: $c_mainBg;
+				color: $c_afterPostBg;
 			}
 		}
 	}
