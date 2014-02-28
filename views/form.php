@@ -1,3 +1,9 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'HTTP/1.0 403 Forbidden' );
+	die;
+} 
+?>
 <h2>
 	<?php printf( __( "%s License Settings", $this->text_domain ), $this->item_name ); ?>&nbsp; &nbsp; 
 </h2>
