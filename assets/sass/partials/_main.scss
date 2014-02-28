@@ -2669,6 +2669,37 @@ table {
 			}
 		}
 	}
+	.cta-button-medium {
+		@extend .cta-button;
+	}
+	.cta-button-light {
+		@extend .cta-button;
+		$ctaBglight: lighten($c_ctaBg, 25%);
+		a {
+			border-color: $ctaBglight;
+			@include background-image(linear-gradient(lighten($ctaBglight, 10%), $ctaBglight));
+			&:hover {
+				background: {
+					color: lighten($ctaBglight, 10%);
+				}
+				@include background-image(linear-gradient($ctaBglight, lighten($ctaBglight, 10%)));
+			}
+		}
+	}
+	.cta-button-dark {
+		@extend .cta-button;
+		$ctaBgDark: darken($c_ctaBg, 25%);
+		a {
+			border-color: $ctaBgDark;
+			@include background-image(linear-gradient(lighten($ctaBgDark, 10%), $ctaBgDark));
+			&:hover {
+				background: {
+					color: lighten($ctaBgDark, 10%);
+				}
+				@include background-image(linear-gradient($ctaBgDark, lighten($ctaBgDark, 10%)));
+			}
+		}
+	}
 }
 
 /**
