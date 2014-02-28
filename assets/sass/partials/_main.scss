@@ -2652,7 +2652,7 @@ table {
 			}
 		}
 	}
-	.cta-button-1 {
+	.cta-button-light {
 		@extend .cta-button;
 		a {
 			border-color: $c_ctaBg_1;
@@ -2665,7 +2665,7 @@ table {
 			}
 		}
 	}
-	.cta-button-2 {
+	.cta-button-medium {
 		@extend .cta-button;
 		a {
 			border-color: $c_ctaBg_2;
@@ -2678,7 +2678,7 @@ table {
 			}
 		}
 	}
-	.cta-button-3 {
+	.cta-button-dark {
 		@extend .cta-button;
 		a {
 			border-color: $c_ctaBg_3;
