@@ -21,7 +21,7 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 			<th scope="row" valign="top"><?php _e( 'License status', $this->text_domain ); ?></th>
 			<td>
 				<?php if( $this->license_is_valid() ) { ?>
-				<span style="color: white; background: green; padding:3px 6px;">ACTIVE</span> &nbsp; - &nbsp; you are receiving updates.
+				<span style="color: white; background: limegreen; padding:3px 6px;">ACTIVE</span> &nbsp; - &nbsp; you are receiving updates.
 				<?php } else { ?>
 				<span style="color:white; background: red; padding: 3px 6px;">INACTIVE</span> &nbsp; - &nbsp; you are <strong>not</strong> receiving updates.
 				<?php } ?>
