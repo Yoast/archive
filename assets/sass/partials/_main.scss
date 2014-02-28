@@ -2151,6 +2151,9 @@ table {
 
 .widget {
 	clear: both;
+	margin: {
+		bottom: 30px;
+	}
 }
 
 /**
@@ -2300,6 +2303,9 @@ table {
 		margin: 0;
 		color: $c_afterHeaderH3;
 		padding: 0 0 10px;
+		background: {
+			color: $c_afterHeaderBg;
+		}
 		+ div {
 			padding: {
 				left: 0;
@@ -2466,9 +2472,6 @@ table {
 		bottom: 32px;
 	}
 	> p {
-		padding: {
-			left: 10px;
-		}
 		a {
 			text: {
 				decoration: underline;
@@ -2565,7 +2568,7 @@ table {
 		.widget-wrap {
 			p,
 			div {
-				padding: 0 10px;
+				padding: 0 0;
 				a {
 					font: {
 						weight: 700;
@@ -2580,28 +2583,34 @@ table {
 	font: {
 		size: $f_sidebarH3-px;
 		size: $f_sidebarH3;
+		weight: 700;
 	}
 	margin: {
 		bottom: 16px;
 	}
+	padding: {
+		bottom: 10px;
+	}
 	text: {
 		transform: none;
 	}
-	background-color: $c_sidebarH3Bg;
+	background: {
+		color: $c_sidebarH3Bg;
+	}
 	color: $c_sidebarH3;
-	padding: 10px;
+	border: {
+		bottom: 1px solid $c_widgetTitleBorder;
+	}
 	a {
 		border: none;
 		color: $c_sidebarH3;
 	}
-	+ div {
-		padding: {
-			left: 10px;
-		}
-	}
-	+ div#calendar_wrap {
-		padding: {
-			left: 0;
+}
+
+#yoast-after-header-container {
+	.widget-title {
+		background: {
+			color: $c_afterHeaderBg;
 		}
 	}
 }
@@ -2609,6 +2618,40 @@ table {
 /**
  * Special styling for Widgets
  */
+
+/* Post Connector Widget */
+.widget_sp_widget_showchilds {
+	ul {
+		h4 {
+			font: {
+				size: $f_PC_title-px;
+				size: $f_PC_title;
+				weight: 700;
+			}
+		}
+		p {
+			font: {
+				size: $f_PC_text-px;
+				size: $f_PC_text;
+				weight: 400;
+			}
+		}
+		.excerpt_readmore {
+			font: {
+				size: $f_PC_rm-px;
+				size: $f_PC_rm;
+				weight: 400;
+			}
+		}
+	}
+}
+
+/* WP Calendar - standard widget */
+.wp-calendar {
+	a {
+		color: $c_widget_calendarLink;
+	}
+}
 
 /**
  * Big Button widget. Shows a big button with text.
@@ -2796,9 +2839,6 @@ table {
 	line-height: 32px;
 	margin: {
 		bottom: 40px;
-	}
-	padding: {
-		left: 10px;
 	}
 	a {
 		display: block;
@@ -3167,7 +3207,7 @@ table {
  */
 .widget-wrap {
 	.wpseo-opening-hours {
-		margin: 0 10px;
+		margin: 0;
 		width: 92%;
 		tbody {
 			border: 0;
