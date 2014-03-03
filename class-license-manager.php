@@ -12,7 +12,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	/**
 	* @var string The URL of the shop running the EDD API. 
 	*/
-	protected $api_url = 'http://localhost/wp/latest/';
+	protected $api_url;
 
 	/**
 	* @var string The item name in the EDD shop.
@@ -32,12 +32,12 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	/**
 	* @var string The absolute url on which users can purchase a license
 	*/
-	protected $item_url = 'https://yoast.com';
+	protected $item_url;
 
 	/**
 	* @var string Absolute admin URL on which users can enter their license key.
 	*/
-	protected $license_page_url = '';
+	protected $license_page_url = '#';
 
 	/**
 	* @var string The text domain used for translating strings
