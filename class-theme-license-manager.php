@@ -13,12 +13,12 @@ class Yoast_Theme_License_Manager extends Yoast_License_Manager {
 	 * @param string $text_domain The text domain used for translating strings (optional)
 	 * @param string $author The theme author (optional)
 	 */
-	public function __construct( $api_url, $item_name, $item_url, $slug, $version, $text_domain = '', $author = '') {
+	public function __construct( $api_url, $item_name, $slug, $version, $item_url, $text_domain = '', $author = '') {
 
 		// store the license page url
 		$license_page = 'themes.php?page=theme-license';
 
-		parent::__construct( $api_url, $item_name, $item_url, $slug, $version, $license_page, $text_domain, $author);
+		parent::__construct( $api_url, $item_name, $slug, $version, $item_url, $license_page, $text_domain, $author);
 	}
 
 	/**

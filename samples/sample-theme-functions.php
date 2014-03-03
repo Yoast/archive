@@ -16,6 +16,6 @@ if( is_admin() ) {
 	require_once dirname( __FILE__ ) . '/License-Manager/class-theme-license-manager.php';
 
 	// instantiate license class
-	$license_manager = new Yoast_Theme_License_Manager( $api_url, $item_name, $item_url, $theme_slug, $version, $text_domain, $author );
+	$license_manager = new Yoast_Theme_License_Manager( $api_url, $item_name, $theme_slug, $version, $item_url, $text_domain, $author );
 
 }
