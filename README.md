@@ -4,10 +4,10 @@ Yoast License Manager
 This library will take care of the following.
 
 - Managing license related options
-- Settings license key from constant
+- Setting license key from a constant
 - Obfuscasting (valid) license keys
 - Remote license activation / deactivation
-- Checking for updates
+- Checking for plugin or theme updates
 
 ## Usage
 
