@@ -242,7 +242,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 				} else {
 					// show a general notice if it's any other error
-					$this->set_notice( __( "Failed to activate your license, your license key seems to be invalid.", $this->text_domain ) );
+					$this->set_notice( __( "Failed to activate your license, your license key seems to be invalid.", $this->text_domain ), false );
 				}
 
 				$this->remote_license_activation_failed = true;
