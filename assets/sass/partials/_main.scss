@@ -3048,13 +3048,7 @@ table {
 	background: {
 		color: $c_footerWidgetsBg;
 	}
-	border: {
-		top: {
-			width: 1px;
-			style: solid;
-			color: $c_footerWidgetsBorderTop;
-		}
-	}
+	@include box-shadow(0 8px 8px -6px darken($c_footerWidgetsBg, 10%) inset);
 	color: $c_footerWidgetsText;
 	clear: both;
 	padding: 30px 0 16px;
@@ -3103,7 +3097,17 @@ table {
 	.widget {
 		margin-bottom: 24px;
 		.widget-title {
+			border: none;
+			padding: {
+				bottom: 0;
+			}
+			margin: {
+				bottom: 0;
+			}
 			color: $c_footerWidgetsH3;
+			background: {
+				color: $c_footerWidgetsBg;
+			}
 		}
 	}
 
@@ -3252,13 +3256,7 @@ img#wpstats {
 	background: {
 		color: $c_footerBg;
 	}
-	border: {
-		top: {
-			width: 1px;
-			style: solid;
-			color: $c_footerBorderTop;
-		}
-	}
+	@include box-shadow(0 8px 8px -6px darken($c_footerBg, 15%) inset);
 	color: $c_footerText;
 	font: {
 		size: $f_footerBaseFont-px;
