@@ -243,16 +243,21 @@ $c_sidebarH4:           #666666;
 $c_sidebarH4Bg:         #ffffff;
 
 // After Post
-$c_afterPostBg:							#f0f0f0;
+$c_afterPostBg:							#ffffff;
 $c_afterPost_widget_title: 	#009d38;
 
 // Widgets
-$c_widgetTitleBorder:	#b5b5b5;
-$c_widget_calendarLink: #009d38;
+$c_widgetTitleBorder:					#b5b5b5;
+$c_widget_calendar_link: 			#009d38;
+$c_widget_calendar_prevnext: 	#008293;
+
+$c_widget_localseo_openinghours:			#008293;
+$c_widget_localseo_openinghours_day:	#888888;
+$c_widget_localseo_openinghours_time:	#000000;
 
 	// footerwidgets
 $c_footerWidgetsBg:       #eeeeee;
-$c_footerWidgetsBorderTop:#91b71b;
+$c_footerWidgetsBorderTop:#888888;
 $c_footerWidgetsText:     #000000;
 $c_footerWidgetsLink:     #888888;
 $c_footerWidgetsLinkHover:#000000;

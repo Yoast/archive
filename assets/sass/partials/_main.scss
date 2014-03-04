@@ -414,15 +414,14 @@ header {
 	}
 	.search-form {
 		float: right;
+		margin: 10px 0;
 	}
 	.widget-title {
-		display: none;
-		visibility: hidden;
-		+ div {
-			padding: {
-				left: 0;
-			}
-		}
+		@extend .widget-title;
+	}
+
+	.wpseo-map-canvas {
+		float: right;
 	}
 
 }
@@ -2247,23 +2246,20 @@ table {
 			}
 			#prev {
 				text-align: left;
-				padding: {
-					left: 10px;
+				a {
+					color: $c_widget_calendar_prevnext;
 				}
 			}
 			#next {
 				text-align: right;
-				padding: {
-					right: 10px;
+				a {
+					color: $c_widget_calendar_prevnext;
 				}
 			}
 		}
 		caption {
 			line-height: 1em;
 			text-align: left;
-			padding: {
-				left: 10px;
-			}
 			float: none;
 			font: {
 				weight: 700;
@@ -2558,7 +2554,7 @@ table {
 		}
 	}
 	form {
-		padding: 0 10px;
+		padding: 0;
 		&.search-form {
 			padding: 0;
 		}
@@ -2586,7 +2582,7 @@ table {
 		weight: 700;
 	}
 	margin: {
-		bottom: 16px;
+		bottom: 8px;
 	}
 	padding: {
 		bottom: 10px;
@@ -2609,8 +2605,12 @@ table {
 
 #yoast-after-header-container {
 	.widget-title {
+		@extend .widget-title;
 		background: {
-			color: $c_afterHeaderBg;
+			color: $c_footerWidgetsBg;
+		}
+		border: {
+			bottom: 1px solid $c_footerWidgetsBorderTop;
 		}
 	}
 }
@@ -2618,6 +2618,68 @@ table {
 /**
  * Special styling for Widgets
  */
+
+/* Local SEO Timetable General */
+#wpseo-opening-hours {
+	margin: 0;
+	tbody {
+		border: 0;
+	}
+	td {
+		border: 0;
+		padding: 0;
+		line-height: 1.5em;
+		&.day {
+			color: $c_widget_localseo_openinghours_day;
+			font: {
+				size: $f_widget_localseo_openinghours_day-px;
+				size: $f_widget_localseo_openinghours_day;
+				weight: 700;
+			}
+		}
+		&.time {
+			color: $c_widget_localseo_openinghours_time;
+			font: {
+				size: $f_widget_localseo_openinghours_time-px;
+				size: $f_widget_localseo_openinghours_time;
+			}
+		}
+	}
+}
+
+/* Local SEO Show Address */
+.WPSEO_Show_Address {
+	@extend #wpseo-opening-hours;
+}
+
+/* Local SEO Show Map */
+.WPSEO_Show_Map {
+	#map_canvas {
+		width: 100%;
+		margin: {
+			bottom: 15px;
+		}
+	}
+	#origin {
+		margin: {
+			top: 10px;
+			bottom: 10px;
+		}
+	}
+	.wpseo-directions-heading {
+		color: $c_widget_localseo_openinghours;
+		font: {
+			family: $f_baseFont;
+			size: $f_widget_localseo_openinghours_heading-px;
+			size: $f_widget_localseo_openinghours_heading;
+		}
+	}
+}
+
+/* Local SEO Opening Hours */
+.WPSEO_Show_OpeningHours {
+	@extend #wpseo-opening-hours;
+}
 
 /* Post Connector Widget */
 .widget_sp_widget_showchilds {
@@ -2649,7 +2711,7 @@ table {
 /* WP Calendar - standard widget */
 .wp-calendar {
 	a {
-		color: $c_widget_calendarLink;
+		color: $c_widget_calendar_link;
 	}
 }
 
@@ -2741,13 +2803,6 @@ table {
  */
 
 .widget-yns {
-	p,
-	form {
-		padding: {
-			left: 10px;
-			right: 10px;
-		}
-	}
 	form {
 		label {
 			display: block;
@@ -2781,47 +2836,42 @@ table {
 /**
  * Newletter Widget additions for the after-post area
  */
-
-.yoast-after-post-widget {
+#yoast-after-post-container {
 	background: {
 		color: $c_afterPostBg;
 	}
-	padding: 20px;
-	margin: {
-		bottom: 36px;
-	}
-	.widget {
-		padding: {
-			top: 20px;
+	.yoast-after-post-widget {
+		margin: {
+			bottom: 36px;
 		}
-		&:first-child {
-			border: 0;
+		.widget {
 			padding: {
-				top: 0;
+				top: 20px;
 			}
-		}
-		div {
-			padding: {
-				left: 0;
+			&:first-child {
+				border: 0;
+				padding: {
+					top: 0;
+				}
 			}
-		}
-		.widget-title,
-		p,
-		form {
-			padding: {
-				left: 0;
+			div {
+				padding: {
+					left: 0;
+				}
 			}
-		}
-		.widget-title {
-			color: $c_afterPost_widget_title;
-			margin: {
-				bottom: 0;
+			.widget-title,
+			p,
+			form {
+				padding: {
+					left: 0;
+				}
 			}
-			background: {
-				color: $c_afterPostBg;
+			.widget-title {
+				@extend .widget-title;
 			}
 		}
 	}
+
 }
 
 /**
@@ -2962,40 +3012,28 @@ table {
 	}
 }
 
-/**
- * Facebook Like Box
- * Banner widget
- */
-
-.widget_banner {
-	.widget-title {
-		background: {
-			color: $c_mainBg;
-		}
-		color: $c_sidebarH4;
-		padding: 10px 10px 0 0;
-		margin: {
-			bottom: 16px;
-		}
-		+ div {
-			padding: {
-				left: 0;
-			}
-		}
-	}
-}
-
-/**
- * Optional styling for fb-widget
- *
- * .yst_fb_widget {
- *  .fb-dark-bg {
- *  }
- *  .fb-light-bg {
- *  }
- *}
- *
- */
+///**
+// * Facebook Like Box
+// * Banner widget
+// */
+//
+//.widget_banner {
+//	.widget-title {
+//		background: {
+//			color: $c_mainBg;
+//		}
+//		color: $c_sidebarH4;
+//		padding: 10px 10px 0 0;
+//		margin: {
+//			bottom: 16px;
+//		}
+//		+ div {
+//			padding: {
+//				left: 0;
+//			}
+//		}
+//	}
+//}
 
 /**
  * Full Width Widgets
@@ -3018,11 +3056,6 @@ table {
 
 	#yoast-fullwidth-widgetarea-2 {
 		margin: 0 45px;
-	}
-	.widget {
-		padding: {
-			bottom: 24px;
-		}
 	}
 	.widget-title {
 		@extend .widget-title;
@@ -3097,16 +3130,12 @@ table {
 	.widget {
 		margin-bottom: 24px;
 		.widget-title {
-			border: none;
-			padding: {
-				bottom: 0;
-			}
-			margin: {
-				bottom: 0;
-			}
-			color: $c_footerWidgetsH3;
+			@extend .widget-title;
 			background: {
 				color: $c_footerWidgetsBg;
+			}
+			border: {
+				bottom: 1px solid $c_footerWidgetsBorderTop;
 			}
 		}
 	}
@@ -3203,33 +3232,6 @@ table {
 	color: $c_mainLink;
 	h3 {
 		color: $c_mainLink;
-	}
-}
-
-/**
- * LOCAL SEO
- */
-.widget-wrap {
-	.wpseo-opening-hours {
-		margin: 0;
-		width: 92%;
-		tbody {
-			border: 0;
-		}
-		td {
-			border: 0;
-			padding: 0;
-			line-height: 1.5em;
-			&.time {
-				font: {
-					size: $f_tableSmall-px;
-					size: $f_tableSmall;
-				}
-			}
-		}
-	}
-	.wpseo-map-canvas {
-		width: 100% !important;
 	}
 }
 
