@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 } 
 ?>
-<h2>
-	<?php printf( __( "%s License Settings", $this->text_domain ), $this->item_name ); ?>&nbsp; &nbsp; 
-</h2>
+<h3>
+	<?php printf( __( "%s: License Settings", $this->text_domain ), $this->item_name ); ?>&nbsp; &nbsp; 
+</h3>
 <?php 
 
 // Output form tags if we're not embedded in another form

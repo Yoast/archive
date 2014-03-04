@@ -114,7 +114,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		}
 
 		// set prefix
-		$this->prefix = sanitize_title_with_dashes( $this->author . '_' . $this->item_name, null, 'save' );
+		$this->prefix = sanitize_title_with_dashes( $this->item_name . '_', null, 'save' );
 
 		// setup hooks
 		$this->hooks();
@@ -150,7 +150,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		$this->author = $author;
 
 		// update prefix
-		$this->prefix = sanitize_title_with_dashes( $this->author . '_' . $this->item_name, null, 'save' );
+		$this->prefix = sanitize_title_with_dashes( $this->item_name . '_', null, 'save' );
 	}
 
 	/**
@@ -378,7 +378,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	protected function get_options() {
 
 		// create option name
-		$option_name = $this->prefix . '_license';
+		$option_name = $this->prefix . 'license';
 
 		// get array of options from db
 		$options = get_option( $option_name, array( ) );
@@ -402,7 +402,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	*/
 	protected function set_options( array $options ) {
 		// create option name
-		$option_name = $this->prefix . '_license';
+		$option_name = $this->prefix . 'license';
 
 		// update db
 		update_option( $option_name, $options );
@@ -443,9 +443,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	*/
 	public function show_license_form( $embedded = true ) {
 
-		$key_name = $this->prefix . '_license_key';
-		$nonce_name = $this->prefix . '_license_nonce';
-		$action_name = $this->prefix . '_license_action';
+		$key_name = $this->prefix . 'license_key';
+		$nonce_name = $this->prefix . 'license_nonce';
+		$action_name = $this->prefix . 'license_action';
 
 		
 		$visible_license_key = $this->get_license_key();	
@@ -471,7 +471,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	*/
 	public function catch_post_request() {
 
-		$name = $this->prefix . '_license_key';
+		$name = $this->prefix . 'license_key';
 
 		// check if license key was posted and not empty
 		if( ! isset( $_POST[$name] ) ) {
@@ -479,7 +479,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		}
 
 		// run a quick security check
-		$nonce_name = $this->prefix . '_license_nonce';
+		$nonce_name = $this->prefix . 'license_nonce';
 
 		if ( ! check_admin_referer( $nonce_name, $nonce_name ) ) {
 			return; 
@@ -508,7 +508,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		}	
 
-		$action_name = $this->prefix . '_license_action';
+		$action_name = $this->prefix . 'license_action';
 
 		// was one of the action buttons clicked?
 		if( isset( $_POST[ $action_name ] ) ) {
@@ -555,7 +555,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		
 		if( $this->license_constant_name === '') {
 			// generate license constant name
-			$this->set_license_constant_name('YOAST_' . strtoupper( str_replace( array(' ', '-' ), '', sanitize_key( $this->item_name ) ) ) . '_LICENSE');
+			$this->set_license_constant_name( strtoupper( str_replace( array(' ', '-' ), '', sanitize_key( $this->item_name ) ) ) . '_LICENSE');
 		}
 
 		// set license key from constant
