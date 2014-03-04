@@ -230,14 +230,18 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 			} else {
 
-				// show notice if user is at their activation limit
-				if( $result->error === 'no_activations_left' ) {
-					$this->set_notice( sprintf( __('You\'ve reached your activation limit. You must <a href="%s">upgrade your license</a> to use it on this site.', $this->text_domain ), $this->item_url ), false );
-				// show notice if the license is expired
-				} elseif( $result->error == "expired" ) {
-					$this->set_notice( sprintf( __('Your license is expired. You must <a href="%s">extend your license</a> in order to use it again.', $this->text_domain ), $this->item_url ), false );
-				// show a general notice if it's any other error
+				if( isset($result->error) ) {
+					
+					if( $result->error === 'no_activations_left' ) {
+						// show notice if user is at their activation limit
+						$this->set_notice( sprintf( __('You\'ve reached your activation limit. You must <a href="%s">upgrade your license</a> to use it on this site.', $this->text_domain ), $this->item_url ), false );
+					} elseif( $result->error == "expired" ) {
+						// show notice if the license is expired
+						$this->set_notice( sprintf( __('Your license is expired. You must <a href="%s">extend your license</a> in order to use it again.', $this->text_domain ), $this->item_url ), false );
+					}
+
 				} else {
+					// show a general notice if it's any other error
 					$this->set_notice( __( "Failed to activate your license, your license key seems to be invalid.", $this->text_domain ) );
 				}
 
