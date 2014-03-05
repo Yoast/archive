@@ -9,6 +9,12 @@ interface iYoast_License_Manager {
 
 abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
+
+	/**
+	* @const VERSION The version number of the License_Manager class
+	*/
+	const VERSION = 1;
+
 	/**
 	* @var string The URL of the shop running the EDD API. 
 	*/
