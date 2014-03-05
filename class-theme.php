@@ -175,7 +175,7 @@ abstract class Yoast_Theme implements iYoast_Theme {
 		add_filter( 'genesis_comment_list_args', array( $this, 'comment_list_args' ) );
 
 		// Load the textdomain
-		load_theme_textdomain( 'yoast-theme', get_stylesheet_directory() . '/lib/framework/languages' );
+		load_child_theme_textdomain( 'yoast-theme', get_stylesheet_directory() . '/lib/framework/languages' );
 	}
 
 	/**
