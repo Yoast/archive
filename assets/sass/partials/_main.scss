@@ -1311,6 +1311,14 @@ img.alignright,
 }
 
 .author-box {
+	img {
+		width: 70px;
+		height: auto;
+		margin: {
+			right: 10px;
+			top: 10px;
+		}
+	}
 	margin: 40px 0;
 	padding: 10px;
 	color: $c_articleAuthorText;
@@ -2719,12 +2727,12 @@ table {
 			a {
 				color: $c_widget_PC_link;
 				text-decoration: none;
-			}
-			&:after {
-				color: $c_widget_PC_link;
-				content: ' \bb';
-				padding: {
-					left: 3px;
+				&:after {
+					color: $c_widget_PC_link;
+					content: ' \bb';
+					padding: {
+						left: 3px;
+					}
 				}
 			}
 		}
