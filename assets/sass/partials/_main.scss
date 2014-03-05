@@ -1750,8 +1750,33 @@ table {
 
 // full-width
 .full-width-content {
-	.content {
+	section,
+	#comments,
+	#respond,
+	.back-to-top {
 		width: $d_fullwidthMainColumn;
+		max-width: 100%;
+	}
+	article {
+		header,
+		entry-content,
+		footer {
+			width: $d_fullwidthMainColumn;
+			max-width: 100%;
+		}
+		border: {
+			top: 1px solid $c_fullwidth_articleBorder;
+		}
+		padding: {
+			top: 20px;
+		}
+	}
+	article:first-child {
+		border: none;
+		padding: 0;
+	}
+	.content {
+		width: $d_full;
 		max-width: 100%;
 		float: none;
 	}
@@ -3105,6 +3130,22 @@ table {
 		padding: {
 			left: 10px;
 			right: 10px;
+		}
+	}
+}
+.full-width-content {
+	#yoast-fullwidth-bottom-container {
+		.yoast-fullwidth-widget {
+			section {
+				width: $d_sidebar;
+				max-width: 100%;
+			}
+		}
+	}
+	.footer-widgets {
+		.widget-area {
+			width: $d_sidebar;
+			max-width: 100%;
 		}
 	}
 }
