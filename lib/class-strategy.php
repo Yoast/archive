@@ -204,6 +204,7 @@ class Yoast_Strategy extends Yoast_Theme {
 	 * @param array    $args
 	 * @param integer  $depth
 	 *
+	 * @todo try to get this into Yoast_Theme
 	 * @todo create a template partial containing this HTML block
 	 */
 	public function comment_callback( $comment, $args, $depth ) {
@@ -215,37 +216,38 @@ class Yoast_Strategy extends Yoast_Theme {
 
 			<?php do_action( 'genesis_before_comment' ); ?>
 
-			<header class="comment-header">
-				<p <?php echo genesis_attr( 'comment-author' ); ?>>
-					<?php
-
-					$author = get_comment_author();
-					$url = get_comment_author_url();
-
-					if ( ! empty( $url ) && 'http://' !== $url ) {
-						$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
-					}
-
-					printf( 'By <span itemprop="name">%s</span> ', $author );
-
-					$pattern = 'on <time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
-					printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
-
-					if ( $comment->user_id === $post->post_author ) {
-						echo ' <span class="post_author_comment">' . __( 'Author', 'yoast-theme' ) . '</span>';
-					}
-
-					?>
-
-				</p>
-			</header>
 			<div class="avatar">
 				<?php
-				$avatar_size = 1 == $depth ? 126 : 80;
+				$avatar_size = 1 == $depth ? 88 : 62;
 				echo get_avatar( $comment, $avatar_size );
 				?>
 			</div>
 			<div class="comment-content" itemprop="commentText">
+				<header class="comment-header">
+					<p <?php echo genesis_attr( 'comment-author' ); ?>>
+						<?php
+
+						$author = get_comment_author();
+						$url = get_comment_author_url();
+
+						if ( ! empty( $url ) && 'http://' !== $url ) {
+							$author = sprintf( '<a href="%s" rel="external nofollow" itemprop="url">%s</a>', esc_url( $url ), $author );
+						}
+
+						printf( __( 'By %s', 'yoast-theme' ), sprintf( '<span itemprop="name">%s</span> ', $author ) );
+						_e( ' on ', 'yoast-theme' );
+
+						$pattern = '<time itemprop="commentTime" datetime="%s"><a href="%s" itemprop="url">%s %s %s</a></time>';
+						printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
+
+						if ( $comment->user_id === $post->post_author ) {
+							echo ' <span class="post_author_comment">' . __( 'Author', 'yoast-theme' ) . '</span>';
+						}
+
+						?>
+
+					</p>
+				</header>
 				<?php if ( ! $comment->comment_approved ) : ?>
 					<p class="alert"><?php echo apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation.', 'genesis' ) ); ?></p>
 				<?php endif; ?>
@@ -255,21 +257,24 @@ class Yoast_Strategy extends Yoast_Theme {
 				<p class="comment-actions">
 					<?php
 					comment_reply_link( array_merge( $args, array(
-						'depth'  => $depth,
-						'before' => '<span class="comment-reply">',
-						'after'  => '</span>',
+						'reply_text' => __( 'Reply &raquo;', 'yoast-theme' ),
+						'depth'      => $depth,
+						'before'     => '<span class="comment-reply">',
+						'after'      => '</span>',
 					) ) );
 					edit_comment_link( __( 'Edit comment', 'yoast-theme' ), ' <span class="edit">', '</span>' );
 					?>
 				</p>
 			</div>
-			<div class="clearfloat"></div>
 
 			<?php do_action( 'genesis_after_comment' ); ?>
+
+			<div class="floatclearing"></div>
 
 		</article>
 		<?php
 		//* No ending </li> tag because of comment threading
+
 	}
 
 	/**

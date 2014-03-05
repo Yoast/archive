@@ -1971,12 +1971,11 @@ table {
 		color: $c_mainBg;
 	}
 	.comment-list {
-		border: {
-			top: 1px solid $c_commentBorder;
-			bottom: 1px solid $c_commentBorder;
+		margin: {
+			bottom: 20px;
 		}
-		padding: {
-			top: 20px;
+		border: {
+			bottom: 1px solid $c_commentBorder;
 		}
 		div.avatar {
 			float: left;
@@ -1989,6 +1988,14 @@ table {
 		.comment-content {
 			float: left;
 			width: 75%;
+		}
+		> li {
+			padding: {
+				top: 10px;
+			}
+			border: {
+				top: 1px solid $c_commentBorder;
+			}
 		}
 		li {
 			list-style-type: none;
@@ -2034,12 +2041,15 @@ table {
 		}
 	}
 	.bypostauthor > article {
-		background: {
-			color: $c_commentByAuthorBg;
-		}
 		header {
-			background: {
-				color: $c_commentByAuthorBg; // same as above
+			padding: {
+				bottom: 10px;
+			}
+			margin: {
+				bottom: 10px;
+			}
+			border: {
+				bottom: 1px solid $c_commentByAuthor_border;
 			}
 		}
 		padding: 10px;
@@ -2064,7 +2074,7 @@ table {
 	h3 {
 		color: $c_commentTitle;
 		margin: {
-			bottom: 24px;
+			bottom: 14px;
 		}
 	}
 	.comment-header {
@@ -2084,6 +2094,8 @@ table {
 			color: $c_commentAuthor;
 		}
 		.post_author_comment {
+			float: right;
+			color: $c_commentAuthor;
 			background: {
 				image: image-url($c_sprite);
 				repeat: no-repeat;
@@ -2111,12 +2123,6 @@ table {
 	}
 	.comment-reply-link {
 		color: $c_commentReplyLink;
-		&:after {
-			content: ' \bb';
-			padding: {
-				left: 2px;
-			}
-		}
 	}
 }
 
@@ -3068,29 +3074,6 @@ table {
 		}
 	}
 }
-
-///**
-// * Facebook Like Box
-// * Banner widget
-// */
-//
-//.widget_banner {
-//	.widget-title {
-//		background: {
-//			color: $c_mainBg;
-//		}
-//		color: $c_sidebarH4;
-//		padding: 10px 10px 0 0;
-//		margin: {
-//			bottom: 16px;
-//		}
-//		+ div {
-//			padding: {
-//				left: 0;
-//			}
-//		}
-//	}
-//}
 
 /**
  * Full Width Widgets
