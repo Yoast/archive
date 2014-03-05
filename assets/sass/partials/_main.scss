@@ -2683,31 +2683,80 @@ table {
 
 /* Post Connector Widget */
 .widget_sp_widget_showchilds {
-	ul {
-		h4 {
-			font: {
-				size: $f_PC_title-px;
-				size: $f_PC_title;
-				weight: 700;
+		ul {
+		padding-left:0;
+		li {
+			list-style-type: none;
+			a {
+				color: $c_widget_PC_link;
+				&:hover {
+					color: $c_linkHover;
+				}
+			}
+			margin: {
+				bottom: 30px;
 			}
 		}
-		p {
+		h3,
+		h4 {
 			font: {
-				size: $f_PC_text-px;
-				size: $f_PC_text;
-				weight: 400;
+				size: $f_widget_PC_title-px;
+				size: $f_widget_PC_title;
+				weight: 700;
+			}
+			a {
+				color: $c_widget_PC_link;
+				text-decoration: none;
 			}
 		}
 		.excerpt_readmore {
 			font: {
-				size: $f_PC_rm-px;
-				size: $f_PC_rm;
-				weight: 400;
+				size: $f_widget_PC_rm-px;
+				size: $f_widget_PC_rm;
+				weight: 700;
+			}
+			text-align: right;
+			a {
+				color: $c_widget_PC_link;
+				text-decoration: none;
+			}
+			&:after {
+				color: $c_widget_PC_link;
+				content: ' \bb';
+				padding: {
+					left: 3px;
+				}
 			}
 		}
 	}
 }
-
+/* Post Connector After Post */
+.pc-post-children,
+.pc-post-parents,
+.pc-post-list {
+	@extend .widget_sp_widget_showchilds;
+	h3 {
+		color: $c_widget_PC_heading;
+	}
+	ul {
+		margin: {
+			left: 0;
+		}
+		li {
+			margin: 0;
+		}
+	}
+}
+.pc-post-children,
+.pc-post-parents {
+	ul {
+		li {
+			margin: {
+				left: 10px;
+			}
+		}
+	}
+}
 /* WP Calendar - standard widget */
 .wp-calendar {
 	a {
