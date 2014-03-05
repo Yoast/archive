@@ -154,9 +154,6 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	*/ 
 	public function set_author( $author ) {
 		$this->author = $author;
-
-		// update prefix
-		$this->prefix = sanitize_title_with_dashes( $this->item_name . '_', null, 'save' );
 	}
 
 	/**
@@ -206,7 +203,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	*/
 	protected function set_notice( $message, $success = true ) {
 		$css_class = ( $success ) ? 'updated' : 'error';
-		add_settings_error( $this->prefix . '_license', 'license-notice', $message, $css_class );
+		add_settings_error( $this->prefix . 'license', 'license-notice', $message, $css_class );
 	}
 
 	/**
