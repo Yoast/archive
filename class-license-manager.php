@@ -187,9 +187,15 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		// show notice if license is invalid
 		if( ! $this->license_is_valid() ) {
+
+			if( $this->get_license_key() === '' ) {
+				$message = '<b>Warning!</b> You didn\'t set your %s license key yet, which means you\'re missing out on updates and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.';
+			} else {
+				$message = '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updates and support! <a href="%s">Activate your license</a> or <a href="%s" target="_blank">get a license here</a>.';
+			}
 		?>
 		<div class="error">
-			<p><?php printf( __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updated and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', $this->text_domain ), $this->item_name, $this->license_page_url, $this->item_url ); ?></p>
+			<p><?php printf( __( $message, $this->text_domain ), $this->item_name, $this->license_page_url, $this->item_url ); ?></p>
 		</div>
 		<?php
 		}
