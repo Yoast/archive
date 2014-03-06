@@ -90,6 +90,11 @@ class Yoast_Update_Manager {
 	 */
 	protected function call_remote_api() {
 
+		// only check if a transient is not set (or if it's expired)
+		if( get_transient( $this->slug . '-update-check-error' ) !== false ) {
+			return;
+		}
+
 		// setup api parameters
 		$api_params = array(
 				'edd_action' => 'get_version',
@@ -116,6 +121,9 @@ class Yoast_Update_Manager {
 
 			// show error to user
 			add_action( 'admin_notices', array( $this, 'show_update_error') );
+
+			// set a transient to prevent checking for updates on every page load
+			set_transient( $this->slug . '-update-check-error', true, 60 * 30 ); // 30 mins
 
 			return false;
 		}

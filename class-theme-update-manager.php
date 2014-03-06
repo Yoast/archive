@@ -79,10 +79,12 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 
 		$update_data = $this->get_update_data();
 
-		if( $update_data ) {
-			// add update data to "updates available" array. convert object to array.
-			$value->response[ $this->slug ] = (array) $update_data;
+		if( $update_data === false ) {
+			return $value;
 		}
+			
+		// add update data to "updates available" array. convert object to array.
+		$value->response[ $this->slug ] = (array) $update_data;
 
 		return $value;
 	}
@@ -91,6 +93,14 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 	* Add hooks and scripts to the Appearance > Themes screen
 	*/
 	public function load_themes_screen() {
+
+		$update_data = $this->get_update_data();
+
+		// only do if an update is available
+		if( $update_data === false ) {
+			return;
+		}
+
 		add_thickbox();
 		add_action( 'admin_notices', array( $this, 'show_update_details' ) );
 	}
@@ -152,27 +162,16 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 				return false;
 			}
 
-			// did we get a valid response?
-			if( $api_response !== false && is_object( $api_response ) ) {
-
-				set_transient( $this->response_key, $api_response, strtotime( '+12 hours') );
-				$update_data = $api_response;
-
-			} else {
-
-				// remote request failed, try again in 30 minutes
-				$fake_data = new stdClass;
-				$fake_data->new_version = $this->get_theme_version();
-				set_transient( $this->response_key, $fake_data, strtotime( '+30 minutes' ) );
-				return false;
-
-			}
+			set_transient( $this->response_key, $api_response, strtotime( '+12 hours') );
+			$update_data = $api_response;
+			
 		}
 
-		// check if a new version is available. if not, abandon.
+		// check if a new version is available. 
 		if ( version_compare( $this->get_theme_version(), $update_data->new_version, '>=' ) ) {
 			return false;
-		}	
+		}
+
 
 		// an update is available
 		return $update_data;
