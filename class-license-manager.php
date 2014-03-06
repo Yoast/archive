@@ -469,7 +469,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		// make license key readonly when license key is valid or license is defined with a constant
 		$readonly = ( $this->license_is_valid() || $this->license_constant_is_defined );
 		
-		require_once dirname( __FILE__ ) . '/views/form.php';		
+		require dirname( __FILE__ ) . '/views/form.php';		
 
 		// enqueue script in the footer
 		add_action( 'admin_footer', array( $this, 'output_script'), 99 );
