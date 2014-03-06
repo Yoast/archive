@@ -549,21 +549,29 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	*/
 	public function set_license_constant_name( $license_constant_name ) {
 		$this->license_constant_name = trim( $license_constant_name );
+		$this->maybe_set_license_key_from_constant();
 	}
 
 	/**
 	* Maybe set license key from a defined constant
 	*/
-	private function maybe_set_license_key_from_constant() {
+	private function maybe_set_license_key_from_constant( ) {
 		
-		if( $this->license_constant_name === '') {
+		if( empty( $this->license_constant_name ) ) {
 			// generate license constant name
-			$this->set_license_constant_name( strtoupper( str_replace( array(' ', '-' ), '', sanitize_key( $this->item_name ) ) ) . '_LICENSE');
+			$this->license_constant_name = strtoupper( str_replace( array(' ', '-' ), '', sanitize_key( $this->item_name ) ) ) . '_LICENSE';
 		}
 
 		// set license key from constant
 		if( defined( $this->license_constant_name ) ) {
-			$this->set_license_key( constant( $this->license_constant_name ) );
+
+			$license_constant_value = constant( $this->license_constant_name );
+
+			// update license key value with value of constant
+			if( $this->get_license_key() !== $license_constant_value ) {
+				$this->set_license_key( $license_constant_value );
+			}
+			
 			$this->license_constant_is_defined = true;
 		}
 	}

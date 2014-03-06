@@ -76,6 +76,7 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 	* Set "updates available" transient
 	*/
 	public function set_theme_update_transient( $value ) {
+
 		$update_data = $this->get_update_data();
 
 		if( $update_data ) {
@@ -139,13 +140,17 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 	* @return object $update_data Object containing the update data
 	*/
 	public function get_update_data() {
-		
+	
 		$update_data = $this->get_theme_update_transient();
 
 		// if transient was not set, make a remote request
 		if( $update_data === false ) {
 
 			$api_response = $this->call_remote_api();
+
+			if( false === $api_response ) {
+				return false;
+			}
 
 			// did we get a valid response?
 			if( $api_response !== false && is_object( $api_response ) ) {
