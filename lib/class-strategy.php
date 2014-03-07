@@ -396,9 +396,9 @@ class Yoast_Strategy extends Yoast_Theme {
 		$css = '';
 
 		// Normal logo
-		$logo = get_theme_mod( 'yst_logo' );
+		$logo = get_theme_mod( 'yst_logo', get_stylesheet_directory_uri() . '/assets/images/logo.png' );
 		if ( isset( $logo ) && ! empty ( $logo ) ) {
-			$css .= '@media(min-width: 640px){.site-header .title-area {background-image: url(' . $logo . ');}}';
+			$css .= '@media(min-width: 640px){.site-header .title-area {background-image: url("' . $logo . '");}}';
 		}
 
 		// Mobile logo, positioning depends on whether the logo is wider than 230px and / or higher than 36px, if it is, alternate positioning is used.
