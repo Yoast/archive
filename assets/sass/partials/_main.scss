@@ -2957,6 +2957,12 @@ table {
 			.widget-title {
 				@extend .widget-title;
 			}
+
+			ul{
+				margin: {
+					left: 16px;
+				}
+			}
 		}
 	}
 
@@ -3182,7 +3188,7 @@ table {
 			size: $f_footerH3;
 		}
 	}
-	ul {
+	ul.children {
 		margin: {
 			left: 10px;
 		}
