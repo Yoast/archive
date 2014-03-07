@@ -530,6 +530,10 @@ button {
 	}
 }
 
+label {
+	color: $c_labels;
+}
+
 input {
 	background: {
 		color: $c_inputBg;
@@ -2308,6 +2312,7 @@ table {
 			font: {
 				weight: 700;
 			}
+			color: $c_labels;
 		}
 	}
 }
