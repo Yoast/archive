@@ -27,7 +27,7 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 			'text'         => '',
 			'url'          => '',
 			'intern_url'   => '',
-			'class_select' => 'cta-button',
+			'class_selector' => 'cta-button',
 			'class'        => '',
 			'target'       => '_self',
 			'nofollow'     => false
