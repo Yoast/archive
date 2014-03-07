@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @todo example needs to be rewritten
+ */
+
 if( is_admin() ) {
 
 	// setup required variables

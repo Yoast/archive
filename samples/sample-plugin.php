@@ -10,6 +10,11 @@ Author URI: http://yoast.com/
 Text Domain: sample-plugin
 */
 
+/**
+ * Class Sample_Plugin
+ *
+ * @todo example needs to be rewritten
+ */
 class Sample_Plugin {
 
 	private $api_url = 'http://localhost/wp/latest/';
