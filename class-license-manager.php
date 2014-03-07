@@ -7,8 +7,13 @@ interface iYoast_License_Manager {
 
 }
 
+/**
+ * Class Yoast_License_Manager
+ *
+ * @todo Maybe create a license class that contains key and option
+ * @todo Not sure if Yoast_License_Manager is a good name for this class, it's more managing the product (plugin or theme)
+ */
 abstract class Yoast_License_Manager implements iYoast_License_Manager {
-
 
 	/**
 	* @const VERSION The version number of the License_Manager class
@@ -16,44 +21,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	const VERSION = 1;
 
 	/**
-	* @var string The URL of the shop running the EDD API. 
-	*/
-	protected $api_url;
-
-	/**
-	* @var string The item name in the EDD shop.
-	*/
-	protected $item_name;
-
-	/**
-	* @var string The theme slug or plugin file
-	*/
-	protected $slug;
-
-	/**
-	* @var string The version number of the item
-	*/ 
-	protected $version;
-
-	/**
-	* @var string The absolute url on which users can purchase a license
-	*/
-	protected $item_url;
-
-	/**
-	* @var string Absolute admin URL on which users can enter their license key.
-	*/
-	protected $license_page_url = '#';
-
-	/**
-	* @var string The text domain used for translating strings
-	*/
-	protected $text_domain = 'yoast';
-
-	/**
-	* @var string The item author
-	*/ 
-	protected $author = 'Yoast';
+	 * @var Yoast_License The license
+	 */
+	protected $product;
 
 	/**
 	* @var string 
@@ -83,92 +53,26 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	/**
 	 * Constructor
 	 *
-	 * @param string $api_url The url running the EDD API
-	 * @param string $item_name The item name in the EDD shop
-	 * @param string $slug The theme slug or plugin file
-	 * @param string $version The version number of the item 
-	 * @param string $item_url The absolute url on which users can purchase a license
-	 * @param string $license_page Relative admin URL on which users can enter their license key
-	 * @param string $text_domain The text domain used for translating strings
-	 * @param stirng $author The plugin or theme author
+	 * @param Yoast_Product $product
 	 */
-	public function __construct( $api_url, $item_name, $slug, $version, $item_url = '', $license_page = '', $text_domain = '', $author = '' ) {
+	public function __construct( Yoast_Product $product ) {
 
-		$this->api_url = $api_url;
-		$this->item_name = $item_name;
-		$this->slug = $slug;
-		$this->version = $version;	
-		
-		// set item_url or default to shop url
-		if( $this->item_url !== '' ) {
-			$this->item_url = $item_url;
-		} else {
-			$this->item_url = $this->api_url;
-		}
-
-		// set page on which users can enter their license
-		$this->license_page_url = admin_url( $license_page );
-				
-		// set text domain, if given
-		if( $text_domain !== '' ) {
-			$this->text_domain = $text_domain;
-		}
-
-		// set author, if given
-		if( $author !== '' ) {
-			$this->author = $author;
-		}
+		// Set the license
+		$this->product = $product;
 
 		// set prefix
-		$this->prefix = sanitize_title_with_dashes( $this->item_name . '_', null, 'save' );
-
-		// setup hooks
-		$this->hooks();
+		$this->prefix = sanitize_title_with_dashes( $this->product->get_item_name() . '_', null, 'save' );
 
 		// maybe set license key from constant
 		$this->maybe_set_license_key_from_constant();		
 	}
 
 	/**
-	* Sets the store URL on which users can purchase, upgrade or renew their license.
-	* 
-	* @param string $item_url
-	*/
-	public function set_item_url( $item_url ) {
-		$this->item_url = $item_url;
-	}
-
-	/**
-	* Sets the URL on which users can enter their license key
-	*
-	* @param string $license_page Relative admin URL on which users can enter their license key
-	*/
-	public function set_license_page( $license_page ) {
-		$this->license_page_url = admin_url( $license_page );
-	}
-
-	/**
-	* Sets the item author
-	*
-	* @param string $author
-	*/ 
-	public function set_author( $author ) {
-		$this->author = $author;
-	}
-
-	/**
-	* Sets the item text domain
-	*
-	* @param string $text_domain
-	*/
-	public function set_text_domain( $text_domain ) {
-		$this->text_domain = $text_domain;
-	}
-
-	/**
 	* Setup hooks
+	 *
+	 * @todo I'm not sure I want the setup_auto_updater() to be called from the setup_hooks method
 	*/
-	private function hooks() {
+	public function setup_hooks() {
 		// show admin notice if license is not active
 		add_action( 'admin_notices', array( $this, 'display_admin_notices' ) );
 		add_action( 'admin_init', array( $this, 'catch_post_request') );
@@ -189,7 +93,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		if( ! $this->license_is_valid() ) {
 		?>
 		<div class="error">
-			<p><?php printf( __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updated and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', $this->text_domain ), $this->item_name, $this->license_page_url, $this->item_url ); ?></p>
+			<p><?php printf( __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updated and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', $this->product->get_text_domain() ), $this->product->get_item_name(), $this->product->get_license_page_url(), $this->product->get_item_url() ); ?></p>
 		</div>
 		<?php
 		}
@@ -214,19 +118,19 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		$result = $this->call_license_api( 'activate' );
 
-		if( $result ) {	
+		if( $result ) {
 
 			// show success notice if license is valid
 			if($result->license === 'valid') {
-				$message = sprintf( __( "Your %s license has been activated. You have used %d/%d activations. ", $this->text_domain ), $this->item_name, $result->site_count, $result->license_limit );
+				$message = sprintf( __( "Your %s license has been activated. You have used %d/%d activations. ", $this->product->get_text_domain() ), $this->product->get_item_name(), $result->site_count, $result->license_limit );
 			
 				// add upgrade notice if user has less than 3 activations left
 				if( $result->license_limit > 0 && ( $result->license_limit - $result->site_count ) <= 3 ) {
-					$message .= sprintf( __( '<a href="%s">Did you know you can upgrade your license?</a>', $this->text_domain ), $this->item_url );
+					$message .= sprintf( __( '<a href="%s">Did you know you can upgrade your license?</a>', $this->product->get_text_domain() ), $this->product->get_item_url() );
 				// add extend notice if license is expiring in less than 1 month
 				} elseif( strtotime( $result->expires ) < strtotime( "+1 month" ) ) {
 					$days_left = round( ( strtotime( $result->expires ) - strtotime( "now" ) ) / 86400 );
-					$message .= sprintf( __( '<a href="%s">Your license is expiring in %d days, would you like to extend it?</a>', $this->text_domain ), $this->item_url, $days_left );
+					$message .= sprintf( __( '<a href="%s">Your license is expiring in %d days, would you like to extend it?</a>', $this->product->get_text_domain() ), $this->product->get_item_url(), $days_left );
 				}
 
 				$this->set_notice( $message, true );
@@ -237,15 +141,15 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 					
 					if( $result->error === 'no_activations_left' ) {
 						// show notice if user is at their activation limit
-						$this->set_notice( sprintf( __('You\'ve reached your activation limit. You must <a href="%s">upgrade your license</a> to use it on this site.', $this->text_domain ), $this->item_url ), false );
+						$this->set_notice( sprintf( __('You\'ve reached your activation limit. You must <a href="%s">upgrade your license</a> to use it on this site.', $this->product->get_text_domain() ), $this->product->get_item_url() ), false );
 					} elseif( $result->error == "expired" ) {
 						// show notice if the license is expired
-						$this->set_notice( sprintf( __('Your license is expired. You must <a href="%s">extend your license</a> in order to use it again.', $this->text_domain ), $this->item_url ), false );
+						$this->set_notice( sprintf( __('Your license is expired. You must <a href="%s">extend your license</a> in order to use it again.', $this->product->get_text_domain() ), $this->product->get_item_url() ), false );
 					}
 
 				} else {
 					// show a general notice if it's any other error
-					$this->set_notice( __( "Failed to activate your license, your license key seems to be invalid.", $this->text_domain ), false );
+					$this->set_notice( __( "Failed to activate your license, your license key seems to be invalid.", $this->product->get_text_domain() ), false );
 				}
 
 				$this->remote_license_activation_failed = true;
@@ -269,9 +173,9 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 			
 			// show notice if license is deactivated
 			if( $result->license === 'deactivated' ) {
-				$this->set_notice( sprintf( __( "Your %s license has been deactivated.", $this->text_domain ), $this->item_name ) );				
+				$this->set_notice( sprintf( __( "Your %s license has been deactivated.", $this->product->get_text_domain() ), $this->product->get_item_name() ) );
 			} else {
-				$this->set_notice( sprintf( __( "Failed to deactivate your %s license.", $this->text_domain ), $this->item_name ), false );		
+				$this->set_notice( sprintf( __( "Failed to deactivate your %s license.", $this->product->get_text_domain() ), $this->product->get_item_name() ), false );
 			}
 
 			$this->set_license_status( $result->license );
@@ -295,11 +199,11 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		$api_params = array(
 			'edd_action' => $action . '_license',
 			'license'    => $this->get_license_key(),
-			'item_name'  => urlencode( trim( $this->item_name ) )
+			'item_name'  => urlencode( trim( $this->product->get_item_name() ) )
 		);
 
 		// create api request url
-		$url = add_query_arg( $api_params, $this->api_url );
+		$url = add_query_arg( $api_params, $this->product->get_api_url() );
 
 		// request parameters
 		$request_params = array( 
@@ -315,7 +219,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		if( is_wp_error( $response ) ) {
 
 			// set notice, useful for debugging why remote requests are failing
-			$this->set_notice( sprintf( __( "Request error: %s", $this->text_domain ), $response->get_error_message() ), false );
+			$this->set_notice( sprintf( __( "Request error: %s", $this->product->get_text_domain() ), $response->get_error_message() ), false );
 
 			return false;
 		}
@@ -558,7 +462,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		
 		if( $this->license_constant_name === '') {
 			// generate license constant name
-			$this->set_license_constant_name( strtoupper( str_replace( array(' ', '-' ), '', sanitize_key( $this->item_name ) ) ) . '_LICENSE');
+			$this->set_license_constant_name( strtoupper( str_replace( array(' ', '-' ), '', sanitize_key( $this->product->get_item_name() ) ) ) . '_LICENSE');
 		}
 
 		// set license key from constant
