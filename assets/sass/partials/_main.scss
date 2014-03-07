@@ -2318,7 +2318,6 @@ table {
 	}
 	padding: {
 		top: 24px; // this will be overwritten for Simple Image Plugin, so the image will be fixed to the top
-		bottom: 24px;
 	}
 	@include box-shadow(0 8px 8px -6px $c_afterHeaderBoxShadow, 0 8px 8px -6px $c_afterHeaderBoxShadow inset);
 	.widget_simpleimage {
@@ -2330,7 +2329,10 @@ table {
 			}
 		}
 	}
-	.widget,
+	.widget{
+		padding: 0;
+		margin-bottom: 24px;
+	}
 	.widget-wrap {
 		padding: 0;
 		margin: 0;
