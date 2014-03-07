@@ -2421,6 +2421,9 @@ table {
 #yoast-after-header-fp-1 {
 	width: $d_columnOne;
 	max-width: 100%;
+	margin: {
+		right: 45px;
+	}
 }
 
 #yoast-after-header-2,
@@ -2428,7 +2431,6 @@ table {
 	width: $d_columnTwo;
 	max-width: 100%;
 	margin: {
-		left: 45px;
 		right: 45px;
 	}
 	vertical-align: middle;
