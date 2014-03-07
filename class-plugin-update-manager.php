@@ -15,8 +15,8 @@ class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 	* @param string $author (optional)
 	* @param string $text_domain 
 	*/
-	public function __construct( $api_url, $item_name, $license_key, $slug, $version, $author = '', $text_domain = null) {
-		parent::__construct( $api_url, $item_name, $license_key, $slug, $version, $author, $text_domain );
+	public function __construct( Yoast_Product $product, $license_key ) {
+		parent::__construct( $product, $license_key );
 
 		// setup hooks
 		$this->setup_hooks();
@@ -53,10 +53,10 @@ class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 		}
 
 		// compare versions
-		if ( version_compare( $this->version, $api_response->new_version, '<' ) ) {
+		if ( version_compare( $this->product->get_version(), $api_response->new_version, '<' ) ) {
 
 			// remote version is newer, add to data
-			$data->response[ $this->slug ] = $api_response;
+			$data->response[ $this->product->get_slug() ] = $api_response;
 
 		}
 
@@ -77,7 +77,7 @@ class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 	public function plugins_api_filter( $data, $action = '', $args = null ) {
 
 		// only do something if we're checking for our plugin
-		if ( $action !== 'plugin_information' || ! isset( $args->slug ) || $args->slug !== $this->slug ) {
+		if ( $action !== 'plugin_information' || ! isset( $args->slug ) || $args->slug !== $this->product->get_slug() ) {
 			return $data;
 		} 
 
