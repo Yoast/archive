@@ -74,7 +74,7 @@ class Yoast_Theme_Customizer {
 			'yst_primary_nav_position',
 			array(
 				'default'   => 'topright',
-				'transport' => 'postMessage'
+				'transport' => 'refresh'
 			)
 		);
 
@@ -82,7 +82,7 @@ class Yoast_Theme_Customizer {
 			'yst_tagline_positioner',
 			array(
 				'default'   => 'middle',
-				'transport' => 'postMessage'
+				'transport' => 'refresh'
 			)
 		);
 
