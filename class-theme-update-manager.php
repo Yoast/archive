@@ -20,11 +20,11 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 	* @param string $theme_version
 	* @param string $author (optional)
 	*/
-	public function __construct( $api_url, $item_name, $license_key, $slug, $version = '', $author = '', $text_domain = null) {
+	public function __construct( Yoast_Product $product, $license_key ) {
 		
-		parent::__construct( $api_url, $item_name, $license_key, $slug, $version, $author, $text_domain );
+		parent::__construct( $product, $license_key );
 
-		$this->response_key = $this->slug . '-update-response';
+		$this->response_key = $this->product->get_slug() . '-update-response';
 
 		// setup hooks
 		$this->setup_hooks();
@@ -38,12 +38,12 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 	private function get_theme_version() {
 
 		// if version was not set, get it from the Theme stylesheet
-		if( $this->version === '' ) {
-			$theme = wp_get_theme( $this->slug );
+		if( $this->product->get_version() === '' ) {
+			$theme = wp_get_theme( $this->product->get_slug() );
 			return $theme->get( 'Version' );
 		}
 
-		return $this->version;
+		return $this->product->get_version();
 	}
 
 	/**
@@ -80,7 +80,7 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 
 		if( $update_data ) {
 			// add update data to "updates available" array. convert object to array.
-			$value->response[ $this->slug ] = (array) $update_data;
+			$value->response[ $this->product->get_slug() ] = (array) $update_data;
 		}
 
 		return $value;
@@ -107,23 +107,23 @@ class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
 			return;
 		}
 
-		$update_url = wp_nonce_url( 'update.php?action=upgrade-theme&amp;theme=' . urlencode( $this->slug ), 'upgrade-theme_' . $this->slug );
+		$update_url = wp_nonce_url( 'update.php?action=upgrade-theme&amp;theme=' . urlencode( $this->product->get_slug() ), 'upgrade-theme_' . $this->product->get_slug() );
 		$update_onclick = ' onclick="if ( confirm(\'' . esc_js( __( "Updating this theme will lose any customizations you have made. 'Cancel' to stop, 'OK' to update." ) ) . '\') ) {return true;}return false;"';
 		?>
 		<div id="update-nag">
 			<?php
 				printf( 
 					__( '<strong>%s version %s</strong> is available. <a href="%s" class="thickbox" title="%s">Check out what\'s new</a> or <a href="%s" %s>update now</a>.' ),
-					$this->item_name,
+					$this->product->get_item_name(),
 					$update_data->new_version,
-					'#TB_inline?width=640&amp;inlineId=' . $this->slug . '_changelog',
-					$this->item_name,
+					'#TB_inline?width=640&amp;inlineId=' . $this->product->get_slug() . '_changelog',
+					$this->get_item_name(),
 					$update_url,
 					$update_onclick
 				);
 			?>
 		</div>
-		<div id="<?php echo $this->slug; ?>_changelog" style="display: none;">
+		<div id="<?php echo $this->product->get_slug(); ?>_changelog" style="display: none;">
 			<?php echo wpautop( $update_data->sections['changelog'] ); ?>
 		</div>	
 		<?php
