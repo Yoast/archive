@@ -91,6 +91,12 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
 		// show notice if license is invalid
 		if( ! $this->license_is_valid() ) {
+
+			if( $this->get_license_key() === '' ) {
+				$message = '<b>Warning!</b> You didn\'t set your %s license key yet, which means you\'re missing out on updates and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.';
+			} else {
+				$message = '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updates and support! <a href="%s">Activate your license</a> or <a href="%s" target="_blank">get a license here</a>.';
+			}
 		?>
 		<div class="error">
 			<p><?php printf( __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updated and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', $this->product->get_text_domain() ), $this->product->get_item_name(), $this->product->get_license_page_url(), $this->product->get_item_url() ); ?></p>
@@ -367,7 +373,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		// make license key readonly when license key is valid or license is defined with a constant
 		$readonly = ( $this->license_is_valid() || $this->license_constant_is_defined );
 		
-		require_once dirname( __FILE__ ) . '/views/form.php';		
+		require dirname( __FILE__ ) . '/views/form.php';		
 
 		// enqueue script in the footer
 		add_action( 'admin_footer', array( $this, 'output_script'), 99 );
@@ -453,21 +459,29 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	*/
 	public function set_license_constant_name( $license_constant_name ) {
 		$this->license_constant_name = trim( $license_constant_name );
+		$this->maybe_set_license_key_from_constant();
 	}
 
 	/**
 	* Maybe set license key from a defined constant
 	*/
-	private function maybe_set_license_key_from_constant() {
+	private function maybe_set_license_key_from_constant( ) {
 		
-		if( $this->license_constant_name === '') {
+		if( empty( $this->license_constant_name ) ) {
 			// generate license constant name
 			$this->set_license_constant_name( strtoupper( str_replace( array(' ', '-' ), '', sanitize_key( $this->product->get_item_name() ) ) ) . '_LICENSE');
 		}
 
 		// set license key from constant
 		if( defined( $this->license_constant_name ) ) {
-			$this->set_license_key( constant( $this->license_constant_name ) );
+
+			$license_constant_value = constant( $this->license_constant_name );
+
+			// update license key value with value of constant
+			if( $this->get_license_key() !== $license_constant_value ) {
+				$this->set_license_key( $license_constant_value );
+			}
+			
 			$this->license_constant_is_defined = true;
 		}
 	}
