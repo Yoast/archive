@@ -266,7 +266,7 @@ header {
 	margin: 0 auto;
 	border: {
 		top: {
-			width: 5px;
+			width: 4px;
 			style: solid;
 			color: $c_bodyTopLine;
 		}
@@ -1501,7 +1501,7 @@ video,
 
 img {
 	height: auto;
-	width: 100%; // IE8
+	width: auto; // IE8
 }
 
 /**
@@ -1728,7 +1728,8 @@ table {
 }
 
 // exceptions for archive pages, read more link closer to content
-.blog {
+.blog,
+.page {
 	.entry-content {
 		p {
 			margin: {
@@ -1737,9 +1738,11 @@ table {
 		}
 		img.alignleft {
 			margin: 7px 24px 10px 0;
+			max-width: 200px;
 		}
 		img.alignright {
 			margin: 7px 0 24px 10px;
+			max-width: 200px;
 		}
 	}
 	.entry-footer {
@@ -2032,6 +2035,7 @@ table {
 			&.depth-1 {
 				div.avatar {
 					width: $d_avatarDept1;
+					max-width: 20%;
 				}
 			}
 			&.depth-2,
@@ -2043,6 +2047,7 @@ table {
 				}
 				div.avatar {
 					width: $d_avatarDept2345;
+					max-width: 20%;
 				}
 			}
 		}
@@ -2407,13 +2412,13 @@ table {
 #yoast-after-header-1,
 #yoast-after-header-fp-1 {
 	width: $d_columnOne;
-	max-width: 50%;
+	max-width: 100%;
 }
 
 #yoast-after-header-2,
 #yoast-after-header-fp-2 {
 	width: $d_columnTwo;
-	max-width: 50%;
+	max-width: 100%;
 	margin: {
 		left: 45px;
 		right: 45px;
@@ -2424,6 +2429,7 @@ table {
 #yoast-after-header-3,
 #yoast-after-header-fp-3 {
 	width: $d_sidebar;
+	max-width: 100%;
 }
 
 .sidebar-content {
@@ -2810,6 +2816,8 @@ table {
  * Big Button widget. Shows a big button with text.
  */
 .widget_bigbutton {
+	width: 100%;
+	max-width: 300px;
 	.cta-button {
 		a {
 			display: block;
@@ -3416,39 +3424,86 @@ img#wpstats {
 	.content {
 		max-width: 67%;
 	}
+	.blog .entry-content {
+		img {
+			&.alignleft {
+				margin: {
+					right: 2%;
+					bottom: 2%;
+				}
+			}
+			&.alignright {
+				margin: {
+					left: 2%;
+					bottom: 2%;
+				}
+			}
+		}
+	}
+	img {
+		&.alignleft {
+			margin: {
+				right: 2%;
+				bottom: 2%;
+			}
+		}
+		&.alignright {
+			margin: {
+				left: 2%;
+				bottom: 2%;
+			}
+		}
+	}
+	.home,
+	.single {
+		.content {
+			max-width: 67%;
+		}
+		img {
+			max-width: 45%;
+			max-height: 250px;
+		}
+	}
+	.home,
+	.page {
+		img {
+			max-width: 170px;
+			max-height: 115px;
+		}
+	}
 	.sidebar-primary {
-		max-width: 25%;
+		max-width: 30%;
 	}
 	.content-sidebar {
 		.sidebar-primary {
 			margin: {
-				right: 10px;
+				right: 1%;
 			}
 		}
 		.content {
 			padding: {
-				left: 10px;
-				right: 10px;
+				left: 1%;
+				right: 1%;
 			}
 		}
 	}
 	.sidebar-content {
 		.sidebar-primary {
 			margin: {
-				left: 10px;
+				left: 1%;
 			}
 		}
 		.content {
 			padding: {
 				left: 0;
-				right: 10px;
+				right: 1%;
 			}
 		}
 	}
 	.full-width-content {
 		.content {
 			padding: {
-				left: 10px;
+				left: 1%;
 				right: 0;
 			}
 		}
@@ -3463,10 +3518,13 @@ img#wpstats {
 			a {
 				min-height: 140px;
 			}
+			margin: {
+				left: 1%;
+			}
 		}
 		.header-widget-area {
 			padding: {
-				right: 20px;
+				right: 1%;
 			}
 			max-width: 60%;
 			overflow: hidden;
@@ -3474,47 +3532,51 @@ img#wpstats {
 	}
 	.breadcrumb {
 		padding: {
-			left: 10px;
+			left: 1%;
 		}
 	}
 	#yoast-after-header-container {
 		padding: {
-			left: 10px;
-			right: 10px;
+			left: 1%;
+			right: 1%;
 		}
-		.yoast-after-header-widget {
+		.yoast-after-header-widget,
+		.yoast-after-header-fp-widget,{
 			max-width: 30%;
 		}
-		#yoast-after-header-3 {
-			max-width: 25%;
+		#yoast-after-header-3,
+		#yoast-after-header-fp-3 {
+			max-width: 30%;
+		}
+		#yoast-after-header-2,
+		#yoast-after-header-fp-2 {
+			margin: {
+				left: 4%;
+				right: 4%;
+			}
 		}
 	}
 	#yoast-fullwidth-bottom-container {
 		padding: {
-			left: 20px;
-			right: 20px;
+			left: 2%;
+			right: 2%;
 		}
 		.yoast-fullwidth-widget {
 			width: 30%;
 		}
 		#yoast-fullwidth-widgetarea-2 {
-			margin: 0 30px;
+			margin: 0 3%;
 		}
 	}
 	.footer-widgets {
 		padding: {
-			left: 10px;
-			right: 10px;
+			left: 1%;
+			right: 1%;
 		}
 		.widget-area {
-			width: 22%;
+			width: 30%;
 			&.footer-widgets-2 {
-				margin: 0 3%;
-			}
-			&.footer-widgets-3 {
-				margin: {
-					right: 3%;
-				}
+				margin: 0 4%;
 			}
 		}
 	}
@@ -3529,13 +3591,15 @@ img#wpstats {
 @media (max-width: 655px) AND (min-width: 640px) {
 	#yoast-fullwidth-bottom-container {
 		#yoast-fullwidth-widgetarea-2 {
-			margin: 0 15px;
+			margin: 0 2%;
 		}
 	}
 }
 
 @media (max-width: 835px) {
-	#yoast-after-header-container {
+	#yoast-after-header-container,
+	#yoast-after-header-fp-container,
+	#yoast-tagline-after-header-container {
 		display: none;
 		visibility: hidden;
 	}
@@ -3549,15 +3613,23 @@ img#wpstats {
 		width: 100%;
 		max-width: $d_contentColumn;
 	}
+	.home,
+	.single {
+		.content {
+			max-width: 100%;
+		}
+	}
 	.sidebar-primary {
 		width: 100%;
 		max-width: 100%;
 	}
 	.entry {
-		padding: 0 0 16px;
+		padding: 0;
 		margin: {
+			top: 10px;
 			left: 0;
 			right: 0;
+			bottom: 20px;
 		}
 	}
 	.full-width-content.home .entry-content {
@@ -3569,8 +3641,8 @@ img#wpstats {
 	}
 	.breadcrumb {
 		padding: {
-			left: 10px;
-			right: 10px;
+			left: 1%;
+			right: 1%;
 		}
 		margin: {
 			top: 1em;
@@ -3612,27 +3684,9 @@ img#wpstats {
 			}
 		}
 	}
-	#yoast-after-header-container {
-		padding: 0 10px;
-		#yoast-after-header-1,
-		#yoast-after-header-2,
-		#yoast-after-header-3 {
-			margin: 0;
-			padding: {
-				bottom: 1em;
-			}
-			float: none;
-			width: 100%;
-			max-width: 100%;
-		}
+	.site-inner {
+		padding: 0;
 	}
-	.yoast-tagline {
-		padding: {
-			left: 20px;
-			right: 20px;
-		}
-	}
-
 	#yoast-fullwidth-bottom-container {
 		padding: 0 10px;
 		#yoast-fullwidth-widgetarea-1,
@@ -3646,9 +3700,6 @@ img#wpstats {
 			width: 100%;
 			max-width: 100%;
 		}
-	}
-	#yoast-tagline-after-header-container {
-		display: none;
 	}
 	.footer-widgets {
 		padding: {
@@ -3678,9 +3729,6 @@ img#wpstats {
 	}
 	header {
 		&.site-header {
-			border: {
-				bottom: 5px solid $c_hrLine;
-			}
 			display: inline-block;
 			text-indent: -10000px;
 			z-index: 13;
