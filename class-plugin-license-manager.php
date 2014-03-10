@@ -9,7 +9,8 @@ if ( ! class_exists( "Yoast_Plugin_License_Manager" ) ) {
 		public function setup_auto_updater() {
 			if ( $this->license_is_valid() ) {
 				// setup auto updater
-				require_once dirname( __FILE__ ) . '/class-plugin-update-manager.php';
+				require_once( dirname( __FILE__ ) . '/class-update-manager.php' );
+				require_once( dirname( __FILE__ ) . '/class-plugin-update-manager.php' );
 				new Yoast_Plugin_Update_Manager( $this->product, $this->get_license_key() );
 			}
 		}
