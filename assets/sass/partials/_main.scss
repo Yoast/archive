@@ -2377,6 +2377,13 @@ table {
 			}
 		}
 	}
+	.widget_bigbutton {
+		a {
+			font: {
+				weight: 400;
+			}
+		}
+	}
 	li {
 		list: {
 			style: none;
@@ -2830,6 +2837,7 @@ table {
 	max-width: 300px;
 	.cta-button {
 		a {
+			letter-spacing: 1px;
 			display: block;
 			padding: 15px;
 			border: {
@@ -2837,7 +2845,6 @@ table {
 				style: solid;
 				color: $c_ctaBorder;
 			}
-			@include box-shadow(inset 0px 0 5px $c_ctaBoxShadow);
 			background: {
 				color: $c_ctaBg;
 			}
@@ -2848,8 +2855,7 @@ table {
 				size: $f_ctaAfterHeader;
 				weight: 400;
 			}
-			line-height: 1em;
-			@include text-shadow($c_ctaTextShadow 1px 1px 5px);
+			line-height: 1.3em;
 			&:after {
 				content: ' \bb';
 				padding: {
