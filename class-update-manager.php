@@ -62,7 +62,7 @@ if( ! class_exists( "Yoast_Update_Manager") ) {
 		protected function call_remote_api() {
 
 			// only check if a transient is not set (or if it's expired)
-			if( get_transient( $this->slug . '-update-check-error' ) !== false ) {
+			if( get_transient( $this->product->get_slug() . '-update-check-error' ) !== false ) {
 				return;
 			}
 
@@ -70,9 +70,9 @@ if( ! class_exists( "Yoast_Update_Manager") ) {
 			$api_params = array(
 					'edd_action' => 'get_version',
 					'license'    => $this->license_key,
-				'name'       => $this->item_name,
-				'slug'       => $this->slug,
-				'author'     => $this->author
+				'name'       => $this->product->get_item_name(),
+				'slug'       => $this->product->get_slug(),
+				'author'     => $this->product->get_author()
 			);
 
 			// setup request parameters
@@ -85,7 +85,6 @@ if( ! class_exists( "Yoast_Update_Manager") ) {
 			// call remote api
 		$response = wp_remote_post( $this->product->get_api_url(), $request_params );
 
-
 			// wp / http error?
 		if ( is_wp_error( $response ) ) {
 				$this->wp_error = $response;
@@ -94,7 +93,7 @@ if( ! class_exists( "Yoast_Update_Manager") ) {
 			add_action( 'admin_notices', array( $this, 'show_update_error' ) );
 
 				// set a transient to prevent checking for updates on every page load
-				set_transient( $this->slug . '-update-check-error', true, 60 * 30 ); // 30 mins
+				set_transient( $this->product->get_slug() . '-update-check-error', true, 60 * 30 ); // 30 mins
 
 				return false;
 			}
