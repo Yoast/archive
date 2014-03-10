@@ -94,6 +94,9 @@ class Yoast_Strategy extends Yoast_Theme {
 
 		// Adds class to the body-element. Used in sticky menu.
 		add_action( 'body_class', array( $this, 'add_body_class_for_sticky_nav' ) );
+
+		// Changes styling of galleries
+		add_filter( 'gallery_style', array( $this, 'change_gallery_css' ) );
 	}
 
 	/**
@@ -573,5 +576,9 @@ class Yoast_Strategy extends Yoast_Theme {
 			$classes[] = 'menu-right';
 		}
 		return $classes;
+	}
+
+	public function change_gallery_css( $css ) {
+		return preg_replace( "/margin: auto;/", 'margin: 0;', $css );
 	}
 }
