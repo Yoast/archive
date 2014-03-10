@@ -410,6 +410,7 @@ header {
 		}
 		.widget {
 			margin-bottom: 10px;
+			float: right;
 		}
 	}
 	.search-form {
@@ -630,7 +631,7 @@ textarea {
 .search-form {
 	input {
 		height: 1.5em;
-		padding: 16px 32px 16px 16px;
+		padding: 16px 32px 16px 0;
 		background: {
 			image: image-url('search.png');
 			position: 95% 50%;
@@ -700,6 +701,13 @@ textarea {
 			vertical-align: middle;
 			padding: {
 				left: 5px;
+			}
+		}
+	}
+	> .menu-item:first-child {
+		a {
+			margin: {
+				left: 0px;
 			}
 		}
 	}
@@ -2497,7 +2505,7 @@ table {
 	.yoast-tagline {
 		margin: 0 auto;
 		max-width: $d_full;
-		padding: 20px 10px;
+		padding: 20px 0;
 		font: {
 			family: $f_baseFont;
 			size: $f_taglineTop-px;
