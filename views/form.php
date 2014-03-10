@@ -44,7 +44,7 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 					if( $this->get_license_key() !== '') { ?>
 						<button name="<?php echo esc_attr( $action_name ); ?>" type="submit" class="button-secondary yoast-license-activate" value="activate" /><?php echo esc_html_e('Activate License', $product->get_text_domain() ); ?></button> &nbsp;
 					<?php } else {
-						_e( 'Please enter a license key in the field below first.', $this->text_domain );
+						_e( 'Please enter a license key in the field below first.', $product->get_text_domain() );
 					} 
 
 				} ?>
@@ -56,7 +56,7 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 			<td>
 				<input id="yoast-license-key-field" name="<?php echo esc_attr( $key_name ); ?>" type="text" class="regular-text <?php if( $obfuscate ) { ?>yoast-license-obfuscate<?php } ?>" value="<?php echo esc_attr( $visible_license_key ); ?>" placeholder="<?php echo esc_attr( sprintf( __( 'Paste your %s license key here..', $product->get_text_domain() ), $product->get_item_name() ) ); ?>" <?php if( $readonly ) { echo 'readonly="readonly"'; } ?> />
 				<?php if( $this->license_constant_is_defined ) { ?>
-				<p class="help"><?php printf( __( "You defined your license key using the %s PHP constant.", $this->text_domain ), '<code>' . $this->license_constant_name . '</code>' ); ?></p>
+				<p class="help"><?php printf( __( "You defined your license key using the %s PHP constant.", $product->get_text_domain() ), '<code>' . $this->license_constant_name . '</code>' ); ?></p>
 				<?php } ?>
 			</td>
 		</tr>
