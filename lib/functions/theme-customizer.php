@@ -386,15 +386,19 @@ class Yoast_Theme_Customizer {
 
 		// This control goes into the default Site Title & Tagline section
 		$wp_customize->add_control(
-			'yst_tagline_positioner',
-			array(
-				'section'  => 'title_tagline',
-				'label'    => __( 'Position of tagline', 'yoast-theme' ),
-				'type'     => 'radio',
-				'choices'  => array(
-					'top' => __( 'Top', 'yoast-theme' ),
-					'middle'  => __( 'Middle', 'yoast-theme' ) ),
-				'priority' => 200,
+			new Yoast_Customize_Control(
+				$wp_customize,
+				'yst_tagline_positioner',
+				array(
+					'section'     => 'title_tagline',
+					'label'       => __( 'Position of tagline', 'yoast-theme' ),
+					'type'        => 'radio',
+					'choices'  => array(
+						'top' => __( 'Top', 'yoast-theme' ),
+						'middle'  => __( 'Middle', 'yoast-theme' ) ),
+					'description' => __( 'For aesthetic reasons, the tagline can only be placed in the \'top\'-position when there is no menu or the menu is placed in the top-right position.<br />If either is the case, the tagline will be pushed to the \'middle\' position.' ),
+					'priority'    => 200
+				)
 			)
 		);
 
