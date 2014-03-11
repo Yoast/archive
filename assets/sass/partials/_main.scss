@@ -44,6 +44,13 @@ audio:not([controls]) {
 	display: none;
 }
 
+link {
+	color: $c_link;
+	&:hover {
+		color: $c_linkHover;
+	}
+}
+
 /**
  *  Main elements
  */
@@ -77,7 +84,7 @@ body {
 }
 
 a {
-	color: $c_mainLink;
+	@extend link;
 	text: {
 		decoration: none;
 	}
@@ -90,7 +97,6 @@ a {
 		outline: thin dotted;
 	}
 	&:hover {
-		color: $c_mainLinkHover;
 		outline: 0;
 	}
 	&:active {
@@ -789,7 +795,6 @@ textarea {
 				color: $c_navSubBg;
 			}
 			color: $c_navSubLink;
-			//text-shadow: 1px 1px 1px $c_navMainLinkShadow;
 			border: {
 				width: 0 0 1px;
 				style: solid;
@@ -1651,7 +1656,7 @@ table {
 .entry-content {
 	max-width: 100%;
 	a {
-		color: $c_mainLink;
+		color: $c_altLink;
 		font: {
 			weight: 700;
 		}
@@ -1659,7 +1664,7 @@ table {
 			decoration: underline;
 		}
 		&:hover {
-			color: $c_mainLinkHover;
+			color: $c_linkHover;
 			text: {
 				decoration: none;
 			}
@@ -1740,7 +1745,7 @@ table {
 				font: {
 					weight: 700;
 				}
-				color: $c_mainLinkHover;
+				color: $c_linkHover;
 			}
 			&:after {
 				content: '»';
@@ -1762,7 +1767,7 @@ table {
 		weight: 700;
 	}
 	a {
-		color: $c_back_to_top;
+		@extend link;
 	}
 }
 
@@ -1859,7 +1864,7 @@ table {
 			weight: 700;
 		}
 		.entry-author-name {
-			color: $c_metaAtPostAuthor;
+			@extend link;
 			text-transform: capitalize;
 		}
 		.entry-comments-link {
@@ -2163,7 +2168,7 @@ table {
 	}
 	.comment-author {
 		a {
-			color: $c_commentAuthor;
+			@extend link;
 		}
 		.post_author_comment {
 			float: right;
@@ -2194,7 +2199,9 @@ table {
 		}
 	}
 	.comment-reply-link {
-		color: $c_commentReplyLink;
+		a {
+			@extend link;
+		}
 	}
 }
 
@@ -2283,7 +2290,7 @@ table {
 		line-height: 1.2em;
 		a {
 			border: none;
-			color: $c_mainLink;
+			@extend link;
 			text: {
 				decoration: none;
 			}
@@ -2620,7 +2627,7 @@ table {
 				color: $c_sidebarLinkArrow;
 			}
 			&:hover {
-				color: $c_mainLinkHover;
+				color: $c_linkHover;
 			}
 		}
 	}
@@ -3388,7 +3395,7 @@ table {
 				}
 				.tweet-details {
 					a {
-						color: $c_mainLink;
+						color: $c_link;
 					}
 				}
 			}
@@ -3403,9 +3410,9 @@ table {
 	padding: {
 		bottom: 36px;
 	}
-	color: $c_mainLink;
+	color: $c_link;
 	h3 {
-		color: $c_mainLink;
+		color: $c_link;
 	}
 }
 
