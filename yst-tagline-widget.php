@@ -30,7 +30,7 @@ if ( ! class_exists( 'YST_Tagline_Widget' ) ) {
 		 * @return void Echoes its' output
 		 **/
 		function widget( $args, $instance ) {
-			$tagline = get_bloginfo( 'description' );
+			$tagline = html_entity_decode( get_bloginfo( 'description' ) );
 			if ( ! empty( $tagline ) ) {
 				echo $args['before_widget'];
 				echo apply_filters( 'yst_tagline_widget_tagline', '<p class="yst_tagline">' . $tagline . '</p>' );
