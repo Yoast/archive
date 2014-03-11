@@ -506,7 +506,7 @@ button {
 		style: solid;
 		color: $c_inputSubmitBorder;
 	}
-	@include box-shadow(inset 0px 0 3px $c_inputSubmitBoxShadow);
+//	@include box-shadow(inset 0px 0 3px $c_inputSubmitBoxShadow);
 	background: {
 		color: $c_inputSubmitBg;
 	}
@@ -544,7 +544,6 @@ input {
 		style: solid;
 		color: $c_inputBorder;
 	}
-	// @include box-shadow(1px 1px 3px $c_inputBoxShadow inset);
 	color: $c_inputText;
 	font: {
 		size: $f_inputText-px;
@@ -2033,9 +2032,6 @@ table {
 	}
 	.form-submit {
 		input {
-			background: {
-				color: red;
-			}
 		}
 	}
 }
@@ -2957,9 +2953,14 @@ table {
  */
 
 .widget-yns {
+	p,
+	form {
+		padding: {
+		}
+	}
 	form {
 		label {
-			display: block;
+			display:block;
 			font: {
 				size: $f_sidebarLabel-px;
 				size: $f_sidebarLabel;
@@ -2967,21 +2968,41 @@ table {
 			}
 		}
 		input {
-			padding: 8px;
 			margin: {
 				bottom: 10px;
 			}
 			&[type="text"] {
-				width: 80%;
+				width:89%;
 			}
 			&[type="submit"] {
 				font: {
 					size: 12px;
 				}
-				padding: {
-					top: 11px;
-					bottom: 7px;
-				}
+				max-width: 11%;
+			}
+		}
+	}
+	.yst-newsletter-input-wrapper {
+		position:relative;
+		height:38px;
+		max-width:100%;
+		input {
+			padding: 8px;
+			margin: {
+				bottom: 10px;
+			}
+			&[type="text"] {
+				position: absolute;
+				top:0;
+				height:100%;
+			}
+			&[type="submit"] {
+				height:100%;
+				position: absolute;
+				top:0;
+				right:0;
+				padding: 0 11px;
+				margin:0;
 			}
 		}
 	}
