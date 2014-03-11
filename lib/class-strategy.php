@@ -48,7 +48,6 @@ class Yoast_Strategy extends Yoast_Theme {
 		// Image Sizes
 		add_image_size( 'yst-archive-thumb', 180, 0, true );			// Used on archive pages except frontpage
 		add_image_size( 'yst-frontpage-thumb', 255, 0, true );			// Used on front page only
-		add_image_size( 'sidebarfeatured-thumb', 230, 153, true );
 		add_image_size( 'fullwidth-thumb', 300, 200, true );			// Used on full width pages only
 
 		// Change image output
