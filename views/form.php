@@ -20,7 +20,7 @@ if( ! $embedded ) {
 }
 
 wp_nonce_field( $nonce_name, $nonce_name ); ?>
-<table class="form-table" id="yoast-license-form">
+<table class="form-table yoast-license-form">
 	<tbody>
 		<tr valign="top">
 			<th scope="row" valign="top"><?php _e( 'License status', $product->get_text_domain() ); ?></th>
@@ -34,7 +34,7 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 		</tr>
 		<tr valign="top">
 			<th scope="row" valign="top"><?php _e('Toggle license status', $product->get_text_domain() ); ?></th>
-			<td id="yoast-license-toggler">
+			<td class="yoast-license-toggler">
 
 				<?php if( $this->license_is_valid() ) { ?>
 					<button name="<?php echo esc_attr( $action_name ); ?>" type="submit" class="button-secondary yoast-license-deactivate" value="deactivate"><?php echo esc_html_e( 'Deactivate License', $product->get_text_domain() ); ?></button> &nbsp;
@@ -54,7 +54,7 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 		<tr valign="top">
 			<th scope="row" valign="top"><?php _e( 'License Key', $product->get_text_domain() ); ?></th>
 			<td>
-				<input id="yoast-license-key-field" name="<?php echo esc_attr( $key_name ); ?>" type="text" class="regular-text <?php if( $obfuscate ) { ?>yoast-license-obfuscate<?php } ?>" value="<?php echo esc_attr( $visible_license_key ); ?>" placeholder="<?php echo esc_attr( sprintf( __( 'Paste your %s license key here..', $product->get_text_domain() ), $product->get_item_name() ) ); ?>" <?php if( $readonly ) { echo 'readonly="readonly"'; } ?> />
+				<input name="<?php echo esc_attr( $key_name ); ?>" type="text" class="regular-text yoast-license-key-field <?php if( $obfuscate ) { ?>yoast-license-obfuscate<?php } ?>" value="<?php echo esc_attr( $visible_license_key ); ?>" placeholder="<?php echo esc_attr( sprintf( __( 'Paste your %s license key here..', $product->get_text_domain() ), $product->get_item_name() ) ); ?>" <?php if( $readonly ) { echo 'readonly="readonly"'; } ?> />
 				<?php if( $this->license_constant_is_defined ) { ?>
 				<p class="help"><?php printf( __( "You defined your license key using the %s PHP constant.", $product->get_text_domain() ), '<code>' . $this->license_constant_name . '</code>' ); ?></p>
 				<?php } ?>
