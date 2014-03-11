@@ -130,7 +130,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 			if($result->license === 'valid') {
 
 				// show a custom notice if users have an unlimited license
-				if( $result->license_limit === 0 ) {
+				if( $result->license_limit == 0 ) {
 					$message = sprintf( __( "Your %s license has been activated. You have an unlimited license. ", $this->product->get_text_domain() ), $this->product->get_item_name() );
 				} else {
 					$message = sprintf( __( "Your %s license has been activated. You have used %d/%d activations. ", $this->product->get_text_domain() ), $this->product->get_item_name(), $result->site_count, $result->license_limit );
