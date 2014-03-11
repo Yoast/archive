@@ -1299,20 +1299,30 @@ img.alignright,
 
 .archive-description,
 .term-intro {
-	margin: 40px 0;
+	margin: 0 0 40px 0;
 	color: $c_taxonomyIntroText;
 	font: {
+		family: $f_baseFont;
+		size: $f_taxonomyIntro-px;
+		size: $f_taxonomyIntro;
 		weight: 700;
 	}
 	.archive-title,
 	h1 {
 		color: $c_taxonomyIntroH1;
 		margin: {
-			bottom: 0;
+			bottom: 20px;
 		}
+		line-height: 40px;
 		font: {
-			size: $f_mainH2-px;
-			size: $f_mainH2;
+			size: $f_taxonomyIntroH1-px;
+			size: $f_taxonomyIntroH1;
+			weight: 400;
+		}
+	}
+	a {
+		font: {
+			weight: 700;
 		}
 	}
 	p:last-of-type {
