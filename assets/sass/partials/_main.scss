@@ -2528,12 +2528,9 @@ table {
 			font-weight: 700;
 		}
 		a {
-			color: $c_taglineLink;
+			@extend link;
+			font-weight: 700;
 			text-decoration: underline;
-			&:hover {
-				color: $c_taglineLinkHover;
-				text-decoration: none;
-			}
 		}
 		.widget,
 		.widget-wrap {
@@ -2739,6 +2736,9 @@ table {
 		font: {
 			weight: 700;
 		}
+	}
+	a {
+		text-decoration: underline;
 	}
 }
 
