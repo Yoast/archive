@@ -2170,20 +2170,21 @@ table {
 		a {
 			@extend link;
 		}
-		.post_author_comment {
-			float: right;
-			color: $c_commentAuthor;
+		.post_author_comment_wrap {
+			text-align: right;
+			width: 100px;
+			margin-left: 10px;
+		}
+		.post_author_comment_img {
+			padding: 0 6px;
 			background: {
 				image: image-url($c_sprite);
 				repeat: no-repeat;
-				position: -72px 0;
+				position: -72px -2px;
 			}
-			padding: {
-				left: 16px;
-			}
-			margin: {
-				left: 10px;
-			}
+		}
+		.post_author_comment {
+			color: $c_commentAuthor;
 		}
 	}
 	.entry-pings {
@@ -2432,7 +2433,7 @@ table {
 		}
 		background: {
 			image: image-url($c_sprite);
-			position: 0 -29px;
+			position: -90px -5px;
 			repeat: no-repeat;
 		}
 		padding: {

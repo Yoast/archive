@@ -244,7 +244,7 @@ class Yoast_Strategy extends Yoast_Theme {
 						printf( $pattern, esc_attr( get_comment_time( 'c' ) ), esc_url( get_comment_link( $comment->comment_ID ) ), esc_html( get_comment_date() ), __( 'at', 'yoast-theme' ), esc_html( get_comment_time() ) );
 
 						if ( $comment->user_id === $post->post_author ) {
-							echo ' <span class="post_author_comment">' . __( 'Author', 'yoast-theme' ) . '</span>';
+							echo ' <span class="post_author_comment_wrap"><span class="post_author_comment_img">&nbsp;</span><span class="post_author_comment">' . __( 'Author', 'yoast-theme' ) . '</span></a>';
 						}
 
 						?>
