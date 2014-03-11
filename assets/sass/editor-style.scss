@@ -22,7 +22,7 @@ body {
 }
 
 a {
-	color: $c_mainLink;
+	color: $c_link;
 	font: {
 		weight: 700;
 	}
@@ -39,7 +39,7 @@ a {
 		outline: thin dotted;
 	}
 	&:hover {
-		color: $c_mainLinkHover;
+		color: $c_linkHover;
 		outline: 0;
 		text: {
 			decoration: none;
