@@ -2724,6 +2724,24 @@ table {
  * Special styling for Widgets
  */
 
+/* Tagline widget */
+.widget_tagline_yst {
+	color: $c_widget_tagline;
+	font: {
+		family: $f_baseFont;
+		size: $f_widget_tagline-px;
+		size: $f_widget_tagline;
+	}
+	strong,
+	b,
+	a {
+		@extend link;
+		font: {
+			weight: 700;
+		}
+	}
+}
+
 /* Local SEO Timetable General */
 #wpseo-opening-hours {
 	margin: 0;
