@@ -503,6 +503,7 @@ class Yoast_Strategy extends Yoast_Theme {
 				genesis_widget_area( $area, array(
 					'before' => '<div id="' . $area . '" class="yoast-after-header-fp-widget">',
 					'after'  => '</div>',
+					'show_inactive' => 1,
 				) );
 			}
 
@@ -556,6 +557,7 @@ class Yoast_Strategy extends Yoast_Theme {
 				genesis_widget_area( $area, array(
 					'before' => '<div id="' . $area . '" class="yoast-after-header-widget">',
 					'after'  => '</div>',
+					'show_inactive' => 1,
 				) );
 			}
 

@@ -2467,6 +2467,7 @@ table {
 #yoast-after-header-1,
 #yoast-after-header-fp-1 {
 	width: $d_columnOne;
+	min-height: 1px;
 	max-width: 100%;
 	margin: {
 		right: 45px;
@@ -2476,6 +2477,7 @@ table {
 #yoast-after-header-2,
 #yoast-after-header-fp-2 {
 	width: $d_columnTwo;
+	min-height: 1px;
 	max-width: 100%;
 	margin: {
 		right: 45px;
@@ -2486,6 +2488,7 @@ table {
 #yoast-after-header-3,
 #yoast-after-header-fp-3 {
 	width: $d_sidebar;
+	min-height: 1px;
 	max-width: 100%;
 }
 
