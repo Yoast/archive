@@ -2602,9 +2602,6 @@ table {
 	}
 	> p {
 		a {
-			text: {
-				decoration: underline;
-			}
 			&:hover {
 				text: {
 					decoration: none;
@@ -3116,6 +3113,21 @@ table {
 .widget_socials {
 	margin: {
 		bottom: 40px;
+	}
+}
+
+.user-profile {
+	a {
+		@extend link;
+		font: {
+			weight: 700;
+		}
+		&:after {
+			content: ' \bb';
+			padding: {
+				left: 3px;
+			}
+		}
 	}
 }
 
