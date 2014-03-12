@@ -3940,7 +3940,7 @@ img#wpstats {
 		&#sidr-left {
 			float: left;
 			margin: 2px 0;
-			background: image-url($c_sprite) 0 0 no-repeat;
+			background: image-url($c_sprite) -36px 0 no-repeat;
 			border: {
 				right: {
 					width: 2px;
@@ -3952,7 +3952,7 @@ img#wpstats {
 		&#sidr-right {
 			float: right;
 			margin: 2px 0;
-			background: image-url($c_sprite) -36px 0 no-repeat;
+			background: image-url($c_sprite) 0 0 no-repeat;
 			border: {
 				left: {
 					width: 2px;
