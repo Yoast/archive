@@ -461,9 +461,8 @@ class Yoast_Strategy extends Yoast_Theme {
 		if ( 'topright' == get_theme_mod( 'yst_primary_nav_position' ) ) {
 			remove_action( 'genesis_after_header', 'genesis_do_nav' );
 			add_action( 'genesis_header_right', 'genesis_do_nav' );
-
-			add_filter( 'genesis_structural_wrap-menu-primary', array( $this, 'add_search_to_nav' ), 10, 2 );
 		}
+		add_filter( 'genesis_structural_wrap-menu-primary', array( $this, 'add_search_to_nav' ), 10, 2 );
 
 	}
 

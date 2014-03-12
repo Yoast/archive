@@ -675,6 +675,10 @@ textarea {
 		size: $f_pagenav-px;
 		size: $f_pagenav;
 	}
+	form {
+		display: none;
+		visibility: hidden;
+	}
 }
 
 .genesis-nav-menu {
@@ -1112,7 +1116,18 @@ textarea {
  */
 .menu-right {
 	.sticky-nav {
-		text-align: right;
+		.genesis-nav-menu {
+			float: right;
+			text-align: right;
+		}
+		&.nav-primary {
+			form {
+				float: left;
+				padding: {
+					right: 5px;
+				}
+			}
+		}
 	}
 }
 // body.sticky,
@@ -1176,9 +1191,22 @@ textarea {
 		}
 	}
 	.genesis-nav-menu {
+		float: left;
+		max-width: 85%;
 		.sub-menu {
 			.sub-menu {
 				margin: -57px 0 0 201px;
+			}
+		}
+	}
+	&.nav-primary {
+		form {
+			max-width: 15%;
+			display: inline-block;
+			visibility: visible;
+			float: left;
+			margin: {
+				top: 5px;
 			}
 		}
 	}
