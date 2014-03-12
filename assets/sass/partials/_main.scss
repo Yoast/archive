@@ -3816,8 +3816,11 @@ img#wpstats {
 		width: 100%;
 		float: none;
 	}
-	.thumb {
+	.thumb,
+	.yst-frontpage-thumb,
+	.yst-archive-thumb {
 		display: none;
+		visibility: hidden;
 	}
 	.breadcrumb {
 		padding: {
