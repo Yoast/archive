@@ -161,7 +161,7 @@ if ( ! class_exists( 'YST_User_Profile_Widget' ) ) {
 				unset( $new_instance['show_linkedin'] );
 			}
 			if ( ! isset( $new_instance['show_googleplus'] ) || $new_instance['show_googleplus'] !== '1' ) {
-				unset( $new_instance['posts_link'] );
+				unset( $new_instance['show_googleplus'] );
 			}
 			if ( ! isset( $new_instance['show_pinterest'] ) || $new_instance['show_pinterest'] !== '1' ) {
 				unset( $new_instance['show_pinterest'] );
