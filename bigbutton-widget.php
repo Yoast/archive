@@ -23,14 +23,15 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 		 * @var array The defaults for the values of this banner
 		 */
 		var $defaults = array(
-			'title'        => '',
-			'text'         => '',
-			'url'          => '',
-			'intern_url'   => '',
-			'class_selector' => 'cta-button',
-			'class'        => '',
-			'target'       => '_self',
-			'nofollow'     => false
+				'title'          => '',
+				'text'           => '',
+				'url'            => '',
+				'intern_url'     => '',
+				'class_selector' => 'cta-button',
+				'class'          => '',
+				'target'         => '_self',
+				'nofollow'       => false,
+				'show_on_self'   => false
 		);
 
 		/**
@@ -38,14 +39,15 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 		 **/
 		public function __construct() {
 			$this->vars = array(
-				'title'          => __( 'Title', 'yoast-theme' ),
-				'text'           => __( 'Text', 'yoast-theme' ),
-				'url'            => __( 'URL', 'yoast-theme' ),
-				'intern_url'     => __( 'Internal URL', 'yoast-theme' ),
-				'class_selector' => __( 'Class Selector', 'yoast-theme' ),
-				'class'          => __( 'Extra CSS Class', 'yoast-theme' ),
-				'target'         => __( 'Target', 'yoast-theme' ),
-				'nofollow'       => __( 'Nofollow this link', 'yoast-theme' ),
+					'title'          => __( 'Title', 'yoast-theme' ),
+					'text'           => __( 'Text', 'yoast-theme' ),
+					'url'            => __( 'URL', 'yoast-theme' ),
+					'intern_url'     => __( 'Internal URL', 'yoast-theme' ),
+					'class_selector' => __( 'Class Selector', 'yoast-theme' ),
+					'class'          => __( 'Extra CSS Class', 'yoast-theme' ),
+					'target'         => __( 'Target', 'yoast-theme' ),
+					'nofollow'       => __( 'Nofollow this link', 'yoast-theme' ),
+					'show_on_self'   => __( 'Show button on target page', 'yoast-theme' ),
 			);
 
 			$widget_ops = array( 'classname' => 'widget_bigbutton' );
@@ -63,12 +65,21 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 		 * @return void Echoes its output
 		 **/
 		public function widget( $args, $instance ) {
-			// Don't show the widget if it's linking to the current page.
-			if ( isset( $instance['intern_url'] ) && ! empty( $instance['intern_url'] ) && is_singular() ) {
-				global $post;
-				if ( $instance['intern_url'] == $post->ID ) {
-					return;
+
+			// Merge arguments
+			$instance = wp_parse_args( $instance, $this->defaults );
+
+			// Check if the widget is allowed to display on self
+			if ( false === $instance['show_on_self'] ) {
+
+				// Don't show the widget if it's linking to the current page.
+				if ( isset( $instance['intern_url'] ) && ! empty( $instance['intern_url'] ) && is_singular() ) {
+					global $post;
+					if ( $instance['intern_url'] == $post->ID ) {
+						return;
+					}
 				}
+
 			}
 
 			if ( ! isset( $instance['url'] ) ) {
@@ -164,18 +175,18 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 					echo '<select class="widefat" ' . $input_attr . '>';
 					echo '<option value="">' . __( 'Use external URL', 'yoast-theme' ) . '</option>';
 					foreach ( get_posts(
-								  array(
-									  'post_type'   => ( isset( $instance['post_type'] ) ? $instance['post_type'] : 'page' ),
-									  'numberposts' => - 1,
-									  'orderby'     => 'title',
-									  'order'       => 'ASC'
-								  )
-							  ) as $post ) {
+												array(
+														'post_type'   => ( isset( $instance['post_type'] ) ? $instance['post_type'] : 'page' ),
+														'numberposts' => - 1,
+														'orderby'     => 'title',
+														'order'       => 'ASC'
+												)
+										) as $post ) {
 						echo '<option ' . selected( $instance[$var], $post->ID, false ) . ' value="' . $post->ID . '">' . esc_html( $post->post_title ) . '</option>';
 					}
 					echo '</select>';
 				} else {
-					if ( $var == 'nofollow' ) {
+					if ( 'nofollow' == $var || 'show_on_self' == $var ) {
 						echo '<input class="checkbox" ' . $input_attr . ' type="checkbox" ' . checked( $instance[$var], true, false ) . '/> ';
 						echo $label;
 					} else {
@@ -202,6 +213,7 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 						}
 					}
 				}
+
 				echo '</p>';
 			}
 		}
@@ -221,6 +233,10 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 				$new_instance['nofollow'] = true;
 			}
 
+			if ( isset( $new_instance['show_on_self'] ) ) {
+				$new_instance['show_on_self'] = true;
+			}
+
 			if ( isset( $new_instance['url'] ) ) {
 				$new_instance['url'] = esc_url( $new_instance['url'] );
 			}
@@ -228,7 +244,7 @@ if ( ! class_exists( 'YST_Bigbutton_Widget' ) ) {
 			// If we have a Post ID, it's easy to prefill the alt based on the post title and the class based on the post_name
 			if ( isset ( $new_instance['url'] ) && ( $new_instance['intern_url'] != '-1' || ! empty( $new_instance['intern_url'] ) ) ) {
 				if ( isset( $new_instance['intern_url'] ) && ! empty( $new_instance['intern_url'] ) &&
-					( ! isset( $new_instance['class'] ) || empty( $new_instance['class'] ) )
+						( ! isset( $new_instance['class'] ) || empty( $new_instance['class'] ) )
 				) {
 					$p = get_post( $new_instance['intern_url'] );
 					if ( ( ! isset( $new_instance['class'] ) || empty( $new_instance['class'] ) ) && isset( $p->post_name ) && ! empty ( $p->post_name ) ) {
