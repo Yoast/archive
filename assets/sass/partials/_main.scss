@@ -3797,6 +3797,20 @@ img#wpstats {
 }
 
 @media (max-width: 640px) {
+	.site-header {
+		border: {
+			bottom: {
+				width: 4px;
+				style: solid;
+				color: $c_bodyTopLine;
+			}
+		}
+	}
+	.site-container {
+		border: {
+			top: none;
+		}
+	}
 	.content {
 		width: 100%;
 		max-width: $d_contentColumn;
