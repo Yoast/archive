@@ -675,6 +675,10 @@ textarea {
 		size: $f_pagenav-px;
 		size: $f_pagenav;
 	}
+	form {
+		display: none;
+		visibility: hidden;
+	}
 }
 
 .genesis-nav-menu {
@@ -918,6 +922,13 @@ textarea {
 		right: -260px;
 		z-index: 999999;
 		@include box-shadow(-2px -2px 5px $c_sidr_boxShadow);
+		h1 {
+			border: none;
+			color: $c_sidr_searchH1;
+			background: {
+				color: $c_sidr_searchH1Bg;
+			}
+		}
 	}
 	&.left {
 		left: -260px;
@@ -1040,7 +1051,8 @@ textarea {
 		}
 	}
 	form {
-		margin: 15px;
+		padding: 15px;
+		@include background-image(linear-gradient(lighten($c_sidr_searchBg, 10%), $c_sidr_searchBg));
 	}
 	label {
 		font-size: inherit;
@@ -1112,7 +1124,18 @@ textarea {
  */
 .menu-right {
 	.sticky-nav {
-		text-align: right;
+		.genesis-nav-menu {
+			float: right;
+			text-align: right;
+		}
+		&.nav-primary {
+			form {
+				float: left;
+				padding: {
+					right: 5px;
+				}
+			}
+		}
 	}
 }
 // body.sticky,
@@ -1176,9 +1199,22 @@ textarea {
 		}
 	}
 	.genesis-nav-menu {
+		float: left;
+		max-width: 85%;
 		.sub-menu {
 			.sub-menu {
 				margin: -57px 0 0 201px;
+			}
+		}
+	}
+	&.nav-primary {
+		form {
+			max-width: 15%;
+			display: inline-block;
+			visibility: visible;
+			float: left;
+			margin: {
+				top: 5px;
 			}
 		}
 	}
@@ -2467,6 +2503,7 @@ table {
 #yoast-after-header-1,
 #yoast-after-header-fp-1 {
 	width: $d_columnOne;
+	min-height: 1px;
 	max-width: 100%;
 	margin: {
 		right: 45px;
@@ -2476,6 +2513,7 @@ table {
 #yoast-after-header-2,
 #yoast-after-header-fp-2 {
 	width: $d_columnTwo;
+	min-height: 1px;
 	max-width: 100%;
 	margin: {
 		right: 45px;
@@ -2486,6 +2524,7 @@ table {
 #yoast-after-header-3,
 #yoast-after-header-fp-3 {
 	width: $d_sidebar;
+	min-height: 1px;
 	max-width: 100%;
 }
 
@@ -2571,9 +2610,6 @@ table {
 	}
 	> p {
 		a {
-			text: {
-				decoration: underline;
-			}
 			&:hover {
 				text: {
 					decoration: none;
@@ -3085,6 +3121,21 @@ table {
 .widget_socials {
 	margin: {
 		bottom: 40px;
+	}
+}
+
+.user-profile {
+	a {
+		@extend link;
+		font: {
+			weight: 700;
+		}
+		&:after {
+			content: ' \bb';
+			padding: {
+				left: 3px;
+			}
+		}
 	}
 }
 
@@ -3773,8 +3824,11 @@ img#wpstats {
 		width: 100%;
 		float: none;
 	}
-	.thumb {
+	.thumb,
+	.yst-frontpage-thumb,
+	.yst-archive-thumb {
 		display: none;
+		visibility: hidden;
 	}
 	.breadcrumb {
 		padding: {
@@ -3894,7 +3948,7 @@ img#wpstats {
 		&#sidr-left {
 			float: left;
 			margin: 2px 0;
-			background: image-url($c_sprite) 0 0 no-repeat;
+			background: image-url($c_sprite) -36px 0 no-repeat;
 			border: {
 				right: {
 					width: 2px;
@@ -3906,7 +3960,7 @@ img#wpstats {
 		&#sidr-right {
 			float: right;
 			margin: 2px 0;
-			background: image-url($c_sprite) -36px 0 no-repeat;
+			background: image-url($c_sprite) 0 0 no-repeat;
 			border: {
 				left: {
 					width: 2px;
