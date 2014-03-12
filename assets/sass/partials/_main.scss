@@ -922,6 +922,13 @@ textarea {
 		right: -260px;
 		z-index: 999999;
 		@include box-shadow(-2px -2px 5px $c_sidr_boxShadow);
+		h1 {
+			border: none;
+			color: $c_sidr_searchH1;
+			background: {
+				color: $c_sidr_searchH1Bg;
+			}
+		}
 	}
 	&.left {
 		left: -260px;
@@ -1044,7 +1051,8 @@ textarea {
 		}
 	}
 	form {
-		margin: 15px;
+		padding: 15px;
+		@include background-image(linear-gradient(lighten($c_sidr_searchBg, 10%), $c_sidr_searchBg));
 	}
 	label {
 		font-size: inherit;
