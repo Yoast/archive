@@ -918,6 +918,9 @@ textarea {
 			}
 		}
 	}
+	h1:first-child {
+		visibility: hidden;
+	}
 	&.right {
 		left: auto;
 		right: -260px;
@@ -985,9 +988,6 @@ textarea {
 					}
 				}
 				color: $sidr-text-color;
-				font: {
-					weight: 700;
-				}
 				&:hover,
 				&.active,
 				&.sidr-class-active {
@@ -1024,27 +1024,6 @@ textarea {
 					a {
 						padding: {
 							left: 20px;
-						}
-						font: {
-							weight: normal;
-						}
-					}
-					ul {
-						li {
-							a {
-								padding: {
-									left: 25px;
-								}
-							}
-							ul {
-								li {
-									a {
-										padding: {
-											left: 30px;
-										}
-									}
-								}
-							}
 						}
 					}
 				}
