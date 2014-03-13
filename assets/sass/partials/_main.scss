@@ -1302,7 +1302,7 @@ img.alignright,
 .breadcrumb {
 	max-width: $d_full;
 	margin: 0 auto;
-	padding: 20px 0 0;
+	padding: 10px 0 0;
 	color: $c_breadcrumbs;
 	font: {
 		size: $f_breadcrumbs-px;
@@ -3828,9 +3828,6 @@ img#wpstats {
 		padding: {
 			left: 1%;
 			right: 1%;
-		}
-		margin: {
-			top: 1em;
 		}
 	}
 	.content-sidebar,
