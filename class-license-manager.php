@@ -73,8 +73,10 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	 * @todo I'm not sure I want the setup_auto_updater() to be called from the setup_hooks method
 	*/
 	public function setup_hooks() {
+
 		// show admin notice if license is not active
 		add_action( 'admin_notices', array( $this, 'display_admin_notices' ) );
+
 		add_action( 'admin_init', array( $this, 'catch_post_request') );
 
 		// setup item type (plugin|theme) specific hooks
@@ -85,7 +87,10 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	}
 
 	/**
-	* Display license specific admin notices
+	* Display license specific admin notices, namely:
+	*
+	* - License for the product isn't activated
+	* - External requests are blocked through WP_HTTP_BLOCK_EXTERNAL
 	*/
 	public function display_admin_notices() {
 
@@ -102,6 +107,22 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 			<p><?php printf( __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updated and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.', $this->product->get_text_domain() ), $this->product->get_item_name(), $this->product->get_license_page_url(), $this->product->get_item_url() ); ?></p>
 		</div>
 		<?php
+		}
+
+		// show notice if external requests are blocked through the WP_HTTP_BLOCK_EXTERNAL constant
+		if( defined( "WP_HTTP_BLOCK_EXTERNAL" ) && WP_HTTP_BLOCK_EXTERNAL === true ) {
+
+			// check if our API endpoint is in the allowed hosts
+			$host = parse_url( $this->product->get_api_url(), PHP_URL_HOST );
+			
+			if( ! defined( "WP_ACCESSIBLE_HOSTS" ) || stristr( WP_ACCESSIBLE_HOSTS, $host ) === false ) {
+				?>
+				<div class="error">
+					<p><?php printf( __( '<b>Warning!</b> You\'re blocking external requests which means you won\'t be able to get %s updates. Please add %s to %s.', $this->product->get_text_domain() ), $this->product->get_item_name(), '<strong>' . $host . '</strong>', '<code>WP_ACCESSIBLE_HOSTS</code>'); ?></p>
+				</div>
+				<?php
+			}
+
 		}
 	}
 
