@@ -952,16 +952,16 @@ textarea {
 			size: $f_main-px;
 			size: $f_main;
 		}
-		border: {
-			bottom: {
-				width: 5px;
-				style: solid;
-				color: $c_sidr_headingBorder;
-			}
-		}
 		padding: 0 15px;
 		line: {
 			height: 39px;
+		}
+		border: {
+			bottom: {
+				width: 2px;
+				style: solid;
+				color: $c_sidr_linkBorder;
+			}
 		}
 		margin: 0;
 	}
@@ -969,14 +969,12 @@ textarea {
 	}
 	ul {
 		display: block;
-		margin: 0 0 15px;
 		padding: 0;
 		li {
 			display: block;
 			margin: 0;
 			line-height: 36px;
 			a /*, span */  {
-				//No idea what the span is for
 				padding: 0 15px;
 				display: block;
 				text-decoration: none;
@@ -991,12 +989,8 @@ textarea {
 				&:hover,
 				&.active,
 				&.sidr-class-active {
-					border-top: none;
-					line-height: 36px;
 					color: $c_sidr_linkHoverText;
-					background: {
-						color: $c_sidr_linkHoverBg;
-					}
+					font-weight: bold;
 				}
 				&.active,
 				&.sidr-class-active {
@@ -1007,23 +1001,43 @@ textarea {
 			}
 			&.current-menu-item {
 				> a {
-					color: $c_sidr_linkHoverText;
-					background: {
-						color: $c_sidr_linkActiveBg;
-					}
+					color: $c_sidr_linkActiveText;
+					@include background-image(linear-gradient(lighten($c_sidr_searchBg, 10%), $c_sidr_searchBg));
+
 					&:hover {
-						background: {
-							color: $c_sidr_linkHoverBg;
-						}
+						color: $c_sidr_linkActiveText;
+						font-weight: normal;
+					}
+
+					&:after{ 
+						padding-left: 5px;
+						font-size: 20px;
+						content: '\2304';
 					}
 				}
 			}
+			
 			ul {
 				margin: 0;
 				li {
 					a {
 						padding: {
-							left: 20px;
+							left: 30px;
+						}
+						border: {
+							bottom: {
+								width: 2px;
+								style: solid;
+								color: $c_sidr_subLinkBorder;
+							}
+						}
+
+
+					}
+
+					&.current-menu-item{
+						a:after {
+							content: '';
 						}
 					}
 				}
