@@ -65,6 +65,20 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 </table>
 
 <?php 	
+
+if( ( $expiry_date = strtotime( $this->get_license_expiry_date() ) ) ) {
+
+	echo '<p>';
+
+	printf( __( 'Your %s license is expiring on %s.', $product->get_text_domain() ), $product->get_item_name(), date('Y-m-d', $expiry_date ) ); 
+
+	if( strtotime( '+2 years' ) > $expiry_date ) {
+		printf( ' ' . __('%sRenew your license now%s.', $product->get_text_domain() ), '<a href="'. $product->get_item_url() .'">', '</a>' ); 
+	}
+
+	echo '</p>';
+}
+
 // Only show a "Save Changes" button and end form if we're not embedded in another form.
 if( ! $embedded ) {
 

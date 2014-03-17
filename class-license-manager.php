@@ -144,8 +144,13 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	public function activate_license() {
 
 		$result = $this->call_license_api( 'activate' );
-
+		
 		if( $result ) {
+
+			// story expiry date
+			if( isset( $result->expires ) ) {
+				$this->set_license_expiry_date( $result->expires );
+			}
 			
 			// show success notice if license is valid
 			if($result->license === 'valid') {
@@ -156,7 +161,6 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 				} else {
 					$message = sprintf( __( "Your %s license has been activated. You have used %d/%d activations. ", $this->product->get_text_domain() ), $this->product->get_item_name(), $result->site_count, $result->license_limit );
 				}
-
 			
 				// add upgrade notice if user has less than 3 activations left
 				if( $result->license_limit > 0 && ( $result->license_limit - $result->site_count ) <= 3 ) {
@@ -299,6 +303,22 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 	}
 
 	/**
+	* Gets the license expiry date
+	*
+	* @return string
+	*/
+	public function get_license_expiry_date() {
+		return $this->get_option( 'expiry_date');
+	}
+
+	/**
+	* Stores the license expiry date
+	*/
+	public function set_license_expiry_date( $expiry_date ) {
+		$this->set_option( 'expiry_date', $expiry_date );
+	}
+
+	/**
 	* Checks whether the license status is active
 	*
 	* @return boolean True if license is active
@@ -323,7 +343,8 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 		// setup array of defaults
 		$defaults = array(
 			'key' => '',
-			'status' => ''
+			'status' => '',
+			'expiry_date' => ''
 		);
 
 		// merge options with defaults
