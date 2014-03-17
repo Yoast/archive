@@ -176,7 +176,7 @@ abstract class Yoast_License_Manager implements iYoast_License_Manager {
 					$this->set_notice( sprintf( __('You\'ve reached your activation limit. You must <a href="%s">upgrade your license</a> to use it on this site.', $this->product->get_text_domain() ), $this->product->get_item_url() ), false );
 				} elseif( isset($result->error) && $result->error == "expired" ) {
 					// show notice if the license is expired
-					$this->set_notice( sprintf( __('Your license is expired. You must <a href="%s">extend your license</a> in order to use it again.', $this->product->get_text_domain() ), $this->product->get_item_url() ), false );
+					$this->set_notice( sprintf( __('Your license has expired. You must <a href="%s">extend your license</a> in order to use it again.', $this->product->get_text_domain() ), $this->product->get_item_url() ), false );
 				} else {
 					// show a general notice if it's any other error
 					$this->set_notice( __( "Failed to activate your license, your license key seems to be invalid.", $this->product->get_text_domain() ), false );
