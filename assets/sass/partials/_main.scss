@@ -389,22 +389,19 @@ header {
 		}
 		max-width: $d_headerAside;
 		overflow-x: hidden;
-		color: $c_taglineTop;
-		font: {
-			size: $f_taglineTop-px;
-			size: $f_taglineTop;
-		}
-		strong {
-			color: $c_taglineTopBold;
-		}
-		.search-form {
-			width: $d_sidebar;
-		}
-		a {
-			color: $c_taglineLink;
-			&:hover {
-				color: $c_taglineLinkHover;
-			}
+//		color: $c_taglineTop;
+//		font: {
+//			size: $f_taglineTop-px;
+//			size: $f_taglineTop;
+//		}
+//		strong {
+//			color: $c_taglineTopBold;
+//		}
+	.search-form {
+		width: $d_sidebar;
+	}
+	a {
+		@extend link;
 		}
 	}
 	.header-widget-area {
@@ -2369,13 +2366,13 @@ table {
 			#prev {
 				text-align: left;
 				a {
-					color: $c_widget_calendar_prevnext;
+					@extend link;
 				}
 			}
 			#next {
 				text-align: right;
 				a {
-					color: $c_widget_calendar_prevnext;
+					@extend link;
 				}
 			}
 		}
