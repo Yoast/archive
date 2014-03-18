@@ -3684,6 +3684,12 @@ img#wpstats {
 			}
 		}
 	}
+	#yoast-tagline-after-header-container {
+		padding: {
+			left: 1%;
+			right: 1%;
+		}
+	}
 	.site-header {
 		.title-area {
 			background: {
@@ -3747,13 +3753,13 @@ img#wpstats {
 	.full-width-content {
 		.footer-widgets {
 			padding: {
-				left: 1%;
-				right: 1%;
+				left: 2%;
+				right: 2%;
 			}
 			.widget-area {
 				width: 30%;
 				&.footer-widgets-2 {
-					margin: 0 4%;
+					margin: 0 3%;
 				}
 			}
 		}
@@ -3905,7 +3911,7 @@ img#wpstats {
 		padding: 0;
 	}
 	#yoast-fullwidth-bottom-container {
-		padding: 0 10px;
+		padding: 0 1%;
 		#yoast-fullwidth-widgetarea-1,
 		#yoast-fullwidth-widgetarea-2,
 		#yoast-fullwidth-widgetarea-3 {
@@ -3933,8 +3939,21 @@ img#wpstats {
 
 	}
 	.full-width-content {
+		#yoast-fullwidth-bottom-container {
+			.yoast-fullwidth-widget {
+				section {
+					width: 100%;
+				}
+			}
+		}
 		.footer-widgets {
 			width: 100%;
+			.widget-area {
+				width: 100%;
+				&.footer-widgets-2 {
+					margin: 0;
+				}
+			}
 		}
 	}
 	.site-footer {
