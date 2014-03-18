@@ -633,7 +633,7 @@ textarea {
 .search-form {
 	input {
 		height: 1.5em;
-		padding: 16px 32px 16px 0;
+		padding: 16px 32px 16px 8px;
 		background: {
 			image: image-url('search.png');
 			position: 95% 50%;
@@ -955,7 +955,7 @@ textarea {
 		}
 		border: {
 			bottom: {
-				width: 2px;
+				width: 1px;
 				style: solid;
 				color: $c_sidr_linkBorder;
 			}
@@ -970,17 +970,21 @@ textarea {
 		li {
 			display: block;
 			margin: 0;
-			line-height: 36px;
+			line-height: 40px;
 			a /*, span */  {
 				padding: 0 15px;
 				display: block;
 				text-decoration: none;
 				border: {
 					bottom: {
-						width: 2px;
+						width: 1px;
 						style: solid;
 						color: $c_sidr_linkBorder;
 					}
+				}
+				font: {
+					size: $f_sidr_subMenu-px;
+					size: $f_sidr_subMenu;
 				}
 				color: $sidr-text-color;
 				&:hover,
@@ -1024,7 +1028,7 @@ textarea {
 						}
 						border: {
 							bottom: {
-								width: 2px;
+								width: 1px;
 								style: solid;
 								color: $c_sidr_subLinkBorder;
 							}
@@ -1655,7 +1659,7 @@ table {
 		}
 	}
 	&.home .full-width-thumb {
-		margin-top: -61px;
+		margin-top: -75px;
 		max-width: $d_columnOne;
 		float: right;
 	}
@@ -1663,7 +1667,7 @@ table {
 
 .page-template-page_blog-php {
 	.full-width-thumb {
-		margin-top: -61px;
+		margin-top: -75px;
 		max-width: $d_columnOne;
 		float: right;
 	}
@@ -1806,11 +1810,11 @@ table {
 			}
 		}
 		img.alignleft {
-			margin: 7px 24px 10px 0;
+			margin: 3px 24px 10px 0;
 			max-width: 255px;
 		}
 		img.alignright {
-			margin: 7px 0 24px 10px;
+			margin: 3px 0 24px 10px;
 			max-width: 255px;
 		}
 	}
