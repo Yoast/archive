@@ -2737,6 +2737,9 @@ table {
 }
 
 #yoast-after-header-container {
+	a {
+		@extend link;
+	}
 	.widget-title {
 		@extend .widget-title;
 		background: {
@@ -2744,6 +2747,11 @@ table {
 		}
 		border: {
 			bottom: 1px solid $c_footerWidgetsBorderTop;
+		}
+	}
+	.widget_tagline_yst {
+		a {
+			@extend link;
 		}
 	}
 }
@@ -3332,10 +3340,7 @@ table {
 		top: 24px;
 	}
 	a {
-		color: $c_footerWidgetsLink;
-		&:hover {
-			color: $c_footerWidgetsLinkHover;
-		}
+		@extend link;
 	}
 	h3,
 	h4 {
