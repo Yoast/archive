@@ -2525,23 +2525,6 @@ table {
 	max-width: 100%;
 }
 
-.sidebar-content {
-	#yoast-after-header-container {
-		#yoast-after-header-1,
-		#yoast-after-header-fp-1 {
-			margin: {
-				left: 45px;
-				right: 45px;
-			}
-		}
-		#yoast-after-header-2,
-		#yoast-after-header-fp-2 {
-			float: right;
-			margin: 0;
-		}
-	}
-}
-
 /**
  * Tagline Widgets
  */
@@ -3709,7 +3692,7 @@ img#wpstats {
 			padding: {
 				right: 1%;
 			}
-			max-width: 60%;
+			max-width: 65%;
 			overflow: hidden;
 		}
 	}

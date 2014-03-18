@@ -494,9 +494,6 @@ class Yoast_Strategy extends Yoast_Theme {
 			echo '<div id="yoast-after-header-container"><div class="wrap">';
 
 			$areas = array( 'yoast-after-header-fp-1', 'yoast-after-header-fp-2', 'yoast-after-header-fp-3' );
-			if ( 'sidebar-content' == genesis_site_layout() ) {
-				$areas = array_reverse( $areas );
-			}
 
 			foreach ( $areas as $area ) {
 				genesis_widget_area( $area, array(
