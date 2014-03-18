@@ -86,11 +86,15 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 
 			add_action( 'admin_init', array( $this, 'catch_post_request') );
 
+			// perform a license check
+			add_action( 'admin_init', array( $this, 'check_license' ), 20 );
+
 			// setup item type (plugin|theme) specific hooks
 			$this->specific_hooks();
 
 			// setup the auto updater
 			$this->setup_auto_updater();
+
 		}
 
 		/**
@@ -226,6 +230,44 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 			}
 
 			return ( $this->get_license_status() === 'deactivated' );		
+		}
+
+		/**
+		* Checks the license status remotely
+		*
+		* @return boolean True if the function ran with success, false otherwise.
+		*/
+		public function check_license() {
+		
+			// Only run once every week
+			$transient_name = $this->prefix . 'license_checked';
+
+			if( get_transient( $transient_name ) !== false ) {
+				return false;
+			}
+
+			// call remote api
+			$result = $this->call_license_api( 'check' );
+
+			// did the request fail?
+			if( $result === false ) {
+				return false;
+			}
+
+			// story expiry date
+			if( isset( $result->expires ) ) {
+				$this->set_license_expiry_date( $result->expires );
+			}
+
+			// check if license status is still correct
+			if( $this->get_license_status() !== trim( $result->license ) ) {
+				$this->set_license_status( $result->license );
+			}
+
+			// set transient to ensure license is only checked once a week
+			set_transient( $transient_name, 1, strtotime( "+1 week" ) );
+
+			return true;
 		}
 
 		/**
@@ -540,7 +582,6 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 				$this->license_constant_is_defined = true;
 			}
 		}
-
 
 	}
 
