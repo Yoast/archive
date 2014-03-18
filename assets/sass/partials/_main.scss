@@ -958,7 +958,7 @@ textarea {
 		}
 		border: {
 			bottom: {
-				width: 2px;
+				width: 1px;
 				style: solid;
 				color: $c_sidr_linkBorder;
 			}
@@ -973,17 +973,21 @@ textarea {
 		li {
 			display: block;
 			margin: 0;
-			line-height: 36px;
+			line-height: 40px;
 			a /*, span */  {
 				padding: 0 15px;
 				display: block;
 				text-decoration: none;
 				border: {
 					bottom: {
-						width: 2px;
+						width: 1px;
 						style: solid;
 						color: $c_sidr_linkBorder;
 					}
+				}
+				font: {
+					size: $f_sidr_subMenu-px;
+					size: $f_sidr_subMenu;
 				}
 				color: $sidr-text-color;
 				&:hover,
@@ -1027,7 +1031,7 @@ textarea {
 						}
 						border: {
 							bottom: {
-								width: 2px;
+								width: 1px;
 								style: solid;
 								color: $c_sidr_subLinkBorder;
 							}
