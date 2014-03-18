@@ -3739,9 +3739,6 @@ img#wpstats {
 		}
 	}
 	.full-width-content {
-		.widget_bigbutton {
-			max-width: 100%;
-		}
 		.footer-widgets {
 			padding: {
 				left: 1%;
@@ -3752,6 +3749,21 @@ img#wpstats {
 				&.footer-widgets-2 {
 					margin: 0 4%;
 				}
+			}
+		}
+		.widget_bigbutton {
+			max-width: 100%;
+		}
+	}
+	.footer-widgets {
+		padding: {
+			left: 1%;
+			right: 1%;
+		}
+		.widget-area {
+			width: 30%;
+			&.footer-widgets-2 {
+				margin: 0 4%;
 			}
 		}
 	}
@@ -3911,6 +3923,12 @@ img#wpstats {
 			&.footer-widgets-3 {
 				margin: 0;
 			}
+		}
+
+	}
+	.full-width-content {
+		.footer-widgets {
+			width: 100%;
 		}
 	}
 	.site-footer {
