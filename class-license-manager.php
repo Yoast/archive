@@ -157,6 +157,9 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 				// story expiry date
 				if( isset( $result->expires ) ) {
 					$this->set_license_expiry_date( $result->expires );
+					$expiry_date = strtotime( $result->expires );
+				} else {
+					$expiry_date = false;
 				}
 				
 				// show success notice if license is valid
@@ -173,8 +176,8 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 					if( $result->license_limit > 0 && ( $result->license_limit - $result->site_count ) <= 3 ) {
 						$message .= sprintf( __( '<a href="%s">Did you know you can upgrade your license?</a>', $this->product->get_text_domain() ), $this->product->get_tracking_url( 'license-nearing-limit-notice' ) );
 					// add extend notice if license is expiring in less than 1 month
-					} elseif( strtotime( $result->expires ) < strtotime( "+1 month" ) ) {
-						$days_left = round( ( strtotime( $result->expires ) - strtotime( "now" ) ) / 86400 );
+					} elseif( $expiry_date !== false && $expiry_date < strtotime( "+1 month" ) ) {
+						$days_left = round( ( $expiry_date - strtotime( "now" ) ) / 86400 );
 						$message .= sprintf( __( '<a href="%s">Your license is expiring in %d days, would you like to extend it?</a>', $this->product->get_text_domain() ), $this->product->get_tracking_url( 'license-expiring-notice' ), $days_left );
 					}
 

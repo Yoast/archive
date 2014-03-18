@@ -66,17 +66,21 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 
 <?php 	
 
-if( ( $expiry_date = strtotime( $this->get_license_expiry_date() ) ) ) {
+if( $this->license_is_valid() ) {
+	
+	$expiry_date = strtotime( $this->get_license_expiry_date() );
+	
+	if( $expiry_date !== false ) {
+		echo '<p>';
 
-	echo '<p>';
+		printf( __( 'Your %s license will expire on %s.', $product->get_text_domain() ), $product->get_item_name(), date('F jS Y', $expiry_date ) ); 
 
-	printf( __( 'Your %s license will expire on %s.', $product->get_text_domain() ), $product->get_item_name(), date('F jS Y', $expiry_date ) ); 
+		if( strtotime( '+3 months' ) > $expiry_date ) {
+			printf( ' ' . __('%sRenew your license now%s.', $product->get_text_domain() ), '<a href="'. $this->product->get_tracking_url( 'renewal' ) .'">', '</a>' ); 
+		}
 
-	if( strtotime( '+3 years' ) > $expiry_date ) {
-		printf( ' ' . __('%sRenew your license now%s.', $product->get_text_domain() ), '<a href="'. $this->product->get_tracking_url( 'renewal' ) .'">', '</a>' ); 
-	}
-
-	echo '</p>';
+		echo '</p>';
+	}	
 }
 
 // Only show a "Save Changes" button and end form if we're not embedded in another form.
