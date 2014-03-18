@@ -1662,7 +1662,7 @@ table {
 		}
 	}
 	&.home .full-width-thumb {
-		margin-top: -61px;
+		margin-top: -75px;
 		max-width: $d_columnOne;
 		float: right;
 	}
@@ -1670,7 +1670,7 @@ table {
 
 .page-template-page_blog-php {
 	.full-width-thumb {
-		margin-top: -61px;
+		margin-top: -75px;
 		max-width: $d_columnOne;
 		float: right;
 	}
@@ -1813,11 +1813,11 @@ table {
 			}
 		}
 		img.alignleft {
-			margin: 7px 24px 10px 0;
+			margin: 3px 24px 10px 0;
 			max-width: 255px;
 		}
 		img.alignright {
-			margin: 7px 0 24px 10px;
+			margin: 3px 0 24px 10px;
 			max-width: 255px;
 		}
 	}
