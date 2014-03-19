@@ -471,6 +471,12 @@ header {
 }
 
 .sidebar-content {
+	.content {
+		margin-right: 65px;
+	}
+	&.home .content {
+		margin-right: 25px;
+	}
 	.sidebar-primary {
 		float: left;
 	}
