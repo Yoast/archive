@@ -413,8 +413,12 @@ header {
 			bottom: 10px;
 		}
 		.widget {
+			width: 300px;
 			margin-bottom: 10px;
 			float: right;
+			text: {
+				align: left;
+			}
 		}
 	}
 	.search-form {
@@ -1109,7 +1113,7 @@ textarea {
 			padding: 14px 0 0;
 		}
 	}
-	
+
 }
 
 .nav-secondary {
@@ -3714,6 +3718,7 @@ img#wpstats {
 			}
 			max-width: 65%;
 			overflow: hidden;
+
 		}
 	}
 	.breadcrumb {
