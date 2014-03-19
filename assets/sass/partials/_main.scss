@@ -3872,9 +3872,7 @@ img#wpstats {
 		visibility: hidden;
 		display: none;
 	}
-}
 
-@media (max-width: 640px) {
 	.site-header {
 		border: {
 			bottom: {
@@ -3884,6 +3882,10 @@ img#wpstats {
 			}
 		}
 	}
+}
+
+@media (max-width: 640px) {
+	
 	.site-container {
 		border: {
 			top: none;
