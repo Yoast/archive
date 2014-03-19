@@ -3656,10 +3656,10 @@ img#wpstats {
 	}
 	.content-sidebar,
 	.sidebar-content {
-		.home,
-		.single {
+		&.home,
+		&.single {
 			.content {
-				max-width: 67%;
+				max-width: 66%;
 			}
 			img {
 				max-width: 45%;
@@ -3691,16 +3691,9 @@ img#wpstats {
 		}
 	}
 	.sidebar-content {
-		.sidebar-primary {
-			margin: {
-				left: 1%;
-			}
-		}
 		.content {
-			padding: {
-				left: 1%;
-				right: 1%;
-			}
+			margin-right: 4%;
+			max-width: 63%;
 		}
 	}
 	.full-width-content {
@@ -3741,9 +3734,24 @@ img#wpstats {
 		}
 	}
 	.breadcrumb {
+		margin: {
+			left: 0;
+			right: 0;
+		}
 		padding: {
 			left: 1%;
+			right: 1%;
+		};
+	}
+	.site-inner {
+		margin: {
+			left: 0;
+			right: 0;
 		}
+		padding: {
+			left: 1%;
+			right: 1%;
+		};
 	}
 	#yoast-after-header-container {
 		padding: {
@@ -3829,9 +3837,27 @@ img#wpstats {
 }
 
 @media (max-width: 950px ) {
+	.sidebar-content {
+		.content {
+			margin-right: 3%;
+			max-width: 64%;
+		}
+	}
 	.full-width-thumb {
 		visibility: hidden;
 		display: none;
+	}
+}
+
+@media (max-width: 930px ) {
+	.sidebar-content {
+		.content {
+			margin: {
+				right: 2%;
+				left: 1%;
+			}
+			max-width: 64%;
+		}
 	}
 }
 
@@ -3867,10 +3893,13 @@ img#wpstats {
 		width: 100%;
 		max-width: $d_contentColumn;
 	}
-	.home,
-	.single {
-		.content {
-			max-width: 100%;
+	.content-sidebar,
+	.sidebar-content {
+		&.home,
+		&.single {
+			.content {
+				max-width: 100%;
+			}
 		}
 	}
 	.sidebar-primary {
@@ -3918,17 +3947,15 @@ img#wpstats {
 	}
 	.sidebar-content {
 		.content {
-			margin: 0;
-			padding: {
-				left: 10px;
-			}
+			padding: 0 1%;
+			margin-right: 0;
+			max-width: 100%;
 		}
 		.sidebar-primary {
-			margin: 0;
-			padding: {
-				right: 10px;
-				left: 10px;
-			}
+			padding: 0 1%;
+		}
+		aside {
+			padding: 0 1%;
 		}
 	}
 	.featured-content.featuredpost,
