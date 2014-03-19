@@ -105,19 +105,19 @@ class Yoast_Strategy extends Yoast_Theme {
 
 		genesis_register_sidebar( array(
 			'id'          => 'yoast-after-header-fp-1',
-			'name'        => __( 'After Header for Front Page 1', 'yoast-theme' ),
+			'name'        => __( 'After Header 1 for Front Page', 'yoast-theme' ),
 			'description' => __( 'After Header 1 widget area. Will only display on the front page.', 'yoast-theme' ),
 		) );
 
 		genesis_register_sidebar( array(
 			'id'          => 'yoast-after-header-fp-2',
-			'name'        => __( 'After Header for Front Page 2', 'yoast-theme' ),
+			'name'        => __( 'After Header 2 for Front Page', 'yoast-theme' ),
 			'description' => __( 'After Header 2 widget area. Will only display on the front page.', 'yoast-theme' ),
 		) );
 
 		genesis_register_sidebar( array(
 			'id'          => 'yoast-after-header-fp-3',
-			'name'        => __( 'After Header for Front Page 3', 'yoast-theme' ),
+			'name'        => __( 'After Header 3 for Front Page', 'yoast-theme' ),
 			'description' => __( 'After Header 3 widget area. Will only display on the front page.', 'yoast-theme' ),
 		) );
 
@@ -494,9 +494,6 @@ class Yoast_Strategy extends Yoast_Theme {
 			echo '<div id="yoast-after-header-container"><div class="wrap">';
 
 			$areas = array( 'yoast-after-header-fp-1', 'yoast-after-header-fp-2', 'yoast-after-header-fp-3' );
-			if ( 'sidebar-content' == genesis_site_layout() ) {
-				$areas = array_reverse( $areas );
-			}
 
 			foreach ( $areas as $area ) {
 				genesis_widget_area( $area, array(

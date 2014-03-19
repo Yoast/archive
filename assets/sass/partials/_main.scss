@@ -335,6 +335,7 @@ header {
 			weight: 700;
 		}
 		width: $d_headerLogo;
+		max-width: 30%;
 	}
 	.site-description {
 		display: block;
@@ -389,22 +390,19 @@ header {
 		}
 		max-width: $d_headerAside;
 		overflow-x: hidden;
-		color: $c_taglineTop;
-		font: {
-			size: $f_taglineTop-px;
-			size: $f_taglineTop;
-		}
-		strong {
-			color: $c_taglineTopBold;
-		}
-		.search-form {
-			width: $d_sidebar;
-		}
-		a {
-			color: $c_taglineLink;
-			&:hover {
-				color: $c_taglineLinkHover;
-			}
+//		color: $c_taglineTop;
+//		font: {
+//			size: $f_taglineTop-px;
+//			size: $f_taglineTop;
+//		}
+//		strong {
+//			color: $c_taglineTopBold;
+//		}
+	.search-form {
+		width: $d_sidebar;
+	}
+	a {
+		@extend link;
 		}
 	}
 	.header-widget-area {
@@ -636,7 +634,7 @@ textarea {
 .search-form {
 	input {
 		height: 1.5em;
-		padding: 16px 32px 16px 0;
+		padding: 16px 32px 16px 8px;
 		background: {
 			image: image-url('search.png');
 			position: 95% 50%;
@@ -731,8 +729,9 @@ textarea {
 		position: relative;
 		color: $c_navMainLink;
 		padding: 10px 0px;
-		margin: 0px 20px;
+		margin: 0px 10px;
 		font: {
+			size: 17px;
 			weight: 400;
 		}
 		text: {
@@ -917,6 +916,9 @@ textarea {
 			}
 		}
 	}
+	h1:first-child {
+		visibility: hidden;
+	}
 	&.right {
 		left: auto;
 		right: -260px;
@@ -948,16 +950,16 @@ textarea {
 			size: $f_main-px;
 			size: $f_main;
 		}
-		border: {
-			bottom: {
-				width: 5px;
-				style: solid;
-				color: $c_sidr_headingBorder;
-			}
-		}
 		padding: 0 15px;
 		line: {
 			height: 39px;
+		}
+		border: {
+			bottom: {
+				width: 1px;
+				style: solid;
+				color: $c_sidr_linkBorder;
+			}
 		}
 		margin: 0;
 	}
@@ -965,37 +967,32 @@ textarea {
 	}
 	ul {
 		display: block;
-		margin: 0 0 15px;
 		padding: 0;
 		li {
 			display: block;
 			margin: 0;
-			line-height: 36px;
+			line-height: 40px;
 			a /*, span */  {
-				//No idea what the span is for
 				padding: 0 15px;
 				display: block;
 				text-decoration: none;
 				border: {
 					bottom: {
-						width: 2px;
+						width: 1px;
 						style: solid;
 						color: $c_sidr_linkBorder;
 					}
 				}
-				color: $sidr-text-color;
 				font: {
-					weight: 700;
+					size: $f_sidr_subMenu-px;
+					size: $f_sidr_subMenu;
 				}
+				color: $sidr-text-color;
 				&:hover,
 				&.active,
 				&.sidr-class-active {
-					border-top: none;
-					line-height: 36px;
 					color: $c_sidr_linkHoverText;
-					background: {
-						color: $c_sidr_linkHoverBg;
-					}
+					font-weight: bold;
 				}
 				&.active,
 				&.sidr-class-active {
@@ -1006,44 +1003,44 @@ textarea {
 			}
 			&.current-menu-item {
 				> a {
-					color: $c_sidr_linkHoverText;
-					background: {
-						color: $c_sidr_linkActiveBg;
-					}
+					color: $c_sidr_linkActiveText;
+					@include background-image(linear-gradient(lighten($c_sidr_searchBg, 10%), $c_sidr_searchBg));
+
 					&:hover {
-						background: {
-							color: $c_sidr_linkHoverBg;
-						}
+						color: $c_sidr_linkActiveText;
+						font-weight: normal;
+					}
+
+					&:after{ 
+						padding-left: 5px;
+						font-size: 20px;
+						content: '\2304';
 					}
 				}
 			}
+			
 			ul {
 				margin: 0;
 				li {
 					a {
+						color: $c_sidr_subLinkText;
 						padding: {
-							left: 20px;
+							left: 30px;
 						}
-						font: {
-							weight: normal;
+						border: {
+							bottom: {
+								width: 1px;
+								style: solid;
+								color: $c_sidr_subLinkBorder;
+							}
 						}
+
+
 					}
-					ul {
-						li {
-							a {
-								padding: {
-									left: 25px;
-								}
-							}
-							ul {
-								li {
-									a {
-										padding: {
-											left: 30px;
-										}
-									}
-								}
-							}
+
+					&.current-menu-item{
+						a:after {
+							content: '';
 						}
 					}
 				}
@@ -1234,13 +1231,13 @@ textarea {
 
 .alignleft .avatar {
 	margin: {
-		right: 24px;
+		right: 10px;
 	}
 }
 
 .alignright .avatar {
 	margin: {
-		left: 24px;
+		left: 10px;
 	}
 }
 
@@ -1663,7 +1660,7 @@ table {
 		}
 	}
 	&.home .full-width-thumb {
-		margin-top: -61px;
+		margin-top: -75px;
 		max-width: $d_columnOne;
 		float: right;
 	}
@@ -1671,7 +1668,7 @@ table {
 
 .page-template-page_blog-php {
 	.full-width-thumb {
-		margin-top: -61px;
+		margin-top: -75px;
 		max-width: $d_columnOne;
 		float: right;
 	}
@@ -1814,11 +1811,11 @@ table {
 			}
 		}
 		img.alignleft {
-			margin: 7px 24px 10px 0;
+			margin: 3px 24px 10px 0;
 			max-width: 255px;
 		}
 		img.alignright {
-			margin: 7px 0 24px 10px;
+			margin: 3px 0 24px 10px;
 			max-width: 255px;
 		}
 	}
@@ -2374,13 +2371,13 @@ table {
 			#prev {
 				text-align: left;
 				a {
-					color: $c_widget_calendar_prevnext;
+					@extend link;
 				}
 			}
 			#next {
 				text-align: right;
 				a {
-					color: $c_widget_calendar_prevnext;
+					@extend link;
 				}
 			}
 		}
@@ -2526,23 +2523,6 @@ table {
 	width: $d_sidebar;
 	min-height: 1px;
 	max-width: 100%;
-}
-
-.sidebar-content {
-	#yoast-after-header-container {
-		#yoast-after-header-1,
-		#yoast-after-header-fp-1 {
-			margin: {
-				left: 45px;
-				right: 45px;
-			}
-		}
-		#yoast-after-header-2,
-		#yoast-after-header-fp-2 {
-			float: right;
-			margin: 0;
-		}
-	}
 }
 
 /**
@@ -2742,6 +2722,9 @@ table {
 }
 
 #yoast-after-header-container {
+	a {
+		@extend link;
+	}
 	.widget-title {
 		@extend .widget-title;
 		background: {
@@ -2749,6 +2732,11 @@ table {
 		}
 		border: {
 			bottom: 1px solid $c_footerWidgetsBorderTop;
+		}
+	}
+	.widget_tagline_yst {
+		a {
+			@extend link;
 		}
 	}
 }
@@ -3337,10 +3325,7 @@ table {
 		top: 24px;
 	}
 	a {
-		color: $c_footerWidgetsLink;
-		&:hover {
-			color: $c_footerWidgetsLinkHover;
-		}
+		@extend link;
 	}
 	h3,
 	h4 {
@@ -3670,7 +3655,7 @@ img#wpstats {
 		}
 		.content {
 			padding: {
-				left: 0;
+				left: 1%;
 				right: 1%;
 			}
 		}
@@ -3679,8 +3664,14 @@ img#wpstats {
 		.content {
 			padding: {
 				left: 1%;
-				right: 0;
+				right: 1%;
 			}
+		}
+	}
+	#yoast-tagline-after-header-container {
+		padding: {
+			left: 1%;
+			right: 1%;
 		}
 	}
 	.site-header {
@@ -3688,7 +3679,7 @@ img#wpstats {
 			background: {
 				size: 100%;
 			}
-			max-width: 40%;
+			max-width: 30%;
 			overflow: hidden;
 			a {
 				min-height: 140px;
@@ -3701,7 +3692,7 @@ img#wpstats {
 			padding: {
 				right: 1%;
 			}
-			max-width: 60%;
+			max-width: 65%;
 			overflow: hidden;
 		}
 	}
@@ -3744,19 +3735,31 @@ img#wpstats {
 		}
 	}
 	.full-width-content {
-		.widget_bigbutton {
-			max-width: 100%;
-		}
 		.footer-widgets {
 			padding: {
-				left: 1%;
-				right: 1%;
+				left: 2%;
+				right: 2%;
 			}
 			.widget-area {
 				width: 30%;
 				&.footer-widgets-2 {
-					margin: 0 4%;
+					margin: 0 3%;
 				}
+			}
+		}
+		.widget_bigbutton {
+			max-width: 100%;
+		}
+	}
+	.footer-widgets {
+		padding: {
+			left: 1%;
+			right: 1%;
+		}
+		.widget-area {
+			width: 30%;
+			&.footer-widgets-2 {
+				margin: 0 4%;
 			}
 		}
 	}
@@ -3797,6 +3800,20 @@ img#wpstats {
 }
 
 @media (max-width: 640px) {
+	.site-header {
+		border: {
+			bottom: {
+				width: 4px;
+				style: solid;
+				color: $c_bodyTopLine;
+			}
+		}
+	}
+	.site-container {
+		border: {
+			top: none;
+		}
+	}
 	.content {
 		width: 100%;
 		max-width: $d_contentColumn;
@@ -3834,9 +3851,8 @@ img#wpstats {
 		padding: {
 			left: 1%;
 			right: 1%;
-		}
-		margin: {
-			top: 1em;
+			top: 15px;
+			bottom: 5px;
 		}
 	}
 	.content-sidebar,
@@ -3879,7 +3895,7 @@ img#wpstats {
 		padding: 0;
 	}
 	#yoast-fullwidth-bottom-container {
-		padding: 0 10px;
+		padding: 0 1%;
 		#yoast-fullwidth-widgetarea-1,
 		#yoast-fullwidth-widgetarea-2,
 		#yoast-fullwidth-widgetarea-3 {
@@ -3894,14 +3910,33 @@ img#wpstats {
 	}
 	.footer-widgets {
 		padding: {
-			left: 10px;
-			right: 10px;
+			left: 1%;
+			right: 1%;
 		}
 		.widget-area {
 			width: 100%;
 			&.footer-widgets-2,
 			&.footer-widgets-3 {
 				margin: 0;
+			}
+		}
+
+	}
+	.full-width-content {
+		#yoast-fullwidth-bottom-container {
+			.yoast-fullwidth-widget {
+				section {
+					width: 100%;
+				}
+			}
+		}
+		.footer-widgets {
+			width: 100%;
+			.widget-area {
+				width: 100%;
+				&.footer-widgets-2 {
+					margin: 0;
+				}
 			}
 		}
 	}
