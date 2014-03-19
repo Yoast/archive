@@ -728,8 +728,8 @@ textarea {
 		display: block;
 		position: relative;
 		color: $c_navMainLink;
-		padding: 3px 0px;
-		margin: 0px 10px;
+		padding: 3px 0;
+		margin: 0 0 0 20px;
 		font: {
 			size: 17px;
 			weight: 400;
@@ -2599,7 +2599,7 @@ table {
 	}
 
 	li {
-		list-style: square;
+		list-style: none;
 		margin: {
 			bottom: 0;
 		}
@@ -2615,6 +2615,10 @@ table {
 			&:hover {
 				text-decoration: none;
 			}
+		}
+		li {
+			margin-left: 20px;
+			list-style: square;
 		}
 	}
 	.featuredpost ul {
