@@ -16,7 +16,6 @@ $c_sprite:              "sprites/Strategy_Sprite_GreenBright.png";
 // general
 $c_bodyTopLine:         #008293;
 
-$c_paragraph:           #000000;
 $c_link:                #008293;
 $c_linkHover:           #009d38;
 $c_altLink:         	  #888888;
@@ -26,16 +25,10 @@ $c_logoText:            #000000;
 $c_logoTextLink:        #000000;
 $c_logoTextLinkHover:   #000000;
 
-//$c_taglineTop:          					#666666;
-//$c_taglineTopBold:      					#888888;
 $c_taglineFullWidth:    					#009d38;
 $c_taglineFullWidthBold:					#008293;
-//$c_taglineBoxShadow:    					#cccccc;
-$c_taglineLink:         					#888888;
-$c_taglineLinkHover:    					#009d38;
 $c_tagline_top_border_top:				#008293;
 $c_tagline_top_border_bottom:			#b5b5b5;
-$c_tagline_middle_border_top:			#b5b5b5;
 $c_tagline_middle_border_bottom:	#008293;
 
 $c_breadcrumbs:         #b5b5b5;
@@ -50,10 +43,6 @@ $c_pagenavActiveBg:     #ffffff;
 $c_pagenavActiveLink:   #888888;
 
 $c_metaAtPost:          #b5b5b5;
-//$c_metaAtPostBorder:    #dddddd;
-$c_metaAtPostAuthor:    #008293;
-$c_linkToArchives:      #888888;
-$c_commentHTMLtags:     #b5b5b5;
 
 $c_hrLine:              #91b71b;
 $c_borderImg:           #b5b5b5;
@@ -71,64 +60,41 @@ $c_strong: 							#008293;
 $c_fullwidth_articleBorder: 	#b5b5b5;
 
 // header
-$c_headerBg:            #f0f0f0;
-$c_headerText:          #888888;
 $c_headerLink:          #888888;
-$c_headerLinkHover:     #009d38;
-$c_headerH3:            #009d38;
-$c_headerH4:            #009d38;
 
 // navigation
 $c_navMainFullBg:           #ffffff;
-$c_navMainFullBorderTop:    #009d38;
 $c_navMainFullBorderBottom: #008293;
 
 $c_navMainBg:           #ffffff;
-$c_navMainText:         #888888;
 $c_navMainLink:         #888888;
-$c_navMainLinkHover:    #888888;
-$c_navMainLinkBg:       #ffffff;
-$c_navMainLinkBgHover:  #ffffff;
-$c_navMainBgActive:     #ffffff;
-$c_navMainTextActive:   #888888;
-//$c_navMainLinkShadow:   #333333;
-$c_navMainBorder:       #ffffff;
-$c_navMainBorderBottom: #009d38;
 $c_navMainShadow:       #f0f0f0;
 
 $c_navSubBg:           #ffffff;
-$c_navSubText:         #888888;
 $c_navSubLink:         #888888;
 $c_navSubLinkHover:    #ffffff;
 $c_navSubLinkBg:       #008293;
 $c_navSubLinkBgHover:  #008293;
-$c_navSubLinkActive:   #ffffff;
 $c_navSubBorder:       #b5b5b5;
-$c_navSubBorderBottom: #009d38;
 
 $c_navMainBgSticky:    #91b71b;
 $c_navMainLinkSticky:	 #ffffff;
 
 $c_afterHeaderBg: 				#f0f0f0;
-$c_afterHeaderText: 			#000000;
 $c_afterHeaderBoxShadow: 	#c8c8c8; // exception
 $c_afterHeaderH3: 				#009d38;
 
 // mobile menu Sidr
 $sidr-background:               #ffffff;
-$sidr-background-shadow-color:  #f0f0f0;
 $sidr-text-color:               #888888;
-$c_sidr_linkBg:                 #ffffff;
 $c_sidr_linkBorder:             #008293;
 $c_sidr_subLinkBorder:					#b5b5b5;
 $c_sidr_subLinkText:						#000000;
 $c_sidr_linkHoverText:          #008293;
-$c_sidr_linkHoverBg:            #ffffff;
 $c_sidr_linkActiveText: 				#ffffff;
 $c_sidr_linkActiveBg:           #888888;
 $c_sidr_headingBg:							#ffffff;
 $c_sidr_headingText:            #333333;
-$c_sidr_headingBorder:          #ffffff;
 $c_sidr_boxShadow:              #888888;
 $c_sidr_searchBg:								#008293;
 $c_sidr_searchH1:								#f0f0f0;
@@ -156,49 +122,30 @@ $c_taxonomyIntroH1:     #91b71b;
 
 // blockquote
 $c_BlockquoteText:      #000000;
-$c_BlockquoteLink:      #888888;
-$c_BlockquoteLinkHover: #009d38;
-$c_BlockquoteBorder:    #f0f0f0;
-$c_BlockquoteBg:        #f0f0f0;
 $c_blockquoteBefore:    #b5b5b5;
 
 // input
 $c_inputText:           #000000;
-$c_inputTextFocus:      #000000;
 $c_inputBg:             #ffffff;
-$c_inputBgFocus:        #ffffff;
 $c_inputBorder:         #b5b5b5;
-$c_inputBoxShadow:      #f0f0f0;
 $c_inputBorderFocus:    #b5b5b5;
 $c_inputTextPlaceholder:#b5b5b5;
 
 $c_inputSubmitText:     #ffffff;
-$c_inputSubmitTextHover:#ffffff;
 $c_inputSubmitBg:       #008293;
-$c_inputSubmitBgHover:  #009d38;
 $c_inputSubmitBorder:   #008293;
-$c_inputSubmitTextShadow: #888888;
 $c_inputSubmitBoxShadow:  #ffffff;
 
 // comments
 $c_commentReplyTitle:		#009d38;
-$c_commentBg:           #ffffff;
-$c_commentText:         #000000;
 $c_commentHeader:       #888888;
 $c_commentTitle:				#009d38;
 $c_commentAuthor:       #008293;
-$c_commentLink:         #009d38;
-$c_commentReplyLink: 		#008293;
 $c_commentBorder:       #b5b5b5;
-$c_commentReplyBorder:  #f0f0f0;
-$c_commentByAuthorBg:   #f0f0f0;
 $c_commentByAuthor_border:	#008293;
-$c_logged_in_as:				#008293;
 
 // author block
 $c_articleAuthorBg:   #f0f0f0;
-$c_articleAuthorH2:   #009d38;
-$c_articleAuthorH3:   #888888;
 $c_articleAuthorText:	#000000;
 $c_articleAuthorTitle:	#009d38;
 
@@ -210,25 +157,14 @@ $c_ctaBg_3:							#008293;
 
 $c_ctaBorder:           #f37837;
 $c_ctaTextWhite:        #ffffff;
-//$c_ctaTextShadow:       #333333;
-$c_ctaBoxShadow:        #ffffff;
 
 $c_ctaBgWhite:          #ffffff;
-$c_ctaBorderWhite:      #ffffff;
 $c_ctaBgGrey:           #b5b5b5;
 $c_ctaBorderGrey:       #b5b5b5;
 $c_ctaTextBlack:        #000000;
 
 // tables
-$c_tableBg:             #ffffff;
-$c_tableText:           #000000;
-$c_tableRowAlt:         #ffffff;
-$c_tableHeaderBg:       #888888;
-$c_tableHeaderText:     #ffffff;
-$c_tableLink:           #888888;
-$c_tableLinkHover:      #009d38;
 $c_tableBorder:         #b5b5b5;
-$c_tableCaption:        #888888;
 
 // code
 $c_codeBg:              #b5b5b5;
@@ -239,24 +175,18 @@ $c_markBg:              #ffff00; // exception color
 $c_markText:            #000000;
 
 // sidebar
-$c_sidebarBg:           #ffffff;
 $c_sidebarText:         #000000;
 $c_sidebarLink:         #000000;
-$c_sidebarLinkHover:    #888888;
 $c_sidebarLinkArrow:    #888888;
 $c_sidebarH3:           #009d38;
 $c_sidebarH3Bg:         #ffffff;
-$c_sidebarH4:           #888888;
-$c_sidebarH4Bg:         #ffffff;
 
 // After Post
 $c_afterPostBg:							#ffffff;
-$c_afterPost_widget_title: 	#009d38;
 
 // Widgets
 $c_widgetTitleBorder:					#b5b5b5;
 $c_widget_calendar_link: 			#009d38;
-$c_widget_calendar_prevnext: 	#008293;
 
 $c_widget_localseo_openinghours:			#008293;
 $c_widget_localseo_openinghours_day:	#888888;
@@ -271,14 +201,9 @@ $c_widget_tagline:			#009d38;
 $c_footerWidgetsBg:       #f0f0f0;
 $c_footerWidgetsBorderTop:#888888;
 $c_footerWidgetsText:     #000000;
-$c_footerWidgetsLink:     #888888;
-$c_footerWidgetsLinkHover:#000000;
-$c_footerWidgetsH3:       #009d38;
-$c_footerWidgetsH4:       #888888;
 
 // footer
 $c_footerBg:            #888888;
-$c_footerBorderTop:     #f0f0f0;
 $c_footerText:          #ffffff;
 $c_footerLink:          #ffffff;
 $c_footerLinkHover:     #009d38;
