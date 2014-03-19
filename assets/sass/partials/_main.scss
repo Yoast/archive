@@ -2261,7 +2261,7 @@ table {
 
 .logged-in-as {
 	a {
-		color: $c_logged_in_as;
+		@extends link;
 		font: {
 			weight: 700;
 		}
