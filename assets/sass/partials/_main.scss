@@ -3766,6 +3766,11 @@ img#wpstats {
 		}
 	}
 	.full-width-content {
+		&.home {
+			.content {
+				max-width: 100%;
+			}
+		}
 		.footer-widgets {
 			padding: {
 				left: 2%;
