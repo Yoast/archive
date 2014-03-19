@@ -3408,6 +3408,13 @@ table {
 	}
 }
 
+/* WooCommerce */
+.woocommerce {
+	.return-to-shop {
+		padding: 10px;
+	}
+}
+
 /**
  * PLUGINS
  **********************************/
@@ -3766,6 +3773,11 @@ img#wpstats {
 		}
 	}
 	.full-width-content {
+		&.home {
+			.content {
+				max-width: 100%;
+			}
+		}
 		.footer-widgets {
 			padding: {
 				left: 2%;
