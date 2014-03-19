@@ -571,7 +571,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				</div>
 
 				<div class="actions">
-					<a href="#" class="remove"><?php _e( 'Remove Image' ); ?></a>
+					<a href="#" class="remove"><?php _e( 'Remove Image', 'yoast-theme' ); ?></a>
 				</div>
 			</div>
 		<?php
