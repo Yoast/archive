@@ -2497,6 +2497,13 @@ table {
 		padding: {
 			left: 24px;
 		}
+
+		li {
+			list-style: disc;
+			background: none;
+			margin-left: 24px;
+			padding-left: 6px;
+		}
 	}
 	img {
 		border: 0;
