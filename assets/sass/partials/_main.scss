@@ -802,6 +802,7 @@ textarea {
 			&.current-menu-item {
 				> a {
 					color: $c_sidr_linkActiveText;
+					background-color: $c_sidr_searchBg;
 					@include background-image(linear-gradient(lighten($c_sidr_searchBg, 10%), $c_sidr_searchBg));
 
 					&:hover {
@@ -847,6 +848,7 @@ textarea {
 	}
 	form {
 		padding: 15px;
+		background-color: $c_sidr_searchBg;
 		@include background-image(linear-gradient(lighten($c_sidr_searchBg, 10%), $c_sidr_searchBg));
 	}
 	label {
@@ -2994,6 +2996,7 @@ table {
 		@extend .cta-button;
 		a {
 			border-color: $c_ctaBg_1;
+			background-color: $c_ctaBg_1;
 			@include background-image(linear-gradient(lighten($c_ctaBg_1, 10%), $c_ctaBg_1));
 			&:hover {
 				background: {
@@ -3007,6 +3010,7 @@ table {
 		@extend .cta-button;
 		a {
 			border-color: $c_ctaBg_2;
+			background-color: $c_ctaBg_2;
 			@include background-image(linear-gradient(lighten($c_ctaBg_2, 10%), $c_ctaBg_2));
 			&:hover {
 				background: {
@@ -3020,6 +3024,9 @@ table {
 		@extend .cta-button;
 		a {
 			border-color: $c_ctaBg_3;
+			background: {
+				color: $c_ctaBg_3;
+			}
 			@include background-image(linear-gradient(lighten($c_ctaBg_3, 10%), $c_ctaBg_3));
 			&:hover {
 				background: {
