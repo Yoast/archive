@@ -591,10 +591,12 @@ input {
 	&[type="checkbox"] {
 		@include box-sizing(border-box);
 		padding: 0;
+		width: auto;
 	}
 	&[type="radio"] {
 		@include box-sizing(border-box);
 		padding: 0;
+		width: auto;
 	}
 	&[type="search"] {
 		-webkit-appearance: textfield;
