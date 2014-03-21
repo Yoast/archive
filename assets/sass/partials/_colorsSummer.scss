@@ -1,0 +1,212 @@
+// color declarations Summer
+
+// #f99800		Button 1 / headings / tagline
+// #ee7103		Button 2 / Headings sidebar
+// #51b3ae		Button 3 / Text Active / Tagline / Border Top
+// #888888		Text Grey / BG Footer
+// #eaf6f4		BG Top
+// #b5b5b5		Borders / Lines Sidebar
+// #000000		Black text
+// #6ab916		CTA
+// #ffffff		White
+// #c8c8c8		Exception for After Header Box Shadow
+//
+$c_sprite:              "sprites/Strategy_Sprite_Summer.png";
+
+// general
+$c_bodyTopLine:         #51b3ae;
+
+$c_link:                #ee7103;
+$c_linkHover:           #51b3ae;
+$c_altLink:         	  #888888;
+$c_linkBorder:          #eaf6f4;
+
+$c_logoText:            #000000;
+$c_logoTextLink:        #000000;
+$c_logoTextLinkHover:   #000000;
+
+$c_taglineFullWidth:    					#ee7103;
+$c_taglineFullWidthBold:					#51b3ae;
+$c_tagline_top_border_top:				#51b3ae;
+$c_tagline_top_border_bottom:			#b5b5b5;
+$c_tagline_middle_border_bottom:	#51b3ae;
+
+$c_breadcrumbs:         #b5b5b5;
+$c_breadcrumbsLink:     #51b3ae;
+$c_breadcrumbsLinkHover:#ee7103;
+
+$c_pagenavBg:           #ffffff;
+$c_pagenavLink:         #51b3ae;
+$c_pagenavHoverBg:      #ffffff;
+$c_pagenavHoverLink:    #51b3ae;
+$c_pagenavActiveBg:     #ffffff;
+$c_pagenavActiveLink:   #888888;
+
+$c_metaAtPost:          #b5b5b5;
+
+$c_hrLine:              #f99800;
+$c_borderImg:           #b5b5b5;
+$c_randLine:            #b5b5b5; // random grey line
+
+$c_selectionText:       #ffffff;
+$c_selectionBg:         #f99800;
+
+$c_fieldsetBorder:      #eaf6f4;
+$c_excerpt_readmore: 		#51b3ae;
+$c_back_to_top: 				#51b3ae;
+
+$c_strong: 							#51b3ae;
+
+$c_fullwidth_articleBorder: 	#b5b5b5;
+
+// header
+$c_headerLink:          #888888;
+
+// navigation
+$c_navMainFullBg:           #ffffff;
+$c_navMainFullBorderBottom: #51b3ae;
+
+$c_navMainBg:           #ffffff;
+$c_navMainLink:         #888888;
+$c_navMainShadow:       #eaf6f4;
+
+$c_navSubBg:           #ffffff;
+$c_navSubLink:         #888888;
+$c_navSubLinkHover:    #ffffff;
+$c_navSubLinkBg:       #51b3ae;
+$c_navSubLinkBgHover:  #51b3ae;
+$c_navSubBorder:       #b5b5b5;
+
+$c_navMainBgSticky:    #f99800;
+$c_navMainLinkSticky:	 #ffffff;
+
+$c_afterHeaderBg: 				#eaf6f4;
+$c_afterHeaderBoxShadow: 	#c8c8c8; // exception
+$c_afterHeaderH3: 				#51b3ae;
+
+// mobile menu Sidr
+$sidr-background:               #ffffff;
+$sidr-text-color:               #888888;
+$c_sidr_linkBorder:             #51b3ae;
+$c_sidr_subLinkBorder:					#b5b5b5;
+$c_sidr_subLinkText:						#000000;
+$c_sidr_linkHoverText:          #51b3ae;
+$c_sidr_linkActiveText: 				#ffffff;
+$c_sidr_linkActiveBg:           #888888;
+$c_sidr_headingBg:							#ffffff;
+$c_sidr_headingText:            #333333;
+$c_sidr_boxShadow:              #888888;
+$c_sidr_searchBg:								#51b3ae;
+$c_sidr_searchH1:								#eaf6f4;
+$c_sidr_searchH1Bg:							#eaf6f4;
+
+// main content
+$c_mainBg:              #ffffff;
+$c_mainText:            #000000;
+$c_mainH1:              #f99800;
+$c_mainH1Hover:         #ee7103;
+$c_mainH2:              #f99800;
+$c_mainH2Hover:         #ee7103;
+$c_mainH3:              #51b3ae;
+$c_mainH3Hover:         #ee7103;
+$c_mainH4:              #51b3ae;
+$c_mainH4Hover:         #ee7103;
+$c_mainH5:              #f99800;
+$c_mainH5Hover:         #51b3ae;
+$c_mainH6:              #888888;
+$c_mainH6Hover:         #ee7103;
+$c_labels:							#888888;
+
+$c_taxonomyIntroText:   #888888;
+$c_taxonomyIntroH1:     #f99800;
+
+// blockquote
+$c_BlockquoteText:      #000000;
+$c_blockquoteBefore:    #b5b5b5;
+
+// input
+$c_inputText:           #000000;
+$c_inputBg:             #ffffff;
+$c_inputBorder:         #b5b5b5;
+$c_inputBorderFocus:    #b5b5b5;
+$c_inputTextPlaceholder:#b5b5b5;
+
+$c_inputSubmitText:     #ffffff;
+$c_inputSubmitBg:       #51b3ae;
+$c_inputSubmitBorder:   #51b3ae;
+$c_inputSubmitBoxShadow:  #ffffff;
+
+// comments
+$c_commentReplyTitle:		#ee7103;
+$c_commentHeader:       #888888;
+$c_commentTitle:				#ee7103;
+$c_commentAuthor:       #51b3ae;
+$c_commentBorder:       #b5b5b5;
+$c_commentByAuthor_border:	#51b3ae;
+
+// author block
+$c_articleAuthorBg:   #eaf6f4;
+$c_articleAuthorText:	#000000;
+$c_articleAuthorTitle:	#ee7103;
+
+// call-to-action
+// @TODO: Colors tbd by Mijke
+$c_ctaBg:               #6ab916;
+$c_ctaBg_1:							lighten(#f99800, 12%);
+$c_ctaBg_2:							#f99800;
+$c_ctaBg_3:							darken(#f99800, 5%);
+
+$c_ctaBorder:           #6ab916;
+$c_ctaTextWhite:        #ffffff;
+
+$c_ctaBgWhite:          #ffffff;
+$c_ctaBgGrey:           #b5b5b5;
+$c_ctaBorderGrey:       #b5b5b5;
+$c_ctaTextBlack:        #000000;
+
+// tables
+$c_tableBorder:         #b5b5b5;
+
+// code
+$c_codeBg:              #b5b5b5;
+$c_codeText:            #888888;
+
+// mark
+$c_markBg:              #ffff00; // exception color
+$c_markText:            #000000;
+
+// sidebar
+$c_sidebarText:         #000000;
+$c_sidebarLink:         #000000;
+$c_sidebarLinkArrow:    #888888;
+$c_sidebarH3:           #51b3ae;
+$c_sidebarH3Bg:         #ffffff;
+
+// After Post
+$c_afterPostBg:							#ffffff;
+
+// Widgets
+$c_widgetTitleBorder:					#b5b5b5;
+$c_widget_calendar_link: 			#ee7103;
+
+$c_widget_localseo_openinghours:			#51b3ae;
+$c_widget_localseo_openinghours_day:	#888888;
+$c_widget_localseo_openinghours_time:	#000000;
+
+$c_widget_PC_link:			#51b3ae;
+$c_widget_PC_heading:		#ee7103;
+
+$c_widget_tagline:			#ee7103;
+
+// footerwidgets
+$c_footerWidgetsBg:       #eaf6f4;
+$c_footerWidgetsBorderTop:#888888;
+$c_footerWidgetsText:     #000000;
+
+// footer
+$c_footerBg:            #888888;
+$c_footerText:          #ffffff;
+$c_footerLink:          #ffffff;
+$c_footerLinkHover:     #ee7103;
+$c_footerH3:            #ffffff;
+$c_footerH4:            #ffffff;
