@@ -1,0 +1,210 @@
+// color declarations Spring
+
+// #64b32b		headings / tagline
+// #eb5570		Button 1 / Button 3 / Button 2 / Headings sidebar / Text Active / Tagline / Border Top
+// #888888		Text Grey / BG Footer
+// #f2f5da		BG Top
+// #b5b5b5		Borders / Lines Sidebar
+// #000000		Black text
+// #0faded		CTA
+// #ffffff		White
+// #c8c8c8		Exception for After Header Box Shadow
+//
+$c_sprite:              "sprites/Strategy_Sprite_Spring.png";
+
+// general
+$c_bodyTopLine:         #eb5570;
+
+$c_link:                #eb5570;
+$c_linkHover:           #888888;
+$c_altLink:         	  #888888;
+$c_linkBorder:          #f2f5da;
+
+$c_logoText:            #000000;
+$c_logoTextLink:        #000000;
+$c_logoTextLinkHover:   #000000;
+
+$c_taglineFullWidth:    					#64b32b;
+$c_taglineFullWidthBold:					#eb5570;
+$c_tagline_top_border_top:				#eb5570;
+$c_tagline_top_border_bottom:			#b5b5b5;
+$c_tagline_middle_border_bottom:	#eb5570;
+
+$c_breadcrumbs:         #b5b5b5;
+$c_breadcrumbsLink:     #eb5570;
+$c_breadcrumbsLinkHover:#eb5570;
+
+$c_pagenavBg:           #ffffff;
+$c_pagenavLink:         #eb5570;
+$c_pagenavHoverBg:      #ffffff;
+$c_pagenavHoverLink:    #eb5570;
+$c_pagenavActiveBg:     #ffffff;
+$c_pagenavActiveLink:   #888888;
+
+$c_metaAtPost:          #b5b5b5;
+
+$c_hrLine:              #64b32b;
+$c_borderImg:           #b5b5b5;
+$c_randLine:            #b5b5b5; // random grey line
+
+$c_selectionText:       #ffffff;
+$c_selectionBg:         #64b32b;
+
+$c_fieldsetBorder:      #f2f5da;
+$c_excerpt_readmore: 		#eb5570;
+$c_back_to_top: 				#eb5570;
+
+$c_strong: 							#eb5570;
+
+$c_fullwidth_articleBorder: 	#b5b5b5;
+
+// header
+$c_headerLink:          #888888;
+
+// navigation
+$c_navMainFullBg:           #ffffff;
+$c_navMainFullBorderBottom: #eb5570;
+
+$c_navMainBg:           #ffffff;
+$c_navMainLink:         #888888;
+$c_navMainShadow:       #f2f5da;
+
+$c_navSubBg:           #ffffff;
+$c_navSubLink:         #888888;
+$c_navSubLinkHover:    #ffffff;
+$c_navSubLinkBg:       #eb5570;
+$c_navSubLinkBgHover:  #eb5570;
+$c_navSubBorder:       #b5b5b5;
+
+$c_navMainBgSticky:    #64b32b;
+$c_navMainLinkSticky:	 #ffffff;
+
+$c_afterHeaderBg: 				#f2f5da;
+$c_afterHeaderBoxShadow: 	#c8c8c8; // exception
+$c_afterHeaderH3: 				#64b32b;
+
+// mobile menu Sidr
+$sidr-background:               #ffffff;
+$sidr-text-color:               #888888;
+$c_sidr_linkBorder:             #eb5570;
+$c_sidr_subLinkBorder:					#b5b5b5;
+$c_sidr_subLinkText:						#000000;
+$c_sidr_linkHoverText:          #eb5570;
+$c_sidr_linkActiveText: 				#ffffff;
+$c_sidr_linkActiveBg:           #888888;
+$c_sidr_headingBg:							#ffffff;
+$c_sidr_headingText:            #333333;
+$c_sidr_boxShadow:              #888888;
+$c_sidr_searchBg:								#eb5570;
+$c_sidr_searchH1:								#f2f5da;
+$c_sidr_searchH1Bg:							#f2f5da;
+
+// main content
+$c_mainBg:              #ffffff;
+$c_mainText:            #000000;
+$c_mainH1:              #64b32b;
+$c_mainH1Hover:         #eb5570;
+$c_mainH2:              #64b32b;
+$c_mainH2Hover:         #eb5570;
+$c_mainH3:              #eb5570;
+$c_mainH3Hover:         #64b32b;
+$c_mainH4:              #eb5570;
+$c_mainH4Hover:         #64b32b;
+$c_mainH5:              #64b32b;
+$c_mainH5Hover:         #eb5570;
+$c_mainH6:              #888888;
+$c_mainH6Hover:         #eb5570;
+$c_labels:							#888888;
+
+$c_taxonomyIntroText:   #888888;
+$c_taxonomyIntroH1:     #64b32b;
+
+// blockquote
+$c_BlockquoteText:      #000000;
+$c_blockquoteBefore:    #b5b5b5;
+
+// input
+$c_inputText:           #000000;
+$c_inputBg:             #ffffff;
+$c_inputBorder:         #b5b5b5;
+$c_inputBorderFocus:    #b5b5b5;
+$c_inputTextPlaceholder:#b5b5b5;
+
+$c_inputSubmitText:     #ffffff;
+$c_inputSubmitBg:       #eb5570;
+$c_inputSubmitBorder:   #eb5570;
+$c_inputSubmitBoxShadow:  #ffffff;
+
+// comments
+$c_commentReplyTitle:		#eb5570;
+$c_commentHeader:       #888888;
+$c_commentTitle:				#eb5570;
+$c_commentAuthor:       #eb5570;
+$c_commentBorder:       #b5b5b5;
+$c_commentByAuthor_border:	#eb5570;
+
+// author block
+$c_articleAuthorBg:   #f2f5da;
+$c_articleAuthorText:	#000000;
+$c_articleAuthorTitle:	#eb5570;
+
+// call-to-action
+$c_ctaBg:               #0faded;
+$c_ctaBg_1:							#f06978;
+$c_ctaBg_2:							#eb5570;
+$c_ctaBg_3:							#de3e5a;
+
+$c_ctaBorder:           #0faded;
+$c_ctaTextWhite:        #ffffff;
+
+$c_ctaBgWhite:          #ffffff;
+$c_ctaBgGrey:           #b5b5b5;
+$c_ctaBorderGrey:       #b5b5b5;
+$c_ctaTextBlack:        #000000;
+
+// tables
+$c_tableBorder:         #b5b5b5;
+
+// code
+$c_codeBg:              #b5b5b5;
+$c_codeText:            #888888;
+
+// mark
+$c_markBg:              #ffff00; // exception color
+$c_markText:            #000000;
+
+// sidebar
+$c_sidebarText:         #000000;
+$c_sidebarLink:         #000000;
+$c_sidebarLinkArrow:    #888888;
+$c_sidebarH3:           #64b32b;
+$c_sidebarH3Bg:         #ffffff;
+
+// After Post
+$c_afterPostBg:							#ffffff;
+
+// Widgets
+$c_widgetTitleBorder:					#b5b5b5;
+$c_widget_calendar_link: 			#eb5570;
+
+$c_widget_localseo_openinghours:			#eb5570;
+$c_widget_localseo_openinghours_day:	#888888;
+$c_widget_localseo_openinghours_time:	#000000;
+
+$c_widget_PC_link:			#eb5570;
+$c_widget_PC_heading:		#eb5570;
+
+$c_widget_tagline:			#eb5570;
+
+// footerwidgets
+$c_footerWidgetsBg:       #f2f5da;
+$c_footerWidgetsBorderTop:#888888;
+$c_footerWidgetsText:     #000000;
+
+// footer
+$c_footerBg:            #888888;
+$c_footerText:          #ffffff;
+$c_footerLink:          #ffffff;
+$c_footerLinkHover:     #eb5570;
+$c_footerH3:            #ffffff;
+$c_footerH4:            #ffffff;
