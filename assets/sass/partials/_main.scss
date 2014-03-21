@@ -1792,11 +1792,11 @@ table {
 			decoration: none;
 		}
 		a {
+			@extend link;
 			text: {
 				align: right;
 				decoration: none;
 			}
-			color: $c_excerpt_readmore;
 			font: {
 				weight: 700;
 			}
@@ -2042,19 +2042,13 @@ table {
 	li {
 		display: inline;
 		a {
+			@extend link;
 			background: {
 				color: $c_pagenavBg;
 			}
-			color: $c_pagenavLink;
 			cursor: pointer;
 			display: inline-block;
 			padding: 4px 12px;
-			&:hover {
-				color: $c_pagenavHoverLink;
-				background: {
-					color: $c_pagenavHoverBg;
-				}
-			}
 		}
 		&.active {
 			a {
@@ -2095,10 +2089,6 @@ table {
 	.comment-form-comment {
 		font: {
 			weight: 700;
-		}
-	}
-	.form-submit {
-		input {
 		}
 	}
 }
@@ -2904,7 +2894,7 @@ table {
 			}
 			text-align: right;
 			a {
-				color: $c_widget_PC_link;
+				@extend link;
 				text-decoration: none;
 				&:after {
 					color: $c_widget_PC_link;

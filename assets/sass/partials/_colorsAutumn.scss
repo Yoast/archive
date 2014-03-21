@@ -16,8 +16,8 @@ $c_sprite:              "sprites/Strategy_Sprite_Autumn.png";
 // general
 $c_bodyTopLine:         #678e35;
 
-$c_link:                #678e35;
-$c_linkHover:           #ee7103;
+$c_link:                #ee7103;
+$c_linkHover:           #678e35;
 $c_altLink:         	  #888888;
 $c_linkBorder:          #f0e4ca;
 
@@ -25,14 +25,16 @@ $c_logoText:            #000000;
 $c_logoTextLink:        #000000;
 $c_logoTextLinkHover:   #000000;
 
-$c_taglineFullWidth:    					#ee7103;
-$c_taglineFullWidthBold:					#678e35;
+$c_taglineLink:										#ee7103;
+$c_taglineLinkHover:							#678e35;
+$c_taglineFullWidth:    					#678e35;
+$c_taglineFullWidthBold:					#ee7103;
 $c_tagline_top_border_top:				#678e35;
 $c_tagline_top_border_bottom:			#b5b5b5;
 $c_tagline_middle_border_bottom:	#678e35;
 
 $c_breadcrumbs:         #b5b5b5;
-$c_breadcrumbsLink:     #678e35;
+$c_breadcrumbsLink:     #ee7103;
 $c_breadcrumbsLinkHover:#678e35;
 
 $c_pagenavBg:           #ffffff;
@@ -132,8 +134,8 @@ $c_inputBorderFocus:    #b5b5b5;
 $c_inputTextPlaceholder:#b5b5b5;
 
 $c_inputSubmitText:     #ffffff;
-$c_inputSubmitBg:       #678e35;
-$c_inputSubmitBorder:   #678e35;
+$c_inputSubmitBg:       #ee7103;
+$c_inputSubmitBorder:   #ee7103;
 $c_inputSubmitBoxShadow:  #ffffff;
 
 // comments
@@ -151,8 +153,8 @@ $c_articleAuthorTitle:	#ee7103;
 
 // call-to-action
 $c_ctaBg:               #f99800;
-$c_ctaBg_1:							#8aa227;
-$c_ctaBg_2:							#ee7103;
+$c_ctaBg_1:							#95ad5f;
+$c_ctaBg_2:							#8aa227;
 $c_ctaBg_3:							#678e35;
 
 $c_ctaBorder:           #f99800;
@@ -195,7 +197,7 @@ $c_widget_localseo_openinghours_time:	#000000;
 $c_widget_PC_link:			#678e35;
 $c_widget_PC_heading:		#ee7103;
 
-$c_widget_tagline:			#ee7103;
+$c_widget_tagline:			#8aa227;
 
 // footerwidgets
 $c_footerWidgetsBg:       #f0e4ca;
