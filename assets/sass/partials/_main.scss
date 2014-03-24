@@ -328,7 +328,7 @@ header {
 		float: left;
 		font: {
 			family: $f_baseFont;
-			weight: 700;
+			weight: 400;
 		}
 		width: $d_headerLogo;
 		max-width: 30%;
@@ -1003,7 +1003,7 @@ textarea {
 		}
 		> a {
 			font: {
-				weight: 700;
+				weight: 400;
 			}
 		}
 		> a:hover {
@@ -1297,7 +1297,7 @@ img.alignright,
 .wp-caption-text {
 	font: {
 		size: 14px;
-		weight: 700;
+		weight: 400;
 	}
 	text: {
 		align: center;
@@ -1335,7 +1335,7 @@ img.alignright,
 	font: {
 		size: $f_breadcrumbs-px;
 		size: $f_breadcrumbs;
-		weight: 700;
+		weight: 400;
 	}
 	a {
 		color: $c_breadcrumbsLink;
@@ -1353,7 +1353,7 @@ img.alignright,
 		family: $f_baseFont;
 		size: $f_taxonomyIntro-px;
 		size: $f_taxonomyIntro;
-		weight: 700;
+		weight: 400;
 	}
 	.archive-title,
 	h1 {
@@ -1370,7 +1370,7 @@ img.alignright,
 	}
 	a {
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 	}
 	p:last-of-type {
@@ -1445,7 +1445,7 @@ img.alignright,
 
 .headingsDefault {
 	font: {
-		weight: 700;
+		weight: 400;
 	}
 	line-height: 1.2;
 	margin: 0 0 24px;
@@ -1603,7 +1603,7 @@ table {
 			transform: none;
 		}
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 	}
 	td {
@@ -1699,7 +1699,7 @@ table {
 	a {
 		color: $c_altLink;
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 		text: {
 			decoration: underline;
@@ -1791,14 +1791,14 @@ table {
 				decoration: none;
 			}
 			font: {
-				weight: 700;
+				weight: 400;
 			}
 			border: {
 				bottom: none;
 			}
 			&:hover {
 				font: {
-					weight: 700;
+					weight: 400;
 				}
 				color: $c_linkHover;
 			}
@@ -1819,7 +1819,7 @@ table {
 	text-align: right;
 	color: $c_back_to_top;
 	font: {
-		weight: 700;
+		weight: 400;
 	}
 	a {
 		@extend link;
@@ -1904,7 +1904,7 @@ table {
 	}
 	a {
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 	}
 }
@@ -1916,7 +1916,7 @@ table {
 			top: 5px;
 		}
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 		.entry-author-name {
 			@extend link;
@@ -2022,7 +2022,7 @@ table {
 	font: {
 		size: $f_pagenav-px;
 		size: $f_pagenav;
-		weight: 700;
+		weight: 400;
 	}
 	div.pagination-next,
 	div.pagination-previous {
@@ -2081,7 +2081,7 @@ table {
 	}
 	.comment-form-comment {
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 	}
 }
@@ -2178,7 +2178,7 @@ table {
 	}
 	a {
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 	}
 	time {
@@ -2202,7 +2202,7 @@ table {
 	.comment-header {
 		font: {
 			size: 14px;
-			weight: 700;
+			weight: 400;
 		}
 		color: $c_commentHeader;
 		p {
@@ -2278,7 +2278,7 @@ table {
 	a {
 		@extends link;
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 	}
 }
@@ -2367,7 +2367,7 @@ table {
 			a {
 				color: $c_linkHover;
 				font: {
-					weight: 700;
+					weight: 400;
 				}
 				&:hover {
 					color: $c_link;
@@ -2381,7 +2381,7 @@ table {
 		}
 		tfoot {
 			font: {
-				weight: 700;
+				weight: 400;
 			}
 			#prev {
 				text-align: left;
@@ -2401,7 +2401,7 @@ table {
 			text-align: left;
 			float: none;
 			font: {
-				weight: 700;
+				weight: 400;
 			}
 			color: $c_labels;
 		}
@@ -2446,7 +2446,7 @@ table {
 			decoration: underline;
 		}
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 		&:hover {
 			text: {
@@ -2564,7 +2564,7 @@ table {
 		}
 		a {
 			@extend link;
-			font-weight: 700;
+			font-weight: 400;
 			text-decoration: underline;
 		}
 		.widget,
@@ -2702,7 +2702,7 @@ table {
 				padding: 0 0;
 				a {
 					font: {
-						weight: 700;
+						weight: 400;
 					}
 				}
 			}
@@ -2714,7 +2714,7 @@ table {
 	font: {
 		size: $f_sidebarH3-px;
 		size: $f_sidebarH3;
-		weight: 700;
+		weight: 400;
 	}
 	margin: {
 		bottom: 8px;
@@ -2764,14 +2764,14 @@ table {
 		size: $f_widget_tagline;
 	}
 	strong,
-	b,
-	a {
+	b {
 		@extend link;
 		font: {
 			weight: 700;
 		}
 	}
 	a {
+		@extend link;
 		text-decoration: underline;
 	}
 }
@@ -2791,7 +2791,7 @@ table {
 			font: {
 				size: $f_widget_localseo_openinghours_day-px;
 				size: $f_widget_localseo_openinghours_day;
-				weight: 700;
+				weight: 400;
 			}
 		}
 		&.time {
@@ -2859,7 +2859,7 @@ table {
 			font: {
 				size: $f_widget_PC_title-px;
 				size: $f_widget_PC_title;
-				weight: 700;
+				weight: 400;
 			}
 			a {
 				color: $c_widget_PC_link;
@@ -2870,7 +2870,7 @@ table {
 			font: {
 				size: $f_widget_PC_rm-px;
 				size: $f_widget_PC_rm;
-				weight: 700;
+				weight: 400;
 			}
 			text-align: right;
 			a {
@@ -3026,7 +3026,7 @@ table {
 			font: {
 				size: $f_sidebarLabel-px;
 				size: $f_sidebarLabel;
-				weight: 700;
+				weight: 400;
 			}
 		}
 		input {
@@ -3131,7 +3131,7 @@ table {
 	a {
 		@extend link;
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 		&:after {
 			content: ' \bb';
@@ -3259,7 +3259,7 @@ table {
 			left: 10px;
 		}
 		font: {
-			weight: 700;
+			weight: 400;
 		}
 	}
 	.yst-social-readmore {
