@@ -2741,7 +2741,7 @@ table {
 #yoast-after-header-container {
 	.widget-title {
 		@extend .widget-title;
-		color: $c_afterHeaderColor;
+		color: $c_afterHeaderH3;
 		background: {
 			color: $c_afterHeaderBg;
 		}
