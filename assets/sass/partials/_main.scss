@@ -3869,13 +3869,6 @@ img#wpstats {
 		max-width: $d_contentColumn;
 	}
 
-	.entry-content {
-		.yst-archive-image-link {
-			visibility: hidden;
-			display: none;
-		}
-	}
-
 	.content-sidebar,
 	.sidebar-content {
 		&.home,
@@ -3897,6 +3890,21 @@ img#wpstats {
 			left: 0;
 			right: 0;
 			bottom: 20px;
+		}
+	}
+
+	.entry-content {
+		.yst-archive-image-link {
+			visibility: hidden;
+			display: none;
+		}
+	}
+
+	.entry-header {
+		.entry-meta {
+			margin: {
+				bottom: 13px;
+			}
 		}
 	}
 	.full-width-content.home .entry-content {
