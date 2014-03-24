@@ -2446,20 +2446,8 @@ table {
 		padding: 0;
 		margin: 0;
 	}
-	.widget-title {
-		margin: 0;
-		color: $c_afterHeaderH3;
-		padding: 0 0 10px;
-		background: {
-			color: $c_afterHeaderBg;
-		}
-		+ div {
-			padding: {
-				left: 0;
-			}
-		}
-	}
 	a {
+		@extend link;
 		color: $c_headerLink;
 		text: {
 			decoration: underline;
@@ -2478,6 +2466,11 @@ table {
 			font: {
 				weight: 400;
 			}
+		}
+	}
+	.widget_tagline_yst {
+		a {
+			@extend link;
 		}
 	}
 	li {
@@ -2753,21 +2746,14 @@ table {
 }
 
 #yoast-after-header-container {
-	a {
-		@extend link;
-	}
 	.widget-title {
 		@extend .widget-title;
+		color: $c_afterHeaderColor;
 		background: {
-			color: $c_footerWidgetsBg;
+			color: $c_afterHeaderBg;
 		}
 		border: {
-			bottom: 1px solid $c_footerWidgetsBorderTop;
-		}
-	}
-	.widget_tagline_yst {
-		a {
-			@extend link;
+			bottom: 1px solid $c_afterHeaderColor;
 		}
 	}
 }
