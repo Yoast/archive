@@ -2420,6 +2420,7 @@ table {
  */
 // testing no widgets and tagline below menu
 #yoast-after-header-container {
+	color: $c_afterHeaderColor;
 	margin: 0 auto;
 	background: {
 		color: $c_afterHeaderBg;
