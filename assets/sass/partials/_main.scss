@@ -386,19 +386,11 @@ header {
 		}
 		max-width: $d_headerAside;
 		overflow-x: hidden;
-//		color: $c_taglineTop;
-//		font: {
-//			size: $f_taglineTop-px;
-//			size: $f_taglineTop;
-//		}
-//		strong {
-//			color: $c_taglineTopBold;
-//		}
-	.search-form {
-		width: $d_sidebar;
-	}
-	a {
-		@extend link;
+		.search-form {
+			width: $d_sidebar;
+		}
+		a {
+			@extend link;
 		}
 	}
 	.header-widget-area {
@@ -986,6 +978,7 @@ textarea {
 			}
 		}
 		&:hover {
+			color: $c_pagenavHoverLink;
 			position: static;
 			border: {
 				bottom: {
