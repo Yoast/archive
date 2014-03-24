@@ -174,6 +174,10 @@ class Yoast_Strategy extends Yoast_Theme {
 			return;
 		}
 
+		if ( is_single() ) {
+			return;
+		}
+
 		// No inline image on full-width
 		if ( 'full-width-content' == genesis_site_layout() ) {
 			return;
