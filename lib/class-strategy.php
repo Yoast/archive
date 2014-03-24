@@ -418,7 +418,7 @@ class Yoast_Strategy extends Yoast_Theme {
 			}
 
 			if ( ! $use_alt_positioning ) {
-				$css .= '@media(max-width: 640px){header.site-header {background:#fff url(' . $mobile_logo . ') no-repeat 50% 0;	}}';
+				$css .= '@media(max-width: 640px){header.site-header {background:#fff url(' . $mobile_logo . ') no-repeat 50% 100%;	}}';
 			} else {
 				$mobile_logo_height = $yst_mobile_logo_details['height']; // - 41;
 				//if ( is_user_logged_in() ) {
