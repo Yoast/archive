@@ -3,30 +3,40 @@
 
 class SupportFramework {
 
+    private $question;
+
     public function __construct(){
 
     }
 
-    public function getSupportInfo(){
-        $info     =   array();
-
-        $info['WP_VERSION']      =     get_bloginfo('version');
-        $info['WP_PLUGINS']      =     self::getWPPlugins();
-        $info['WP_THEMES']       =     self::getWPThemes();
-        $info['URL']             =     get_bloginfo('url');
-        $info['SERVER_INFO']     =     self::getServerInfo();
-
-        return $info;
+    public function validate($data){
+        if(!empty($data)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-
-    public function validate(){
-
-    }
-
 
     /*
-     * Data collector functions
+     * Get all support info packed in a nice array
      */
+    private function getSupportInfo(){
+        return array(
+            'wp_version'    =>     get_bloginfo('version'),
+            'wp_plugins'    =>     self::getWPPlugins(),
+            'wp_themes'     =>     self::getWPThemes(),
+            'url'           =>     get_bloginfo('url'),
+            'server_info'   =>     self::getServerInfo()
+        );
+    }
+
+
+
+    #######################
+    # Collect all data    #
+    # - Private functions #
+    #######################
 
     /*
      * Return WP Plugins
@@ -39,9 +49,9 @@ class SupportFramework {
             foreach($wp_plugins as $name => $pluginInfo){
                 if(is_plugin_active($name)==1 && !empty(is_plugin_active($name))){
                     $plugins[]  =   array(
-                        'NAME'          =>  $pluginInfo['Name'],
-                        'PLUGIN_URI'    =>  $pluginInfo['PluginURI'],
-                        'VERSION'       =>  $pluginInfo['Version']
+                        'name'          =>  $pluginInfo['Name'],
+                        'plugin_uri'    =>  $pluginInfo['PluginURI'],
+                        'version'       =>  $pluginInfo['Version']
                     );
                 }
             }
@@ -66,8 +76,8 @@ class SupportFramework {
             foreach($wp_themes as $name => $themeInfo){
                 // Todo: check if plugin is active
                 $themes[]  =   array(
-                    'NAME'          =>  $themeInfo['Name'],
-                    'VERSION'       =>  $themeInfo['Version'],
+                    'name'          =>  $themeInfo['Name'],
+                    'version'       =>  $themeInfo['Version'],
 //                    'STATUS'        =>  is_theme_active($name)
                 );
             }
@@ -80,17 +90,16 @@ class SupportFramework {
      * Return the Server information
      */
     private function getServerInfo(){
-        $server     =   array();
-        $server['ENGINE']               =   $_SERVER['SERVER_SOFTWARE'];
-        $server['USER']                 =   $_SERVER['USER'];
-        $server['GATEWAY_INTERFACE']    =   $_SERVER['GATEWAY_INTERFACE'];
-        $server['SERVER_PORT']          =   $_SERVER['SERVER_PORT'];
-        $server['SERVER_NAME']          =   $_SERVER['SERVER_NAME'];
-        $server['ENCODING']             =   $_SERVER['HTTP_ACCEPT_ENCODING'];
-        $server['PHP_VERSION']          =   phpversion();
-        $server['PHP_MODULES']          =   get_loaded_extensions();
-
-        return $server;
+        return array(
+            'engine'        =>  $_SERVER['SERVER_SOFTWARE'],
+            'user'          =>  $_SERVER['USER'],
+            'gateway'       =>  $_SERVER['GATEWAY_INTERFACE'],
+            'server_port'   =>  $_SERVER['SERVER_PORT'],
+            'server_name'   =>  $_SERVER['SERVER_NAME'],
+            'encoding'      =>  $_SERVER['HTTP_ACCEPT_ENCODING'],
+            'php_version'   =>  phpversion(),
+            'php_modules'   =>  get_loaded_extensions()
+        );
     }
 
 }
