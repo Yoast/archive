@@ -18,6 +18,10 @@ class SupportFramework {
         }
     }
 
+    public function __SupportMessage(){
+        return __("Write your question here and provide as much info as you know to get a detailed answer from our support team.");
+    }
+
     /*
      * Get all support info packed in a nice array
      */
