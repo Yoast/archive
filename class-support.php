@@ -11,6 +11,10 @@ class SupportFramework {
 
     public function validate($data){
         if(!empty($data)){
+            echo '<pre>';
+                print_r(self::getSupportInfo());
+            echo '</pre>';
+
             return true;
         }
         else{

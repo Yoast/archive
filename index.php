@@ -1,4 +1,4 @@
-<h2>Yoast Support</h2>
+<h2 id="wpseo-title">Yoast Support</h2>
 
 <?php
 if(!class_exists('SupportFramework')){
