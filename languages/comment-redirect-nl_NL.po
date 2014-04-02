@@ -1,0 +1,41 @@
+# Translation of Comment Redirect in Dutch
+# This file is distributed under the same license as the Comment Redirect package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2012-07-04 07:49:29+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Comment Redirect\n"
+
+#: comment-redirect.php:44 comment-redirect.php:94
+msgid "Comment Redirect Configuration"
+msgstr "Reactie doorsturen configuratie"
+
+#: comment-redirect.php:44
+msgid "Comment Redirect"
+msgstr "Reactie doorsturen"
+
+#: comment-redirect.php:79
+msgid "You cannot edit the Comment Redirect options."
+msgstr "Je kan de Reactie doorsturen opties niet wijzigen."
+
+#: comment-redirect.php:97
+msgid "Select the page below that a first time commenter should be redirected to:"
+msgstr "Selecteer hieronder de pagina waar mensen die voor het eerst reageren naar toe gestuurd moeten worden:"
+
+#: comment-redirect.php:101
+msgid "Redirect to"
+msgstr "Stuur door naar"
+
+#: comment-redirect.php:116
+msgid "Save Settings"
+msgstr "Instellingen bewaren"
+
+msgid "Comment Redirect by Yoast"
+msgstr "Reactie doorsturen door Yoast"
+
+msgid "Redirect commenters who just made their first comment to a page of your choice."
+msgstr "Stuur reageerders door die net hun eerste reactie hebben gegeven op een pagina van je keuze."

@@ -1,0 +1,41 @@
+# Translation of Comment Redirect in Hebrew
+# This file is distributed under the same license as the Comment Redirect package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2012-07-04 07:41:46+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Comment Redirect\n"
+
+#: comment-redirect.php:44 comment-redirect.php:94
+msgid "Comment Redirect Configuration"
+msgstr "תצורת הפנית מגיב"
+
+#: comment-redirect.php:44
+msgid "Comment Redirect"
+msgstr "הפנית מגיב"
+
+#: comment-redirect.php:79
+msgid "You cannot edit the Comment Redirect options."
+msgstr "אתה לא יכול לערוך את אפשרויות הפנית מגיב."
+
+#: comment-redirect.php:97
+msgid "Select the page below that a first time commenter should be redirected to:"
+msgstr "בחר מרשימת הדפים את הדף אליו מגיב בפעם הראשונה יופה אליו:"
+
+#: comment-redirect.php:101
+msgid "Redirect to"
+msgstr "הפנה אותם לדף"
+
+#: comment-redirect.php:116
+msgid "Save Settings"
+msgstr "שמור הגדרות"
+
+msgid "Comment Redirect by Yoast"
+msgstr "הפנית מגיב ע\"י Yoast"
+
+msgid "Redirect commenters who just made their first comment to a page of your choice."
+msgstr "מפנה מגיבים שכרגע הגיבו בפעם הראשונה לדף מיוחד לפי בחירתך."

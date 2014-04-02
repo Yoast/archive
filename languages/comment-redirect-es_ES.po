@@ -1,0 +1,41 @@
+# Translation of Comment Redirect in Spanish (Spain)
+# This file is distributed under the same license as the Comment Redirect package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2012-07-04 07:48:49+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Comment Redirect\n"
+
+#: comment-redirect.php:44 comment-redirect.php:94
+msgid "Comment Redirect Configuration"
+msgstr "Configuración de redireccionamiento de los comentarios"
+
+#: comment-redirect.php:44
+msgid "Comment Redirect"
+msgstr "Redireccionamiento del comentarios"
+
+#: comment-redirect.php:79
+msgid "You cannot edit the Comment Redirect options."
+msgstr "No puedes editar las opciones de redireccionamiento del comentario"
+
+#: comment-redirect.php:97
+msgid "Select the page below that a first time commenter should be redirected to:"
+msgstr "Selecciona la página abajo a la que redireccionar a alguien que comente por primera vez:"
+
+#: comment-redirect.php:101
+msgid "Redirect to"
+msgstr "Redireccionar a"
+
+#: comment-redirect.php:116
+msgid "Save Settings"
+msgstr "Guardar opciones de configuración"
+
+msgid "Comment Redirect by Yoast"
+msgstr "Redireccionamiento de comentario por Yoast"
+
+msgid "Redirect commenters who just made their first comment to a page of your choice."
+msgstr "Redirecciona a los que han comentado por primera vez hacia una página de tu elección."

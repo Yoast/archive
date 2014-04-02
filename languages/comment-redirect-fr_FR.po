@@ -1,0 +1,41 @@
+# Translation of Comment Redirect in French (France)
+# This file is distributed under the same license as the Comment Redirect package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2012-07-04 07:39:26+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Comment Redirect\n"
+
+#: comment-redirect.php:44 comment-redirect.php:94
+msgid "Comment Redirect Configuration"
+msgstr "Configuration de Comment Redirect"
+
+#: comment-redirect.php:44
+msgid "Comment Redirect"
+msgstr "Comment Redirect"
+
+#: comment-redirect.php:79
+msgid "You cannot edit the Comment Redirect options."
+msgstr "Vous ne pouvez pas éditer les options de Comment Redirect."
+
+#: comment-redirect.php:97
+msgid "Select the page below that a first time commenter should be redirected to:"
+msgstr "Veuillez choisir ci-dessous, la page vers laquelle un visiteur laissant son premier commentaire doit être redirigé:"
+
+#: comment-redirect.php:101
+msgid "Redirect to"
+msgstr "Rediriger vers"
+
+#: comment-redirect.php:116
+msgid "Save Settings"
+msgstr "Enregistrer les modifications"
+
+msgid "Comment Redirect by Yoast"
+msgstr "Comment Redirect par Yoast"
+
+msgid "Redirect commenters who just made their first comment to a page of your choice."
+msgstr "Redirigez les visiteurs laissant leur premier commentaire vers une page de votre choix."

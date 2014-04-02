@@ -1,0 +1,41 @@
+# Translation of Comment Redirect in Danish
+# This file is distributed under the same license as the Comment Redirect package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2012-07-04 07:49:58+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Comment Redirect\n"
+
+#: comment-redirect.php:44 comment-redirect.php:94
+msgid "Comment Redirect Configuration"
+msgstr "Kommentar Redirect Konfiguration"
+
+#: comment-redirect.php:44
+msgid "Comment Redirect"
+msgstr "Kommentar Redirect"
+
+#: comment-redirect.php:79
+msgid "You cannot edit the Comment Redirect options."
+msgstr "Du kan ikke ændre Kommentar Redirect indstillingerne. "
+
+#: comment-redirect.php:97
+msgid "Select the page below that a first time commenter should be redirected to:"
+msgstr "Vælg den side nedenfor, som første-gangs-kommentatoren skal omdirigeres til:"
+
+#: comment-redirect.php:101
+msgid "Redirect to"
+msgstr "Redirect til "
+
+#: comment-redirect.php:116
+msgid "Save Settings"
+msgstr "Gem Indstillinger"
+
+msgid "Comment Redirect by Yoast"
+msgstr "Kommentar Redirect af Yoast"
+
+msgid "Redirect commenters who just made their first comment to a page of your choice."
+msgstr "Omdiriger kommentatorerne, der netop har lavet deres første kommentar til en side efter eget valg."

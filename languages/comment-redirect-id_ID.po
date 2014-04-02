@@ -1,0 +1,41 @@
+# Translation of Comment Redirect in Indonesian
+# This file is distributed under the same license as the Comment Redirect package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2012-07-04 07:43:16+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Comment Redirect\n"
+
+#: comment-redirect.php:44 comment-redirect.php:94
+msgid "Comment Redirect Configuration"
+msgstr "Konfigurasi Pengalihan (Redirect) Komentar"
+
+#: comment-redirect.php:44
+msgid "Comment Redirect"
+msgstr "Pengalihan Komentar"
+
+#: comment-redirect.php:79
+msgid "You cannot edit the Comment Redirect options."
+msgstr "Anda tidak dapat mengedit opsi Pengalihan (Redirect) Komentar."
+
+#: comment-redirect.php:97
+msgid "Select the page below that a first time commenter should be redirected to:"
+msgstr "Pilih halaman di bawah ini untuk mengarahkan pemberi komentar ke:"
+
+#: comment-redirect.php:101
+msgid "Redirect to"
+msgstr "Alihkan ke"
+
+#: comment-redirect.php:116
+msgid "Save Settings"
+msgstr "Simpan Perubahan"
+
+msgid "Comment Redirect by Yoast"
+msgstr "Pengalihan (Redirect) Komentar oleh Yoast"
+
+msgid "Redirect commenters who just made their first comment to a page of your choice."
+msgstr "Alihkan pemberi komentar yang baru saja membuat komentar pertama mereka ke halaman pilihan Anda."
