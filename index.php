@@ -6,10 +6,22 @@ if(!class_exists('SupportFramework')){
     $yoast_support      =   new SupportFramework();
 }
 
-if($yoast_support->validate($_POST)){
+if(isset($_POST['getsupport'])){
+    $data       =   $_POST;
+    if($yoast_support->validate($data)){
+        $type       =   'updated';
+        $message    =   __('Your question is succesfully submitted to <a href="http://www.yoast.com" target="_blank">Yoast</a>.');
+    }
+    else {
+        $type       =   'error';
+        $message    =   __( 'Please fill in your question!', 'support_framework' );
+    }
 
-    echo 'Valid';
+    add_settings_error( 'yoast_support-notices', 'yoast_support-error', __($message, 'yoast_support'), $type );
+
 }
+settings_errors( 'yoast_support-notices' );
+add_action('admin_notices', 'yoast_support_admin_messages');
 ?>
 
 <p><?php echo __('You need help? We are there for you. Before you ask us, check our <a href="https://yoast.com/support/" target="_blank">Support page</a>. Please fill in this field and we will answer your question soon.'); ?></p>

@@ -10,10 +10,11 @@ class SupportFramework {
     }
 
     public function validate($data){
-        if(!empty($data)){
-            echo '<pre>';
-                print_r(self::getSupportInfo());
-            echo '</pre>';
+        if(!empty($data['yoast_support']['question'])){
+            $this->question =   array(
+                'question'      =>  $data['yoast_support']['question'],
+                'site_info'     =>  self::getSupportInfo()
+            );
 
             return true;
         }
