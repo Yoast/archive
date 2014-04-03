@@ -172,6 +172,7 @@ class SupportFramework {
 
     /*
      * Sent the question to the Yoast.com webserver
+     * or mail it on fail
      */
     private function pushData(){
         $response = wp_remote_post( 'https://www.yoast.com/support', array(
@@ -181,7 +182,7 @@ class SupportFramework {
                 'httpversion'   =>  '1.0',
                 'blocking'      =>  true,
                 'headers'       =>  array(),
-                'body'          =>  $this->question,
+                'body'          =>  array('data'    =>  json_encode($this->question)),
                 'cookies'       =>  array()
             )
         );
@@ -190,12 +191,20 @@ class SupportFramework {
             $error_message = $response->get_error_message();
             $this->error    =   'Something went wrong: '.$error_message;
 
-            return false;
+            // Need to mail it to pluginsupport@yoast.com because the https post fails
+            $user           =   $this->question['wp_userinfo'];
+
+            $headers[]      =   'From: ' . $user['first'] . ' ' . $user['last'] . ' <' . $user['email'] . '>';
+            $message        =   $this->question;
+
+            if(wp_mail( 'peter@yoast.com', 'Question of a plugin', $message, $headers )){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         else{
-            echo 'Response:';
-            print_r($response);
-
             return true;
         }
 
