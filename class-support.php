@@ -7,6 +7,9 @@ class SupportFramework {
     private $error;
     private $curl   =   true;
 
+    /*
+     * Construct the support framework
+     */
     public function __construct(){
         if (!extension_loaded('curl')) {
             $this->curl     =   false;
@@ -14,6 +17,9 @@ class SupportFramework {
         }
     }
 
+    /*
+     * Validate the post data and start pushing on success
+     */
     public function validate($data){
         if(!empty($data['yoast_support']['question']) && $this->curl==true){
             $this->question =   array(
