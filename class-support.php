@@ -24,7 +24,7 @@ class SupportFramework {
         if(!empty($data['yoast_support']['question']) && $this->curl==true){
             $this->question =   array(
                 'question'      =>  $data['yoast_support']['question'],
-                'site_info'     =>  self::getSupportInfo()
+                'site_info'     =>  $this->getSupportInfo()
             );
 
             if(self::pushData()){
@@ -56,12 +56,12 @@ class SupportFramework {
     private function getSupportInfo(){
         return array(
             'wp_version'    =>     get_bloginfo('version'),
-            'wp_plugins'    =>     self::getWPPlugins(),
-            'wp_themes'     =>     self::getWPThemes(),
-            'wp_userinfo'   =>     self::getUserInfo(),
+            'wp_plugins'    =>     $this->getWPPlugins(),
+            'wp_themes'     =>     $this->getWPThemes(),
+            'wp_userinfo'   =>     $this->getUserInfo(),
             'url'           =>     get_bloginfo('url'),
-            'server_info'   =>     self::getServerInfo(),
-            'mysql'         =>     self::getMySQLinfo()
+            'server_info'   =>     $this->getServerInfo(),
+            'mysql'         =>     $this->getMySQLinfo()
         );
     }
 
@@ -129,7 +129,6 @@ class SupportFramework {
 
         if(count($wp_themes)>=1){
             foreach($wp_themes as $name => $themeInfo){
-                // Todo: check if plugin is active
                 $themes[]  =   array(
                     'name'          =>  $themeInfo['Name'],
                     'version'       =>  $themeInfo['Version']
@@ -152,7 +151,7 @@ class SupportFramework {
             'server_name'   =>  $_SERVER['SERVER_NAME'],
             'encoding'      =>  $_SERVER['HTTP_ACCEPT_ENCODING'],
             'php_version'   =>  phpversion(),
-            'php_modules'   =>  self::getPHPModules()
+            'php_modules'   =>  $this->getPHPModules()
         );
     }
 

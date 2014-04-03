@@ -25,6 +25,8 @@ settings_errors( 'yoast_support-notices' );
 add_action('admin_notices', 'yoast_support_admin_messages');
 ?>
 
+<p class="desc">Let Yoast help you if we need admin access to your site.</p>
+
 <p><?php echo __('You need help? We are there for you. Before you ask us, check our <a href="https://yoast.com/support/" target="_blank">Support page</a>. Please fill in this field and we will answer your question soon.'); ?></p>
 
 <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" accept-charset="UTF-8">
