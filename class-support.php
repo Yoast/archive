@@ -43,6 +43,9 @@ class SupportFramework {
         }
     }
 
+    /*
+     * Return the i18n support message that is default in the support message field
+     */
     public function __SupportMessage(){
         return __("Write your question here and provide as much info as you know to get a detailed answer from our support team.");
     }
@@ -96,6 +99,9 @@ class SupportFramework {
         return $plugins;
     }
 
+    /*
+     * Return an array with all user info
+     */
     private function getUserInfo(){
         global $current_user;
         get_currentuserinfo();
@@ -181,7 +187,7 @@ class SupportFramework {
      * or mail it on fail
      */
     private function pushData(){
-        $response = wp_remote_post( 'https://www.yoast.com/support', array(
+        $response = wp_remote_post( 'https://www.yoast.com/support-request', array(
                 'method'        =>  'POST',
                 'timeout'       =>  30,
                 'redirection'   =>  5,
@@ -197,13 +203,13 @@ class SupportFramework {
             $error_message = $response->get_error_message();
             $this->error    =   'Something went wrong: '.$error_message;
 
-            // Need to mail it to pluginsupport@yoast.com because the https post fails
+            // Need to mail it because the https post fails
             $user           =   $this->question['wp_userinfo'];
 
             $headers[]      =   'From: ' . $user['first'] . ' ' . $user['last'] . ' <' . $user['email'] . '>';
             $message        =   $this->question;
 
-            if(wp_mail( 'peter@yoast.com', 'Question of a plugin', $message, $headers )){
+            if(wp_mail( 'pluginsupport@yoast.com', 'Question of a plugin', $message, $headers )){
                 return true;
             }
             else{
