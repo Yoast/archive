@@ -39,6 +39,7 @@ class SupportFramework {
             'wp_version'    =>     get_bloginfo('version'),
             'wp_plugins'    =>     self::getWPPlugins(),
             'wp_themes'     =>     self::getWPThemes(),
+            'wp_userinfo'   =>     self::getUserInfo(),
             'url'           =>     get_bloginfo('url'),
             'server_info'   =>     self::getServerInfo()
         );
@@ -80,6 +81,19 @@ class SupportFramework {
         return $plugins;
     }
 
+    private function getUserInfo(){
+        global $current_user;
+        get_currentuserinfo();
+
+        return array(
+            'username'  =>      $current_user->user_login,
+            'email'     =>      $current_user->user_email,
+            'first'     =>      $current_user->user_firstname,
+            'last'      =>      $current_user->user_lastname,
+            'display'   =>      $current_user->display_name,
+        );
+    }
+
     /*
      * Return themes
      */
@@ -118,8 +132,21 @@ class SupportFramework {
             'server_name'   =>  $_SERVER['SERVER_NAME'],
             'encoding'      =>  $_SERVER['HTTP_ACCEPT_ENCODING'],
             'php_version'   =>  phpversion(),
-            'php_modules'   =>  get_loaded_extensions()
+            'php_modules'   =>  self::getPHPModules()
         );
+    }
+
+    /*
+     * Get the phpmodules with all its version numbers
+     */
+    private function getPHPModules(){
+        $modules        =   array();
+
+        foreach(get_loaded_extensions() as $ext){
+            $modules[$ext]      =   phpversion($ext);
+        }
+
+        return $modules;
     }
 
 }
