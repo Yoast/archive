@@ -14,7 +14,7 @@ if(isset($_POST['getsupport'])){
     }
     else {
         $type       =   'error';
-        $message    =   __( 'Please fill in your question!', 'support_framework' );
+        $message    =   __( $yoast_support->__getError(), 'support_framework' );
     }
 
     add_settings_error( 'yoast_support-notices', 'yoast_support-error', __($message, 'yoast_support'), $type );
@@ -39,11 +39,3 @@ add_action('admin_notices', 'yoast_support_admin_messages');
     <p><input type="submit" class="button-primary" name="getsupport" value="Get support"></p>
 
 </form>
-
-<?php
-if(!empty($yoast_support->__getOutput())):
-?>
-<pre><?php print_r($yoast_support->__getOutput()); ?></pre>
-<?php
-endif;
-?>

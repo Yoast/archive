@@ -4,6 +4,7 @@
 class SupportFramework {
 
     private $question;
+    private $error;
     private $curl   =   true;
 
     public function __construct(){
@@ -20,9 +21,18 @@ class SupportFramework {
                 'site_info'     =>  self::getSupportInfo()
             );
 
-            return true;
+            if(self::pushData()){
+                return true;
+            }
+            else{
+                $this->error    =   __('Couldn\'t sent your question to Yoast.');
+
+                return false;
+            }
         }
         else{
+            $this->error    =   __('Please fill in a question in the form below.');
+
             return false;
         }
     }
@@ -41,18 +51,17 @@ class SupportFramework {
             'wp_themes'     =>     self::getWPThemes(),
             'wp_userinfo'   =>     self::getUserInfo(),
             'url'           =>     get_bloginfo('url'),
-            'server_info'   =>     self::getServerInfo()
+            'server_info'   =>     self::getServerInfo(),
+            'mysql'         =>     self::getMySQLinfo()
         );
     }
 
     /*
-     * Temp function for testing with our output
-     * Remove it before going live
+     * Central function to return the error message to the user
      */
-    public function __getOutput(){
-        return $this->question;
+    public function __getError(){
+        return $this->error;
     }
-
 
     #######################
     # Collect all data    #
@@ -111,8 +120,7 @@ class SupportFramework {
                 // Todo: check if plugin is active
                 $themes[]  =   array(
                     'name'          =>  $themeInfo['Name'],
-                    'version'       =>  $themeInfo['Version'],
-//                    'STATUS'        =>  is_theme_active($name)
+                    'version'       =>  $themeInfo['Version']
                 );
             }
         }
@@ -147,6 +155,50 @@ class SupportFramework {
         }
 
         return $modules;
+    }
+
+    /*
+     * Get all mysql info
+     */
+    private function getMySQLinfo(){
+        return array(
+            'server'      =>      mysql_get_server_info(),
+            'client'      =>      mysql_get_client_info(),
+            'host'        =>      mysql_get_host_info(),
+            'protocol'    =>      mysql_get_proto_info(),
+            'charset'     =>      mysql_client_encoding()
+        );
+    }
+
+    /*
+     * Sent the question to the Yoast.com webserver
+     */
+    private function pushData(){
+        $response = wp_remote_post( 'https://www.yoast.com/support', array(
+                'method'        =>  'POST',
+                'timeout'       =>  30,
+                'redirection'   =>  5,
+                'httpversion'   =>  '1.0',
+                'blocking'      =>  true,
+                'headers'       =>  array(),
+                'body'          =>  $this->question,
+                'cookies'       =>  array()
+            )
+        );
+
+        if ( is_wp_error( $response ) ) {
+            $error_message = $response->get_error_message();
+            $this->error    =   'Something went wrong: '.$error_message;
+
+            return false;
+        }
+        else{
+            echo 'Response:';
+            print_r($response);
+
+            return true;
+        }
+
     }
 
 }
