@@ -294,7 +294,7 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 			// request parameters
 			$request_params = array( 
 				'timeout' => 20, 
-				'sslverify' => true, 
+				'sslverify' => false, 
 				'headers' => array( 'Accept-Encoding' => '*' ) 
 			);
 
