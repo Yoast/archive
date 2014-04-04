@@ -305,7 +305,7 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 			if( is_wp_error( $response ) ) {
 
 				// set notice, useful for debugging why remote requests are failing
-				$this->set_notice( sprintf( __( "Request error: %s", $this->product->get_text_domain() ), $response->get_error_message() ), false );
+				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), $response->get_error_message(), '<a href="https://yoast.com/support/licenses/#license-activation-notices">', '</a>' ), false );
 
 				return false;
 			}
@@ -316,7 +316,7 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 			if( $response_code !== 200 ) {
 
 				$response_message = wp_remote_retrieve_response_message( $response );
-				$this->set_notice( sprintf( __( "Request error: %s", $this->product->get_text_domain() ), "{$response_code} {$response_message}" ), false );
+				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), "{$response_code} {$response_message}", '<a href="https://yoast.com/support/licenses/#license-activation-notices">', '</a>' ), false );
 
 				return false;
 			}
