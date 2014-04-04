@@ -294,7 +294,7 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 			// request parameters
 			$request_params = array( 
 				'timeout' => 20, 
-				'sslverify' => false, 
+				'sslverify' => true, 
 				'headers' => array( 'Accept-Encoding' => '*' ) 
 			);
 
@@ -306,6 +306,16 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 
 				// set notice, useful for debugging why remote requests are failing
 				$this->set_notice( sprintf( __( "Request error: %s", $this->product->get_text_domain() ), $response->get_error_message() ), false );
+
+				return false;
+			}
+
+			if( ( $error_code = wp_remote_retrieve_response_code( $response ) ) !== 200 ) {
+
+				$error_message = wp_remote_retrieve_response_message( $response );
+
+				// set notice, useful for debugging why remote requests are failing
+				$this->set_notice( sprintf( __( "Request error: %s", $this->product->get_text_domain() ), "{$error_code} {$error_message}" ), false );
 
 				return false;
 			}
