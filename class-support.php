@@ -5,23 +5,12 @@ class SupportFramework {
 
     private $question;
     private $error;
-    private $curl   =   true;
-
-    /*
-     * Construct the support framework
-     */
-    public function __construct(){
-        if (!extension_loaded('curl')) {
-            $this->curl     =   false;
-            add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('To use this support form, please make sure you have enabled Curl in your php.ini.', 'yoast_support'), 'error' );
-        }
-    }
 
     /*
      * Validate the post data and start pushing on success
      */
     public function validate($data){
-        if(!empty($data['yoast_support']['question']) && $this->curl==true){
+        if(!empty($data['yoast_support']['question'])){
             $this->question =   array(
                 'question'      =>  $data['yoast_support']['question'],
                 'site_info'     =>  $this->getSupportInfo()
