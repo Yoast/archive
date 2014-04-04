@@ -61,7 +61,7 @@ class SupportFramework {
      * Remove the created admin account ( $this->createAdminDetails() )
      */
     public function removeAdminDetails(){
-        $user       =   get_user_by('email',    'pluginsupport@yoast.com');
+        $user       =   $this->findAdminUser();
 
         if(isset($user->ID)){
             wp_delete_user($user->ID);
@@ -72,6 +72,17 @@ class SupportFramework {
             return false;
         }
 
+    }
+
+    /*
+     * Find the admin user
+     * returns an object
+     */
+    public function findAdminUser(){
+        return get_user_by(
+            'email',
+            'pluginsupport@yoast.com'
+        );
     }
 
     /*

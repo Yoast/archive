@@ -40,6 +40,7 @@ if(isset($_POST['getsupport'])){
 
 }
 
+$user   =   $yoast_support->findAdminUser();
 settings_errors( 'yoast_support-notices' );
 add_action('admin_notices', 'yoast_support_admin_messages');
 ?>
@@ -51,9 +52,19 @@ add_action('admin_notices', 'yoast_support_admin_messages');
 
 <p class="desc"><?php echo __('Let Yoast help you if we need admin access to your site.'); ?></p>
 
+<table class="form-table">
+    <tr>
+        <th scope="row"><label for="yoast-support-question"><?php echo __('Send admin details to us'); ?></label></th>
+        <td>
+        <?php if(isset($user->ID)): ?>
+            <button class="button" name="adminAccess" onclick="location.href='?page=wpseo_support&admin=remove';"><?php echo __('Remove Yoast admin account'); ?></button>
+        <?php else: ?>
+            <button class="button" name="adminAccess" onclick="location.href='?page=wpseo_support&admin=sent';"><?php echo __('Create new admin account and send details to Yoast'); ?></button>
+        <?php endif; ?></td>
+    </tr>
+</table>
 <p>
-    <button class="button" name="adminAccess" onclick="location.href='?page=wpseo_support&admin=sent';"><?php echo __('Create new admin account and send details to Yoast'); ?></button>
-    <button class="button" name="adminAccess" onclick="location.href='?page=wpseo_support&admin=remove';"><?php echo __('Remove Yoast admin account'); ?></button>
+
 </p>
 
 <hr>
