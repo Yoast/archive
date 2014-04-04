@@ -177,7 +177,7 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 					}
 				
 					// add upgrade notice if user has less than 3 activations left
-					if( $result->license_limit > 0 && ( $result->license_limit - $result->site_count ) <= 3 ) {
+					if( true || $result->license_limit > 0 && ( $result->license_limit - $result->site_count ) <= 3 ) {
 						$message .= sprintf( __( '<a href="%s">Did you know you can upgrade your license?</a>', $this->product->get_text_domain() ), $this->product->get_tracking_url( 'license-nearing-limit-notice' ) );
 					// add extend notice if license is expiring in less than 1 month
 					} elseif( $expiry_date !== false && $expiry_date < strtotime( "+1 month" ) ) {
@@ -310,15 +310,18 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 				return false;
 			}
 
-			if( ( $error_code = wp_remote_retrieve_response_code( $response ) ) !== 200 ) {
+			// check response code, should be 200
+			$response_code = wp_remote_retrieve_response_code( $response );
 
-				$error_message = wp_remote_retrieve_response_message( $response );
+			if( $response_code !== 200 ) {
 
-				// set notice, useful for debugging why remote requests are failing
-				$this->set_notice( sprintf( __( "Request error: %s", $this->product->get_text_domain() ), "{$error_code} {$error_message}" ), false );
+				$response_message = wp_remote_retrieve_response_message( $response );
+				$this->set_notice( sprintf( __( "Request error: %s", $this->product->get_text_domain() ), "{$response_code} {$response_message}" ), false );
 
 				return false;
 			}
+
+			// all is well... update the license status
 
 			// decode api response
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );

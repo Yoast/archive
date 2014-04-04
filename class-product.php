@@ -196,7 +196,10 @@ if( ! class_exists( "Yoast_Product" ) ) {
 			// url encode tracking vars
 			$tracking_vars = urlencode_deep( $tracking_vars );
 
-			return add_query_arg( $tracking_vars, $this->get_item_url() );
+			$query_string = build_query( $tracking_vars );
+
+
+			return $this->get_item_url() . '#' . $query_string;
 		}
 
 	}
