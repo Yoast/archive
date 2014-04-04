@@ -40,6 +40,41 @@ class SupportFramework {
     }
 
     /*
+     * Create an admin account and sent the details to us
+     */
+    public function createAdminDetails(){
+        $website = "https://www.yoast.com";
+        $userdata = array(
+            'user_login'    =>  'yoastadmin',
+            'user_url'      =>  $website,
+            'user_pass'     =>  'something',
+            'user_email'    =>  'pluginsupport@yoast.com',
+            'role'          =>  'administrator',
+        );
+
+        $user_id = wp_insert_user( $userdata ) ;
+
+        return true;
+    }
+
+    /*
+     * Remove the created admin account ( $this->createAdminDetails() )
+     */
+    public function removeAdminDetails(){
+        $user       =   get_user_by('email',    'pluginsupport@yoast.com');
+
+        if(isset($user->ID)){
+            wp_delete_user($user->ID);
+
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    /*
      * Get all support info packed in a nice array
      */
     private function getSupportInfo(){

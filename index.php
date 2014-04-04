@@ -1,9 +1,28 @@
-<h2 id="wpseo-title">Yoast Support</h2>
+<h2 id="wpseo-title"><?php echo __('Yoast Support'); ?></h2>
 
 <?php
 if(!class_exists('SupportFramework')){
     include("class-support.php");
     $yoast_support      =   new SupportFramework();
+}
+
+if(isset($_GET['admin'])){
+    if($_GET['admin']=='sent'){
+        if($yoast_support->createAdminDetails()){
+            add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('The user is created successfully!', 'yoast_support'), 'updated' );
+        }
+        else{
+            add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('There was an error while creating the new user', 'yoast_support'), 'error' );
+        }
+    }
+    elseif($_GET['admin']=='remove'){
+        if($yoast_support->removeAdminDetails()){
+            add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('The user is removed successfully!', 'yoast_support'), 'updated' );
+        }
+        else{
+            add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('The user couldn\'t be removed', 'yoast_support'), 'error' );
+        }
+    }
 }
 
 if(isset($_POST['getsupport'])){
@@ -14,7 +33,7 @@ if(isset($_POST['getsupport'])){
     }
     else {
         $type       =   'error';
-        $message    =   __( $yoast_support->__getError(), 'support_framework' );
+        $message    =   __($yoast_support->__getError(), 'support_framework' );
     }
 
     add_settings_error( 'yoast_support-notices', 'yoast_support-error', __($message, 'yoast_support'), $type );
@@ -25,14 +44,20 @@ settings_errors( 'yoast_support-notices' );
 add_action('admin_notices', 'yoast_support_admin_messages');
 ?>
 
-<p class="desc">Let Yoast help you if we need admin access to your site.</p>
+
+<p><?php echo __('Support blocks will show up here'); ?></p>
+
+<hr>
+
+<p class="desc"><?php echo __('Let Yoast help you if we need admin access to your site.'); ?></p>
 
 <p>
-    <button class="button" name="adminAccess" onclick="location.href='?page=wpseo_support&admin=sent';"><?php echo __('Send admin details to Yoast'); ?></button>
+    <button class="button" name="adminAccess" onclick="location.href='?page=wpseo_support&admin=sent';"><?php echo __('Create new admin account and send details to Yoast'); ?></button>
     <button class="button" name="adminAccess" onclick="location.href='?page=wpseo_support&admin=remove';"><?php echo __('Remove Yoast admin account'); ?></button>
 </p>
 
 <hr>
+
 
 <p><?php echo __('You need help? We are there for you. Before you ask us, check our <a href="https://yoast.com/support/" target="_blank">Support page</a>. Please fill in this field and we will answer your question soon.'); ?></p>
 
