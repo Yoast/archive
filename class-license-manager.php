@@ -298,7 +298,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), $request->get_error_message(), '<a href="https://yoast.com/support/licenses/#license-activation-notices">', '</a>' ), false );
 			}
 
-			// fire request to shop
+			// get response
 			$response = $request->get_response();
 
 			// update license status

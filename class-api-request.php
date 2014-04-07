@@ -2,6 +2,10 @@
 
 if( ! class_exists( "Yoast_API_Request", false ) ) {
 
+	/**
+	* Handles requests to the Yoast EDD API
+	* @todo Allow for post requests
+	*/
 	class Yoast_API_Request {
 
 		/**
