@@ -54,10 +54,10 @@ if( ! class_exists( "Yoast_Plugin_Update_Manager") ) {
 			}
 
 			// compare versions
-		if ( version_compare( $this->product->get_version(), $api_response->new_version, '<' ) ) {
+			if ( version_compare( $this->product->get_version(), $api_response->new_version, '<' ) ) {
 
 				// remote version is newer, add to data
-			$data->response[ $this->product->get_slug() ] = $api_response;
+				$data->response[ $this->product->get_slug() ] = $api_response;
 
 			}
 

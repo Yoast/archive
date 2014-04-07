@@ -4,19 +4,19 @@ if( ! class_exists( "Yoast_API_Request", false ) ) {
 
 	/**
 	* Handles requests to the Yoast EDD API
-	* @todo Allow for post requests
 	*/
 	class Yoast_API_Request {
 
 		/**
-		* @var string
+		* @var string Request URL
 		*/
 		private $url = '';
 
 		/**
-		* @var array
+		* @var array Request parameters
 		*/
 		private $args = array(
+			'method' => 'GET',
 			'timeout' => 20, 
 			'sslverify' => false, 
 			'headers' => array( 'Accept-Encoding' => '*' ) 
@@ -71,7 +71,7 @@ if( ! class_exists( "Yoast_API_Request", false ) ) {
 		private function fire() {
 
 			// fire request to shop
-			$response = wp_remote_get( $this->url, $this->args );
+			$response = wp_remote_request( $this->url, $this->args );
 
 			// validate raw response
 			if( $this->validate_raw_response( $response ) === false ) {
