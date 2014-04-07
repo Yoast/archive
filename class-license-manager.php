@@ -1,6 +1,6 @@
 <?php
 
-if( ! interface_exists( 'iYoast_License_Manager' ) ) {
+if( ! interface_exists( 'iYoast_License_Manager', false ) ) {
 
 	interface iYoast_License_Manager {
 
@@ -12,7 +12,7 @@ if( ! interface_exists( 'iYoast_License_Manager' ) ) {
 }
 
 
-if( ! class_exists( 'Yoast_License_Manager') ) {
+if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 	/**
 	 * Class Yoast_License_Manager
@@ -291,43 +291,23 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 			// create api request url
 			$url = add_query_arg( $api_params, $this->product->get_api_url() );
 
-			// request parameters
-			$request_params = array( 
-				'timeout' => 20, 
-				'sslverify' => false, 
-				'headers' => array( 'Accept-Encoding' => '*' ) 
-			);
+			require_once dirname( __FILE__ ) . '/class-request.php';
+			$request = new Yoast_API_Request( $url );
+	
+			if( $request->is_valid() !== true ) {
+				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), $request->get_error_message(), '<a href="https://yoast.com/support/licenses/#license-activation-notices">', '</a>' ), false );
+			}
 
 			// fire request to shop
-			$response = wp_remote_get( $url, $request_params );
+			$response = $request->get_response();
 
-			// make sure response came back okay
-			if( is_wp_error( $response ) ) {
-
-				// set notice, useful for debugging why remote requests are failing
-				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), $response->get_error_message(), '<a href="https://yoast.com/support/licenses/#license-activation-notices">', '</a>' ), false );
-
-				return false;
-			}
-
-			// check response code, should be 200
-			$response_code = wp_remote_retrieve_response_code( $response );
-
-			if( $response_code !== 200 ) {
-
-				$response_message = wp_remote_retrieve_response_message( $response );
-				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), "{$response_code} {$response_message}", '<a href="https://yoast.com/support/licenses/#license-activation-notices">', '</a>' ), false );
-
-				return false;
-			}
-
-			// all is well... update the license status
-
-			// decode api response
-			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+			// update license status
+			$license_data = $response;
 
 			return $license_data;
 		}
+
+		
 
 		/**
 		* Set the license status
@@ -596,6 +576,7 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 			}
 		}
 
+		
 	}
 
 }
