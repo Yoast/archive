@@ -291,7 +291,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			// create api request url
 			$url = add_query_arg( $api_params, $this->product->get_api_url() );
 
-			require_once dirname( __FILE__ ) . '/class-request.php';
+			require_once dirname( __FILE__ ) . '/class-api-request.php';
 			$request = new Yoast_API_Request( $url );
 	
 			if( $request->is_valid() !== true ) {

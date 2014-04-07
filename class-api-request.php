@@ -81,6 +81,7 @@ if( ! class_exists( "Yoast_API_Request", false ) ) {
 					$this->fire();
 				}
 
+				$this->success = false;
 				return false;
 			}
 
@@ -171,7 +172,7 @@ if( ! class_exists( "Yoast_API_Request", false ) ) {
 			}
 
 			$transport_used = _wp_http_get_object()->_get_first_available_transport( $this->args, $this->url );
-			if( $transport_used !== 'WP_Http_curl' ) {
+			if( strtolower( $transport_used ) !== 'wp_http_curl' ) {
 				return false;
 			}
 
