@@ -8,6 +8,7 @@ class SupportFramework {
 
     /*
      * Validate the post data and start pushing on success
+     * Returns true on success, false on fail
      */
     public function validate($data){
         if(!empty($data['yoast_support']['question'])){
@@ -43,9 +44,9 @@ class SupportFramework {
      * Create an admin account and sent the details to us
      */
     public function createAdminDetails(){
-        $website    =   "https://www.yoast.com";
-        $password   =   wp_generate_password();
-        $userdata   =   array(
+        $website                =   "https://www.yoast.com";
+        $password               =   wp_generate_password();
+        $userdata               =   array(
             'user_login'    =>  'yoastadmin',
             'user_url'      =>  $website,
             'user_pass'     =>  $password,
@@ -121,7 +122,7 @@ class SupportFramework {
     #######################
 
     /*
-     * Return WP Plugins
+     * Return WP Plugins with name, plugin url and version
      */
     private function getWPPlugins(){
         $plugins        =   array();
@@ -171,7 +172,7 @@ class SupportFramework {
         }
 
         if(count($wp_themes)>=1){
-            foreach($wp_themes as $name => $themeInfo){
+            foreach($wp_themes as $themeInfo){
                 $themes[]  =   array(
                     'name'          =>  $themeInfo['Name'],
                     'version'       =>  $themeInfo['Version']
@@ -227,10 +228,6 @@ class SupportFramework {
     /*
      * Sent the question to the Yoast.com webserver
      * or mail it on fail
-     *
-     * url: 'https://www.yoast.com/support-request'
-     * data: $this->question
-     * mailfailTitle: Question about a Yoast plugin
      */
     private function pushData($url, $data, $mailfailTitle){
         $response = wp_remote_post( $url , array(
