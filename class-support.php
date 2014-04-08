@@ -16,7 +16,7 @@ class SupportFramework {
                 'site_info'     =>  $this->getSupportInfo()
             );
 
-            if(self::pushData()){
+            if(self::pushData('https://www.yoast.com/support-request', $this->question, 'Question about a Yoast plugin')){
                 return true;
             }
             else{
@@ -219,16 +219,20 @@ class SupportFramework {
     /*
      * Sent the question to the Yoast.com webserver
      * or mail it on fail
+     *
+     * url: 'https://www.yoast.com/support-request'
+     * data: $this->question
+     * mailfailTitle: Question about a Yoast plugin
      */
-    private function pushData(){
-        $response = wp_remote_post( 'https://www.yoast.com/support-request', array(
+    private function pushData($url, $data, $mailfailTitle){
+        $response = wp_remote_post( $url , array(
                 'method'        =>  'POST',
                 'timeout'       =>  30,
                 'redirection'   =>  5,
                 'httpversion'   =>  '1.0',
                 'blocking'      =>  true,
                 'headers'       =>  array(),
-                'body'          =>  array('data'    =>  json_encode($this->question)),
+                'body'          =>  array('data'    =>  json_encode($data)),
                 'cookies'       =>  array()
             )
         );
@@ -241,9 +245,9 @@ class SupportFramework {
             $user           =   $this->question['wp_userinfo'];
 
             $headers[]      =   'From: ' . $user['first'] . ' ' . $user['last'] . ' <' . $user['email'] . '>';
-            $message        =   $this->question;
+            $message        =   $data;
 
-            if(wp_mail( 'pluginsupport@yoast.com', 'Question of a plugin', $message, $headers )){
+            if(wp_mail( 'pluginsupport@yoast.com', $mailfailTitle, $message, $headers )){
                 return true;
             }
             else{
