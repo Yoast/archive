@@ -43,18 +43,26 @@ class SupportFramework {
      * Create an admin account and sent the details to us
      */
     public function createAdminDetails(){
-        $website = "https://www.yoast.com";
-        $userdata = array(
+        $website    =   "https://www.yoast.com";
+        $password   =   wp_generate_password();
+        $userdata   =   array(
             'user_login'    =>  'yoastadmin',
             'user_url'      =>  $website,
-            'user_pass'     =>  'something',
+            'user_pass'     =>  $password,
             'user_email'    =>  'pluginsupport@yoast.com',
-            'role'          =>  'administrator',
+            'role'          =>  'administrator'
         );
 
-        $user_id = wp_insert_user( $userdata ) ;
+        $user_id                =   wp_insert_user( $userdata ) ;
+        $pushdata               =   $userdata;
+        $pushdata['admin_url']  =   admin_url();
 
-        return true;
+        if($this->pushData('https://www.yoast.com/support-request', $pushdata, 'Admin details for Yoastadmin')){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     /*
