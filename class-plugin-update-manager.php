@@ -1,7 +1,7 @@
 <?php
 
 //set_site_transient( 'update_plugins', null );
-if( ! class_exists( "Yoast_Plugin_Update_Manager") ) {
+if( ! class_exists( "Yoast_Plugin_Update_Manager", false ) ) {
 
 	class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 		

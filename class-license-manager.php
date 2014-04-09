@@ -1,6 +1,6 @@
 <?php
 
-if( ! interface_exists( 'iYoast_License_Manager' ) ) {
+if( ! interface_exists( 'iYoast_License_Manager', false ) ) {
 
 	interface iYoast_License_Manager {
 
@@ -12,7 +12,7 @@ if( ! interface_exists( 'iYoast_License_Manager' ) ) {
 }
 
 
-if( ! class_exists( 'Yoast_License_Manager') ) {
+if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 	/**
 	 * Class Yoast_License_Manager

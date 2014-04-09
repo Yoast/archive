@@ -1,5 +1,5 @@
 <?php
-if ( ! class_exists( "Yoast_Plugin_License_Manager" ) ) {
+if ( ! class_exists( "Yoast_Plugin_License_Manager", false ) ) {
 
 	class Yoast_Plugin_License_Manager extends Yoast_License_Manager {
 
