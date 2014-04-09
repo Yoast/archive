@@ -238,9 +238,16 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 		* @return boolean True if the function ran with success, false otherwise.
 		*/
 		public function check_license() {
-		
+
+            // only check active licenses
+            if( $this->license_is_valid() === false ) {
+                return false;
+            }
+
 			// Only run once every week
 			$transient_name = $this->prefix . 'license_checked';
+
+              delete_transient( $transient_name );
 
 			if( get_transient( $transient_name ) !== false ) {
 				return false;
@@ -251,6 +258,8 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 
 			// did the request fail?
 			if( $result === false ) {
+                // try again tomorrow
+                set_transient( $transient_name, 1, DAY_IN_SECONDS );
 				return false;
 			}
 
@@ -265,7 +274,7 @@ if( ! class_exists( 'Yoast_License_Manager') ) {
 			}
 
 			// set transient to ensure license is only checked once a week
-			set_transient( $transient_name, 1, strtotime( "+1 week" ) );
+			set_transient( $transient_name, 1, WEEK_IN_SECONDS );
 
 			return true;
 		}
