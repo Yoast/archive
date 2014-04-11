@@ -236,15 +236,15 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
         /**
-         * Set transient to ensure we only check a maximum of once a week
+         * Set transient to ensure we only check a maximum of once every 4 weeks
          */
         public function set_license_checked_remotely() {
             $transient_name = $this->prefix . 'license_checked';
-            set_transient( $transient_name, 1, ( WEEK_IN_SECONDS * 2 ) );
+            set_transient( $transient_name, 1, ( WEEK_IN_SECONDS * 4 ) );
         }
 
         /**
-         * Was the license remotely checked this week?
+         * Was the license remotely checked in the last 4 weeks?
          *
          * @return bool
          */
@@ -265,7 +265,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
                 return false;
             }
 
-			// Only run once every week
+			// Only run once every 4 weeks
 			if( $this->is_license_checked_remotely() ) {
                 return false;
             }
@@ -274,7 +274,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$result = $this->call_license_api( 'check' );
 
 			// did the request succeed?
-			if( $result !== false && is_object( $result ) ) {
+			if( $result != false && is_object( $result ) ) {
 
                 // story expiry date
                 if( isset( $result->expires ) ) {
@@ -283,6 +283,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
                 // check if license status is still correct
                 if( isset( $result->license ) && is_string( $result->license ) && $this->get_license_status() != trim( $result->license ) ) {
+                    $this->set_notice( sprintf( __( "Heads up! The license you're using for %s seems inactive on Yoast.com.", $this->product->get_text_domain() ), $this->product->get_item_name() ), false );
                     $this->set_license_status( $result->license );
                 }
 
