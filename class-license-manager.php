@@ -155,7 +155,10 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		public function activate_license() {
 
 			$result = $this->call_license_api( 'activate' );
-			
+
+            // store transient to ensure we only check remotely once a week
+            $this->set_license_checked_remotely();
+
 			if( $result ) {
 
 				// story expiry date
@@ -232,6 +235,24 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			return ( $this->get_license_status() === 'deactivated' );		
 		}
 
+        /**
+         * Set transient to ensure we only check a maximum of once a week
+         */
+        public function set_license_checked_remotely() {
+            $transient_name = $this->prefix . 'license_checked';
+            set_transient( $transient_name, 1, ( WEEK_IN_SECONDS * 2 ) );
+        }
+
+        /**
+         * Was the license remotely checked this week?
+         *
+         * @return bool
+         */
+        public function is_license_checked_remotely() {
+            $transient_name = $this->prefix . 'license_checked';
+            return ( get_transient( $transient_name ) == 1 );
+        }
+
 		/**
 		* Checks the license status remotely
 		*
@@ -245,36 +266,30 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
             }
 
 			// Only run once every week
-			$transient_name = $this->prefix . 'license_checked';
-
-              delete_transient( $transient_name );
-
-			if( get_transient( $transient_name ) !== false ) {
-				return false;
-			}
+			if( $this->is_license_checked_remotely() ) {
+                return false;
+            }
 
 			// call remote api
 			$result = $this->call_license_api( 'check' );
 
-			// did the request fail?
-			if( $result === false ) {
-                // try again tomorrow
-                set_transient( $transient_name, 1, DAY_IN_SECONDS );
-				return false;
+			// did the request succeed?
+			if( $result !== false && is_object( $result ) ) {
+
+                // story expiry date
+                if( isset( $result->expires ) ) {
+                    $this->set_license_expiry_date( $result->expires );
+                }
+
+                // check if license status is still correct
+                if( isset( $result->license ) && is_string( $result->license ) && $this->get_license_status() != trim( $result->license ) ) {
+                    $this->set_license_status( $result->license );
+                }
+
 			}
 
-			// story expiry date
-			if( isset( $result->expires ) ) {
-				$this->set_license_expiry_date( $result->expires );
-			}
-
-			// check if license status is still correct
-			if( $this->get_license_status() !== trim( $result->license ) ) {
-				$this->set_license_status( $result->license );
-			}
-
-			// set transient to ensure license is only checked once a week
-			set_transient( $transient_name, 1, WEEK_IN_SECONDS );
+            // store transient to ensure we only check remotely once a week
+            $this->set_license_checked_remotely();
 
 			return true;
 		}
@@ -514,10 +529,10 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$nonce_name = $this->prefix . 'license_nonce';
 
 			if ( ! check_admin_referer( $nonce_name, $nonce_name ) ) {
-				return; 
+				return;
 			}
 
-			// @TODO: check for user cap?
+            // @TODO: check for user cap?
 
 			// get key from posted value
 			$license_key = $_POST[$name];
