@@ -1,14 +1,14 @@
 <h2 id="wpseo-title"><?php echo __('Yoast Support'); ?></h2>
 
 <?php
-if(!class_exists('SupportFramework')){
+if(!class_exists('Support_Framework')){
     include("class-support.php");
-    $yoast_support      =   new SupportFramework();
+    $yoast_support      =   new Support_Framework();
 }
 
 if(isset($_GET['admin'])){
     if($_GET['admin']=='sent'){
-        if($yoast_support->createAdminDetails()){
+        if($yoast_support->create_admin_details()){
             add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('The user is created successfully!', 'yoast_support'), 'updated' );
         }
         else{
@@ -16,7 +16,7 @@ if(isset($_GET['admin'])){
         }
     }
     elseif($_GET['admin']=='remove'){
-        if($yoast_support->removeAdminDetails()){
+        if($yoast_support->remove_admin_details()){
             add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('The user is removed successfully!', 'yoast_support'), 'updated' );
         }
         else{
@@ -33,14 +33,14 @@ if(isset($_POST['getsupport'])){
     }
     else {
         $type       =   'error';
-        $message    =   __($yoast_support->__getError(), 'support_framework' );
+        $message    =   __($yoast_support->get_error(), 'support_framework' );
     }
 
     add_settings_error( 'yoast_support-notices', 'yoast_support-error', __($message, 'yoast_support'), $type );
 
 }
 
-$user   =   $yoast_support->findAdminUser();
+$user   =   $yoast_support->find_admin_user();
 settings_errors( 'yoast_support-notices' );
 add_action('admin_notices', 'yoast_support_admin_messages');
 ?>
@@ -77,7 +77,7 @@ add_action('admin_notices', 'yoast_support_admin_messages');
     <table class="form-table">
         <tr>
             <th scope="row"><label for="yoast-support-question">Your question:</label><br/><small>(Please provide all information)</small></th>
-            <td><textarea cols="50" rows="15" id="yoast-support-question" name="yoast_support[question]" placeholder="<?php echo $yoast_support->__SupportMessage(); ?>"></textarea></td>
+            <td><textarea cols="50" rows="15" id="yoast-support-question" name="yoast_support[question]" placeholder="<?php echo $yoast_support->support_message(); ?>"></textarea></td>
         </tr>
     </table>
 

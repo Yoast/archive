@@ -1,10 +1,14 @@
 <?php
 /* Build the Yoast BV main support class */
 
-class SupportFramework {
+class Support_Framework {
 
     private $question;
     private $error;
+
+    public function __construct(){
+
+    }
 
     /**
      * Validate the post data and start pushing on success
@@ -16,10 +20,10 @@ class SupportFramework {
         if( !empty($data['yoast_support']['question'])){
             $this->question =   array(
                 'question'      =>  $data['yoast_support']['question'],
-                'site_info'     =>  $this->getSupportInfo()
+                'site_info'     =>  $this->get_support_info()
             );
 
-            if(self::pushData('https://www.yoast.com/support-request', $this->question, 'Question about a Yoast plugin')){
+            if($this->push_data('https://www.yoast.com/support-request', $this->question, 'Question about a Yoast plugin')){
                 return true;
             }
             else{
@@ -39,7 +43,7 @@ class SupportFramework {
      * Return the i18n support message that is default in the support message field
      * @return mixed
      */
-    public function __SupportMessage(){
+    public function support_message(){
         return __("Write your question here and provide as much info as you know to get a detailed answer from our support team.");
     }
 
@@ -47,7 +51,7 @@ class SupportFramework {
      * Create an admin account and push the data
      * @return bool
      */
-    public function createAdminDetails(){
+    public function create_admin_details(){
         $website                =   "https://www.yoast.com";
         $password               =   wp_generate_password();
         $userdata               =   array(
@@ -62,7 +66,7 @@ class SupportFramework {
         $pushdata               =   $userdata;
         $pushdata['admin_url']  =   admin_url();
 
-        if($this->pushData('https://www.yoast.com/support-request', $pushdata, 'Admin details for Yoastadmin')){
+        if($this->push_data('https://www.yoast.com/support-request', $pushdata, 'Admin details for Yoastadmin')){
             return true;
         }
         else{
@@ -74,8 +78,8 @@ class SupportFramework {
      * Remove the created admin account ( $this->createAdminDetails() )
      * @return bool
      */
-    public function removeAdminDetails(){
-        $user       =   $this->findAdminUser();
+    public function remove_admin_details(){
+        $user       =   $this->find_admin_user();
 
         if(isset($user->ID)){
             wp_delete_user($user->ID);
@@ -92,7 +96,7 @@ class SupportFramework {
      * Find our admin user
      * @return mixed
      */
-    public function findAdminUser(){
+    public function find_admin_user(){
         return get_user_by(
             'email',
             'pluginsupport@yoast.com'
@@ -103,15 +107,15 @@ class SupportFramework {
      * Return all support info in one array
      * @return array
      */
-    private function getSupportInfo(){
+    private function get_support_info(){
         return array(
             'wp_version'    =>     get_bloginfo('version'),
-            'wp_plugins'    =>     $this->getWPPlugins(),
-            'wp_themes'     =>     $this->getWPThemes(),
-            'wp_userinfo'   =>     $this->getUserInfo(),
+            'wp_plugins'    =>     $this->get_wp_plugins(),
+            'wp_themes'     =>     $this->get_wp_themes(),
+            'wp_userinfo'   =>     $this->get_user_info(),
             'url'           =>     get_bloginfo('url'),
-            'server_info'   =>     $this->getServerInfo(),
-            'mysql'         =>     $this->getMySQLinfo()
+            'server_info'   =>     $this->get_server_info(),
+            'mysql'         =>     $this->get_mysql_info()
         );
     }
 
@@ -119,7 +123,7 @@ class SupportFramework {
      * Central function to return the error message to the user
      * @return mixed
      */
-    public function __getError(){
+    public function get_error(){
         return $this->error;
     }
 
@@ -132,7 +136,7 @@ class SupportFramework {
      * Return all WP Plugins (Name, plugin url and version)
      * @return array
      */
-    private function getWPPlugins(){
+    private function get_wp_plugins(){
         $plugins        =   array();
         $wp_plugins     =   get_plugins();
 
@@ -155,7 +159,7 @@ class SupportFramework {
      * Return an array with all logged in user info
      * @return array
      */
-    private function getUserInfo(){
+    private function get_user_info(){
         global $current_user;
         get_currentuserinfo();
 
@@ -172,7 +176,7 @@ class SupportFramework {
      * Return the WP Themes
      * @return array
      */
-    private function getWPThemes(){
+    private function get_wp_themes(){
         $themes        =   array();
         if(function_exists('wp_get_themes')){
             $wp_themes      =   wp_get_themes();
@@ -197,7 +201,7 @@ class SupportFramework {
      * Return the server info
      * @return array
      */
-    private function getServerInfo(){
+    private function get_server_info(){
         return array(
             'engine'        =>  $_SERVER['SERVER_SOFTWARE'],
             'user'          =>  $_SERVER['USER'],
@@ -206,7 +210,7 @@ class SupportFramework {
             'server_name'   =>  $_SERVER['SERVER_NAME'],
             'encoding'      =>  $_SERVER['HTTP_ACCEPT_ENCODING'],
             'php_version'   =>  phpversion(),
-            'php_modules'   =>  $this->getPHPModules()
+            'php_modules'   =>  $this->get_php_modules()
         );
     }
 
@@ -214,7 +218,7 @@ class SupportFramework {
      * Get the phpmodules with all its version numbers
      * @return array
      */
-    private function getPHPModules(){
+    private function get_php_modules(){
         $modules        =   array();
 
         foreach(get_loaded_extensions() as $ext){
@@ -228,7 +232,7 @@ class SupportFramework {
      * Get all MySQL info of this database connection
      * @return array
      */
-    private function getMySQLinfo(){
+    private function get_mysql_info(){
         return array(
             'server'      =>      mysql_get_server_info(),
             'client'      =>      mysql_get_client_info(),
@@ -246,7 +250,7 @@ class SupportFramework {
      * @param $mailfailTitle
      * @return bool
      */
-    private function pushData($url, $data, $mailfailTitle){
+    private function push_data($url, $data, $mailfailTitle){
         $response = wp_remote_post( $url , array(
                 'method'        =>  'POST',
                 'timeout'       =>  30,
