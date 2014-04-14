@@ -6,12 +6,14 @@ class SupportFramework {
     private $question;
     private $error;
 
-    /*
+    /**
      * Validate the post data and start pushing on success
-     * Returns true on success, false on fail
+     * Returns true on success, false on fai
+     * @param $data
+     * @return bool
      */
-    public function validate($data){
-        if(!empty($data['yoast_support']['question'])){
+    public function validate( $data ){
+        if( !empty($data['yoast_support']['question'])){
             $this->question =   array(
                 'question'      =>  $data['yoast_support']['question'],
                 'site_info'     =>  $this->getSupportInfo()
@@ -33,15 +35,17 @@ class SupportFramework {
         }
     }
 
-    /*
+    /**
      * Return the i18n support message that is default in the support message field
+     * @return mixed
      */
     public function __SupportMessage(){
         return __("Write your question here and provide as much info as you know to get a detailed answer from our support team.");
     }
 
-    /*
-     * Create an admin account and sent the details to us
+    /**
+     * Create an admin account and push the data
+     * @return bool
      */
     public function createAdminDetails(){
         $website                =   "https://www.yoast.com";
@@ -66,8 +70,9 @@ class SupportFramework {
         }
     }
 
-    /*
+    /**
      * Remove the created admin account ( $this->createAdminDetails() )
+     * @return bool
      */
     public function removeAdminDetails(){
         $user       =   $this->findAdminUser();
@@ -83,9 +88,9 @@ class SupportFramework {
 
     }
 
-    /*
-     * Find the admin user
-     * returns an object
+    /**
+     * Find our admin user
+     * @return mixed
      */
     public function findAdminUser(){
         return get_user_by(
@@ -94,8 +99,9 @@ class SupportFramework {
         );
     }
 
-    /*
-     * Get all support info packed in a nice array
+    /**
+     * Return all support info in one array
+     * @return array
      */
     private function getSupportInfo(){
         return array(
@@ -109,8 +115,9 @@ class SupportFramework {
         );
     }
 
-    /*
+    /**
      * Central function to return the error message to the user
+     * @return mixed
      */
     public function __getError(){
         return $this->error;
@@ -121,8 +128,9 @@ class SupportFramework {
     # - Private functions #
     #######################
 
-    /*
-     * Return WP Plugins with name, plugin url and version
+    /**
+     * Return all WP Plugins (Name, plugin url and version)
+     * @return array
      */
     private function getWPPlugins(){
         $plugins        =   array();
@@ -143,8 +151,9 @@ class SupportFramework {
         return $plugins;
     }
 
-    /*
-     * Return an array with all user info
+    /**
+     * Return an array with all logged in user info
+     * @return array
      */
     private function getUserInfo(){
         global $current_user;
@@ -159,8 +168,9 @@ class SupportFramework {
         );
     }
 
-    /*
-     * Return themes
+    /**
+     * Return the WP Themes
+     * @return array
      */
     private function getWPThemes(){
         $themes        =   array();
@@ -183,8 +193,9 @@ class SupportFramework {
         return $themes;
     }
 
-    /*
-     * Return the Server information
+    /**
+     * Return the server info
+     * @return array
      */
     private function getServerInfo(){
         return array(
@@ -199,8 +210,9 @@ class SupportFramework {
         );
     }
 
-    /*
+    /**
      * Get the phpmodules with all its version numbers
+     * @return array
      */
     private function getPHPModules(){
         $modules        =   array();
@@ -212,8 +224,9 @@ class SupportFramework {
         return $modules;
     }
 
-    /*
-     * Get all mysql info
+    /**
+     * Get all MySQL info of this database connection
+     * @return array
      */
     private function getMySQLinfo(){
         return array(
@@ -225,9 +238,13 @@ class SupportFramework {
         );
     }
 
-    /*
-     * Sent the question to the Yoast.com webserver
-     * or mail it on fail
+    /**
+     * Push data to Yoast.
+     *
+     * @param $url
+     * @param $data
+     * @param $mailfailTitle
+     * @return bool
      */
     private function pushData($url, $data, $mailfailTitle){
         $response = wp_remote_post( $url , array(
