@@ -40,7 +40,7 @@ if( ! class_exists( "Yoast_Plugin_Update_Manager", false ) ) {
 		* @param object $data
 		* @return object $data
 		*/
-		public function set_updates_available_data( $data ) {
+		public function set_updates_available_data( $data = array() ) {
 
 			if ( empty( $data ) ) {
 				return $data;

@@ -63,7 +63,7 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 
 			// only check if a transient is not set (or if it's expired)
 			if( get_transient( $this->product->get_slug() . '-update-check-error' ) !== false ) {
-				return;
+				return false;
 			}
 
 			// setup api parameters
@@ -91,7 +91,7 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 				add_action( 'admin_notices', array( $this, 'show_update_error' ) );
 
 				// set a transient to prevent checking for updates on every page load
-				set_transient( $this->product->get_slug() . '-update-check-error', true, 60 * 30 ); // 30 mins
+				set_transient( $this->product->get_slug() . '-update-check-error', 1, DAY_IN_SECONDS ); // 30 mins
 
 				return false;
 			}

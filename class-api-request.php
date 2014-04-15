@@ -112,7 +112,7 @@ if( ! class_exists( "Yoast_API_Request", false ) ) {
 			// check response code, should be 200
 			$response_code = wp_remote_retrieve_response_code( $response );
 
-			if( $response_code !== 200 ) {
+			if( false === strstr( $response_code, '200' ) ) {
 
 				$response_message = wp_remote_retrieve_response_message( $response );
 				$this->error_message = "{$response_code} {$response_message}";
