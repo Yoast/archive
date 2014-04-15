@@ -315,43 +315,23 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			// create api request url
 			$url = add_query_arg( $api_params, $this->product->get_api_url() );
 
-			// request parameters
-			$request_params = array( 
-				'timeout' => 20, 
-				'sslverify' => false, 
-				'headers' => array( 'Accept-Encoding' => '*' ) 
-			);
-
-			// fire request to shop
-			$response = wp_remote_get( $url, $request_params );
-
-			// make sure response came back okay
-			if( is_wp_error( $response ) ) {
-
-				// set notice, useful for debugging why remote requests are failing
-				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), $response->get_error_message(), '<a href="https://yoast.com/support/licenses/#license-activation-notices">', '</a>' ), false );
-
-				return false;
+			require_once dirname( __FILE__ ) . '/class-api-request.php';
+			$request = new Yoast_API_Request( $url );
+	
+			if( $request->is_valid() !== true ) {
+				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), $request->get_error_message(), '<a href="https://yoast.com/support/licenses/#license-activation-notices">', '</a>' ), false );
 			}
 
-			// check response code, should be 200
-			$response_code = wp_remote_retrieve_response_code( $response );
+			// get response
+			$response = $request->get_response();
 
-			if( $response_code !== 200 ) {
-
-				$response_message = wp_remote_retrieve_response_message( $response );
-				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), "{$response_code} {$response_message}", '<a href="https://yoast.com/support/licenses/#license-activation-notices">', '</a>' ), false );
-
-				return false;
-			}
-
-			// all is well... update the license status
-
-			// decode api response
-			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+			// update license status
+			$license_data = $response;
 
 			return $license_data;
 		}
+
+		
 
 		/**
 		* Set the license status
@@ -620,6 +600,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			}
 		}
 
+		
 	}
 
 }
