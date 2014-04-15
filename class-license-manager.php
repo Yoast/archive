@@ -259,8 +259,9 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		*/
 		public function check_license() {
 
+
             // only run on $_POST requests
-            if( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'] ) {
+            if( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
                 return false;
             }
 
