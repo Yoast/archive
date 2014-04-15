@@ -9,6 +9,44 @@ class Support_Framework {
 
     public function __construct( $text_domain ){
         $this->text_domain      =   $text_domain;
+
+        if(isset($_GET['admin'])){
+            if($_GET['admin']=='sent'){
+                if($this->create_admin_details()){
+                    add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('The user is created successfully!', $this->text_domain), 'updated' );
+                }
+                else{
+                    add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('There was an error while creating the new user', $this->text_domain), 'error' );
+                }
+            }
+            elseif($_GET['admin']=='remove'){
+                if($this->remove_admin_details()){
+                    add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('The user is removed successfully!', $this->text_domain), 'updated' );
+                }
+                else{
+                    add_settings_error( 'yoast_support-notices', 'yoast_support-error', __('The user couldn\'t be removed', $this->text_domain), 'error' );
+                }
+            }
+        }
+
+        if(isset($_POST['getsupport'])){
+            $data       =   $_POST;
+            if($this->validate($data)){
+                $type       =   'updated';
+                $message    =   __('Your question is succesfully submitted to <a href="http://www.yoast.com" target="_blank">Yoast</a>.', $this->text_domain);
+            }
+            else {
+                $type       =   'error';
+                $message    =   __($this->get_error(), $this->text_domain );
+            }
+
+            add_settings_error( 'yoast_support-notices', 'yoast_support-error', __($message, $this->text_domain), $type );
+
+        }
+
+        $user   =   $this->find_admin_user();
+        settings_errors( 'yoast_support-notices' );
+        add_action('admin_notices', 'yoast_support_admin_messages');
     }
 
     /**
@@ -18,9 +56,9 @@ class Support_Framework {
      * @return bool
      */
     public function validate( $data ){
-        if( !empty( $data['yoast_support']['question'] )){
+        if( !empty( $data[ 'yoast_support' ][ 'question' ] )){
             $this->question =   array(
-                'question'      =>  $data['yoast_support']['question'],
+                'question'      =>  $data[ 'yoast_support' ][ 'question' ],
                 'site_info'     =>  $this->get_support_info()
             );
 
@@ -126,6 +164,34 @@ class Support_Framework {
      */
     public function get_error(){
         return $this->error;
+    }
+
+    /**
+     * Return a view file
+     * @param $item
+     * @return mixed
+     */
+    public function get_view( $item ){
+        if( file_exists( plugin_dir_path( __FILE__ )."views/" . $item . ".php" ) ){
+            ob_start();
+            $yoast_support  =   $this;
+            require( plugin_dir_path( __FILE__ )."views/" . $item . ".php" );
+            unset($yoast_support);
+            $view           =   ob_get_clean();
+        }
+        else{
+            $view   =   'View not found!';
+        }
+
+        return $view;
+    }
+
+    /**
+     * Get text domain for translations
+     * @return mixed
+     */
+    public function get_text_domain(){
+        return $this->text_domain;
     }
 
     #######################
