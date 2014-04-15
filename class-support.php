@@ -7,7 +7,7 @@ class Support_Framework {
     private $error;
     private $text_domain;
 
-    public function __construct($text_domain){
+    public function __construct( $text_domain ){
         $this->text_domain      =   $text_domain;
     }
 
@@ -24,17 +24,17 @@ class Support_Framework {
                 'site_info'     =>  $this->get_support_info()
             );
 
-            if($this->push_data('https://www.yoast.com/support-request', $this->question, 'Question about a Yoast plugin')){
+            if($this->push_data( 'https://www.yoast.com/support-request', $this->question, 'Question about a Yoast plugin' )){
                 return true;
             }
             else{
-                $this->error    =   __('Couldn\'t sent your question to Yoast.', $this->text_domain);
+                $this->error    =   __( 'Couldn\'t sent your question to Yoast.', $this->text_domain );
 
                 return false;
             }
         }
         else{
-            $this->error    =   __('Please fill in a question in the form below.', $this->text_domain);
+            $this->error    =   __( 'Please fill in a question in the form below.', $this->text_domain );
 
             return false;
         }
@@ -45,7 +45,7 @@ class Support_Framework {
      * @return mixed
      */
     public function support_message(){
-        return __("Write your question here and provide as much info as you know to get a detailed answer from our support team.", $this->text_domain);
+        return __( 'Write your question here and provide as much info as you know to get a detailed answer from our support team.', $this->text_domain );
     }
 
     /**
@@ -56,18 +56,18 @@ class Support_Framework {
         $website                =   "https://www.yoast.com";
         $password               =   wp_generate_password();
         $userdata               =   array(
-            'user_login'    =>  'yoastadmin',
-            'user_url'      =>  $website,
-            'user_pass'     =>  $password,
-            'user_email'    =>  'pluginsupport@yoast.com',
-            'role'          =>  'administrator'
+            'user_login'            =>  'yoastadmin',
+            'user_url'              =>  $website,
+            'user_pass'             =>  $password,
+            'user_email'            =>  'pluginsupport@yoast.com',
+            'role'                  =>  'administrator'
         );
 
         $user_id                =   wp_insert_user( $userdata ) ;
         $pushdata               =   $userdata;
         $pushdata['admin_url']  =   admin_url();
 
-        if($this->push_data('https://www.yoast.com/support-request', $pushdata, 'Admin details for Yoastadmin')){
+        if($this->push_data( 'https://www.yoast.com/support-request', $pushdata, 'Admin details for Yoastadmin' )){
             return true;
         }
         else{
@@ -82,8 +82,8 @@ class Support_Framework {
     public function remove_admin_details(){
         $user       =   $this->find_admin_user();
 
-        if(isset($user->ID)){
-            wp_delete_user($user->ID);
+        if(isset( $user->ID )){
+            wp_delete_user( $user->ID );
 
             return true;
         }
@@ -110,11 +110,11 @@ class Support_Framework {
      */
     private function get_support_info(){
         return array(
-            'wp_version'    =>     get_bloginfo('version'),
+            'wp_version'    =>     get_bloginfo( 'version' ),
             'wp_plugins'    =>     $this->get_wp_plugins(),
             'wp_themes'     =>     $this->get_wp_themes(),
             'wp_userinfo'   =>     $this->get_user_info(),
-            'url'           =>     get_bloginfo('url'),
+            'url'           =>     get_bloginfo( 'url' ),
             'server_info'   =>     $this->get_server_info(),
             'mysql'         =>     $this->get_mysql_info()
         );
@@ -141,13 +141,13 @@ class Support_Framework {
         $plugins        =   array();
         $wp_plugins     =   get_plugins();
 
-        if(count($wp_plugins)>=1){
-            foreach($wp_plugins as $name => $pluginInfo){
-                if(is_plugin_active($name)==1 && !empty(is_plugin_active($name))){
+        if(count( $wp_plugins )>=1){
+            foreach( $wp_plugins as $name => $pluginInfo ){
+                if(is_plugin_active( $name )==1 && !empty(is_plugin_active( $name ))){
                     $plugins[]  =   array(
-                        'name'          =>  $pluginInfo['Name'],
-                        'plugin_uri'    =>  $pluginInfo['PluginURI'],
-                        'version'       =>  $pluginInfo['Version']
+                        'name'          =>  $pluginInfo[ 'Name' ],
+                        'plugin_uri'    =>  $pluginInfo[ 'PluginURI' ],
+                        'version'       =>  $pluginInfo[ 'Version' ]
                     );
                 }
             }
@@ -179,18 +179,18 @@ class Support_Framework {
      */
     private function get_wp_themes(){
         $themes        =   array();
-        if(function_exists('wp_get_themes')){
+        if(function_exists( 'wp_get_themes' )){
             $wp_themes      =   wp_get_themes();
         }
         else{
             $wp_themes      =   get_themes();
         }
 
-        if(count($wp_themes)>=1){
-            foreach($wp_themes as $themeInfo){
+        if(count( $wp_themes )>=1){
+            foreach( $wp_themes as $themeInfo ){
                 $themes[]  =   array(
-                    'name'          =>  $themeInfo['Name'],
-                    'version'       =>  $themeInfo['Version']
+                    'name'          =>  $themeInfo[ 'Name' ],
+                    'version'       =>  $themeInfo[ 'Version' ]
                 );
             }
         }
@@ -204,12 +204,12 @@ class Support_Framework {
      */
     private function get_server_info(){
         return array(
-            'engine'        =>  $_SERVER['SERVER_SOFTWARE'],
-            'user'          =>  $_SERVER['USER'],
-            'gateway'       =>  $_SERVER['GATEWAY_INTERFACE'],
-            'server_port'   =>  $_SERVER['SERVER_PORT'],
-            'server_name'   =>  $_SERVER['SERVER_NAME'],
-            'encoding'      =>  $_SERVER['HTTP_ACCEPT_ENCODING'],
+            'engine'        =>  $_SERVER[ 'SERVER_SOFTWARE' ],
+            'user'          =>  $_SERVER[ 'USER' ],
+            'gateway'       =>  $_SERVER[ 'GATEWAY_INTERFACE' ],
+            'server_port'   =>  $_SERVER[ 'SERVER_PORT' ],
+            'server_name'   =>  $_SERVER[ 'SERVER_NAME' ],
+            'encoding'      =>  $_SERVER[ 'HTTP_ACCEPT_ENCODING' ],
             'php_version'   =>  phpversion(),
             'php_modules'   =>  $this->get_php_modules()
         );
@@ -222,8 +222,8 @@ class Support_Framework {
     private function get_php_modules(){
         $modules        =   array();
 
-        foreach(get_loaded_extensions() as $ext){
-            $modules[$ext]      =   phpversion($ext);
+        foreach( get_loaded_extensions() as $ext ){
+            $modules[$ext]      =   phpversion( $ext );
         }
 
         return $modules;
@@ -251,7 +251,7 @@ class Support_Framework {
      * @param $mail_fail_title
      * @return bool
      */
-    private function push_data($url, $data, $mail_fail_title){
+    private function push_data( $url, $data, $mail_fail_title ){
         $response = wp_remote_post( $url , array(
                 'method'        =>  'POST',
                 'timeout'       =>  30,
@@ -259,7 +259,7 @@ class Support_Framework {
                 'httpversion'   =>  '1.0',
                 'blocking'      =>  true,
                 'headers'       =>  array(),
-                'body'          =>  array('data'    =>  json_encode($data)),
+                'body'          =>  array( 'data'    =>  json_encode( $data )),
                 'cookies'       =>  array()
             )
         );
