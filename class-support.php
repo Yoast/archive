@@ -5,9 +5,10 @@ class Support_Framework {
 
     private $question;
     private $error;
+    private $text_domain;
 
-    public function __construct(){
-
+    public function __construct($text_domain){
+        $this->text_domain      =   $text_domain;
     }
 
     /**
@@ -17,7 +18,7 @@ class Support_Framework {
      * @return bool
      */
     public function validate( $data ){
-        if( !empty($data['yoast_support']['question'])){
+        if( !empty( $data['yoast_support']['question'] )){
             $this->question =   array(
                 'question'      =>  $data['yoast_support']['question'],
                 'site_info'     =>  $this->get_support_info()
@@ -27,13 +28,13 @@ class Support_Framework {
                 return true;
             }
             else{
-                $this->error    =   __('Couldn\'t sent your question to Yoast.');
+                $this->error    =   __('Couldn\'t sent your question to Yoast.', $this->text_domain);
 
                 return false;
             }
         }
         else{
-            $this->error    =   __('Please fill in a question in the form below.');
+            $this->error    =   __('Please fill in a question in the form below.', $this->text_domain);
 
             return false;
         }
@@ -44,7 +45,7 @@ class Support_Framework {
      * @return mixed
      */
     public function support_message(){
-        return __("Write your question here and provide as much info as you know to get a detailed answer from our support team.");
+        return __("Write your question here and provide as much info as you know to get a detailed answer from our support team.", $this->text_domain);
     }
 
     /**
@@ -247,10 +248,10 @@ class Support_Framework {
      *
      * @param $url
      * @param $data
-     * @param $mailfailTitle
+     * @param $mail_fail_title
      * @return bool
      */
-    private function push_data($url, $data, $mailfailTitle){
+    private function push_data($url, $data, $mail_fail_title){
         $response = wp_remote_post( $url , array(
                 'method'        =>  'POST',
                 'timeout'       =>  30,
@@ -273,7 +274,7 @@ class Support_Framework {
             $headers[]      =   'From: ' . $user['first'] . ' ' . $user['last'] . ' <' . $user['email'] . '>';
             $message        =   $data;
 
-            if(wp_mail( 'pluginsupport@yoast.com', $mailfailTitle, $message, $headers )){
+            if(wp_mail( 'pluginsupport@yoast.com', $mail_fail_title, $message, $headers )){
                 return true;
             }
             else{

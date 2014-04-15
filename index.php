@@ -3,7 +3,7 @@
 <?php
 if(!class_exists('Support_Framework')){
     include("class-support.php");
-    $yoast_support      =   new Support_Framework();
+    $yoast_support      =   new Support_Framework('yoast-support');
 }
 
 if(isset($_GET['admin'])){
