@@ -425,7 +425,7 @@ class Yoast_Theme_Customizer {
 						'yst_logo',
 						array(
 								'label'       => __( 'Logo', 'yoast-theme' ),
-								'description' => __( 'Best size: 360px x 144px', 'yoast-theme' ),
+								'description' => __( 'Best size: 300px x 120px', 'yoast-theme' ),
 								'setting'     => 'yst_logo',
 								'section'     => 'yst_logos',
 								'context'     => 'yst_logo',
