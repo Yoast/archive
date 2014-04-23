@@ -58,6 +58,11 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		protected $prefix;
 
 		/**
+		 * @var bool Boolean indicating whether this plugin is network activated
+		 */
+		protected $is_network_activated = false;
+
+		/**
 		 * Constructor
 		 *
 		 * @param Yoast_Product $product
@@ -71,7 +76,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$this->prefix = sanitize_title_with_dashes( $this->product->get_item_name() . '_', null, 'save' );
 
 			// maybe set license key from constant
-			$this->maybe_set_license_key_from_constant();		
+			$this->maybe_set_license_key_from_constant();
 		}
 
 		/**
@@ -84,6 +89,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			// show admin notice if license is not active
 			add_action( 'admin_notices', array( $this, 'display_admin_notices' ) );
 
+			// catch POST requests from license form
 			add_action( 'admin_init', array( $this, 'catch_post_request') );
 
 			// perform a license check
@@ -239,7 +245,13 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
          */
         public function set_license_checked_remotely() {
             $transient_name = $this->prefix . 'license_checked';
-            set_transient( $transient_name, 1, ( WEEK_IN_SECONDS * 4 ) );
+
+	        if( $this->is_network_activated ) {
+		        set_site_transient( $transient_name, 1, ( WEEK_IN_SECONDS * 4 ) );
+	        } else {
+		        set_transient( $transient_name, 1, ( WEEK_IN_SECONDS * 4 ) );
+
+	        }
         }
 
         /**
@@ -249,7 +261,12 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
          */
         public function is_license_checked_remotely() {
             $transient_name = $this->prefix . 'license_checked';
-            return ( get_transient( $transient_name ) == 1 );
+
+	        if( $this->is_network_activated ) {
+		        return ( get_site_transient( $transient_name ) == 1 );
+	        } else {
+		        return ( get_transient( $transient_name ) == 1 );
+	        }
         }
 
 		/**
@@ -413,7 +430,11 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$option_name = $this->prefix . 'license';
 
 			// get array of options from db
-			$options = get_option( $option_name, array( ) );
+			if( $this->is_network_activated ) {
+				$options = get_site_option( $option_name, array( ) );
+			} else {
+				$options = get_option( $option_name, array( ) );
+			}
 
 			// setup array of defaults
 			$defaults = array(
@@ -438,7 +459,12 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$option_name = $this->prefix . 'license';
 
 			// update db
-			update_option( $option_name, $options );
+			if( $this->is_network_activated ) {
+				update_site_option( $option_name, $options );
+			} else {
+				update_option( $option_name, $options );
+			}
+
 		}
 
 		/**
@@ -467,6 +493,14 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 			// save options
 			$this->set_options( $options );
+		}
+
+		public function show_license_form_heading() {
+			?>
+			<h3>
+				<?php printf( __( "%s: License Settings", $this->product->get_text_domain() ), $this->product->get_item_name() ); ?>&nbsp; &nbsp;
+			</h3>
+			<?php
 		}
 
 		/**
