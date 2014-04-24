@@ -61,8 +61,10 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 		 */
 		protected function call_remote_api() {
 
+			$transient_name = $this->product->get_slug() . '-update-check-error';
+
 			// only check if a transient is not set (or if it's expired)
-			if( get_transient( $this->product->get_slug() . '-update-check-error' ) !== false ) {
+			if( get_transient( $transient_name ) !== false ) {
 				return false;
 			}
 
@@ -91,17 +93,26 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 				add_action( 'admin_notices', array( $this, 'show_update_error' ) );
 
 				// set a transient to prevent checking for updates on every page load
-				set_transient( $this->product->get_slug() . '-update-check-error', 1, DAY_IN_SECONDS ); // 30 mins
+				set_transient( $transient_name, 1, DAY_IN_SECONDS );
 
 				return false;
 			}
 
 			// decode response
 			$response = $request->get_response();
+
+			// check if response is an object (if we got JSON) and contains information about the request plugin or theme
+			if( false === is_object( $response ) || false === isset( $response->new_version ) ) {
+				set_transient( $transient_name, 1, DAY_IN_SECONDS );
+				return false;
+			}
+
 			$response->sections = maybe_unserialize( $response->sections );
 
 			return $response;
 		}
+
+
 
 	}
 	
