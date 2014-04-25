@@ -25,6 +25,16 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 		protected $update_response = null;
 
 		/**
+		 * @var string The transient name storing the API response
+		 */
+		private $response_transient_key = '';
+
+		/**
+		 * @var string The transient name that stores failed request tries
+		 */
+		private $request_failed_transient_key = '';
+
+		/**
 		 * Constructor
 		 *
 		 * @param string $api_url     The url to the EDD shop
@@ -38,22 +48,24 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 			$this->product = $product;
 			$this->license_manager = $license_manager;
 
-			// generate transient name
+			// generate transient names
 			$this->response_transient_key = $this->product->get_slug() . 'update-response';
+			$this->request_failed_transient_key = $this->product->get_slug() . '-update-request-failed';
 
 			// maybe delete transient
-			$this->maybe_delete_update_response_transient();
+			$this->maybe_delete_transients();
 		}
 
 		/**
-		 * Deletes the update response transient
+		 * Deletes the various transients
 		 * If we're on the update-core.php?force-check=1 page
 		 */
-		private function maybe_delete_update_response_transient() {
+		private function maybe_delete_transients() {
 			global $pagenow;
 
 			if( $pagenow === 'update-core.php' && isset( $_GET['force-check'] ) ) {
 				delete_transient( $this->response_transient_key );
+				delete_transient( $this->request_failed_transient_key );
 			}
 		}
 
@@ -84,11 +96,8 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 		 */
 		private function call_remote_api() {
 
-			// create transient name to store failed tries
-			$failed_transient_name = $this->product->get_slug() . '-update-checked';
-
 			// only check if the failed transient is not set (or if it's expired)
-			if( get_transient( $failed_transient_name ) !== false ) {
+			if( get_transient( $this->request_failed_transient_key ) !== false ) {
 				return false;
 			}
 
@@ -98,7 +107,8 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 				'license'    => $this->license_manager->get_license_key(),
 				'item_name'       => $this->product->get_item_name(),
 				'wp_version'       => get_bloginfo('version'),
-				'item_version'     => $this->product->get_version()
+				'item_version'     => $this->product->get_version(),
+				'url' => home_url()
 			);
 
 			// setup request parameters
@@ -117,7 +127,7 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 				add_action( 'admin_notices', array( $this, 'show_update_error' ) );
 
 				// set a transient to prevent failed update checks on every page load
-				set_transient( $failed_transient_name, 'failed', 10800 );
+				set_transient( $this->request_failed_transient_key, 'failed', 10800 );
 
 				return false;
 			}
@@ -126,10 +136,10 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 			$response = $request->get_response();
 
 			// check if response returned that a given site was inactive
-			if( isset( $response->license_check ) && $response->license_check === 'site_inactive' ) {
+			if( isset( $response->license_check ) && ! empty( $response->license_check ) && $response->license_check != 'valid' ) {
 
 				// deactivate local license
-				$this->license_manager->set_license_status( 'inactive' );
+				$this->license_manager->set_license_status( 'invalid' );
 
 				// show notice to let the user know we deactivated his/her license
 				$this->error_message = __( "This site has not been activated properly on yoast.com and thus cannot check for future updates. Please activate your site with a valid license key.", $this->product->get_text_domain() );
