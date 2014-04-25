@@ -12,7 +12,7 @@ if( ! class_exists( "Yoast_Theme_License_Manager", false ) ) {
 				// setup auto updater
 				require_once dirname( __FILE__ ) . '/class-update-manager.php';
 				require_once dirname( __FILE__ ) . '/class-theme-update-manager.php'; // @TODO: Autoload?
-				new Yoast_Theme_Update_Manager( $this->product, $this->get_license_key() );
+				new Yoast_Theme_Update_Manager( $this->product, $this );
 			}
 		}
 
