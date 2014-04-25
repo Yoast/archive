@@ -75,6 +75,7 @@ if( ! class_exists( "Yoast_API_Request", false ) ) {
 
 			// response should be an object
 			if( ! is_object( $this->response ) ) {
+				$this->error_message = 'No JSON object was returned.';
 				return false;
 			}
 
