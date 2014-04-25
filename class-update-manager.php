@@ -20,6 +20,11 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 		protected $error_message = '';
 
 		/**
+		 * @var object
+		 */
+		protected $update_response;
+
+		/**
 		 * Constructor
 		 *
 		 * @param string $api_url     The url to the EDD shop
@@ -59,9 +64,10 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 		 *
 		 * @return false||object
 		 */
-		protected function call_remote_api() {
+		private function call_remote_api() {
 
-			$transient_name = $this->product->get_slug() . '-update-check-error';
+			// create transient name
+			$transient_name = $this->product->get_slug() . '-update-checked';
 
 			// only check if a transient is not set (or if it's expired)
 			if( get_transient( $transient_name ) !== false ) {
@@ -73,8 +79,8 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 				'edd_action' => 'get_version',
 				'license'    => $this->license_key,
 				'name'       => $this->product->get_item_name(),
-				'slug'       => $this->product->get_slug(),
-				'author'     => $this->product->get_author()
+				'wp_version'       => get_bloginfo('version'),
+				'item_version'     => $this->product->get_version()
 			);
 
 			// setup request parameters
@@ -93,7 +99,7 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 				add_action( 'admin_notices', array( $this, 'show_update_error' ) );
 
 				// set a transient to prevent checking for updates on every page load
-				set_transient( $transient_name, 1, DAY_IN_SECONDS );
+				set_transient( $transient_name, 1, 10800 );
 
 				return false;
 			}
@@ -102,17 +108,54 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 			$response = $request->get_response();
 
 			// check if response is an object (if we got JSON) and contains information about the request plugin or theme
-			if( false === is_object( $response ) || false === isset( $response->new_version ) ) {
-				set_transient( $transient_name, 1, DAY_IN_SECONDS );
+			if( ! isset( $response->new_version ) ) {
+				set_transient( $transient_name, 1, 10800 );
 				return false;
 			}
 
 			$response->sections = maybe_unserialize( $response->sections );
 
+			// store response
+			set_transient( $this->product->get_slug() . 'update-response', $response, 10800 );
+
 			return $response;
 		}
 
+		/**
+		 * @return object
+		 */
+		protected function get_remote_data() {
 
+			// always use property if it's set
+			if( null !== $this->update_response ) {
+				return $this->update_response;
+			}
+
+			// get cached remote data
+			$data = $this->get_cached_remote_data();
+
+			// if cache is empty or expired, call remote api
+			if( $data === false ) {
+				$data = $this->call_remote_api();
+			}
+
+			$this->update_response = $data;
+			return $data;
+		}
+
+		/**
+		 * @return bool|mixed
+		 */
+		private function get_cached_remote_data() {
+
+			$data = get_transient( $this->product->get_slug() . 'update-response' );
+
+			if( $data ) {
+				return $data;
+			}
+
+			return false;
+		}
 
 	}
 	

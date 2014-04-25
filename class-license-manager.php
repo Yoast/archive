@@ -80,10 +80,9 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
-		* Setup hooks
+		 * Setup hooks
 		 *
-		 * @todo I'm not sure I want the setup_auto_updater() to be called from the setup_hooks method
-		*/
+		 */
 		public function setup_hooks() {
 
 			// show admin notice if license is not active
