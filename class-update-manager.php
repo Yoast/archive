@@ -96,7 +96,7 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 			$api_params = array(
 				'edd_action' => 'get_version',
 				'license'    => $this->license_manager->get_license_key(),
-				'name'       => $this->product->get_item_name(),
+				'item_name'       => $this->product->get_item_name(),
 				'wp_version'       => get_bloginfo('version'),
 				'item_version'     => $this->product->get_version()
 			);
