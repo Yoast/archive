@@ -91,9 +91,6 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			// catch POST requests from license form
 			add_action( 'admin_init', array( $this, 'catch_post_request') );
 
-			// perform a license check
-			add_action( 'admin_init', array( $this, 'check_license' ), 20 );
-
 			// setup item type (plugin|theme) specific hooks
 			$this->specific_hooks();
 
@@ -160,8 +157,6 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 			$result = $this->call_license_api( 'activate' );
 
-            // store transient to ensure we only check remotely once a week
-            $this->set_license_checked_remotely();
 
 			if( $result ) {
 
@@ -237,83 +232,6 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			}
 
 			return ( $this->get_license_status() === 'deactivated' );		
-		}
-
-        /**
-         * Set transient to ensure we only check a maximum of once every 4 weeks
-         */
-        public function set_license_checked_remotely() {
-            $transient_name = $this->prefix . 'license_checked';
-
-	        if( $this->is_network_activated ) {
-		        set_site_transient( $transient_name, 1, ( WEEK_IN_SECONDS * 4 ) );
-	        } else {
-		        set_transient( $transient_name, 1, ( WEEK_IN_SECONDS * 4 ) );
-
-	        }
-        }
-
-        /**
-         * Was the license remotely checked in the last 4 weeks?
-         *
-         * @return bool
-         */
-        public function is_license_checked_remotely() {
-            $transient_name = $this->prefix . 'license_checked';
-
-	        if( $this->is_network_activated ) {
-		        return ( get_site_transient( $transient_name ) == 1 );
-	        } else {
-		        return ( get_transient( $transient_name ) == 1 );
-	        }
-        }
-
-		/**
-		* Checks the license status remotely
-		*
-		* @return boolean True if the function ran with success, false otherwise.
-		*/
-		public function check_license() {
-
-
-            // only run on $_POST requests
-            if( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
-                return false;
-            }
-
-            // only check active licenses
-            if( $this->license_is_valid() === false ) {
-                return false;
-            }
-
-			// Only run once every 4 weeks
-			if( $this->is_license_checked_remotely() ) {
-                return false;
-            }
-
-			// call remote api
-			$result = $this->call_license_api( 'check' );
-
-			// did the request succeed?
-			if( $result != false && is_object( $result ) ) {
-
-                // story expiry date
-                if( isset( $result->expires ) ) {
-                    $this->set_license_expiry_date( $result->expires );
-                }
-
-                // check if license status is still correct
-                if( isset( $result->license ) && is_string( $result->license ) && $this->get_license_status() != trim( $result->license ) ) {
-                    $this->set_notice( sprintf( __( "Heads up! The license you're using for %s seems inactive on Yoast.com.", $this->product->get_text_domain() ), $this->product->get_item_name() ), false );
-                    $this->set_license_status( $result->license );
-                }
-
-			}
-
-            // store transient to ensure we only check remotely once a week
-            $this->set_license_checked_remotely();
-
-			return true;
 		}
 
 		/**
