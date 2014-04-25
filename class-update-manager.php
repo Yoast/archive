@@ -101,12 +101,14 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 				return false;
 			}
 
+			global $wp_version;
+
 			// setup api parameters
 			$api_params = array(
 				'edd_action' => 'get_version',
 				'license'    => $this->license_manager->get_license_key(),
 				'item_name'       => $this->product->get_item_name(),
-				'wp_version'       => get_bloginfo('version'),
+				'wp_version'       => $wp_version,
 				'item_version'     => $this->product->get_version(),
 				'url' => home_url()
 			);
