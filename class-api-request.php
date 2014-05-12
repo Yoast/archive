@@ -1,6 +1,6 @@
 <?php
 
-if( ! class_exists( 'Yoast_API_Request', false ) ) {
+if( ! class_exists( "Yoast_API_Request", false ) ) {
 
 	/**
 	* Handles requests to the Yoast EDD API
@@ -99,7 +99,7 @@ if( ! class_exists( 'Yoast_API_Request', false ) ) {
 
 			if( false === strstr( $response_code, '200' ) ) {
 
-				$response_message    = wp_remote_retrieve_response_message( $response );
+				$response_message = wp_remote_retrieve_response_message( $response );
 				$this->error_message = "{$response_code} {$response_message}";
 
 				return false;

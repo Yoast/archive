@@ -1,6 +1,6 @@
 <?php
 
-if( ! class_exists( 'Yoast_Product', false ) ) {
+if( ! class_exists( "Yoast_Product", false ) ) {
 
 	/**
 	 * Class Yoast_Product
@@ -49,21 +49,6 @@ if( ! class_exists( 'Yoast_Product', false ) ) {
 		 */
 		protected $author;
 
-		/**
-		 * @var Yoast_Product_Messages
-		 */
-		protected $messages;
-
-		/**
-		 * @param        $api_url
-		 * @param        $item_name
-		 * @param        $slug
-		 * @param        $version
-		 * @param string $item_url
-		 * @param string $license_page_url
-		 * @param string $text_domain
-		 * @param string $author
-		 */
 		public function __construct( $api_url, $item_name, $slug, $version, $item_url = '', $license_page_url = '#', $text_domain = 'yoast', $author = 'Yoast' ) {
 			$this->api_url          = $api_url;
 			$this->item_name        = $item_name;
@@ -89,10 +74,6 @@ if( ! class_exists( 'Yoast_Product', false ) ) {
 					$this->license_page_url = network_admin_url( $license_page_url );
 				}
 			}
-
-			$this->messages = array(
-
-			);
 		}
 
 

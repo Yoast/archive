@@ -2,21 +2,21 @@
 
 //set_site_transient( 'update_plugins', null );
 
-if ( ! class_exists( 'Yoast_Plugin_Update_Manage', false ) ) {
+if( ! class_exists( "Yoast_Plugin_Update_Manager", false ) ) {
 
 	class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
 
 		/**
-		 * Constructor
-		 *
-		 * @param string $api_url
-		 * @param string $item_name
-		 * @param string $license_key
-		 * @param string $slug   The path to the main plugin file, relative to plugins dir
-		 * @param string $version
-		 * @param string $author (optional)
-		 * @param string $text_domain
-		 */
+		* Constructor
+		*
+		* @param string $api_url
+		* @param string $item_name
+		* @param string $license_key
+		* @param string $slug The path to the main plugin file, relative to plugins dir
+		* @param string $version
+		* @param string $author (optional)
+		* @param string $text_domain 
+		*/
 		public function __construct( Yoast_Product $product, $license_key ) {
 			parent::__construct( $product, $license_key );
 
@@ -26,24 +26,23 @@ if ( ! class_exists( 'Yoast_Plugin_Update_Manage', false ) ) {
 		}
 
 		/**
-		 * Setup hooks
-		 */
+		* Setup hooks
+		*/
 		private function setup_hooks() {
 
 			// check for updates
 			add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'set_updates_available_data' ) );
-
+			
 			// get correct plugin information (when viewing details)
 			add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );
 		}
 
 		/**
-		 * Check for updates and if so, add to "updates available" data
-		 *
-		 * @param object $data
-		 *
-		 * @return object $data
-		 */
+		* Check for updates and if so, add to "updates available" data
+		*
+		* @param object $data
+		* @return object $data
+		*/
 		public function set_updates_available_data( $data ) {
 
 			if ( empty( $data ) ) {
@@ -54,7 +53,7 @@ if ( ! class_exists( 'Yoast_Plugin_Update_Manage', false ) ) {
 			$remote_data = $this->get_remote_data();
 
 			// did we get a response?
-			if ( $remote_data === false ) {
+			if( $remote_data === false ) {
 				return $data;
 			}
 
@@ -88,10 +87,10 @@ if ( ! class_exists( 'Yoast_Plugin_Update_Manage', false ) ) {
 			}
 
 			$api_response = $this->get_remote_data();
-
+			
 			// did we get a response?
 			if ( $api_response === false ) {
-				return $data;
+				return $data;	
 			}
 
 			// return api response
