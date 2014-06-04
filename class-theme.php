@@ -362,7 +362,9 @@ abstract class Yoast_Theme implements iYoast_Theme {
 	 * @return string
 	 */
 	public function read_more_link() {
-		return apply_filters( 'yoast_read_more', '&hellip; <div class="excerpt_readmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>' );
+		if ( ! is_singular() ) {
+			return apply_filters( 'yoast_read_more', '&hellip; <div class="excerpt_readmore"><a href="' . get_permalink() . '">' . __( 'Read more', 'yoast-theme' ) . '</a></div>' );
+		}
 	}
 
 	/**
