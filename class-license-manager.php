@@ -107,6 +107,10 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		*/
 		public function display_admin_notices() {
 
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+			
 			// show notice if license is invalid
 			if( ! $this->license_is_valid() ) {
 				if( $this->get_license_key() == '' ) {
