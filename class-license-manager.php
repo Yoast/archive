@@ -110,7 +110,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
 			}
-			
+
 			// show notice if license is invalid
 			if( ! $this->license_is_valid() ) {
 				if( $this->get_license_key() == '' ) {
@@ -254,7 +254,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				'edd_action' => $action . '_license',
 				'license'    => $this->get_license_key(),
 				'item_name'  => urlencode( trim( $this->product->get_item_name() ) ),
-				'url' => home_url()
+				'url'        => get_option( 'home' )                                    // grab the URL straight from the option to prevent filters from breaking it.
 			);
 
 			// create api request url
