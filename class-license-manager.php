@@ -179,7 +179,7 @@ if( ! class_exists( 'Yoast_License_Manager', false ) ) {
 					}
 				
 					// add upgrade notice if user has less than 3 activations left
-					if( true || $result->license_limit > 0 && ( $result->license_limit - $result->site_count ) <= 3 ) {
+					if( $result->license_limit > 0 && ( $result->license_limit - $result->site_count ) <= 3 ) {
 						$message .= sprintf( __( '<a href="%s">Did you know you can upgrade your license?</a>', $this->product->get_text_domain() ), $this->product->get_tracking_url( 'license-nearing-limit-notice' ) );
 					// add extend notice if license is expiring in less than 1 month
 					} elseif( $expiry_date !== false && $expiry_date < strtotime( "+1 month" ) ) {
