@@ -45,7 +45,7 @@ class Yoast_Theme_License {
 		);
 
 		// Do the request
-		$response = wp_remote_get( add_query_arg( $api_params, 'https://yoast.com' ), array( 'timeout' => 15, 'sslverify' => false ) );
+		$response = wp_remote_get( add_query_arg( $api_params, 'https://yoast.com/' ), array( 'timeout' => 15, 'sslverify' => false ) );
 
 		// Check the response for errors
 		if ( is_wp_error( $response ) ) {
