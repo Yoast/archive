@@ -18,7 +18,7 @@ Just paste the URL of a presentation on its own line in a post, hit Publish / Up
 = Embed with shortcode =
 Once installed, simply go to any SlideShare presentation, click on Share and copy / paste the WordPress embed code.
 
-> <strong>Development on GitHub</strong><br/>
+> <strong>Development on GitHub</strong><br>
 > Development for the SlideShare plugin happens in [this GitHub repository](https://github.com/Yoast/slideshare), bug reports and pull requests are welcome there.
 
 More info:
