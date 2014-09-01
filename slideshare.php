@@ -57,10 +57,6 @@ if ( ! class_exists( 'Yoast_SlideShare_Admin' ) && is_admin() && ( ! defined( 'D
 			}
 			?>
 			<div class="wrap">
-				<a href="http://yoast.com/">
-					<div id="yoast-icon" class="icon32"><br /></div>
-				</a>
-
 				<h2><?php _e( "SlideShare Configuration", 'slideshare' ); ?></h2>
 
 				<div class="postbox-container" style="width:70%;">
