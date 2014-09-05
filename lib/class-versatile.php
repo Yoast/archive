@@ -253,7 +253,7 @@ class Yoast_Versatile extends Yoast_Theme {
 
 		$mobile_logo = get_theme_mod( 'yst_mobile_logo' );
 		if ( isset ( $mobile_logo ) && ! empty ( $mobile_logo ) ) {
-			$css .= '@media(max-width: 640px){header.site-header {background-color:#fff; background-image: url(' . $mobile_logo . '); background-repeat: no-repeat;	}}';
+			$css .= '@media(max-width: 640px){header.site-header {background-color:#fff; background-image: url(' . $mobile_logo . '); background-repeat: no-repeat;	background-position: 50% 8px; }}';
 		}
 
 		if ( ! empty( $css ) ) {
