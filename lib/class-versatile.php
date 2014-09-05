@@ -35,6 +35,7 @@ class Yoast_Versatile extends Yoast_Theme {
 
 		// Add support for 3-column footer widgets
 		add_theme_support( 'genesis-footer-widgets', 3 );
+		add_theme_support( 'genesis-connect-woocommerce' );
 
 		// Disable site layouts that are not used
 		genesis_unregister_layout( 'content-sidebar-sidebar' );
