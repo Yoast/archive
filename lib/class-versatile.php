@@ -301,7 +301,7 @@ class Yoast_Versatile extends Yoast_Theme {
 	public function archive_image() {
 		global $post;
 
-		if ( ! is_front_page() ) {
+		if ( ! ( is_front_page() || is_category() || ( is_archive() && ( 'on' == get_theme_mod('yst_content_archive_thumbnail') ) ) ) ) {
 			return;
 		}
 
