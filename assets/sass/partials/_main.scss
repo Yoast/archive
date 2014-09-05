@@ -707,13 +707,20 @@ textarea {
     }
   }
   input[type="submit"] {
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+		margin-top: -33px;
+		margin-right: 5px;
+		font-size: 0px;
+		line-height: 14px;
+		float: right;
+		background-color: white;
+		&:hover {
+			background: {
+				color: $c_inputBg;
+				image: image-url('search.png');
+				position: 95% 50%;
+				repeat: no-repeat;
+			}
+		}
   }
 }
 
