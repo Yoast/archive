@@ -1204,81 +1204,70 @@ textarea {
  */
 
 // body.sticky,
-body.sticky-menu {
-  padding-top: 120px;
-  .after-header-content-wrapper {
-    max-width: $d_full;
-  }
-  .site-container {
-    background: {
-      color: $c_mainBg;
-    }
-  }
-  .nav-primary {
-    position: absolute;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    max-width: 100%;
-    z-index: 500;
-    height: 64px;
-    padding: 0;
-    border: none;
-    margin: 0px;
-    background: {
-      color: $c_navMainBg;
-    }
-    @include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
-    @include box-shadow(0px 1px 5px $c_navMainLinkShadow);
-    .wrap {
-      width: 100%;
-      max-width: $d_full;
-      margin: 0 auto;
-    }
-    li {
-      a {
-        color: $c_navMainLink;
-        &:hover {
-          color:$c_navMainLinkHover;
-          text-shadow: 1px 1px 1px $c_navMainLinkShadow;
-        }
-      }
-      li {
-        a {
-          color: $c_navSubLink;
-        }
-      }
-      &.current-menu-item,
-      &.current-menu-parent,
-      &.current-page-ancestor {
-        background: {
-          color: $c_navMainBgActive;
-        }
-        a {
-          color: $c_navMainTextActive;
-          text-shadow: 1px 1px 1px $c_navMainLinkShadow;
-        }
-      }
-      &.menu-item-search {
-        display:inline;
-        visibility: visible;
-        z-index: 700;
-        float:right;
-        width:250px;
-        input {
-          width: 250px;
-          margin: {
-            top: 5px;
-          }
-        }
-      }
-      &:first-child {
-        border: {
-          left: 1px solid $c_navMainBorder;
-        }
-      }
-    }
-  }
+.sticky-nav {
+	position: absolute;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	max-width: 100%;
+	z-index: 500;
+	height: 64px;
+	padding: 0;
+	border: none;
+	margin: 0px;
+	background: {
+		color: $c_navMainBg;
+	}
+	@include background-image(linear-gradient(lighten($c_navMainBg,10%), darken($c_navMainBg,20%)));
+	@include box-shadow(0px 1px 5px $c_navMainLinkShadow);
+	.wrap {
+		width: 100%;
+		max-width: $d_full;
+		margin: 0 auto;
+	}
+	li {
+		a {
+			color: $c_navMainLink;
+			&:hover {
+				color:$c_navMainLinkHover;
+				text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+			}
+		}
+		li {
+			a {
+				color: $c_navSubLink;
+			}
+		}
+		&.current-menu-item,
+		&.current-menu-parent,
+		&.current-page-ancestor {
+			background: {
+				color: $c_navMainBgActive;
+			}
+			a {
+				color: $c_navMainTextActive;
+				text-shadow: 1px 1px 1px $c_navMainLinkShadow;
+			}
+		}
+		&.menu-item-search {
+			display:inline;
+			visibility: visible;
+			z-index: 700;
+			float:right;
+			width:250px;
+			input {
+				width: 250px;
+				margin: {
+					top: 5px;
+				}
+			}
+		}
+		&:first-child {
+			border: {
+				left: 1px solid $c_navMainBorder;
+			}
+		}
+	}
 }
 
 /**
@@ -3921,10 +3910,11 @@ body.menu-at-top {
 }
 
 @media (max-width:768px) {
-  body.sticky-menu {
-    .nav-primary {
-      height: 40px;
-    }
+  .sticky-nav {
+		height: 40px;
+		li:first-child {
+			border-left: 0px;
+		}
   }
   .genesis-nav-menu {
     a {
@@ -4195,7 +4185,7 @@ body.menu-at-top {
       }
     }
   }
-  body.sticky-menu {
+  .sticky-nav {
     .tagline_top {
       display:none;
       visibility: hidden;
@@ -4335,7 +4325,7 @@ body.admin-bar { // why does WordPress have two heights for that!?
     }
   }
 }
-body.sticky-menu.admin-bar { // why does WordPress have two heights for that!?
+.sticky-nav.admin-bar { // why does WordPress have two heights for that!?
   .site-header,
   .nav-primary {
     top:32px;
