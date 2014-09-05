@@ -446,7 +446,7 @@ class Yoast_Theme_Customizer {
 				)
 		);
 
-		// This control goes into the default Site Title & Tagline section
+		// This control goes into the Navigation section
 		$wp_customize->add_control(
 				'yst_nav_positioner',
 				array(
