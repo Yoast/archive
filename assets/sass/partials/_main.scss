@@ -2292,10 +2292,16 @@ table {
 }
 #respond {
   #reply-title {
-    color: $c_commentReplyTitle;
-    font: {
-      weight: 700;
-    }
+		color: $c_entryCommentsH3;
+		font: {
+			family: $f_extraFont;
+			size: $f_commentHeader-px;
+			size: $f_commentHeader;
+			weight: 700;
+		}
+		margin: {
+			bottom: 10px;
+		}
   }
   .comment-form-comment {
     label {
