@@ -6,8 +6,10 @@ class Yoast_Support_Framework {
 
 	private $question;
 	private $error;
-	private $text_domain;
 
+	/**
+	 * Construct the Support framework for Yoast plugins
+	 */
 	public function __construct() {
 		if ( isset( $_GET['admin'] ) ) {
 			if ( $_GET['admin'] == 'sent' ) {
@@ -48,7 +50,7 @@ class Yoast_Support_Framework {
 	 * Validate the post data and start pushing on success
 	 * Returns true on success, false on fai
 	 *
-	 * @param $data
+	 * @param array $data
 	 *
 	 * @return bool
 	 */
@@ -76,7 +78,7 @@ class Yoast_Support_Framework {
 	/**
 	 * Return the i18n support message that is default in the support message field
 	 *
-	 * @return mixed
+	 * @return string
 	 */
 	public function support_message() {
 		return __( 'Write your question here and provide as much info as you know to get a detailed answer from our support team.', 'yoast-support-framework' );
@@ -168,7 +170,7 @@ class Yoast_Support_Framework {
 	/**
 	 * Central function to return the error message to the user
 	 *
-	 * @return mixed
+	 * @return string
 	 */
 	public function get_error() {
 		return $this->error;
@@ -177,7 +179,7 @@ class Yoast_Support_Framework {
 	/**
 	 * Return a view file
 	 *
-	 * @param $item
+	 * @param string $item
 	 *
 	 * @return mixed
 	 */
@@ -286,7 +288,8 @@ class Yoast_Support_Framework {
 	}
 
 	/**
-	 * Get the phpmodules with all its version numbers
+	 * Get the PHP modules with all its version numbers
+	 *
 	 * @return array
 	 */
 	private function get_php_modules() {
@@ -317,9 +320,9 @@ class Yoast_Support_Framework {
 	/**
 	 * Push data to Yoast
 	 *
-	 * @param $url
-	 * @param $data
-	 * @param $mail_fail_title
+	 * @param string $url
+	 * @param array  $data
+	 * @param string $mail_fail_title
 	 *
 	 * @return bool
 	 */
@@ -338,7 +341,7 @@ class Yoast_Support_Framework {
 
 		if ( is_wp_error( $response ) ) {
 			$error_message = $response->get_error_message();
-			$this->error   = sprintf( __('Something went wrong: %s'), $error_message);
+			$this->error   = sprintf( __( 'Something went wrong: %s' ), $error_message );
 
 			// Need to mail it because the https post fails
 			$user = $this->question['wp_userinfo'];
