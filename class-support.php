@@ -89,9 +89,9 @@ class Yoast_Support_Framework {
 	 */
 	public function create_admin_details() {
 		$website  = "https://yoast.com";
-		$password = wp_generate_password();
+		$password = wp_generate_password( 12, true, true );
 		$userdata = array(
-			'user_login' => 'yoastadmin',
+			'user_login' => $this->generate_username(),
 			'user_url'   => $website,
 			'user_pass'  => $password,
 			'user_email' => 'pluginsupport@yoast.com',
@@ -107,6 +107,15 @@ class Yoast_Support_Framework {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Generate a new Yoast admin username
+	 *
+	 * @return string
+	 */
+	private function generate_username() {
+		return 'yoast_' . strtolower( wp_generate_password( 10, false, false ) );
 	}
 
 	/**
