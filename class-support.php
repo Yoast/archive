@@ -189,7 +189,7 @@ class Yoast_Support_Framework {
 			unset( $yoast_support );
 			$view = ob_get_clean();
 		} else {
-			$view = 'View not found!';
+			$view = __( 'View not found!', 'yoast-support-framework' );
 		}
 
 		return $view;
