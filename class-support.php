@@ -347,7 +347,7 @@ class Yoast_Support_Framework {
 
 		if ( is_wp_error( $response ) ) {
 			$error_message = $response->get_error_message();
-			$this->error   = 'Something went wrong: ' . $error_message;
+			$this->error   = sprintf( __('Something went wrong: %s'), $error_message);
 
 			// Need to mail it because the https post fails
 			$user = $this->question['wp_userinfo'];
