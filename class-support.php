@@ -20,7 +20,7 @@ class Yoast_Support_Framework {
 				if ( $this->remove_admin_details() ) {
 					add_settings_error( 'yoast_support-notices', 'yoast_support-error', __( 'The user is removed successfully!', 'yoast-support-framework' ), 'updated' );
 				} else {
-					add_settings_error( 'yoast_support-notices', 'yoast_support-error', __( 'The user couldn\'t be removed', 'yoast-support-framework' ), 'error' );
+					add_settings_error( 'yoast_support-notices', 'yoast_support-error', __( 'The user couldn&#8217;t be removed', 'yoast-support-framework' ), 'error' );
 				}
 			}
 		}
@@ -29,7 +29,7 @@ class Yoast_Support_Framework {
 			$data = $_POST;
 			if ( $this->validate( $data ) ) {
 				$type    = 'updated';
-				$message = __( 'Your question is succesfully submitted to <a href="https://yoast.com" target="_blank">Yoast</a>.', 'yoast-support-framework' );
+				$message = sprintf( __( 'Your question is successfully submitted to %s.', 'yoast-support-framework' ), '<a href="https://yoast.com" target="_blank">Yoast</a>' );
 			} else {
 				$type    = 'error';
 				$message = __( $this->get_error(), 'yoast-support-framework' );
@@ -62,7 +62,7 @@ class Yoast_Support_Framework {
 			if ( $this->push_data( 'https://yoast.com/support-request', $this->question, 'Question about a Yoast plugin' ) ) {
 				return true;
 			} else {
-				$this->error = __( 'Couldn\'t sent your question to Yoast.', 'yoast-support-framework' );
+				$this->error = __( 'Couldn&#8217;t sent your question to Yoast.', 'yoast-support-framework' );
 
 				return false;
 			}
@@ -75,6 +75,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Return the i18n support message that is default in the support message field
+	 *
 	 * @return mixed
 	 */
 	public function support_message() {
@@ -83,6 +84,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Create an admin account and push the data
+	 *
 	 * @return bool
 	 */
 	public function create_admin_details() {
@@ -100,7 +102,7 @@ class Yoast_Support_Framework {
 		$pushdata              = $userdata;
 		$pushdata['admin_url'] = admin_url();
 
-		if ( $this->push_data( 'https://yoast.com/support-request', $pushdata, 'Admin details for Yoastadmin' ) ) {
+		if ( $this->push_data( 'https://yoast.com/support-request', $pushdata, 'Admin details for Yoast admin' ) ) {
 			return true;
 		} else {
 			return false;
@@ -109,6 +111,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Remove the created admin account ( $this->createAdminDetails() )
+	 *
 	 * @return bool
 	 */
 	public function remove_admin_details() {
@@ -126,6 +129,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Find our admin user
+	 *
 	 * @return mixed
 	 */
 	public function find_admin_user() {
@@ -137,6 +141,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Return all support info in one array
+	 *
 	 * @return array
 	 */
 	private function get_support_info() {
@@ -153,6 +158,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Central function to return the error message to the user
+	 *
 	 * @return mixed
 	 */
 	public function get_error() {
@@ -182,6 +188,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Get text domain for translations
+	 *
 	 * @return mixed
 	 */
 	public function get_text_domain() {
@@ -195,6 +202,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Return all WP Plugins (Name, plugin url and version)
+	 *
 	 * @return array
 	 */
 	private function get_wp_plugins() {
@@ -218,6 +226,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Return an array with all logged in user info
+	 *
 	 * @return array
 	 */
 	private function get_user_info() {
@@ -235,6 +244,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Return the WP Themes
+	 *
 	 * @return array
 	 */
 	private function get_wp_themes() {
@@ -259,6 +269,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Return the server info
+	 *
 	 * @return array
 	 */
 	private function get_server_info() {
@@ -290,6 +301,7 @@ class Yoast_Support_Framework {
 
 	/**
 	 * Get all MySQL info of this database connection
+	 *
 	 * @return array
 	 */
 	private function get_mysql_info() {
@@ -303,7 +315,7 @@ class Yoast_Support_Framework {
 	}
 
 	/**
-	 * Push data to Yoast.
+	 * Push data to Yoast
 	 *
 	 * @param $url
 	 * @param $data
