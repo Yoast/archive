@@ -29,7 +29,7 @@ class Yoast_Support_Framework {
 			$data = $_POST;
 			if ( $this->validate( $data ) ) {
 				$type    = 'updated';
-				$message = __( 'Your question is succesfully submitted to <a href="http://www.yoast.com" target="_blank">Yoast</a>.', 'yoast-support-framework' );
+				$message = __( 'Your question is succesfully submitted to <a href="https://yoast.com" target="_blank">Yoast</a>.', 'yoast-support-framework' );
 			} else {
 				$type    = 'error';
 				$message = __( $this->get_error(), 'yoast-support-framework' );
@@ -59,7 +59,7 @@ class Yoast_Support_Framework {
 				'site_info' => $this->get_support_info()
 			);
 
-			if ( $this->push_data( 'https://www.yoast.com/support-request', $this->question, 'Question about a Yoast plugin' ) ) {
+			if ( $this->push_data( 'https://yoast.com/support-request', $this->question, 'Question about a Yoast plugin' ) ) {
 				return true;
 			} else {
 				$this->error = __( 'Couldn\'t sent your question to Yoast.', 'yoast-support-framework' );
@@ -86,7 +86,7 @@ class Yoast_Support_Framework {
 	 * @return bool
 	 */
 	public function create_admin_details() {
-		$website  = "https://www.yoast.com";
+		$website  = "https://yoast.com";
 		$password = wp_generate_password();
 		$userdata = array(
 			'user_login' => 'yoastadmin',
@@ -100,7 +100,7 @@ class Yoast_Support_Framework {
 		$pushdata              = $userdata;
 		$pushdata['admin_url'] = admin_url();
 
-		if ( $this->push_data( 'https://www.yoast.com/support-request', $pushdata, 'Admin details for Yoastadmin' ) ) {
+		if ( $this->push_data( 'https://yoast.com/support-request', $pushdata, 'Admin details for Yoastadmin' ) ) {
 			return true;
 		} else {
 			return false;
