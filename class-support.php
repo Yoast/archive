@@ -35,7 +35,7 @@ class Yoast_Support_Framework {
 				$message = $this->get_error(); // Get the translated error
 			}
 
-			add_settings_error( 'yoast_support-notices', 'yoast_support-error', __( $message, 'yoast-support-framework' ), $type );
+			add_settings_error( 'yoast_support-notices', 'yoast_support-error', $message, $type );
 
 		}
 
