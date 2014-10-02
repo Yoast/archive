@@ -25,7 +25,7 @@ class Yoast_Support_Framework {
 			}
 		}
 
-		if ( isset( $_POST['getsupport'] ) ) {
+		if ( isset( $_POST['getsupport'] ) && false != wp_verify_nonce( $_REQUEST['_wpnonce'], 'yoast-support-request' ) ) {
 			$data = $_POST;
 			if ( $this->validate( $data ) ) {
 				$type    = 'updated';

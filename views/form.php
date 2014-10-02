@@ -1,4 +1,7 @@
 <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" accept-charset="UTF-8">
+	<?php
+	echo wp_nonce_field( 'yoast-support-request' );
+	?>
     <table class="form-table">
         <tr>
             <th scope="row"><label for="yoast-support-question"><?php echo __('Your question', 'yoast-support-framework'); ?>:</label><br/><small>(<?php echo __('Please provide all information', 'yoast-support-framework'); ?></small></th>
