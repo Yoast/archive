@@ -250,14 +250,10 @@ class Yoast_Support_Framework {
 	 * @return array
 	 */
 	private function get_wp_themes() {
-		$themes = array();
-		if ( function_exists( 'wp_get_themes' ) ) {
-			$wp_themes = wp_get_themes();
-		} else {
-			$wp_themes = get_themes();
-		}
+		$themes    = array();
+		$wp_themes = wp_get_themes();
 
-		if ( count( $wp_themes ) >= 1 ) {
+		if ( is_array( $wp_themes ) && count( $wp_themes ) >= 1 ) {
 			foreach ( $wp_themes as $themeInfo ) {
 				$themes[] = array(
 					'name'    => $themeInfo['Name'],
