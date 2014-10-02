@@ -195,15 +195,6 @@ class Yoast_Support_Framework {
 		return $view;
 	}
 
-	/**
-	 * Get text domain for translations
-	 *
-	 * @return mixed
-	 */
-	public function get_text_domain() {
-		return 'yoast-support-framework';
-	}
-
 	#######################
 	# Collect all data    #
 	# - Private functions #
