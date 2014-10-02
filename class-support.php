@@ -2,7 +2,7 @@
 
 /* Build the Yoast BV main support class */
 
-class Support_Framework {
+class Yoast_Support_Framework {
 
 	private $question;
 	private $error;
