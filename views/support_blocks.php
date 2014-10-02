@@ -1,3 +1,3 @@
 <h2 id="wpseo-title"><?php echo __('Yoast Support', 'yoast-support-framework'); ?></h2>
 
-<p><?php printf( __('You need help? We are there for you. Before you ask us, check our %s. Please fill in this field and we will answer your question soon.', 'yoast-support-framework'), '<a href="https://yoast.com/support/" target="_blank">Support page</a>' ); ?></p>
+<p><?php printf( __('You need help? We are there for you. Before you ask us, check our %s. Please fill in this field and we will answer your question soon.', 'yoast-support-framework'), '<a href="https://yoast.com/support/" target="_blank">' . __('Support page', 'yoast-support-framework') . '</a>' ); ?></p>
