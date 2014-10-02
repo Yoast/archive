@@ -32,7 +32,7 @@ class Yoast_Support_Framework {
 				$message = sprintf( __( 'Your question is successfully submitted to %s.', 'yoast-support-framework' ), '<a href="https://yoast.com" target="_blank">Yoast</a>' );
 			} else {
 				$type    = 'error';
-				$message = __( $this->get_error(), 'yoast-support-framework' );
+				$message = $this->get_error(); // Get the translated error
 			}
 
 			add_settings_error( 'yoast_support-notices', 'yoast_support-error', __( $message, 'yoast-support-framework' ), $type );
