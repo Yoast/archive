@@ -32,10 +32,10 @@ class Yoast_Support_Framework {
 				$message = sprintf( __( 'Your question is successfully submitted to %s.', 'yoast-support-framework' ), '<a href="https://yoast.com" target="_blank">Yoast</a>' );
 			} else {
 				$type    = 'error';
-				$message = __( $this->get_error(), 'yoast-support-framework' );
+				$message = $this->get_error(); // Get the translated error
 			}
 
-			add_settings_error( 'yoast_support-notices', 'yoast_support-error', __( $message, 'yoast-support-framework' ), $type );
+			add_settings_error( 'yoast_support-notices', 'yoast_support-error', $message, $type );
 
 		}
 
@@ -189,19 +189,10 @@ class Yoast_Support_Framework {
 			unset( $yoast_support );
 			$view = ob_get_clean();
 		} else {
-			$view = 'View not found!';
+			$view = __( 'View not found!', 'yoast-support-framework' );
 		}
 
 		return $view;
-	}
-
-	/**
-	 * Get text domain for translations
-	 *
-	 * @return mixed
-	 */
-	public function get_text_domain() {
-		return 'yoast-support-framework';
 	}
 
 	#######################
@@ -347,7 +338,7 @@ class Yoast_Support_Framework {
 
 		if ( is_wp_error( $response ) ) {
 			$error_message = $response->get_error_message();
-			$this->error   = 'Something went wrong: ' . $error_message;
+			$this->error   = sprintf( __('Something went wrong: %s'), $error_message);
 
 			// Need to mail it because the https post fails
 			$user = $this->question['wp_userinfo'];
