@@ -4,10 +4,24 @@
 
 class Yoast_Support_Framework {
 
+	/**
+	 * @var    string    The customer's question or bug report
+	 */
 	private $question;
-	private $error;
-	private $text_domain;
 
+	/**
+	 * @var        string    If we have an error on validation, it is stored here
+	 */
+	private $error;
+
+	/**
+	 * @var    object    Instance of this class
+	 */
+	public static $instance;
+
+	/**
+	 * Construct the Support framework class
+	 */
 	public function __construct() {
 		if ( isset( $_GET['admin'] ) ) {
 			if ( $_GET['admin'] == 'sent' ) {
@@ -45,6 +59,40 @@ class Yoast_Support_Framework {
 	}
 
 	/**
+	 * Get the singleton instance of this class
+	 *
+	 * @return object
+	 */
+	public static function get_instance() {
+		if ( ! ( self::$instance instanceof self ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Hook on a menu to add the support class as an item
+	 *
+	 * @param array $submenu_pages
+	 *
+	 * @return array
+	 */
+	public function hook_menu( $submenu_pages = array() ) {
+		$submenu_pages[] = array(
+			'wpseo_dashboard',
+			'',
+			'<span style="color:#f18500">' . __( 'Support', 'wordpress-seo' ) . '</span>',
+			$manage_options_cap,
+			'wpseo_support',
+			array( $this, 'load_page' ),
+			null,
+		);
+
+		return $submenu_pages;
+	}
+
+	/**
 	 * Validate the post data and start pushing on success
 	 * Returns true on success, false on fai
 	 *
@@ -58,6 +106,10 @@ class Yoast_Support_Framework {
 				'question'  => $data['yoast_support']['question'],
 				'site_info' => $this->get_support_info()
 			);
+
+			if ( isset( $data['yoast_support']['plugin'] ) ) {
+				$this->question['plugin'] = $data['yoast_support']['question'];
+			}
 
 			if ( $this->push_data( 'https://yoast.com/support-request', $this->question, 'Question about a Yoast plugin' ) ) {
 				return true;
@@ -177,13 +229,18 @@ class Yoast_Support_Framework {
 	/**
 	 * Return a view file
 	 *
-	 * @param $item
+	 * @param string $item
 	 *
 	 * @return mixed
 	 */
 	public function get_view( $item ) {
 		if ( file_exists( plugin_dir_path( __FILE__ ) . "views/" . $item . ".php" ) ) {
 			ob_start();
+
+			if ( $item == 'form' ) {
+				$yoast_plugins = $this->get_wp_yoast_plugins();
+			}
+
 			$yoast_support = $this;
 			require( plugin_dir_path( __FILE__ ) . "views/" . $item . ".php" );
 			unset( $yoast_support );
@@ -196,12 +253,31 @@ class Yoast_Support_Framework {
 	}
 
 	/**
-	 * Get text domain for translations
+	 * Get the Yoast plugins which are active on this WordPress site
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	public function get_text_domain() {
-		return 'yoast-support-framework';
+	public function get_wp_yoast_plugins() {
+		$plugins       = $this->get_wp_plugins();
+		$yoast_plugins = array(
+			'WordPress SEO',
+			'Local SEO',
+			'Video SEO',
+			'WooCommerce SEO',
+			'Google Analytics by Yoast',
+			'eCommerce Tracking',
+		);
+
+		foreach ( $plugins as $key => $plugin ) {
+			if ( ! in_array( $plugin['name'], $yoast_plugins ) ) {
+				unset( $plugins[$key] );
+			} else {
+				$plugin['id']  = strtolower( str_replace( ' ', '-', $plugin['name'] ) );
+				$plugins[$key] = $plugin;
+			}
+		}
+
+		return $plugins;
 	}
 
 	#######################
