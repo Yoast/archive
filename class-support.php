@@ -1,5 +1,4 @@
 <?php
-
 /* Build the Yoast BV main support class */
 
 class Yoast_Support_Framework {
@@ -56,6 +55,7 @@ class Yoast_Support_Framework {
 		$user = $this->find_admin_user();
 		settings_errors( 'yoast_support-notices' );
 		add_action( 'admin_notices', 'yoast_support_admin_messages' );
+		add_action( 'admin_init', array( $this, 'init_yoast_support' ) );
 	}
 
 	/**
@@ -69,6 +69,13 @@ class Yoast_Support_Framework {
 		}
 
 		return self::$instance;
+	}
+
+	/**
+	 * Initiate the Yoast Support framework
+	 */
+	public function init_yoast_support() {
+		add_action( 'admin_menu', array( $this, 'hook_menu' ) );
 	}
 
 	/**
