@@ -1,4 +1,5 @@
 <?php
+
 /* Build the Yoast BV main support class */
 
 class Yoast_Support_Framework {
@@ -19,7 +20,7 @@ class Yoast_Support_Framework {
 	public static $instance;
 
 	/**
-	 * Construct the Support framework class
+	 * Construct the Support framework for Yoast plugins
 	 */
 	public function __construct() {
 		if ( isset( $_GET['admin'] ) ) {
@@ -45,10 +46,10 @@ class Yoast_Support_Framework {
 				$message = sprintf( __( 'Your question is successfully submitted to %s.', 'yoast-support-framework' ), '<a href="https://yoast.com" target="_blank">Yoast</a>' );
 			} else {
 				$type    = 'error';
-				$message = __( $this->get_error(), 'yoast-support-framework' );
+				$message = $this->get_error(); // Get the translated error
 			}
 
-			add_settings_error( 'yoast_support-notices', 'yoast_support-error', __( $message, 'yoast-support-framework' ), $type );
+			add_settings_error( 'yoast_support-notices', 'yoast_support-error', $message, $type );
 
 		}
 
@@ -103,7 +104,7 @@ class Yoast_Support_Framework {
 	 * Validate the post data and start pushing on success
 	 * Returns true on success, false on fai
 	 *
-	 * @param $data
+	 * @param array $data
 	 *
 	 * @return bool
 	 */
@@ -135,7 +136,7 @@ class Yoast_Support_Framework {
 	/**
 	 * Return the i18n support message that is default in the support message field
 	 *
-	 * @return mixed
+	 * @return string
 	 */
 	public function support_message() {
 		return __( 'Write your question here and provide as much info as you know to get a detailed answer from our support team.', 'yoast-support-framework' );
@@ -227,7 +228,7 @@ class Yoast_Support_Framework {
 	/**
 	 * Central function to return the error message to the user
 	 *
-	 * @return mixed
+	 * @return string
 	 */
 	public function get_error() {
 		return $this->error;
@@ -253,7 +254,7 @@ class Yoast_Support_Framework {
 			unset( $yoast_support );
 			$view = ob_get_clean();
 		} else {
-			$view = 'View not found!';
+			$view = __( 'View not found!', 'yoast-support-framework' );
 		}
 
 		return $view;
@@ -340,14 +341,10 @@ class Yoast_Support_Framework {
 	 * @return array
 	 */
 	private function get_wp_themes() {
-		$themes = array();
-		if ( function_exists( 'wp_get_themes' ) ) {
-			$wp_themes = wp_get_themes();
-		} else {
-			$wp_themes = get_themes();
-		}
+		$themes    = array();
+		$wp_themes = wp_get_themes();
 
-		if ( count( $wp_themes ) >= 1 ) {
+		if ( is_array( $wp_themes ) && count( $wp_themes ) >= 1 ) {
 			foreach ( $wp_themes as $themeInfo ) {
 				$themes[] = array(
 					'name'    => $themeInfo['Name'],
@@ -378,7 +375,8 @@ class Yoast_Support_Framework {
 	}
 
 	/**
-	 * Get the phpmodules with all its version numbers
+	 * Get the PHP modules with all its version numbers
+	 *
 	 * @return array
 	 */
 	private function get_php_modules() {
@@ -409,9 +407,9 @@ class Yoast_Support_Framework {
 	/**
 	 * Push data to Yoast
 	 *
-	 * @param $url
-	 * @param $data
-	 * @param $mail_fail_title
+	 * @param string $url
+	 * @param array  $data
+	 * @param string $mail_fail_title
 	 *
 	 * @return bool
 	 */
@@ -430,7 +428,7 @@ class Yoast_Support_Framework {
 
 		if ( is_wp_error( $response ) ) {
 			$error_message = $response->get_error_message();
-			$this->error   = 'Something went wrong: ' . $error_message;
+			$this->error   = sprintf( __( 'Something went wrong: %s' ), $error_message );
 
 			// Need to mail it because the https post fails
 			$user = $this->question['wp_userinfo'];
