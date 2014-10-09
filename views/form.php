@@ -1,4 +1,4 @@
-<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" accept-charset="UTF-8">
+<form action="" method="post" accept-charset="UTF-8">
 	<?php
 	echo wp_nonce_field( 'yoast-support-request' );
 	?>
