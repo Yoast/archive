@@ -120,7 +120,7 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 			$submenu_pages[] = array(
 				'wpseo_dashboard',
 				'',
-				'<span style="color:#f18500">' . __( 'Support', 'wordpress-seo' ) . '</span>',
+				'<span style="color:#f18500">' . __( 'Support', 'yoast-support-framework' ) . '</span>',
 				$manage_options_cap,
 				'wpseo_support',
 				array( $this, 'load_page' ),
