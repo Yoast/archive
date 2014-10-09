@@ -201,21 +201,25 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 		 * @return bool
 		 */
 		private function create_admin_details() {
-			$password = wp_generate_password( 12, true, true );
-			$userdata = array(
-				'user_login' => $this->generate_username(),
-				'user_url'   => self::$company_url,
-				'user_pass'  => $password,
-				'user_email' => self::$company_support_email,
-				'role'       => 'administrator'
-			);
+			if ( current_user_can( 'add_users' ) ) {
+				$password = wp_generate_password( 12, true, true );
+				$userdata = array(
+					'user_login' => $this->generate_username(),
+					'user_url'   => self::$company_url,
+					'user_pass'  => $password,
+					'user_email' => self::$company_support_email,
+					'role'       => 'administrator'
+				);
 
-			$user_id               = wp_insert_user( $userdata );
-			$pushdata              = $userdata;
-			$pushdata['admin_url'] = admin_url();
+				$user_id               = wp_insert_user( $userdata );
+				$pushdata              = $userdata;
+				$pushdata['admin_url'] = admin_url();
 
-			if ( $this->push_data( self::$company_support_push_url, $pushdata, sprintf( __( 'Admin details for %s admin', 'yoast-support-framework' ), self::$company_name ) ) ) {
-				return true;
+				if ( $this->push_data( self::$company_support_push_url, $pushdata, sprintf( __( 'Admin details for %s admin', 'yoast-support-framework' ), self::$company_name ) ) ) {
+					return true;
+				} else {
+					return false;
+				}
 			} else {
 				return false;
 			}
