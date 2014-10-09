@@ -16,6 +16,11 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 		private $error;
 
 		/**
+		 * @var        array    Store the registered plugins here, other plugins can register itself
+		 */
+		public $registered_plugins;
+
+		/**
 		 * @var    object    Instance of this class
 		 */
 		public static $instance;
@@ -53,6 +58,8 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 			self::$company_url              = $company_url;
 			self::$company_support_email    = $company_support_email;
 			self::$company_support_push_url = $company_support_push_url;
+
+			$this->registered_plugins = array();
 
 			if ( isset( $_GET['admin'] ) ) {
 				if ( $_GET['admin'] == 'sent' ) {
@@ -107,6 +114,22 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 		 */
 		public function init_yoast_support() {
 			add_action( 'admin_menu', array( $this, 'hook_menu' ) );
+			add_filter( 'support_framework_plugins', array( $this, 'support_plugins_filter' ), 1 );
+		}
+
+		/**
+		 * Register a new plugin through this WP filter (Filter name: support_framework_plugins)
+		 *
+		 * @param $plugins
+		 *
+		 * @return mixed
+		 */
+		public function support_plugins_filter( $plugins ) {
+			$plugins = array_merge( $plugins, $this->registered_plugins );
+
+			$this->registered_plugins = $plugins;
+
+			return $plugins;
 		}
 
 		/**
@@ -177,7 +200,7 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 		 *
 		 * @return bool
 		 */
-		public function create_admin_details() {
+		private function create_admin_details() {
 			$password = wp_generate_password( 12, true, true );
 			$userdata = array(
 				'user_login' => $this->generate_username(),
@@ -212,7 +235,7 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 		 *
 		 * @return bool
 		 */
-		public function remove_admin_details() {
+		private function remove_admin_details() {
 			$user = $this->find_admin_user();
 
 			if ( isset( $user->ID ) ) {
