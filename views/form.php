@@ -3,7 +3,7 @@
 	echo wp_nonce_field( 'yoast-support-request' );
 	?>
 	<table class="form-table">
-		<?php if (isset( $yoast_plugins ) && count( $yoast_plugins ) >= 1): ?>
+		<?php if (isset( $filtered_plugins ) && count( $filtered_plugins ) >= 1): ?>
 		<tr>
 			<th>
 				<label for="yoast-support-plugin"><?php echo _e( 'I have question about', 'yoast-support-framework' ); ?>:</label>
@@ -11,7 +11,7 @@
 			<td>
 				<select name="yoast_support[plugin]" id="yoast-support-plugin">
 					<option value="--">-- <?php _e( 'Please select an item', 'yoast-support-framework' ); ?> --</option>
-					<?php foreach( $yoast_plugins as $plugin ): ?>
+					<?php foreach( $filtered_plugins as $plugin ): ?>
 						<option value="<?php echo $plugin['id']; ?>"><?php echo $plugin['name']; ?></option>
 					<?php endforeach; ?>
 				</select>
