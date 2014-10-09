@@ -23,27 +23,37 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 		/**
 		 * @var    string    Company name for the Support class
 		 */
-		private static $company_name = 'Yoast';
+		private static $company_name;
 
 		/**
 		 * @var    string    Company url for the Support class
 		 */
-		private static $company_url = 'https://yoast.com';
+		private static $company_url;
 
 		/**
 		 * @var    string    Company email address for sending the support questions
 		 */
-		private static $company_support_email = 'pluginsupport@yoast.com';
+		private static $company_support_email;
 
 		/**
 		 * @var    string    Company URL to push data to, eg. the support question with the WP envoirement data
 		 */
-		private static $company_support_push_url = 'https://yoast.com/support-request';
+		private static $company_support_push_url;
 
 		/**
-		 * Construct the Support framework for Yoast plugins
+		 * Create the Support framework
+		 *
+		 * @param string $company_name
+		 * @param string $company_url
+		 * @param string $company_support_email
+		 * @param string $company_support_push_url
 		 */
-		public function __construct() {
+		public function __construct( $company_name, $company_url, $company_support_email, $company_support_push_url ) {
+			self::$company_name             = $company_name;
+			self::$company_url              = $company_url;
+			self::$company_support_email    = $company_support_email;
+			self::$company_support_push_url = $company_support_push_url;
+
 			if ( isset( $_GET['admin'] ) ) {
 				if ( $_GET['admin'] == 'sent' ) {
 					if ( $this->create_admin_details() ) {
@@ -71,7 +81,6 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 				}
 
 				add_settings_error( 'yoast_support-notices', 'yoast_support-error', $message, $type );
-
 			}
 
 			$user = $this->find_admin_user();
@@ -182,7 +191,7 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 			$pushdata              = $userdata;
 			$pushdata['admin_url'] = admin_url();
 
-			if ( $this->push_data( self::$company_support_push_url, $pushdata, sprintf( __( 'Admin details for %s admin', 'yoast-support-framework' ), self::$company_name) ) ) {
+			if ( $this->push_data( self::$company_support_push_url, $pushdata, sprintf( __( 'Admin details for %s admin', 'yoast-support-framework' ), self::$company_name ) ) ) {
 				return true;
 			} else {
 				return false;
