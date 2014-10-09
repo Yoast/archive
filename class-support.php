@@ -298,7 +298,7 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 				ob_start();
 
 				if ( $item == 'form' ) {
-					$yoast_plugins = $this->get_wp_yoast_plugins();
+					$filtered_plugins = (array) $this->registered_plugins;
 				}
 
 				$yoast_support = $this;
@@ -310,34 +310,6 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 			}
 
 			return $view;
-		}
-
-		/**
-		 * Get the Yoast plugins which are active on this WordPress site
-		 *
-		 * @return array
-		 */
-		public function get_wp_yoast_plugins() {
-			$plugins       = $this->get_wp_plugins();
-			$yoast_plugins = array(
-				'WordPress SEO',
-				'Local SEO',
-				'Video SEO',
-				'WooCommerce SEO',
-				'Google Analytics by Yoast',
-				'eCommerce Tracking',
-			);
-
-			foreach ( $plugins as $key => $plugin ) {
-				if ( ! in_array( $plugin['name'], $yoast_plugins ) ) {
-					unset( $plugins[$key] );
-				} else {
-					$plugin['id']  = strtolower( str_replace( ' ', '-', $plugin['name'] ) );
-					$plugins[$key] = $plugin;
-				}
-			}
-
-			return $plugins;
 		}
 
 		#######################
