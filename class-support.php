@@ -115,6 +115,7 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 		public function init_yoast_support() {
 			add_action( 'admin_menu', array( $this, 'hook_menu' ) );
 			add_filter( 'support_framework_plugins', array( $this, 'support_plugins_filter' ), 1 );
+			add_filter( 'support_framework_menu', array( $this, 'hook_menu' ), 3 );
 		}
 
 		/**
@@ -135,17 +136,19 @@ if ( ! class_exists( 'Yoast_Support_Framework' ) ) {
 		/**
 		 * Hook on a menu to add the support class as an item
 		 *
-		 * @param array $submenu_pages
+		 * @param array  $submenu_pages
+		 * @param string $parent
+		 * @param string $page
 		 *
 		 * @return array
 		 */
-		public function hook_menu( $submenu_pages = array() ) {
+		public function hook_menu( $submenu_pages, $parent, $page ) {
 			$submenu_pages[] = array(
-				'wpseo_dashboard',
+				$parent,
 				'',
 				'<span style="color:#f18500">' . __( 'Support', 'yoast-support-framework' ) . '</span>',
 				$manage_options_cap,
-				'wpseo_support',
+				$page,
 				array( $this, 'load_page' ),
 				null,
 			);
