@@ -1,5 +1,6 @@
 input   = document.getElementById 'upload_file';
 preview = document.getElementById 'image_preview';
+steps = 0
 
 changed = () ->
 	Files      = input.files
@@ -20,23 +21,16 @@ parse_file = (File) ->
 
 		preview.appendChild canvas
 
-	#preview.innerHTML = '<canvas id="image"></canvas>';
-
-		#canvas = preview.getElementById 'image'
 		canvas.src = create_canvas e.target.result, canvas ;
 
-
-#		image = '<img id="image" src="' + e.target.result + '" alt="" />';
-
-
-		return 1;
+		return 1
 
 create_canvas = (image_string, canvas) ->
 
 	context    = canvas.getContext '2d'
 
-	base_image = new Image();
-	base_image.src = image_string;
+	base_image = new Image()
+	base_image.src = image_string
 
 	width = base_image.width
 	height = base_image.height
@@ -45,20 +39,44 @@ create_canvas = (image_string, canvas) ->
 
 	base_image.onload = ->
 		context.drawImage base_image, 0 , 0, width, height
+		canvas.addEventListener 'click', () -> rotate base_image , true
 
-
-		return 1;
-
-
-	return 1;
 
 set_canvas_dimensions = (canvas, width, height) ->
 	canvas.width = width
 	canvas.height = height
 
-rotate = (Degree) ->
+
+rotate = (base_image, degree = 90) ->
+
+	canvas  = document.getElementById 'image'
+	context = canvas.getContext '2d'
+
+	cx = 0
+	cy = 0
+	if steps is 0
+		cw = base_image.height
+		ch = base_image.width
+		cy = cw * (-1)
+
+		steps = 1
+	else if steps is 1
+		cx = base_image.width * (-1)
+		cy = base_image.height * (-1)
+		degree = 180
+		steps = 2
+	else if steps is 2
+		cw = base_image.height
+		ch = base_image.width
+		cx = base_image.width * (-1)
+		degree = 270
+		steps = 0
 
 
+	canvas.setAttribute 'width', cw
+	canvas.setAttribute 'height', ch
+	context.rotate (90 * Math.PI) / 180
+	context.drawImage base_image, cx, cy, cw, ch
 
 
 input.addEventListener 'change', changed, true
