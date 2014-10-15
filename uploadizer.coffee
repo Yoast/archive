@@ -1,21 +1,26 @@
-class Animal
-	constructor: (@name) ->
+input   = document.getElementById 'upload_file';
+preview = document.getElementById 'image_preview';
 
-	move: (meters) ->
-		alert @name + " moved #{meters}m."
+changed = () ->
+	Files      = input.files
 
-class Snake extends Animal
-	move: ->
-		alert "Slithering..."
-		super 5
+	for File in Files
+		load_file File
 
-class Horse extends Animal
-	move: ->
-		alert "Galloping..."
-		super 45
+load_file = (File) ->
+	reader = new FileReader();
+	reader.onload = parse_file File
+	reader.readAsDataURL File;
 
-sam = new Snake "Sammy the Python"
-tom = new Horse "Tommy the Palomino"
+parse_file = (File) ->
+	(e) ->
+		image = '<img id="image" src="' + e.target.result + '" alt="" />';
+		preview.innerHTML = image;
+		return 1;
 
-sam.move()
-tom.move()
+rotate = (Degree) ->
+
+
+
+
+input.addEventListener 'change', changed, true
