@@ -3,6 +3,7 @@
 <head lang="en">
 	<meta charset="UTF-8">
 	<title>Image Uploadizer</title>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
 <p>This is the Image Uploadizer.</p>

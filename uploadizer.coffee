@@ -1,82 +1,107 @@
-input   = document.getElementById 'upload_file';
-preview = document.getElementById 'image_preview';
-steps = 0
+class Uploadizer
 
-changed = () ->
-	Files      = input.files
+	steps   : 1
+	context : null
+	canvas  : null
 
-	for File in Files
-		load_file File
+	constructor: () ->
+		@input   = document.getElementById 'upload_file';
+		@preview = jQuery '#image_preview';
 
-load_file = (File) ->
-	reader = new FileReader();
-	reader.onload = parse_file File
-	reader.readAsDataURL File;
+		jQuery(@input).change (event) => @onchange event
 
-parse_file = (File) ->
-	(e) ->
-		preview.innerHTML = ''
-		canvas = document.createElement 'canvas'
-		canvas.id = 'image'
+	onchange: (event) =>
+		@load_files event
 
-		preview.appendChild canvas
+	load_files: () =>
+		Files = event.target.files
+		for File in Files
+			@load_file File
 
-		canvas.src = create_canvas e.target.result, canvas ;
+	load_file : ( File ) =>
+		reader = new FileReader();
+		reader.onload = ( File ) => @parse_file File
+		reader.readAsDataURL File;
+
+	parse_file : ( event ) =>
+		@canvas = jQuery '<canvas/>', { id : 'image' }
+		@preview.html ''
+			. append @canvas
+
+		@canvas.src = @create_canvas event.target.result ;
 
 		return 1
 
-create_canvas = (image_string, canvas) ->
+	create_canvas : (image_string) =>
+		@context       = @canvas[0].getContext '2d'
 
-	context    = canvas.getContext '2d'
+		base_image     = new Image()
+		base_image.src = image_string
 
-	base_image = new Image()
-	base_image.src = image_string
+		width  = base_image.width
+		height = base_image.height
 
-	width = base_image.width
-	height = base_image.height
+		@set_canvas_dimensions(width, height)
 
-	set_canvas_dimensions(canvas, width, height)
+		base_image.onload = =>
+			@context.drawImage base_image, 0 , 0, width, height
+			@canvas.click (event) => @rotate base_image
+			return 1
 
-	base_image.onload = ->
-		context.drawImage base_image, 0 , 0, width, height
-		canvas.addEventListener 'click', () -> rotate base_image , true
+	set_canvas_dimensions: (width, height) ->
+		@canvas.attr 'width',  width
+		@canvas.attr 'height', height
 
+	rotate : (base_image) =>
+		cx = 0
+		cy = 0
+		cw = @canvas.attr('width')
+		ch = @canvas.attr('height')
 
-set_canvas_dimensions = (canvas, width, height) ->
-	canvas.width = width
-	canvas.height = height
+		# Rotates the canvas
+		@set_canvas_dimensions(ch, cw);
 
-
-rotate = (base_image, degree = 90) ->
-
-	canvas  = document.getElementById 'image'
-	context = canvas.getContext '2d'
-
-	cx = 0
-	cy = 0
-	if steps is 0
-		cw = base_image.height
-		ch = base_image.width
-		cy = cw * (-1)
-
-		steps = 1
-	else if steps is 1
-		cx = base_image.width * (-1)
-		cy = base_image.height * (-1)
-		degree = 180
-		steps = 2
-	else if steps is 2
-		cw = base_image.height
-		ch = base_image.width
-		cx = base_image.width * (-1)
-		degree = 270
-		steps = 0
+		new_width  = ch;
+		new_height = cw;
 
 
-	canvas.setAttribute 'width', cw
-	canvas.setAttribute 'height', ch
-	context.rotate (90 * Math.PI) / 180
-	context.drawImage base_image, cx, cy, cw, ch
+
+		cw = new_width;
+		ch = new_height
+
+		console.log new_width
+
+		if @steps is 1 || @steps is 3
+			cw = new_height
+			ch = new_width
 
 
-input.addEventListener 'change', changed, true
+		if @steps is 1
+			cy     = ch * (-1)
+			degree = 90
+		else if @steps is 2
+			cx = cw * (-1)
+			cy = cw * (-1)
+			degree = 180
+		else if @steps is 3
+			cx = ch * (-1)
+			degree = 270
+		else if @steps is 4
+			degree = 0
+			@steps = 0
+
+		@steps = @steps + 1;
+
+#		console.log 'degree ' + degree
+		console.log 'stappen ' + @steps
+		console.log 'breedte ' + cw
+		console.log 'hoogte ' + ch
+
+		@context.clearRect 0,0, cw, ch;
+		@context.save()
+		@context.rotate (degree * Math.PI) / 180
+		@context.drawImage base_image, cx, cy, cw, ch
+		@context.restore()
+
+
+test = new Uploadizer;
