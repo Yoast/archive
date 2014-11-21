@@ -1,15 +1,16 @@
 <?php
 /*
 Plugin Name: Comment Redirect by Yoast
-Version: 1.1.1
-Plugin URI: http://yoast.com/wordpress/comment-redirect/
+Version: 1.1.2
+Plugin URI: https://yoast.com/wordpress/plugins/comment-redirect/
 Description: Redirect commenters who just made their first comment to a page of your choice. On this page, you could ask them to subscribe, like you on Facebook and lots more!
-Author: Joost de Valk
-Author URI: http://yoast.com/
+Author: Team Yoast
+Author URI: https://yoast.com/
+Textdomain: comment-redirect
 License: GPL v3
 
 Comment Redirect plugin: Redirect first time commenters
-Copyright (C) 2008-2013, Joost de Valk - joost@yoast.com
+Copyright (C) 2008-2014, Joost de Valk - support@yoast.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -28,8 +29,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Yoast Comment Redirect plugin. Redirects first time commenters to a special page.
  * @package Yoast_Comment_Redirect
- * @author Joost de Valk <joost@yoast.com>
- * @copyright Copyright (C) 2008-2013, Joost de Valk
+ * @author Joost de Valk
+ * @copyright Copyright (C) 2008-2014, Yoast BV
  */
 
 /**

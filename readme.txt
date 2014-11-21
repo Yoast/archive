@@ -3,8 +3,8 @@ Contributors: joostdevalk
 Donate link: http://yoast.com/donate/
 Tags: comments, subscribe, subscriptions, community
 Requires at least: 3.0
-Tested up to: 3.6
-stable tag: 1.1.1
+Tested up to: 4.0
+stable tag: 1.1.2
 
 Redirect commenters who just made their first comment to a page of your choice. Allows you to ask them to subscribe, like you on Facebook, etc.
 
@@ -18,21 +18,25 @@ If you want to translate this plugin, the POT file is included, please send the 
 
 More info:
 
-* [Comment Redirect plugin](http://yoast.com/wordpress/comment-redirect/).
-* Read more about [WordPress SEO](http://yoast.com/wordpress-seo/) so you can get the most out of this plugin.
-* Check out the other [Wordpress plugins](http://yoast.com/wordpress/) by the same author.
+* [Comment Redirect plugin](https://yoast.com/wordpress/plugins/comment-redirect/).
+* Read more about [WordPress SEO](https://yoast.com/articles/wordpress-seo/) so you can get the most out of this plugin.
+* Check out the other [WordPress plugins](https://yoast.com/wordpress/plugins/) by the same author.
 
-== Screenshot ==
+== Screenshots ==
 
 1. Screenshot of the admin panel: only one setting!
 2. Example thank you page from Yoast.com.
 
 == Changelog ==
 
-= trunk =
+= 1.1.2 =
 
+* Updated tested up to.
+* Moved screenshots to assets directory.
+* Updated links in readme.txt
+* Fixed Screenshots tab.
 * i18n
-	* Added hu_HU
+	* Added hu_HU and fi translations.
 
 = 1.1.1 =
 
