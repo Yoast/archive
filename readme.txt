@@ -4,7 +4,7 @@ Donate link: http://yoast.com/donate/
 Tags: comments, subscribe, subscriptions, community
 Requires at least: 3.0
 Tested up to: 4.0
-stable tag: 1.1.2
+stable tag: 1.1.3
 
 Redirect commenters who just made their first comment to a page of your choice. Allows you to ask them to subscribe, like you on Facebook, etc.
 
@@ -28,6 +28,12 @@ More info:
 2. Example thank you page from Yoast.com.
 
 == Changelog ==
+
+= 1.1.3 =
+
+Pure translation release:
+	* Added translations for Arabic, Greek, Polish and Turkish.
+	* Updated translations for Swedish, Russian, Portugese (Portugal), Portugese (Brazil), Dutch, Italian, Indonesian, Hungarian, Hebrew, French, Finnish, Farsi, Spanish, German, Danish, Bosnian and Bulgarian.
 
 = 1.1.2 =
 

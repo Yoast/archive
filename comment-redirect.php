@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: Comment Redirect by Yoast
-Version: 1.1.2
+Version: 1.1.3
 Plugin URI: https://yoast.com/wordpress/plugins/comment-redirect/
 Description: Redirect commenters who just made their first comment to a page of your choice. On this page, you could ask them to subscribe, like you on Facebook and lots more!
 Author: Team Yoast
 Author URI: https://yoast.com/
-Textdomain: comment-redirect
+Text Domain: comment-redirect
 License: GPL v3
 
 Comment Redirect plugin: Redirect first time commenters
