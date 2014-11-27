@@ -1,8 +1,6 @@
 [submodule "lib/widgets"]
 	path = lib/widgets
-	url=https://github.com/Yoast/yoast-widgets.git
-
-
+	url = https://github.com/Yoast/yoast-widgets.git
 [submodule "lib/framework"]
 	path = lib/framework
 	url = https://github.com/Yoast/theme-framework.git
