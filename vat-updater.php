@@ -33,8 +33,8 @@ function yst_edd_vat_rate_check_activate() {
 	$timestamp = wp_next_scheduled( 'yst_edd_vat_rate_check' );
 
 	if ( ! $timestamp ) {
-		// If there's no scheduled task, schedule one an hour from now and make it a daily task
-		wp_schedule_event( time() + HOUR_IN_SECONDS, 'daily', 'yst_edd_vat_rate_check' );
+		// If there's no scheduled task, schedule one for tonight at 1 minute past twelve
+		wp_schedule_event( strtotime( 'tomorrow 00:01' ), 'daily', 'yst_edd_vat_rate_check' );
 	}
 }
 register_activation_hook( __FILE__, 'yst_edd_vat_rate_check_activate' );
@@ -43,7 +43,7 @@ register_activation_hook( __FILE__, 'yst_edd_vat_rate_check_activate' );
  * When we need to check the VAT rates, instantiate the task
  */
 function yst_edd_vat_rate_check() {
-	if ( defined('DOING_CRON') && DOING_CRON ) {
+	if ( defined( 'DOING_CRON' ) && DOING_CRON ) {
 		require_once 'lib/yoast-vat-updater.php';
 
 		new Yoast_VAT_Updater();
