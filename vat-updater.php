@@ -34,7 +34,7 @@ function yst_edd_vat_rate_check_activate() {
 
 	if ( ! $timestamp ) {
 		// If there's no scheduled task, schedule one for tonight at 1 minute past twelve
-		wp_schedule_event( strtotime( 'tomorrow 00:01' ), 'daily', 'yst_edd_vat_rate_check' );
+		wp_schedule_event( strtotime( 'tomorrow 00:01', current_time( 'timestamp' ) ), 'daily', 'yst_edd_vat_rate_check' );
 	}
 }
 register_activation_hook( __FILE__, 'yst_edd_vat_rate_check_activate' );
