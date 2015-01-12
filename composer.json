@@ -3,6 +3,7 @@
     "description": "Yoast License Manager.",
     "keywords"   : ["wordpress"],
     "homepage"   : "https://github.com/Yoast/License-Manager",
+    "license"    : "GPL-2.0+",
     "authors"    : [
         {
             "name"    : "Joost de Valk",
