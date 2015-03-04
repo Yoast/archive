@@ -444,7 +444,8 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 			$api_host_available = array(
 				'url'          => $this->product->get_api_url(),
-				'availability' => $this->check_api_host_availability()
+				'availability' => $this->check_api_host_availability(),
+				'curl_version' => $this->get_curl_version(),
 			);
 
 			$visible_license_key = $this->get_license_key();
@@ -557,6 +558,23 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$wp_http = new WP_Http();
 			if ( $wp_http->block_request( $this->product->get_api_url() ) === false ) {
 				return true;
+			}
+
+			return false;
+		}
+
+		/**
+		 * Get the current curl version, or false
+		 *
+		 * @return mixed
+		 */
+		private function get_curl_version() {
+			if ( function_exists( 'curl_version' ) ) {
+				$curl_version = curl_version();
+
+				if ( isset( $curl_version['version'] ) ) {
+					return $curl_version['version'];
+				}
 			}
 
 			return false;
