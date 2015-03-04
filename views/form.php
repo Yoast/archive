@@ -21,7 +21,7 @@ if( $api_host_available['curl_version'] !== false && version_compare( $api_host_
 
 // Output form tags if we're not embedded in another form
 if( ! $embedded ) {
-	echo '<form method="post" action="' . admin_url('admin.php') . '?page=yst_ga_extensions#top#licenses">';
+	echo '<form method="post" action="">';
 }
 
 wp_nonce_field( $nonce_name, $nonce_name ); ?>
