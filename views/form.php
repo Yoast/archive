@@ -11,9 +11,13 @@ $product = $this->product;
 
 $this->show_license_form_heading();
 
+if( $api_host_available['availability'] === false ){
+	echo '<p style="color: red; max-width: 600px;"><strong>' . sprintf( __( 'We couldn\'t create a connection to our API to verify your license key(s). Please ask your webhosting company to allow outgoing connections from your server to %s.', $product->get_text_domain() ), $api_host_available['url'] ) . '</strong></p>';
+}
+
 // Output form tags if we're not embedded in another form
 if( ! $embedded ) {
-	echo '<form method="post" action="">';
+	echo '<form method="post" action="' . admin_url('admin.php') . '?page=yst_ga_extensions#top#licenses">';
 }
 
 wp_nonce_field( $nonce_name, $nonce_name ); ?>
@@ -84,7 +88,7 @@ if( $this->license_is_valid() ) {
 if( ! $embedded ) {
 
 	// only show "Save Changes" button if license is not activated and not defined with a constant
-	if( $readonly === false ) {
+	if( $readonly === false && $api_host_available['availability'] === true ) {
 		submit_button();
 	}
 
