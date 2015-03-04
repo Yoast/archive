@@ -442,11 +442,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$nonce_name  = $this->prefix . 'license_nonce';
 			$action_name = $this->prefix . 'license_action';
 
-			$api_host_available = array(
-				'url'          => $this->product->get_api_url(),
-				'availability' => $this->check_api_host_availability(),
-				'curl_version' => $this->get_curl_version(),
-			);
+			$api_host_available = $this->get_api_availability();
 
 			$visible_license_key = $this->get_license_key();
 
@@ -550,6 +546,19 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
+		 * Get the API availability information
+		 *
+		 * @return array
+		 */
+		protected function get_api_availability(){
+			return array(
+				'url'          => $this->product->get_api_url(),
+				'availability' => $this->check_api_host_availability(),
+				'curl_version' => $this->get_curl_version(),
+			);
+		}
+
+		/**
 		 * Check if the API host address is available from this server
 		 *
 		 * @return bool
@@ -568,7 +577,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		 *
 		 * @return mixed
 		 */
-		private function get_curl_version() {
+		protected function get_curl_version() {
 			if ( function_exists( 'curl_version' ) ) {
 				$curl_version = curl_version();
 
