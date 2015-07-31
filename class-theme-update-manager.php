@@ -97,8 +97,9 @@ if( class_exists( 'Yoast_Update_Manager' ) && ! class_exists( "Yoast_Theme_Updat
 			?>
 			<div id="update-nag">
 				<?php
+					/* translators: %1$s expands to product name, $2%s expands to version, %3$s expands to changelog URL, %4$s expands to changelog title, %5$s expands to update URL, %6$s expands to onclick action */
 					printf( 
-						__( '<strong>%s version %s</strong> is available. <a href="%s" class="thickbox" title="%s">Check out what\'s new</a> or <a href="%s" %s>update now</a>.' ),
+						__( '<strong>%1$s version %2$s</strong> is available. <a href="%3$s" class="thickbox" title="%s">Check out what\'s new</a> or <a href="%s" %s>update now</a>.' ),
 					$this->product->get_item_name(),
 						$update_data->new_version,
 					'#TB_inline?width=640&amp;inlineId=' . $this->product->get_slug() . '_changelog',
