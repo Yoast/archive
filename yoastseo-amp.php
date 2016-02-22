@@ -14,6 +14,9 @@
  * Author URI:  https://yoast.com
  */
 
+/**
+ * Defines the YoastSEO AMP class. In a wrapper function so we can overwrite this from within Yoast SEO later on.
+ */
 function yoast_seo_amp_glue_define() {
 	if ( ! class_exists( 'YoastSEO_AMP' ) ) {
 		/**
@@ -142,5 +145,3 @@ function yoast_seo_amp_glue_init() {
 }
 
 add_action( 'init', 'yoast_seo_amp_glue_init', 12 );
-
-
