@@ -15,6 +15,8 @@ This plugin makes sure the default [WordPress AMP plugin](https://wordpress.org/
 
 To change your company name or logo, you now have to go to the SEO settings, General tab.
 
+Bugs? Ideas? File them [on this plugins GitHub repo](https://github.com/Yoast/yoastseo-amp) please!
+
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/yoast-seo-amp` directory, or install the plugin through the WordPress plugins screen directly.
