@@ -12,5 +12,7 @@
     "autoload": {
         "classmap": [ "src/" ]
     },
-    "require": {}
+    "require": {
+        "yoast/license-manager": "^1.2"
+    }
 }
