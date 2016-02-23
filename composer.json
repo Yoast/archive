@@ -9,5 +9,8 @@
             "homepage": "https://yoast.com"
         }
     ],
+    "autoload": {
+        "classmap": [ src ]
+    },
     "require": {}
 }
