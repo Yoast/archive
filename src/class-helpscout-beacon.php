@@ -16,12 +16,20 @@ class WPSEO_HelpScout_Beacon {
 	private $current_page = '';
 
 	/**
+	 * @var WPSEO_HelpScout_Beacon_Identifier
+	 */
+	protected $identifier;
+
+	/**
 	 * Setting the hook to load the beacon
 	 *
-	 * @param string $current_page The current opened page without the prefix.
+	 * @param string                            $current_page The current opened page without the prefix.
+	 * @param WPSEO_HelpScout_Beacon_Identifier $identifier The identifier that generates data to be send.
 	 */
-	public function __construct( $current_page ) {
+	public function __construct( $current_page, WPSEO_HelpScout_Beacon_Identifier $identifier ) {
 		$this->current_page = $current_page;
+		$this->identifier = $identifier;
+
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
 	}
 
@@ -103,8 +111,8 @@ class WPSEO_HelpScout_Beacon {
 	private function get_identify() {
 		$identify_data = get_transient( self::YST_SEO_SUPPORT_IDENTIFY );
 		if ( ! $identify_data ) {
-			$identifier = new WPSEO_HelpScout_Beacon_Identifier();
-			$identify_data = $identifier->get_data();
+			$identify_data = $this->identifier->get_data();
+
 			if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
 				set_transient( self::YST_SEO_SUPPORT_IDENTIFY, $identify_data, DAY_IN_SECONDS );
 			}

@@ -9,6 +9,20 @@
 class WPSEO_HelpScout_Beacon_Identifier {
 
 	/**
+	 * @var Yoast_Product
+	 */
+	protected $product;
+
+	/**
+	 * WPSEO_HelpScout_Beacon_Identifier constructor.
+	 *
+	 * @param Yoast_Product $product The product to report the license of.
+	 */
+	public function __construct( Yoast_Product $product ) {
+		$this->product = $product;
+	}
+
+	/**
 	 * Build data to populate the beacon email form
 	 *
 	 * @return array
@@ -53,7 +67,7 @@ class WPSEO_HelpScout_Beacon_Identifier {
 	 * @return string
 	 */
 	private function get_yoast_seo_info() {
-		$license_manager = new Yoast_Plugin_License_Manager( new WPSEO_Product_Premium() );
+		$license_manager = new Yoast_Plugin_License_Manager( $this->product );
 
 		$out = '<table>';
 		$out .= '<tr><td>Version</td><td>' . WPSEO_VERSION . '</td></tr>';
