@@ -29,15 +29,18 @@ class WPSEO_HelpScout_Beacon_Identifier {
 	 */
 	public function get_data() {
 		// Do not make these strings translateable! They are for our support agents, the user won't see them!
-		return array(
+		$data = array(
 			'name'                                                     => $this->get_user_info(),
 			'email'                                                    => $this->get_user_info( 'email' ),
 			'WordPress Version'                                        => $this->get_wordpress_version(),
-			'Yoast SEO'                                                => $this->get_yoast_seo_info(),
 			'Server'                                                   => $this->get_server_info(),
 			'<a href="' . admin_url( 'themes.php' ) . '">Theme</a>'    => $this->get_theme_info(),
 			'<a href="' . admin_url( 'plugins.php' ) . '">Plugins</a>' => $this->get_current_plugins(),
 		);
+
+		$data[ $this->product->get_item_name() ] = $this->get_yoast_seo_info();
+
+		return $data;
 	}
 
 	/**
