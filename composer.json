@@ -10,7 +10,8 @@
         }
     ],
     "autoload": {
-        "classmap": [ "src/" ]
+        "classmap": [ "src/" ],
+        "files": [ "src/functions.php" ]
     },
     "require": {
         "yoast/license-manager": "^1.2"
