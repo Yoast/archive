@@ -28,8 +28,8 @@ class WPSEO_HelpScout_Beacon {
 	/**
 	 * Setting the hook to load the beacon
 	 *
-	 * @param string                            $current_page The current opened page without the prefix.
-	 * @param Yoast_HelpScout_Beacon_Setting[]  $settings  Suggestions for the admin pages.
+	 * @param string                           $current_page The current opened page without the prefix.
+	 * @param Yoast_HelpScout_Beacon_Setting[] $settings  Suggestions for the admin pages.
 	 */
 	public function __construct( $current_page, array $settings ) {
 		$this->current_page = $current_page;
@@ -38,8 +38,11 @@ class WPSEO_HelpScout_Beacon {
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
 	}
 
-	public function add_setting( Yoast_HelpScout_Beacon_Setting $suggestion ) {
-		$this->settings[] = $suggestion;
+	/**
+	 * @param Yoast_HelpScout_Beacon_Setting $setting Setting to add to the helpscout beacon.
+	 */
+	public function add_setting( Yoast_HelpScout_Beacon_Setting $setting ) {
+		$this->settings[] = $setting;
 	}
 
 	/**
