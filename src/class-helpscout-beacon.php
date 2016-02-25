@@ -21,23 +21,25 @@ class WPSEO_HelpScout_Beacon {
 	protected $identifier;
 
 	/**
-	 * @var Yoast_HelpScout_Beacon_Suggestions
+	 * @var Yoast_HelpScout_Beacon_Setting[]
 	 */
-	protected $suggestions;
+	protected $settings;
 
 	/**
 	 * Setting the hook to load the beacon
 	 *
-	 * @param string                             $current_page The current opened page without the prefix.
-	 * @param WPSEO_HelpScout_Beacon_Identifier  $identifier   The identifier that generates data to be send.
-	 * @param Yoast_HelpScout_Beacon_Suggestions $suggestions  Suggestions for the admin pages.
+	 * @param string                            $current_page The current opened page without the prefix.
+	 * @param Yoast_HelpScout_Beacon_Setting[]  $settings  Suggestions for the admin pages.
 	 */
-	public function __construct( $current_page, WPSEO_HelpScout_Beacon_Identifier $identifier, Yoast_HelpScout_Beacon_Suggestions $suggestions ) {
+	public function __construct( $current_page, array $settings ) {
 		$this->current_page = $current_page;
-		$this->identifier = $identifier;
-		$this->suggestions = $suggestions;
+		$this->settings     = $settings;
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
+	}
+
+	public function add_setting( Yoast_HelpScout_Beacon_Setting $suggestion ) {
+		$this->settings[] = $suggestion;
 	}
 
 	/**
@@ -63,7 +65,7 @@ class WPSEO_HelpScout_Beacon {
 				'translation'  => $this->get_translations(),
 			),
 			'identify' => $this->get_identify(),
-			'suggest'  => $this->suggestions->get_suggestions( $this->current_page ),
+			'suggest'  => $this->get_suggest( $this->current_page ),
 		);
 	}
 
@@ -118,7 +120,8 @@ class WPSEO_HelpScout_Beacon {
 	private function get_identify() {
 		$identify_data = get_transient( self::YST_SEO_SUPPORT_IDENTIFY );
 		if ( ! $identify_data ) {
-			$identify_data = $this->identifier->get_data();
+			$identifier = new WPSEO_HelpScout_Beacon_Identifier( $this->get_products( $this->current_page ) );
+			$identify_data = $identifier->get_data();
 
 			if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
 				set_transient( self::YST_SEO_SUPPORT_IDENTIFY, $identify_data, DAY_IN_SECONDS );
@@ -126,5 +129,39 @@ class WPSEO_HelpScout_Beacon {
 		}
 
 		return $identify_data;
+	}
+
+	/**
+	 * Returns the suggestions for a certain page, or an empty array if there are no suggestions
+	 *
+	 * @param string $page The admin page the user is on.
+	 *
+	 * @return array
+	 */
+	private function get_suggest( $page ) {
+		$suggestions = array();
+
+		foreach ( $this->settings as $setting ) {
+			$suggestions = array_merge( $suggestions, $setting->get_suggestions( $page ) );
+		}
+
+		return $suggestions;
+	}
+
+	/**
+	 * Returns the products for a certain page, or an empty array if there are no products.
+	 *
+	 * @param string $page The admin page the user is on.
+	 *
+	 * @return array
+	 */
+	private function get_products( $page ) {
+		$products = array();
+
+		foreach ( $this->settings as $setting ) {
+			$products = array_merge( $products, $setting->get_products( $page ) );
+		}
+
+		return $products;
 	}
 }

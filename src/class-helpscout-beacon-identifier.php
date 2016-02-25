@@ -11,15 +11,15 @@ class WPSEO_HelpScout_Beacon_Identifier {
 	/**
 	 * @var Yoast_Product
 	 */
-	protected $product;
+	protected $products;
 
 	/**
 	 * WPSEO_HelpScout_Beacon_Identifier constructor.
 	 *
-	 * @param Yoast_Product $product The product to report the license of.
+	 * @param Yoast_Product[] $products The product to report the license of.
 	 */
-	public function __construct( Yoast_Product $product ) {
-		$this->product = $product;
+	public function __construct( array $products ) {
+		$this->products = $products;
 	}
 
 	/**
@@ -38,7 +38,9 @@ class WPSEO_HelpScout_Beacon_Identifier {
 			'<a href="' . admin_url( 'plugins.php' ) . '">Plugins</a>' => $this->get_current_plugins(),
 		);
 
-		$data[ $this->product->get_item_name() ] = $this->get_yoast_seo_info();
+		foreach ( $this->products as $product ) {
+			$data[ $product->get_item_name() ] = $this->get_product_info( $product );
+		}
 
 		return $data;
 	}
@@ -67,10 +69,12 @@ class WPSEO_HelpScout_Beacon_Identifier {
 	/**
 	 * Returns info about the Yoast SEO plugin version and license
 	 *
+	 * @param Yoast_Product $product The product to return information for.
+	 *
 	 * @return string
 	 */
-	private function get_yoast_seo_info() {
-		$license_manager = new Yoast_Plugin_License_Manager( $this->product );
+	private function get_product_info( Yoast_Product $product ) {
+		$license_manager = new Yoast_Plugin_License_Manager( $product );
 
 		$out = '<table>';
 		$out .= '<tr><td>Version</td><td>' . WPSEO_VERSION . '</td></tr>';
