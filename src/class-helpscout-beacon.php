@@ -21,14 +21,21 @@ class WPSEO_HelpScout_Beacon {
 	protected $identifier;
 
 	/**
+	 * @var Yoast_HelpScout_Beacon_Suggestions
+	 */
+	protected $suggestions;
+
+	/**
 	 * Setting the hook to load the beacon
 	 *
-	 * @param string                            $current_page The current opened page without the prefix.
-	 * @param WPSEO_HelpScout_Beacon_Identifier $identifier The identifier that generates data to be send.
+	 * @param string                             $current_page The current opened page without the prefix.
+	 * @param WPSEO_HelpScout_Beacon_Identifier  $identifier   The identifier that generates data to be send.
+	 * @param Yoast_HelpScout_Beacon_Suggestions $suggestions  Suggestions for the admin pages.
 	 */
-	public function __construct( $current_page, WPSEO_HelpScout_Beacon_Identifier $identifier ) {
+	public function __construct( $current_page, WPSEO_HelpScout_Beacon_Identifier $identifier, Yoast_HelpScout_Beacon_Suggestions $suggestions ) {
 		$this->current_page = $current_page;
 		$this->identifier = $identifier;
+		$this->suggestions = $suggestions;
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
 	}
@@ -56,7 +63,7 @@ class WPSEO_HelpScout_Beacon {
 				'translation'  => $this->get_translations(),
 			),
 			'identify' => $this->get_identify(),
-			'suggest'  => $this->get_suggest(),
+			'suggest'  => $this->suggestions->get_suggestions( $this->current_page ),
 		);
 	}
 
@@ -120,16 +127,4 @@ class WPSEO_HelpScout_Beacon {
 
 		return $identify_data;
 	}
-
-	/**
-	 * Getting the suggestions for the current page
-	 *
-	 * @return array
-	 */
-	private function get_suggest() {
-		$suggest = new WPSEO_HelpScout_Beacon_Suggest();
-
-		return $suggest->get_suggest( $this->current_page );
-	}
-
 }
