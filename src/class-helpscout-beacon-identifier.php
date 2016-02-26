@@ -74,6 +74,10 @@ class WPSEO_HelpScout_Beacon_Identifier {
 	 * @return string
 	 */
 	private function get_product_info( Yoast_Product $product ) {
+		if ( ! class_exists( 'Yoast_Plugin_License_Manager' ) ) {
+			return 'License manager could not be loaded';
+		}
+
 		$license_manager = new Yoast_Plugin_License_Manager( $product );
 
 		$out = '<table>';
