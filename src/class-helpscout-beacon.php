@@ -122,6 +122,20 @@ class Yoast_HelpScout_Beacon {
 		);
 	}
 
+	/**
+	 * @param Yoast_Product[] $products The products to build the cache key for.
+	 *
+	 * @return string
+	 */
+	private function get_cache_key( array $products ) {
+		$products_string = '';
+
+		foreach ( $products as $product ) {
+			$products_string .= $product->get_item_name();
+		}
+
+		return md5( self::YST_SEO_SUPPORT_IDENTIFY . $products_string );
+	}
 
 	/**
 	 * Retrieve data to populate the beacon email form
@@ -129,13 +143,16 @@ class Yoast_HelpScout_Beacon {
 	 * @return array
 	 */
 	private function get_identify() {
-		$identify_data = get_transient( self::YST_SEO_SUPPORT_IDENTIFY );
+		$products = $this->get_products( $this->current_page );
+		$cache_key = $this->get_cache_key( $products );
+
+		$identify_data = get_transient( $cache_key );
 		if ( ! $identify_data ) {
 			$identifier = new Yoast_HelpScout_Beacon_Identifier( $this->get_products( $this->current_page ) );
 			$identify_data = $identifier->get_data();
 
 			if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
-				set_transient( self::YST_SEO_SUPPORT_IDENTIFY, $identify_data, DAY_IN_SECONDS );
+				set_transient( $cache_key, $identify_data, DAY_IN_SECONDS );
 			}
 		}
 
