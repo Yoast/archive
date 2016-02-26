@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Premium\Classes
+ * @package Yoast\WPHelpScout
  */
 
 /**
  * This class adds the helpscout beacon by hooking on admin_footer.
  */
-class WPSEO_HelpScout_Beacon {
+class Yoast_HelpScout_Beacon {
 
 	const YST_SEO_SUPPORT_IDENTIFY = 'yst_seo_support_identify';
 
@@ -16,7 +16,7 @@ class WPSEO_HelpScout_Beacon {
 	private $current_page = '';
 
 	/**
-	 * @var WPSEO_HelpScout_Beacon_Identifier
+	 * @var Yoast_HelpScout_Beacon_Identifier
 	 */
 	protected $identifier;
 
@@ -131,7 +131,7 @@ class WPSEO_HelpScout_Beacon {
 	private function get_identify() {
 		$identify_data = get_transient( self::YST_SEO_SUPPORT_IDENTIFY );
 		if ( ! $identify_data ) {
-			$identifier = new WPSEO_HelpScout_Beacon_Identifier( $this->get_products( $this->current_page ) );
+			$identifier = new Yoast_HelpScout_Beacon_Identifier( $this->get_products( $this->current_page ) );
 			$identify_data = $identifier->get_data();
 
 			if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {

@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WPSEO\Premium\Classes
+ * @package Yoast\WPHelpScout
  */
 
 /**
  * Identifier for fetching installation related data like: other plugins, environment, etc.
  */
-class WPSEO_HelpScout_Beacon_Identifier {
+class Yoast_HelpScout_Beacon_Identifier {
 
 	/**
 	 * @var Yoast_Product
