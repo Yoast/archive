@@ -1,0 +1,241 @@
+<?php
+/**
+ * @package     YoastSEO_AMP_Glue\Frontend
+ * @author      Joost de Valk
+ * @copyright   2016 Yoast BV
+ * @license     GPL-2.0+
+ */
+
+if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
+	/**
+	 * This class improves upon the AMP output by the default WordPress AMP plugin using Yoast SEO metadata.
+	 */
+	class YoastSEO_AMP_Frontend {
+
+		/**
+		 * @var WPSEO_Frontend
+		 */
+		private $front;
+
+		/**
+		 * @var array
+		 */
+		private $options;
+
+		/**
+		 * @var array
+		 */
+		private $wpseo_options;
+
+		/**
+		 * YoastSEO_AMP_Frontend constructor.
+		 */
+		public function __construct() {
+			$this->wpseo_options = WPSEO_Options::get_all();
+			$this->options       = get_option( 'wpseo_amp' );
+
+			add_action( 'amp_init', array( $this, 'post_types' ) );
+
+			add_action( 'amp_post_template_css', array( $this, 'additional_css' ) );
+			add_action( 'amp_post_template_head', array( $this, 'extra_head' ) );
+			add_action( 'amp_post_template_footer', array( $this, 'extra_footer' ) );
+
+			add_filter( 'amp_post_template_data', array( $this, 'fix_amp_post_data' ), 10, 2 );
+			add_filter( 'amp_post_template_metadata', array( $this, 'fix_amp_post_metadata' ), 10, 2 );
+			add_filter( 'amp_post_template_analytics', array( $this, 'analytics' ) );
+
+			add_filter( 'amp_content_sanitizers', array( $this, 'add_sanitizer' ) );
+		}
+
+		/**
+		 * Add our own sanitizer to the array of sanitizers
+		 *
+		 * @param array $sanitizers
+		 *
+		 * @return array
+		 */
+		public function add_sanitizer( $sanitizers ) {
+			require 'class-sanitizer.php';
+			new Yoast_AMP_Blacklist_Sanitizer();
+
+			$sanitizers['Yoast_AMP_Blacklist_Sanitizer'] = array();
+
+			return $sanitizers;
+		}
+
+		/**
+		 * If analytics tracking has been set, output it now.
+		 *
+		 * @param array $analytics
+		 *
+		 * @return array
+		 */
+		public function analytics( $analytics ) {
+			if ( isset( $this->options['analytics-extra'] ) && ! empty( $this->options['analytics-extra'] ) ) {
+				return $analytics;
+			}
+
+			if ( ! class_exists( 'Yoast_GA_Options' ) || Yoast_GA_Options::instance()->get_tracking_code() === null ) {
+				return $analytics;
+			}
+			$UA = Yoast_GA_Options::instance()->get_tracking_code();
+
+			$analytics['yst-googleanalytics'] = array(
+				'type'        => 'googleanalytics',
+				'attributes'  => array(// 'data-credentials' => 'include',
+				),
+				'config_data' => array(
+					'vars'     => array(
+						'account' => $UA
+					),
+					'triggers' => array(
+						'trackPageview' => array(
+							'on'      => 'visible',
+							'request' => 'pageview',
+						),
+					),
+				),
+			);
+
+			return $analytics;
+		}
+
+		/**
+		 * Make AMP work for all the post types we want it for
+		 */
+		public function post_types() {
+			$post_types = get_post_types( array( 'public' => true ), 'objects' );
+			if ( is_array( $post_types ) && $post_types !== array() ) {
+				foreach ( $post_types as $pt ) {
+					if ( $this->options[ 'post_types-' . $pt->name . '-amp' ] === 'on' ) {
+						add_post_type_support( $pt->name, AMP_QUERY_VAR );
+					}
+				}
+			}
+		}
+
+		/**
+		 * Fix the basic AMP post data
+		 *
+		 * @param array $data
+		 * @param object $post
+		 *
+		 * @return array
+		 */
+		public function fix_amp_post_data( $data, $post ) {
+			$data['canonical_url'] = $this->front->canonical( false );
+			if ( ! empty( $this->options['amp_site_icon'] ) ) {
+				$data['site_icon_url'] = $this->options['amp_site_icon'];
+			}
+
+			// If we are loading extra analytics, we need to load the module too.
+			if ( ! empty( $this->options['analytics-extra'] ) ) {
+				$data['amp_component_scripts']['amp-analytics'] = 'https://cdn.ampproject.org/v0/amp-analytics-0.1.js';
+			}
+
+			return $data;
+		}
+
+		/**
+		 * Fix the AMP metadata for a post
+		 *
+		 * @param array $metadata
+		 * @param object $post
+		 *
+		 * @return array
+		 */
+		public function fix_amp_post_metadata( $metadata, $post ) {
+			$this->front = WPSEO_Frontend::get_instance();
+
+			$this->build_organization_object( $metadata );
+
+			$desc = $this->front->metadesc( false );
+			if ( $desc ) {
+				$metadata['description'] = $desc;
+			}
+
+			$og_img = $this->get_image_object( WPSEO_Meta::get_value( 'opengraph-image', $post->ID ) );
+			if ( is_array( $og_img ) ) {
+				$metadata['image'] = $og_img;
+			}
+
+			// Posts without an image fail validation in Google, leading to Search Console errors
+			if ( ! isset( $metadata['image'] ) ) {
+				$metadata['image'] = $this->get_image_object( $this->options['default_image'] );
+			}
+
+			return $metadata;
+		}
+
+		/**
+		 * Add additional CSS to the AMP output
+		 */
+		public function additional_css() {
+			require 'views/additional-css.php';
+			echo $this->options['extra-css'];
+		}
+
+		/**
+		 * Outputs extra code in the head, if set
+		 */
+		public function extra_head() {
+			echo $this->options['extra-head'];
+		}
+
+		/**
+		 * Outputs analytics code in the footer, if set
+		 */
+		public function extra_footer() {
+			echo $this->options['analytics-extra'];
+		}
+
+		/**
+		 * Builds the organization object if needed.
+		 *
+		 * @param array $metadata
+		 */
+		private function build_organization_object( &$metadata ) {
+			// While it's using the blog name, it's actually outputting the company name
+			if ( ! empty( $this->wpseo_options['company_name'] ) ) {
+				$metadata['publisher']['name'] = $this->wpseo_options['company_name'];
+			}
+
+			// The logo needs to be 600px wide max, 60px high max
+			$logo = $this->get_image_object( $this->wpseo_options['company_logo'], array( 600, 60 ) );
+			if ( is_array( $logo ) ) {
+				$metadata['publisher']['logo'] = $logo;
+			}
+		}
+
+		/**
+		 * Builds an image object array from an image URL
+		 *
+		 * @param string $image_url
+		 * @param string|array $size Optional. Image size. Accepts any valid image size, or an array of width
+		 *                                    and height values in pixels (in that order). Default 'full'.
+		 *
+		 * @return bool|array
+		 */
+		private function get_image_object( $image_url, $size = 'full' ) {
+			if ( empty( $image_url ) ) {
+				return false;
+			}
+
+			$image_id  = attachment_url_to_postid( $image_url );
+			$image_src = wp_get_attachment_image_src( $image_id, $size );
+
+			if ( is_array( $image_src ) ) {
+				return array(
+					'@type'  => 'ImageObject',
+					'url'    => $image_src[0],
+					'width'  => $image_src[1],
+					'height' => $image_src[2]
+				);
+			}
+
+			return false;
+		}
+	}
+}
+
+
