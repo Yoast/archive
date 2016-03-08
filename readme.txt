@@ -13,30 +13,7 @@ This plugin makes sure the default WordPress AMP plugin uses the proper Yoast SE
 
 This plugin makes sure the default [WordPress AMP plugin](https://wordpress.org/plugins/amp/) uses the proper [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) metadata. Without this glue plugin things like canonical might go wrong.
 
-This replaces the following values with Yoast SEO data, all in the JSON+LD data on posts:
-
-* Organization name (uses the blog name by default, now replaced by the Company name from the SEO General settings, Your info tab)
-* Organization logo (uses the blog icon by default, now replaced by the Company logo from the SEO General settings, Your info tab)
-* Post canonical (replaced by the Yoast SEO canonical, usually the same but makes sure its consistent when changed through Yoast SEO)
-* Post image (uses the featured image by default, replaced by the Facebook image if one is set)
-* Post description (added from the meta description, if set, by default the WordPress AMP plugin doesn't add one)
-
-> *Bugs? Ideas?*<br>
-> File them [on the GitHub repo for this plugin](https://github.com/Yoast/yoastseo-amp) please!
-
-== Frequently Asked Questions ==
-
-= How do I test whether it all works? =
-
-Use Google's [Structured Data testing tool](https://developers.google.com/structured-data/testing-tool/) and enter the AMP URL of one of your posts.
-
-= How do I change the Organization name or logo? =
-
-Go to SEO -> General -> Your Info tab.
-
-== Screenshots ==
-
-1. Screenshot of the structured data testing tool testing an AMP page with the Yoast SEO plugin and this glue plugin.
+To change your company name or logo, you now have to go to the SEO settings, General tab.
 
 == Installation ==
 
