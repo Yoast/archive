@@ -31,8 +31,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * YoastSEO_AMP_Frontend constructor.
 		 */
 		public function __construct() {
-			$this->wpseo_options = WPSEO_Options::get_all();
-			$this->options       = get_option( 'wpseo_amp' );
+			$this->set_options();
 
 			add_action( 'amp_init', array( $this, 'post_types' ) );
 
@@ -40,11 +39,16 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			add_action( 'amp_post_template_head', array( $this, 'extra_head' ) );
 			add_action( 'amp_post_template_footer', array( $this, 'extra_footer' ) );
 
-			add_filter( 'amp_post_template_data', array( $this, 'fix_amp_post_data' ), 10, 2 );
+			add_filter( 'amp_post_template_data', array( $this, 'fix_amp_post_data' ) );
 			add_filter( 'amp_post_template_metadata', array( $this, 'fix_amp_post_metadata' ), 10, 2 );
 			add_filter( 'amp_post_template_analytics', array( $this, 'analytics' ) );
 
 			add_filter( 'amp_content_sanitizers', array( $this, 'add_sanitizer' ) );
+		}
+
+		private function set_options() {
+			$this->wpseo_options = WPSEO_Options::get_all();
+			$this->options       = YoastSEO_AMP_Options::get();
 		}
 
 		/**
@@ -55,8 +59,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * @return array
 		 */
 		public function add_sanitizer( $sanitizers ) {
-			require 'class-sanitizer.php';
-			new Yoast_AMP_Blacklist_Sanitizer();
+			require_once 'class-sanitizer.php';
 
 			$sanitizers['Yoast_AMP_Blacklist_Sanitizer'] = array();
 
@@ -82,7 +85,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 
 			$analytics['yst-googleanalytics'] = array(
 				'type'        => 'googleanalytics',
-				'attributes'  => array(// 'data-credentials' => 'include',
+				'attributes'  => array(
 				),
 				'config_data' => array(
 					'vars'     => array(
@@ -118,11 +121,10 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * Fix the basic AMP post data
 		 *
 		 * @param array $data
-		 * @param object $post
 		 *
 		 * @return array
 		 */
-		public function fix_amp_post_data( $data, $post ) {
+		public function fix_amp_post_data( $data ) {
 			$data['canonical_url'] = $this->front->canonical( false );
 			if ( ! empty( $this->options['amp_site_icon'] ) ) {
 				$data['site_icon_url'] = $this->options['amp_site_icon'];
@@ -160,7 +162,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 
 			// Posts without an image fail validation in Google, leading to Search Console errors
-			if ( ! isset( $metadata['image'] ) ) {
+			if ( ! isset( $metadata['image'] ) && isset( $this->options['default_image'] ) ) {
 				$metadata['image'] = $this->get_image_object( $this->options['default_image'] );
 			}
 
@@ -171,7 +173,24 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * Add additional CSS to the AMP output
 		 */
 		public function additional_css() {
+
 			require 'views/additional-css.php';
+
+			$css_builder = new YoastSEO_AMP_CSS_Builder();
+			$css_builder->add_option( 'header-color', 'nav.amp-wp-title-bar', 'background' );
+			$css_builder->add_option( 'headings-color', '.amp-wp-title, h2, h3, h4', 'color' );
+			$css_builder->add_option( 'text-color', '.amp-wp-content', 'color' );
+
+			$css_builder->add_option( 'blockquote-bg-color', '.amp-wp-content blockquote', 'background-color' );
+			$css_builder->add_option( 'blockquote-border-color', '.amp-wp-content blockquote', 'border-color' );
+			$css_builder->add_option( 'blockquote-text-color', '.amp-wp-content blockquote', 'color' );
+
+			$css_builder->add_option( 'link-color', 'a, a:active, a:visited', 'color' );
+			$css_builder->add_option( 'link-color-hover', 'a:hover, a:focus', 'color' );
+
+			$css_builder->add_option( 'meta-color', '.amp-wp-meta li, .amp-wp-meta li a', 'color' );
+
+			echo $css_builder->build();
 			echo $this->options['extra-css'];
 		}
 
@@ -237,5 +256,3 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 	}
 }
-
-

@@ -6,7 +6,7 @@
  * @license     GPL-2.0+
  */
 
-if ( ! class_exists( 'YoastSEO_AMP_Backend' ) ) {
+if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 	/**
 	 * This class improves upon the AMP output by the default WordPress AMP plugin using Yoast SEO metadata.
 	 */
@@ -18,44 +18,16 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend' ) ) {
 		public $options;
 
 		/**
-		 * @var string
-		 */
-		public $option_name = 'wpseo_amp';
-
-		/**
 		 * YoastSEO_AMP_Backend constructor.
 		 */
 		public function __construct() {
-			$this->options = get_option( $this->option_name );
-
-			// Register settings
-			add_action( 'admin_init', array( $this, 'register_settings' ) );
+			$this->options = YoastSEO_AMP_Options::get();
 
 			// Add subitem to menu
 			add_filter( 'wpseo_submenu_pages', array( $this, 'add_submenu_page' ), 10, 1 );
 
 			// Register AMP admin page as a Yoast SEO admin page
 			add_filter( 'wpseo_admin_pages', array( $this, 'add_admin_pages' ) );
-		}
-
-		/**
-		 * Register the premium settings
-		 */
-		public function register_settings() {
-			register_setting( 'wpseo_amp_settings', $this->option_name, array( $this, 'sanitize_options' ) );
-		}
-
-		/**
-		 * Sanitize options
-		 *
-		 * @param $options
-		 *
-		 * @return mixed
-		 */
-		public function sanitize_options( $options ) {
-			$options['version'] = 1;
-
-			return $options;
 		}
 
 		/**
@@ -84,8 +56,6 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend' ) ) {
 		 * Displays the admin page
 		 */
 		public function display() {
-			$this->ensure_options_exist();
-
 			require 'views/admin-page.php';
 		}
 
@@ -145,25 +115,5 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend' ) ) {
 			echo ' class="yst_colorpicker" id="', $var, '"/>';
 			echo '<br/>';
 		}
-
-		/**
-		 * Makes sure the options for each post type exist
-		 */
-		private function ensure_options_exist() {
-			$post_types = get_post_types( array( 'public' => true ), 'objects' );
-			if ( is_array( $post_types ) && $post_types !== array() ) {
-				foreach ( $post_types as $pt ) {
-					if ( ! isset( $this->options[ 'post_types-' . $pt->name . '-amp' ] ) ) {
-						if ( $pt->name === 'post' ) {
-							$this->options[ 'post_types-' . $pt->name . '-amp' ] = 'on';
-						} else {
-							$this->options[ 'post_types-' . $pt->name . '-amp' ] = 'off';
-						}
-					}
-				}
-			}
-			update_option( $this->option_name, $this->options );
-		}
 	}
-
 }
