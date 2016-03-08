@@ -191,7 +191,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			$css_builder->add_option( 'meta-color', '.amp-wp-meta li, .amp-wp-meta li a', 'color' );
 
 			echo $css_builder->build();
-			echo $this->options['extra-css'];
+
+			echo esc_html( $this->options['extra-css'] );
 		}
 
 		/**
@@ -210,7 +211,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 
 			do_action( 'wpseo_opengraph' );
 
-			echo $this->options['extra-head'];
+			echo strip_tags($this->options['extra-head'], '<link><meta>');
 		}
 
 		/**
