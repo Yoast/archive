@@ -24,7 +24,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 			$this->options = YoastSEO_AMP_Options::get();
 
 			// Add subitem to menu
-			add_filter( 'wpseo_submenu_pages', array( $this, 'add_submenu_page' ), 10, 1 );
+			add_filter( 'wpseo_submenu_pages', array( $this, 'add_submenu_page' ) );
 
 			// Register AMP admin page as a Yoast SEO admin page
 			add_filter( 'wpseo_admin_pages', array( $this, 'add_admin_pages' ) );

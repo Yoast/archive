@@ -303,7 +303,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			 * @api string $type The Schema.org type for the $post
 			 * @param WP_Post $post
 			 */
-			$type = add_filter( 'yoastseo_amp_schema_type', $type, $post );
+			$type = apply_filters( 'yoastseo_amp_schema_type', $type, $post );
 
 			return $type;
 		}
