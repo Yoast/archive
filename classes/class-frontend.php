@@ -145,7 +145,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * Fix the AMP metadata for a post
 		 *
 		 * @param array $metadata
-		 * @param object $post
+		 * @param WP_Post $post
 		 *
 		 * @return array
 		 */
@@ -159,15 +159,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				$metadata['description'] = $desc;
 			}
 
-			$og_img = $this->get_image_object( WPSEO_Meta::get_value( 'opengraph-image', $post->ID ) );
-			if ( is_array( $og_img ) ) {
-				$metadata['image'] = $og_img;
-			}
-
-			// Posts without an image fail validation in Google, leading to Search Console errors
-			if ( ! isset( $metadata['image'] ) && isset( $this->options['default_image'] ) ) {
-				$metadata['image'] = $this->get_image_object( $this->options['default_image'] );
-			}
+			$metadata['image'] = $this->get_image( $post );
+			$metadata['@type'] = $this->get_post_schema_type( $post );
 
 			return $metadata;
 		}
@@ -249,7 +242,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * @param string|array $size Optional. Image size. Accepts any valid image size, or an array of width
 		 *                                    and height values in pixels (in that order). Default 'full'.
 		 *
-		 * @return bool|array
+		 * @return array|false
 		 */
 		private function get_image_object( $image_url, $size = 'full' ) {
 			if ( empty( $image_url ) ) {
@@ -269,6 +262,50 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 
 			return false;
+		}
+
+		/**
+		 * Retrieve the Schema.org image for the post
+		 *
+		 * @param WP_Post $post
+		 *
+		 * @return array|false
+		 */
+		private function get_image( $post ) {
+			$image = $this->get_image_object( WPSEO_Meta::get_value( 'opengraph-image', $post->ID ) );
+
+			// Posts without an image fail validation in Google, leading to Search Console errors
+			if ( ! is_array( $image ) && isset( $this->options['default_image'] ) ) {
+				$image = $this->get_image_object( $this->options['default_image'] );
+			}
+
+			return $image;
+		}
+
+		/**
+		 * Gets the Schema.org type for the post, based on the post type.
+		 *
+		 * @param WP_Post $post
+		 *
+		 * @return string
+		 */
+		private function get_post_schema_type( $post ) {
+			if ( 'post' === $post->post_type ) {
+				$type = 'Article';
+			}
+			else {
+				$type = 'WebPage';
+			}
+
+			/**
+			 * Filter: 'yoastseo_amp_schema_type' - Allow changing the Schema.org type for the post
+			 *
+			 * @api string $type The Schema.org type for the $post
+			 * @param WP_Post $post
+			 */
+			$type = add_filter( 'yoastseo_amp_schema_type', $type, $post );
+
+			return $type;
 		}
 	}
 }
