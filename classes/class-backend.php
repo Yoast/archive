@@ -66,10 +66,10 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 			wp_enqueue_style( 'yoast_amp_css', plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.css', array( 'wp-color-picker' ), false );
 
 			wp_enqueue_media(); // enqueue files needed for upload functionality
-			wp_enqueue_script( 'wpseo-admin-media', plugins_url( 'js/wp-seo-admin-media-' . '310' . WPSEO_CSSJS_SUFFIX . '.js', WPSEO_FILE ), array(
+			wp_enqueue_script( 'wpseo-admin-media', plugin_dir_url( __FILE__ ) . 'assets/wp-seo-admin-media.js', array(
 				'jquery',
 				'jquery-ui-core',
-			), WPSEO_VERSION, true );
+			), false, true );
 			wp_localize_script( 'wpseo-admin-media', 'wpseoMediaL10n', $this->localize_media_script() );
 
 			wp_enqueue_script( 'yoast_amp_js', plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.js', array(
