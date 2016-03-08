@@ -3,7 +3,7 @@ Contributors: joostdevalk
 Tags: AMP, SEO
 Requires at least: 4.2
 Tested up to: 4.4
-Stable tag: 0.2
+Stable tag: 0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,17 @@ To change your company name or logo, you now have to go to the SEO settings, Gen
 1. You're done.
 
 == Changelog ==
+
+= 0.3 =
+* Split the plugin into several classes.
+* Added a settings page, found under SEO -> AMP
+* This new settings page has:
+    * A post types settings tab;
+    * A design settings tab;
+    * An analytics integration tab.
+* Added sanitization functions that further clean up AMP output to make sure more pages pass validation.
+* Added a default image (settable on the design tab) to use when a post has no image. This because the image in the JSON+LD output is required by Google.
+* The plugin now automatically enables AMP GA tracking when GA by Yoast is enabled, but also allows you to add custom tracking.
 
 = 0.1 =
 * Initial version.
