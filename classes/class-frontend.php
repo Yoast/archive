@@ -33,7 +33,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		public function __construct() {
 			$this->set_options();
 
-			add_action( 'amp_init', array( $this, 'post_types' ) );
+			add_action( 'wp', array( $this, 'post_types' ) );
 
 			add_action( 'amp_post_template_css', array( $this, 'additional_css' ) );
 			add_action( 'amp_post_template_head', array( $this, 'extra_head' ) );
@@ -112,6 +112,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				foreach ( $post_types as $pt ) {
 					if ( $this->options[ 'post_types-' . $pt->name . '-amp' ] === 'on' ) {
 						add_post_type_support( $pt->name, AMP_QUERY_VAR );
+					}
+					else {
+						remove_post_type_support( $pt->name, AMP_QUERY_VAR );
 					}
 				}
 			}
