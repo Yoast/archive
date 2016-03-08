@@ -97,6 +97,7 @@ $yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
 			<br/>
 
 			<h3><?php printf( esc_html( __( 'Extra code in %s', 'wordpress-seo' ) ), '<code>&lt;head&gt;</code>' ); ?></h3>
+			<p><?php echo sprintf( esc_html( __( 'Only %s and %s tags are allowed, other tags will be removed automatically.', 'wordpress-seo' ) ), '<code>meta</code>', '<code>link</code>' ) ?></p>
 			<?php $yform->textarea( 'extra-head', __( 'Extra code', 'wordpress-seo' ), array(
 				'rows' => 5,
 				'cols' => 100
@@ -109,13 +110,15 @@ $yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
 
 			<?php
 			if ( class_exists( 'Yoast_GA_Options' ) ) {
-				echo '<p>', esc_html( __( 'Because your Google Analytics plugin by Yoast is active, your AMP pages will also be tracked.', 'wordpress-seo' ) ), '</p>';
+				echo '<p>', esc_html( __( 'Because your Google Analytics plugin by Yoast is active, your AMP pages will also be tracked.', 'wordpress-seo' ) ), '<br>';
 				$UA = Yoast_GA_Options::instance()->get_tracking_code();
 				if ( $UA === null ) {
-					echo '<p>', esc_html( __( 'Make sure to connect your Google Analytics plugin properly.', 'wordpress-seo' ) ), '</p>';
+					echo esc_html( __( 'Make sure to connect your Google Analytics plugin properly.', 'wordpress-seo' ) );
 				} else {
-					echo '<p>', sprintf( esc_html( __( 'Pageviews will be tracked using the following account: %s.', 'wordpress-seo' ) ), '<code>' . $UA . '</code>' ), '</p>';
+					echo sprintf( esc_html( __( 'Pageviews will be tracked using the following account: %s.', 'wordpress-seo' ) ), '<code>' . $UA . '</code>' );
 				}
+
+				echo '</p>';
 
 				echo '<p>', esc_html( __( 'Optionally you can override the default AMP tracking code with your own by putting it below:', 'wordpress-seo' ) ), '</p>';
 				$yform->textarea( 'analytics-extra', __( 'Analytics code', 'wordpress-seo' ), array(

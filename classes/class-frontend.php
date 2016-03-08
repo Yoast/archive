@@ -223,12 +223,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * @param array $metadata
 		 */
 		private function build_organization_object( &$metadata ) {
-			// While it's using the blog name, it's actually outputting the company name
+			// While it's using the blog name, it's actually outputting the company name.
 			if ( ! empty( $this->wpseo_options['company_name'] ) ) {
 				$metadata['publisher']['name'] = $this->wpseo_options['company_name'];
 			}
 
-			// The logo needs to be 600px wide max, 60px high max
+			// The logo needs to be 600px wide max, 60px high max.
 			$logo = $this->get_image_object( $this->wpseo_options['company_logo'], array( 600, 60 ) );
 			if ( is_array( $logo ) ) {
 				$metadata['publisher']['logo'] = $logo;
@@ -240,7 +240,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 *
 		 * @param string $image_url
 		 * @param string|array $size Optional. Image size. Accepts any valid image size, or an array of width
-		 *                                    and height values in pixels (in that order). Default 'full'.
+		 *                                     and height values in pixels (in that order). Default 'full'.
 		 *
 		 * @return array|false
 		 */
