@@ -179,6 +179,18 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * Outputs extra code in the head, if set
 		 */
 		public function extra_head() {
+			$options = WPSEO_Options::get_option( 'wpseo_social' );
+
+			if ( $options['twitter'] === true ) {
+				WPSEO_Twitter::get_instance();
+			}
+
+			if ( $options['opengraph'] === true ) {
+				$GLOBALS['wpseo_og'] = new WPSEO_OpenGraph;
+			}
+
+			do_action( 'wpseo_opengraph' );
+
 			echo $this->options['extra-head'];
 		}
 
