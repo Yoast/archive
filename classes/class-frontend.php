@@ -114,10 +114,22 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 						add_post_type_support( $pt->name, AMP_QUERY_VAR );
 					}
 					else {
-						remove_post_type_support( $pt->name, AMP_QUERY_VAR );
+						if ( 'post' === $pt ) {
+							add_action( 'wp', array( $this, 'disable_amp_for_posts' ) );
+						}
+						else {
+							remove_post_type_support( $pt->name, AMP_QUERY_VAR );
+						}
 					}
 				}
 			}
+		}
+
+		/**
+		 * Disables AMP for posts specifically, run later because of AMP plugin internals
+		 */
+		public function disable_amp_for_posts() {
+			remove_post_type_support( 'post', AMP_QUERY_VAR );
 		}
 
 		/**
