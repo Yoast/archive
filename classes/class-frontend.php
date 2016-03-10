@@ -33,7 +33,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		public function __construct() {
 			$this->set_options();
 
-			add_action( 'wp', array( $this, 'post_types' ) );
+			add_action( 'amp_init', array( $this, 'post_types' ) );
 
 			add_action( 'amp_post_template_css', array( $this, 'additional_css' ) );
 			add_action( 'amp_post_template_head', array( $this, 'extra_head' ) );
