@@ -157,7 +157,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				$metadata['description'] = $desc;
 			}
 
-			$metadata['image'] = $this->get_image( $post, $metadata['image'] );
+			$image = isset( $metadata['image'] ) ? $metadata['image'] : null;
+
+			$metadata['image'] = $this->get_image( $post, $image );
 			$metadata['@type'] = $this->get_post_schema_type( $post );
 
 			return $metadata;
@@ -265,8 +267,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Retrieve the Schema.org image for the post
 		 *
-		 * @param WP_Post $post
-		 * @param array $image The currently set post image
+		 * @param WP_Post    $post
+		 * @param array|null $image The currently set post image
 		 *
 		 * @return array
 		 */
