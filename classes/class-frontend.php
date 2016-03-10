@@ -33,7 +33,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		public function __construct() {
 			$this->set_options();
 
-			add_action( 'wp', array( $this, 'post_types' ) );
+			add_action( 'amp_init', array( $this, 'post_types' ) );
 
 			add_action( 'amp_post_template_css', array( $this, 'additional_css' ) );
 			add_action( 'amp_post_template_head', array( $this, 'extra_head' ) );
@@ -111,11 +111,24 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				foreach ( $post_types as $pt ) {
 					if ( $this->options[ 'post_types-' . $pt->name . '-amp' ] === 'on' ) {
 						add_post_type_support( $pt->name, AMP_QUERY_VAR );
-					} else {
-						remove_post_type_support( $pt->name, AMP_QUERY_VAR );
+					}
+					else {
+						if ( 'post' === $pt->name ) {
+							add_action( 'wp', array( $this, 'disable_amp_for_posts' ) );
+						}
+						else {
+							remove_post_type_support( $pt->name, AMP_QUERY_VAR );
+						}
 					}
 				}
 			}
+		}
+
+		/**
+		 * Disables AMP for posts specifically, run later because of AMP plugin internals
+		 */
+		public function disable_amp_for_posts() {
+			remove_post_type_support( 'post', AMP_QUERY_VAR );
 		}
 
 		/**
@@ -301,7 +314,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		private function get_post_schema_type( $post ) {
 			if ( 'post' === $post->post_type ) {
 				$type = 'Article';
-			} else {
+			}
+			else {
 				$type = 'WebPage';
 			}
 
