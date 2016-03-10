@@ -114,7 +114,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 						add_post_type_support( $pt->name, AMP_QUERY_VAR );
 					}
 					else {
-						if ( 'post' === $pt ) {
+						if ( 'post' === $pt->name ) {
 							add_action( 'wp', array( $this, 'disable_amp_for_posts' ) );
 						}
 						else {
