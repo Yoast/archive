@@ -85,8 +85,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 
 			$analytics['yst-googleanalytics'] = array(
 				'type'        => 'googleanalytics',
-				'attributes'  => array(
-				),
+				'attributes'  => array(),
 				'config_data' => array(
 					'vars'     => array(
 						'account' => $UA
@@ -112,8 +111,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				foreach ( $post_types as $pt ) {
 					if ( $this->options[ 'post_types-' . $pt->name . '-amp' ] === 'on' ) {
 						add_post_type_support( $pt->name, AMP_QUERY_VAR );
-					}
-					else {
+					} else {
 						remove_post_type_support( $pt->name, AMP_QUERY_VAR );
 					}
 				}
@@ -159,7 +157,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				$metadata['description'] = $desc;
 			}
 
-			$metadata['image'] = $this->get_image( $post );
+			$image = isset( $metadata['image'] ) ? $metadata['image'] : null;
+
+			$metadata['image'] = $this->get_image( $post, $image );
 			$metadata['@type'] = $this->get_post_schema_type( $post );
 
 			return $metadata;
@@ -212,7 +212,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 
 			do_action( 'wpseo_opengraph' );
 
-			echo strip_tags($this->options['extra-head'], '<link><meta>');
+			echo strip_tags( $this->options['extra-head'], '<link><meta>' );
 		}
 
 		/**
@@ -272,16 +272,20 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Retrieve the Schema.org image for the post
 		 *
-		 * @param WP_Post $post
+		 * @param WP_Post    $post
+		 * @param array|null $image The currently set post image
 		 *
-		 * @return array|false
+		 * @return array
 		 */
-		private function get_image( $post ) {
-			$image = $this->get_image_object( WPSEO_Meta::get_value( 'opengraph-image', $post->ID ) );
+		private function get_image( $post, $image ) {
+			$og_image = $this->get_image_object( WPSEO_Meta::get_value( 'opengraph-image', $post->ID ) );
+			if ( is_array( $og_image ) ) {
+				return $og_image;
+			}
 
 			// Posts without an image fail validation in Google, leading to Search Console errors
 			if ( ! is_array( $image ) && isset( $this->options['default_image'] ) ) {
-				$image = $this->get_image_object( $this->options['default_image'] );
+				return $this->get_image_object( $this->options['default_image'] );
 			}
 
 			return $image;
@@ -297,8 +301,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		private function get_post_schema_type( $post ) {
 			if ( 'post' === $post->post_type ) {
 				$type = 'Article';
-			}
-			else {
+			} else {
 				$type = 'WebPage';
 			}
 
@@ -306,6 +309,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			 * Filter: 'yoastseo_amp_schema_type' - Allow changing the Schema.org type for the post
 			 *
 			 * @api string $type The Schema.org type for the $post
+			 *
 			 * @param WP_Post $post
 			 */
 			$type = apply_filters( 'yoastseo_amp_schema_type', $type, $post );
