@@ -188,7 +188,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 
 			echo $css_builder->build();
 
-			echo esc_html( $this->options['extra-css'] );
+			if ( ! empty( $this->options['extra-css'] ) ) {
+				$safe_text = strip_tags($this->options['extra-css']);
+				$safe_text = wp_check_invalid_utf8( $safe_text );
+				$safe_text = _wp_specialchars( $safe_text, ENT_NOQUOTES );
+				echo $safe_text;
+			}
 		}
 
 		/**
