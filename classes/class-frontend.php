@@ -109,6 +109,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			$post_types = get_post_types( array( 'public' => true ), 'objects' );
 			if ( is_array( $post_types ) && $post_types !== array() ) {
 				foreach ( $post_types as $pt ) {
+					if ( ! isset( $this->options[ 'post_types-' . $pt->name . '-amp' ] ) ) {
+						continue;
+					}
 					if ( $this->options[ 'post_types-' . $pt->name . '-amp' ] === 'on' ) {
 						add_post_type_support( $pt->name, AMP_QUERY_VAR );
 					}
