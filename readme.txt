@@ -3,25 +3,36 @@ Contributors: joostdevalk
 Tags: AMP, SEO
 Requires at least: 4.2
 Tested up to: 4.4
-Stable tag: 0.3
+Stable tag: 0.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin makes sure the default WordPress AMP plugin uses the proper Yoast SEO metadata.
+This plugin makes sure the default WordPress AMP plugin uses the proper Yoast SEO metadata and allows modification of the AMP page design.
 
 == Description ==
 
 This plugin makes sure the default [WordPress AMP plugin](https://wordpress.org/plugins/amp/) uses the proper [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) metadata. Without this glue plugin things like canonical might go wrong.
 
-To change your company name or logo, you now have to go to the SEO settings, General tab.
+To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/yoast-seo-amp` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
+1. Go to SEO -> AMP to change your design and enable custom post types.
 1. You're done.
 
 == Changelog ==
+
+= 0.3.1 =
+* Bugfixes:
+    * Fixed bug where featured image wouldn't be used properly anymore.
+    * Fixed bug where CSS in Extra CSS field could be wrongly escaped.
+    * Fixed bug where wrong hook was used to `add_post_type_support`, causing integration issues.
+    * Fixed bug where post type settings wouldn't save properly.
+* Enhancement:
+    * Added some more escaping to color picker functionality.
+    * Made sure no notice is thrown on frontend when post type setting isn't available.
 
 = 0.3 =
 * Split the plugin into several classes.
