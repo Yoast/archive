@@ -22,6 +22,12 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 1. Go to SEO -> AMP to change your design and enable custom post types.
 1. You're done.
 
+== Screenshots ==
+
+1. Example AMP page, design changed with this plugin.
+2. Post type support in the plugin.
+3. Design settings in the plugin.
+
 == Changelog ==
 
 = 0.3.1 =
