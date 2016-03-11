@@ -62,15 +62,54 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 			$options['version'] = 1;
 
 			// Sanitize extra CSS field.
-			$extra_css = strip_tags($options['extra-css']);
-			$extra_css = wp_check_invalid_utf8( $extra_css );
-			$extra_css = _wp_specialchars( $extra_css, ENT_NOQUOTES );
+			$extra_css            = strip_tags( $options['extra-css'] );
+			$extra_css            = wp_check_invalid_utf8( $extra_css );
+			$extra_css            = _wp_specialchars( $extra_css, ENT_NOQUOTES );
 			$options['extra-css'] = $extra_css;
 
 			// Only allow meta and link tags in head.
 			$options['extra-head'] = strip_tags( $options['extra-head'], '<link><meta>' );
 
+			$colors = array(
+				'header-color',
+				'headings-color',
+				'text-color',
+				'meta-color',
+				'link-color',
+				'blockquote-text-color',
+				'blockquote-bg-color',
+				'blockquote-border-color',
+			);
+
+			foreach ( $colors as $color ) {
+				$options[ $color ] = $this->sanitize_color( $options[ $color ], '' );
+			}
+
+			// Only allow 'on' or 'off'
+			foreach ( $options as $key => $value ) {
+				if ( 'post_types-' === substr( $key, 0, 11 ) ) {
+					$options[ $key ] = ( $value === 'on' ) ? 'on' : 'off';
+				}
+			}
+
 			return $options;
+		}
+
+		/**
+		 * Sanitize hexadecimal color
+		 *
+		 * @param string $color   String to test for valid color.
+		 * @param string $default Value the string will get when no color is found.
+		 *
+		 * @return string Color or $default
+		 */
+		private function sanitize_color( $color, $default ) {
+			if ( preg_match( '~^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$~', $color, $matches ) ) {
+				return $matches[0];
+
+			}
+
+			return $default;
 		}
 
 		/**
