@@ -61,6 +61,15 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		public function sanitize_options( $options ) {
 			$options['version'] = 1;
 
+			// Sanitize extra CSS field.
+			$extra_css = strip_tags($options['extra-css']);
+			$extra_css = wp_check_invalid_utf8( $extra_css );
+			$extra_css = _wp_specialchars( $extra_css, ENT_NOQUOTES );
+			$options['extra-css'] = $extra_css;
+
+			// Only allow meta and link tags in head.
+			$options['extra-head'] = strip_tags( $options['extra-head'], '<link><meta>' );
+
 			return $options;
 		}
 
