@@ -143,6 +143,11 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 			// Strip JSON content so we can apply verified script tag.
 			$tag = str_replace( $json, '', $allowed_tags );
 
+			// If the tag doesn't occur in the code, the code is invalid.
+			if ( false === strpos( $allowed_tags, '<amp-analytics' ) ) {
+				return '';
+			}
+
 			$parts = explode( '><', $tag );
 			$parts[0] .= '>';
 			$parts[1] = '<' . $parts[1];
