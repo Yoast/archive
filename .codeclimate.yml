@@ -15,6 +15,9 @@ engines:
     config:
       file_extensions: "php"
       rulesets: "unusedcode,cleancode"
+    checks:
+      CleanCode/StaticAccess:
+        enabled: false
 ratings:
   paths:
   - "**.css"
