@@ -108,7 +108,6 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		private function sanitize_color( $color, $default ) {
 			if ( preg_match( '~^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$~', $color, $matches ) ) {
 				return $matches[0];
-
 			}
 
 			return $default;
