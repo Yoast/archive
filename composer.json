@@ -1,0 +1,39 @@
+{
+  "name": "yoast/yoastseo-amp",
+  "description": "This plugin makes sure the default WordPress AMP plugin uses the proper Yoast SEO metadata and allows modification of the AMP page design.",
+  "keywords": [
+    "wordpress",
+    "seo",
+    "amp"
+  ],
+  "homepage": "https://wordpress.org/plugins/glue-for-yoast-seo-amp/",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Team Yoast",
+      "email": "support@yoast.com",
+      "homepage": "https://yoast.com"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "support": {
+    "issues": "https://github.com/Yoast/yoastseo-amp/issues",
+    "forum": "https://wordpress.org/support/plugin/yoastseo-amp",
+    "wiki": "https://github.com/Yoast/yoastseo-amp/wiki",
+    "source": "https://github.com/Yoast/yoastseo-amp"
+  },
+  "require": {
+  },
+  "require-dev": {
+    "yoast/yoastcs": "dev-master",
+    "codeclimate/php-test-reporter": "dev-master"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "config-yoastcs": [
+      "\"vendor/bin/phpcs\" --config-set installed_paths ../../../vendor/wp-coding-standards/wpcs,../../../vendor/yoast/yoastcs",
+      "\"vendor/bin/phpcs\" --config-set default_standard Yoast"
+    ]
+  }
+}
