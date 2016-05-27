@@ -10,7 +10,7 @@ class Yoast_HelpScout_Beacon {
 
 	const YST_SEO_SUPPORT_IDENTIFY = 'yst_seo_support_identify';
 	const BEACON_TYPE_NO_SEARCH = 'no_search';
-	const BEACON_TYPE_SEARCH =  'search';
+	const BEACON_TYPE_SEARCH = 'search';
 
 	/**
 	 * @var string The current opened page without the prefix.
@@ -201,12 +201,19 @@ class Yoast_HelpScout_Beacon {
 	 *
 	 * @return string
 	 */
-	private function get_type(){
+	private function get_type() {
 		return $this->type;
 	}
 
+	/**
+	 * Returns the configuration for a certain page
+	 *
+	 * @param string $page The admin page the user is on.
+	 *
+	 * @return array
+	 */
 	private function get_config( $page ) {
-		// defaults
+		// Defaults.
 		$config = array(
 			'instructions' => $this->get_instructions(),
 			'icon'         => 'question',
