@@ -8,6 +8,7 @@ if ( ! function_exists( 'yoast_get_helpscout_beacon' ) ) {
 	 * Retrieve the instance of the beacon
 	 *
 	 * @param string $page The current admin page.
+	 * @param string $type Which type of popup we want to show.
 	 *
 	 * @return Yoast_HelpScout_Beacon
 	 */
