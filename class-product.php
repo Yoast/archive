@@ -186,7 +186,7 @@ if( ! class_exists( "Yoast_Product", false ) ) {
 		 * @return string
 		 */
 		public function get_transient_prefix() {
-			return substr( dirname( $this->slug ), 0, 15 );
+			return substr( md5( $this->file ), 0, 15 );
 		}
 
 		/**
