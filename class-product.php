@@ -72,34 +72,17 @@ if ( ! class_exists( "Yoast_Product", false ) ) {
 		 * @param int    $product_id       The ID of the product in the backend system.
 		 */
 		public function __construct( $api_url, $item_name, $slug, $version, $item_url = '', $license_page_url = '#', $text_domain = 'yoast', $author = 'Yoast', $file = '', $product_id = 0 ) {
-			$this->api_url          = $api_url;
-			$this->item_name        = $item_name;
-			$this->slug             = $slug;
-			$this->version          = $version;
-			$this->item_url         = $item_url;
-			$this->license_page_url = admin_url( $license_page_url );
-			$this->text_domain      = $text_domain;
-			$this->author           = $author;
-			$this->file             = $file;
-			$this->product_id       = $product_id;
-
-			// Fix possible empty item url
-			if ( $this->item_url === '' ) {
-				$this->item_url = $this->api_url;
-			}
-
-			if ( is_admin() && is_multisite() ) {
-
-				if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-					require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-				}
-
-				if ( is_plugin_active_for_network( $slug ) ) {
-					$this->license_page_url = network_admin_url( $license_page_url );
-				}
-			}
+			$this->set_api_url( $api_url );
+			$this->set_item_name( $item_name );
+			$this->set_slug( $slug );
+			$this->set_version( $version );
+			$this->set_item_url( $item_url );
+			$this->set_license_page_url( $license_page_url );
+			$this->set_text_domain( $text_domain );
+			$this->set_author( $author );
+			$this->set_file( $file );
+			$this->set_product_id( $product_id );
 		}
-
 
 		/**
 		 * @param string $api_url
@@ -147,6 +130,10 @@ if ( ! class_exists( "Yoast_Product", false ) ) {
 		 * @param string $item_url
 		 */
 		public function set_item_url( $item_url ) {
+			if ( empty( $item_url ) ) {
+				$item_url = $this->api_url;
+			}
+
 			$this->item_url = $item_url;
 		}
 
@@ -161,7 +148,21 @@ if ( ! class_exists( "Yoast_Product", false ) ) {
 		 * @param string $license_page_url
 		 */
 		public function set_license_page_url( $license_page_url ) {
-			$this->license_page_url = admin_page( $license_page_url );
+
+			if ( is_admin() && is_multisite() ) {
+
+				if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+					require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+				}
+
+				if ( is_plugin_active_for_network( $this->get_slug() ) ) {
+					$this->license_page_url = network_admin_url( $license_page_url );
+
+					return;
+				}
+			}
+
+			$this->license_page_url = admin_url( $license_page_url );
 		}
 
 		/**
@@ -280,11 +281,9 @@ if ( ! class_exists( "Yoast_Product", false ) ) {
 				'utm_content'  => $link_identifier
 			);
 
-			// url encode tracking vars
+			// URL encode tracking vars.
 			$tracking_vars = urlencode_deep( $tracking_vars );
-
 			$query_string = build_query( $tracking_vars );
-
 
 			return $this->get_item_url() . '#' . $query_string;
 		}
