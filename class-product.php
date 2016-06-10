@@ -1,6 +1,6 @@
 <?php
 
-if( ! class_exists( "Yoast_Product", false ) ) {
+if ( ! class_exists( "Yoast_Product", false ) ) {
 
 	/**
 	 * Class Yoast_Product
@@ -54,20 +54,24 @@ if( ! class_exists( "Yoast_Product", false ) ) {
 		 */
 		protected $file;
 
+		/** @var int Product ID in backend system for quick lookup */
+		protected $product_id;
+
 		/**
 		 * Yoast_Product constructor.
 		 *
-		 * @param string $api_url The URL of the shop running the EDD API.
-		 * @param string $item_name The item name in the EDD shop.
-		 * @param string $slug The slug of the plugin, for shiny updates this needs to be a valid HTML id.
-		 * @param string $version The version number of the item.
-		 * @param string $item_url The absolute url on which users can purchase a license.
+		 * @param string $api_url          The URL of the shop running the EDD API.
+		 * @param string $item_name        The item name in the EDD shop.
+		 * @param string $slug             The slug of the plugin, for shiny updates this needs to be a valid HTML id.
+		 * @param string $version          The version number of the item.
+		 * @param string $item_url         The absolute url on which users can purchase a license.
 		 * @param string $license_page_url Absolute admin URL on which users can enter their license key.
-		 * @param string $text_domain The text domain used for translating strings.
-		 * @param string $author The item author.
-		 * @param string $file The relative file path to the plugin.
+		 * @param string $text_domain      The text domain used for translating strings.
+		 * @param string $author           The item author.
+		 * @param string $file             The relative file path to the plugin.
+		 * @param int    $product_id       The ID of the product in the backend system.
 		 */
-		public function __construct( $api_url, $item_name, $slug, $version, $item_url = '', $license_page_url = '#', $text_domain = 'yoast', $author = 'Yoast', $file = '' ) {
+		public function __construct( $api_url, $item_name, $slug, $version, $item_url = '', $license_page_url = '#', $text_domain = 'yoast', $author = 'Yoast', $file = '', $product_id = 0 ) {
 			$this->api_url          = $api_url;
 			$this->item_name        = $item_name;
 			$this->slug             = $slug;
@@ -77,19 +81,20 @@ if( ! class_exists( "Yoast_Product", false ) ) {
 			$this->text_domain      = $text_domain;
 			$this->author           = $author;
 			$this->file             = $file;
+			$this->product_id       = $product_id;
 
 			// Fix possible empty item url
 			if ( $this->item_url === '' ) {
 				$this->item_url = $this->api_url;
 			}
 
-			if( is_admin() && is_multisite() ) {
+			if ( is_admin() && is_multisite() ) {
 
 				if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
 					require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 				}
 
-				if( is_plugin_active_for_network( $slug ) ) {
+				if ( is_plugin_active_for_network( $slug ) ) {
 					$this->license_page_url = network_admin_url( $license_page_url );
 				}
 			}
@@ -242,18 +247,37 @@ if( ! class_exists( "Yoast_Product", false ) ) {
 		}
 
 		/**
-		* Gets a Google Analytics Campaign url for this product
-		*
-		* @param string $link_identifier
-		* @return string The full URL
-		*/
+		 * Return the Product ID
+		 *
+		 * @return int
+		 */
+		public function get_product_id() {
+			return $this->product_id;
+		}
+
+		/**
+		 * Set the product ID
+		 *
+		 * @param int $product_id Product ID to set.
+		 */
+		public function set_product_id( $product_id ) {
+			$this->product_id = (int) $product_id;
+		}
+
+		/**
+		 * Gets a Google Analytics Campaign url for this product
+		 *
+		 * @param string $link_identifier
+		 *
+		 * @return string The full URL
+		 */
 		public function get_tracking_url( $link_identifier = '' ) {
 
 			$tracking_vars = array(
 				'utm_campaign' => $this->get_item_name() . ' licensing',
-				'utm_medium' => 'link',
-				'utm_source' => $this->get_item_name(),
-				'utm_content' => $link_identifier
+				'utm_medium'   => 'link',
+				'utm_source'   => $this->get_item_name(),
+				'utm_content'  => $link_identifier
 			);
 
 			// url encode tracking vars
@@ -264,8 +288,6 @@ if( ! class_exists( "Yoast_Product", false ) ) {
 
 			return $this->get_item_url() . '#' . $query_string;
 		}
-
 	}
 
 }
-
