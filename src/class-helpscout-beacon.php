@@ -223,7 +223,9 @@ class Yoast_HelpScout_Beacon {
 		);
 
 		foreach ( $this->settings as $setting ) {
-			$config = array_merge( $config, $setting->get_config( $page ) );
+			if ( method_exists( $setting, 'get_config' ) ) {
+				$config = array_merge( $config, $setting->get_config( $page ) );
+			}
 		}
 
 		return $config;
