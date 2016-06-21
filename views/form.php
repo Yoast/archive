@@ -42,12 +42,12 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 			<td class="yoast-license-toggler">
 
 				<?php if( $this->license_is_valid() ) { ?>
-					<button name="<?php echo esc_attr( $action_name ); ?>" type="submit" class="button-secondary yoast-license-deactivate" value="deactivate"><?php echo esc_html_e( 'Deactivate License', $product->get_text_domain() ); ?></button> &nbsp;
+					<button name="<?php echo esc_attr( $action_name ); ?>" type="submit" class="button button-secondary yoast-license-deactivate" value="deactivate"><?php echo esc_html_e( 'Deactivate License', $product->get_text_domain() ); ?></button> &nbsp;
 					<small><?php _e( '(deactivate your license so you can activate it on another WordPress site)', $product->get_text_domain() ); ?></small>
 				<?php } else {
 
 					if( $this->get_license_key() !== '') { ?>
-						<button name="<?php echo esc_attr( $action_name ); ?>" type="submit" class="button-secondary yoast-license-activate" value="activate" /><?php echo esc_html_e('Activate License', $product->get_text_domain() ); ?></button> &nbsp;
+						<button name="<?php echo esc_attr( $action_name ); ?>" type="submit" class="button button-secondary yoast-license-activate" value="activate" /><?php echo esc_html_e('Activate License', $product->get_text_domain() ); ?></button> &nbsp;
 					<?php } else {
 						_e( 'Please enter a license key in the field below first.', $product->get_text_domain() );
 					}
