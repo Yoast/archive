@@ -27,52 +27,52 @@ var contentAssessor = new ContentAssessor(i18n);
  * @param row Object
  */
 function Analyze(row) {
+    try {
+        console.error(row.url);
+        var paper = new Paper(row.content, {locale: row.language});
+
         try {
-            console.error(row.url);
-            var paper = new Paper(row.content, {locale: row.language});
+            contentAssessor.assess(paper);
 
-            try {
-                contentAssessor.assess(paper);
+        } catch (err) {
+            // console.error(paper);
+            // Do nuttin'
+        }
+        var scores = contentAssessor.getValidResults();
 
-            } catch (err) {
-                // console.error(paper);
-                // Do nuttin'
+        var headers = ['inputId'];
+        var scoresOut = [row.id];
+        scores.forEach(function (score) {
+            // This overrides the 3-6-9 score specifically for the textSentenceLengthVariation
+            if (score._identifier == 'textSentenceLengthVariation') {
+                score.score = score.text.match(/score is ([\d.]+)/)[1];
             }
-            var scores = contentAssessor.getValidResults();
+            if (score._identifier != '') {
+                headers.push(score._identifier);
+                scoresOut.push(score.score);
+            }
+        });
+        headers.push('language');
+        scoresOut.push(row.language);
 
-            var headers = ['inputId'];
-            var scoresOut = [row.id];
-            scores.forEach(function (score) {
-                // This overrides the 3-6-9 score specifically for the textSentenceLengthVariation
-                if (score._identifier == 'textSentenceLengthVariation') {
-                    score.score = score.text.match(/score is ([\d.]+)/)[1];
-                }
-                if (score._identifier != '') {
-                    headers.push(score._identifier);
-                    scoresOut.push(score.score);
-                }
-            });
-            headers.push('language');
-            scoresOut.push(row.language);
+        headers.push('Total');
+        var overall = contentAssessor.calculateOverallScore();
+        scoresOut.push(overall);
 
-            headers.push('Total');
-            var overall = contentAssessor.calculateOverallScore();
-            scoresOut.push(overall);
+        var sql = "INSERT INTO results ( ?? ) VALUES ( ? )";
+        var inserts = [headers, scoresOut];
+        var query = mysql.format(sql, inserts);
 
-            var sql = "INSERT INTO results ( ?? ) VALUES ( ? )";
-            var inserts = [headers, scoresOut];
-            var query = mysql.format(sql, inserts);
-
-            connection.query(query, function (err) {
-                if (err) {
-                    console.log('Query that errored:' + query);
-                    console.error(err);
-                }
-            });
-        }
-        catch (err) {
-            console.log(err);
-        }
+        connection.query(query, function (err) {
+            if (err) {
+                console.log('Query that errored:' + query);
+                console.error(err);
+            }
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
 
 var query = "SELECT input.* FROM input WHERE input.id NOT IN ( SELECT inputId FROM results )";
