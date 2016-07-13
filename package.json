@@ -1,0 +1,29 @@
+{
+  "name": "yoastseo-scraper",
+  "version": "1.0.0",
+  "description": "Scrapes a given set of URLs from input.",
+  "main": "scraper.js",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "csv-parse": "^1.1.0",
+    "fs": "^0.0.2",
+    "jed": "^1.1.0",
+    "mysql": "^2.11.1",
+    "node-horseman": "^3.0.1",
+    "path": "^0.12.7",
+    "phantomjs-prebuilt": "^2.1.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node run.js -f yoast-com_test.csv"
+  },
+  "keywords": [
+    "SEO",
+    "Google",
+    "Google",
+    "Search",
+    "Console"
+  ],
+  "author": "Joost de Valk",
+  "license": "GPL-3.0"
+}
