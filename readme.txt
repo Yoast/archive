@@ -28,6 +28,11 @@ More info:
 
 == Changelog ==
 
+= 1.9.2 =
+
+* Bugfixes
+	* Fixes a security issue where an admin could XSS another admin by saving a setting.
+
 = 1.9.1 =
 
 * Bugfixes
