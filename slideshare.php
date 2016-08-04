@@ -12,7 +12,8 @@
  */
 
 function yst_slideshare_init() {
-	load_plugin_textdomain( 'slideshare', null, plugins_url( 'languages', __FILE__ ) );
+
+	load_plugin_textdomain( 'slideshare', null, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 
 add_action( 'init', 'yst_slideshare_init' );
