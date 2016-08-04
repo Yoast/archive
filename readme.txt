@@ -32,9 +32,15 @@ More info:
 
 = 1.9.2 =
 
+Release Date: August 4th, 2016
+
 * Bugfixes
 	* Fixes a security issue where an admin could XSS another admin by saving a setting.
 	* Fixes a PHP notice in the settings and on the frontend.
+	* Fixes a bug where the translations where not loaded.
+
+* Enhancements
+	* Adds seven new translations.
 
 = 1.9.1 =
 
