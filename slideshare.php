@@ -155,7 +155,7 @@ if ( ! is_admin() ) {
 				$args = str_replace( '&amp;', '&', $args );
 				$r    = wp_parse_args( 'id=' . $args );
 
-				if ( $options['postwidth'] == '' ) {
+				if ( $options['postwidth'] == '' && isset( $r['w'] ) ) {
 					$width = $r['w'];
 				} else {
 					$width = $options['postwidth'];
