@@ -121,7 +121,7 @@ class Yoast_VAT_Updater {
 	 */
 	private function retrieve_vat_rates() {
 		$resp = wp_remote_get( 'http://jsonvat.com/' );
-		if ( 200 === $resp['response']['code'] ) {
+		if ( 200 === wp_remote_retrieve_response_code( $resp ) ) {
 			$json 		 = wp_remote_retrieve_body( $resp );
 			$vat_details = json_decode( $json );
 
