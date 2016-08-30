@@ -40,6 +40,18 @@ function yst_edd_vat_rate_check_activate() {
 register_activation_hook( __FILE__, 'yst_edd_vat_rate_check_activate' );
 
 /**
+ * Checks whether there's a scheduled task and if yes, unschedules it
+ */
+function yst_edd_vat_rate_check_deactivate() {
+  $timestamp = wp_next_scheduled( 'yst_edd_vat_rate_check' );
+
+  if ( $timestamp ) {
+    wp_unschedule_event( $timestamp, 'yst_edd_vat_rate_check' );
+  }
+}
+register_deactivation_hook( __FILE__, 'yst_edd_vat_rate_check_deactivate' );
+
+/**
  * When we need to check the VAT rates, instantiate the task
  */
 function yst_edd_vat_rate_check() {
