@@ -2,8 +2,8 @@
 Contributors: joostdevalk
 Tags: AMP, SEO
 Requires at least: 4.2
-Tested up to: 4.4
-Stable tag: 0.3.2
+Tested up to: 4.6
+Stable tag: 0.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,11 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 3. Design settings in the plugin.
 
 == Changelog ==
+
+= 0.3.3 =
+* Bugfixes:
+    * Fixes bug where AMP was only activated for the first post type in the list
+    * Made sure that the function is not declared multiple times
 
 = 0.3.2 =
 * Bugfixes:
