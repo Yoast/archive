@@ -108,19 +108,25 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		public function post_types() {
 			$post_types = get_post_types( array( 'public' => true ), 'objects' );
 			if ( is_array( $post_types ) && $post_types !== array() ) {
-				foreach ( $post_types as $pt ) {
-					if ( ! isset( $this->options[ 'post_types-' . $pt->name . '-amp' ] ) ) {
+				foreach ( $post_types as $post_type ) {
+
+					$post_type_name = $post_type->name;
+
+					if ( ! isset( $this->options[ 'post_types-' . $post_type_name . '-amp' ] ) ) {
 						continue;
 					}
-					if ( $this->options[ 'post_types-' . $pt->name . '-amp' ] === 'on' ) {
-						add_post_type_support( $pt->name, AMP_QUERY_VAR );
-						return;
+
+					if ( $this->options[ 'post_types-' . $post_type_name . '-amp' ] === 'on' ) {
+						add_post_type_support( $post_type_name, AMP_QUERY_VAR );
+						continue;
 					}
-					if ( 'post' === $pt->name ) {
+
+					if ( 'post' === $post_type_name ) {
 						add_action( 'wp', array( $this, 'disable_amp_for_posts' ) );
-						return;
+						continue;
 					}
-					remove_post_type_support( $pt->name, AMP_QUERY_VAR );
+
+					remove_post_type_support( $post_type_name, AMP_QUERY_VAR );
 				}
 			}
 		}
