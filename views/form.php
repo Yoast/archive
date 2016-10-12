@@ -31,9 +31,9 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 			<th scope="row" valign="top"><?php _e( 'License status', $product->get_text_domain() ); ?></th>
 			<td>
 				<?php if( $this->license_is_valid() ) { ?>
-				<span style="color: white; background: limegreen; padding:3px 6px;">ACTIVE</span> &nbsp; - &nbsp; you are receiving updates.
+				<span style="color: white; background: limegreen; padding:3px 6px;"><?php _e( 'ACTIVE', $product->get_text_domain() ); ?></span> &nbsp; - &nbsp; <?php _e( 'you are receiving updates.', $product->get_text_domain() ); ?>
 				<?php } else { ?>
-				<span style="color:white; background: red; padding: 3px 6px;">INACTIVE</span> &nbsp; - &nbsp; you are <strong>not</strong> receiving updates.
+				<span style="color:white; background: red; padding: 3px 6px;"><?php _e( 'INACTIVE', $product->get_text_domain() ); ?></span> &nbsp; - &nbsp; <?php _e( 'you are <strong>not</strong> receiving updates.', $product->get_text_domain() ); ?>
 				<?php } ?>
 			</td>
 		</tr>
