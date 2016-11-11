@@ -288,7 +288,7 @@ if ( ! class_exists( "Yoast_Product", false ) ) {
 		 */
 		public function get_extension_url( $link_identifier = '' ) {
 			if ( $this->extension_url ) {
-				return $this->add_campaign_attributes( $this->extension_url(), $link_identifier );
+				return $this->add_campaign_attributes( $this->extension_url, $link_identifier );
 			}
 
 			return $this->get_tracking_url( $link_identifier );
