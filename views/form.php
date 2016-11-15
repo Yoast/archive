@@ -12,11 +12,11 @@ $product = $this->product;
 $this->show_license_form_heading();
 
 if( $api_host_available['availability'] === false ){
-	echo '<p style="color: red; max-width: 600px;"><strong>' . sprintf( __( 'We couldn\'t create a connection to our API to verify your license key(s). Please ask your hosting company to allow outgoing connections from your server to %s.', $product->get_text_domain() ), $api_host_available['url'] ) . '</strong></p>';
+	echo '<p style="color: #dc3232; max-width: 600px;"><strong>' . sprintf( __( 'We couldn\'t create a connection to our API to verify your license key(s). Please ask your hosting company to allow outgoing connections from your server to %s.', $product->get_text_domain() ), $api_host_available['url'] ) . '</strong></p>';
 }
 
 if( $api_host_available['curl_version'] !== false && version_compare( $api_host_available['curl_version'], '7.20.0', '<')){
-	echo '<p style="color: red; max-width: 600px;"><strong>' . sprintf( __( 'Your server has an outdated version of the PHP module cURL (Version: %s). Please ask your hosting company to update this to a recent version of cURL. You can read more about that in our %sKnowledge base%s.', $product->get_text_domain() ), $api_host_available['curl_version'], '<a href="http://kb.yoast.com/article/90-is-my-curl-up-to-date" target="_blank">', '</a>' ) . '</strong></p>';
+	echo '<p style="color: #dc3232; max-width: 600px;"><strong>' . sprintf( __( 'Your server has an outdated version of the PHP module cURL (Version: %s). Please ask your hosting company to update this to a recent version of cURL. You can read more about that in our %sKnowledge base%s.', $product->get_text_domain() ), $api_host_available['curl_version'], '<a href="http://kb.yoast.com/article/90-is-my-curl-up-to-date" target="_blank">', '</a>' ) . '</strong></p>';
 }
 
 // Output form tags if we're not embedded in another form
@@ -31,9 +31,9 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 			<th scope="row" valign="top"><?php _e( 'License status', $product->get_text_domain() ); ?></th>
 			<td>
 				<?php if( $this->license_is_valid() ) { ?>
-				<span style="color: white; background: limegreen; padding:3px 6px;"><?php _e( 'ACTIVE', $product->get_text_domain() ); ?></span> &nbsp; - &nbsp; <?php _e( 'you are receiving updates.', $product->get_text_domain() ); ?>
+				<span style="padding: 3px 6px; color: #fff; background: #008a00;"><?php _e( 'ACTIVE', $product->get_text_domain() ); ?></span> &nbsp; - &nbsp; <?php _e( 'you are receiving updates.', $product->get_text_domain() ); ?>
 				<?php } else { ?>
-				<span style="color:white; background: red; padding: 3px 6px;"><?php _e( 'INACTIVE', $product->get_text_domain() ); ?></span> &nbsp; - &nbsp; <?php _e( 'you are <strong>not</strong> receiving updates.', $product->get_text_domain() ); ?>
+				<span style="padding: 3px 6px; color: #fff; background: #dc3232;"><?php _e( 'INACTIVE', $product->get_text_domain() ); ?></span> &nbsp; - &nbsp; <?php _e( 'you are <strong>not</strong> receiving updates.', $product->get_text_domain() ); ?>
 				<?php } ?>
 			</td>
 		</tr>
