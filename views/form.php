@@ -30,10 +30,10 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 		<tr valign="top">
 			<th scope="row" valign="top"><?php _e( 'License status', $product->get_text_domain() ); ?></th>
 			<td>
-				<?php if( $this->license_is_valid() ) { ?>
-				<span style="padding: 3px 6px; color: #fff; background: #008a00;"><?php _e( 'ACTIVE', $product->get_text_domain() ); ?></span> &nbsp; - &nbsp; <?php _e( 'you are receiving updates.', $product->get_text_domain() ); ?>
+				<?php if ( $this->license_is_valid() ) { ?>
+				<span class="yoast-license-status-active"><?php _e( 'ACTIVE', $product->get_text_domain() ); ?></span> &nbsp; - &nbsp; <?php _e( 'you are receiving updates.', $product->get_text_domain() ); ?>
 				<?php } else { ?>
-				<span style="padding: 3px 6px; color: #fff; background: #dc3232;"><?php _e( 'INACTIVE', $product->get_text_domain() ); ?></span> &nbsp; - &nbsp; <?php _e( 'you are <strong>not</strong> receiving updates.', $product->get_text_domain() ); ?>
+				<span class="yoast-license-status-inactive"><?php _e( 'INACTIVE', $product->get_text_domain() ); ?></span> &nbsp; - &nbsp; <?php _e( 'you are <strong>not</strong> receiving updates.', $product->get_text_domain() ); ?>
 				<?php } ?>
 			</td>
 		</tr>
