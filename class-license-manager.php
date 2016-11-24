@@ -116,7 +116,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 					$message = __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updates and support! <a href="%s">Activate your license</a> or <a href="%s" target="_blank">get a license here</a>.' );
 				}
 				?>
-				<div class="error">
+				<div class="notice notice-error yoast-notice-error">
 					<p><?php printf( __( $message, $this->product->get_text_domain() ), $this->product->get_item_name(), $this->product->get_license_page_url(), $this->product->get_tracking_url( 'activate-license-notice' ) ); ?></p>
 				</div>
 			<?php
@@ -130,7 +130,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 				if ( ! defined( "WP_ACCESSIBLE_HOSTS" ) || stristr( WP_ACCESSIBLE_HOSTS, $host ) === false ) {
 					?>
-					<div class="error">
+					<div class="notice notice-error yoast-notice-error">
 						<p><?php printf( __( '<b>Warning!</b> You\'re blocking external requests which means you won\'t be able to get %s updates. Please add %s to %s.', $this->product->get_text_domain() ), $this->product->get_item_name(), '<strong>' . $host . '</strong>', '<code>WP_ACCESSIBLE_HOSTS</code>' ); ?></p>
 					</div>
 				<?php
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		 * @param string $message The message to display
 		 */
 		protected function set_notice( $message, $success = true ) {
-			$css_class = ( $success ) ? 'updated' : 'error';
+			$css_class = ( $success ) ? 'notice-success yoast-notice-success' : 'notice-error yoast-notice-error';
 			add_settings_error( $this->prefix . 'license', 'license-notice', $message, $css_class );
 		}
 
