@@ -4,6 +4,7 @@ if ( ! interface_exists( 'iYoast_License_Manager', false ) ) {
 
 	interface iYoast_License_Manager {
 		public function specific_hooks();
+
 		public function setup_auto_updater();
 	}
 
@@ -116,10 +117,10 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 					$message = __( '<b>Warning!</b> Your %s license is inactive which means you\'re missing out on updates and support! <a href="%s">Activate your license</a> or <a href="%s" target="_blank">get a license here</a>.' );
 				}
 				?>
-				<div class="notice notice-error yoast-notice-error">
-					<p><?php printf( __( $message, $this->product->get_text_domain() ), $this->product->get_item_name(), $this->product->get_license_page_url(), $this->product->get_tracking_url( 'activate-license-notice' ) ); ?></p>
-				</div>
-			<?php
+                <div class="notice notice-error yoast-notice-error">
+                    <p><?php printf( __( $message, $this->product->get_text_domain() ), $this->product->get_item_name(), $this->product->get_license_page_url(), $this->product->get_tracking_url( 'activate-license-notice' ) ); ?></p>
+                </div>
+				<?php
 			}
 
 			// show notice if external requests are blocked through the WP_HTTP_BLOCK_EXTERNAL constant
@@ -130,10 +131,10 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 				if ( ! defined( "WP_ACCESSIBLE_HOSTS" ) || stristr( WP_ACCESSIBLE_HOSTS, $host ) === false ) {
 					?>
-					<div class="notice notice-error yoast-notice-error">
-						<p><?php printf( __( '<b>Warning!</b> You\'re blocking external requests which means you won\'t be able to get %s updates. Please add %s to %s.', $this->product->get_text_domain() ), $this->product->get_item_name(), '<strong>' . $host . '</strong>', '<code>WP_ACCESSIBLE_HOSTS</code>' ); ?></p>
-					</div>
-				<?php
+                    <div class="notice notice-error yoast-notice-error">
+                        <p><?php printf( __( '<b>Warning!</b> You\'re blocking external requests which means you won\'t be able to get %s updates. Please add %s to %s.', $this->product->get_text_domain() ), $this->product->get_item_name(), '<strong>' . $host . '</strong>', '<code>WP_ACCESSIBLE_HOSTS</code>' ); ?></p>
+                    </div>
+					<?php
 				}
 
 			}
@@ -229,7 +230,8 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				'edd_action' => $action . '_license',
 				'license'    => $this->get_license_key(),
 				'item_name'  => urlencode( trim( $this->product->get_item_name() ) ),
-				'url'        => get_option( 'home' )                                    // grab the URL straight from the option to prevent filters from breaking it.
+				'url'        => get_option( 'home' )
+				// grab the URL straight from the option to prevent filters from breaking it.
 			);
 
 			// create api request url
@@ -370,7 +372,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		protected function get_option( $name ) {
 			$options = $this->get_options();
 
-			return $options[$name];
+			return $options[ $name ];
 		}
 
 		/**
@@ -384,7 +386,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$options = $this->get_options();
 
 			// update option
-			$options[$name] = $value;
+			$options[ $name ] = $value;
 
 			// save options
 			$this->set_options( $options );
@@ -392,10 +394,11 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 		public function show_license_form_heading() {
 			?>
-			<h3>
-				<?php printf( __( "%s: License Settings", $this->product->get_text_domain() ), $this->product->get_item_name() ); ?>&nbsp; &nbsp;
-			</h3>
-		<?php
+            <h3>
+				<?php printf( __( "%s: License Settings", $this->product->get_text_domain() ), $this->product->get_item_name() ); ?>
+                &nbsp; &nbsp;
+            </h3>
+			<?php
 		}
 
 		/**
@@ -436,7 +439,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$name = $this->prefix . 'license_key';
 
 			// check if license key was posted and not empty
-			if ( ! isset( $_POST[$name] ) ) {
+			if ( ! isset( $_POST[ $name ] ) ) {
 				return;
 			}
 
@@ -450,13 +453,13 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			// @TODO: check for user cap?
 
 			// get key from posted value
-			$license_key = $_POST[$name];
+			$license_key = $_POST[ $name ];
 
 			// check if license key doesn't accidentally contain asterisks
 			if ( strstr( $license_key, '*' ) === false ) {
 
 				// sanitize key
-				$license_key = trim( sanitize_key( $_POST[$name] ) );
+				$license_key = trim( sanitize_key( $_POST[ $name ] ) );
 
 				// save license key
 				$this->set_license_key( $license_key );
@@ -473,9 +476,9 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$action_name = $this->prefix . 'license_action';
 
 			// was one of the action buttons clicked?
-			if ( isset( $_POST[$action_name] ) ) {
+			if ( isset( $_POST[ $action_name ] ) ) {
 
-				$action = trim( $_POST[$action_name] );
+				$action = trim( $_POST[ $action_name ] );
 
 				switch ( $action ) {
 					case 'activate':
@@ -513,7 +516,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		 *
 		 * @return array
 		 */
-		protected function get_api_availability(){
+		protected function get_api_availability() {
 			return array(
 				'url'          => $this->product->get_api_url(),
 				'availability' => $this->check_api_host_availability(),
@@ -559,7 +562,10 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 			if ( empty( $this->license_constant_name ) ) {
 				// generate license constant name
-				$this->set_license_constant_name( strtoupper( str_replace( array( ' ', '-' ), '', sanitize_key( $this->product->get_item_name() ) ) ) . '_LICENSE' );
+				$this->set_license_constant_name( strtoupper( str_replace( array(
+						' ',
+						'-'
+					), '', sanitize_key( $this->product->get_item_name() ) ) ) . '_LICENSE' );
 			}
 
 			// set license key from constant
@@ -577,14 +583,14 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
-         * Determine what message should be shown for a successful license activation
-         *
+		 * Determine what message should be shown for a successful license activation
+		 *
 		 * @param Object $result Result of a request.
 		 *
 		 * @return string
 		 */
 		protected function get_successful_activation_message( $result ) {
-		    // Get expiry date.
+			// Get expiry date.
 			if ( isset( $result->expires ) ) {
 				$this->set_license_expiry_date( $result->expires );
 				$expiry_date = strtotime( $result->expires );
@@ -615,8 +621,8 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
-         * Determine what message should be shown for an unsuccessful activation
-         *
+		 * Determine what message should be shown for an unsuccessful activation
+		 *
 		 * @param Object $result Result of a request.
 		 *
 		 * @return string
