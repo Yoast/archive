@@ -119,7 +119,11 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	/** @var Yoast_License_Manager_Double */
 	private $class;
 
+	/**
+	 * Set up before each test
+	 */
 	public function setUp() {
+		// Create a new double for every run.
 		$this->class = new Yoast_License_Manager_Double();
 	}
 
@@ -150,6 +154,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message for successful unlimited license activation
+	 *
 	 * @covers Yoast_License_Manager::get_successful_activation_message()
 	 */
 	public function test_get_successful_activation_message_unlimited() {
@@ -167,6 +173,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message for successful activation with remaining activations
+	 *
 	 * @covers Yoast_License_Manager::get_successful_activation_message()
 	 */
 	public function test_get_successful_activation_message_limited_license() {
@@ -184,6 +192,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message for successful activation with upgrade message
+	 *
 	 * @covers Yoast_License_Manager::get_successful_activation_message()
 	 */
 	public function test_get_successful_activation_message_limited_license_upgrade() {
@@ -202,6 +212,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message for successful activation which will expire soon
+	 *
 	 * @covers Yoast_License_Manager::get_successful_activation_message()
 	 */
 	public function test_get_successful_activation_message_limited_license_extend() {
@@ -221,6 +233,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message for successful activation which will expire tomorrow
+	 *
 	 * @covers Yoast_License_Manager::get_successful_activation_message()
 	 */
 	public function test_get_successful_activation_message_limited_license_extend_tomorrow() {
@@ -240,6 +254,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message for successful activation which expires soon and can be upgraded
+	 *
 	 * @covers Yoast_License_Manager::get_successful_activation_message()
 	 */
 	public function test_get_successful_activation_message_limited_license_upgrade_extend() {
@@ -262,6 +278,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 
 
 	/**
+	 * Tests message for unsuccessful activation without specific error code
+	 *
 	 * @covers Yoast_License_Manager::get_unsuccessful_activation_message()
 	 */
 	public function test_get_unsuccessful_activation_message() {
@@ -276,6 +294,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message for unsuccessful activation when activation limit is reached
+	 *
 	 * @covers Yoast_License_Manager::get_unsuccessful_activation_message()
 	 */
 	public function test_get_unsuccessful_activation_message_no_activations_left() {
@@ -290,6 +310,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message for unsuccessful activation when license is expired
+	 *
 	 * @covers Yoast_License_Manager::get_unsuccessful_activation_message()
 	 */
 	public function test_get_unsuccessful_activation_message_expired() {
@@ -304,9 +326,27 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests regular custom message
+	 *
 	 * @covers Yoast_License_Manager::get_custom_message()
 	 */
 	public function test_get_custom_message() {
+		$message = 'Normal HTML Message';
+
+		$object                   = new StdClass();
+		$object->html_description = $message;
+
+		$result = $this->class->get_custom_message( $object );
+
+		$this->assertEquals( $result, '<br />' . $message );
+	}
+
+	/**
+	 * Tests locale specific custom message
+	 *
+	 * @covers Yoast_License_Manager::get_custom_message()
+	 */
+	public function test_get_custom_message_locale() {
 		$message = 'locale message';
 
 		$locale = $this->class->get_locale();
@@ -320,16 +360,26 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests notice on licence API unsuccessful request
+	 *
 	 * @covers Yoast_License_Manager::activate_license()
 	 */
 	public function test_activate_license_failed_api_response() {
+		// API response will be `false`.
 		$this->class->set_license_api_response( 'activate', false );
 
-		$this->assertFalse( $this->class->activate_license() );
+		$activated = $this->class->activate_license();
+
+		// Activation will fail.
+		$this->assertFalse( $activated );
+
+		// No notice will be triggered.
 		$this->assertEquals( [], $this->class->__get_notices() );
 	}
 
 	/**
+	 * Tests notice on successful unlimited license activation
+	 *
 	 * @covers Yoast_License_Manager::activate_license()
 	 */
 	public function test_activate_license_success() {
@@ -352,6 +402,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests notice on successful unlimited license activation with custom message
+	 *
 	 * @covers Yoast_License_Manager::activate_license()
 	 */
 	public function test_activate_license_success_custom_message() {
@@ -375,17 +427,26 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests state on failed deactivation
+	 *
 	 * @covers Yoast_License_Manager::deactivate_license()
 	 */
 	public function test_deactivate_license_failed_response() {
+		// Current state is activated.
 		$this->class->set_license_status( 'activated' );
+
+		// API response will be `false`.
 		$this->class->set_license_api_response( 'deactivate', false );
 
-		$this->assertFalse( $this->class->deactivate_license() );
+		$deactivated = $this->class->deactivate_license();
+
+		$this->assertFalse( $deactivated );
 		$this->assertEquals( 'activated', $this->class->get_license_status() );
 	}
 
 	/**
+	 * Tests message on successful deactivation
+	 *
 	 * @covers Yoast_License_Manager::deactivate_license()
 	 */
 	public function test_deactivate_license_success() {
@@ -407,6 +468,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message on successful deactivation with custom message
+	 *
 	 * @covers Yoast_License_Manager::deactivate_license()
 	 */
 	public function test_deactivate_license_success_custom_message() {
@@ -429,6 +492,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message on unsuccessful deactivation
+	 *
 	 * @covers Yoast_License_Manager::deactivate_license()
 	 */
 	public function test_deactivate_license_failed() {
@@ -450,6 +515,8 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests message on unsuccessful deactivation with custom message
+	 *
 	 * @covers Yoast_License_Manager::deactivate_license()
 	 */
 	public function test_deactivate_license_failed_custom_message() {
