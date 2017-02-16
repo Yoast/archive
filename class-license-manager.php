@@ -202,7 +202,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 					$message = sprintf( __( "Failed to deactivate your %s license.", $this->product->get_text_domain() ), $this->product->get_item_name() );
 				}
 
-				$message .= wpautop( $this->get_custom_message( $result ) );
+				$message .= $this->get_custom_message( $result );
 
 				// Append custom HTML message to default message.
 				$this->set_notice( $message, $success );
