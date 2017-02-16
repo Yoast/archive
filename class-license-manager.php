@@ -14,9 +14,6 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 	/**
 	 * Class Yoast_License_Manager
-	 *
-	 * @todo Maybe create a license class that contains key and option
-	 * @todo Not sure if Yoast_License_Manager is a good name for this class, it's more managing the product (plugin or theme)
 	 */
 	abstract class Yoast_License_Manager implements iYoast_License_Manager {
 
