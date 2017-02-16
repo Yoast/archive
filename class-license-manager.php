@@ -643,8 +643,8 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
-         * Get the relevant locale
-         *
+		 * Get the relevant locale
+		 *
 		 * @return string
 		 */
 		protected function get_locale() {
@@ -656,8 +656,8 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
-         * Parse custom HTML message from response
-         *
+		 * Parse custom HTML message from response
+		 *
 		 * @param Object $result Result of the request.
 		 *
 		 * @return string
@@ -672,8 +672,8 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			}
 
 			// Fall back to default HTML Description if no locale has been provided.
-			if ( empty( $message ) && ! empty( $result->htmlDescription ) ) {
-				$message = $result->htmlDescription;
+			if ( empty( $message ) && ! empty( $result->html_description ) ) {
+				$message = $result->html_description;
 			}
 
 			// Make sure we limit the type of HTML elements to be displayed.
