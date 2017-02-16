@@ -610,11 +610,13 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 			// add upgrade notice if user has less than 3 activations left
 			if ( $result->license_limit > 0 && ( $result->license_limit - $result->site_count ) <= 3 ) {
-				$message .= sprintf( __( '<a href="%s">Did you know you can upgrade your license?</a>', $this->product->get_text_domain() ), $this->product->get_extension_url( 'license-nearing-limit-notice' ) );
-			} elseif ( $expiry_date !== false && $expiry_date < strtotime( "+1 month" ) ) {
+				$message .= sprintf( __( '<a href="%s">Did you know you can upgrade your license?</a> ', $this->product->get_text_domain() ), $this->product->get_extension_url( 'license-nearing-limit-notice' ) );
+			}
+
+			if ( $expiry_date !== false && $expiry_date < strtotime( "+1 month" ) ) {
 				// Add extend notice if license is expiring in less than 1 month.
-				$days_left = round( ( $expiry_date - strtotime( "now" ) ) / 86400 );
-				$message .= sprintf( _n( '<a href="%s">Your license is expiring in %d day, would you like to extend it?</a>', '<a href="%s">Your license is expiring in %d days, would you like to extend it?</a>', $days_left, $this->product->get_text_domain() ), $this->product->get_extension_url( 'license-expiring-notice' ), $days_left );
+				$days_left = round( ( $expiry_date - time() ) / 86400 );
+				$message .= sprintf( _n( '<a href="%s">Your license is expiring in %d day, would you like to extend it?</a> ', '<a href="%s">Your license is expiring in %d days, would you like to extend it?</a> ', $days_left, $this->product->get_text_domain() ), $this->product->get_extension_url( 'license-expiring-notice' ), $days_left );
 			}
 
 			return $message;
