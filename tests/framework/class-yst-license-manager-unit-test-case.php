@@ -36,5 +36,4 @@ class Yst_License_Manager_UnitTestCase extends WP_UnitTestCase {
 		ob_clean();
 		$this->assertEquals( $output, $string );
 	}
-
 }
