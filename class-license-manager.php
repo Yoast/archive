@@ -173,7 +173,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				}
 
 				// Append custom HTML message to default message.
-				$message .= wpautop( $this->get_custom_message( $result ) );
+				$message .= $this->get_custom_message( $result );
 
 				$this->set_notice( $message, $success );
 
