@@ -687,7 +687,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				$message = strip_tags( $message, 'a,span,strong,b,em,i' );
 
 				// Make sure we are on a new line.
-				$message = PHP_EOL . $message;
+				$message = '<br />' . $message;
 			}
 
 			return $message;
