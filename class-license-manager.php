@@ -683,7 +683,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 			// Make sure we limit the type of HTML elements to be displayed.
 			if ( ! empty( $message ) ) {
-				$message = strip_tags( $message, 'a' );
+				$message = strip_tags( $message, '<a>' );
 
 				// Make sure we are on a new line.
 				$message = '<br />' . $message;
