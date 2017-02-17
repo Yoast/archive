@@ -555,6 +555,23 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	}
 
 	/**
+	 * Tests if allowed HTML tags still remain after parsing
+	 *
+	 * @covers Yoast_License_Manager::get_custom_message()
+	 */
+	public function test_custom_message_allowed_html_tags_attributes() {
+		$message  = 'Normal HTML Message<br /> with a <a href="http://example.com" target="_blank" title="bla" style="invalid">link</a>.';
+		$expected = 'Normal HTML Message<br /> with a <a href="http://example.com" target="_blank" title="bla">link</a>.';
+
+		$object                   = new StdClass();
+		$object->html_description = $message;
+
+		$result = $this->class->get_custom_message( $object );
+
+		$this->assertEquals( $result, '<br />' . $expected );
+	}
+
+	/**
 	 * Tests if non-allowed tags are being removed from the message
 	 *
 	 * @covers Yoast_License_Manager::get_custom_message()
