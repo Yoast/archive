@@ -62,8 +62,8 @@ class Yoast_License_Manager_Double extends Yoast_License_Manager {
 	/**
 	 * Expose protected function.
 	 */
-	public function get_locale() {
-		return parent::get_locale();
+	public function get_user_locale() {
+		return parent::get_user_locale();
 	}
 
 	/**
@@ -160,14 +160,15 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 */
 	public function test_get_successful_activation_message_unlimited() {
 
-		$object                = new StdClass();
-		$object->license_limit = 0;
-		$object->expiry_date   = false;
+		$api_response = (object) array(
+			'license_limit' => 0,
+			'expiry_date'   => false
+		);
 
-		$message = sprintf( 'Your %s license has been activated. ', $this->class->product->get_item_name() );
+		$message = 'Your test-product license has been activated. ';
 		$message .= 'You have an unlimited license. ';
 
-		$result = $this->class->get_successful_activation_message( $object );
+		$result = $this->class->get_successful_activation_message( $api_response );
 
 		$this->assertEquals( $result, $message );
 	}
@@ -178,15 +179,16 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::get_successful_activation_message()
 	 */
 	public function test_get_successful_activation_message_limited_license() {
-		$object                = new StdClass();
-		$object->site_count    = 2;
-		$object->license_limit = 8;
-		$object->expires       = false;
+		$api_response = (object) array(
+			'license_limit' => 8,
+			'site_count'    => 2,
+			'expires'       => false
+		);
 
-		$message = sprintf( 'Your %s license has been activated. ', $this->class->product->get_item_name() );
-		$message .= sprintf( 'You have used %d/%d activations. ', $object->site_count, $object->license_limit );
+		$message = 'Your test-product license has been activated. ';
+		$message .= 'You have used 2/8 activations. ';
 
-		$result = $this->class->get_successful_activation_message( $object );
+		$result = $this->class->get_successful_activation_message( $api_response );
 
 		$this->assertEquals( $result, $message );
 	}
@@ -197,16 +199,17 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::get_successful_activation_message()
 	 */
 	public function test_get_successful_activation_message_limited_license_upgrade() {
-		$object                = new StdClass();
-		$object->site_count    = 2;
-		$object->license_limit = 3;
-		$object->expires       = false;
+		$api_response = (object) array(
+			'site_count'    => 2,
+			'license_limit' => 3,
+			'expires'       => false
+		);
 
-		$message = sprintf( 'Your %s license has been activated. ', $this->class->product->get_item_name() );
-		$message .= sprintf( 'You have used %d/%d activations. ', $object->site_count, $object->license_limit );
+		$message = 'Your test-product license has been activated. ';
+		$message .= 'You have used 2/3 activations. ';
 		$message .= sprintf( '<a href="%s">Did you know you can upgrade your license?</a> ', $this->class->product->get_extension_url( 'license-nearing-limit-notice' ) );
 
-		$result = $this->class->get_successful_activation_message( $object );
+		$result = $this->class->get_successful_activation_message( $api_response );
 
 		$this->assertEquals( $result, $message );
 	}
@@ -219,15 +222,16 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	public function test_get_successful_activation_message_limited_license_extend() {
 		$days_left = 5;
 
-		$object                = new StdClass();
-		$object->license_limit = 0;
-		$object->expires       = date( DATE_RSS, time() + ( $days_left * 86400 ) );
+		$api_response = (object) array(
+			'license_limit' => 0,
+			'expires'       => date( DATE_RSS, time() + ( $days_left * 86400 ) )
+		);
 
-		$message = sprintf( 'Your %s license has been activated. ', $this->class->product->get_item_name() );
+		$message = 'Your test-product license has been activated. ';
 		$message .= 'You have an unlimited license. ';
-		$message .= sprintf( '<a href="%s">Your license is expiring in %d days, would you like to extend it?</a> ', $this->class->product->get_extension_url( 'license-expiring-notice' ), $days_left );
+		$message .= sprintf( '<a href="%s">Your license is expiring in 5 days, would you like to extend it?</a> ', $this->class->product->get_extension_url( 'license-expiring-notice' ) );
 
-		$result = $this->class->get_successful_activation_message( $object );
+		$result = $this->class->get_successful_activation_message( $api_response );
 
 		$this->assertEquals( $result, $message );
 	}
@@ -240,15 +244,16 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	public function test_get_successful_activation_message_limited_license_extend_tomorrow() {
 		$days_left = 1;
 
-		$object                = new StdClass();
-		$object->license_limit = 0;
-		$object->expires       = date( DATE_RSS, time() + ( $days_left * 86400 ) );
+		$api_response = (object) array(
+			'license_limit' => 0,
+			'expires'       => date( DATE_RSS, time() + ( $days_left * 86400 ) )
+		);
 
-		$message = sprintf( 'Your %s license has been activated. ', $this->class->product->get_item_name() );
+		$message = 'Your test-product license has been activated. ';
 		$message .= 'You have an unlimited license. ';
-		$message .= sprintf( '<a href="%s">Your license is expiring in %d day, would you like to extend it?</a> ', $this->class->product->get_extension_url( 'license-expiring-notice' ), $days_left );
+		$message .= sprintf( '<a href="%s">Your license is expiring in 1 day, would you like to extend it?</a> ', $this->class->product->get_extension_url( 'license-expiring-notice' ) );
 
-		$result = $this->class->get_successful_activation_message( $object );
+		$result = $this->class->get_successful_activation_message( $api_response );
 
 		$this->assertEquals( $result, $message );
 	}
@@ -261,17 +266,18 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	public function test_get_successful_activation_message_limited_license_upgrade_extend() {
 		$days_left = 5;
 
-		$object                = new StdClass();
-		$object->site_count    = 2;
-		$object->license_limit = 3;
-		$object->expires       = date( DATE_RSS, time() + ( $days_left * 86400 ) );
+		$api_response = (object) array(
+			'site_count'    => 2,
+			'license_limit' => 3,
+			'expires'       => date( DATE_RSS, time() + ( $days_left * 86400 ) )
+		);
 
-		$message = sprintf( 'Your %s license has been activated. ', $this->class->product->get_item_name() );
-		$message .= sprintf( 'You have used %d/%d activations. ', $object->site_count, $object->license_limit );
+		$message = 'Your test-product license has been activated. ';
+		$message .= 'You have used 2/3 activations. ';
 		$message .= sprintf( '<a href="%s">Did you know you can upgrade your license?</a> ', $this->class->product->get_extension_url( 'license-nearing-limit-notice' ) );
-		$message .= sprintf( '<a href="%s">Your license is expiring in %d days, would you like to extend it?</a> ', $this->class->product->get_extension_url( 'license-expiring-notice' ), $days_left );
+		$message .= sprintf( '<a href="%s">Your license is expiring in 5 days, would you like to extend it?</a> ', $this->class->product->get_extension_url( 'license-expiring-notice' ) );
 
-		$result = $this->class->get_successful_activation_message( $object );
+		$result = $this->class->get_successful_activation_message( $api_response );
 
 		$this->assertEquals( $result, $message );
 	}
@@ -283,12 +289,13 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::get_unsuccessful_activation_message()
 	 */
 	public function test_get_unsuccessful_activation_message() {
-		$object        = new StdClass();
-		$object->error = '';
+		$api_response = (object) array(
+			'error' => ''
+		);
 
 		$message = 'Failed to activate your license, your license key seems to be invalid.';
 
-		$result = $this->class->get_unsuccessful_activation_message( $object );
+		$result = $this->class->get_unsuccessful_activation_message( $api_response );
 
 		$this->assertEquals( $result, $message );
 	}
@@ -299,12 +306,13 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::get_unsuccessful_activation_message()
 	 */
 	public function test_get_unsuccessful_activation_message_no_activations_left() {
-		$object        = new StdClass();
-		$object->error = 'no_activations_left';
+		$api_response = (object) array(
+			'error' => 'no_activations_left'
+		);
 
 		$message = sprintf( 'You\'ve reached your activation limit. You must <a href="%s">upgrade your license</a> to use it on this site.', $this->class->product->get_extension_url( 'license-at-limit-notice' ) );
 
-		$result = $this->class->get_unsuccessful_activation_message( $object );
+		$result = $this->class->get_unsuccessful_activation_message( $api_response );
 
 		$this->assertEquals( $result, $message );
 	}
@@ -315,12 +323,13 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::get_unsuccessful_activation_message()
 	 */
 	public function test_get_unsuccessful_activation_message_expired() {
-		$object        = new StdClass();
-		$object->error = 'expired';
+		$api_response = (object) array(
+			'error' => 'expired'
+		);
 
 		$message = sprintf( 'Your license has expired. You must <a href="%s">extend your license</a> in order to use it again.', $this->class->product->get_extension_url( 'license-expired-notice' ) );
 
-		$result = $this->class->get_unsuccessful_activation_message( $object );
+		$result = $this->class->get_unsuccessful_activation_message( $api_response );
 
 		$this->assertEquals( $result, $message );
 	}
@@ -333,10 +342,11 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	public function test_get_custom_message() {
 		$message = 'Normal HTML Message';
 
-		$object                   = new StdClass();
-		$object->html_description = $message;
+		$api_response = (object) array(
+			'custom_message' => $message,
+		);
 
-		$result = $this->class->get_custom_message( $object );
+		$result = $this->class->get_custom_message( $api_response );
 
 		$this->assertEquals( $result, '<br />' . $message );
 	}
@@ -349,12 +359,13 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	public function test_get_custom_message_locale() {
 		$message = 'locale message';
 
-		$locale = $this->class->get_locale();
+		$locale = $this->class->get_user_locale();
 
-		$object                                  = new StdClass();
-		$object->{'html_description_' . $locale} = $message;
+		$api_response = (object) array(
+			'custom_message_' . $locale => $message
+		);
 
-		$result = $this->class->get_custom_message( $object );
+		$result = $this->class->get_custom_message( $api_response );
 
 		$this->assertEquals( $result, '<br />' . $message );
 	}
@@ -374,7 +385,7 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 		$this->assertFalse( $activated );
 
 		// No notice will be triggered.
-		$this->assertEquals( [], $this->class->__get_notices() );
+		$this->assertEquals( array(), $this->class->__get_notices() );
 	}
 
 	/**
@@ -383,14 +394,15 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::activate_license()
 	 */
 	public function test_activate_license_success() {
-		$object                = new StdClass();
-		$object->license       = 'valid';
-		$object->license_limit = 0;
+		$api_response = (object) array(
+			'license'       => 'valid',
+			'license_limit' => 0,
+		);
 
-		$message = sprintf( 'Your %s license has been activated. ', $this->class->product->get_item_name() );
+		$message = 'Your test-product license has been activated. ';
 		$message .= 'You have an unlimited license. ';
 
-		$this->class->set_license_api_response( 'activate', $object );
+		$this->class->set_license_api_response( 'activate', $api_response );
 		$this->class->activate_license();
 
 		$this->assertEquals( array(
@@ -407,20 +419,22 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::activate_license()
 	 */
 	public function test_activate_license_success_custom_message() {
-		$object                   = new StdClass();
-		$object->license          = 'valid';
-		$object->license_limit    = 0;
-		$object->html_description = 'This is an HTML description.';
+		$api_response = (object) array(
+			'license'        => 'valid',
+			'license_limit'  => 0,
+			'custom_message' => 'This is an HTML description.'
+		);
 
-		$message = sprintf( 'Your %s license has been activated. ', $this->class->product->get_item_name() );
+
+		$message = 'Your test-product license has been activated. ';
 		$message .= 'You have an unlimited license. ';
 
-		$this->class->set_license_api_response( 'activate', $object );
+		$this->class->set_license_api_response( 'activate', $api_response );
 		$this->class->activate_license();
 
 		$this->assertEquals( array(
 			array(
-				'message' => $message . '<br />' . $object->html_description,
+				'message' => $message . '<br />' . $api_response->custom_message,
 				'success' => true
 			)
 		), $this->class->__get_notices() );
@@ -450,13 +464,14 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::deactivate_license()
 	 */
 	public function test_deactivate_license_success() {
-		$object          = new StdClass();
-		$object->license = 'deactivated';
+		$api_response = (object) array(
+			'license' => 'deactivated'
+		);
 
-		$message = sprintf( 'Your %s license has been deactivated.', $this->class->product->get_item_name() );
+		$message = 'Your test-product license has been deactivated.';
 
 		$this->class->set_license_status( 'activated' );
-		$this->class->set_license_api_response( 'deactivate', $object );
+		$this->class->set_license_api_response( 'deactivate', $api_response );
 
 		$this->assertTrue( $this->class->deactivate_license() );
 		$this->assertEquals( array(
@@ -473,19 +488,20 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::deactivate_license()
 	 */
 	public function test_deactivate_license_success_custom_message() {
-		$object                   = new StdClass();
-		$object->license          = 'deactivated';
-		$object->html_description = 'This is an HTML description.';
+		$api_response = (object) array(
+			'license'        => 'deactivated',
+			'custom_message' => 'This is an HTML description.'
+		);
 
-		$message = sprintf( 'Your %s license has been deactivated.', $this->class->product->get_item_name() );
+		$message = 'Your test-product license has been deactivated.';
 
 		$this->class->set_license_status( 'activated' );
-		$this->class->set_license_api_response( 'deactivate', $object );
+		$this->class->set_license_api_response( 'deactivate', $api_response );
 
 		$this->assertTrue( $this->class->deactivate_license() );
 		$this->assertEquals( array(
 			array(
-				'message' => $message . '<br />' . $object->html_description,
+				'message' => $message . '<br />' . $api_response->custom_message,
 				'success' => true
 			)
 		), $this->class->__get_notices() );
@@ -497,13 +513,14 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::deactivate_license()
 	 */
 	public function test_deactivate_license_failed() {
-		$object          = new StdClass();
-		$object->license = 'activated'; // Expected to be deactivated.
+		$api_response = (object) array(
+			'license' => 'activated' // Expected to be deactivated.
+		);
 
-		$message = sprintf( 'Failed to deactivate your %s license.', $this->class->product->get_item_name() );
+		$message = 'Failed to deactivate your test-product license.';
 
 		$this->class->set_license_status( 'activated' );
-		$this->class->set_license_api_response( 'deactivate', $object );
+		$this->class->set_license_api_response( 'deactivate', $api_response );
 
 		$this->assertFalse( $this->class->deactivate_license() );
 		$this->assertEquals( array(
@@ -520,19 +537,20 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	 * @covers Yoast_License_Manager::deactivate_license()
 	 */
 	public function test_deactivate_license_failed_custom_message() {
-		$object                   = new StdClass();
-		$object->license          = 'activated'; // Expected to be deactivated.
-		$object->html_description = 'This is an HTML description.';
+		$api_response = (object) array(
+			'license'        => 'activated', // Expected to be deactivated.
+			'custom_message' => 'This is an HTML description.'
+		);
 
-		$message = sprintf( 'Failed to deactivate your %s license.', $this->class->product->get_item_name() );
+		$message = 'Failed to deactivate your test-product license.';
 
 		$this->class->set_license_status( 'activated' );
-		$this->class->set_license_api_response( 'deactivate', $object );
+		$this->class->set_license_api_response( 'deactivate', $api_response );
 
 		$this->assertFalse( $this->class->deactivate_license() );
 		$this->assertEquals( array(
 			array(
-				'message' => $message . '<br />' . $object->html_description,
+				'message' => $message . '<br />' . $api_response->custom_message,
 				'success' => false
 			)
 		), $this->class->__get_notices() );
@@ -546,10 +564,11 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	public function test_custom_message_allowed_html_tags() {
 		$message = 'Normal HTML Message with a <a href="http://example.com">link</a>.';
 
-		$object                   = new StdClass();
-		$object->html_description = $message;
+		$api_response = (object) array(
+			'custom_message' => $message
+		);
 
-		$result = $this->class->get_custom_message( $object );
+		$result = $this->class->get_custom_message( $api_response );
 
 		$this->assertEquals( $result, '<br />' . $message );
 	}
@@ -563,10 +582,11 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 		$message  = 'Normal HTML Message<br /> with a <a href="http://example.com" target="_blank" title="bla" style="invalid">link</a>.';
 		$expected = 'Normal HTML Message<br /> with a <a href="http://example.com" target="_blank" title="bla">link</a>.';
 
-		$object                   = new StdClass();
-		$object->html_description = $message;
+		$api_response = (object) array(
+			'custom_message' => $message
+		);
 
-		$result = $this->class->get_custom_message( $object );
+		$result = $this->class->get_custom_message( $api_response );
 
 		$this->assertEquals( $result, '<br />' . $expected );
 	}
@@ -580,10 +600,11 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 		$message  = 'Normal HTML Message with a <strong>link</strong>.';
 		$expected = 'Normal HTML Message with a link.';
 
-		$object                   = new StdClass();
-		$object->html_description = $message;
+		$api_response = (object) array(
+			'custom_message' => $message
+		);
 
-		$result = $this->class->get_custom_message( $object );
+		$result = $this->class->get_custom_message( $api_response );
 
 		$this->assertEquals( $result, '<br />' . $expected );
 	}

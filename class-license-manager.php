@@ -648,11 +648,11 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
-		 * Get the relevant locale
+		 * Get the locale for the current user
 		 *
 		 * @return string
 		 */
-		protected function get_locale() {
+		protected function get_user_locale() {
 			if ( function_exists( 'get_user_locale' ) ) {
 				return get_user_locale();
 			}
@@ -671,14 +671,14 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$message = '';
 
 			// Allow for translated messages to be used.
-			$localizedDescription = 'html_description_' . $this->get_locale();
+			$localizedDescription = 'custom_message_' . $this->get_user_locale();
 			if ( ! empty( $result->{$localizedDescription} ) ) {
 				$message = $result->{$localizedDescription};
 			}
 
-			// Fall back to default HTML Description if no locale has been provided.
-			if ( empty( $message ) && ! empty( $result->html_description ) ) {
-				$message = $result->html_description;
+			// Fall back to non-localized custom message if no locale has been provided.
+			if ( empty( $message ) && ! empty( $result->custom_message ) ) {
+				$message = $result->custom_message;
 			}
 
 			// Make sure we limit the type of HTML elements to be displayed.
