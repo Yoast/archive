@@ -1,0 +1,12 @@
+{
+  "name": "theme-framework",
+  "description": "Development files for the Yoast Theme Framework",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-wp-i18n": "git://github.com/blazersix/grunt-wp-i18n.git#develop"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
