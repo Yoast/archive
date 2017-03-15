@@ -1,0 +1,7 @@
+= TRUNK =
+
+* Enhancements
+	* Removed Yoast branding, moved them to static vars to change it easily.
+
+* i18n
+	* Changed text-domain from PHP method to a text-domain string in translation functions
