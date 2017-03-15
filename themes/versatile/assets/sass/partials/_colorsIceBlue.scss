@@ -1,0 +1,264 @@
+// Color declarations Versatile ColorSet1 IceBlue
+
+// H1 / H3 / Button Field / BG Top					#96afd7
+// Afterheader text													#526eaa
+// T3 / Lines Color / NAV Active						#d97e91
+// T2 / H2 Gray / BG Footer Dark						#4a5358
+// CTA																			#6bbd1e
+// Lines / Spacers Gray / Buttons content		#a4a7ab
+// BG Content Top / BG Footer NAV Light			#ebeff9
+// Text black																#000000
+// BG																				#e6e6e6
+
+// #yoast-after-header-container check in list
+$c_sprite:          "Versatile_Sprite_IceBlue.png";
+
+// general
+$c_bodyTopLineDark:     #d97e91;
+$c_bodyTopLineLight:    #96afd7;
+$c_bodyLine:						#d97e91;
+
+$c_paragraph:           #000000;
+$c_link:                #d97e91;
+$c_linkHover:           #6bbd1e;
+$c_linkBorder:          #ebeff9;
+
+$c_logoText:            #a4a7ab;
+$c_logoTextLink:        #4a5358;
+$c_logoTextLinkHover:   #4a5358;
+
+$c_taglineTopLight:     #ffffff;
+$c_taglineTopDark:      #96afd7;
+$c_taglineTopBold:      #d97e91;
+$c_taglineFullWidth:    #e6e6e6;
+$c_taglineFullWidthBold:#d97e91;
+$c_taglineBoxShadow:    #e6e6e6;
+$c_taglineLink:         #d97e91;
+$c_taglineLinkHover:    #6bbd1e;
+$c_taglineBg:						#96afd7;
+$c_taglineBgAlt:				#ebeff9;
+$c_taglineBorderMobile:	#a4a7ab;
+
+$c_breadcrumbs:         #4a5358;
+$c_breadcrumbsLink:     #d97e91;
+$c_breadcrumbsLinkHover:#6bbd1e;
+
+$c_pagenavBg:           #a4a7ab;
+$c_pagenavLink:         #ffffff;
+$c_pagenavHoverBg:      #6bbd1e;
+$c_pagenavHoverLink:    #ffffff;
+$c_pagenavActiveBg:     #d97e91;
+$c_pagenavActiveLink:   #ffffff;
+
+$c_metaAtPost:          #4a5358;
+$c_metaAtPostBorder:    #ebeff9;
+$c_commentHTMLtags:     #e6e6e6;
+
+$c_hrLine:              #e6e6e6;
+$c_borderImg:           #e6e6e6;
+$c_randLine:            #a4a7ab; // random grey line
+
+$c_selectionText:       #ffffff;
+$c_selectionBg:         #d97e91;
+
+$c_fieldsetBorder:      #4a5358;
+
+// header
+$c_headerBgDark:        #96afd7;
+$c_headerBgLight:       #ffffff;
+$c_headerText:          #000000;
+$c_headerLink:          #d97e91;
+$c_headerLinkHover:     #d97e91;
+$c_headerH3:            #4a5358;
+$c_headerH4:            #4a5358;
+
+// after header widgets
+$c_afterHeaderBg:					#ebeff9;
+$c_afterHeaderLink:				#d97e91;
+$c_afterHeaderLinkHover:	#6bbd1e;
+$c_afterHeaderH3:					#4a5358;
+$c_afterHeaderH4:					#4a5358;
+$c_afterHeaderText:				#526eaa;
+$c_afterHeaderBorder:			#d97e91;
+
+// navigation
+$c_navMainFullBg:           #4a5358;
+$c_navMainFullBorderTop:    #d97e91;
+$c_navMainFullBorderBottom: #d97e91;
+
+$c_navMainBg:           #a4a7ab;
+$c_navMainText:         #ffffff;
+$c_navMainLink:         #ffffff;
+$c_navMainLinkHover:    #ffffff;
+$c_navMainLinkBg:       #4a5358;
+$c_navMainLinkBgHover:  #d97e91;
+$c_navMainBgActive:     #d97e91;
+$c_navMainTextActive:   #ffffff;
+$c_navMainLinkShadow:   #4a5358;
+$c_navMainBorder:       #ffffff;
+$c_navMainBorderBottom: #d97e91;
+$c_navMainShadow:       #a4a7ab;
+
+$c_navSubBg:           #a4a7ab;
+$c_navSubText:         #ffffff;
+$c_navSubLink:         #ffffff;
+$c_navSubLinkHover:    #ffffff;
+$c_navSubLinkBg:       #a4a7ab;
+$c_navSubLinkBgHover:  #d97e91;
+$c_navSubLinkActive:   #ffffff;
+$c_navSubLinkActiveBg: #a4a7ab;
+$c_navSubBorder:       #e6e6e6;
+$c_navSubBorderBottom: #d97e91;
+
+// mobile menu Sidr
+$sidr-background:               #4a5358;
+$sidr-background-shadow-color:  #4a5358;
+$sidr-text-color:               #ffffff;
+$c_sidr_linkBg:                 #e6e6e6;
+$c_sidr_linkBorder:             #a4a7ab;
+$c_sidr_linkHoverBg:            #d97e91;
+$c_sidr_linkActiveBg:           #d97e91;
+$c_sidr_linkHoverText:          #ffffff;
+$c_sidr_headingText:            #e6e6e6;
+$c_sidr_headingBorder:          #a4a7ab;
+$c_sidr_boxShadow:              #4a5358;
+$c_sidr_searchBg:								#d97e91;
+
+// main content
+$c_mainBg:              #e6e6e6;
+$c_mainContentBg:				#ffffff;
+$c_mainText:            #000000;
+$c_mainLink:            #d97e91;
+$c_mainLinkHover:       #6bbd1e;
+$c_mainH1:              #526eaa;
+$c_mainH1Hover:         #6bbd1e;
+$c_mainH2:              #526eaa;
+$c_mainH2Hover:         #6bbd1e;
+$c_mainH3:              #d97e91;
+$c_mainH3Hover:         #6bbd1e;
+$c_mainH4:              #d97e91;
+$c_mainH4Hover:         #6bbd1e;
+$c_mainH5:              #526eaa;
+$c_mainH5Hover:         #6bbd1e;
+$c_mainH6:              #4a5358;
+$c_mainH6Hover:         #6bbd1e;
+
+$c_taxonomyIntroText:   #526eaa;
+$c_taxonomyIntroH1:     #4a5358;
+
+// blockquote
+$c_BlockquoteText:      #4a5358;
+$c_BlockquoteLink:      #d97e91;
+$c_BlockquoteLinkHover: #d97e91;
+$c_BlockquoteBorder:    #ebeff9;
+$c_BlockquoteBg:        #ebeff9;
+$c_blockquoteBefore:    #a4a7ab;
+
+// input
+$c_inputText:           #000000;
+$c_inputTextFocus:      #000000;
+$c_inputBg:             #ffffff;
+$c_inputBgFocus:        #ffffff;
+$c_inputBorder:         #e6e6e6;
+$c_inputBoxShadow:      #ebeff9;
+$c_inputBorderFocus:    #a4a7ab;
+$c_inputTextPlaceholder:#a4a7ab;
+
+$c_inputSubmitText:     #ffffff;
+$c_inputSubmitTextHover:#ffffff;
+$c_inputSubmitBg:       #526eaa;
+$c_inputSubmitBgHover:  #526eaa;
+$c_inputSubmitBorder:   #a4a7ab;
+$c_inputSubmitTextShadow: #4a5358;
+$c_inputSubmitBoxShadow:  #ffffff;
+
+// comments
+$c_commentBg:           #ffffff;
+$c_commentText:         #000000;
+$c_commentLink:         #d97e91;
+$c_commentBorder:       #d97e91;
+$c_commentReplyBorder:  #ebeff9;
+$c_commentByAuthorBg:   #ebeff9;
+$c_commentAuthor: 			#96afd7;
+$c_entryCommentsH3:			#96afd7;
+$c_postAuthorBorder: 		#d97e91;
+$c_commentReplyTitle: 	#96afd7;
+$c_commentFormTitle: 		#4a5358;
+$c_allowedTags: 				#4a5358;
+$c_allowedTagsBg:				#e6e6e6;
+
+// author block
+$c_articleAuthorBg:     #ebeff9;
+$c_articleAuthorH2:     #d97e91;
+$c_articleAuthorH3:     #d97e91;
+
+// call-to-action
+$c_ctaBg:               #6bbd1e;
+$c_ctaBorder:           #6bbd1e;
+$c_ctaTextWhite:        #ffffff;
+$c_ctaTextShadow:       #4a5358;
+$c_ctaBoxShadow:        #000000;
+
+$c_ctaBgWhite:          #ffffff;
+$c_ctaBorderWhite:      #ffffff;
+$c_ctaBgGrey:           #e6e6e6;
+$c_ctaBorderGrey:       #e6e6e6;
+$c_ctaTextBlack:        #000000;
+
+// tables
+$c_tableBg:             #ffffff;
+$c_tableText:           #000000;
+$c_tableRowAlt:         #e6e6e6;
+$c_tableHeaderBg:       #a4a7ab;
+$c_tableHeaderText:     #ffffff;
+$c_tableLink:           #a4a7ab;
+$c_tableLinkHover:      #d97e91;
+$c_tableBorder:         #ebeff9;
+$c_tableCaption:        #a4a7ab;
+
+// code
+$c_codeBg:              #ebeff9;
+$c_codeText:            #4a5358;
+
+// mark
+$c_markBg:              #ffff00;
+$c_markText:            #000000;
+
+// sidebar
+$c_sidebarBg:           #ffffff;
+$c_sidebarText:         #000000;
+$c_sidebarLink:         #000000;
+$c_sidebarLinkHover:    #d97e91;
+$c_sidebarLinkArrow:    #d97e91;
+$c_sidebarH3:           #526eaa;
+$c_sidebarH3Bg:         #ebeff9;
+$c_sidebarH4:           #e6e6e6;
+$c_sidebarH4Bg:         #ffffff;
+
+// footerwidgets
+$c_footerWidgetsBg:       #ebeff9;
+$c_footerWidgetsBorderTop:#d97e91;
+$c_footerWidgetsText:     #000000;
+$c_footerWidgetsLink:     #4a5358;
+$c_footerWidgetsLinkHover:#6bbd1e;
+$c_footerWidgetsH3:       #000000;
+$c_footerWidgetsH4:       #e6e6e6;
+
+// footer
+$c_footerBg:            #a4a7ab;
+$c_footerBorderTop:     #d97e91;
+$c_footerText:          #ffffff;
+$c_footerLink:          #ffffff;
+$c_footerLinkHover:     #6bbd1e;
+$c_footerH3:            #ffffff;
+$c_footerH4:            #ffffff;
+
+// main content border
+$c_maincontent_border: 	#a4a7ab;
+
+// general widgets
+$c_widgetBorder:				#d97e91;
+$c_afterPostBorder: 		#d97e91;
+$c_widgetYnsInputfieldBorder:	#526eaa;
+$c_termIntroBg: 				#ebeff9;
+$c_termIntroBorder: 		#d97e91;

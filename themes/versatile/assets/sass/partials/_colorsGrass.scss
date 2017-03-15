@@ -1,0 +1,263 @@
+// Color declarations Versatile ColorSet1 Grass
+
+// H1 / H3 / Button Field / BG Top					#4c8a4e
+// T3 / Lines Color / NAV Active						#afca00
+// T2 / H2 Gray / BG Footer Dark						#4a5358
+// CTA																			#e74c21
+// Lines / Spacers Gray / Buttons content		#a4a7ab
+// BG Content Top / BG Footer NAV Light			#e9f0e6
+// Text black																#000000
+// BG																				#e6e6e6
+
+// #yoast-after-header-container check in list
+$c_sprite:          "Versatile_Sprite_Grass.png";
+
+// general
+$c_bodyTopLineDark:     #afca00;
+$c_bodyTopLineLight:    #4c8a4e;
+$c_bodyLine:						#afca00;
+
+$c_paragraph:           #000000;
+$c_link:                #afca00;
+$c_linkHover:           #e74c21;
+$c_linkBorder:          #e9f0e6;
+
+$c_logoText:            #a4a7ab;
+$c_logoTextLink:        #4a5358;
+$c_logoTextLinkHover:   #4a5358;
+
+$c_taglineTopLight:     #ffffff;
+$c_taglineTopDark:      #4c8a4e;
+$c_taglineTopBold:      #afca00;
+$c_taglineFullWidth:    #e6e6e6;
+$c_taglineFullWidthBold:#afca00;
+$c_taglineBoxShadow:    #e6e6e6;
+$c_taglineLink:         #afca00;
+$c_taglineLinkHover:    #e74c21;
+$c_taglineBg:						#4c8a4e;
+$c_taglineBgAlt:				#e9f0e6;
+$c_taglineBorderMobile:	#a4a7ab;
+
+$c_breadcrumbs:         #4a5358;
+$c_breadcrumbsLink:     #afca00;
+$c_breadcrumbsLinkHover:#e74c21;
+
+$c_pagenavBg:           #a4a7ab;
+$c_pagenavLink:         #ffffff;
+$c_pagenavHoverBg:      #e74c21;
+$c_pagenavHoverLink:    #ffffff;
+$c_pagenavActiveBg:     #afca00;
+$c_pagenavActiveLink:   #ffffff;
+
+$c_metaAtPost:          #4a5358;
+$c_metaAtPostBorder:    #e9f0e6;
+$c_commentHTMLtags:     #e6e6e6;
+
+$c_hrLine:              #e6e6e6;
+$c_borderImg:           #e6e6e6;
+$c_randLine:            #a4a7ab; // random grey line
+
+$c_selectionText:       #ffffff;
+$c_selectionBg:         #afca00;
+
+$c_fieldsetBorder:      #4a5358;
+
+// header
+$c_headerBgDark:        #4c8a4e;
+$c_headerBgLight:       #ffffff;
+$c_headerText:          #000000;
+$c_headerLink:          #afca00;
+$c_headerLinkHover:     #afca00;
+$c_headerH3:            #4a5358;
+$c_headerH4:            #4a5358;
+
+// after header widgets
+$c_afterHeaderBg:					#e9f0e6;
+$c_afterHeaderLink:				#4c8a4e;
+$c_afterHeaderLinkHover:	#e74c21;
+$c_afterHeaderH3:					#4a5358;
+$c_afterHeaderH4:					#4a5358;
+$c_afterHeaderText:				#4c8a4e;
+$c_afterHeaderBorder:			#afca00;
+
+// navigation
+$c_navMainFullBg:           #4a5358;
+$c_navMainFullBorderTop:    #afca00;
+$c_navMainFullBorderBottom: #afca00;
+
+$c_navMainBg:           #4a5358;
+$c_navMainText:         #ffffff;
+$c_navMainLink:         #ffffff;
+$c_navMainLinkHover:    #ffffff;
+$c_navMainLinkBg:       #4a5358;
+$c_navMainLinkBgHover:  #afca00;
+$c_navMainBgActive:     #afca00;
+$c_navMainTextActive:   #ffffff;
+$c_navMainLinkShadow:   #4a5358;
+$c_navMainBorder:       #ffffff;
+$c_navMainBorderBottom: #afca00;
+$c_navMainShadow:       #a4a7ab;
+
+$c_navSubBg:           #4a5358;
+$c_navSubText:         #ffffff;
+$c_navSubLink:         #ffffff;
+$c_navSubLinkHover:    #ffffff;
+$c_navSubLinkBg:       #4a5358;
+$c_navSubLinkBgHover:  #afca00;
+$c_navSubLinkActive:   #ffffff;
+$c_navSubLinkActiveBg: #4a5358;
+$c_navSubBorder:       #e6e6e6;
+$c_navSubBorderBottom: #afca00;
+
+// mobile menu Sidr
+$sidr-background:               #4a5358;
+$sidr-background-shadow-color:  #4a5358;
+$sidr-text-color:               #ffffff;
+$c_sidr_linkBg:                 #e6e6e6;
+$c_sidr_linkBorder:             #a4a7ab;
+$c_sidr_linkHoverBg:            #afca00;
+$c_sidr_linkActiveBg:           #afca00;
+$c_sidr_linkHoverText:          #ffffff;
+$c_sidr_headingText:            #e6e6e6;
+$c_sidr_headingBorder:          #a4a7ab;
+$c_sidr_boxShadow:              #4a5358;
+$c_sidr_searchBg:								#afca00;
+
+// main content
+$c_mainBg:              #e6e6e6;
+$c_mainContentBg:				#ffffff;
+$c_mainText:            #000000;
+$c_mainLink:            #4c8a4e;
+$c_mainLinkHover:       #e74c21;
+$c_mainH1:              #afca00;
+$c_mainH1Hover:         #e74c21;
+$c_mainH2:              #afca00;
+$c_mainH2Hover:         #e74c21;
+$c_mainH3:              #4c8a4e;
+$c_mainH3Hover:         #e74c21;
+$c_mainH4:              #4c8a4e;
+$c_mainH4Hover:         #e74c21;
+$c_mainH5:              #afca00;
+$c_mainH5Hover:         #e74c21;
+$c_mainH6:              #4a5358;
+$c_mainH6Hover:         #e74c21;
+
+$c_taxonomyIntroText:   #4c8a4e;
+$c_taxonomyIntroH1:     #4a5358;
+
+// blockquote
+$c_BlockquoteText:      #4a5358;
+$c_BlockquoteLink:      #afca00;
+$c_BlockquoteLinkHover: #afca00;
+$c_BlockquoteBorder:    #e9f0e6;
+$c_BlockquoteBg:        #e9f0e6;
+$c_blockquoteBefore:    #a4a7ab;
+
+// input
+$c_inputText:           #000000;
+$c_inputTextFocus:      #000000;
+$c_inputBg:             #ffffff;
+$c_inputBgFocus:        #ffffff;
+$c_inputBorder:         #e6e6e6;
+$c_inputBoxShadow:      #e9f0e6;
+$c_inputBorderFocus:    #a4a7ab;
+$c_inputTextPlaceholder:#a4a7ab;
+
+$c_inputSubmitText:     #ffffff;
+$c_inputSubmitTextHover:#ffffff;
+$c_inputSubmitBg:       #4c8a4e;
+$c_inputSubmitBgHover:  #4c8a4e;
+$c_inputSubmitBorder:   #a4a7ab;
+$c_inputSubmitTextShadow: #4a5358;
+$c_inputSubmitBoxShadow:  #ffffff;
+
+// comments
+$c_commentBg:           #ffffff;
+$c_commentText:         #000000;
+$c_commentLink:         #afca00;
+$c_commentBorder:       #afca00;
+$c_commentReplyBorder:  #e9f0e6;
+$c_commentByAuthorBg:   #e9f0e6;
+$c_commentAuthor: 			#4c8a4e;
+$c_entryCommentsH3:			#4c8a4e;
+$c_postAuthorBorder: 		#afca00;
+$c_commentReplyTitle: 	#4c8a4e;
+$c_commentFormTitle: 		#4a5358;
+$c_allowedTags: 				#4a5358;
+$c_allowedTagsBg:				#e6e6e6;
+
+// author block
+$c_articleAuthorBg:     #e9f0e6;
+$c_articleAuthorH2:     #afca00;
+$c_articleAuthorH3:     #afca00;
+
+// call-to-action
+$c_ctaBg:               #e74c21;
+$c_ctaBorder:           #4c8a4e;
+$c_ctaTextWhite:        #ffffff;
+$c_ctaTextShadow:       #4a5358;
+$c_ctaBoxShadow:        #000000;
+
+$c_ctaBgWhite:          #ffffff;
+$c_ctaBorderWhite:      #ffffff;
+$c_ctaBgGrey:           #e6e6e6;
+$c_ctaBorderGrey:       #e6e6e6;
+$c_ctaTextBlack:        #000000;
+
+// tables
+$c_tableBg:             #ffffff;
+$c_tableText:           #000000;
+$c_tableRowAlt:         #e6e6e6;
+$c_tableHeaderBg:       #a4a7ab;
+$c_tableHeaderText:     #ffffff;
+$c_tableLink:           #a4a7ab;
+$c_tableLinkHover:      #afca00;
+$c_tableBorder:         #e9f0e6;
+$c_tableCaption:        #a4a7ab;
+
+// code
+$c_codeBg:              #e9f0e6;
+$c_codeText:            #4a5358;
+
+// mark
+$c_markBg:              #ffff00;
+$c_markText:            #000000;
+
+// sidebar
+$c_sidebarBg:           #ffffff;
+$c_sidebarText:         #000000;
+$c_sidebarLink:         #000000;
+$c_sidebarLinkHover:    #afca00;
+$c_sidebarLinkArrow:    #afca00;
+$c_sidebarH3:           #4c8a4e;
+$c_sidebarH3Bg:         #e9f0e6;
+$c_sidebarH4:           #e6e6e6;
+$c_sidebarH4Bg:         #ffffff;
+
+// footerwidgets
+$c_footerWidgetsBg:       #e9f0e6;
+$c_footerWidgetsBorderTop:#afca00;
+$c_footerWidgetsText:     #000000;
+$c_footerWidgetsLink:     #4a5358;
+$c_footerWidgetsLinkHover:#e74c21;
+$c_footerWidgetsH3:       #000000;
+$c_footerWidgetsH4:       #e6e6e6;
+
+// footer
+$c_footerBg:            #4a5358;
+$c_footerBorderTop:     #afca00;
+$c_footerText:          #ffffff;
+$c_footerLink:          #ffffff;
+$c_footerLinkHover:     #e74c21;
+$c_footerH3:            #ffffff;
+$c_footerH4:            #ffffff;
+
+// main content border
+$c_maincontent_border: 	#a4a7ab;
+
+// general widgets
+$c_widgetBorder:				#afca00;
+$c_afterPostBorder: 		#afca00;
+$c_widgetYnsInputfieldBorder:	#4c8a4e;
+$c_termIntroBg: 				#e9f0e6;
+$c_termIntroBorder: 		#afca00;

@@ -1,0 +1,5 @@
+ompass #
+###########
+assets/.sass-cache/*
+assets/css/*
+*.scssc

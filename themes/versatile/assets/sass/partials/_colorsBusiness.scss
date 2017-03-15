@@ -1,0 +1,263 @@
+// Color declarations Versatile ColorSet1 BrightBlue
+
+// H1 / H3 / Button Field / BG Top					#0f495f
+// T3 / Lines Color / NAV Active						#008cc8
+// T2 / H2 Gray / BG Footer Dark						#4a5358
+// CTA																			#e74c21
+// Lines / Spacers Gray / Buttons content		#a4a7ab
+// BG Content Top / BG Footer NAV Light			#dce6f0
+// Text black																#000000
+// BG																				#e6e6e6
+
+// #yoast-after-header-container check in list
+$c_sprite:          "Versatile_Sprite_Business.png";
+
+// general
+$c_bodyTopLineDark:     #008cc8;
+$c_bodyTopLineLight:    #0f495f;
+$c_bodyLine:						#008cc8;
+
+$c_paragraph:           #000000;
+$c_link:                #008cc8;
+$c_linkHover:           #e74c21;
+$c_linkBorder:          #dce6f0;
+
+$c_logoText:            #a4a7ab;
+$c_logoTextLink:        #4a5358;
+$c_logoTextLinkHover:   #4a5358;
+
+$c_taglineTopLight:     #ffffff;
+$c_taglineTopDark:      #0f495f;
+$c_taglineTopBold:      #008cc8;
+$c_taglineFullWidth:    #e6e6e6;
+$c_taglineFullWidthBold:#008cc8;
+$c_taglineBoxShadow:    #e6e6e6;
+$c_taglineLink:         #008cc8;
+$c_taglineLinkHover:    #e74c21;
+$c_taglineBg:						#0f495f;
+$c_taglineBgAlt:				#dce6f0;
+$c_taglineBorderMobile:	#a4a7ab;
+
+$c_breadcrumbs:         #4a5358;
+$c_breadcrumbsLink:     #008cc8;
+$c_breadcrumbsLinkHover:#e74c21;
+
+$c_pagenavBg:           #a4a7ab;
+$c_pagenavLink:         #ffffff;
+$c_pagenavHoverBg:      #e74c21;
+$c_pagenavHoverLink:    #ffffff;
+$c_pagenavActiveBg:     #008cc8;
+$c_pagenavActiveLink:   #ffffff;
+
+$c_metaAtPost:          #4a5358;
+$c_metaAtPostBorder:    #dce6f0;
+$c_commentHTMLtags:     #e6e6e6;
+
+$c_hrLine:              #e6e6e6;
+$c_borderImg:           #e6e6e6;
+$c_randLine:            #a4a7ab; // random grey line
+
+$c_selectionText:       #ffffff;
+$c_selectionBg:         #008cc8;
+
+$c_fieldsetBorder:      #4a5358;
+
+// header
+$c_headerBgDark:        #0f495f;
+$c_headerBgLight:       #ffffff;
+$c_headerText:          #000000;
+$c_headerLink:          #008cc8;
+$c_headerLinkHover:     #008cc8;
+$c_headerH3:            #4a5358;
+$c_headerH4:            #4a5358;
+
+// after header widgets
+$c_afterHeaderBg:					#dce6f0;
+$c_afterHeaderLink:				#008cc8;
+$c_afterHeaderLinkHover:	#e74c21;
+$c_afterHeaderH3:					#4a5358;
+$c_afterHeaderH4:					#4a5358;
+$c_afterHeaderText:				#0f495f;
+$c_afterHeaderBorder:			#008cc8;
+
+// navigation
+$c_navMainFullBg:           #4a5358;
+$c_navMainFullBorderTop:    #008cc8;
+$c_navMainFullBorderBottom: #008cc8;
+
+$c_navMainBg:           #4a5358;
+$c_navMainText:         #ffffff;
+$c_navMainLink:         #ffffff;
+$c_navMainLinkHover:    #ffffff;
+$c_navMainLinkBg:       #4a5358;
+$c_navMainLinkBgHover:  #008cc8;
+$c_navMainBgActive:     #008cc8;
+$c_navMainTextActive:   #ffffff;
+$c_navMainLinkShadow:   #4a5358;
+$c_navMainBorder:       #ffffff;
+$c_navMainBorderBottom: #008cc8;
+$c_navMainShadow:       #a4a7ab;
+
+$c_navSubBg:           #4a5358;
+$c_navSubText:         #ffffff;
+$c_navSubLink:         #ffffff;
+$c_navSubLinkHover:    #ffffff;
+$c_navSubLinkBg:       #4a5358;
+$c_navSubLinkBgHover:  #008cc8;
+$c_navSubLinkActive:   #ffffff;
+$c_navSubLinkActiveBg: #4a5358;
+$c_navSubBorder:       #e6e6e6;
+$c_navSubBorderBottom: #008cc8;
+
+// mobile menu Sidr
+$sidr-background:               #4a5358;
+$sidr-background-shadow-color:  #4a5358;
+$sidr-text-color:               #ffffff;
+$c_sidr_linkBg:                 #e6e6e6;
+$c_sidr_linkBorder:             #a4a7ab;
+$c_sidr_linkHoverBg:            #008cc8;
+$c_sidr_linkActiveBg:           #008cc8;
+$c_sidr_linkHoverText:          #ffffff;
+$c_sidr_headingText:            #e6e6e6;
+$c_sidr_headingBorder:          #a4a7ab;
+$c_sidr_boxShadow:              #4a5358;
+$c_sidr_searchBg:								#008cc8;
+
+// main content
+$c_mainBg:              #e6e6e6;
+$c_mainContentBg:				#ffffff;
+$c_mainText:            #000000;
+$c_mainLink:            #008cc8;
+$c_mainLinkHover:       #e74c21;
+$c_mainH1:              #0f495f;
+$c_mainH1Hover:         #e74c21;
+$c_mainH2:              #0f495f;
+$c_mainH2Hover:         #e74c21;
+$c_mainH3:              #008cc8;
+$c_mainH3Hover:         #e74c21;
+$c_mainH4:              #008cc8;
+$c_mainH4Hover:         #e74c21;
+$c_mainH5:              #0f495f;
+$c_mainH5Hover:         #e74c21;
+$c_mainH6:              #4a5358;
+$c_mainH6Hover:         #e74c21;
+
+$c_taxonomyIntroText:   #0f495f;
+$c_taxonomyIntroH1:     #4a5358;
+
+// blockquote
+$c_BlockquoteText:      #4a5358;
+$c_BlockquoteLink:      #008cc8;
+$c_BlockquoteLinkHover: #008cc8;
+$c_BlockquoteBorder:    #dce6f0;
+$c_BlockquoteBg:        #dce6f0;
+$c_blockquoteBefore:    #a4a7ab;
+
+// input
+$c_inputText:           #000000;
+$c_inputTextFocus:      #000000;
+$c_inputBg:             #ffffff;
+$c_inputBgFocus:        #ffffff;
+$c_inputBorder:         #e6e6e6;
+$c_inputBoxShadow:      #dce6f0;
+$c_inputBorderFocus:    #a4a7ab;
+$c_inputTextPlaceholder:#a4a7ab;
+
+$c_inputSubmitText:     #ffffff;
+$c_inputSubmitTextHover:#ffffff;
+$c_inputSubmitBg:       #008cc8;
+$c_inputSubmitBgHover:  #008cc8;
+$c_inputSubmitBorder:   #a4a7ab;
+$c_inputSubmitTextShadow: #4a5358;
+$c_inputSubmitBoxShadow:  #ffffff;
+
+// comments
+$c_commentBg:           #ffffff;
+$c_commentText:         #000000;
+$c_commentLink:         #008cc8;
+$c_commentBorder:       #008cc8;
+$c_commentReplyBorder:  #dce6f0;
+$c_commentByAuthorBg:   #dce6f0;
+$c_commentAuthor: 			#0f495f;
+$c_entryCommentsH3:			#0f495f;
+$c_postAuthorBorder: 		#008cc8;
+$c_commentReplyTitle: 	#0f495f;
+$c_commentFormTitle: 		#4a5358;
+$c_allowedTags: 				#4a5358;
+$c_allowedTagsBg:				#e6e6e6;
+
+// author block
+$c_articleAuthorBg:     #dce6f0;
+$c_articleAuthorH2:     #008cc8;
+$c_articleAuthorH3:     #008cc8;
+
+// call-to-action
+$c_ctaBg:               #e74c21;
+$c_ctaBorder:           #0f495f;
+$c_ctaTextWhite:        #ffffff;
+$c_ctaTextShadow:       #4a5358;
+$c_ctaBoxShadow:        #000000;
+
+$c_ctaBgWhite:          #ffffff;
+$c_ctaBorderWhite:      #ffffff;
+$c_ctaBgGrey:           #e6e6e6;
+$c_ctaBorderGrey:       #e6e6e6;
+$c_ctaTextBlack:        #000000;
+
+// tables
+$c_tableBg:             #ffffff;
+$c_tableText:           #000000;
+$c_tableRowAlt:         #e6e6e6;
+$c_tableHeaderBg:       #a4a7ab;
+$c_tableHeaderText:     #ffffff;
+$c_tableLink:           #a4a7ab;
+$c_tableLinkHover:      #008cc8;
+$c_tableBorder:         #dce6f0;
+$c_tableCaption:        #a4a7ab;
+
+// code
+$c_codeBg:              #dce6f0;
+$c_codeText:            #4a5358;
+
+// mark
+$c_markBg:              #ffff00;
+$c_markText:            #000000;
+
+// sidebar
+$c_sidebarBg:           #ffffff;
+$c_sidebarText:         #000000;
+$c_sidebarLink:         #000000;
+$c_sidebarLinkHover:    #008cc8;
+$c_sidebarLinkArrow:    #008cc8;
+$c_sidebarH3:           #0f495f;
+$c_sidebarH3Bg:         #dce6f0;
+$c_sidebarH4:           #e6e6e6;
+$c_sidebarH4Bg:         #ffffff;
+
+// footerwidgets
+$c_footerWidgetsBg:       #dce6f0;
+$c_footerWidgetsBorderTop:#008cc8;
+$c_footerWidgetsText:     #000000;
+$c_footerWidgetsLink:     #4a5358;
+$c_footerWidgetsLinkHover:#e74c21;
+$c_footerWidgetsH3:       #000000;
+$c_footerWidgetsH4:       #e6e6e6;
+
+// footer
+$c_footerBg:            #4a5358;
+$c_footerBorderTop:     #008cc8;
+$c_footerText:          #ffffff;
+$c_footerLink:          #ffffff;
+$c_footerLinkHover:     #e74c21;
+$c_footerH3:            #ffffff;
+$c_footerH4:            #ffffff;
+
+// main content border
+$c_maincontent_border: 	#a4a7ab;
+
+// general widgets
+$c_widgetBorder:				#008cc8;
+$c_afterPostBorder: 		#008cc8;
+$c_widgetYnsInputfieldBorder:	#008cc8;
+$c_termIntroBg: 				#dce6f0;
+$c_termIntroBorder: 		#008cc8;
