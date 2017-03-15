@@ -1,0 +1,230 @@
+// color declarations
+
+// Added images for this colorscheme
+$c_sprite:              'spriteLakeBlue.png';
+$c_ribbonImage:         'Ribbon_Cupcake-Lake_Blue.png';
+$c_borderBottomImage:   'double_borderBottom.png';
+$c_ctaImage:            'Vintage_CTA_Transparent.png';
+$c_ctaImageFooter:      'Vintage_CTA_Transparent_Gray.png';
+$c_sidebarFooterDivider:'Element_SidebarFooter.png';
+$c_ContentWidthDivider: 'Element_Content_Width.png';
+$c_fullwidthDivider:    'Element_Full_Width.png';
+//$c_submenuBorderImage:  'Dropdown_GreenYellow-GreenPink.png';
+
+// general
+$c_paragraph:           #000000;
+$c_link:                #c52c8f;
+$c_linkHover:           #777777;
+$c_linkBorder:          #c52c8f;
+
+$c_logoText:            #999999;
+$c_logoTextLink:        #333333;
+$c_logoTextLinkHover:   #333333;
+
+$c_taglineTop:          #777777;
+$c_taglineTopBold:      #c52c8f;
+$c_taglineFullWidth:    #555555;
+$c_taglineFullWidthBold:#c52c8f;
+$c_taglineBoxShadow:    #cccccc;
+$c_taglineLink:         #c52c8f;
+$c_taglineLinkHover:    #fb8dc5;
+
+$c_breadcrumbs:         #555555;
+$c_breadcrumbsLink:     #c52c8f;
+$c_breadcrumbsLinkHover:#fb8dc5;
+
+$c_pagenavBg:           #eeeeee;
+$c_pagenavLink:         #fb8dc5;
+//$c_pagenavHoverBg:      #c0f2f3;
+$c_pagenavHoverLink:    #c52c8f;
+//$c_pagenavActiveBg:     #ffffff;
+$c_pagenavActiveLink:   #c52c8f;
+
+$c_metaAtPost:          #333333;
+$c_entryMetaLink:       #c52c8f;
+$c_metaAtPostBorder:    #dddddd;
+$c_linkToArchives:      #c52c8f;
+$c_commentHTMLtags:     #777777;
+
+$c_hrLine:              #c52c8f;
+$c_borderImg:           #777777;
+$c_randLine:            #777777; // random grey line
+
+$c_selectionText:       #ffffff;
+$c_selectionBg:         #c52c8f;
+
+$c_fieldsetBorder:      #c0c0c0;
+
+// header
+$c_headerBg:            #eeeeee;
+$c_headerText:          #c52c8f;
+$c_headerLink:          #c52c8f;
+$c_headerLinkHover:     #fb8dc5;
+$c_headerH3:            #fb8dc5;
+$c_headerH4:            #fb8dc5;
+
+// navigation
+$c_navMainFullBg:           #c0f2f3;
+$c_navMainFullBorderTop:    #fb8dc5;
+$c_navMainFullBorderBottom: #c34200;
+
+$c_navMainBg:           #c0f2f3;
+$c_navMainText:         #555555;
+$c_navMainLink:         #555555;
+$c_navMainLinkHover:    #c52c8f;
+$c_navMainLinkBg:       #c0f2f3;
+$c_navMainLinkBgHover:  #c0f2f3;
+$c_navMainBgActive:     #c0f2f3;
+$c_navMainTextActive:   #fb8dc5;
+$c_navMainLinkShadow:   transparent;
+$c_navMainBorder:       transparent;
+$c_navMainBorderBottom: transparent;
+$c_navMainShadow:       #777777;
+
+$c_navSubBg:           #ffffff;
+$c_navSubWrapBorder:   #c52c8f;
+$c_navSubText:         #777777;
+$c_navSubLink:         #777777;
+$c_navSubLinkHover:    #c52c8f;
+$c_navSubLinkBg:       transparent;
+$c_navSubLinkBgHover:  transparent;
+$c_navSubLinkActive:   #c52c8f;
+$c_navSubBorder:       #777777;
+
+// mobile menu Sidr
+$sidr-background:               #c0f2f3; //#f8f8f8; //toevoegen
+$sidr-background-shadow-color:  #ebebeb; //toevoegen
+$sidr-text-color:               #333333; //toevoegen
+$c_sidr_stickyBg:               #ffffff;
+$c_sidr_linkBg:                 #777777;
+$c_sidr_linkBorder:             #999999;
+$c_sidr_linkHoverBg:            #ffffff;
+$c_sidr_linkActiveBg:           #ffffff;
+$c_sidr_linkHoverText:          #c52c8f;
+$c_sidr_headingText:            #555555;
+$c_sidr_headingBorder:          #c52c8f;
+$c_sidr_boxShadow:              #999999;
+
+// main content
+$c_BodyBg:              #ececec;
+$c_mainBg:              #ffffff;
+$c_mainBorder:          #777777;
+$c_mainText:            #000000;
+$c_mainLink:            #c52c8f;
+$c_mainLinkHover:       #777777;
+$c_mainH1:              #fb8dc5;
+$c_mainH1Hover:         #c52c8f;
+$c_mainH2:              #fb8dc5;
+$c_mainH2Hover:         #c52c8f;
+$c_mainH3:              #fb8dc5;
+$c_mainH3Hover:         #c52c8f;
+$c_mainH4:              #555555;
+$c_mainH4Hover:         #000000;
+$c_mainH5:              #555555;
+$c_mainH5Hover:         #000000;
+$c_mainH6:              #555555;
+$c_mainH6Hover:         #000000;
+
+$c_taxonomyIntroH1:     #fb8dc5;
+$c_taxonomyIntroText:   #777777;
+
+// blockquote
+$c_BlockquoteText:      #333333;
+$c_BlockquoteLink:      #c52c8f;
+$c_BlockquoteLinkHover: #fb8dc5;
+$c_BlockquoteBorder:    #dddddd;
+$c_BlockquoteBg:        #eeeeee;
+$c_blockquoteBefore:    #999999;
+
+// input
+$c_inputText:           #000000;
+$c_inputTextFocus:      #000000;
+$c_inputBg:             #ffffff;
+$c_inputBgFocus:        #ffffff;
+$c_inputBorder:         #999999;
+$c_inputBoxShadow:      #eeeeee;
+$c_inputBorderFocus:    #999999;
+$c_inputTextPlaceholder:#999999;
+
+$c_inputSubmitText:     #ffffff;
+$c_inputSubmitTextHover:#ffffff;
+$c_inputSubmitBg:       #fb8dc5;
+$c_inputSubmitBgHover:  #fb8dc5;
+$c_inputSubmitBorder:   #fb8dc5;
+$c_inputSubmitTextShadow: transparent;
+$c_inputSubmitBoxShadow:  transparent;
+
+// comments
+$c_commentBg:           #ffffff;
+$c_commentText:         #000000;
+$c_commentLink:         #fb8dc5;
+$c_commentBorder:       #fb8dc5;
+$c_commentReplyBorder:  #dddddd;
+$c_commentByAuthorBg:   #eaf2f7;
+
+// author block
+$c_articleAuthorBg:     #eaf2f7;
+$c_articleAuthorH2:     #fb8dc5;
+$c_articleAuthorH3:     #c52c8f;
+
+// call-to-action
+$c_ctaBg:               #ffb55c;
+$c_ctaBorder:           #ffb55c;
+$c_ctaTextWhite:        #ffffff;
+$c_ctaTextShadow:       #333333;
+$c_ctaBoxShadow:        #ffffff;
+
+$c_ctaBgWhite:          #ffffff;
+$c_ctaBorderWhite:      #ffffff;
+$c_ctaBgGrey:           #777777;
+$c_ctaBorderGrey:       #777777;
+$c_ctaTextBlack:        #000000;
+
+// tables
+$c_tableBg:             #ffffff;
+$c_tableText:           #000000;
+$c_tableRowAlt:         #c0f2f3;
+$c_tableHeaderBg:       #c52c8f;
+$c_tableHeaderText:     #ffffff;
+$c_tableLink:           #c52c8f;
+$c_tableLinkHover:      #fb8dc5;
+$c_tableBorder:         #dddddd;
+$c_tableCaption:        #c52c8f;
+
+// code
+$c_codeBg:              #eeeeee;
+$c_codeText:            #333333;
+
+// mark
+$c_markBg:              #ffff00;
+$c_markText:            #000000;
+
+// sidebar
+$c_sidebarBg:           #ffffff;
+$c_sidebarText:         #000000;
+$c_sidebarLink:         #000000;
+$c_sidebarLinkHover:    #c52c8f;
+$c_sidebarLinkArrow:    #c52c8f;
+$c_sidebarH3:           #fb8dc5;
+$c_sidebarH3Bg:         transparent;
+$c_sidebarH4:           #fb8dc5;
+$c_sidebarH4Bg:         transparent;
+$c_sidebarLabel:        #777777;
+
+// footerwidgets
+$c_footerWidgetsBg:       #f4f4f4;
+$c_footerWidgetsBorderTop:#777777;
+$c_footerWidgetsText:     #000000;
+$c_footerWidgetsLink:     #c52c8f;
+$c_footerWidgetsLinkHover:#000000;
+$c_footerWidgetsH3:       #fb8dc5;
+$c_footerWidgetsH4:       #fb8dc5;
+
+// footer
+$c_footerBg:            #c0f2f3;
+$c_footerBorderTop:     #777777;
+$c_footerText:          #000000;
+$c_footerLink:          #000000;
+$c_footerLinkHover:     #fb8dc5;
+$c_footerH3:            #000000;
+$c_footerH4:            #000000;

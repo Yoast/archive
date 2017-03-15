@@ -1,0 +1,342 @@
+@charset "UTF-8";
+@import "compass";
+
+/* Fonts */
+@import url('http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic');
+@import url('http://fonts.googleapis.com/css?family=Lekton:400,700,400italic');
+
+@import "partials/colorsLoveGreen";
+@import "partials/dimensions";
+@import "partials/fonts";
+
+body {
+	width: 680px;
+	background: #fff;
+	color: #444;
+	font: {
+		family: $f_baseFont;
+		size: 1em;
+		weight: normal;
+	}
+	line-height: 22px;
+}
+
+a {
+	color: $c_mainLink;
+	font: {
+		weight: 700;
+	}
+	text: {
+		decoration: underline;
+	}
+	img {
+		margin: {
+			bottom: -4px;
+			bottom: -0.4rem;
+		}
+	}
+	&:focus {
+		outline: thin dotted;
+	}
+	&:hover {
+		color: $c_mainLinkHover;
+		outline: 0;
+		text: {
+			decoration: none;
+		}
+	}
+	&:active {
+		outline: 0;
+	}
+}
+
+p {
+	margin: {
+		top: 0;
+		bottom: 26px;
+	}
+}
+
+ol {
+	margin: {
+		bottom: 26px;
+		left: 40px;
+	}
+	li {
+		list-style-type: decimal;
+	}
+	ol {
+		margin: {
+			bottom: 0;
+		}
+	}
+}
+
+ul {
+	margin: {
+		bottom: 26px;
+		left: 40px;
+	}
+	li {
+		list-style-type: disc;
+	}
+	ul {
+		margin: {
+			bottom: 0;
+		}
+	}
+}
+
+strong {
+	font: {
+		weight: 700;
+	}
+}
+
+ol,
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+blockquote {
+	color: $c_BlockquoteText;
+	margin: 40px 40px 24px;
+	margin: 4rem 4rem 2.4rem;
+	::before {
+		color: $c_blockquoteBefore;
+		content: "\201C";
+		display: block;
+		font: {
+			size: $f_blockquoteBefore-px;
+			size: $f_blockquoteBefore;
+		}
+		height: 0;
+		left: -20px;
+		position: relative;
+		top: -10px;
+	}
+}
+
+code {
+	background: {
+		color: $c_codeBg;
+	}
+	color: $c_codeText;
+	font: {
+		family: $f_codeFont;
+		size: 1em;
+	}
+}
+
+kbd, samp {
+	@extend code;
+}
+
+pre {
+	@extend code;
+	white-space: pre-wrap;
+}
+
+cite {
+	font: {
+		style: normal;
+	}
+}
+
+abbr[title] {
+	border: {
+		bottom: 1px dotted;
+	}
+}
+
+b,
+strong {
+	font: {
+		weight: 700;
+	}
+}
+
+dfn {
+	font: {
+		style: italic;
+	}
+}
+
+hr {
+	@include box-sizing(content-box);
+	height: 0;
+}
+
+mark {
+	background: {
+		color: $c_markBg;
+	}
+	color: $c_markText;
+}
+
+q {
+	quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+small {
+	font: {
+		size: 80%;
+	}
+}
+
+sub, sup {
+	font: {
+		size: 75%;
+	}
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+img {
+	border: {
+		width: 1px;
+		style: solid;
+		color: $c_borderImg;
+	}
+}
+
+img.centered,
+.aligncenter {
+	display: block;
+	margin: 0 auto 24px;
+}
+
+img.alignnone {
+	margin: {
+		bottom: 12px;
+	}
+}
+
+.alignleft {
+	float: left;
+	text-align: left;
+}
+
+.alignright {
+	float: right;
+	text: {
+		align: right;
+	}
+}
+
+img.alignleft,
+.wp-caption.alignleft {
+	margin: 0 24px 24px 0;
+}
+
+img.alignright,
+.wp-caption.alignright {
+	margin: 0 0 24px 24px;
+}
+
+.wp-caption-text {
+	font: {
+		size: 14px;
+		weight: 700;
+	}
+	text: {
+		align: center;
+	}
+}
+
+.headingsDefault {
+	font: {
+		weight: 700;
+	}
+	line-height: 1.2;
+	margin: 0;
+}
+
+h1 {
+	@extend .headingsDefault;
+	color: $c_mainH1;
+	font: {
+		family: $f_H1Font;
+		size: $f_mainH1-px;
+		size: $f_mainH1;
+	}
+	margin: 0;
+}
+
+h2 {
+	@extend .headingsDefault;
+	color: $c_mainH2;
+	font: {
+		family: $f_H2Font;
+		size: $f_mainH2-px;
+		size: $f_mainH2;
+	}
+}
+
+h3 {
+	@extend .headingsDefault;
+	color: $c_mainH3;
+	font: {
+		family: $f_H3Font;
+		size: $f_mainH3-px;
+		size: $f_mainH3;
+	}
+}
+
+h4 {
+	@extend .headingsDefault;
+	color: $c_mainH4;
+	font: {
+		family: $f_H4Font;
+		size: $f_mainH4-px;
+		size: $f_mainH4;
+	}
+}
+
+h5 {
+	@extend .headingsDefault;
+	color: $c_mainH5;
+	font: {
+		family: $f_H5Font;
+		size: $f_mainH5-px;
+		size: $f_mainH5;
+	}
+}
+
+h6 {
+	@extend .headingsDefault;
+	color: $c_mainH6;
+	font: {
+		family: $f_H6Font;
+		size: $f_mainH6-px;
+		size: $f_mainH6;
+	}
+}
+
+/**
+ * Objects
+ */
+
+embed,
+iframe,
+img,
+object,
+video,
+.wp-caption {
+	max-width: 100%;
+}
+
+img {
+	height: auto;
+	width: auto; // IE8
+}

@@ -1,0 +1,230 @@
+// color declarations
+
+// Added images for this colorscheme
+$c_sprite:              'spriteLavender.png';
+$c_ribbonImage:         'Ribbon_Lavender.png';
+$c_borderBottomImage:   'double_borderBottom.png';
+$c_ctaImage:            'Vintage_CTA_Transparent.png';
+$c_ctaImageFooter:      'Vintage_CTA_Transparent_Gray.png';
+$c_sidebarFooterDivider:'Element_SidebarFooter.png';
+$c_ContentWidthDivider: 'Element_Content_Width.png';
+$c_fullwidthDivider:    'Element_Full_Width.png';
+//$c_submenuBorderImage:  'Dropdown_GreenYellow-GreenPink.png';
+
+// general
+$c_paragraph:           #000000;
+$c_link:                #cd1c8d;
+$c_linkHover:           #777777;
+$c_linkBorder:          #cd1c8d;
+
+$c_logoText:            #999999;
+$c_logoTextLink:        #333333;
+$c_logoTextLinkHover:   #333333;
+
+$c_taglineTop:          #777777;
+$c_taglineTopBold:      #cd1c8d;
+$c_taglineFullWidth:    #555555;
+$c_taglineFullWidthBold:#cd1c8d;
+$c_taglineBoxShadow:    #cccccc;
+$c_taglineLink:         #cd1c8d;
+$c_taglineLinkHover:    #d66e86;
+
+$c_breadcrumbs:         #555555;
+$c_breadcrumbsLink:     #cd1c8d;
+$c_breadcrumbsLinkHover:#d66e86;
+
+$c_pagenavBg:           #eeeeee;
+$c_pagenavLink:         #d66e86;
+//$c_pagenavHoverBg:      #dadeef;
+$c_pagenavHoverLink:    #cd1c8d;
+//$c_pagenavActiveBg:     #ffffff;
+$c_pagenavActiveLink:   #cd1c8d;
+
+$c_metaAtPost:          #333333;
+$c_entryMetaLink:       #cd1c8d;
+$c_metaAtPostBorder:    #dddddd;
+$c_linkToArchives:      #cd1c8d;
+$c_commentHTMLtags:     #777777;
+
+$c_hrLine:              #cd1c8d;
+$c_borderImg:           #777777;
+$c_randLine:            #777777; // random grey line
+
+$c_selectionText:       #ffffff;
+$c_selectionBg:         #cd1c8d;
+
+$c_fieldsetBorder:      #c0c0c0;
+
+// header
+$c_headerBg:            #eeeeee;
+$c_headerText:          #cd1c8d;
+$c_headerLink:          #cd1c8d;
+$c_headerLinkHover:     #d66e86;
+$c_headerH3:            #d66e86;
+$c_headerH4:            #d66e86;
+
+// navigation
+$c_navMainFullBg:           #dadeef;
+$c_navMainFullBorderTop:    #d66e86;
+$c_navMainFullBorderBottom: #c34200;
+
+$c_navMainBg:           #dadeef;
+$c_navMainText:         #555555;
+$c_navMainLink:         #555555;
+$c_navMainLinkHover:    #cd1c8d;
+$c_navMainLinkBg:       #dadeef;
+$c_navMainLinkBgHover:  #dadeef;
+$c_navMainBgActive:     #dadeef;
+$c_navMainTextActive:   #d66e86;
+$c_navMainLinkShadow:   transparent;
+$c_navMainBorder:       transparent;
+$c_navMainBorderBottom: transparent;
+$c_navMainShadow:       #777777;
+
+$c_navSubBg:           #ffffff;
+$c_navSubWrapBorder:   #cd1c8d;
+$c_navSubText:         #777777;
+$c_navSubLink:         #777777;
+$c_navSubLinkHover:    #cd1c8d;
+$c_navSubLinkBg:       transparent;
+$c_navSubLinkBgHover:  transparent;
+$c_navSubLinkActive:   #cd1c8d;
+$c_navSubBorder:       #777777;
+
+// mobile menu Sidr
+$sidr-background:               #dadeef; //#f8f8f8; //toevoegen
+$sidr-background-shadow-color:  #ebebeb; //toevoegen
+$sidr-text-color:               #333333; //toevoegen
+$c_sidr_stickyBg:               #ffffff;
+$c_sidr_linkBg:                 #777777;
+$c_sidr_linkBorder:             #999999;
+$c_sidr_linkHoverBg:            #ffffff;
+$c_sidr_linkActiveBg:           #ffffff;
+$c_sidr_linkHoverText:          #cd1c8d;
+$c_sidr_headingText:            #555555;
+$c_sidr_headingBorder:          #cd1c8d;
+$c_sidr_boxShadow:              #999999;
+
+// main content
+$c_BodyBg:              #f7f2f9;
+$c_mainBg:              #ffffff;
+$c_mainBorder:          #777777;
+$c_mainText:            #000000;
+$c_mainLink:            #cd1c8d;
+$c_mainLinkHover:       #777777;
+$c_mainH1:              #d66e86;
+$c_mainH1Hover:         #cd1c8d;
+$c_mainH2:              #d66e86;
+$c_mainH2Hover:         #cd1c8d;
+$c_mainH3:              #d66e86;
+$c_mainH3Hover:         #cd1c8d;
+$c_mainH4:              #555555;
+$c_mainH4Hover:         #000000;
+$c_mainH5:              #555555;
+$c_mainH5Hover:         #000000;
+$c_mainH6:              #555555;
+$c_mainH6Hover:         #000000;
+
+$c_taxonomyIntroH1:     #d66e86;
+$c_taxonomyIntroText:   #777777;
+
+// blockquote
+$c_BlockquoteText:      #333333;
+$c_BlockquoteLink:      #cd1c8d;
+$c_BlockquoteLinkHover: #d66e86;
+$c_BlockquoteBorder:    #dddddd;
+$c_BlockquoteBg:        #eeeeee;
+$c_blockquoteBefore:    #999999;
+
+// input
+$c_inputText:           #000000;
+$c_inputTextFocus:      #000000;
+$c_inputBg:             #ffffff;
+$c_inputBgFocus:        #ffffff;
+$c_inputBorder:         #999999;
+$c_inputBoxShadow:      #eeeeee;
+$c_inputBorderFocus:    #999999;
+$c_inputTextPlaceholder:#999999;
+
+$c_inputSubmitText:     #ffffff;
+$c_inputSubmitTextHover:#ffffff;
+$c_inputSubmitBg:       #d66e86;
+$c_inputSubmitBgHover:  #d66e86;
+$c_inputSubmitBorder:   #d66e86;
+$c_inputSubmitTextShadow: transparent;
+$c_inputSubmitBoxShadow:  transparent;
+
+// comments
+$c_commentBg:           #ffffff;
+$c_commentText:         #000000;
+$c_commentLink:         #d66e86;
+$c_commentBorder:       #d66e86;
+$c_commentReplyBorder:  #dddddd;
+$c_commentByAuthorBg:   #eaf2f7;
+
+// author block
+$c_articleAuthorBg:     #eaf2f7;
+$c_articleAuthorH2:     #d66e86;
+$c_articleAuthorH3:     #cd1c8d;
+
+// call-to-action
+$c_ctaBg:               #3bd1d5;
+$c_ctaBorder:           #3bd1d5;
+$c_ctaTextWhite:        #ffffff;
+$c_ctaTextShadow:       #333333;
+$c_ctaBoxShadow:        #ffffff;
+
+$c_ctaBgWhite:          #ffffff;
+$c_ctaBorderWhite:      #ffffff;
+$c_ctaBgGrey:           #777777;
+$c_ctaBorderGrey:       #777777;
+$c_ctaTextBlack:        #000000;
+
+// tables
+$c_tableBg:             #ffffff;
+$c_tableText:           #000000;
+$c_tableRowAlt:         #dadeef;
+$c_tableHeaderBg:       #cd1c8d;
+$c_tableHeaderText:     #ffffff;
+$c_tableLink:           #cd1c8d;
+$c_tableLinkHover:      #d66e86;
+$c_tableBorder:         #dddddd;
+$c_tableCaption:        #cd1c8d;
+
+// code
+$c_codeBg:              #eeeeee;
+$c_codeText:            #333333;
+
+// mark
+$c_markBg:              #ffff00;
+$c_markText:            #000000;
+
+// sidebar
+$c_sidebarBg:           #ffffff;
+$c_sidebarText:         #000000;
+$c_sidebarLink:         #000000;
+$c_sidebarLinkHover:    #cd1c8d;
+$c_sidebarLinkArrow:    #cd1c8d;
+$c_sidebarH3:           #d66e86;
+$c_sidebarH3Bg:         transparent;
+$c_sidebarH4:           #d66e86;
+$c_sidebarH4Bg:         transparent;
+$c_sidebarLabel:        #777777;
+
+// footerwidgets
+$c_footerWidgetsBg:       #f4f4f4;
+$c_footerWidgetsBorderTop:#777777;
+$c_footerWidgetsText:     #000000;
+$c_footerWidgetsLink:     #cd1c8d;
+$c_footerWidgetsLinkHover:#000000;
+$c_footerWidgetsH3:       #d66e86;
+$c_footerWidgetsH4:       #d66e86;
+
+// footer
+$c_footerBg:            #dadeef;
+$c_footerBorderTop:     #777777;
+$c_footerText:          #000000;
+$c_footerLink:          #000000;
+$c_footerLinkHover:     #d66e86;
+$c_footerH3:            #000000;
+$c_footerH4:            #000000;
