@@ -198,19 +198,47 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		public function additional_css() {
 			require 'views/additional-css.php';
 
+			$selectors = array(
+				'header-color' => 'nav.amp-wp-title-bar',
+				'headings-color' => '.amp-wp-title, h2, h3, h4',
+				'text-color' => '.amp-wp-content',
+
+				'blockquote-bg-color' => '.amp-wp-content blockquote',
+				'blockquote-border-color' => '.amp-wp-content blockquote',
+				'blockquote-text-color' => '.amp-wp-content blockquote',
+
+				'link-color' => 'a, a:active, a:visited',
+				'link-color-hover' => 'a:hover, a:focus',
+
+				'meta-color' => '.amp-wp-meta li, .amp-wp-meta li a',
+			);
+
+			// CSS classnames have been changed in version 0.4.0.
+			if ( version_compare( AMP__VERSION, '0.4.0', '>=' ) ) {
+				$selectors_v4 = array(
+					'header-color'            => 'header.amp-wp-header, html',
+					'text-color'              => 'div.amp-wp-article',
+					'blockquote-bg-color'     => '.amp-wp-article-content blockquote',
+					'blockquote-border-color' => '.amp-wp-article-content blockquote',
+					'blockquote-text-color'   => '.amp-wp-article-content blockquote',
+					'meta-color'              => '.amp-wp-meta, .amp-wp-meta a',
+				);
+				$selectors = array_merge( $selectors, $selectors_v4 );
+			}
+
 			$css_builder = new YoastSEO_AMP_CSS_Builder();
-			$css_builder->add_option( 'header-color', 'nav.amp-wp-title-bar', 'background' );
-			$css_builder->add_option( 'headings-color', '.amp-wp-title, h2, h3, h4', 'color' );
-			$css_builder->add_option( 'text-color', '.amp-wp-content', 'color' );
+			$css_builder->add_option( 'header-color', $selectors[ 'header-color' ], 'background' );
+			$css_builder->add_option( 'headings-color', $selectors[ 'headings-color' ], 'color' );
+			$css_builder->add_option( 'text-color', $selectors[ 'text-color' ], 'color' );
 
-			$css_builder->add_option( 'blockquote-bg-color', '.amp-wp-content blockquote', 'background-color' );
-			$css_builder->add_option( 'blockquote-border-color', '.amp-wp-content blockquote', 'border-color' );
-			$css_builder->add_option( 'blockquote-text-color', '.amp-wp-content blockquote', 'color' );
+			$css_builder->add_option( 'blockquote-bg-color', $selectors[ 'blockquote-bg-color' ], 'background-color' );
+			$css_builder->add_option( 'blockquote-border-color', $selectors[ 'blockquote-border-color' ], 'border-color' );
+			$css_builder->add_option( 'blockquote-text-color', $selectors[ 'blockquote-text-color' ], 'color' );
 
-			$css_builder->add_option( 'link-color', 'a, a:active, a:visited', 'color' );
-			$css_builder->add_option( 'link-color-hover', 'a:hover, a:focus', 'color' );
+			$css_builder->add_option( 'link-color', $selectors[ 'link-color' ], 'color' );
+			$css_builder->add_option( 'link-color-hover', $selectors[ 'link-color-hover' ], 'color' );
 
-			$css_builder->add_option( 'meta-color', '.amp-wp-meta li, .amp-wp-meta li a', 'color' );
+			$css_builder->add_option( 'meta-color', $selectors[ 'meta-color' ], 'color' );
 
 			echo $css_builder->build();
 
