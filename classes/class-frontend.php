@@ -74,6 +74,11 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * @return array
 		 */
 		public function analytics( $analytics ) {
+			// If Monster Insights is outputting analytics, don't do anything.
+			if ( isset( $analytics['monsterinsights-googleanalytics'] ) ) {
+				return $analytics;
+			}
+
 			if ( isset( $this->options['analytics-extra'] ) && ! empty( $this->options['analytics-extra'] ) ) {
 				return $analytics;
 			}
