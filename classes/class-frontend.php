@@ -124,6 +124,11 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 						continue;
 					}
 
+					// If AMP page support is not present, don't allow enabling it here.
+					if ( 'page' === $post_type_name && ! post_type_supports( 'page', AMP_QUERY_VAR ) ) {
+						continue;
+					}
+
 					if ( $this->options[ 'post_types-' . $post_type_name . '-amp' ] === 'on' ) {
 						add_post_type_support( $post_type_name, AMP_QUERY_VAR );
 						continue;
