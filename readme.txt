@@ -34,20 +34,20 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 
 == Changelog ==
 
-= 0.3.4 =
-*Bugfixes:
-    * Removed page from post-type list to avoid unwanted canonical link
+= 0.4.0 =
+* Bugfixes:
+    * Removed page from post-type list to avoid unwanted canonical link.
 
 * Enhancements:
-    * Removed canonical feature because it is being handled by the AMP plugin
-    * Removed sanitizations which are already being done by the AMP plugin
-    * Added a check for Monster Insights analytics implementation and disables our implementation if present
-    * Added class selector implementation for AMP 0.4.x compatibility
+    * Removed canonical feature because it is being handled by the AMP plugin.
+    * Removed sanitizations which are already being done by the AMP plugin.
+    * Added a check for Monster Insights analytics implementation and disables our implementation if present.
+    * Added class selector implementation for AMP 0.4.x compatibility.
 
 = 0.3.3 =
 * Bugfixes:
-    * Fixes bug where AMP was only activated for the first post type in the list
-    * Made sure that the function is not declared multiple times
+    * Fixes bug where AMP was only activated for the first post type in the list.
+    * Made sure that the function is not declared multiple times.
 
 = 0.3.2 =
 * Bugfixes:
