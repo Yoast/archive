@@ -3,7 +3,7 @@ Contributors: joostdevalk
 Tags: AMP, SEO
 Requires at least: 4.6
 Tested up to: 4.7.3
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,10 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 3. Design settings in the plugin.
 
 == Changelog ==
+
+= 0.4.1 =
+* Bugfixes:
+    * Fix styling of design tab.
 
 = 0.4.0 =
 * Bugfixes:
