@@ -75,11 +75,14 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 */
 		public function analytics( $analytics ) {
 			// If Monster Insights is outputting analytics, don't do anything.
-			if ( isset( $analytics['monsterinsights-googleanalytics'] ) ) {
+			if ( ! empty( $analytics['monsterinsights-googleanalytics'] ) ) {
+				// Clear analytics-extra options because Monster Insights is taking care of everything.
+				$this->options['analytics-extra'] = '';
+
 				return $analytics;
 			}
 
-			if ( isset( $this->options['analytics-extra'] ) && ! empty( $this->options['analytics-extra'] ) ) {
+			if ( ! empty( $this->options['analytics-extra'] ) ) {
 				return $analytics;
 			}
 
@@ -166,7 +169,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Fix the AMP metadata for a post
 		 *
-		 * @param array $metadata
+		 * @param array   $metadata
 		 * @param WP_Post $post
 		 *
 		 * @return array
@@ -193,7 +196,6 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * Add additional CSS to the AMP output
 		 */
 		public function additional_css() {
-
 			require 'views/additional-css.php';
 
 			$css_builder = new YoastSEO_AMP_CSS_Builder();
@@ -213,7 +215,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			echo $css_builder->build();
 
 			if ( ! empty( $this->options['extra-css'] ) ) {
-				$safe_text = strip_tags($this->options['extra-css']);
+				$safe_text = strip_tags( $this->options['extra-css'] );
 				$safe_text = wp_check_invalid_utf8( $safe_text );
 				$safe_text = _wp_specialchars( $safe_text, ENT_NOQUOTES );
 				echo $safe_text;
@@ -267,8 +269,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Builds an image object array from an image URL
 		 *
-		 * @param string $image_url
-		 * @param string|array $size Optional. Image size. Accepts any valid image size, or an array of width
+		 * @param string       $image_url      Image URL to build URL for.
+		 * @param string|array $size           Optional. Image size. Accepts any valid image size, or an array of width
 		 *                                     and height values in pixels (in that order). Default 'full'.
 		 *
 		 * @return array|false
@@ -296,8 +298,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Retrieve the Schema.org image for the post
 		 *
-		 * @param WP_Post    $post
-		 * @param array|null $image The currently set post image
+		 * @param WP_Post    $post  Post to retrieve the data for.
+		 * @param array|null $image The currently set post image.
 		 *
 		 * @return array
 		 */
