@@ -198,33 +198,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		public function additional_css() {
 			require 'views/additional-css.php';
 
-			$selectors = array(
-				'header-color' => 'nav.amp-wp-title-bar',
-				'headings-color' => '.amp-wp-title, h2, h3, h4',
-				'text-color' => '.amp-wp-content',
-
-				'blockquote-bg-color' => '.amp-wp-content blockquote',
-				'blockquote-border-color' => '.amp-wp-content blockquote',
-				'blockquote-text-color' => '.amp-wp-content blockquote',
-
-				'link-color' => 'a, a:active, a:visited',
-				'link-color-hover' => 'a:hover, a:focus',
-
-				'meta-color' => '.amp-wp-meta li, .amp-wp-meta li a',
-			);
-
-			// CSS classnames have been changed in version 0.4.0.
-			if ( version_compare( AMP__VERSION, '0.4.0', '>=' ) ) {
-				$selectors_v4 = array(
-					'header-color'            => 'header.amp-wp-header, html',
-					'text-color'              => 'div.amp-wp-article',
-					'blockquote-bg-color'     => '.amp-wp-article-content blockquote',
-					'blockquote-border-color' => '.amp-wp-article-content blockquote',
-					'blockquote-text-color'   => '.amp-wp-article-content blockquote',
-					'meta-color'              => '.amp-wp-meta, .amp-wp-meta a',
-				);
-				$selectors = array_merge( $selectors, $selectors_v4 );
-			}
+			$selectors = $this->get_class_selectors();
 
 			$css_builder = new YoastSEO_AMP_CSS_Builder();
 			$css_builder->add_option( 'header-color', $selectors[ 'header-color' ], 'background' );
@@ -368,6 +342,43 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			$type = apply_filters( 'yoastseo_amp_schema_type', $type, $post );
 
 			return $type;
+		}
+
+		/**
+		 * Gets version dependent class names
+		 *
+		 * @return array
+		 */
+		private function get_class_selectors() {
+			$selectors = array(
+				'header-color'   => 'nav.amp-wp-title-bar',
+				'headings-color' => '.amp-wp-title, h2, h3, h4',
+				'text-color'     => '.amp-wp-content',
+
+				'blockquote-bg-color'     => '.amp-wp-content blockquote',
+				'blockquote-border-color' => '.amp-wp-content blockquote',
+				'blockquote-text-color'   => '.amp-wp-content blockquote',
+
+				'link-color'       => 'a, a:active, a:visited',
+				'link-color-hover' => 'a:hover, a:focus',
+
+				'meta-color' => '.amp-wp-meta li, .amp-wp-meta li a',
+			);
+
+			// CSS classnames have been changed in version 0.4.0.
+			if ( version_compare( AMP__VERSION, '0.4.0', '>=' ) ) {
+				$selectors_v4 = array(
+					'header-color'            => 'header.amp-wp-header, html',
+					'text-color'              => 'div.amp-wp-article',
+					'blockquote-bg-color'     => '.amp-wp-article-content blockquote',
+					'blockquote-border-color' => '.amp-wp-article-content blockquote',
+					'blockquote-text-color'   => '.amp-wp-article-content blockquote',
+					'meta-color'              => '.amp-wp-meta, .amp-wp-meta a',
+				);
+				$selectors    = array_merge( $selectors, $selectors_v4 );
+			}
+
+			return $selectors;
 		}
 	}
 }
