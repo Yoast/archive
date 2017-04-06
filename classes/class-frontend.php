@@ -159,6 +159,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * @return array
 		 */
 		public function fix_amp_post_data( $data ) {
+			$data['canonical_url'] = $this->front->canonical( false );
+
 			if ( ! empty( $this->options['amp_site_icon'] ) ) {
 				$data['site_icon_url'] = $this->options['amp_site_icon'];
 			}
