@@ -2,8 +2,8 @@
 Contributors: joostdevalk
 Tags: AMP, SEO
 Requires at least: 4.2
-Tested up to: 4.6
-Stable tag: 0.3.3
+Tested up to: 4.7.3
+Stable tag: 0.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,12 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 3. Design settings in the plugin.
 
 == Changelog ==
+
+= 0.3.4 =
+* Enhancements:
+    * Removed canonical feature because it is being handled by the AMP plugin
+    * Removed sanitizations which are already being done by the AMP plugin
+    * Add a check for Monster Insights analytics implementation and disables our implementation if present
 
 = 0.3.3 =
 * Bugfixes:
