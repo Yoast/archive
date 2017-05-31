@@ -129,7 +129,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			}
 
 			// show notice if license is invalid
-			if ( ! $this->license_is_valid() ) {
+			if ( $this->show_license_notice() && ! $this->license_is_valid() ) {
 				if ( $this->get_license_key() == '' ) {
 					$message = __( '<b>Warning!</b> You didn\'t set your %s license key yet, which means you\'re missing out on updates and support! <a href="%s">Enter your license key</a> or <a href="%s" target="_blank">get a license here</a>.' );
 				} else {
@@ -194,7 +194,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				// Append custom HTML message to default message.
 				$message .= $this->get_custom_message( $result );
 
-				if ( apply_filters( 'yoast-show-license-notice', true ) ) {
+				if ( $this->show_license_notice() ) {
 					$this->set_notice( $message, $success );
 				}
 
@@ -226,7 +226,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				$message .= $this->get_custom_message( $result );
 
 				// Append custom HTML message to default message.
-				if ( apply_filters( 'yoast-show-license-notice', true ) ) {
+				if ( $this->show_license_notice() ) {
 					$this->set_notice( $message, $success );
 				}
 
@@ -723,6 +723,15 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			}
 
 			return $message;
+		}
+
+		/**
+		 * Returns true when a license notice should be shown.
+		 *
+		 * @return bool
+		 */
+		protected function show_license_notice() {
+			return ( bool ) apply_filters( 'yoast-show-license-notice', true );
 		}
 	}
 
