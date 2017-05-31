@@ -86,12 +86,29 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			// catch POST requests from license form
 			add_action( 'admin_init', array( $this, 'catch_post_request' ) );
 
+			// Adds the plugin to the active extensions.
+			add_filter( 'wpseo_active_extensions', array( $this, 'set_active_extension' ) );
+
 			// setup item type (plugin|theme) specific hooks
 			$this->specific_hooks();
 
 			// setup the auto updater
 			$this->setup_auto_updater();
+		}
 
+		/**
+		 * Checks if the license is valid and put it to the list with extensions.
+		 *
+		 * @param array $extensions The extensions used in Yoast SEO.
+		 *
+		 * @return array
+		 */
+		public function set_active_extension( $extensions ) {
+			if ( $this->license_is_valid() ) {
+				$extensions[] = $this->product->get_slug();
+			}
+
+			return $extensions;
 		}
 
 		/**
