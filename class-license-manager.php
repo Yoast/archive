@@ -87,7 +87,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			add_action( 'admin_init', array( $this, 'catch_post_request' ) );
 
 			// Adds the plugin to the active extensions.
-			add_filter( 'wpseo_active_extensions', array( $this, 'set_active_extension' ) );
+			add_filter( 'yoast-active-extensions', array( $this, 'set_active_extension' ) );
 
 			// setup item type (plugin|theme) specific hooks
 			$this->specific_hooks();
@@ -104,6 +104,11 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		 * @return array
 		 */
 		public function set_active_extension( $extensions ) {
+			if ( ! $this->license_is_valid() ) {
+				$this->set_license_key( 'yoast-dummy-license' );
+				$this->activate_license();
+			}
+
 			if ( $this->license_is_valid() ) {
 				$extensions[] = $this->product->get_slug();
 			}
@@ -189,7 +194,9 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				// Append custom HTML message to default message.
 				$message .= $this->get_custom_message( $result );
 
-				$this->set_notice( $message, $success );
+				if ( apply_filters( 'yoast-show-license-notice', true ) ) {
+					$this->set_notice( $message, $success );
+				}
 
 				$this->set_license_status( $result->license );
 			}
@@ -219,7 +226,9 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				$message .= $this->get_custom_message( $result );
 
 				// Append custom HTML message to default message.
-				$this->set_notice( $message, $success );
+				if ( apply_filters( 'yoast-show-license-notice', true ) ) {
+					$this->set_notice( $message, $success );
+				}
 
 				$this->set_license_status( $result->license );
 			}
