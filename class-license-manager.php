@@ -97,7 +97,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
-		 * Checks if the license is valid and put it to the list with extensions.
+		 * Checks if the license is valid and put it into the list with extensions.
 		 *
 		 * @param array $extensions The extensions used in Yoast SEO.
 		 *
