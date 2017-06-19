@@ -31,7 +31,7 @@ if ( class_exists( 'Yoast_License_Manager' ) && ! class_exists( "Yoast_Plugin_Li
 			/**
 			 * Filter: 'yoast-license-valid' - Perform action when license is valid or hook returns true.
 			 *
-			 * @api bool $is_valid True if the license is valid
+			 * @api bool $is_valid True if the license is valid.
 			 */
 			if ( apply_filters( 'yoast-license-valid', $this->license_is_valid() ) ) {
 				// setup auto updater
