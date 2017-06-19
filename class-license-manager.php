@@ -731,6 +731,11 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		 * @return bool
 		 */
 		protected function show_license_notice() {
+			/**
+			 * Filter: 'yoast-show-license-notice' - Show the license notice.
+			 *
+			 * @api bool $show True if notices should be shown.
+			 */
 			return ( bool ) apply_filters( 'yoast-show-license-notice', true );
 		}
 	}
