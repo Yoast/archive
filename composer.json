@@ -14,5 +14,8 @@
             "name": "Team Yoast",
             "email": "support@yoast.com"
         }
-    ]
+    ],
+    "psr-4": {
+        "Yoast\\WordPress\\": "src"
+    }
 }
