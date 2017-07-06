@@ -15,7 +15,9 @@
             "email": "support@yoast.com"
         }
     ],
-    "psr-4": {
-        "Yoast\\WordPress\\": "src"
+    "autoload": {
+        "psr-4": {
+            "Yoast\\WordPress\\": "src"
+        }
     }
 }
