@@ -34,5 +34,4 @@ final class WP_CLI_Logger extends AbstractLogger {
 				\WP_CLI::log( $message );
 		}
 	}
-	}
 }
