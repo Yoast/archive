@@ -111,7 +111,7 @@ if ( ! class_exists( "Yoast_Update_Manager", false ) ) {
 				'item_name'    => $this->product->get_item_name(),
 				'wp_version'   => $wp_version,
 				'item_version' => $this->product->get_version(),
-				'url'          => home_url(),
+				'url'          => $this->get_home_url(),
 				'slug'         => $this->product->get_slug(),
 			);
 
@@ -217,6 +217,37 @@ if ( ! class_exists( "Yoast_Update_Manager", false ) ) {
 			}
 
 			return false;
+		}
+
+		/**
+		 * Returns the real home url without any WPML language additions.
+		 *
+		 * @return string The home url.
+		 */
+		private function get_home_url() {
+
+			add_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10, 2 );
+
+			$home_url = home_url();
+
+			remove_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10 );
+
+			return $home_url;
+		}
+
+		/**
+		 * Returns the original URL instead of the language-enriched URL.
+		 *
+		 * This method is trigger by filter wpml_get_home_url and returns the $url this is the url before the filter
+		 * has been executed and can be considered as the one that isn't altered by WPML.
+		 *
+		 * @param string $home_url The url altered by WPML. Unused.
+		 * @param string $url      The url that isn't altered by WPML.
+		 *
+		 * @return string The original url.
+		 */
+		public function wpml_get_home_url( $home_url, $url ) {
+			return $url;
 		}
 
 	}
