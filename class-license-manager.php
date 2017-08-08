@@ -255,7 +255,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		 *
 		 * @return string The home url.
 		 */
-		public function get_home_url() {
+		protected function get_home_url() {
 			// Add a new filter to undo WPML's changing of home url.
 			add_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10, 2 );
 
