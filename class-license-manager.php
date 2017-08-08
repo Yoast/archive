@@ -240,19 +240,19 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		 * Returns the correct url.
 		 */
 		public function get_home_url() {
-		    if ( ! is_multisite() ) {
-                // Add a new filter to undo WPML's changing of home url.
-			    add_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10, 2 );
+			if ( ! is_multisite() ) {
+				// Add a new filter to undo WPML's changing of home url.
+				add_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10, 2 );
 
-			    $home_url = home_url();
+				$home_url = home_url();
 
-			    remove_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10 );
+				remove_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10 );
 
-			    return $home_url;
-            }
-            // WPML does not change the network home url so we can return it without modification.
-		    return network_home_url();
-        }
+				return $home_url;
+			}
+			// WPML does not change the network home url so we can return it without modification.
+			return network_home_url();
+		}
 
 		/**
 		 * Returns the original URL instead of the language-enriched URL.
