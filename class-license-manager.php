@@ -237,21 +237,33 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
-		 * Returns the correct url.
+		 * Returns the home url with the following modifications:
+		 *
+		 * In case of a multisite setup we return the network_home_url.
+		 * In case of no multisite setup we return the home_url while overriding the WPML filter.
+		 */
+		public function get_url() {
+			if ( is_multisite() ) {
+				// WPML does not change the network home url so we can return it without modification.
+				return network_home_url();
+			}
+			return $this->get_home_url();
+		}
+
+		/**
+		 * Returns the real home url without any WPML language additions.
+		 *
+		 * @return string The home url.
 		 */
 		public function get_home_url() {
-			if ( ! is_multisite() ) {
-				// Add a new filter to undo WPML's changing of home url.
-				add_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10, 2 );
+			// Add a new filter to undo WPML's changing of home url.
+			add_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10, 2 );
 
-				$home_url = home_url();
+			$home_url = home_url();
 
-				remove_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10 );
+			remove_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10 );
 
-				return $home_url;
-			}
-			// WPML does not change the network home url so we can return it without modification.
-			return network_home_url();
+			return $home_url;
 		}
 
 		/**
@@ -286,7 +298,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				'edd_action' => $action . '_license',
 				'license'    => $this->get_license_key(),
 				'item_name'  => urlencode( trim( $this->product->get_item_name() ) ),
-				'url'        => $this->get_home_url()
+				'url'        => $this->get_url()
 				// grab the URL straight from the option to prevent filters from breaking it.
 			);
 
