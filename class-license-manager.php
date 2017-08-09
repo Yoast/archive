@@ -268,9 +268,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
 		/**
 		 * Returns the original URL instead of the language-enriched URL.
-		 *
-		 * This method is trigger by filter wpml_get_home_url and returns the $url this is the url before the filter
-		 * has been executed and can be considered as the one that isn't altered by WPML.
+		 * This method gets automatically triggered by the wpml_get_home_url filter.
 		 *
 		 * @param string $home_url The url altered by WPML. Unused.
 		 * @param string $url      The url that isn't altered by WPML.
