@@ -246,8 +246,15 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			// Add a new filter to undo WPML's changing of home url.
 			add_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10, 2 );
 
-			// Network home url will return home url for non-network installs.
-			$url = network_home_url();
+			// If the plugin is network activated, use the network home URL.
+			if ( $this->is_network_activated ) {
+				$url = network_home_url();
+			}
+
+			// Otherwise use the home URL for this specific site.
+			if ( ! $this->is_network_activated ) {
+				$url = home_url();
+			}
 
 			remove_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10 );
 
