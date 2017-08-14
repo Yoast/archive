@@ -237,6 +237,44 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
+		 * Returns the home url with the following modifications:
+		 *
+		 * In case of a multisite setup we return the network_home_url.
+		 * In case of no multisite setup we return the home_url while overriding the WPML filter.
+		 */
+		public function get_url() {
+			// Add a new filter to undo WPML's changing of home url.
+			add_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10, 2 );
+
+			// If the plugin is network activated, use the network home URL.
+			if ( $this->is_network_activated ) {
+				$url = network_home_url();
+			}
+
+			// Otherwise use the home URL for this specific site.
+			if ( ! $this->is_network_activated ) {
+				$url = home_url();
+			}
+
+			remove_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10 );
+
+			return $url;
+		}
+
+		/**
+		 * Returns the original URL instead of the language-enriched URL.
+		 * This method gets automatically triggered by the wpml_get_home_url filter.
+		 *
+		 * @param string $home_url The url altered by WPML. Unused.
+		 * @param string $url      The url that isn't altered by WPML.
+		 *
+		 * @return string The original url.
+		 */
+		public function wpml_get_home_url( $home_url, $url ) {
+			return $url;
+		}
+
+		/**
 		 * @param string $action activate|deactivate
 		 *
 		 * @return mixed
@@ -253,7 +291,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				'edd_action' => $action . '_license',
 				'license'    => $this->get_license_key(),
 				'item_name'  => urlencode( trim( $this->product->get_item_name() ) ),
-				'url'        => get_option( 'home' )
+				'url'        => $this->get_url()
 				// grab the URL straight from the option to prevent filters from breaking it.
 			);
 
