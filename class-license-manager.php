@@ -243,27 +243,15 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		 * In case of no multisite setup we return the home_url while overriding the WPML filter.
 		 */
 		public function get_url() {
-			if ( is_multisite() ) {
-				// WPML does not change the network home url so we can return it without modification.
-				return network_home_url();
-			}
-			return $this->get_home_url();
-		}
-
-		/**
-		 * Returns the real home url without any WPML language additions.
-		 *
-		 * @return string The home url.
-		 */
-		protected function get_home_url() {
 			// Add a new filter to undo WPML's changing of home url.
 			add_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10, 2 );
 
-			$home_url = home_url();
+			// Network home url will return home url for non-network installs.
+			$url = network_home_url();
 
 			remove_filter( 'wpml_get_home_url', array( $this, 'wpml_get_home_url' ), 10 );
 
-			return $home_url;
+			return $url;
 		}
 
 		/**
