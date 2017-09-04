@@ -33,9 +33,11 @@ final class WP_CLI_Logger extends AbstractLogger {
 			case LogLevel::INFO:
 			case LogLevel::DEBUG:
 				\WP_CLI::debug( $message );
+				break;
 			case LogLevel::NOTICE:
 			default:
 				\WP_CLI::log( $message );
+				break;
 		}
 	}
 }
