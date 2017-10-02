@@ -1,0 +1,67 @@
+# Copyright (C) 2010 Minimum comment length
+# This file is distributed under the same license as the Minimum comment length package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Minimum comment length 1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/minimum-comment-length\n"
+"POT-Creation-Date: 2011-07-05 20:52:18+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: minimum-comment-length.php:98
+msgid ""
+"The minimum length you entered is invalid, please enter a minimum length "
+"above %d."
+msgstr ""
+
+#: minimum-comment-length.php:110 minimum-comment-length.php:166
+msgid "Minimum comment length configuration"
+msgstr ""
+
+#: minimum-comment-length.php:110
+msgid "Min comment length"
+msgstr ""
+
+#: minimum-comment-length.php:124
+msgid "Settings"
+msgstr ""
+
+#: minimum-comment-length.php:142
+msgid "Error: Your comment is too short. Please try to say something useful."
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (Minimum comment length 1.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: minimum-comment-length.php:172
+msgid "Minimum comment length"
+msgstr ""
+
+#: minimum-comment-length.php:180
+msgid "Error message"
+msgstr ""
+
+#: minimum-comment-length.php:188
+msgid "Update Settings &raquo;"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://yoast.com/wordpress/minimum-comment-length/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Check the comment for a set minimum length and disapprove it if it's too "
+"short."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Joost de Valk"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://yoast.com/"
+msgstr ""
