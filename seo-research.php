@@ -1,0 +1,166 @@
+<?php
+/*
+Plugin Name: Yoast WordPress SEO Research
+Plugin URI: https://yoast.com/seo-research/
+Description: This plugin exports a maximum of 10 random posts and 5 random terms from your blog, including their SEO data, to help in Yoast's SEO research.
+Version: 1.0
+Author: Team Yoast
+Author URI: https://yoast.com
+License: GPL2 or higher
+*/
+
+/**
+ * Class Yoast_Research
+ */
+class Yoast_Research {
+	var $output = array();
+
+	/**
+	 * Yoast_Research constructor.
+	 */
+	public function __construct() {
+		add_action( 'wp', array( $this, 'retrieve_data' ), 100 );
+		add_action( 'admin_menu', array( $this, 'menu' ) );
+	}
+
+	/**
+	 * Registers the menu page
+	 */
+	public function menu() {
+		add_submenu_page(
+			'wpseo_dashboard',
+			__( 'SEO Research', 'wordpress-seo-research' ),
+			__( 'SEO Research', 'wordpress-seo-research' ),
+			'manage_options',
+			'wpseo_research',
+			array( $this, 'admin_page' )
+		);
+	}
+
+	/**
+	 * Output for the menu page
+	 */
+	public function admin_page() {
+		echo '<div class="wrap">';
+		printf( '<h2>%s</h2>', __( 'Yoast SEO Research', 'wordpress-seo-research' ) );
+		printf( '<p>%s</p>', __( 'Thank you for participating in our research. You\'re helping us make Yoast SEO better!', 'wordpress-seo-research' ) );
+		printf( '<p>%s</p>', __( 'Click on the button, this will create a file for you, which will contain a maximum of 10 random posts and 5 random categories from your site:', 'wordpress-seo-research' ) );
+		echo '<a class="button-primary" href=" ' . home_url( '?output=yoast' ) . ' ">' . __( '1. Get research data', 'wordpress-seo-research' ) . '</a>';
+		printf( '<p>%s</p>', __( 'Then go to the following URL and send the file to us:', 'wordpress-seo-research' ) );
+		echo '<a class="button-primary" href="https://yoast.com/">' . __( '2. Submit data to Yoast', 'wordpress-seo-research' ) . '</a>';
+		printf( '<p>%s</p>', __( 'After you\'ve done this, feel free to deactivate and uninstall the plugin.', 'wordpress-seo-research' ) );
+		echo '</div>';
+	}
+
+	/**
+	 * Retrieves the actual data for download
+	 */
+	public function retrieve_data() {
+		if ( current_user_can( 'manage_options' ) && isset( $_GET['output'] ) && $_GET['output'] == 'yoast' ) {
+			ob_start();
+			$this->basic_data();
+			$this->get_terms();
+			$this->get_posts();
+			ob_end_clean();
+			header( 'Content-disposition: attachment; filename=wpseo-research.json' );
+			header( 'Content-Type: application/json' );
+			echo wp_json_encode( $this->output );
+			die;
+		}
+	}
+
+	/**
+	 * Gathers basic data about a site to send along.
+	 */
+	protected function basic_data() {
+		$this->output['data'] = array(
+			'locale'            => get_locale(),
+			'wp_version'        => get_bloginfo( 'version' ),
+			'yoast_seo_version' => WPSEO_VERSION,
+			'home_url'          => home_url(),
+		);
+	}
+
+	/**
+	 * content
+	 * title
+	 * SEO title (generated)
+	 * meta description (generated)
+	 * focus keyword
+	 * url
+	 */
+	protected function get_posts() {
+		$args = array(
+			'post_type'      => WPSEO_Post_Type::get_accessible_post_types(),
+			'orderby'        => 'rand',
+			'posts_per_page' => 10,
+		);
+
+		remove_action( 'wp_head', 'wpseo_head' );
+		$the_query = new WP_Query( $args );
+
+		if ( $the_query->have_posts() ) {
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				$this->output['posts'][] = $this->build_post_data();
+			}
+		}
+	}
+
+	/**
+	 * Builds the post data needed.
+	 *
+	 * @return array
+	 */
+	protected function build_post_data() {
+		WPSEO_Frontend::get_instance()->reset();
+
+		return array(
+			'content'          => get_the_content(),
+			'focus_keyword'    => WPSEO_Meta::get_value( 'focuskw' ),
+			'meta_description' => WPSEO_Frontend::get_instance()->metadesc( false ),
+			'seo_title'        => WPSEO_Frontend::get_instance()->title( null ),
+			'title'            => get_the_title(),
+			'url'              => get_permalink(),
+		);
+	}
+
+	/**
+	 * Grabs five terms and their content.
+	 */
+	protected function get_terms() {
+		$terms = get_terms( array( 'taxonomy' => 'category', 'number' => 5 ) );
+		foreach ( $terms as $term ) {
+			$content = term_description( $term );
+			if ( empty( $content ) ) {
+				continue;
+			}
+			$this->output['terms'][] = array(
+				'content'          => $content,
+				'focus_keyword'    => WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'focuskw' ),
+				'meta_description' => WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'desc' ),
+				'title'            => $this->get_term_seo_title( $term ),
+				'url'              => get_term_link( $term ),
+			);
+		}
+	}
+
+	/**
+	 * Works around the fact that we can't feed the term properly in another way to WPSEO_Frontend
+	 *
+	 * @param \WP_Term $term The term object.
+	 *
+	 * @return string
+	 */
+	protected function get_term_seo_title( $term ) {
+		$title = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'title' );
+
+		if ( is_string( $title ) && $title !== '' ) {
+			return wpseo_replace_vars( $title, $term );
+		}
+
+		return WPSEO_Frontend::get_instance()->get_title_from_options( 'title-tax-' . $term->taxonomy, $term );
+	}
+}
+
+new Yoast_Research();
