@@ -117,8 +117,11 @@ class Yoast_Research {
 
 		return array(
 			'content'          => get_the_content(),
+			'content_score'    => WPSEO_Meta::get_value( 'content_score' ),
 			'focus_keyword'    => WPSEO_Meta::get_value( 'focuskw' ),
 			'meta_description' => WPSEO_Frontend::get_instance()->metadesc( false ),
+			'multiple_focus'   => WPSEO_Meta::get_value( 'focuskeywords' ),
+			'score'            => WPSEO_Meta::get_value( 'linkdex' ),
 			'seo_title'        => WPSEO_Frontend::get_instance()->title( null ),
 			'title'            => get_the_title(),
 			'url'              => get_permalink(),
@@ -137,8 +140,10 @@ class Yoast_Research {
 			}
 			$this->output['terms'][] = array(
 				'content'          => $content,
+				'content_score'    => WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'content_score' ),
 				'focus_keyword'    => WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'focuskw' ),
 				'meta_description' => WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'desc' ),
+				'score'            => WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'linkdex' ),
 				'title'            => $this->get_term_seo_title( $term ),
 				'url'              => get_term_link( $term ),
 			);
