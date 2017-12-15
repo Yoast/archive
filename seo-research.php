@@ -19,12 +19,54 @@ class Yoast_Research {
 	 * Yoast_Research constructor.
 	 */
 	public function __construct() {
-		add_action( 'wp', array( $this, 'retrieve_data' ), 100 );
-		add_action( 'admin_menu', array( $this, 'menu' ) );
+		$this->set_hooks();
 	}
 
 	/**
-	 * Registers the menu page
+	 * Adds an activation error notice if the user doesn't run the right version of Yoast SEO.
+	 *
+	 * @return void
+	 */
+	public function activation_error_notice() {
+		if ( get_transient( 'wordpress-seo-research-activation-failed' ) ) {
+			$message = __( 'It seems that you are using an outdated version of Yoast SEO. Please update to the latest version before activating this plugin.', 'wordpress-seo-research' );
+			printf( "<div class='error notice'><p>%s</p></div>", $message );
+
+			deactivate_plugins( plugin_basename( __FILE__ ) );
+			delete_transient( 'wordpress-seo-research-activation-failed' );
+		}
+	}
+
+	/**
+	 * Sets up the necessary hooks.
+	 *
+	 * @return void
+	 */
+	public function set_hooks() {
+		add_action( 'wp', array( $this, 'retrieve_data' ), 100 );
+		add_action( 'admin_menu', array( $this, 'menu' ) );
+
+		register_activation_hook( __FILE__, array( $this, 'check_compatibility' ) );
+		add_action( 'admin_notices', array( $this, 'activation_error_notice' ) );
+	}
+
+	/**
+	 * Determines whether or not a version of Yoast SEO Free with a minimum requirement of 5.9.3 is present.
+	 *
+	 * @return bool True if the user is running a version of Yoast SEO Free that is >= 5.9.3.
+	 */
+	public function check_compatibility() {
+		if ( ! class_exists( 'WPSEO_Post_Type' ) ) {
+			set_transient( 'wordpress-seo-research-activation-failed', true, 5 );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Registers the menu page.
+	 *
+	 * @return void
 	 */
 	public function menu() {
 		add_submenu_page(
@@ -38,7 +80,9 @@ class Yoast_Research {
 	}
 
 	/**
-	 * Output for the menu page
+	 * Output for the menu page.
+	 *
+	 * @return void
 	 */
 	public function admin_page() {
 		echo '<div class="wrap">';
@@ -53,7 +97,9 @@ class Yoast_Research {
 	}
 
 	/**
-	 * Retrieves the actual data for download
+	 * Retrieves the actual data for download.
+	 *
+	 * @return void
 	 */
 	public function retrieve_data() {
 		if ( current_user_can( 'manage_options' ) && isset( $_GET['output'] ) && $_GET['output'] == 'yoast' ) {
@@ -93,7 +139,7 @@ class Yoast_Research {
 		$args = array(
 			'post_type'      => WPSEO_Post_Type::get_accessible_post_types(),
 			'orderby'        => 'rand',
-			'posts_per_page' => 10,
+			'posts_per_page' => 100,
 		);
 
 		remove_action( 'wp_head', 'wpseo_head' );
@@ -102,6 +148,7 @@ class Yoast_Research {
 		if ( $the_query->have_posts() ) {
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
+
 				$this->output['posts'][] = $this->build_post_data();
 			}
 		}
