@@ -94,6 +94,16 @@ class Yoast_Research {
 			'post_type'      => WPSEO_Post_Type::get_accessible_post_types(),
 			'orderby'        => 'rand',
 			'posts_per_page' => 10,
+			'post_status' => array( 'publish' ),
+			'has_password' => false,
+
+			'meta_query' => array(
+				array(
+					'key'     => WPSEO_Meta::$meta_prefix . 'focuskw',
+					'value'   => '',
+					'compare' => '!=',
+				),
+			),
 		);
 
 		remove_action( 'wp_head', 'wpseo_head' );
