@@ -139,7 +139,7 @@ class Yoast_Research {
 		$args = array(
 			'post_type'      => WPSEO_Post_Type::get_accessible_post_types(),
 			'orderby'        => 'rand',
-			'posts_per_page' => 100,
+			'posts_per_page' => 10,
 		);
 
 		remove_action( 'wp_head', 'wpseo_head' );
