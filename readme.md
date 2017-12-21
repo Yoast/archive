@@ -1,5 +1,5 @@
 ## Yoast SEO Research
-Contributors: joostdevalk, ireneyoast
+Contributors: joostdevalk, ireneyoast, jjcomack
 
 Tags: SEO, Research, Yoast
 
