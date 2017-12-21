@@ -167,7 +167,7 @@ class Yoast_Research {
 	 * Builds the post data needed: content, content score, focus keyword(s), generated meta description, SEO score,
 	 * generated SEO title, title, and url.
 	 *
-	 * @return array
+	 * @return array The post data.
 	 */
 	protected function build_post_data() {
 		WPSEO_Frontend::get_instance()->reset();
