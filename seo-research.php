@@ -92,7 +92,6 @@ class Yoast_Research {
 		echo '<a class="button-primary" href=" ' . home_url( '?output=yoast' ) . ' ">' . __( '1. Get research data', 'wordpress-seo-research' ) . '</a>';
 		printf( '<p>%s</p>', __( 'Then go to the following URL and send the file to us:', 'wordpress-seo-research' ) );
 		echo '<a class="button-primary" href="https://yoast.com/">' . __( '2. Submit data to Yoast', 'wordpress-seo-research' ) . '</a>';
-		printf( '<p>%s</p>', __( 'After you\'ve done this, feel free to deactivate and uninstall the plugin.', 'wordpress-seo-research' ) );
 		echo '</div>';
 	}
 
