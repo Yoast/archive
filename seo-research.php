@@ -88,7 +88,7 @@ class Yoast_Research {
 		echo '<div class="wrap">';
 		printf( '<h2>%s</h2>', __( 'Yoast SEO Research', 'wordpress-seo-research' ) );
 		printf( '<p>%s</p>', __( 'Thank you for participating in our research. You\'re helping us make Yoast SEO better!', 'wordpress-seo-research' ) );
-		printf( '<p>%s</p>', __( 'Click on the button, this will create a file for you, which will contain a maximum of 10 random posts and 5 random categories from your site:', 'wordpress-seo-research' ) );
+		printf( '<p>%s</p>', __( 'Click on the button. This will create a file for you, which will contain a maximum of 10 random posts and 5 random categories from your site:', 'wordpress-seo-research' ) );
 		echo '<a class="button-primary" href=" ' . home_url( '?output=yoast' ) . ' ">' . __( '1. Get research data', 'wordpress-seo-research' ) . '</a>';
 		printf( '<p>%s</p>', __( 'Then go to the following URL and send the file to us:', 'wordpress-seo-research' ) );
 		echo '<a class="button-primary" href="https://yoast.com/">' . __( '2. Submit data to Yoast', 'wordpress-seo-research' ) . '</a>';
@@ -117,6 +117,8 @@ class Yoast_Research {
 
 	/**
 	 * Gathers basic data about a site to send along.
+	 *
+	 * @return void
 	 */
 	protected function basic_data() {
 		$this->output['data'] = array(
@@ -128,12 +130,9 @@ class Yoast_Research {
 	}
 
 	/**
-	 * content
-	 * title
-	 * SEO title (generated)
-	 * meta description (generated)
-	 * focus keyword
-	 * url
+	 * Gets 10 posts with a focus keyword and their post data.
+	 *
+	 * @return void
 	 */
 	protected function get_posts() {
 		$args = array(
@@ -165,7 +164,8 @@ class Yoast_Research {
 	}
 
 	/**
-	 * Builds the post data needed.
+	 * Builds the post data needed: content, content score, focus keyword(s), generated meta description, SEO score,
+	 * generated SEO title, title, and url.
 	 *
 	 * @return array
 	 */
@@ -186,7 +186,10 @@ class Yoast_Research {
 	}
 
 	/**
-	 * Grabs five terms and their content.
+	 * Gets the following data for 5 terms: content, content score, focus keyword, generated meta description, SEO score, title,
+	 * generated SEO title, and url.
+	 *
+	 * @return void
 	 */
 	protected function get_terms() {
 		$terms = get_terms( array( 'taxonomy' => 'category', 'number' => 5 ) );
@@ -208,11 +211,11 @@ class Yoast_Research {
 	}
 
 	/**
-	 * Works around the fact that we can't feed the term properly in another way to WPSEO_Frontend
+	 * Works around the fact that we can't feed the term properly in another way to WPSEO_Frontend.
 	 *
 	 * @param \WP_Term $term The term object.
 	 *
-	 * @return string
+	 * @return string The term's title.
 	 */
 	protected function get_term_seo_title( $term ) {
 		$title = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'title' );
