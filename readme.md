@@ -1,14 +1,19 @@
-## Yoast SEO Research
-Contributors: joostdevalk, ireneyoast<br>
-Tags: SEO, Research, Yoast<br>
-Requires at least: 4.0<br>
-Tested up to: 4.9<br>
-Stable tag: 1.0<br>
-License: GPLv3<br>
+Contributors: joostdevalk, ireneyoast, jjcomack
 
-This plugin exports a maximum of 10 random posts and 5 random terms from your blog, including their SEO data, to help in Yoast's SEO research.
+Tags: SEO, Research, Yoast
+
+Requires at least: 4.0
+
+Tested up to: 4.9
+
+Stable tag: 1.0
+
+License: GPLv3
+
+Aid the Yoast SEO research team in their SEO research. 
 
 ## Description
+
 ### Yoast SEO Research
 At Yoast we always want to improve our products. But sometimes we cannot do that all by ourselves, therefore we need your help! To refinine the SEO & content analysis of our Yoast SEO plugin we are looking for some site owners that want to help us out by providing some posts and/or pages from their sites as reference material. 
 
