@@ -1,16 +1,16 @@
 <?php
 
-if ( class_exists( 'Yoast_Update_Manager' ) && ! class_exists( 'Yoast_Theme_Update_Manager', false ) ) {
+if ( class_exists( 'Yoast_Update_Manager_v2' ) && ! class_exists( 'Yoast_Theme_Update_Manager_v2', false ) ) {
 
-	class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
+	class Yoast_Theme_Update_Manager_v2 extends Yoast_Update_Manager_v2 {
 
 		/**
 		 * Constructor
 		 *
-		 * @param Yoast_Product $product     The Product.
-		 * @param string        $license_key The License key.
+		 * @param Yoast_Product_v2 $product     The Product.
+		 * @param string           $license_key The License key.
 		 */
-		public function __construct( Yoast_Product $product, $license_key ) {
+		public function __construct( Yoast_Product_v2 $product, $license_key ) {
 			parent::__construct( $product, $license_key );
 
 			// setup hooks
@@ -128,7 +128,7 @@ if ( class_exists( 'Yoast_Update_Manager' ) && ! class_exists( 'Yoast_Theme_Upda
 
 			$update_data = $api_response;
 
-			// check if a new version is available. 
+			// check if a new version is available.
 			if ( version_compare( $this->get_theme_version(), $update_data->new_version, '>=' ) ) {
 				return false;
 			}

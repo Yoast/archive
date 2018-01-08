@@ -1,16 +1,16 @@
 <?php
 
-if( class_exists( 'Yoast_Update_Manager' ) && ! class_exists( "Yoast_Plugin_Update_Manager", false ) ) {
+if( class_exists( 'Yoast_Update_Manager_v2' ) && ! class_exists( "Yoast_Plugin_Update_Manager_v2", false ) ) {
 
-	class Yoast_Plugin_Update_Manager extends Yoast_Update_Manager {
+	class Yoast_Plugin_Update_Manager_v2 extends Yoast_Update_Manager_v2 {
 
 		/**
 		 * Constructor
 		 *
-		 * @param Yoast_Product $product     The Product.
-		 * @param string        $license_key The License entered.
+		 * @param Yoast_Product_v2 $product     The Product.
+		 * @param string           $license_key The License entered.
 		 */
-		public function __construct( Yoast_Product $product, $license_key ) {
+		public function __construct( Yoast_Product_v2 $product, $license_key ) {
 			parent::__construct( $product, $license_key );
 
 			// setup hooks
@@ -24,7 +24,7 @@ if( class_exists( 'Yoast_Update_Manager' ) && ! class_exists( "Yoast_Plugin_Upda
 
 			// check for updates
 			add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'set_updates_available_data' ) );
-			
+
 			// get correct plugin information (when viewing details)
 			add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );
 		}
@@ -79,10 +79,10 @@ if( class_exists( 'Yoast_Update_Manager' ) && ! class_exists( "Yoast_Plugin_Upda
 			}
 
 			$api_response = $this->get_remote_data();
-			
+
 			// did we get a response?
 			if ( $api_response === false ) {
-				return $data;	
+				return $data;
 			}
 
 			// return api response
