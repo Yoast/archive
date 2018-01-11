@@ -1,6 +1,6 @@
 <?php
 
-if ( class_exists( 'Yoast_License_Manager_v2' ) && ! class_exists( "Yoast_Theme_License_Manager_v2", false ) ) {
+if ( class_exists( 'Yoast_License_Manager_v2' ) && ! class_exists( 'Yoast_Theme_License_Manager_v2', false ) ) {
 
 	class Yoast_Theme_License_Manager_v2 extends Yoast_License_Manager_v2 {
 
@@ -11,7 +11,7 @@ if ( class_exists( 'Yoast_License_Manager_v2' ) && ! class_exists( "Yoast_Theme_
 			if ( $this->license_is_valid() ) {
 				// setup auto updater
 				require_once dirname( __FILE__ ) . '/class-update-manager.php';
-				require_once dirname( __FILE__ ) . '/class-theme-update-manager.php'; // @TODO: Autoload?
+				require_once dirname( __FILE__ ) . '/class-theme-update-manager.php';
 				new Yoast_Theme_Update_Manager_v2( $this->product, $this );
 			}
 		}

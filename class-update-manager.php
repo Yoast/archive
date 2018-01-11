@@ -1,6 +1,6 @@
 <?php
 
-if ( ! class_exists( "Yoast_Update_Manager_v2", false ) ) {
+if ( ! class_exists( 'Yoast_Update_Manager_v2', false ) ) {
 
 	class Yoast_Update_Manager_v2 {
 
