@@ -1,11 +1,11 @@
 <?php
 
-if ( ! class_exists( "Yoast_API_Request", false ) ) {
+if ( ! class_exists( 'Yoast_API_Request_v2', false ) ) {
 
 	/**
 	* Handles requests to the Yoast EDD API
 	*/
-	class Yoast_API_Request {
+	class Yoast_API_Request_v2 {
 
 		/**
 		* @var string Request URL
@@ -42,7 +42,7 @@ if ( ! class_exists( "Yoast_API_Request", false ) ) {
 
 		/**
 		* Constructor
-		* 
+		*
 		* @param string url
 		* @param array $args
 		*/
@@ -115,7 +115,7 @@ if ( ! class_exists( "Yoast_API_Request", false ) ) {
 		* Was a valid response returned?
 		*
 		* @return boolean
-		*/ 
+		*/
 		public function is_valid() {
 			return ( $this->success === true );
 		}
