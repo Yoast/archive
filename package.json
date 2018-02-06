@@ -1,0 +1,9 @@
+{
+  "name": "Tin-Foil-Hat",
+  "version": "0.1",
+  "description": "This plugin helps you write awesome conspiring content.",
+  "main": "index.js",
+  "repository": "https://github.com/IreneStr/Tin-Foil-Hat.git",
+  "author": "IreneStr <irene@yoast.com>",
+  "license": "GLP v3"
+}
