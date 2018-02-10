@@ -129,7 +129,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		 */
 		private function color_picker( $var, $label ) {
 			echo '<label class="checkbox" for="', esc_attr( $var ), '">', esc_html( $label ), '</label>';
-			echo '<input type="text" name="wpseo_amp[', esc_attr( $var ), ']"';
+			echo '<input type="text" name="', esc_attr( 'wpseo_amp[' . $var . ']' ), '"';
 			if ( isset( $this->options[ $var ] ) ) {
 				echo ' value="' . esc_attr( $this->options[ $var ] ) . '"';
 			}
