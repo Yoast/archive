@@ -1,5 +1,7 @@
 <?php
 /**
+ * YoastSEO_AMP_Glue plugin file.
+ *
  * @package     YoastSEO_AMP_Glue\Frontend
  * @author      Joost de Valk
  * @copyright   2016 Yoast BV
