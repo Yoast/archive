@@ -13,17 +13,15 @@ jobs:
   fast_finish: true
   include:
     - php: 7.2
-      env: WP_VERSION=4.9 WP_MULTISITE=1 PHPLINT=1 PHPCS=1
+      env: PHPLINT=1 PHPCS=1
     - php: 5.2
       # As 'trusty' is not supporting PHP 5.2/5.3 anymore, we need to force using 'precise'.
       dist: precise
-      env: WP_VERSION=4.8 PHPLINT=1
+      env: PHPLINT=1
     - php: nightly
-      env: WP_VERSION=master
   allow_failures:
     # Allow failures for unstable builds.
     - php: nightly
-    - env: WP_VERSION=master
 
 cache:
   directories:
@@ -43,20 +41,6 @@ before_script:
 - export -f travis_fold
 - export -f travis_time_start
 - export -f travis_time_finish
-
-- PLUGIN_SLUG=$(basename $(pwd))
-- export WP_DEVELOP_DIR=/tmp/wordpress/
-- git clone --depth=50 --branch="$WP_VERSION" git://develop.git.wordpress.org/ /tmp/wordpress
-- cd ..
-- cp -r "$PLUGIN_SLUG" "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
-- cd /tmp/wordpress/
-- cp wp-tests-config-sample.php wp-tests-config.php
-- sed -i "s/youremptytestdbnamehere/wordpress_tests/" wp-tests-config.php
-- sed -i "s/yourusernamehere/travis/" wp-tests-config.php
-- sed -i "s/yourpasswordhere//" wp-tests-config.php
-- mysql -e "CREATE DATABASE wordpress_tests;" -uroot
-- cd "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
-- phpenv rehash
 
 script:
 # PHP Linting
