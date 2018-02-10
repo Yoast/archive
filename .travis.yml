@@ -36,6 +36,9 @@ jobs:
     # Allow failures for unstable builds.
     - php: nightly
 
+before_install:
+  - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
+
 install:
 - |
   if [[ $PHPCS == "1" ]]; then
