@@ -16,6 +16,7 @@
  * Author URI:  https://yoast.com
  * Text Domain: yoastseo-amp
  * Domain Path: /languages/
+ * Depends:     Yoast SEO, AMP for WordPress
  */
 
 if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
