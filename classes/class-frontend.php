@@ -52,7 +52,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Add our own sanitizer to the array of sanitizers
+		 * Add our own sanitizer to the array of sanitizers.
 		 *
 		 * @param array $sanitizers
 		 *
@@ -111,7 +111,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Make AMP work for all the post types we want it for
+		 * Make AMP work for all the post types we want it for.
 		 */
 		public function post_types() {
 			$post_types = get_post_types( array( 'public' => true ), 'objects' );
@@ -145,14 +145,14 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Disables AMP for posts specifically, run later because of AMP plugin internals
+		 * Disables AMP for posts specifically, run later because of AMP plugin internals.
 		 */
 		public function disable_amp_for_posts() {
 			remove_post_type_support( 'post', AMP_QUERY_VAR );
 		}
 
 		/**
-		 * Fix the basic AMP post data
+		 * Fix the basic AMP post data.
 		 *
 		 * @param array $data
 		 *
@@ -174,7 +174,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Fix the AMP metadata for a post
+		 * Fix the AMP metadata for a post.
 		 *
 		 * @param array   $metadata
 		 * @param WP_Post $post
@@ -200,7 +200,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Add additional CSS to the AMP output
+		 * Add additional CSS to the AMP output.
 		 */
 		public function additional_css() {
 			require 'views/additional-css.php';
@@ -232,7 +232,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Outputs extra code in the head, if set
+		 * Outputs extra code in the head, if set.
 		 */
 		public function extra_head() {
 			$options = WPSEO_Options::get_option( 'wpseo_social' );
@@ -251,7 +251,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Outputs analytics code in the footer, if set
+		 * Outputs analytics code in the footer, if set.
 		 */
 		public function extra_footer() {
 			echo $this->options['analytics-extra'];
@@ -276,7 +276,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Builds an image object array from an image URL
+		 * Builds an image object array from an image URL.
 		 *
 		 * @param string       $image_url      Image URL to build URL for.
 		 * @param string|array $size           Optional. Image size. Accepts any valid image size, or an array of width
@@ -305,7 +305,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Retrieve the Schema.org image for the post
+		 * Retrieve the Schema.org image for the post.
 		 *
 		 * @param WP_Post    $post  Post to retrieve the data for.
 		 * @param array|null $image The currently set post image.
@@ -318,7 +318,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				return $og_image;
 			}
 
-			// Posts without an image fail validation in Google, leading to Search Console errors
+			// Posts without an image fail validation in Google, leading to Search Console errors.
 			if ( ! is_array( $image ) && isset( $this->options['default_image'] ) ) {
 				return $this->get_image_object( $this->options['default_image'] );
 			}
@@ -340,9 +340,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 
 			/**
-			 * Filter: 'yoastseo_amp_schema_type' - Allow changing the Schema.org type for the post
+			 * Filter: 'yoastseo_amp_schema_type' - Allow changing the Schema.org type for the post.
 			 *
-			 * @api string $type The Schema.org type for the $post
+			 * @api string $type The Schema.org type for the $post.
 			 *
 			 * @param WP_Post $post
 			 */
@@ -352,7 +352,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Gets version dependent class names
+		 * Gets version dependent class names.
 		 *
 		 * @return array
 		 */

@@ -14,7 +14,7 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 		private $items = array();
 
 		/**
-		 * Add option to CSS map
+		 * Add option to CSS map.
 		 *
 		 * @param string $option_key Option key.
 		 * @param string $selector   CSS Selector.
@@ -28,7 +28,7 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 		}
 
 		/**
-		 * @return string Output CSS
+		 * @return string Output CSS.
 		 */
 		public function build() {
 			$options = YoastSEO_AMP_Options::get();

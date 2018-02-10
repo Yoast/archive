@@ -40,19 +40,19 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		private static $instance;
 
 		private function __construct() {
-			// Register settings
+			// Register settings.
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
 		}
 
 		/**
-		 * Register the premium settings
+		 * Register the premium settings.
 		 */
 		public function register_settings() {
 			register_setting( 'wpseo_amp_settings', $this->option_name, array( $this, 'sanitize_options' ) );
 		}
 
 		/**
-		 * Sanitize options
+		 * Sanitize options.
 		 *
 		 * @param $options
 		 *
@@ -85,7 +85,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 				$options[ $color ] = $this->sanitize_color( $options[ $color ], '' );
 			}
 
-			// Only allow 'on' or 'off'
+			// Only allow 'on' or 'off'.
 			foreach ( $options as $key => $value ) {
 				if ( 'post_types-' === substr( $key, 0, 11 ) ) {
 					$options[ $key ] = ( $value === 'on' ) ? 'on' : 'off';
@@ -98,12 +98,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
-		 * Sanitize hexadecimal color
+		 * Sanitize hexadecimal color.
 		 *
 		 * @param string $color   String to test for valid color.
 		 * @param string $default Value the string will get when no color is found.
 		 *
-		 * @return string Color or $default
+		 * @return string Color or $default.
 		 */
 		private function sanitize_color( $color, $default ) {
 			if ( preg_match( '~^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$~', $color, $matches ) ) {
@@ -167,7 +167,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
-		 * Get the options
+		 * Get the options.
 		 *
 		 * @return array
 		 */
@@ -191,7 +191,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
-		 * Collect options
+		 * Collect options.
 		 *
 		 * @SuppressWarnings("PMD.UnusedPrivateMethod")
 		 */
@@ -214,7 +214,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
-		 * Get post types
+		 * Get post types.
 		 */
 		private function update_post_type_settings() {
 			$post_type_names = array();
