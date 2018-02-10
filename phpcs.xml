@@ -1,16 +1,17 @@
 <?xml version="1.0"?>
 <ruleset name="Yoast SEO">
-	<description>Yoast SEO rules for PHP_CodeSniffer</description>
+    <description>Yoast SEO rules for PHP_CodeSniffer</description>
 
     <file>.</file>
 
-	<exclude-pattern>node_modules/*</exclude-pattern>
+    <exclude-pattern>node_modules/*</exclude-pattern>
+    <exclude-pattern>vendor/*</exclude-pattern>
 
-    <arg name="extensions" value="php" />
-    <arg value="nsp" />
+    <arg name="extensions" value="php"/>
+    <arg value="nsp"/>
 
     <rule ref="Yoast">
-        <exclude name="WordPress.CSRF.NonceVerification.NoNonceVerification" /><!-- TODO audit and fix nonces -->
+        <exclude name="WordPress.CSRF.NonceVerification.NoNonceVerification"/><!-- TODO audit and fix nonces -->
     </rule>
 
     <rule ref="WordPress.WP.EnqueuedResources.NonEnqueuedScript">

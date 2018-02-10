@@ -1,0 +1,79 @@
+language: php
+dist: trusty
+sudo: false
+
+branches:
+  only:
+    - master
+    - trunk
+    - /^release\/\d+\.\d+(\.\d+)?(-\S*)?$/
+    - /^hotfix\/\d+\.\d+(\.\d+)?(-\S*)?$/
+
+jobs:
+  fast_finish: true
+  include:
+    - php: 7.2
+      env: WP_VERSION=4.9 WP_MULTISITE=1 PHPLINT=1 PHPCS=1
+    - php: 5.2
+      # As 'trusty' is not supporting PHP 5.2/5.3 anymore, we need to force using 'precise'.
+      dist: precise
+      env: WP_VERSION=4.8 PHPLINT=1
+    - php: nightly
+      env: WP_VERSION=master
+  allow_failures:
+    # Allow failures for unstable builds.
+    - php: nightly
+    - env: WP_VERSION=master
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+install:
+- |
+  if [[ $PHPCS == "1" ]]; then
+    if [[ $TRAVIS_PHP_VERSION == "5.2" || $TRAVIS_PHP_VERSION == "5.3" ]]; then phpenv local 5.6.13; fi
+    composer install --no-interaction
+    composer config-yoastcs
+    if [[ $TRAVIS_PHP_VERSION == "5.2" || $TRAVIS_PHP_VERSION == "5.3" ]]; then phpenv local --unset; fi
+  fi
+
+before_script:
+- export -f travis_fold
+- export -f travis_time_start
+- export -f travis_time_finish
+
+- PLUGIN_SLUG=$(basename $(pwd))
+- export WP_DEVELOP_DIR=/tmp/wordpress/
+- git clone --depth=50 --branch="$WP_VERSION" git://develop.git.wordpress.org/ /tmp/wordpress
+- cd ..
+- cp -r "$PLUGIN_SLUG" "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
+- cd /tmp/wordpress/
+- cp wp-tests-config-sample.php wp-tests-config.php
+- sed -i "s/youremptytestdbnamehere/wordpress_tests/" wp-tests-config.php
+- sed -i "s/yourusernamehere/travis/" wp-tests-config.php
+- sed -i "s/yourpasswordhere//" wp-tests-config.php
+- mysql -e "CREATE DATABASE wordpress_tests;" -uroot
+- cd "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
+- phpenv rehash
+
+script:
+# PHP Linting
+- |
+  if [[ "$PHPLINT" == "1" ]]; then
+    travis_fold start "PHP.check" && travis_time_start
+    find -L . -path ./vendor -prune -o -path ./node_modules -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+    travis_time_finish && travis_fold end "PHP.check"
+  fi
+# PHP CS
+- |
+  if [[ "$PHPCS" == "1" ]]; then
+    travis_fold start "PHP.code-style" && travis_time_start
+    vendor/bin/phpcs -v --runtime-set ignore_warnings_on_exit 1
+    travis_time_finish && travis_fold end "PHP.code-style"
+  fi
+
+# Validate the composer.json file.
+# @link https://getcomposer.org/doc/03-cli.md#validate
+- if [[ $TRAVIS_PHP_VERSION == "5.3" || $TRAVIS_PHP_VERSION == "7.2" ]]; then composer validate --no-check-all; fi
