@@ -50,7 +50,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		/**
 		 * Add submenu item.
 		 *
-		 * @param array $sub_menu_pages
+		 * @param array $sub_menu_pages Currently registered sub-menu pages.
 		 *
 		 * @return array
 		 */
@@ -120,7 +120,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		/**
 		 * Add admin page to admin_pages so the correct assets are loaded by WPSEO.
 		 *
-		 * @param $admin_pages
+		 * @param array $admin_pages Currently registered admin pages.
 		 *
 		 * @return array
 		 */
@@ -133,8 +133,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		/**
 		 * Render a color picker.
 		 *
-		 * @param string $var
-		 * @param string $label
+		 * @param string $var   Option key.
+		 * @param string $label Option name.
 		 *
 		 * @SuppressWarnings("PMD.UnusedPrivateMethod") // As this is used in a view.
 		 */

@@ -70,7 +70,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		/**
 		 * Sanitize options.
 		 *
-		 * @param $options
+		 * @param array $options Options as received in $_POST.
 		 *
 		 * @return mixed
 		 */
