@@ -48,22 +48,12 @@ install:
     if [[ $TRAVIS_PHP_VERSION == "5.2" || $TRAVIS_PHP_VERSION == "5.3" ]]; then phpenv local --unset; fi
   fi
 
-before_script:
-- export -f travis_fold
-- export -f travis_time_start
-- export -f travis_time_finish
-
 script:
 # PHP Linting
 - if find -L . -path ./vendor -prune -o -path ./node_modules -prune -o -name '*.php' -exec php -l {} \; | grep "^[Parse error|Fatal error]"; then exit 1; fi
 
 # PHP CS
-- |
-  if [[ "$PHPCS" == "1" ]]; then
-    travis_fold start "PHP.code-style" && travis_time_start
-    vendor/bin/phpcs -v --runtime-set ignore_warnings_on_exit 1
-    travis_time_finish && travis_fold end "PHP.code-style"
-  fi
+- if [[ $PHPCS == "1" ]]; then vendor/bin/phpcs -q --runtime-set ignore_warnings_on_exit 1; fi
 
 # Validate the composer.json file.
 # @link https://getcomposer.org/doc/03-cli.md#validate
