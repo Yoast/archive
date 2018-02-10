@@ -14,6 +14,8 @@
  * Version:     0.4.2
  * Author:      Joost de Valk
  * Author URI:  https://yoast.com
+ * Text Domain: yoastseo-amp
+ * Domain Path: /languages/
  */
 
 if ( ! class_exists( 'YoastSEO_AMP', false ) ) {

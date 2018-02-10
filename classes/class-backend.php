@@ -62,8 +62,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 
 			$sub_menu_pages[] = array(
 				'wpseo_dashboard',
-				__( 'AMP', 'wordpress-seo' ),
-				__( 'AMP', 'wordpress-seo' ),
+				__( 'AMP', 'yoastseo-amp' ),
+				__( 'AMP', 'yoastseo-amp' ),
 				'manage_options',
 				'wpseo_amp',
 				array( $this, 'display' ),
@@ -117,7 +117,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		 */
 		public function localize_media_script() {
 			return array(
-				'choose_image' => __( 'Use Logo', 'wordpress-seo' ),
+				'choose_image' => __( 'Use Logo', 'yoastseo-amp' ),
 			);
 		}
 
