@@ -10,7 +10,11 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 
 	class YoastSEO_AMP_CSS_Builder {
 
-		/** @var array Option to CSS lookup map */
+		/**
+		 * Option to CSS lookup map.
+		 *
+		 * @var array
+		 */
 		private $items = array();
 
 		/**

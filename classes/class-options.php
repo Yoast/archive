@@ -10,13 +10,25 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 
 	class YoastSEO_AMP_Options {
 
-		/** @var string Name of the option in the database */
+		/**
+		 * Name of the option in the database.
+		 *
+		 * @var string
+		 */
 		private $option_name = 'wpseo_amp';
 
-		/** @var array Current options */
+		/**
+		 * Current options.
+		 *
+		 * @var array
+		 */
 		private $options;
 
-		/** @var array Option defaults */
+		/**
+		 * Option defaults.
+		 *
+		 * @var array
+		 */
 		private $defaults = array(
 			'version'                 => 1,
 			'amp_site_icon'           => '',
@@ -36,7 +48,11 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 			'analytics-extra'         => '',
 		);
 
-		/** @var self Class instance */
+		/**
+		 * Class instance.
+		 *
+		 * @var self
+		 */
 		private static $instance;
 
 		private function __construct() {
