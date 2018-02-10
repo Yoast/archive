@@ -162,15 +162,15 @@ $yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
 			<?php
 			if ( class_exists( 'Yoast_GA_Options' ) ) {
 				echo '<p>', esc_html__( 'Because your Google Analytics plugin by Yoast is active, your AMP pages will also be tracked.', 'yoastseo-amp' ), '<br>';
-				$UA = Yoast_GA_Options::instance()->get_tracking_code();
-				if ( $UA === null ) {
+				$yoastseo_amp_ga_tracking_code = Yoast_GA_Options::instance()->get_tracking_code();
+				if ( $yoastseo_amp_ga_tracking_code === null ) {
 					esc_html_e( 'Make sure to connect your Google Analytics plugin properly.', 'yoastseo-amp' );
 				}
 				else {
 					printf(
 						/* translators: %s: google analytics tracking code. */
 						esc_html__( 'Pageviews will be tracked using the following account: %s.', 'yoastseo-amp' ),
-						'<code>' . esc_html( $UA ) . '</code>'
+						'<code>' . esc_html( $yoastseo_amp_ga_tracking_code ) . '</code>'
 					);
 				}
 
