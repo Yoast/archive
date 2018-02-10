@@ -41,7 +41,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		 */
 		public function remove_page_post_type( $post_types ) {
 			if ( ! post_type_supports( 'page', AMP_QUERY_VAR ) ) {
-				unset( $post_types[ 'page' ] );
+				unset( $post_types['page'] );
 			}
 
 			return $post_types;

@@ -41,7 +41,7 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 	}
 }
 
-if ( ! function_exists('yoast_seo_amp_glue_init' ) ) {
+if ( ! function_exists( 'yoast_seo_amp_glue_init' ) ) {
 	/**
 	 * Initialize the Yoast SEO AMP Glue plugin
 	 */
