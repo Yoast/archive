@@ -129,7 +129,7 @@ $yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
 			<br/>
 
 			<h3><?php printf( esc_html__( 'Extra code in %s', 'yoastseo-amp' ), '<code>&lt;head&gt;</code>' ); ?></h3>
-			<p><?php printf( esc_html__( 'Only %s and %s tags are allowed, other tags will be removed automatically.', 'yoastseo-amp' ), '<code>meta</code>', '<code>link</code>' ); ?></p>
+			<p><?php printf( esc_html__( 'Only %1$s and %2$s tags are allowed, other tags will be removed automatically.', 'yoastseo-amp' ), '<code>meta</code>', '<code>link</code>' ); ?></p>
 			<?php
 			$yform->textarea(
 				'extra-head',
