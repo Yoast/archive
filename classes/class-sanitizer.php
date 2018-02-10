@@ -12,7 +12,7 @@ require_once AMP__DIR__ . '/includes/sanitizers/class-amp-base-sanitizer.php';
  * Strips blacklisted tags and attributes from content, on top of the ones the AMP plugin already removes.
  *
  * See following for blacklist:
- *     https://github.com/ampproject/amphtml/blob/master/spec/amp-html-format.md#html-tags
+ * {@link https://github.com/ampproject/amphtml/blob/master/spec/amp-html-format.md#html-tags}
  */
 class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 
