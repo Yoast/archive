@@ -86,10 +86,16 @@ $yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
 			$this->color_picker( 'link-color-hover', __( 'Hover color', 'wordpress-seo' ) );
 			?>
 
-			<?php $yform->light_switch( 'underline', __( 'Underline', 'wordpress-seo' ), array(
+			<?php
+			$yform->light_switch(
+				'underline',
 				__( 'Underline', 'wordpress-seo' ),
-				__( 'No underline', 'wordpress-seo' )
-			) ); ?>
+				array(
+					__( 'Underline', 'wordpress-seo' ),
+					__( 'No underline', 'wordpress-seo' ),
+				)
+			);
+			?>
 
 			<br/>
 
@@ -102,19 +108,31 @@ $yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
 			<br/>
 
 			<h3><?php echo esc_html( __( 'Extra CSS', 'wordpress-seo' ) ); ?></h3>
-			<?php $yform->textarea( 'extra-css', __( 'Extra CSS', 'wordpress-seo' ), array(
-				'rows' => 5,
-				'cols' => 100
-			) ); ?>
+			<?php
+			$yform->textarea(
+				'extra-css',
+				__( 'Extra CSS', 'wordpress-seo' ),
+				array(
+					'rows' => 5,
+					'cols' => 100,
+				)
+			);
+			?>
 
 			<br/>
 
 			<h3><?php printf( esc_html( __( 'Extra code in %s', 'wordpress-seo' ) ), '<code>&lt;head&gt;</code>' ); ?></h3>
 			<p><?php echo sprintf( esc_html( __( 'Only %s and %s tags are allowed, other tags will be removed automatically.', 'wordpress-seo' ) ), '<code>meta</code>', '<code>link</code>' ); ?></p>
-			<?php $yform->textarea( 'extra-head', __( 'Extra code', 'wordpress-seo' ), array(
-				'rows' => 5,
-				'cols' => 100
-			) ); ?>
+			<?php
+			$yform->textarea(
+				'extra-head',
+				__( 'Extra code', 'wordpress-seo' ),
+				array(
+					'rows' => 5,
+					'cols' => 100,
+				)
+			);
+			?>
 
 		</div>
 
@@ -135,17 +153,25 @@ $yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
 				echo '</p>';
 
 				echo '<p>', esc_html( __( 'Optionally you can override the default AMP tracking code with your own by putting it below:', 'wordpress-seo' ) ), '</p>';
-				$yform->textarea( 'analytics-extra', __( 'Analytics code', 'wordpress-seo' ), array(
-					'rows' => 5,
-					'cols' => 100
-				) );
+				$yform->textarea(
+					'analytics-extra',
+					__( 'Analytics code', 'wordpress-seo' ),
+					array(
+						'rows' => 5,
+						'cols' => 100,
+					)
+				);
 			}
 			else {
 				echo '<p>', esc_html( __( 'Optionally add a valid google analytics tracking code.', 'wordpress-seo' ) ), '</p>';
-				$yform->textarea( 'analytics-extra', __( 'Analytics code', 'wordpress-seo' ), array(
-					'rows' => 5,
-					'cols' => 100
-				) );
+				$yform->textarea(
+					'analytics-extra',
+					__( 'Analytics code', 'wordpress-seo' ),
+					array(
+						'rows' => 5,
+						'cols' => 100,
+					)
+				);
 			}
 			?>
 		</div>

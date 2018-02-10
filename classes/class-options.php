@@ -152,11 +152,16 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 			$parts[1]  = '<' . $parts[1];
 
 			// Rebuild with script tag and json content.
-			array_splice( $parts, 1, null, array(
-				'<script type="application/json">',
-				trim( $json ),
-				'</script>'
-			) );
+			array_splice(
+				$parts,
+				1,
+				null,
+				array(
+					'<script type="application/json">',
+					trim( $json ),
+					'</script>',
+				)
+			);
 
 			return implode( "\n", $parts );
 		}
