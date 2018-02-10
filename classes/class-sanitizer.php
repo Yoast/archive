@@ -1,4 +1,11 @@
 <?php
+/**
+ * YoastSEO_AMP_Glue plugin file.
+ *
+ * @package   YoastSEO_AMP_Glue\Sanitizer
+ * @copyright 2016 Yoast BV
+ * @license   GPL-2.0+
+ */
 
 if ( ! defined( 'AMP__DIR__' ) ) {
 	header( 'Status: 403 Forbidden' );
