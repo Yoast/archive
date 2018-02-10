@@ -100,14 +100,14 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			if ( ! class_exists( 'Yoast_GA_Options' ) || Yoast_GA_Options::instance()->get_tracking_code() === null ) {
 				return $analytics;
 			}
-			$UA = Yoast_GA_Options::instance()->get_tracking_code();
+			$tracking_code = Yoast_GA_Options::instance()->get_tracking_code();
 
 			$analytics['yst-googleanalytics'] = array(
 				'type'        => 'googleanalytics',
 				'attributes'  => array(),
 				'config_data' => array(
 					'vars'     => array(
-						'account' => $UA,
+						'account' => $tracking_code,
 					),
 					'triggers' => array(
 						'trackPageview' => array(
