@@ -14,10 +14,10 @@ jobs:
   include:
     - php: 7.2
       env: WP_VERSION=4.9 WP_MULTISITE=1 PHPLINT=1 PHPCS=1
-    - php: 5.2 PHPLINT=1
+    - php: 5.2
       # As 'trusty' is not supporting PHP 5.2/5.3 anymore, we need to force using 'precise'.
       dist: precise
-      env: WP_VERSION=master
+      env: WP_VERSION=4.8 PHPLINT=1
     - php: nightly
       env: WP_VERSION=master
   allow_failures:
