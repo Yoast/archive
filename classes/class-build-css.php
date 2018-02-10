@@ -21,7 +21,10 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 		 * @param string $property   CSS Property that will hold the value of the option.
 		 */
 		public function add_option( $option_key, $selector, $property ) {
-			$this->items[ $option_key ] = array( 'selector' => $selector, 'property' => $property );
+			$this->items[ $option_key ] = array(
+				'selector' => $selector,
+				'property' => $property,
+			);
 		}
 
 		/**
