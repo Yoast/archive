@@ -9,7 +9,9 @@
  */
 
 if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
-
+	/**
+	 * Class to manage the YoastSEO_AMP option.
+	 */
 	class YoastSEO_AMP_Options {
 
 		/**
@@ -57,6 +59,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		 */
 		private static $instance;
 
+		/**
+		 * Constructor.
+		 */
 		private function __construct() {
 			// Register settings.
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
@@ -132,6 +137,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
+		 * Sanitize analytics code.
+		 *
 		 * @param string $source Raw input.
 		 *
 		 * @return string Sanitized code.
@@ -198,6 +205,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
+		 * Get the singleton instance of this class.
+		 *
 		 * @return YoastSEO_AMP_Options
 		 */
 		public static function get_instance() {

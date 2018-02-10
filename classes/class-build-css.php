@@ -9,7 +9,9 @@
  */
 
 if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
-
+	/**
+	 * Class to build CSS.
+	 */
 	class YoastSEO_AMP_CSS_Builder {
 
 		/**

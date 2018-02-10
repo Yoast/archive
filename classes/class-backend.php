@@ -15,6 +15,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 	class YoastSEO_AMP_Backend {
 
 		/**
+		 * YoastSEO_AMP_Glue options.
+		 *
 		 * @var array
 		 */
 		public $options;

@@ -15,16 +15,22 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 	class YoastSEO_AMP_Frontend {
 
 		/**
+		 * WPSEO_Frontend singleton instance.
+		 *
 		 * @var WPSEO_Frontend
 		 */
 		private $front;
 
 		/**
+		 * YoastSEO_AMP_Glue options.
+		 *
 		 * @var array
 		 */
 		private $options;
 
 		/**
+		 * All WPSEO options.
+		 *
 		 * @var array
 		 */
 		private $wpseo_options;
@@ -48,6 +54,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			add_filter( 'amp_content_sanitizers', array( $this, 'add_sanitizer' ) );
 		}
 
+		/**
+		 * Retrieve the plugin options and set the relevant properties.
+		 */
 		private function set_options() {
 			$this->wpseo_options = WPSEO_Options::get_all();
 			$this->options       = YoastSEO_AMP_Options::get();
