@@ -278,9 +278,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Builds an image object array from an image URL.
 		 *
-		 * @param string       $image_url      Image URL to build URL for.
-		 * @param string|array $size           Optional. Image size. Accepts any valid image size, or an array of width
-		 *                                     and height values in pixels (in that order). Default 'full'.
+		 * @param string       $image_url Image URL to build URL for.
+		 * @param string|array $size      Optional. Image size. Accepts any valid image size, or an array of width
+		 *                                and height values in pixels (in that order). Default 'full'.
 		 *
 		 * @return array|false
 		 */

@@ -109,7 +109,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		/**
 		 * Pass some variables to js for upload module.
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function localize_media_script() {
 			return array(
