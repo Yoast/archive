@@ -2,6 +2,14 @@ language: php
 dist: trusty
 sudo: false
 
+cache:
+  directories:
+    - vendor
+    # Cache directory for older Composer versions.
+    - $HOME/.composer/cache/files
+    # Cache directory for more recent Composer versions.
+    - $HOME/.cache/composer/files
+
 branches:
   only:
     - master
@@ -23,16 +31,11 @@ jobs:
     # Allow failures for unstable builds.
     - php: nightly
 
-cache:
-  directories:
-    - vendor
-    - $HOME/.composer/cache
-
 install:
 - |
   if [[ $PHPCS == "1" ]]; then
     if [[ $TRAVIS_PHP_VERSION == "5.2" || $TRAVIS_PHP_VERSION == "5.3" ]]; then phpenv local 5.6.13; fi
-    composer install --no-interaction
+    composer install --prefer-dist --no-interaction
     composer config-yoastcs
     if [[ $TRAVIS_PHP_VERSION == "5.2" || $TRAVIS_PHP_VERSION == "5.3" ]]; then phpenv local --unset; fi
   fi
