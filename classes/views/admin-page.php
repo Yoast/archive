@@ -32,6 +32,7 @@ $yoast_amp_yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' )
 				<?php esc_html_e( 'Post is enabled by default, feel free to enable any of them.', 'yoastseo-amp' ); ?></p>
 			<?php
 
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WPSEO hook.
 			$yoast_amp_post_types = apply_filters( 'wpseo_sitemaps_supported_post_types', get_post_types( array( 'public' => true ), 'objects' ) );
 
 			// Allow specific AMP post type overrides, especially needed for Page support.

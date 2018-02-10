@@ -261,6 +261,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				$GLOBALS['wpseo_og'] = new WPSEO_OpenGraph();
 			}
 
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WPSEO hook.
 			do_action( 'wpseo_opengraph' );
 
 			echo strip_tags( $this->options['extra-head'], '<link><meta>' );
