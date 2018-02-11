@@ -128,8 +128,21 @@ $yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
 
 			<br/>
 
-			<h3><?php printf( esc_html__( 'Extra code in %s', 'yoastseo-amp' ), '<code>&lt;head&gt;</code>' ); ?></h3>
-			<p><?php printf( esc_html__( 'Only %1$s and %2$s tags are allowed, other tags will be removed automatically.', 'yoastseo-amp' ), '<code>meta</code>', '<code>link</code>' ); ?></p>
+			<h3>
+				<?php
+				/* translators: %s: 'head' - as in HTML head - wrapped in <code> tags. */
+				printf( esc_html__( 'Extra code in %s', 'yoastseo-amp' ), '<code>&lt;head&gt;</code>' );
+				?>
+			</h3>
+			<p>
+				<?php
+				printf(
+					/* translators: 1: 'meta'; 2: 'link' - both wrapped in <code> tags. */
+					esc_html__( 'Only %1$s and %2$s tags are allowed, other tags will be removed automatically.', 'yoastseo-amp' ),
+					'<code>meta</code>', '<code>link</code>'
+				);
+				?>
+			</p>
 			<?php
 			$yform->textarea(
 				'extra-head',
@@ -154,7 +167,11 @@ $yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
 					esc_html_e( 'Make sure to connect your Google Analytics plugin properly.', 'yoastseo-amp' );
 				}
 				else {
-					printf( esc_html__( 'Pageviews will be tracked using the following account: %s.', 'yoastseo-amp' ), '<code>' . esc_html( $UA ) . '</code>' );
+					printf(
+						/* translators: %s: google analytics tracking code. */
+						esc_html__( 'Pageviews will be tracked using the following account: %s.', 'yoastseo-amp' ),
+						'<code>' . esc_html( $UA ) . '</code>'
+					);
 				}
 
 				echo '</p>';
