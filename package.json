@@ -5,5 +5,15 @@
   "main": "index.js",
   "repository": "https://github.com/IreneStr/Tin-Foil-Hat.git",
   "author": "IreneStr <irene@yoast.com>",
-  "license": "GLP v3"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-eslint": "^20.1.0",
+    "grunt-phpcs": "^0.4.0",
+    "grunt-phplint": "^0.1.0",
+    "load-grunt-config": "^0.19.2",
+    "time-grunt": "^1.4.0",
+    "yoastseo": "^1.29.0"
+  }
 }
