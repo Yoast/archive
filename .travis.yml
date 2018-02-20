@@ -26,7 +26,6 @@ jobs:
   fast_finish: true
   include:
     - php: 7.2
-      env: PHPCS=1
     - php: 5.3
       dist: precise
     - php: 5.2
@@ -39,21 +38,9 @@ jobs:
 before_install:
   - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
 
-install:
-- |
-  if [[ $PHPCS == "1" ]]; then
-    if [[ $TRAVIS_PHP_VERSION == "5.2" || $TRAVIS_PHP_VERSION == "5.3" ]]; then phpenv local 5.3.29; fi
-    composer install --prefer-dist --no-interaction
-    composer config-yoastcs
-    if [[ $TRAVIS_PHP_VERSION == "5.2" || $TRAVIS_PHP_VERSION == "5.3" ]]; then phpenv local --unset; fi
-  fi
-
 script:
 # PHP Linting
 - if find -L . -path ./vendor -prune -o -path ./node_modules -prune -o -name '*.php' -exec php -l {} \; | grep "^[Parse error|Fatal error]"; then exit 1; fi
-
-# PHP CS
-- if [[ $PHPCS == "1" ]]; then vendor/bin/phpcs -q --runtime-set ignore_warnings_on_exit 1; fi
 
 # Validate the composer.json file.
 # @link https://getcomposer.org/doc/03-cli.md#validate
