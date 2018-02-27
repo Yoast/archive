@@ -20,7 +20,6 @@ module.exports = {
 		],
 		tasks: [
 			"phplint",
-			"phpcs",
 		],
 	},
 	js: {

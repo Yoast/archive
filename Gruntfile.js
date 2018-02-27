@@ -1,6 +1,7 @@
 let loadGruntConfig = require( "load-grunt-config" );
 let timeGrunt = require( "time-grunt" );
 let path = require('path');
+const { flattenVersionForFile } = require( "./webpack/paths" );
 
 module.exports = function( grunt ) {
 
@@ -35,6 +36,8 @@ module.exports = function( grunt ) {
 			grunt: "Gruntfile.js",
 		},
 	};
+
+	project.pluginVersionSlug = flattenVersionForFile( pluginVersion );
 
 	// Load Grunt configurations and tasks
 	loadGruntConfig( grunt, {
