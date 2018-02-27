@@ -1,0 +1,27 @@
+# Grunt aliases
+---
+# Build everything
+
+build:
+  - 'build:js'
+
+# Build JavaScript from assets to production.
+'build:js':
+  - 'browserify:build'
+  - 'uglify'
+  - 'webpack:buildDev'
+
+# Check health of the project.
+check:
+  - 'check:js'
+  - 'check:php'
+
+'check:js':
+  - 'eslint'
+
+'check:php':
+  - 'phplint'
+
+# Default task
+default:
+  - build
