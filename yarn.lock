@@ -2513,6 +2513,10 @@ grunt-legacy-util@~1.0.0:
     underscore.string "~3.2.3"
     which "~1.2.1"
 
+grunt-phpcs@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/grunt-phpcs/-/grunt-phpcs-0.4.0.tgz#a08d625fc64465e453b2bd93f810b2a81e94bdaa"
+
 grunt-phplint@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/grunt-phplint/-/grunt-phplint-0.1.0.tgz#6dbe2e6aec53aa229cfac0ad9a7c99e24184848d"
