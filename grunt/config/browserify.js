@@ -9,7 +9,7 @@ module.exports = {
 			},
 		},
 		files: {
-			"js/dist/test-<%= pluginVersionSlug %>.js": [ "js/src/test.js" ],
+			"js/dist/test-<%= pluginVersionSlug %>.js": [ "js/src/testFile.js" ],
 		},
 	},
 };
