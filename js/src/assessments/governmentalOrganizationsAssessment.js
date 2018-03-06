@@ -14,7 +14,7 @@ const scoreGovernmentalOrganizations = function( paper ) {
 		if ( organizations === null ) {
 			return {
 				score: 3,
-				text: "You haven't even mentioned a governmental organization! How do you expect us to believe you're writing about facts!?",
+				text: "You haven't even mentioned a governmental organization! How do you expect us to believe you're writing about facts?!",
 			};
 		}
 		if ( organizations.length === 1 ) {
