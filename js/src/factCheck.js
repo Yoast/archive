@@ -12,7 +12,7 @@
 	function YoastFactCheckPlugin( app ) {
 		app.registerPlugin( "YoastFactCheckPlugin", { status: "ready" } );
 
-		app.registerAssessment( "factStatementAssessment", factStatementAssessment, "YoastFactCheckPlugin" );
+		app.registerAssessment( "factStated", factStatementAssessment, "YoastFactCheckPlugin" );
 	}
 
 	// Adds eventListener on page load to load the Fact Check.

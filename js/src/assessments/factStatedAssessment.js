@@ -6,9 +6,8 @@ let AssessmentResult = require( "yoastseo/js/values/AssessmentResult" );
  * @param {string} text The text find facts in.
  * @returns {{score: number, text:  string}} The object containing the score and feedback text
  */
-const scoreFactStatement = function( text ) {
+const scoreFactStated = function( text ) {
 	let sentences = getSentences( text );
-	console.log( sentences );
 	if ( sentences.length > 0 ) {
 		return {
 			score: 9,
@@ -24,11 +23,11 @@ const scoreFactStatement = function( text ) {
  * @returns {AssessmentResult} The result of the assessment, containing both a score and a feedback text.
  */
 const factStatedAssessment = function( paper ) {
-	let factStatementResult = scoreFactStatement( paper.getText() );
+	let factStatedResult = scoreFactStated( paper.getText() );
 
 	let assessmentResult = new AssessmentResult();
-	assessmentResult.setScore( factStatementResult.score );
-	assessmentResult.setText( factStatementResult.text );
+	assessmentResult.setScore( factStatedResult.score );
+	assessmentResult.setText( factStatedResult.text );
 
 	return assessmentResult;
 };
