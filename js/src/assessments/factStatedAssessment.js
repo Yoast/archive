@@ -15,6 +15,7 @@ const scoreFactStatement = function( text ) {
 			text: "You've stated a fact",
 		};
 	}
+	return {};
 };
 
 /**
