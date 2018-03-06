@@ -4,14 +4,14 @@ let AssessmentResult = require( "yoastseo/js/values/AssessmentResult" );
 /**
  * Returns the score object based on the number of sentences/facts in a text.
  * @param {string} text The text find facts in.
- * @returns {{score: number, text:  string}} The object containing the score and feedback text
+ * @returns {{score: number, text:  string}} The object containing the score and feedback text.
  */
 const scoreFactStated = function( text ) {
 	let sentences = getSentences( text );
 	if ( sentences.length > 0 ) {
 		return {
 			score: 9,
-			text: "You've stated a fact",
+			text: "You've stated a fact. Congratulations!",
 		};
 	}
 	return {};
