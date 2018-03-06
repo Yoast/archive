@@ -17,8 +17,6 @@ const scoreFactStatement = function( text ) {
 	}
 };
 
-let factAssessment = {};
-
 /**
  * Execute the Fact Stated Assessment and return a result.
  * @param {Paper} paper The Paper object to assess.
@@ -34,6 +32,6 @@ const factStatedAssessment = function( paper ) {
 	return assessmentResult;
 };
 
-factAssessment.getResult = factStatedAssessment;
-
-module.exports = factAssessment;
+module.exports = {
+	getResult: factStatedAssessment,
+};
