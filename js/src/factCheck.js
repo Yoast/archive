@@ -2,6 +2,7 @@
 ( function() {
 	// eslint-disable-next-line global-require
 	const factStatementAssessment  = require( "./assessments/factStatedAssessment" );
+	const governmentalOrganizationsAssessment  = require( "./assessments/governmentalOrganizationsAssessment" );
 	/**
      * Adds the Yoast Fact Check plugin to the YoastSEO Analyzer.
      *
@@ -13,6 +14,7 @@
 		app.registerPlugin( "YoastFactCheckPlugin", { status: "ready" } );
 
 		app.registerAssessment( "factStated", factStatementAssessment, "YoastFactCheckPlugin" );
+		app.registerAssessment( "governmentalOrganizations", governmentalOrganizationsAssessment, "YoastFactCheckPlugin" );
 	}
 
 	// Adds eventListener on page load to load the Fact Check.
