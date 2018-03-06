@@ -1,4 +1,3 @@
-function sum(a, b) {
-	return a + b;
-}
-module.exports = sum;
+/**
+ * Created by Danny on 06-Mar-18.
+ */
