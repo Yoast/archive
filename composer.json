@@ -1,0 +1,15 @@
+{
+	"name": "yoast/yoast-fact-check",
+	"description": "Ypast Fact Check plugin for the Yoast SEO plugin",
+	"type": "wordpress-plugin",
+	"license": "GPL-3.0",
+	"authors": [
+		{
+			"name": "Team Yoast",
+			"email": "support@yoast.com",
+			"homepage": "https://yoast.com"
+		}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true
+}

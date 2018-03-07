@@ -1,5 +1,6 @@
 let createRegexFromArray = require( "yoastseo/js/stringProcessing/createRegexFromArray" );
 let dutchOrganizations = [ "AIVD", "BVD" ];
+let belgianOrganizations = [ "Veiligheid van de Staat", "VSSE" ];
 let generalOrganizations = [ "CIA", "FBI", "NSA", "Homeland security", "KGB", "TSA", "MI6", "ATF", "DEA", "GOP" ];
 
 /**
@@ -10,9 +11,10 @@ let generalOrganizations = [ "CIA", "FBI", "NSA", "Homeland security", "KGB", "T
  */
 const getOrganizations = function( locale ) {
 	switch ( locale ) {
-		// For Dutch texts, we'd like to check for both general organizations as well as general organizations.
-		case "nl_NL": return generalOrganizations.concat( dutchOrganizations );
-		// Todo: Add Belgian organizations?
+		// For Dutch texts, we'd like to check for both Dutch/Belgian organizations as well as general organizations.
+		case "nl_NL":
+		case "nl_NL_formal": return generalOrganizations.concat( dutchOrganizations );
+		case "nl_BE": return generalOrganizations.concat( belgianOrganizations );
 		default: return generalOrganizations;
 	}
 };
