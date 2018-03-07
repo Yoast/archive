@@ -23,8 +23,7 @@ class Yoast_TinFoilHat
 	public function enqueue_scripts()
 	{
 		// only enqueue on x-edit page.
-		// todo: dist file
-		wp_enqueue_script('yoast-tfh', plugins_url('js/src/tin-foil-hat-plugin.js', YOAST_TIN_FOIL_HAT ), array(), '1.4', true);
+		wp_enqueue_script('yoast-tfh', plugins_url('js/dist/factCheck-010.js', YOAST_TIN_FOIL_HAT ), array(), '1.4', true);
 	}
 }
 

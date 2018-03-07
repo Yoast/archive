@@ -7,7 +7,7 @@ const cssDistPath = path.resolve( "css", "dist" );
 
 // Output filename: Entry file (relative to jsSrcPath)
 const entry = {
-	"test": "./testFile.js",
+	"factCheck": "./factCheck.js",
 };
 
 /**
