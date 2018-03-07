@@ -16,6 +16,9 @@ const findTruths = function( truths, text ) {
 
 const calculateTruthDensity = function( text ) {
 	let truthCount = findTruths( truths, text );
+	if ( truthCount === null ) {
+		return 0;
+	}
 	return ( truthCount.length / wordCount( text ) * 100 );
 };
 
