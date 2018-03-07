@@ -4,7 +4,7 @@ let governmentalOrganizations = require( "../researches/governmentalOrganization
 
 /**
  * Returns the score object based on the number of governmental organizations in a text.
- * @param {Paper} paper The paper to find governmental organizations  in.
+ * @param {Paper} paper The paper to find governmental organizations in.
  * @returns {{score: number, text:  string}} The object containing the score and feedback text.
  */
 const scoreGovernmentalOrganizations = function( paper ) {
@@ -30,7 +30,7 @@ const scoreGovernmentalOrganizations = function( paper ) {
 			};
 		}
 	}
-	return {}
+	return {};
 };
 
 /**

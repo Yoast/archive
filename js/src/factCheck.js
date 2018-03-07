@@ -1,9 +1,10 @@
 /* global YoastSEO: true */
+/* eslint-disable global-require */
 ( function() {
-	// eslint-disable-next-line global-require
 	const factStatementAssessment  = require( "./assessments/factStatedAssessment" );
 	const governmentalOrganizationsAssessment  = require( "./assessments/governmentalOrganizationsAssessment" );
 	const truthDensityAssessment  = require( "./assessments/truthDensityAssessment" );
+	const vitalStatusOfCelebritiesAssessment  = require( "./assessments/vitalStatusOfCelebritiesAssessment" );
 	/**
      * Adds the Yoast Fact Check plugin to the YoastSEO Analyzer.
      *
@@ -17,6 +18,7 @@
 		app.registerAssessment( "factStated", factStatementAssessment, "YoastFactCheckPlugin" );
 		app.registerAssessment( "governmentalOrganizations", governmentalOrganizationsAssessment, "YoastFactCheckPlugin" );
 		app.registerAssessment( "truthDensity", truthDensityAssessment, "YoastFactCheckPlugin" );
+		app.registerAssessment( "vitalStatusOfCelebrities", vitalStatusOfCelebritiesAssessment, "YoastFactCheckPlugin" );
 	}
 
 	// Adds eventListener on page load to load the Fact Check.

@@ -11,17 +11,17 @@ const createPhrases = function( celebrities, phrases ) {
 	let celebrityPhrases = [];
 	celebrities.map( function( celebrity ) {
 		for( let i = 0; i < phrases.length; i++ ) {
-			celebrityPhrases.push( celebrity + phrases[i] );
+			celebrityPhrases.push( celebrity + phrases[ i ] );
 		}
-	});
-	return celebrityPhrases
+	} );
+	return celebrityPhrases;
 };
 
 
-const createPhraseList = function(){
+const createPhraseList = function() {
 	let createdDeadPhrases = createPhrases( deadCelebrities, deadPhrases );
 	let createdNotDeadPhrases = createPhrases( notDeadCelebrities, notDeadPhrases );
-	return createdDeadPhrases.concat( createdNotDeadPhrases )
+	return createdDeadPhrases.concat( createdNotDeadPhrases );
 };
 
 /**
@@ -43,7 +43,7 @@ const findCelebrities = function( text ) {
  * @param {Object} paper The paper to check for (not) dead celebrities.
  * @returns {Array} An array with celebrity phrases.
  */
-module.exports = function ( paper ) {
+module.exports = function( paper ) {
 	let text = paper.getText();
 	return findCelebrities( text );
 };
