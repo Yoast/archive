@@ -2,11 +2,37 @@ let createRegexFromArray = require( "yoastseo/js/stringProcessing/createRegexFro
 
 let deadCelebrities = [ "paul", "paul mccartney" ];
 let notDeadCelebrities = [ "elvis", "tupac", "makaveli", "2pac", "notorious b.i.g.", "notorious big", "biggie", "biggie smalls" ];
-let deadPhrases = [ " is dead", " has died", " died", "'s death", " passed away", " deceased",
+let deadPhrasesEn = [ " is dead", " has died", " died", "'s death", " passed away", " deceased",
 	" is deceased", " kicked the bucket", " has kicked the bucket" ];
-let notDeadPhrases = [ " is not dead", " has not died", " hasn't died", " didn't die", " did not die", " didn't pass away",
-	" did not pass away", " isn't deceased", " is not deceased", "is alive", "is still alive" ];
+let deadPhrasesNl = [ " is dood", " is gestorven", " is overleden" ];
+let notDeadPhrasesEn = [ " is not dead", " is not really dead", " isn't really dead", " isn't dead", " has not died",
+	" hasn't died", " didn't die", " did not die", " didn't pass away", " did not pass away", " isn't deceased",
+	" is not deceased", "is alive", "is still alive" ];
+let notDeadPhrasesNl = [ " is niet dood", " is niet gestorven", " is niet overleden", " is helemaal niet overleden",
+	" is helemaal niet dood", " is helemaal niet gestorven" ];
 
+/**
+ * Gets the vital status phrases based on the passed locale.
+ *
+ * @param {string} locale The text's locale.
+ * @returns {Object} The dead and not dead phrases.
+ */
+const getVitalStatusPhrases = function( locale ) {
+	switch( locale ) {
+		case "nl_NL":
+		case "nl_NL_formal":
+		case "nl_BE": return { dead: deadPhrasesNl, notDead: notDeadPhrasesNl };
+		default: return { dead: deadPhrasesEn, notDead: notDeadPhrasesEn };
+	}
+};
+
+/**
+ * Combines a list of celebrities and a list of phrases to phrases about the vital status of celebrities.
+ *
+ * @param {array} celebrities The list of celebrities.
+ * @param {array} phrases The list of phrases.
+ * @returns {Array} The list of phrases about the vital status of celebrities.
+ */
 const createPhrases = function( celebrities, phrases ) {
 	let celebrityPhrases = [];
 	celebrities.map( function( celebrity ) {
@@ -17,21 +43,29 @@ const createPhrases = function( celebrities, phrases ) {
 	return celebrityPhrases;
 };
 
-
-const createPhraseList = function() {
-	let createdDeadPhrases = createPhrases( deadCelebrities, deadPhrases );
-	let createdNotDeadPhrases = createPhrases( notDeadCelebrities, notDeadPhrases );
+/**
+ * Gets a list of phrases about the vital status of celebrities.
+ * Combines the phrases about dead celebrities and alive celebrities to one single list.
+ *
+ * @param {string} locale The locale.
+ * @returns {array} The combined phrases list about dead celebrities and alive celebrities.
+ */
+const createPhraseList = function( locale ) {
+	let phrases = getVitalStatusPhrases( locale );
+	let createdDeadPhrases = createPhrases( deadCelebrities, phrases.dead );
+	let createdNotDeadPhrases = createPhrases( notDeadCelebrities, phrases.notDead );
 	return createdDeadPhrases.concat( createdNotDeadPhrases );
 };
 
 /**
- * Finds mentions of dead celebrities in a text.
+ * Finds mentions of dead and alive celebrities in a text.
  *
- * @param {string} text The text to check for dead celebrities.
- * @returns {Array} A list of found dead celebrities.
+ * @param {string} text The text to check for dead and alive celebrities.
+ * @param {string} locale The locale of the text.
+ * @returns {Array} A list of found dead and alive celebrities.
  */
-const findCelebrities = function( text ) {
-	const celebrityPhrases = createPhraseList();
+const findCelebrities = function( text, locale ) {
+	const celebrityPhrases = createPhraseList( locale );
 	const celebritiesRegex = createRegexFromArray( celebrityPhrases );
 	text = text.toLocaleLowerCase();
 	return text.match( celebritiesRegex );
@@ -45,5 +79,6 @@ const findCelebrities = function( text ) {
  */
 module.exports = function( paper ) {
 	let text = paper.getText();
-	return findCelebrities( text );
+	let locale = paper.getLocale();
+	return findCelebrities( text, locale );
 };
