@@ -13,7 +13,7 @@ install:
 - yarn global add grunt-cli
 - yarn install
 script:
-- yarn lint
+- grunt check
 - yarn test --runInBand
 after_success:
 - yarn global add codeclimate-test-reporter
