@@ -5,7 +5,7 @@ describe( "a research to find the mention of governmental organizations in Dutch
 	it( 'returns a list of matched governmental organizations', () => {
 		let mockPaper = new Paper( "Dit is duidelijk een cover-up door de AIVD.", { locale: "nl_NL" } );
 		let organizations = governmentalOrganizations( mockPaper );
-		expect( organizations ).toEqual( [ " AIVD" ] );
+		expect( organizations ).toEqual( [ " aivd" ] );
 	});
 	it( 'returns null when there are no governmental organizations mentioned', () => {
 		let mockPaper = new Paper( "Dit is een saaie tekst.", { locale: "nl_NL" } );
@@ -18,7 +18,7 @@ describe( "a research to find the mention of governmental organizations in Engli
 	it( 'returns a list of matched governmental organizations', () => {
 		let mockPaper = new Paper( "It's a cover-up by the CIA. The FBI is involved as well!", { locale: "en_US" } );
 		let organizations = governmentalOrganizations( mockPaper );
-		expect( organizations ).toEqual( [ " CIA", " FBI" ] );
+		expect( organizations ).toEqual( [ " cia", " fbi" ] );
 	});
 	it( 'returns null when there are no governmental organizations mentioned', () => {
 		let mockPaper = new Paper( "This is a boring text.", { locale: "en_US" } );
@@ -31,7 +31,7 @@ describe( "a research to find the mention of governmental organizations in a tex
 	it( 'returns a list of matched governmental organizations', () => {
 		let mockPaper = new Paper( "La vache qui rit, CIA.", { locale: "fr_FR" } );
 		let organizations = governmentalOrganizations( mockPaper );
-		expect( organizations ).toEqual( [ " CIA" ] );
+		expect( organizations ).toEqual( [ " cia" ] );
 	});
 	it( 'returns null when there are no governmental organizations mentioned', () => {
 		let mockPaper = new Paper( "La vache qui rit.", { locale: "fr_FR" } );
