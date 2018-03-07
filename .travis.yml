@@ -1,0 +1,81 @@
+language: php
+dist: trusty
+sudo: false
+
+branches:
+  only:
+    - master
+    - trunk
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+      env: WP_VERSION=4.9 WP_MULTISITE=1 PHPLINT=1 PHPCS=1
+    - php: 5.2
+      # As 'trusty' is not supporting PHP 5.2/5.3 anymore, we need to force using 'precise'.
+      dist: precise
+      env: WP_VERSION=4.8 WP_MULTISITE=1 PHPLINT=1
+    - php: 5.3
+      # As 'trusty' is not supporting PHP 5.2/5.3 anymore, we need to force using 'precise'.
+      dist: precise
+      env: WP_VERSION=4.9
+    - php: 5.6
+      env: WP_VERSION=4.9
+    - php: 7.0
+      env: WP_VERSION=4.9
+    - php: 5.2
+      # As 'trusty' is not supporting PHP 5.2/5.3 anymore, we need to force using 'precise'.
+      dist: precise
+      env: WP_VERSION=master
+    - php: nightly
+      env: WP_VERSION=master
+  allow_failures:
+    # Allow failures for unstable builds.
+    - php: nightly
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+before_script:
+- PLUGIN_SLUG=$(basename $(pwd))
+- export WP_DEVELOP_DIR=/tmp/wordpress/
+
+# Clone WordPress
+#
+- git clone --depth=50 --branch="$WP_VERSION" git://develop.git.wordpress.org/ /tmp/wordpress
+
+# Clone WPSEO and its submodule
+#
+- git clone --depth=50 --branch="trunk" https://github.com/Yoast/wordpress-seo.git $WP_DEVELOP_DIR/src/wp-content/plugins/wordpress-seo
+- cd /tmp/wordpress/src/wp-content/plugins/wordpress-seo
+- if [[ $TRAVIS_PHP_VERSION == "5.2" || $TRAVIS_PHP_VERSION == "5.3" ]]; then phpenv local 5.6.13; fi
+- composer selfupdate 1.0.0 --no-interaction
+- composer install --no-interaction
+- phpenv local --unset
+- cd -
+
+# Copy news seo to test dir
+- cd ..
+- cp -r "$PLUGIN_SLUG" "$WP_DEVELOP_DIR/src/wp-content/plugins/$PLUGIN_SLUG"
+- cd /tmp/wordpress/
+- cp wp-tests-config-sample.php wp-tests-config.php
+- sed -i "s/youremptytestdbnamehere/wordpress_tests/" wp-tests-config.php
+- sed -i "s/yourusernamehere/travis/" wp-tests-config.php
+- sed -i "s/yourpasswordhere//" wp-tests-config.php
+- mysql -e "CREATE DATABASE wordpress_tests;" -uroot
+- cd "$WP_DEVELOP_DIR/src/wp-content/plugins/$PLUGIN_SLUG"
+- if [[ $TRAVIS_PHP_VERSION == "5.2" || $TRAVIS_PHP_VERSION == "5.3" ]]; then phpenv local 5.6.13; fi
+- composer install --no-interaction
+- composer config-yoastcs
+- phpenv local --unset
+- phpenv rehash
+
+script:
+- if [[ "$PHPLINT" == "1" ]]; then find -L . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l; fi
+- if [[ "$PHPCS" == "1" ]]; then vendor/bin/phpcs -p -s -v -n . --standard=./codesniffer.xml --extensions=php; fi
+- if [[ "$CHECKS" == "1" ]]; then npm install -g grunt-cli && npm install --no-optional && grunt check:js; fi
+- if [[ "$COVERAGE" == "1" ]]; then phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml; else phpunit -c phpunit.xml; fi
+- if [[ "$COVERAGE" == "1" ]]; then vendor/bin/test-reporter; fi
