@@ -1,6 +1,6 @@
 let createRegexFromArray = require( "yoastseo/js/stringProcessing/createRegexFromArray" );
 let dutchOrganizations = [ "AIVD", "BVD" ];
-let generalOrganizations = [ "CIA", "FBI", "NSA", "Homeland security", "KGB" ];
+let generalOrganizations = [ "CIA", "FBI", "NSA", "Homeland security", "KGB", "TSA", "MI6", "ATF", "DEA", "GOP" ];
 
 /**
  * Gets the list of governmental organizations based on the locale.
@@ -22,20 +22,19 @@ const getOrganizations = function( locale ) {
  * 
  * @param {Array} organizations The list of organizations.
  * @param {string} text The text to check for organizations.
- * @returns {*|Promise<any>|RegExpMatchArray|Promise<Response>}
+ * @returns {Array} A list of found governmental organizations. 
  */
 const findOrganizations = function( organizations, text ) {
-	// todo to lowercase
 	const organizationRegex = createRegexFromArray( organizations );
-	let matches = text.match( organizationRegex );
+	text = text.toLocaleLowerCase();
 	return text.match( organizationRegex );
 };
 
 /**
- * Checks a text for governmental organization and returns a list of them.
+ * Checks a text for governmental organizations and returns a list of them.
  *
  * @param {Object} paper The paper to check for governmental organizations.
- * @returns {Array} An array with organization.
+ * @returns {Array} An array with organizations.
  */
 module.exports = function ( paper ) {
 	let locale = paper.getLocale();
