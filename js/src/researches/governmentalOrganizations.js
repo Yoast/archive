@@ -4,9 +4,9 @@ let generalOrganizations = [ "CIA", "FBI", "NSA", "Homeland security", "KGB", "T
 
 /**
  * Gets the list of governmental organizations based on the locale.
- * 
+ *
  * @param {string} locale The locale to get the list of governmental organizations for.
- * @returns {array} The list of governmental organizations
+ * @returns {array} The list of governmental organizations.
  */
 const getOrganizations = function( locale ) {
 	switch ( locale ) {
@@ -19,10 +19,10 @@ const getOrganizations = function( locale ) {
 
 /**
  * Finds governmental organizations in a text.
- * 
+ *
  * @param {Array} organizations The list of organizations.
  * @param {string} text The text to check for organizations.
- * @returns {Array} A list of found governmental organizations. 
+ * @returns {Array} A list of found governmental organizations.
  */
 const findOrganizations = function( organizations, text ) {
 	const organizationRegex = createRegexFromArray( organizations );
@@ -36,9 +36,9 @@ const findOrganizations = function( organizations, text ) {
  * @param {Object} paper The paper to check for governmental organizations.
  * @returns {Array} An array with organizations.
  */
-module.exports = function ( paper ) {
+module.exports = function( paper ) {
 	let locale = paper.getLocale();
 	let text = paper.getText();
-	let organizations = getOrganizations ( locale );
+	let organizations = getOrganizations( locale );
 	return findOrganizations( organizations, text );
 };

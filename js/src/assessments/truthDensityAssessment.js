@@ -1,6 +1,6 @@
 let AssessmentResult = require( "yoastseo/js/values/AssessmentResult" );
 let wordCount = require( "yoastseo/js/stringProcessing/countWords" );
-let getTruthDensity = require( "../researches/getTruthDensity" );
+let getTruthDensity = require( "../researches/truthDensity" );
 
 /**
  * Returns the score object based on the number of governmental organizations in a text.
@@ -30,7 +30,7 @@ const scoreTruthDensity = function( paper ) {
 			};
 		}
 	}
-	return {}
+	return {};
 };
 
 /**
