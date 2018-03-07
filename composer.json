@@ -10,10 +10,6 @@
 			"homepage": "https://yoast.com"
 		}
 	],
-	"require-dev": {
-		"codeclimate/php-test-reporter": "dev-master",
-		"yoast/yoastcs": "^0.4.3"
-	},
 	"minimum-stability": "dev",
 	"prefer-stable": true
 }
