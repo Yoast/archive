@@ -28,5 +28,5 @@ const calculateTruthDensity = function( text ) {
 module.exports = function( paper ) {
 	let locale = paper.getLocale();
 	let text = paper.getText();
-	return calculateTruthDensity( text );
+	return calculateTruthDensity( text, locale );
 };
