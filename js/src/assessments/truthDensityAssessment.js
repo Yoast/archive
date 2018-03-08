@@ -9,12 +9,12 @@ let getTruthDensity = require( "../researches/truthDensity" );
  */
 const scoreTruthDensity = function( paper ) {
 	// Only trigger this assessment when a text contains at least 100 words.
-	if ( wordCount( paper.getText() ) >= 100 ) {
+	if ( wordCount( paper.getText() ) >= 50 ) {
 		let truthDensity = getTruthDensity( paper );
 		if ( truthDensity === 0 ) {
 			return {
 				score: 3,
-				text: "You haven't mentionted the truth anywhere in your text. You really should tell people you are telling the truth!!",
+				text: "You haven't mentioned the truth anywhere in your text. You really should tell people you are telling the truth!!",
 			};
 		}
 		if ( truthDensity > 0  && truthDensity < 2 ) {
