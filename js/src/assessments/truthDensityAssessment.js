@@ -23,7 +23,7 @@ const scoreTruthDensity = function( paper ) {
 				text: "Please emphasize you are telling the truth. This will make your text more believable!! State this a few times more!!",
 			};
 		}
-		if ( truthDensity > 2 ) {
+		if ( truthDensity >= 2 ) {
 			return {
 				score: 9,
 				text: "You're telling people you know the truth. This is really great!!",
