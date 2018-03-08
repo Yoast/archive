@@ -1,4 +1,5 @@
 let createRegexFromArray = require( "yoastseo/js/stringProcessing/createRegexFromArray" );
+let getLanguage = require( "yoastseo/js/helpers/getLanguage" );
 
 let deadCelebrities = [ "paul", "paul mccartney" ];
 let notDeadCelebrities = [ "elvis", "tupac", "makaveli", "2pac", "notorious b.i.g.", "notorious big", "biggie", "biggie smalls" ];
@@ -14,14 +15,12 @@ let notDeadPhrasesNl = [ " is niet dood", " is niet gestorven", " is niet overle
 /**
  * Gets the vital status phrases based on the passed locale.
  *
- * @param {string} locale The text's locale.
+ * @param {string} language The text's language.
  * @returns {Object} The dead and not dead phrases.
  */
-const getVitalStatusPhrases = function( locale ) {
-	switch( locale ) {
-		case "nl_NL":
-		case "nl_NL_formal":
-		case "nl_BE": return { dead: deadPhrasesNl, notDead: notDeadPhrasesNl };
+const getVitalStatusPhrases = function( language ) {
+	switch( language ) {
+		case "nl": return { dead: deadPhrasesNl, notDead: notDeadPhrasesNl };
 		default: return { dead: deadPhrasesEn, notDead: notDeadPhrasesEn };
 	}
 };
@@ -47,11 +46,11 @@ const createPhrases = function( celebrities, phrases ) {
  * Gets a list of phrases about the vital status of celebrities.
  * Combines the phrases about dead celebrities and alive celebrities to one single list.
  *
- * @param {string} locale The locale.
+ * @param {string} language The language.
  * @returns {array} The combined phrases list about dead celebrities and alive celebrities.
  */
-const createPhraseList = function( locale ) {
-	let phrases = getVitalStatusPhrases( locale );
+const createPhraseList = function( language ) {
+	let phrases = getVitalStatusPhrases( language );
 	let createdDeadPhrases = createPhrases( deadCelebrities, phrases.dead );
 	let createdNotDeadPhrases = createPhrases( notDeadCelebrities, phrases.notDead );
 	return createdDeadPhrases.concat( createdNotDeadPhrases );
@@ -61,11 +60,11 @@ const createPhraseList = function( locale ) {
  * Finds mentions of dead and alive celebrities in a text.
  *
  * @param {string} text The text to check for dead and alive celebrities.
- * @param {string} locale The locale of the text.
+ * @param {string} language The language of the text.
  * @returns {Array} A list of found dead and alive celebrities.
  */
-const findCelebrities = function( text, locale ) {
-	const celebrityPhrases = createPhraseList( locale );
+const findCelebrities = function( text, language ) {
+	const celebrityPhrases = createPhraseList( language );
 	const celebritiesRegex = createRegexFromArray( celebrityPhrases );
 	text = text.toLocaleLowerCase();
 	return text.match( celebritiesRegex );
@@ -80,5 +79,6 @@ const findCelebrities = function( text, locale ) {
 module.exports = function( paper ) {
 	let text = paper.getText();
 	let locale = paper.getLocale();
-	return findCelebrities( text, locale );
+	let language = getLanguage( locale );
+	return findCelebrities( text, language );
 };
