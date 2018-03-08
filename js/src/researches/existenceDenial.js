@@ -1,36 +1,50 @@
-let subjects = [ "Finland", "Bielefeld", "maan", "roggebrood", "cake" ];
-let DutchDenials = [ "bestaat niet", "is een leugen" ];
-let EnglishDenials = [ "doesn't exist", "is a lie" ];
+let createRegexFromArray = require( "yoastseo/js/stringProcessing/createRegexFromArray" );
+let getLanguage = require( "yoastseo/js/helpers/getLanguage" );
 
+let createPhrases = require( "../helpers/createPhrases" );
 
-const createPhrases = function( celebrities, phrases ) {
-	let celebrityPhrases = [];
-	celebrities.map( function( celebrity ) {
-		for( let i = 0; i < phrases.length; i++ ) {
-			celebrityPhrases.push( celebrity + phrases[ i ] );
-		}
-	} );
-	return celebrityPhrases;
-};
+let englishSubjects = [ "Finland", "Bielefeld", "moon",  "cake" ];
+let dutchSubjects = [ "Finland", "Bielefeld", "maan" ,"roggebrood" ];
 
+let dutchDenials = [ " bestaat niet", " is een leugen" ];
+let englishDenials = [ " doesn't exist", " is a lie" ];
 
-const createPhraseList = function() {
-	let createdDeadPhrases = createPhrases( deadCelebrities, deadPhrases );
-	let createdNotDeadPhrases = createPhrases( notDeadCelebrities, notDeadPhrases );
-	return createdDeadPhrases.concat( createdNotDeadPhrases );
+/**
+ * Gets the subjects and denial phrases based on the passed language.
+ *
+ * @param {string} language The text's language.
+ * @returns {Object} The subjects and denial phrases.
+ */
+const getPhraseParts = function( language ) {
+	switch( language ) {
+		case "nl": return { subjects: dutchSubjects, denials: dutchDenials };
+		default: return { subjects: englishSubjects, denials: englishDenials };
+	}
 };
 
 /**
- * Finds mentions of dead celebrities in a text.
+ * Gets a list of subject denial phrases.
  *
- * @param {string} text The text to check for dead celebrities.
- * @returns {Array} A list of found dead celebrities.
+ * @param {string} language The language.
+ * @returns {array} The combined phrases list containing subject denials.
  */
-const findCelebrities = function( text ) {
-	const celebrityPhrases = createPhraseList();
-	const celebritiesRegex = createRegexFromArray( celebrityPhrases );
+const createPhraseList = function( language ) {
+	let phraseParts = getPhraseParts( language );
+	return createPhrases( phraseParts.subjects, phraseParts.denials );
+};
+
+/**
+ * Finds denials in a text.
+ *
+ * @param {string} text The text to check for denials.
+ * @param {string} language The language of the text.
+ * @returns {Array} A list of found denials.
+ */
+const findDenials = function( text, language ) {
+	const denialPhrases = createPhraseList( language );
+	const denialRegex = createRegexFromArray( denialPhrases );
 	text = text.toLocaleLowerCase();
-	return text.match( celebritiesRegex );
+	return text.match( denialRegex );
 };
 
 /**
@@ -41,5 +55,7 @@ const findCelebrities = function( text ) {
  */
 module.exports = function( paper ) {
 	let text = paper.getText();
-	return findCelebrities( text );
+	let locale = paper.getLocale();
+	let language = getLanguage( locale );
+	return findDenials( text, language );
 };

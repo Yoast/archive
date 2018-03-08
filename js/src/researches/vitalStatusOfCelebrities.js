@@ -1,6 +1,8 @@
 let createRegexFromArray = require( "yoastseo/js/stringProcessing/createRegexFromArray" );
 let getLanguage = require( "yoastseo/js/helpers/getLanguage" );
 
+let createPhrases = require( "../helpers/createPhrases" );
+
 let deadCelebrities = [ "paul", "paul mccartney" ];
 let notDeadCelebrities = [ "elvis", "tupac", "makaveli", "2pac", "notorious b.i.g.", "notorious big", "biggie", "biggie smalls" ];
 let deadPhrasesEn = [ " is dead", " has died", " died", "'s death", " passed away", " deceased",
@@ -13,7 +15,7 @@ let notDeadPhrasesNl = [ " is niet dood", " is niet gestorven", " is niet overle
 	" is helemaal niet dood", " is helemaal niet gestorven" ];
 
 /**
- * Gets the vital status phrases based on the passed locale.
+ * Gets the vital status phrases based on the passed language.
  *
  * @param {string} language The text's language.
  * @returns {Object} The dead and not dead phrases.
@@ -23,23 +25,6 @@ const getVitalStatusPhrases = function( language ) {
 		case "nl": return { dead: deadPhrasesNl, notDead: notDeadPhrasesNl };
 		default: return { dead: deadPhrasesEn, notDead: notDeadPhrasesEn };
 	}
-};
-
-/**
- * Combines a list of celebrities and a list of phrases to phrases about the vital status of celebrities.
- *
- * @param {array} celebrities The list of celebrities.
- * @param {array} phrases The list of phrases.
- * @returns {Array} The list of phrases about the vital status of celebrities.
- */
-const createPhrases = function( celebrities, phrases ) {
-	let celebrityPhrases = [];
-	celebrities.map( function( celebrity ) {
-		for( let i = 0; i < phrases.length; i++ ) {
-			celebrityPhrases.push( celebrity + phrases[ i ] );
-		}
-	} );
-	return celebrityPhrases;
 };
 
 /**
