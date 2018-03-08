@@ -20,7 +20,7 @@ const scoreVitalStatusOfCelebrities = function( paper ) {
 		if ( celebrities.length > 0 ) {
 			return {
 				score: 9,
-				text: "Your knowledge of the activities of governmental organization is on point!",
+				text: "Way to go! You know who's dead and who isn't!",
 			};
 		}
 	}
