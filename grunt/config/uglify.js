@@ -1,5 +1,5 @@
 module.exports = {
-	"tin-foil-hat": {
+	"fact-check-for-yoastseo": {
 		options: {
 			output: {
 				comments: /^!|@preserve|@license|@cc_on/,
