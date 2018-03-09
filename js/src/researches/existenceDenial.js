@@ -3,11 +3,11 @@ let getLanguage = require( "yoastseo/js/helpers/getLanguage" );
 
 let createPhrases = require( "../helpers/createPhrases" );
 
-let englishSubjects = [ "Finland", "Bielefeld", "moon",  "cake" ];
-let dutchSubjects = [ "Finland", "Bielefeld", "maan" ,"roggebrood" ];
+let englishSubjects = [ "finland", "bielefeld", "moon",  "cake" ];
+let dutchSubjects = [ "finland", "bielefeld", "maan" ,"roggebrood" ];
 
-let dutchDenials = [ " bestaat niet", " is een leugen" ];
-let englishDenials = [ " doesn't exist", " is a lie" ];
+let dutchDenials = [ " bestaat niet", " bestaat helemaal niet"," is een leugen", " bestaat ook niet", " is ook een leugen" ];
+let englishDenials = [ " doesn't exist", " is a lie", " is also a lie" ];
 
 /**
  * Gets the subjects and denial phrases based on the passed language.

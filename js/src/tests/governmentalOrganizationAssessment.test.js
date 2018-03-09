@@ -25,19 +25,12 @@ describe( "an assessment assessing the mentioning of governmental organizations 
 		expect( result.getScore() ).toBe( 6 );
 		expect( result.getText() ).toBe( "You've only mentioned a governmental organization once. We know you can do better!" );
 	});
-	it( 'returns a score of 3 when there are multiple mentions of governmental organizations', () => {
+	it( 'returns a score of 3 when there are no mentions of governmental organizations', () => {
 		let mockPaper = new Paper( "Dit is een saaie tekst." + fillerText, { locale: "nl_NL" } );
 		let result = governmentalOrganizationsAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 3 );
 		expect( result.getText() ).toBe( "You haven't even mentioned a governmental organization! How do you expect us to believe you're writing about facts?!" );
-	});
-	it( 'returns a score of 0 when a text has less than 100 words', () => {
-		let mockPaper = new Paper( "Dit is een te korte tekst met AIVD erin.", { locale: "nl_NL" } );
-		let result = governmentalOrganizationsAssessment.getResult( mockPaper );
-
-		expect( result.getScore() ).toBe( 0 );
-		expect( result.getText() ).toBe( "" );
 	});
 });
 
@@ -56,7 +49,7 @@ describe( "an assessment assessing the mentioning of governmental organizations 
 		expect( result.getScore() ).toBe( 6 );
 		expect( result.getText() ).toBe( "You've only mentioned a governmental organization once. We know you can do better!" );
 	});
-	it( 'returns a score of 3 when there are multiple mentions of governmental organizations', () => {
+	it( 'returns a score of 3 when there are no mentions of governmental organizations', () => {
 		let mockPaper = new Paper( "This is a boring text." + fillerText, { locale: "en_US" } );
 		let result = governmentalOrganizationsAssessment.getResult( mockPaper );
 
@@ -69,13 +62,6 @@ describe( "an assessment assessing the mentioning of governmental organizations 
 
 		expect( result.getScore() ).toBe( 3 );
 		expect( result.getText() ).toBe( "You haven't even mentioned a governmental organization! How do you expect us to believe you're writing about facts?!" );
-	});
-	it( 'returns a score of 0 when a text has less than 100 words', () => {
-		let mockPaper = new Paper( "This is a short text containing the word FBI.", { locale: "en_US" } );
-		let result = governmentalOrganizationsAssessment.getResult( mockPaper );
-
-		expect( result.getScore() ).toBe( 0 );
-		expect( result.getText() ).toBe( "" );
 	});
 });
 
@@ -94,15 +80,18 @@ describe( "an assessment assessing the mentioning of governmental organizations 
 		expect( result.getScore() ).toBe( 6 );
 		expect( result.getText() ).toBe( "You've only mentioned a governmental organization once. We know you can do better!" );
 	});
-	it( 'returns a score of 3 when there are multiple mentions of governmental organizations', () => {
+	it( 'returns a score of 3 when there are no mentions of governmental organizations', () => {
 		let mockPaper = new Paper( "La vache qui rit." + fillerText, { locale: "fr_FR" } );
 		let result = governmentalOrganizationsAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 3 );
 		expect( result.getText() ).toBe( "You haven't even mentioned a governmental organization! How do you expect us to believe you're writing about facts?!" );
 	});
+});
+
+describe( "an assessment assessing the mentioning of governmental organizations in a too short text", function() {
 	it( 'returns a score of 0 when a text has less than 100 words', () => {
-		let mockPaper = new Paper( "La vache qui rit, FBI.", { locale: "fr_FR" } );
+		let mockPaper = new Paper( "Dit is een te korte tekst met AIVD erin.", { locale: "nl_NL" } );
 		let result = governmentalOrganizationsAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 0 );

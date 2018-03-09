@@ -17,7 +17,13 @@ const scoreExistenceDenial = function( paper ) {
 				text: "Don't you want to tell your readers about the lies they believe?! Does Finland really exist?! An what about the moon?!",
 			};
 		}
-		if ( denials.length > 0 ) {
+		if ( denials.length === 1 ) {
+			return {
+				score: 6,
+				text: "Sure, you're denying the existence of something. But there is more to deny, right?!",
+			};
+		}
+		if ( denials.length > 1 ) {
 			return {
 				score: 9,
 				text: "Good job! Not everything the government tells you about does exist!!!",
