@@ -49,7 +49,8 @@ temp/
 .svn
 
 ############
-## Tin-Foil-Hat
+## Fact Check for YoastSEO
 ############
 js/dist/
 node_modules/
+artifact

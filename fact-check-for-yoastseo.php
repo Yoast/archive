@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Tin Foil Hat by Yoast
+Plugin Name: Fact Check for YoastSEO
 Description: This plugin helps you write awesome conspiring content.
 Version: 1.4
 Author: Team Yoast
@@ -23,7 +23,7 @@ class Yoast_TinFoilHat
 	public function enqueue_scripts()
 	{
 		// only enqueue on x-edit page.
-		wp_enqueue_script('fact-check-for-yoastseo', plugins_url('js/dist/factCheck-010.js', FACT_CHECK_FOR_YOASTSEO ), array(), '1.4', true);
+		wp_enqueue_script('fact-check-for-yoastseo', plugins_url('js/dist/factCheck-010.min.js', FACT_CHECK_FOR_YOASTSEO ), array(), '1.4', true);
 	}
 }
 
