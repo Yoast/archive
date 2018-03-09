@@ -1,6 +1,6 @@
 let loadGruntConfig = require( "load-grunt-config" );
 let timeGrunt = require( "time-grunt" );
-let path = require('path');
+let path = require( "path" );
 const { flattenVersionForFile } = require( "./webpack/paths" );
 
 module.exports = function( grunt ) {
@@ -11,9 +11,9 @@ module.exports = function( grunt ) {
 	const pluginVersion = readPackageJson.version;
 
 	let project = {
-		pluginMainFile: "tin-foil-hat.php",
+		pluginMainFile: "fact-check-for-yoastseo.php",
 		pluginVersion: pluginVersion,
-		pluginSlug: "tin-foil-hat",
+		pluginSlug: "fact-check-for-yoastseo",
 		paths: {
 			get config() {
 				return this.grunt + "config/";
