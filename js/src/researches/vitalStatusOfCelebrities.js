@@ -4,13 +4,13 @@ let getLanguage = require( "yoastseo/js/helpers/getLanguage" );
 let createPhrases = require( "../helpers/createPhrases" );
 
 let deadCelebrities = [ "paul", "paul mccartney" ];
-let notDeadCelebrities = [ "elvis", "tupac", "makaveli", "2pac", "notorious b.i.g.", "notorious big", "biggie", "biggie smalls" ];
-let deadPhrasesEn = [ " is dead", " has died", " died", "'s death", " passed away", " deceased",
+let notDeadCelebrities = [ "elvis", "elvis presley", "tupac", "makaveli", "2pac", "notorious b.i.g.", "notorious big", "biggie", "biggie smalls" ];
+let deadPhrasesEn = [ " is dead", " has died", " died", " 's death", " passed away", " deceased",
 	" is deceased", " kicked the bucket", " has kicked the bucket" ];
 let deadPhrasesNl = [ " is dood", " is gestorven", " is overleden" ];
 let notDeadPhrasesEn = [ " is not dead", " is not really dead", " isn't really dead", " isn't dead", " has not died",
 	" hasn't died", " didn't die", " did not die", " didn't pass away", " did not pass away", " isn't deceased",
-	" is not deceased", "is alive", "is still alive" ];
+	" is not deceased", " is alive", " is still alive" ];
 let notDeadPhrasesNl = [ " is niet dood", " is niet gestorven", " is niet overleden", " is helemaal niet overleden",
 	" is helemaal niet dood", " is helemaal niet gestorven" ];
 
