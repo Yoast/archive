@@ -8,7 +8,7 @@ Author URI: https://yoast.com
 License: GPL v3
 */
 
-define('YOAST_TIN_FOIL_HAT', __FILE__);
+define('FACT_CHECK_FOR_YOASTSEO', __FILE__);
 
 class Yoast_TinFoilHat
 {
@@ -23,7 +23,7 @@ class Yoast_TinFoilHat
 	public function enqueue_scripts()
 	{
 		// only enqueue on x-edit page.
-		wp_enqueue_script('yoast-tfh', plugins_url('js/dist/factCheck-010.js', YOAST_TIN_FOIL_HAT ), array(), '1.4', true);
+		wp_enqueue_script('fact-check-for-yoastseo', plugins_url('js/dist/factCheck-010.js', FACT_CHECK_FOR_YOASTSEO ), array(), '1.4', true);
 	}
 }
 
