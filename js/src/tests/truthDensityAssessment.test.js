@@ -4,7 +4,7 @@ let Paper = require( "yoastseo/js/values/Paper.js" );
 let fillerText = "This is some filler text, to make sure we reach the 50 words.  This is some filler text, to make sure we reach the 50 words.  This is some filler text, to make sure we reach the 50 words.  This is some filler text, to make sure we reach the 50 words.  This is some filler text, to make sure we reach the 50 words. ";
 
 describe( "an assessment assessing the density of mentioning the truth in texts", function() {
-	it('returns a score of 3 when there are multiple mentions of governmental organizations', () => {
+	it('returns a score of 3 when there are no mentions of the truth in the text', () => {
 		let mockPaper = new Paper("This is a lie" + fillerText);
 		let result = truthDensityAssessment.getResult(mockPaper);
 
