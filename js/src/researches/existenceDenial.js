@@ -51,7 +51,7 @@ const findDenials = function( text, language ) {
  * Checks a text for existence denials and returns a list of them.
  *
  * @param {Object} paper The paper to check for existence denials.
- * @returns {Array} An array with celebrity phrases.
+ * @returns {Array} An array with existence denials.
  */
 module.exports = function( paper ) {
 	let text = paper.getText();
