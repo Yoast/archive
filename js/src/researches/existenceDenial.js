@@ -48,9 +48,9 @@ const findDenials = function( text, language ) {
 };
 
 /**
- * Checks a text for (not) dead celebrities and returns a list of them.
+ * Checks a text for existence denials and returns a list of them.
  *
- * @param {Object} paper The paper to check for (not) dead celebrities.
+ * @param {Object} paper The paper to check for existence denials.
  * @returns {Array} An array with celebrity phrases.
  */
 module.exports = function( paper ) {

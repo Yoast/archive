@@ -34,7 +34,7 @@ const scoreExistenceDenial = function( paper ) {
 };
 
 /**
- * Execute the Governmental Organization Assessment and return a result.
+ * Execute the Existence Denial assessment and return a result.
  * @param {Paper} paper The Paper object to assess.
  * @returns {AssessmentResult} The result of the assessment, containing both a score and a feedback text.
  */
