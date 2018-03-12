@@ -23,7 +23,7 @@ describe( "an assessment assessing existence denial in a Dutch text", function()
 		let result = existenceDenialAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 3 );
-		expect( result.getText() ).toBe( "Don't you want to tell your readers about the lies they believe?! Does Finland really exist?! An what about the moon?!" );
+		expect( result.getText() ).toBe( "Don't you want to tell your readers about the lies they believe?! Does Finland really exist?! And what about the moon?!" );
 	});
 	it( 'returns a score of 0 when a text has less than 150 words', () => {
 		let mockPaper = new Paper( "Dit is een te korte tekst. De maan bestaat ook niet.", { locale: "nl_NL" } );
@@ -54,7 +54,7 @@ describe( "an assessment assessing existence denial in an English text", functio
 		let result = existenceDenialAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 3 );
-		expect( result.getText() ).toBe( "Don't you want to tell your readers about the lies they believe?! Does Finland really exist?! An what about the moon?!" );
+		expect( result.getText() ).toBe( "Don't you want to tell your readers about the lies they believe?! Does Finland really exist?! And what about the moon?!" );
 	});
 });
 
@@ -78,7 +78,7 @@ describe( "an assessment assessing existence denial in a text with a non-Dutch a
 		let result = existenceDenialAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 3 );
-		expect( result.getText() ).toBe( "Don't you want to tell your readers about the lies they believe?! Does Finland really exist?! An what about the moon?!" );
+		expect( result.getText() ).toBe( "Don't you want to tell your readers about the lies they believe?! Does Finland really exist?! And what about the moon?!" );
 	});
 });
 
