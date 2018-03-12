@@ -23,6 +23,9 @@ const findTruths = function( truths, text ) {
  */
 const calculateTruthDensity = function( text ) {
 	let truthCount = findTruths( truths, text );
+	if ( truthCount === null ) {
+		return 0;
+	}
 	let numberOfTruths = truthCount.length;
 	let numberOfWords = wordCount( text );
 	return Math.round( numberOfTruths / numberOfWords * 100 );

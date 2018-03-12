@@ -1,3 +1,3 @@
 module.exports = {
-	plugin: "tin-foil-hat.php",
+	plugin: "fact-check-for-yoastseo.php",
 };
