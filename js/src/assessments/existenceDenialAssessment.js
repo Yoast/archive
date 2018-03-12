@@ -14,7 +14,7 @@ const scoreExistenceDenial = function( paper ) {
 		if ( denials === null ) {
 			return {
 				score: 3,
-				text: "Don't you want to tell your readers about the lies they believe?! Does Finland really exist?! An what about the moon?!",
+				text: "Don't you want to tell your readers about the lies they believe?! Does Finland really exist?! And what about the moon?!",
 			};
 		}
 		if ( denials.length === 1 ) {
