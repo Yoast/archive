@@ -242,7 +242,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 
 			if ( $options['opengraph'] === true ) {
-				$GLOBALS['wpseo_og'] = new WPSEO_OpenGraph;
+				$GLOBALS['wpseo_og'] = new WPSEO_OpenGraph();
 			}
 
 			do_action( 'wpseo_opengraph' );
