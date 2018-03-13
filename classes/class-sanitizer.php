@@ -20,7 +20,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	 * The actual sanitization function
 	 */
 	public function sanitize() {
-		$body             = $this->get_body_node();
+		$body = $this->get_body_node();
 		$this->strip_attributes_recursive( $body );
 	}
 
@@ -37,7 +37,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 		if ( $node->hasAttributes() ) {
 			$node_name = $node->nodeName;
 			$length    = $node->attributes->length;
-			for ( $i = $length - 1; $i >= 0; $i -- ) {
+			for ( $i = --$length; $i >= 0; $i-- ) {
 				$attribute = $node->attributes->item( $i );
 
 				switch ( $node_name ) {
@@ -77,7 +77,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 				continue;
 			}
 
-			for ( $i = $length - 1; $i >= 0; $i -- ) {
+			for ( $i = --$length; $i >= 0; $i-- ) {
 				$element     = $elements->item( $i );
 				$parent_node = $element->parentNode;
 				$parent_node->removeChild( $element );

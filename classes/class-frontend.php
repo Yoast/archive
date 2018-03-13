@@ -96,7 +96,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				'attributes'  => array(),
 				'config_data' => array(
 					'vars'     => array(
-						'account' => $UA
+						'account' => $UA,
 					),
 					'triggers' => array(
 						'trackPageview' => array(
@@ -208,18 +208,18 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			$selectors = $this->get_class_selectors();
 
 			$css_builder = new YoastSEO_AMP_CSS_Builder();
-			$css_builder->add_option( 'header-color', $selectors[ 'header-color' ], 'background' );
-			$css_builder->add_option( 'headings-color', $selectors[ 'headings-color' ], 'color' );
-			$css_builder->add_option( 'text-color', $selectors[ 'text-color' ], 'color' );
+			$css_builder->add_option( 'header-color', $selectors['header-color'], 'background' );
+			$css_builder->add_option( 'headings-color', $selectors['headings-color'], 'color' );
+			$css_builder->add_option( 'text-color', $selectors['text-color'], 'color' );
 
-			$css_builder->add_option( 'blockquote-bg-color', $selectors[ 'blockquote-bg-color' ], 'background-color' );
-			$css_builder->add_option( 'blockquote-border-color', $selectors[ 'blockquote-border-color' ], 'border-color' );
-			$css_builder->add_option( 'blockquote-text-color', $selectors[ 'blockquote-text-color' ], 'color' );
+			$css_builder->add_option( 'blockquote-bg-color', $selectors['blockquote-bg-color'], 'background-color' );
+			$css_builder->add_option( 'blockquote-border-color', $selectors['blockquote-border-color'], 'border-color' );
+			$css_builder->add_option( 'blockquote-text-color', $selectors['blockquote-text-color'], 'color' );
 
-			$css_builder->add_option( 'link-color', $selectors[ 'link-color' ], 'color' );
-			$css_builder->add_option( 'link-color-hover', $selectors[ 'link-color-hover' ], 'color' );
+			$css_builder->add_option( 'link-color', $selectors['link-color'], 'color' );
+			$css_builder->add_option( 'link-color-hover', $selectors['link-color-hover'], 'color' );
 
-			$css_builder->add_option( 'meta-color', $selectors[ 'meta-color' ], 'color' );
+			$css_builder->add_option( 'meta-color', $selectors['meta-color'], 'color' );
 
 			echo $css_builder->build();
 
@@ -297,7 +297,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 					'@type'  => 'ImageObject',
 					'url'    => $image_src[0],
 					'width'  => $image_src[1],
-					'height' => $image_src[2]
+					'height' => $image_src[2],
 				);
 			}
 
@@ -358,18 +358,18 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 */
 		private function get_class_selectors() {
 			$selectors = array(
-				'header-color'   => 'nav.amp-wp-title-bar',
-				'headings-color' => '.amp-wp-title, h2, h3, h4',
-				'text-color'     => '.amp-wp-content',
+				'header-color'            => 'nav.amp-wp-title-bar',
+				'headings-color'          => '.amp-wp-title, h2, h3, h4',
+				'text-color'              => '.amp-wp-content',
 
 				'blockquote-bg-color'     => '.amp-wp-content blockquote',
 				'blockquote-border-color' => '.amp-wp-content blockquote',
 				'blockquote-text-color'   => '.amp-wp-content blockquote',
 
-				'link-color'       => 'a, a:active, a:visited',
-				'link-color-hover' => 'a:hover, a:focus',
+				'link-color'              => 'a, a:active, a:visited',
+				'link-color-hover'        => 'a:hover, a:focus',
 
-				'meta-color' => '.amp-wp-meta li, .amp-wp-meta li a',
+				'meta-color'              => '.amp-wp-meta li, .amp-wp-meta li a',
 			);
 
 			// CSS classnames have been changed in version 0.4.0.

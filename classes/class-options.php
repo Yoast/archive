@@ -147,16 +147,21 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 				return '';
 			}
 
-			$parts = explode( '><', $tag );
+			$parts     = explode( '><', $tag );
 			$parts[0] .= '>';
-			$parts[1] = '<' . $parts[1];
+			$parts[1]  = '<' . $parts[1];
 
 			// Rebuild with script tag and json content.
-			array_splice( $parts, 1, null, array(
-				'<script type="application/json">',
-				trim( $json ),
-				'</script>'
-			) );
+			array_splice(
+				$parts,
+				1,
+				null,
+				array(
+					'<script type="application/json">',
+					trim( $json ),
+					'</script>',
+				)
+			);
 
 			return implode( "\n", $parts );
 		}

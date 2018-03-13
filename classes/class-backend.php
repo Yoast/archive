@@ -41,7 +41,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		 */
 		public function remove_page_post_type( $post_types ) {
 			if ( ! post_type_supports( 'page', AMP_QUERY_VAR ) ) {
-				unset( $post_types[ 'page' ] );
+				unset( $post_types['page'] );
 			}
 
 			return $post_types;
@@ -80,19 +80,30 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		 * Enqueue admin page JS
 		 */
 		public function enqueue_admin_page() {
-			wp_enqueue_style( 'yoast_amp_css', plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.css', array( 'wp-color-picker' ), false );
+			wp_enqueue_style(
+				'yoast_amp_css',
+				plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.css',
+				array( 'wp-color-picker' ),
+				false
+			);
 
 			wp_enqueue_media(); // enqueue files needed for upload functionality
-			wp_enqueue_script( 'wpseo-admin-media', plugin_dir_url( __FILE__ ) . 'assets/wp-seo-admin-media.js', array(
-				'jquery',
-				'jquery-ui-core',
-			), false, true );
+			wp_enqueue_script(
+				'wpseo-admin-media',
+				plugin_dir_url( __FILE__ ) . 'assets/wp-seo-admin-media.js',
+				array( 'jquery', 'jquery-ui-core' ),
+				false,
+				true
+			);
 			wp_localize_script( 'wpseo-admin-media', 'wpseoMediaL10n', $this->localize_media_script() );
 
-			wp_enqueue_script( 'yoast_amp_js', plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.js', array(
-				'jquery',
-				'wp-color-picker'
-			), false, true );
+			wp_enqueue_script(
+				'yoast_amp_js',
+				plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.js',
+				array( 'jquery', 'wp-color-picker' ),
+				false,
+				true
+			);
 		}
 
 		/**
