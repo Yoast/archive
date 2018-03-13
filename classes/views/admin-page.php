@@ -126,7 +126,7 @@ $yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
 				if ( $UA === null ) {
 					echo esc_html( __( 'Make sure to connect your Google Analytics plugin properly.', 'wordpress-seo' ) );
 				} else {
-					echo sprintf( esc_html( __( 'Pageviews will be tracked using the following account: %s.', 'wordpress-seo' ) ), '<code>' . $UA . '</code>' );
+					echo sprintf( esc_html( __( 'Pageviews will be tracked using the following account: %s.', 'wordpress-seo' ) ), '<code>' . esc_html( $UA ) . '</code>' );
 				}
 
 				echo '</p>';
