@@ -110,6 +110,7 @@ if ( ! class_exists( 'Yoast_Update_Manager_v2', false ) ) {
 				'license'      => $this->license_manager->get_license_key(),
 				'item_name'    => $this->product->get_item_name(),
 				'wp_version'   => $wp_version,
+				'php_version'  => PHP_VERSION_ID,
 				'item_version' => $this->product->get_version(),
 				'url'          => $this->license_manager->get_url(),
 				'slug'         => $this->product->get_slug(),
