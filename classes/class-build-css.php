@@ -1,5 +1,7 @@
 <?php
 /**
+ * YoastSEO_AMP_Glue plugin file.
+ *
  * @package     YoastSEO_AMP_Glue\CSS_Builder
  * @author      Jip Moors
  * @copyright   2016 Yoast BV
@@ -7,14 +9,20 @@
  */
 
 if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
-
+	/**
+	 * Class to build CSS.
+	 */
 	class YoastSEO_AMP_CSS_Builder {
 
-		/** @var array Option to CSS lookup map */
+		/**
+		 * Option to CSS lookup map.
+		 *
+		 * @var array
+		 */
 		private $items = array();
 
 		/**
-		 * Add option to CSS map
+		 * Add option to CSS map.
 		 *
 		 * @param string $option_key Option key.
 		 * @param string $selector   CSS Selector.
@@ -28,7 +36,7 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 		}
 
 		/**
-		 * @return string Output CSS
+		 * @return string Output CSS.
 		 */
 		public function build() {
 			$options = YoastSEO_AMP_Options::get();

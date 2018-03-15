@@ -1,4 +1,11 @@
 <?php
+/**
+ * YoastSEO_AMP_Glue plugin file.
+ *
+ * @package   YoastSEO_AMP_Glue\Sanitizer
+ * @copyright 2016 Yoast BV
+ * @license   GPL-2.0+
+ */
 
 if ( ! defined( 'AMP__DIR__' ) ) {
 	header( 'Status: 403 Forbidden' );
@@ -12,12 +19,12 @@ require_once AMP__DIR__ . '/includes/sanitizers/class-amp-base-sanitizer.php';
  * Strips blacklisted tags and attributes from content, on top of the ones the AMP plugin already removes.
  *
  * See following for blacklist:
- *     https://github.com/ampproject/amphtml/blob/master/spec/amp-html-format.md#html-tags
+ * {@link https://github.com/ampproject/amphtml/blob/master/spec/amp-html-format.md#html-tags}
  */
 class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 
 	/**
-	 * The actual sanitization function
+	 * The actual sanitization function.
 	 */
 	public function sanitize() {
 		$body = $this->get_body_node();
@@ -64,10 +71,10 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	}
 
 	/**
-	 * Passes through the DOM and strips forbidden tags
+	 * Passes through the DOM and strips forbidden tags.
 	 *
 	 * @param DOMNode $node
-	 * @param array $tag_names
+	 * @param array   $tag_names
 	 */
 	private function strip_tags( $node, $tag_names ) {
 		foreach ( $tag_names as $tag_name ) {
@@ -90,10 +97,10 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	}
 
 	/**
-	 * Sanitizes anchor attributes
+	 * Sanitizes anchor attributes.
 	 *
 	 * @param DOMNode $node
-	 * @param object $attribute
+	 * @param object  $attribute
 	 */
 	private function sanitize_a_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
@@ -104,10 +111,10 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	}
 
 	/**
-	 * Sanitizes pre tag attributes
+	 * Sanitizes pre tag attributes.
 	 *
 	 * @param DOMNode $node
-	 * @param object $attribute
+	 * @param object  $attribute
 	 */
 	private function sanitize_pre_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
@@ -118,10 +125,10 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	}
 
 	/**
-	 * Sanitizes td / th tag attributes
+	 * Sanitizes td / th tag attributes.
 	 *
 	 * @param DOMNode $node
-	 * @param object $attribute
+	 * @param object  $attribute
 	 */
 	private function sanitize_cell_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
@@ -132,11 +139,10 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	}
 
 	/**
-	 * Sanitize table tag
-	 * attributes
+	 * Sanitize table tag attributes.
 	 *
 	 * @param DOMNode $node
-	 * @param object $attribute
+	 * @param object  $attribute
 	 */
 	private function sanitize_table_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );

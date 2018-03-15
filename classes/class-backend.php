@@ -1,5 +1,7 @@
 <?php
 /**
+ * YoastSEO_AMP_Glue plugin file.
+ *
  * @package     YoastSEO_AMP_Glue\Admin
  * @author      Joost de Valk
  * @copyright   2016 Yoast BV
@@ -13,6 +15,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 	class YoastSEO_AMP_Backend {
 
 		/**
+		 * YoastSEO_AMP_Glue options.
+		 *
 		 * @var array
 		 */
 		public $options;
@@ -23,10 +27,10 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		public function __construct() {
 			$this->options = YoastSEO_AMP_Options::get();
 
-			// Add subitem to menu
+			// Add subitem to menu.
 			add_filter( 'wpseo_submenu_pages', array( $this, 'add_submenu_page' ) );
 
-			// Register AMP admin page as a Yoast SEO admin page
+			// Register AMP admin page as a Yoast SEO admin page.
 			add_filter( 'wpseo_admin_pages', array( $this, 'add_admin_pages' ) );
 
 			add_filter( 'wpseo_amp_supported_post_types', array( $this, 'remove_page_post_type' ) );
@@ -48,9 +52,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		}
 
 		/**
-		 * Add submenu item
+		 * Add submenu item.
 		 *
-		 * @param array $sub_menu_pages
+		 * @param array $sub_menu_pages Currently registered sub-menu pages.
 		 *
 		 * @return array
 		 */
@@ -70,14 +74,14 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		}
 
 		/**
-		 * Displays the admin page
+		 * Displays the admin page.
 		 */
 		public function display() {
 			require 'views/admin-page.php';
 		}
 
 		/**
-		 * Enqueue admin page JS
+		 * Enqueue admin page JS.
 		 */
 		public function enqueue_admin_page() {
 			wp_enqueue_style(
@@ -87,7 +91,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 				false
 			);
 
-			wp_enqueue_media(); // enqueue files needed for upload functionality
+			wp_enqueue_media(); // Enqueue files needed for upload functionality.
 			wp_enqueue_script(
 				'wpseo-admin-media',
 				plugin_dir_url( __FILE__ ) . 'assets/wp-seo-admin-media.js',
@@ -109,7 +113,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		/**
 		 * Pass some variables to js for upload module.
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function localize_media_script() {
 			return array(
@@ -118,9 +122,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		}
 
 		/**
-		 * Add admin page to admin_pages so the correct assets are loaded by WPSEO
+		 * Add admin page to admin_pages so the correct assets are loaded by WPSEO.
 		 *
-		 * @param $admin_pages
+		 * @param array $admin_pages Currently registered admin pages.
 		 *
 		 * @return array
 		 */
@@ -131,12 +135,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		}
 
 		/**
-		 * Render a color picker
+		 * Render a color picker.
 		 *
-		 * @param string $var
-		 * @param string $label
+		 * @param string $var   Option key.
+		 * @param string $label Option name.
 		 *
-		 * @SuppressWarnings("PMD.UnusedPrivateMethod") // As this is used in a view
+		 * @SuppressWarnings("PMD.UnusedPrivateMethod") // As this is used in a view.
 		 */
 		private function color_picker( $var, $label ) {
 			echo '<label class="checkbox" for="', esc_attr( $var ), '">', esc_html( $label ), '</label>';

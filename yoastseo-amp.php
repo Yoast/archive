@@ -1,5 +1,7 @@
 <?php
 /**
+ * YoastSEO_AMP_Glue plugin.
+ *
  * @package     YoastSEO_AMP_Glue
  * @author      Joost de Valk
  * @copyright   2016 Yoast BV
@@ -7,11 +9,11 @@
  *
  * @wordpress-plugin
  * Plugin Name: Glue for Yoast SEO & AMP
- * Plugin URI: https://wordpress.org/plugins/glue-for-yoast-seo-amp/
+ * Plugin URI:  https://wordpress.org/plugins/glue-for-yoast-seo-amp/
  * Description: Makes sure the default WordPress AMP plugin uses the proper Yoast SEO metadata
- * Version: 0.4.2
- * Author: Joost de Valk
- * Author URI: https://yoast.com
+ * Version:     0.4.2
+ * Author:      Joost de Valk
+ * Author URI:  https://yoast.com
  */
 
 if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
@@ -43,7 +45,7 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 
 if ( ! function_exists( 'yoast_seo_amp_glue_init' ) ) {
 	/**
-	 * Initialize the Yoast SEO AMP Glue plugin
+	 * Initialize the Yoast SEO AMP Glue plugin.
 	 */
 	function yoast_seo_amp_glue_init() {
 		if ( defined( 'WPSEO_FILE' ) && defined( 'AMP__FILE__' ) ) {

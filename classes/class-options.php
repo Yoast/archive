@@ -1,5 +1,7 @@
 <?php
 /**
+ * YoastSEO_AMP_Glue plugin file.
+ *
  * @package     YoastSEO_AMP_Glue\Options
  * @author      Jip Moors
  * @copyright   2016 Yoast BV
@@ -7,16 +9,30 @@
  */
 
 if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
-
+	/**
+	 * Class to manage the YoastSEO_AMP option.
+	 */
 	class YoastSEO_AMP_Options {
 
-		/** @var string Name of the option in the database */
+		/**
+		 * Name of the option in the database.
+		 *
+		 * @var string
+		 */
 		private $option_name = 'wpseo_amp';
 
-		/** @var array Current options */
+		/**
+		 * Current options.
+		 *
+		 * @var array
+		 */
 		private $options;
 
-		/** @var array Option defaults */
+		/**
+		 * Option defaults.
+		 *
+		 * @var array
+		 */
 		private $defaults = array(
 			'version'                 => 1,
 			'amp_site_icon'           => '',
@@ -36,25 +52,32 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 			'analytics-extra'         => '',
 		);
 
-		/** @var self Class instance */
+		/**
+		 * Class instance.
+		 *
+		 * @var self
+		 */
 		private static $instance;
 
+		/**
+		 * Constructor.
+		 */
 		private function __construct() {
-			// Register settings
+			// Register settings.
 			add_action( 'admin_init', array( $this, 'register_settings' ) );
 		}
 
 		/**
-		 * Register the premium settings
+		 * Register the premium settings.
 		 */
 		public function register_settings() {
 			register_setting( 'wpseo_amp_settings', $this->option_name, array( $this, 'sanitize_options' ) );
 		}
 
 		/**
-		 * Sanitize options
+		 * Sanitize options.
 		 *
-		 * @param $options
+		 * @param array $options Options as received in $_POST.
 		 *
 		 * @return mixed
 		 */
@@ -85,7 +108,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 				$options[ $color ] = $this->sanitize_color( $options[ $color ], '' );
 			}
 
-			// Only allow 'on' or 'off'
+			// Only allow 'on' or 'off'.
 			foreach ( $options as $key => $value ) {
 				if ( 'post_types-' === substr( $key, 0, 11 ) ) {
 					$options[ $key ] = ( $value === 'on' ) ? 'on' : 'off';
@@ -98,12 +121,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
-		 * Sanitize hexadecimal color
+		 * Sanitize hexadecimal color.
 		 *
 		 * @param string $color   String to test for valid color.
 		 * @param string $default Value the string will get when no color is found.
 		 *
-		 * @return string Color or $default
+		 * @return string Color or $default.
 		 */
 		private function sanitize_color( $color, $default ) {
 			if ( preg_match( '~^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$~', $color, $matches ) ) {
@@ -114,6 +137,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
+		 * Sanitize analytics code.
+		 *
 		 * @param string $source Raw input.
 		 *
 		 * @return string Sanitized code.
@@ -167,7 +192,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
-		 * Get the options
+		 * Get the options.
 		 *
 		 * @return array
 		 */
@@ -180,6 +205,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
+		 * Get the singleton instance of this class.
+		 *
 		 * @return YoastSEO_AMP_Options
 		 */
 		public static function get_instance() {
@@ -191,7 +218,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
-		 * Collect options
+		 * Collect options.
 		 *
 		 * @SuppressWarnings("PMD.UnusedPrivateMethod")
 		 */
@@ -214,7 +241,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		}
 
 		/**
-		 * Get post types
+		 * Get post types.
 		 */
 		private function update_post_type_settings() {
 			$post_type_names = array();
