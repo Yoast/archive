@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+
 let AssessmentResult = require( "yoastseo/js/values/AssessmentResult" );
 let wordCount = require( "yoastseo/js/stringProcessing/countWords" );
 let getAllTheThings = require( "../researches/allTheThings" );
