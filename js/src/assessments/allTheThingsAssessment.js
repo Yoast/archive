@@ -19,43 +19,44 @@ const scoreAllTheThings = function( paper ) {
 			case "moon landing":
 				result.score = 3;
 				result.text = "You haven't mentioned how the moon landing was staged. Don't you think you should tell people this?!";
-			break;
+				break;
 			case "earth is flat":
 				result.score = 3;
 				result.text = "People really should know how the earth is flat, there is a reason the moon landing was faked!";
-			break;
+				break;
 			case "ufo":
 				result.score = 3;
 				result.text = "While you are on the subject of why the earth is flat. Why not mention how UFO's are involved?!";
-			break;
+				break;
 			case "area 51":
 				result.score = 3;
 				result.text = "How can you talk about UFO's, without talking about Area 51?!";
-			break;
+				break;
 			case "denver airport":
 				result.score = 3;
 				result.text = "Area 51 isn't the only suspicious place. What about Denver Airport? That place is shady as can be!";
-			break;
+				break;
 			case "illuminati":
 				result.score = 6;
 				result.text = "You know the Illuminati are involved. Don't be afraid to mention them as well!!";
-			break;
+				break;
 			case "freemasons":
 				result.score = 6;
 				result.text = "Do you really think the Illuminati are alone? Of course not, the Freemasons are in on it as well!";
-			break;
+				break;
 			case "reptilians":
 				result.score = 6;
 				result.text = "Our earth is controlled by Reptillians, you know that. Please don't be too hesitant too tell that!!";
-			break;
+				break;
 			case "chemtrails":
 				result.score = 6;
-				result.text = "Did you see those lines in the sky? Chemtrails! they are spreading doom over the world. Everyone should know this. Tell them!!";
-			break;
+				result.text = "Did you see those lines in the sky? Chemtrails! they are spreading doom over the world. " +
+					"Everyone should know this. Tell them!!";
+				break;
 			default:
 				result.score = 9;
 				result.text = "You know what you are talking about. Great you're willing to share your ultimate knowledge with your readers!!";
-			break;
+				break;
 		}
 	}
 	return result;

@@ -2,7 +2,7 @@ let allTheThings = [ "moon landing", "earth is flat", "ufo", "area 51", "denver 
 let toRegex = require( "yoastseo/js/stringProcessing/createWordRegex.js" );
 
 
-const matchAllThethings = function( text ){
+const matchAllThethings = function( text ) {
 	let i, missingMatch = "";
 
 	for ( i = 0; i < allTheThings.length; i++ ) {
