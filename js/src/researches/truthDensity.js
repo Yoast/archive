@@ -1,16 +1,33 @@
 let createRegexFromArray = require( "yoastseo/js/stringProcessing/createRegexFromArray" );
 let wordCount = require( "yoastseo/js/stringProcessing/countWords" );
-let truths = [ "the truth", "the shocking truth", "uncovering the truth", "it is true", "this is true" ];
+let getLanguage = require( "yoastseo/js/helpers/getLanguage" );
+
+let englishTruths = [ "the truth", "the shocking truth", "uncovering the truth", "it is true", "this is true", "no lie", "not a lie" ];
+let dutchTruths = [ "de waarheid", "de schokkende waarheid", "is waar", "is zeker waar", "geen leugen" ];
+
+/**
+ * Gets the subjects and denial phrases based on the passed language.
+ *
+ * @param {string} language The text's language.
+ * @returns {Object} The subjects and denial phrases.
+ */
+const getTruthPhrases = function( language ) {
+	switch( language ) {
+		case "nl": return dutchTruths;
+		default: return englishTruths;
+	}
+};
 
 /**
  * Finds truth mentions in a text.
  *
- * @param {Array} truths The list of truths.
  * @param {string} text The text to check for truths.
+ * @param {string} language The language of the text.
  * @returns {array} A list of found truths.
  */
-const findTruths = function( truths, text ) {
-	const truthRegex = createRegexFromArray( truths );
+const findTruths = function( text, language ) {
+	let truthPhrases = getTruthPhrases( language );
+	const truthRegex = createRegexFromArray( truthPhrases );
 	let formattedText = text.toLocaleLowerCase();
 	return formattedText.match( truthRegex ) || [];
 };
@@ -19,10 +36,11 @@ const findTruths = function( truths, text ) {
  * Calculates the density of truths in a text.
  *
  * @param {string} text The text to check for truths.
+ * @param {string} language The text to check for truths.
  * @returns {number} the percentage of truths in the text.
  */
-const calculateTruthDensity = function( text ) {
-	let truthCount = findTruths( truths, text );
+const calculateTruthDensity = function( text, language ) {
+	let truthCount = findTruths( text, language );
 	if ( truthCount === null ) {
 		return 0;
 	}
@@ -35,10 +53,11 @@ const calculateTruthDensity = function( text ) {
  * Checks a text for truths and returns the density of them.
  *
  * @param {Object} paper The paper to check for governmental organizations.
- * @returns {Array} An array with organization.
+ * @returns {number} The truth density.
  */
 module.exports = function( paper ) {
 	let locale = paper.getLocale();
 	let text = paper.getText();
-	return calculateTruthDensity( text, locale );
+	let language = getLanguage( locale );
+	return calculateTruthDensity( text, language );
 };
