@@ -22,6 +22,16 @@ check:
 'check:php':
   - 'phplint'
 
+artifact:
+  # Build like we normally would
+  - 'build'
+  # Remove build folder
+  - 'clean:artifact'
+  # Copy only the relevant files to the folder
+  - 'copy:artifact'
+  # Create a zip file
+  - 'compress:artifact'
+
 # Default task
 default:
   - build
