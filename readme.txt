@@ -1,11 +1,11 @@
-=== Yoast SEO ===
+=== Fact Check for Yoast SEO ===
 Contributors: ireneyoast, terwdan
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, Content analysis, Fact check
 Requires at least: 4.8
 Tested up to: 4.9.4
-Requires PHP: 5.2.4
+Requires PHP: 5.6
 
 == Description ==
 
