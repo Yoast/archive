@@ -34,19 +34,28 @@ describe( "an assessment assessing the number of conspiracies mentioned", functi
 		let result = allTheThingsAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 3 );
-		expect( result.getText() ).toBe( "People really should know how the earth is flat, there is a reason the moon landing was faked!" );
+		expect( result.getText() ).toBe( "People really should know that the earth is flat. There is a reason the moon landing was faked!" );
 	});
 
-	it ( 'returns a score of 3 when only the moon landing was mentioned', () => {
+	it ( 'returns a score of 3 when only the moon landing and flat earth was mentioned', () => {
 		let mockPaper = new Paper( "This is a simple text about the moon landing and how the earth is flat ." + filler );
 		let result = allTheThingsAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 3 );
-		expect( result.getText() ).toBe( "While you are on the subject of why the earth is flat. Why not mention how UFO's are involved?!" );
+		expect( result.getText() ).toBe( "While you are on the subject of why the earth is flat, why not mention how UFOs are involved?!" );
 	});
 
-	it ( 'returns a score of 3 when only the moon landing was mentioned', () => {
+	it ( 'returns a score of 6 when the last thing mentioned from the list is Denver Airport', () => {
 		let mockPaper = new Paper( "This is a simple text about: moon landing earth is flat ufo area 51 denver airport." + filler );
+		let result = allTheThingsAssessment.getResult( mockPaper );
+
+		expect( result.getScore() ).toBe( 6 );
+		expect( result.getText() ).toBe( "You know the Illuminati are involved. Don't be afraid to mention them as well!!" );
+	});
+
+
+	it ( 'returns a score of 6 when the illuminati aren\'t mentioned, but chemtrails are.', () => {
+		let mockPaper = new Paper( "This is a simple text about: moon landing earth is flat ufo area 51 denver airport chemtrails." + filler );
 		let result = allTheThingsAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 6 );
@@ -58,6 +67,6 @@ describe( "an assessment assessing the number of conspiracies mentioned", functi
 		let result = allTheThingsAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 9 );
-		expect( result.getText() ).toBe( "You know what you are talking about. Great you're willing to share your ultimate knowledge with your readers!!" );
+		expect( result.getText() ).toBe( "You know what you are talking about!! Great you're willing to share your ultimate knowledge with your readers!!!" );
 	});
 });
