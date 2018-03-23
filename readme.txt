@@ -15,7 +15,7 @@ Use this plugin to check your text for accuracy. We will tell you if you're writ
 
 ### Bug reports
 
-Bug reports for Fact Check for Yoast SEO are [welcomed on GitHub](https://github.com/IreneStr/tin-foil-hat). Please note GitHub is not a support forum, and issues that aren’t properly qualified as bugs will be closed.
+Bug reports for Fact Check for Yoast SEO are [welcomed on GitHub](https://github.com/Yoast/fact-check). Please note GitHub is not a support forum, and issues that aren’t properly qualified as bugs will be closed.
 
 == Installation ==
 
