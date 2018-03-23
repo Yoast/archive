@@ -54,7 +54,7 @@ describe( "an assessment assessing the number of conspiracies mentioned", functi
 	});
 
 
-	it ( 'returns a score of 6 when the illuminati aren\'t mentioned, but chemtrails are.', () => {
+	it ( 'returns a score of 6 when the illuminati aren\'t mentioned, but chemtrails are which is further in the list then the illuminati', () => {
 		let mockPaper = new Paper( "This is a simple text about: moon landing earth is flat ufo area 51 denver airport chemtrails." + filler );
 		let result = allTheThingsAssessment.getResult( mockPaper );
 
