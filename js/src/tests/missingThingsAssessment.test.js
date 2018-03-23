@@ -1,4 +1,4 @@
-let allTheThingsAssessment = require( "../assessments/allTheThingsAssessment" );
+let allTheThingsAssessment = require( "../assessments/missingThingsAssessment" );
 let Paper = require( "yoastseo/js/values/Paper.js" );
 
 let filler = "this is a piece of filler text so we can reach the 250 word minimum. " +

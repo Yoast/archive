@@ -2,7 +2,7 @@
 
 let AssessmentResult = require( "yoastseo/js/values/AssessmentResult" );
 let wordCount = require( "yoastseo/js/stringProcessing/countWords" );
-let allTheThings = require( "../researches/allTheThings" );
+let allTheThings = require( "../researches/missingThings" );
 
 /**
  * Returns the score object based on the missing thing.

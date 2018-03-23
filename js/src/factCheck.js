@@ -5,7 +5,7 @@
 	const governmentalOrganizationsAssessment  = require( "./assessments/governmentalOrganizationsAssessment" );
 	const truthDensityAssessment  = require( "./assessments/truthDensityAssessment" );
 	const vitalStatusOfCelebritiesAssessment  = require( "./assessments/vitalStatusOfCelebritiesAssessment" );
-	const allTheThingsAssessment  = require( "./assessments/allTheThingsAssessment" );
+	const allTheThingsAssessment  = require( "./assessments/missingThingsAssessment" );
 	const existenceDenialAssessment  = require( "./assessments/existenceDenialAssessment" );
 	/**
      * Adds the Yoast Fact Check plugin to the YoastSEO Analyzer.
