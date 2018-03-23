@@ -22,5 +22,3 @@ Bug reports for Fact Check for Yoast SEO are [welcomed on GitHub](https://github
 1. Visit 'Plugins > Add New'
 2. Search for 'Fact Check for Yoast SEO'
 3. Activate Fact Check for Yoast SEO from your Plugins page.
-
-
