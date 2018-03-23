@@ -4,8 +4,8 @@ let toRegex = require( "yoastseo/js/stringProcessing/createWordRegex.js" );
 /**
  * Finds the missing thing in the text. Checks against the list for things to match.
  *
- * @param text
- * @returns {string} The first
+ * @param {string} text The text to check for mentions in the list
+ * @returns {string} The first thing missing in the list
  */
 const findMissingThing = function( text ) {
 	let i, missingMatch = "";
