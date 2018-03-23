@@ -2,7 +2,7 @@
 
 let AssessmentResult = require( "yoastseo/js/values/AssessmentResult" );
 let wordCount = require( "yoastseo/js/stringProcessing/countWords" );
-let AllTheThings = require( "../researches/allTheThings" );
+let allTheThings = require( "../researches/allTheThings" );
 
 /**
  * Returns the score object based on the missing thing.
@@ -15,7 +15,7 @@ const scoreAllTheThings = function( paper ) {
 
 	// Only trigger this assessment when a text contains at least 250 words.
 	if ( wordCount( paper.getText() ) >= 250 ) {
-		let missingThing = AllTheThings( paper );
+		let missingThing = allTheThings( paper );
 
 		switch ( missingThing ) {
 			case "moon landing":
