@@ -17,7 +17,7 @@ NB. Fact Check for Yoast SEO only works in combination with [Yoast SEO](https://
 
 ### Available languages
 
-Fact Check for Yoast SEO works understands English and Dutch. Don't forget to 
+Fact Check for Yoast SEO understands English and Dutch. Don't forget to set your site language to one of those languages.
 
 ### Bug reports
 
