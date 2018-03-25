@@ -8,14 +8,20 @@ let exclamationMarkInTitle = require( "../researches/exclamationMarkInTitle" );
  */
 const scoreExclamationMarkInTitle = function( title ) {
 	let hasExclamationMark = exclamationMarkInTitle( title );
-	// Only return a score and feedback text when there is a title and the title contains no exclamation mark.
-	if ( title !== "" && ! hasExclamationMark ) {
+	// Only return a score and feedback text when there is a title.
+	if ( title === "" ) {
+		return {};
+	}
+	if ( hasExclamationMark ) {
 		return {
-			score: 3,
-			text: "Why doesn't your title contain an exclamation mark?! Write your title like you mean it!!!!",
+			score: 9,
+			text: "Good work! That's how you write a title!!",
 		};
 	}
-	return {};
+	return {
+		score: 3,
+		text: "Why doesn't your title contain an exclamation mark?! Write your title like you mean it!!!!",
+	};
 };
 
 /**

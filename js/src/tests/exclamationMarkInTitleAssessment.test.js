@@ -9,26 +9,26 @@ describe( "an assessment assessing the presence of at least one exclamation mark
 		expect( result.getScore() ).toBe( 0 );
 		expect( result.getText() ).toBe( "" );
 	} );
-	it( "returns a score of 0 and an empty feedback string when a title ends with !.", () => {
-		let mockPaper = new Paper( "This is a paper." );
+	it( "returns a score of 9 when a title ends with !.", () => {
+		let mockPaper = new Paper( "This is a paper.", { title: "Title!" } );
 		let result = exclamationMarkInTitleAssessment.getResult( mockPaper );
 
-		expect( result.getScore() ).toBe( 0 );
-		expect( result.getText() ).toBe( "" );
+		expect( result.getScore() ).toBe( 9 );
+		expect( result.getText() ).toBe( "Good work! That's how you write a title!!" );
 	} );
-	it( "returns a score of 0 and an empty feedback string when a title ends with ??!?!??.", () => {
+	it( "returns a score of 9 when a title ends with ??!?!??.", () => {
 		let mockPaper = new Paper( "This is a paper", { title: "Title??!?!??" } );
 		let result = exclamationMarkInTitleAssessment.getResult( mockPaper );
 
-		expect( result.getScore() ).toBe( 0 );
-		expect( result.getText() ).toBe( "" );
+		expect( result.getScore() ).toBe( 9 );
+		expect( result.getText() ).toBe( "Good work! That's how you write a title!!" );
 	} );
-	it( "returns a score of 0 and an empty feedback string when the title has exclamation marks in the middle.", () => {
+	it( "returns a score of 9 when the title has exclamation marks in the middle.", () => {
 		let mockPaper = new Paper( "This is a paper", { title: "Its true! Or is it?" } );
 		let result = exclamationMarkInTitleAssessment.getResult( mockPaper );
 
-		expect( result.getScore() ).toBe( 0 );
-		expect( result.getText() ).toBe( "" );
+		expect( result.getScore() ).toBe( 9 );
+		expect( result.getText() ).toBe( "Good work! That's how you write a title!!" );
 	} );
 	it( "returns a score of 3 when a title ends with ?.", () => {
 		let mockPaper = new Paper( "This is a paper", { title: "Title?" } );
