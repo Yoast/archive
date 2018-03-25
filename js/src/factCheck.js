@@ -7,6 +7,7 @@
 	const vitalStatusOfCelebritiesAssessment  = require( "./assessments/vitalStatusOfCelebritiesAssessment" );
 	const allTheThingsAssessment  = require( "./assessments/missingThingsAssessment" );
 	const existenceDenialAssessment  = require( "./assessments/existenceDenialAssessment" );
+	const exclamationMarkInTitleAssessment  = require( "./assessments/exclamationMarkInTitleAssessment" );
 	/**
      * Adds the Yoast Fact Check plugin to the YoastSEO Analyzer.
      *
@@ -23,6 +24,7 @@
 		app.registerAssessment( "vitalStatusOfCelebrities", vitalStatusOfCelebritiesAssessment, "YoastFactCheckPlugin" );
 		app.registerAssessment( "allTheThings", allTheThingsAssessment, "YoastFactCheckPlugin" );
 		app.registerAssessment( "existenceDenial", existenceDenialAssessment, "YoastFactCheckPlugin" );
+		app.registerAssessment( "exclamationMarkInTitle", exclamationMarkInTitleAssessment, "YoastFactCheckPlugin" );
 	}
 
 	// Adds eventListener on page load to load the Fact Check.
