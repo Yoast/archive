@@ -1,4 +1,5 @@
 let allTheThings = [ "moon landing", "earth is flat", "ufo", "area 51", "denver airport", "illuminati", "freemasons", "reptilians", "chemtrails"  ];
+let alltheThingsDutch = [ "maanlading", "aarde is plat", "ufo", "area 51", "denver airport", "illuminati", "vrijmetselaars", "reptilians", "chemtrails" ];
 let toRegex = require( "yoastseo/js/stringProcessing/createWordRegex.js" );
 
 /**
