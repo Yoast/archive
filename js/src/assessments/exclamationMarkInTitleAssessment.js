@@ -20,7 +20,7 @@ const scoreExclamationMarkInTitle = function( title ) {
 	}
 	return {
 		score: 3,
-		text: "Why doesn't your title contain an exclamation mark?! Write your title like you mean it!!!!",
+		text: "Every believable text needs a title with an exclamation mark! Write your title like you mean it!!!!",
 	};
 };
 

@@ -35,20 +35,20 @@ describe( "an assessment assessing the presence of at least one exclamation mark
 		let result = exclamationMarkInTitleAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 3 );
-		expect( result.getText() ).toBe( "Why doesn't your title contain an exclamation mark?! Write your title like you mean it!!!!" );
+		expect( result.getText() ).toBe( "Every believable text needs a title with an exclamation mark! Write your title like you mean it!!!!" );
 	} );
 	it( "returns a score of 3 when a title ends with no punctuation mark.", () => {
 		let mockPaper = new Paper( "This is a paper", { title: "Title" } );
 		let result = exclamationMarkInTitleAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 3 );
-		expect( result.getText() ).toBe( "Why doesn't your title contain an exclamation mark?! Write your title like you mean it!!!!" );
+		expect( result.getText() ).toBe( "Every believable text needs a title with an exclamation mark! Write your title like you mean it!!!!" );
 	} );
 	it( "returns a score of 3 when a title ends with a period.", () => {
 		let mockPaper = new Paper( "This is a paper", { title: "Title." } );
 		let result = exclamationMarkInTitleAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 3 );
-		expect( result.getText() ).toBe( "Why doesn't your title contain an exclamation mark?! Write your title like you mean it!!!!" );
+		expect( result.getText() ).toBe( "Every believable text needs a title with an exclamation mark! Write your title like you mean it!!!!" );
 	} );
 } );
