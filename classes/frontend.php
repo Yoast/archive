@@ -70,7 +70,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * @return array
 		 */
 		public function add_sanitizer( $sanitizers ) {
-			require_once 'class-sanitizer.php';
+			require_once 'blacklist-sanitizer.php';
 
 			$sanitizers['Yoast_AMP_Blacklist_Sanitizer'] = array();
 
