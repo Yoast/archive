@@ -14,7 +14,7 @@ describe( "a research to check titles for exclamation marks", function() {
 		expect( hasExclamationMark ).toBe( true );
 	} );
 	it( "returns true when the title has an exclamation mark in the middle and at the end.", () => {
-		let hasExclamationMark = exclamationMarkInTitle( "Its true! Or is it?" );
+		let hasExclamationMark = exclamationMarkInTitle( "Its true! Or is it!" );
 		expect( hasExclamationMark ).toBe( true );
 	} );
 	it( "returns false when a title ends with ?.", () => {
