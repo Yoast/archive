@@ -69,4 +69,28 @@ describe( "an assessment assessing the number of conspiracies mentioned", functi
 		expect( result.getScore() ).toBe( 9 );
 		expect( result.getText() ).toBe( "You know what you are talking about!! Great you're willing to share your ultimate knowledge with your readers!!!" );
 	});
+
+	it( 'returns a score of 3 when no conspiracies are mentioned in a dutch text', () => {
+		let mockPaper = new Paper( "This is a simple text." +  filler  ,{ locale: "nl_NL" } );
+		let result = allTheThingsAssessment.getResult( mockPaper );
+
+		expect( result.getScore() ).toBe( 3 );
+		expect( result.getText() ).toBe( "You haven't mentioned how the moon landing was staged. Don't you think you should tell people this?!" );
+	});
+
+	it ( 'returns a score of 6 when the illuminati aren\'t mentioned, but chemtrails are which is further in the list than the illuminati in a Dutch text', () => {
+		let mockPaper = new Paper( "Dit is een tekst over de maanlanding, de aarde is plat, area 51 ufo en vliegveld denver en chemtrails." + filler  ,{ locale: "nl_NL" } );
+		let result = allTheThingsAssessment.getResult( mockPaper );
+
+		expect( result.getScore() ).toBe( 6 );
+		expect( result.getText() ).toBe( "You know the Illuminati are involved. Don't be afraid to mention them as well!!" );
+	});
+
+	it ( 'returns a score of 9 when all the things are mentioned with a text in Dutch', () => {
+		let mockPaper = new Paper( "maanlanding aarde is plat ufo area 51 vliegveld denver illuminati vrijmetselaars reptilians chemtrails." + filler, { locale: "nl_NL" } );
+		let result = allTheThingsAssessment.getResult( mockPaper );
+
+		expect( result.getScore() ).toBe( 9 );
+		expect( result.getText() ).toBe( "You know what you are talking about!! Great you're willing to share your ultimate knowledge with your readers!!!" );
+	});
 });
