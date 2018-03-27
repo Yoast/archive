@@ -19,10 +19,12 @@ const scoreAllTheThings = function( paper ) {
 
 		switch ( missingThing ) {
 			case "moon landing":
+			case "maanlanding":
 				result.score = 3;
 				result.text = "You haven't mentioned how the moon landing was staged. Don't you think you should tell people this?!";
 				break;
 			case "earth is flat":
+			case "aarde is plat":
 				result.score = 3;
 				result.text = "People really should know that the earth is flat. There is a reason the moon landing was faked!";
 				break;
@@ -35,6 +37,7 @@ const scoreAllTheThings = function( paper ) {
 				result.text = "How can you talk about UFOs without talking about Area 51?!";
 				break;
 			case "denver airport":
+			case "vliegveld denver":
 				result.score = 3;
 				result.text = "Area 51 isn't the only suspicious place. What about Denver Airport? That place is as shady as can be!";
 				break;
@@ -43,6 +46,7 @@ const scoreAllTheThings = function( paper ) {
 				result.text = "You know the Illuminati are involved. Don't be afraid to mention them as well!!";
 				break;
 			case "freemasons":
+			case "vrijmetselaars":
 				result.score = 6;
 				result.text = "Do you really think the Illuminati are alone? Of course not! The Freemasons are in on it too!";
 				break;
