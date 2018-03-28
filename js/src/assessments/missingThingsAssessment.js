@@ -44,16 +44,16 @@ const scoreAllTheThings = function( paper ) {
 				result.score = 6;
 				result.text = "You know the Illuminati are involved. Don't be afraid to mention them as well!!";
 				break;
-			case "freemasons":
-			case "vrijmetselaars":
+			case "freemason":
+			case "vrijmetselaar":
 				result.score = 6;
 				result.text = "Do you really think the Illuminati are alone? Of course not! The Freemasons are in on it too!";
 				break;
-			case "reptilians":
+			case "reptilian":
 				result.score = 6;
 				result.text = "Our earth is controlled by Reptillians! You know that. Please don't be too hesitant too tell that!!!";
 				break;
-			case "chemtrails":
+			case "chemtrail":
 				result.score = 6;
 				result.text = "Did you see those lines in the sky? Chemtrails! They are spreading doom over the world. " +
 					"Everyone should know this. Tell them!!";
