@@ -1,5 +1,5 @@
-let allTheThings = [ "moon landing", "earth is flat", "ufo", "area 51", "denver airport", "illuminati", "freemasons", "reptilians", "chemtrails"  ];
-let alltheThingsDutch = [ "maanlanding", "aarde is plat", "ufo", "area 51", "vliegveld denver", "illuminati", "vrijmetselaars", "reptilians", "chemtrails" ];
+let allTheThingsEnglish = [ "moon landing", "earth is flat", "ufo", "area 51", "denver airport", "illuminati", "freemasons", "reptilians", "chemtrails"  ];
+let alltheThingsDutch = [ "maanlanding", "aarde is plat", "ufo", "area 51", "denver airport", "illuminati", "vrijmetselaars", "reptilians", "chemtrails" ];
 let toRegex = require( "yoastseo/js/stringProcessing/createWordRegex.js" );
 let getLanguage = require( "yoastseo/js/helpers/getLanguage" );
 
@@ -7,12 +7,12 @@ let getLanguage = require( "yoastseo/js/helpers/getLanguage" );
  * Gets the list of all the things to match based on language
  *
  * @param {string} language The language to use to return the list with things.
- * @returns {array} A list with things in the language of the text.
+ * @returns {array} A list with things in the given language.
  */
 const getThings = function( language ) {
 	switch( language ) {
 		case "nl": return alltheThingsDutch;
-		default: return allTheThings;
+		default: return allTheThingsEnglish;
 	}
 };
 
@@ -47,8 +47,8 @@ const findMissingThing = function( text, language ) {
  */
 module.exports = function( paper ) {
 	let locale = paper.getLocale();
-	let text = paper.getText();
 	let language = getLanguage( locale );
+	let text = paper.getText();
 
 	return findMissingThing( text, language );
 };

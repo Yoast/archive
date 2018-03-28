@@ -37,7 +37,6 @@ const scoreAllTheThings = function( paper ) {
 				result.text = "How can you talk about UFOs without talking about Area 51?!";
 				break;
 			case "denver airport":
-			case "vliegveld denver":
 				result.score = 3;
 				result.text = "Area 51 isn't the only suspicious place. What about Denver Airport? That place is as shady as can be!";
 				break;
