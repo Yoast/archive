@@ -8,12 +8,16 @@ describe( "This will check if you've written all the things people need to know!
 		expect( nextThing ).toEqual( "moon landing" );
 	});
 
-	describe( "This will check if you've written all the things people need to know!", function() {
-		it ( "returns the moonlanding as the next thing to write about", function() {
-			let mockPaper = new Paper( "This is an ordinary text.", { locale: "en_US" } );
-			let nextThing = allTheThings( mockPaper );
-			expect( nextThing ).toEqual( "moon landing" );
-		});
+	it ( "returns the moonlanding as the next thing to write about", function() {
+		let mockPaper = new Paper( "This is an ordinary text.", { locale: "en_US" } );
+		let nextThing = allTheThings( mockPaper );
+		expect( nextThing ).toEqual( "moon landing" );
+	});
+
+	it ( "returns the flat earth as the next thing to write about when uppercases are used", function() {
+		let mockPaper = new Paper( "This is an ordinary text about the MOON Landing.", { locale: "en_US" } );
+		let nextThing = allTheThings( mockPaper );
+		expect( nextThing ).toEqual( "earth is flat" );
 	});
 
 	it ( "returns flat earth as the next thing to write about", function() {

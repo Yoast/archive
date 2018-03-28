@@ -1,5 +1,5 @@
-let allTheThingsEnglish = [ "moon landing", "earth is flat", "ufo", "area 51", "denver airport", "illuminati", "freemasons", "reptilians", "chemtrails"  ];
-let alltheThingsDutch = [ "maanlanding", "aarde is plat", "ufo", "area 51", "denver airport", "illuminati", "vrijmetselaars", "reptilians", "chemtrails" ];
+let allTheThingsEnglish = [ "moon landing", "earth is flat", "ufo", "area 51", "denver airport", "illuminati", "freemason", "reptilian", "chemtrail"  ];
+let alltheThingsDutch = [ "maanlanding", "aarde is plat", "ufo", "area 51", "denver airport", "illuminati", "vrijmetselaar", "reptilian", "chemtrail" ];
 let toRegex = require( "yoastseo/js/stringProcessing/createWordRegex.js" );
 let getLanguage = require( "yoastseo/js/helpers/getLanguage" );
 
@@ -29,7 +29,7 @@ const findMissingThing = function( text, language ) {
 	let things = getThings( language );
 
 	for ( i = 0; i < things.length; i++ ) {
-		let match = toRegex( things[ i ] );
+		let match = new RegExp( things[ i ], "i" );
 		if( ! text.match( match ) ) {
 			missingMatch =  things[ i ];
 			break;
