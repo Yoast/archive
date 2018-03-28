@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Fact Check for YoastSEO
-Description: This plugin helps you write awesome conspiring content.
+Description: This plugin helps you write awesome fact-checked content.
 Version: 1.4
 Author: Team Yoast
 Author URI: https://yoast.com
