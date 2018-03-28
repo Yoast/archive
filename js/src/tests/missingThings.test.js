@@ -8,6 +8,14 @@ describe( "This will check if you've written all the things people need to know!
 		expect( nextThing ).toEqual( "moon landing" );
 	});
 
+	describe( "This will check if you've written all the things people need to know!", function() {
+		it ( "returns the moonlanding as the next thing to write about", function() {
+			let mockPaper = new Paper( "This is an ordinary text.", { locale: "en_US" } );
+			let nextThing = allTheThings( mockPaper );
+			expect( nextThing ).toEqual( "moon landing" );
+		});
+	});
+
 	it ( "returns flat earth as the next thing to write about", function() {
 		let mockPaper = new Paper( "The moon landing was staged" );
 		let thing = allTheThings( mockPaper );
@@ -45,8 +53,14 @@ describe( "This will check if you've written all the things people need to know!
 	});
 
 	it ("returns an empty string when everything is written in a dutch text.", function() {
-		let mockPaper = new Paper( "maanlanding aarde is plat ufo area 51 vliegveld denver illuminati vrijmetselaars reptilians chemtrails", { locale: "nl_NL" } );
+		let mockPaper = new Paper( "maanlanding aarde is plat ufo area 51 denver airport illuminati vrijmetselaars reptilians chemtrails", { locale: "nl_NL" } );
 		let thing = allTheThings( mockPaper );
 		expect( thing ).toEqual( "" );
+	});
+
+	it ( "returns moon landing as the first thing to write about, since the german text will default to English", function() {
+		let mockPaper = new Paper( "Dit is een simpele text.", { locale: "de_DE" } );
+		let nextThing = allTheThings( mockPaper );
+		expect( nextThing ).toEqual( "moon landing" );
 	});
 });

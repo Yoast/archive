@@ -79,7 +79,7 @@ describe( "an assessment assessing the number of conspiracies mentioned", functi
 	});
 
 	it ( 'returns a score of 6 when the illuminati aren\'t mentioned, but chemtrails are which is further in the list than the illuminati in a Dutch text', () => {
-		let mockPaper = new Paper( "Dit is een tekst over de maanlanding, de aarde is plat, area 51 ufo en vliegveld denver en chemtrails." + filler  ,{ locale: "nl_NL" } );
+		let mockPaper = new Paper( "Dit is een tekst over de maanlanding, de aarde is plat, area 51 ufo en denver airport en chemtrails." + filler  ,{ locale: "nl_NL" } );
 		let result = allTheThingsAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 6 );
@@ -87,7 +87,7 @@ describe( "an assessment assessing the number of conspiracies mentioned", functi
 	});
 
 	it ( 'returns a score of 9 when all the things are mentioned with a text in Dutch', () => {
-		let mockPaper = new Paper( "maanlanding aarde is plat ufo area 51 vliegveld denver illuminati vrijmetselaars reptilians chemtrails." + filler, { locale: "nl_NL" } );
+		let mockPaper = new Paper( "maanlanding aarde is plat ufo area 51 denver airport illuminati vrijmetselaars reptilians chemtrails." + filler, { locale: "nl_NL" } );
 		let result = allTheThingsAssessment.getResult( mockPaper );
 
 		expect( result.getScore() ).toBe( 9 );
