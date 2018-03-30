@@ -28,7 +28,7 @@ const scoreVitalStatusOfCelebrities = function( paper ) {
 };
 
 /**
- * Execute the Governmental Organization Assessment and return a result.
+ * Execute the Vital status of celebrity Assessment and return a result.
  * @param {Paper} paper The Paper object to assess.
  * @returns {AssessmentResult} The result of the assessment, containing both a score and a feedback text.
  */
