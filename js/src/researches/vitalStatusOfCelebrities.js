@@ -12,7 +12,7 @@ let notDeadPhrasesEn = [ " is not dead", " is not really dead", " isn't really d
 	" hasn't died", " didn't die", " did not die", " didn't pass away", " did not pass away", " isn't deceased",
 	" is not deceased", " is alive", " is still alive" ];
 let notDeadPhrasesNl = [ " is niet dood", " is niet gestorven", " is niet overleden", " is helemaal niet overleden",
-	" is helemaal niet dood", " is helemaal niet gestorven" ];
+	" is helemaal niet dood", " is helemaal niet gestorven", "leeft" ];
 
 /**
  * Gets the vital status phrases based on the passed language.
