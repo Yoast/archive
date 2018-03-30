@@ -3,7 +3,7 @@
   "version": "1.4",
   "description": "This plugin helps you write awesome fact-checked content.",
   "main": "index.js",
-  "repository": "https://github.com/IreneStr/Tin-Foil-Hat.git",
+  "repository": "https://github.com/Yoast/fact-check.git",
   "author": "IreneStr <irene@yoast.com>",
   "license": "GPL-3.0",
   "devDependencies": {
