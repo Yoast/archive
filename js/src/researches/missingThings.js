@@ -1,6 +1,7 @@
-let allTheThingsEnglish = [ "moon landing", "earth is flat", "ufo", "area 51", "denver airport", "illuminati", "freemason", "reptilian", "chemtrail"  ];
-let alltheThingsDutch = [ "maanlanding", "aarde is plat", "ufo", "area 51", "denver airport", "illuminati", "vrijmetselaar", "reptilian", "chemtrail" ];
-let toRegex = require( "yoastseo/js/stringProcessing/createWordRegex.js" );
+let allTheThingsEnglish = [ "moon landing", "earth is flat", "ufo", "area 51", "denver airport",
+	"illuminati", "freemason", "reptilian", "chemtrail"  ];
+let alltheThingsDutch = [ "maanlanding", "aarde is plat", "ufo", "area 51", "denver airport",
+	"illuminati", "vrijmetselaar", "reptilian", "chemtrail" ];
 let getLanguage = require( "yoastseo/js/helpers/getLanguage" );
 
 /**
