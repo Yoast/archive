@@ -144,51 +144,22 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		 * @return string Sanitized code.
 		 */
 		private function sanitize_analytics_code( $source ) {
-
 			$source = trim( $source );
 
 			if ( empty( $source ) ) {
-				return $source;
-			}
-
-			$code = $source;
-
-			// Strip all tags, to verify JSON input.
-			$json        = strip_tags( $code );
-			$parsed_json = json_decode( $json, true );
-
-			// Non-parsable JSON is always bad.
-			if ( is_null( $parsed_json ) ) {
 				return '';
 			}
 
-			$allowed_tags = strip_tags( $code, '<amp-analytics>' );
-
-			// Strip JSON content so we can apply verified script tag.
-			$tag = str_replace( $json, '', $allowed_tags );
-
-			// If the tag doesn't occur in the code, the code is invalid.
-			if ( false === strpos( $allowed_tags, '<amp-analytics' ) ) {
+			// If no <amp-analytics> occurs in the code, the code is invalid.
+			if ( strpos( $source, '<amp-analytics ' ) === false ) {
 				return '';
 			}
 
-			$parts     = explode( '><', $tag );
-			$parts[0] .= '>';
-			$parts[1]  = '<' . $parts[1];
+			if ( strpos( $source, '<script type="application/json">' ) === false ) {
+				return strip_tags( $source, '<amp-analytics>' );
+			}
 
-			// Rebuild with script tag and json content.
-			array_splice(
-				$parts,
-				1,
-				null,
-				array(
-					'<script type="application/json">',
-					trim( $json ),
-					'</script>',
-				)
-			);
-
-			return implode( "\n", $parts );
+			return $this->sanitize_analytics_json( $source );
 		}
 
 		/**
@@ -260,6 +231,46 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 					$post_type_names[] = $post_type->name;
 				}
 			}
+		}
+
+		/**
+		 * Sanitizes an analytics string when it has JSON in it.
+		 *
+		 * @param string $code The code to sanitize.
+		 *
+		 * @return string Sanitized string.
+		 */
+		private function sanitize_analytics_json( $code ) {
+			// Strip all tags, to verify JSON input.
+			$json = strip_tags( $code );
+
+			// Non-parsable JSON is always bad.
+			if ( is_null( json_decode( $json, true ) ) ) {
+				return '';
+			}
+
+			$allowed_tags = strip_tags( $code, '<amp-analytics>' );
+
+			// Strip JSON content so we can apply verified script tag.
+			$tag = str_replace( $json, '', $allowed_tags );
+
+			$parts    = explode( '><', $tag );
+			$parts[0] .= '>';
+			$parts[1] = '<' . $parts[1];
+
+			// Rebuild with script tag and JSON content.
+			array_splice(
+				$parts,
+				1,
+				null,
+				array(
+					'<script type="application/json">',
+					trim( $json ),
+					'</script>',
+				)
+			);
+
+			return implode( "\n", $parts );
 		}
 	}
 }
