@@ -30,16 +30,16 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 		 */
 		public function __construct() {
 
-			require 'classes/class-options.php';
+			require 'classes/options.php';
 
 			if ( is_admin() ) {
-				require 'classes/class-backend.php';
+				require 'classes/backend.php';
 				new YoastSEO_AMP_Backend();
 				return;
 			}
 
-			require 'classes/class-build-css.php';
-			require 'classes/class-frontend.php';
+			require 'classes/css-builder.php';
+			require 'classes/frontend.php';
 			new YoastSEO_AMP_Frontend();
 		}
 
