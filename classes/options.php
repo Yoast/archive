@@ -254,9 +254,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 			// Strip JSON content so we can apply verified script tag.
 			$tag = str_replace( $json, '', $allowed_tags );
 
-			$parts    = explode( '><', $tag );
+			$parts     = explode( '><', $tag );
 			$parts[0] .= '>';
-			$parts[1] = '<' . $parts[1];
+			$parts[1]  = '<' . $parts[1];
 
 			// Rebuild with script tag and JSON content.
 			array_splice(
