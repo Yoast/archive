@@ -258,6 +258,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 
 			if ( $options['opengraph'] === true ) {
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- WPSEO global var.
 				$GLOBALS['wpseo_og'] = new WPSEO_OpenGraph();
 			}
 
