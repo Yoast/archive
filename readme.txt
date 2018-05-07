@@ -36,7 +36,7 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 
 = 0.4.3 =
 * Bugfixes:
-    * Fixes a fatal error in combination with `AMP for WordPress` version 0.7.0 or up.
+    * Fixes a fatal error in combination with `AMP for WordPress` version 0.7.0.
 
 = 0.4.2 =
 * Bugfixes:
