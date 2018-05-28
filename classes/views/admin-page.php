@@ -35,7 +35,7 @@ $yoast_amp_yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' )
 			$yoast_amp_post_types = apply_filters( 'wpseo_sitemaps_supported_post_types', get_post_types( array( 'public' => true ), 'objects' ) );
 
 			// Allow specific AMP post type overrides, especially needed for Page support.
-			$yoast_amp_post_types = apply_filters( 'wpseo_amp_supported_post_types', $post_types );
+			$yoast_amp_post_types = apply_filters( 'wpseo_amp_supported_post_types', $yoast_amp_post_types );
 
 			if ( is_array( $yoast_amp_post_types ) && $yoast_amp_post_types !== array() ) {
 				foreach ( $yoast_amp_post_types as $yoast_amp_pt ) {
