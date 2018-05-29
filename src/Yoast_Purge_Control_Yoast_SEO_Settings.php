@@ -5,13 +5,6 @@
  */
 class Yoast_Purge_Control_Yoast_SEO_Settings {
 	/**
-	 * Registers the WordPress hooks and filters.
-	 */
-	public function register_hooks() {
-		register_activation_hook( YOAST_PURGE_FILE, array( $this, 'enforce_settings' ) );
-	}
-
-	/**
 	 * Ensures the settings are set as we recommend them to be.
 	 */
 	public function enforce_settings() {

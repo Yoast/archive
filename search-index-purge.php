@@ -44,3 +44,5 @@ global $yoast_purge_plugin;
 $yoast_purge_plugin = new Yoast_Purge_Plugin();
 $yoast_purge_plugin->add_integrations();
 $yoast_purge_plugin->register_hooks();
+
+register_activation_hook( YOAST_PURGE_FILE, array( 'Yoast_Purge_Plugin', 'activate' ) );

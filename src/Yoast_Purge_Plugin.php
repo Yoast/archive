@@ -26,7 +26,6 @@ final class Yoast_Purge_Plugin {
 	public function add_integrations() {
 		$this->integrations = array(
 			new Yoast_Purge_Attachment_Page_Server(),
-			new Yoast_Purge_Control_Yoast_SEO_Settings(),
 			new Yoast_Purge_Media_Settings_Tab_Content(),
 		);
 	}
@@ -53,5 +52,13 @@ final class Yoast_Purge_Plugin {
 	 */
 	public function get_integrations() {
 		return $this->integrations;
+	}
+
+	/**
+	 * Executes everything we need on activation.
+	 */
+	public static function activate() {
+		$seo_settings = new Yoast_Purge_Control_Yoast_SEO_Settings();
+		$seo_settings->enforce_settings();
 	}
 }
