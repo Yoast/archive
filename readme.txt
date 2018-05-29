@@ -36,6 +36,6 @@ You'll find answers to many of your questions on [kb.yoast.com](https://yoa.st/1
 
 == Screenshots ==
 
-1. The plugin takes over the Search Appearance &rarr; Media settings.
+1. The plugin takes over the Search Appearance &rarr; Media settings from Yoast SEO.
 
 == Changelog ==
