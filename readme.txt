@@ -3,7 +3,7 @@ Contributors: yoast, joostdevalk, tacoverdo, omarreiss, atimmer, jipmoors
 Donate link: https://yoa.st/1up
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
-Tags: SEO, XML sitemap, Google Search Console, Content analysis, Readability
+Tags: SEO, XML sitemap, attachments, 410
 Requires at least: 4.8
 Tested up to: 4.9.6
 Stable tag: 1.0.0
@@ -17,8 +17,13 @@ The purpose of this SEO plugin is to purge attachment URLs out of Google's index
 that might have suffered from having too many thin content pages in the search index by removing them in the fastest way
 possible.
 
+Technically this plugin serves a 410 HTTP status code for every attachment URL (which means: content has been deleted),
+while still also serving images themselves. So for the user it acts as though it redirects to the image, for the search
+engine it says: "this URL should not be in your index".
+
 === Yoast SEO required ===
-This plugin is an extension to [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/). It requires it to work.
+This plugin is an extension to [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/). It requires it being active
+and on version 7.5.3 or higher to work.
 
 === The SEO theory behind this plugin ===
 The XML sitemap with recent post modified date makes Google spider _all_ those URLs again. The 410 status code makes
