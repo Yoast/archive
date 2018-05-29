@@ -8,20 +8,21 @@ final class Yoast_Purge_Plugin {
 	/**
 	 * @var array
 	 */
-	protected $integrations;
+	private $integrations = array();
 
 	/**
 	 * Initializes the plugin.
 	 */
 	public function __construct() {
-		$this->integrations = array();
 	}
 
 	/**
 	 * Adds the integrations that the plugin needs.
 	 */
 	public function add_integrations() {
-		$this->integrations = array();
+		$this->integrations = array(
+			new Yoast_Purge_Attachment_Page_Server(),
+		);
 	}
 
 	/**
