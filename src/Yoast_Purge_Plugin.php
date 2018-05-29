@@ -53,4 +53,12 @@ final class Yoast_Purge_Plugin {
 	public function get_integrations() {
 		return $this->integrations;
 	}
+
+	/**
+	 * Executes everything we need on activation.
+	 */
+	public static function activate() {
+		$seo_settings = new Yoast_Purge_Control_Yoast_SEO_Settings();
+		$seo_settings->enforce_settings();
+	}
 }
