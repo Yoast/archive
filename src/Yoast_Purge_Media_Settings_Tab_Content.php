@@ -15,6 +15,28 @@ class Yoast_Purge_Media_Settings_Tab_Content {
 	 * Retrieves the content that needs to be shown instead of the default Media configuration tab.
 	 */
 	public function get_content() {
-		return 'Show some content.';
+		$content = '';
+
+		$content .= sprintf(
+			'<h1>%s</h1>',
+			__( 'These settings are being overridden by the Search Index Purge plugin.', 'yoast-search-index-purge' )
+		);
+
+		$content .= sprintf(
+			'<p>%s</p>',
+			__( 'You are actively purging attachment URLs out of Google\'s search index.', 'yoast-search-index-purge' )
+		);
+
+		$content .= sprintf(
+			'<p>%s</p>',
+			sprintf(
+				/* translators: %1$s expands to the link to the article, %2$s expands to the closing tag of the link */
+				__( 'Read more about the %1$sSearch Index Purge plugin%2$s.', 'yoast-search-index-purge' ),
+				'<a href="' . esc_attr( WPSEO_Shortlinker::get( 'https://yoa.st/2r8' ) ) . '" target="_blank" rel="noopener nofollow">',
+				'</a>'
+			)
+		);
+
+		return $content;
 	}
 }
