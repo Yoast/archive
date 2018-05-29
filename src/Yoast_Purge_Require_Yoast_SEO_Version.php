@@ -35,12 +35,12 @@ final class Yoast_Purge_Require_Yoast_SEO_Version {
 			return;
 		}
 
-		if ( ! self::has_required_version() ) {
-			$this->display_admin_notice( sprintf(
+		if ( ! $this->has_required_version() ) {
+			$this->display_admin_error( sprintf(
 				/* translators: %1$s expands to Yoast SEO. */
 				esc_html__(
 					'Please upgrade the %1$s plugin to the latest version to allow the Yoast SEO: Search Index Purge plugin to work.',
-					''
+					'yoast-search-index-purge'
 				),
 				'Yoast SEO'
 			) );
@@ -57,14 +57,14 @@ final class Yoast_Purge_Require_Yoast_SEO_Version {
 	}
 
 	/**
-	 * Displays an admin notice.
+	 * Displays an admin error.
 	 *
-	 * @param string $admin_notice Notice to display.
+	 * @param string $message Notice to display.
 	 *
 	 * @return void
 	 */
-	private function display_admin_notice( $admin_notice ) {
-		echo '<div class="error"><p>' . $admin_notice . '</p></div>';
+	private function display_admin_error( $message ) {
+		echo '<div class="error"><p>' . $message . '</p></div>';
 	}
 
 	/**
