@@ -37,6 +37,7 @@ define( 'YOAST_PURGE_FILE', __FILE__ );
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Attachment_Page_Server.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Control_Yoast_SEO_Settings.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Media_Settings_Tab_Content.php';
+require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Options.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Plugin.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Require_Yoast_SEO_Version.php';
 
@@ -45,4 +46,4 @@ $yoast_purge_plugin = new Yoast_Purge_Plugin();
 $yoast_purge_plugin->add_integrations();
 add_action( 'plugins_loaded', array( $yoast_purge_plugin, 'register_hooks' ) );
 
-register_activation_hook( YOAST_PURGE_FILE, array( 'Yoast_Purge_Plugin', 'activate' ) );
+register_activation_hook( YOAST_PURGE_FILE, array( $yoast_purge_plugin, 'activate' ) );

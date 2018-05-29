@@ -13,21 +13,33 @@ final class Yoast_Purge_Plugin {
 	/** @var Yoast_Purge_Require_Yoast_SEO_Version */
 	private $requirement_checker;
 
+	/** @var Yoast_Purge_Options */
+	private $options;
+
 	/**
 	 * Initializes the plugin.
 	 */
 	public function __construct() {
 		$this->requirement_checker = new Yoast_Purge_Require_Yoast_SEO_Version();
+		$this->options = new Yoast_Purge_Options();
 	}
 
 	/**
 	 * Adds the integrations that the plugin needs.
 	 */
 	public function add_integrations() {
-		$this->integrations = array(
-			new Yoast_Purge_Attachment_Page_Server(),
-			new Yoast_Purge_Media_Settings_Tab_Content(),
-		);
+		$this->integrations = array();
+
+		// Add integrations that handle the purging of the attachment pages.
+		if ( $this->options->is_attachment_page_purging_active() ) {
+			$this->integrations = array_merge(
+				$this->integrations,
+				array(
+					new Yoast_Purge_Attachment_Page_Server(),
+					new Yoast_Purge_Media_Settings_Tab_Content(),
+				)
+			);
+		}
 	}
 
 	/**
@@ -57,8 +69,10 @@ final class Yoast_Purge_Plugin {
 	/**
 	 * Executes everything we need on activation.
 	 */
-	public static function activate() {
+	public function activate() {
 		$seo_settings = new Yoast_Purge_Control_Yoast_SEO_Settings();
 		$seo_settings->enforce_settings();
+
+		$this->options->set_default_options();
 	}
 }
