@@ -37,6 +37,7 @@ final class Yoast_Purge_Plugin {
 				array(
 					new Yoast_Purge_Attachment_Page_Server(),
 					new Yoast_Purge_Media_Settings_Tab_Content(),
+					new Yoast_Purge_Attachment_Sitemap( $this->options ),
 				)
 			);
 		}
