@@ -21,7 +21,9 @@ final class Yoast_Purge_Plugin {
 	 * Adds the integrations that the plugin needs.
 	 */
 	public function add_integrations() {
-		$this->integrations = array();
+		$this->integrations = array(
+			new Yoast_Purge_Attachment_Page_Server(),
+		);
 	}
 
 	/**

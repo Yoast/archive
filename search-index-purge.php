@@ -34,7 +34,9 @@
 define( 'YOAST_PURGE_PLUGIN_DIR', dirname( __FILE__ ) );
 
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Plugin.php';
+require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Attachment_Page_Server.php';
 
 global $yoast_purge_plugin;
 $yoast_purge_plugin = new Yoast_Purge_Plugin();
+$yoast_purge_plugin->add_integrations();
 $yoast_purge_plugin->register_hooks();
