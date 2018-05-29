@@ -16,6 +16,7 @@ final class Yoast_Purge_Attachment_Page_Server {
 	public function register_hooks() {
 		// We need to do this earlier than Yoast SEO redirects the attachment.
 		add_action( 'template_redirect', array( $this, 'serve' ), -10 );
+		add_action( 'wpseo_attachment_redirect_url', '__return_null' );
 	}
 
 	/**
