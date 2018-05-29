@@ -1,0 +1,12 @@
+{
+    "name": "yoast/search-index-purge",
+    "type": "wordpress-plugin",
+    "license": "GPL-v2+",
+    "authors": [
+        {
+            "name": "Team Yoast",
+            "email": "support@yoast.com"
+        }
+    ],
+    "require": {}
+}
