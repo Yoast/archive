@@ -26,6 +26,7 @@ final class Yoast_Purge_Plugin {
 	public function add_integrations() {
 		$this->integrations = array(
 			new Yoast_Purge_Attachment_Page_Server(),
+			new Yoast_Purge_Media_Settings_Tab_Content(),
 		);
 	}
 
