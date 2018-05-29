@@ -22,7 +22,7 @@ final class Yoast_Purge_Require_Yoast_SEO_Version {
 	 * @return bool True if Yoast SEO has an acceptable version installed and activated.
 	 */
 	public function has_required_version() {
-		return ( $this->is_yoast_seo_active() && $this->is_yoast_seo_up_to_date() );
+		return $this->is_yoast_seo_up_to_date();
 	}
 
 	/**

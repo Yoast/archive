@@ -31,10 +31,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define( 'YOAST_PURGE_PLUGIN_DIR', dirname( __FILE__ ) );
+if ( ! defined( 'YOAST_PURGE_PLUGIN_DIR' ) ) {
+	define( 'YOAST_PURGE_PLUGIN_DIR', dirname( __FILE__ ) );
+}
+
+if ( ! defined( 'YOAST_PURGE_FILE' ) ) {
+	define( 'YOAST_PURGE_FILE', __FILE__ );
+}
 
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Plugin.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Attachment_Page_Server.php';
+require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Control_Yoast_SEO_Settings.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Media_Settings_Tab_Content.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Require_Yoast_SEO_Version.php';
 
