@@ -1,0 +1,13 @@
+{
+    "name": "yoast/search-index-purge",
+    "type": "wordpress-plugin",
+    "description": "Search Index Purge plugin to combat Search Index problems",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Team Yoast",
+            "email": "support@yoast.com"
+        }
+    ],
+    "require": {}
+}
