@@ -31,3 +31,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+define( 'YOAST_PURGE_PLUGIN_DIR', dirname( __FILE__ ) );
+
+require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Plugin.php';
+
+global $yoast_purge_plugin;
+$yoast_purge_plugin = new Yoast_Purge_Plugin();
+$yoast_purge_plugin->register_hooks();
