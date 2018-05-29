@@ -35,6 +35,7 @@ define( 'YOAST_PURGE_PLUGIN_DIR', dirname( __FILE__ ) );
 
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Plugin.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Attachment_Page_Server.php';
+require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Media_Settings_Tab_Content.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Require_Yoast_SEO_Version.php';
 
 global $yoast_purge_plugin;
