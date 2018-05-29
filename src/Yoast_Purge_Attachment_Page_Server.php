@@ -25,7 +25,7 @@ final class Yoast_Purge_Attachment_Page_Server {
 	/**
 	 * Sets the global wp query object so it thinks the current page is a 404.
 	 */
-	public function set_404() {
+	private function set_404() {
 		global $wp_query;
 
 		$wp_query->is_404 = true;

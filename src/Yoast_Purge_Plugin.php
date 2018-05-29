@@ -8,13 +8,12 @@ final class Yoast_Purge_Plugin {
 	/**
 	 * @var array
 	 */
-	protected $integrations;
+	private $integrations = array();
 
 	/**
 	 * Initializes the plugin.
 	 */
 	public function __construct() {
-		$this->integrations = array();
 	}
 
 	/**
