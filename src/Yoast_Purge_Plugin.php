@@ -38,6 +38,7 @@ final class Yoast_Purge_Plugin {
 					new Yoast_Purge_Attachment_Page_Server(),
 					new Yoast_Purge_Media_Settings_Tab_Content(),
 					new Yoast_Purge_Attachment_Sitemap( $this->options ),
+					new Yoast_Purge_Control_Yoast_SEO_Settings()
 				)
 			);
 		}
