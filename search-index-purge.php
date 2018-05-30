@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name: Yoast SEO: Search index purge
  * Version:     1.0.0
- * Plugin URI:
+ * Plugin URI:  https://wordpress.org/plugins/yoast-seo-search-index-purge/
  * Description: Remove attachment URLs from Google's index as fast as possible to prevent thin content penalties.
  * Author:      Team Yoast
  * Author URI:  https://yoa.st/1uk
