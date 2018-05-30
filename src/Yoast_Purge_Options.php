@@ -7,6 +7,27 @@ final class Yoast_Purge_Options {
 
 	const KEY_ACTIVATION_DATE = 'yoast-index-purge-activation-date';
 	const KEY_PURGE_ATTACHMENT_PAGES = 'yoast-index-purge-attachment-pages';
+	const KEY_VERSION = 'yoast-index-purge-version';
+
+	/**
+	 * Retrieves the stored version.
+	 *
+	 * @return string The version saved in the database.
+	 */
+	public function get_version() {
+		return get_option( self::KEY_VERSION, null );
+	}
+
+	/**
+	 * Updates the version.
+	 *
+	 * @param string $version The version to set.
+	 *
+	 * @return void
+	 */
+	public function set_version( $version ) {
+		update_option( self::KEY_VERSION, $version );
+	}
 
 	/**
 	 * Returns the activation date of the plugin as a unix timestamp.
