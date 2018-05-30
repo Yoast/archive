@@ -49,6 +49,9 @@ final class Yoast_Purge_Upgrade {
 	 */
 	private function finish_up() {
 		$this->options->set_version( YOAST_PURGE_VERSION );
+
+		// Flush the sitemap cache, to make sure the changes are picked up.
+		WPSEO_Sitemaps_Cache::clear();
 	}
 
 	/**
