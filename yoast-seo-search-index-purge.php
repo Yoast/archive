@@ -54,6 +54,5 @@ require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Require_Yoast_SEO_Versio
 global $yoast_purge_plugin;
 $yoast_purge_plugin = new Yoast_Purge_Plugin();
 $yoast_purge_plugin->add_integrations();
-add_action( 'plugins_loaded', array( $yoast_purge_plugin, 'register_hooks' ), 20 );
 
-register_activation_hook( YOAST_PURGE_FILE, array( $yoast_purge_plugin, 'activate' ) );
+add_action( 'plugins_loaded', array( $yoast_purge_plugin, 'register_hooks' ), 20 );

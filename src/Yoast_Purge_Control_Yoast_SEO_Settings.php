@@ -25,16 +25,4 @@ class Yoast_Purge_Control_Yoast_SEO_Settings {
 
 		return $input;
 	}
-
-	/**
-	 * Ensures the settings are set as we recommend them to be.
-	 */
-	public function enforce_settings() {
-		// Disable the attachment pages and redirect them to the attachment itself.
-		WPSEO_Options::set( 'disable-attachment', true );
-
-		// Make sure the Purge messages will never be shown again.
-		WPSEO_Options::set( 'is-media-purge-relevant', false );
-
-	}
 }

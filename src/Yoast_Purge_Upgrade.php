@@ -33,8 +33,10 @@ final class Yoast_Purge_Upgrade {
 			return;
 		}
 
+		$this->options->set_default_options();
+
 		if ( version_compare( $version, '1.0.0', '<' ) ) {
-			$this->upgrade_101();
+			$this->upgrade_100();
 		}
 
 		$this->finish_up();
@@ -50,9 +52,9 @@ final class Yoast_Purge_Upgrade {
 	}
 
 	/**
-	 * Upgrades to version 1.0.1
+	 * Upgrades to version 1.0.0
 	 */
-	private function upgrade_101() {
+	private function upgrade_100() {
 		// Disable the attachment pages and redirect them to the attachment itself.
 		WPSEO_Options::set( 'disable-attachment', true );
 
