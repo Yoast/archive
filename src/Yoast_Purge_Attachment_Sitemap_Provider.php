@@ -71,4 +71,31 @@ final class Yoast_Purge_Attachment_Sitemap_Provider extends WPSEO_Post_Type_Site
 		return parent::get_sitemap_links( 'attachment', $max_entries, $current_page );
 	}
 
+	/**
+	 * Retrieves the index links for the sitemap to put in the index.
+	 *
+	 * @param int $max_entries Entries per sitemap.
+	 *
+	 * @return array List of sitemap index links.
+	 */
+	public function get_index_links( $max_entries ) {
+		$index_links = parent::get_index_links( $max_entries );
+
+		$index_links = array_map( array( $this, 'set_modification_date' ), $index_links );
+
+		return $index_links;
+	}
+
+	/**
+	 * Overwrites the modification date with the plugin activation date.
+	 *
+	 * @param array $entry Sitemap link index.
+	 *
+	 * @return array Modified sitemap link index.
+	 */
+	public function set_modification_date( $entry ) {
+		$entry['lastmod'] = date( 'Y-m-d H:i:s', $this->options->get_activation_date() );
+
+		return $entry;
+	}
 }
