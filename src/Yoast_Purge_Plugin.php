@@ -21,7 +21,7 @@ final class Yoast_Purge_Plugin {
 	 */
 	public function __construct() {
 		$this->requirement_checker = new Yoast_Purge_Require_Yoast_SEO_Version();
-		$this->options = new Yoast_Purge_Options();
+		$this->options             = new Yoast_Purge_Options();
 	}
 
 	/**
