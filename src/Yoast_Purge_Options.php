@@ -12,7 +12,18 @@
  */
 final class Yoast_Purge_Options {
 
+	/**
+	 * Name of the option in which the plugin activation date is saved.
+	 *
+	 * @var string
+	 */
 	const KEY_ACTIVATION_DATE = 'yoast-index-purge-activation-date';
+
+	/**
+	 * Name of the option which contains the toggle whether or not attachment pages should be purged.
+	 *
+	 * @var string
+	 */
 	const KEY_PURGE_ATTACHMENT_PAGES = 'yoast-index-purge-attachment-pages';
 
 	/**
