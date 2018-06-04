@@ -47,7 +47,7 @@ final class Yoast_Purge_Options {
 	}
 
 	/**
-	 * Returns whether or not attachment paged should be purged.
+	 * Returns whether or not attachment pages should be purged.
 	 *
 	 * @return bool Whether or not attachment pages should be purged.
 	 */
