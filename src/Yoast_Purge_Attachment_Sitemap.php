@@ -10,7 +10,9 @@
 
 final class Yoast_Purge_Attachment_Sitemap {
 
-	/** @var Yoast_Purge_Options */
+	/**
+	 * @var Yoast_Purge_Options
+	 */
 	protected $options;
 
 	/**

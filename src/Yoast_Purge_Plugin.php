@@ -17,10 +17,14 @@ final class Yoast_Purge_Plugin {
 	 */
 	private $integrations = array();
 
-	/** @var Yoast_Purge_Require_Yoast_SEO_Version */
+	/**
+	 * @var Yoast_Purge_Require_Yoast_SEO_Version
+	 */
 	private $requirement_checker;
 
-	/** @var Yoast_Purge_Options */
+	/**
+	 * @var Yoast_Purge_Options
+	 */
 	private $options;
 
 	/**
