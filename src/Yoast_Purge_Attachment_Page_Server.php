@@ -71,7 +71,7 @@ final class Yoast_Purge_Attachment_Page_Server {
 	 * @return bool Whether or not the given mime type is for an image.
 	 */
 	private function is_image( $mime_type ) {
-		return in_array( $mime_type, $this->valid_image_types );
+		return in_array( $mime_type, $this->valid_image_types, true );
 	}
 
 	/**
