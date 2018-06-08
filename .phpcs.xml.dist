@@ -94,4 +94,20 @@
 		</properties>
 	</rule>
 
+
+	<!--
+	#############################################################################
+	SELECTIVE EXCLUSIONS
+	Exclude specific files for specific sniffs and/or exclude sub-groups in sniffs.
+	#############################################################################
+	-->
+
+	<rule ref="WordPress.VIP.RestrictedFunctions">
+		<!-- Unless and until this plugin applies to be approved to run on WP VIP,
+			 there is no need to address this issue. -->
+		<properties>
+			<property name="exclude" value="attachment_url_to_postid"/>
+		</properties>
+	</rule>
+
 </ruleset>
