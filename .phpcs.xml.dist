@@ -54,4 +54,19 @@
 		</properties>
 	</rule>
 
+	<rule ref="Yoast.Files.FileName">
+		<properties>
+			<!-- Don't trigger on the main file as renaming it would deactivate the plugin. -->
+			<property name="exclude" type="array">
+				<element value="yoastseo-amp.php"/>
+			</property>
+
+			<!-- Remove the following prefixes from the names of object structures. -->
+			<property name="prefixes" type="array">
+				<element value="yoastseo_amp"/>
+				<element value="yoast_amp"/>
+			</property>
+		</properties>
+	</rule>
+
 </ruleset>
