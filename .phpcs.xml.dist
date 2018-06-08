@@ -82,4 +82,16 @@
 		</properties>
 	</rule>
 
+	<!-- Whitelist camelCase variable property name. -->
+	<rule ref="WordPress.NamingConventions.ValidVariableName">
+		<properties>
+			<property name="customPropertiesWhitelist" type="array">
+				<element value="childNodes"/>
+				<element value="nodeName"/>
+				<element value="nodeType"/>
+				<element value="parentNode"/>
+			</property>
+		</properties>
+	</rule>
+
 </ruleset>
