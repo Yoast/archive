@@ -69,4 +69,17 @@
 		</properties>
 	</rule>
 
+	<!-- Verify that everything in the global namespace is prefixed with a plugin specific prefix. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<!-- Provide the prefixes to look for. -->
+			<property name="prefixes" type="array">
+				<element value="yoastseo_amp"/>
+				<element value="yoast_seo_amp"/>
+				<element value="yoast_amp"/>
+				<element value="wpseo_amp"/>
+			</property>
+		</properties>
+	</rule>
+
 </ruleset>
