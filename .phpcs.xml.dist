@@ -20,6 +20,9 @@
 	<!-- Show progress, show the error codes for each message (source). -->
 	<arg value="ps"/>
 
+	<!-- Strip the filepaths down to the relevant bit. -->
+	<arg name="basepath" value="./"/>
+
 
 	<!--
 	#############################################################################
