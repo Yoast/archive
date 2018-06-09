@@ -110,4 +110,21 @@
 		</properties>
 	</rule>
 
+
+	<!--
+	#############################################################################
+	TEMPORARY ADJUSTMENTS
+	Adjustments which should be removed once the associated issue has been resolved.
+	#############################################################################
+	-->
+
+	<!-- The below exclusion has to do with appropriate sanitization and escaping
+		 of CSS and JS data for which no standard functionality exists in WP.
+		 A further review of this is needed and this needs to be tested extensively.
+		 Ticket: https://github.com/Yoast/yoastseo-amp/issues/96
+	-->
+	<rule ref="WordPress.XSS.EscapeOutput.OutputNotEscaped">
+		<exclude-pattern>/classes/frontend\.php$</exclude-pattern>
+	</rule>
+
 </ruleset>
