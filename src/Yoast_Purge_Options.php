@@ -60,7 +60,7 @@ final class Yoast_Purge_Options {
 	 * @return bool Whether or not the value was updated.
 	 */
 	public function set_purge_attachment_pages( $value ) {
-		$value = $value ? 'true' : 'false';
+		$value = ( $value === true ) ? 'true' : 'false';
 
 		return update_option( self::KEY_PURGE_ATTACHMENT_PAGES, $value );
 	}
