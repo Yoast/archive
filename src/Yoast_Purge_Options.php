@@ -75,7 +75,7 @@ final class Yoast_Purge_Options {
 		}
 
 		$purge_attachment_pages = $this->get_purge_attachment_pages();
-		if ( $purge_attachment_pages === null) {
+		if ( $purge_attachment_pages === null ) {
 			$this->set_purge_attachment_pages( true );
 		}
 	}
