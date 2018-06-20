@@ -18,9 +18,9 @@ jobs:
   fast_finish: true
   include:
     - php: 7.2
-      env: COMPVAL=1
+      env: VALIDATE_COMPOSER=1
     - php: 5.3
-      env: COMPVAL=1
+      env: VALIDATE_COMPOSER=1
       # As 'trusty' is not supporting PHP 5.2/5.3 anymore, we need to force using 'precise'.
       dist: precise
     - php: 5.2
@@ -81,4 +81,4 @@ script:
 #  fi
 # Validate the composer.json file.
 # @link https://getcomposer.org/doc/03-cli.md#validate
-- if [[ $COMPVAL== "1" ]]; then composer validate --no-check-all; fi
+- if [[ $VALIDATE_COMPOSER == "1" ]]; then composer validate --no-check-all; fi
