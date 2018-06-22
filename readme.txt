@@ -63,6 +63,16 @@ You'll find answers to many of your questions on [kb.yoast.com](https://yoa.st/1
 
 == Changelog ==
 
+= 1.1 =
+Release date: June 25th, 2018
+
+Enhancements:
+* Excludes attachments from the purge sitemap that were added after activating this plugin.
+
+Bugfixes:
+* Fixes a bug where the Attachement sitemap has the wrong "Last modified" date, this should be the time the plugin was activated.
+* Fixes a bug where the "Redirect attachment URLs to the attachment itself?" can become "No" when saving other settings in Yoast SEO.
+
 = 1.0 =
 Release date: May 30th, 2018
 
