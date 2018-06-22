@@ -1,4 +1,11 @@
 <?php
+/**
+ * Yoast SEO: Search index purge plugin file.
+ *
+ * @package   WPSEO\Main
+ * @copyright Copyright (C) 2018, Yoast BV - support@yoast.com
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3 or higher
+ */
 
 /**
  * Serves a 410 page on attachment pages.
@@ -6,7 +13,9 @@
 final class Yoast_Purge_Attachment_Page_Server {
 
 	/**
-	 * @var array Valid image mime types.
+	 * Valid image mime types.
+	 *
+	 * @var array
 	 */
 	private $valid_image_types = array( 'image/jpeg', 'image/gif', 'image/png' );
 
