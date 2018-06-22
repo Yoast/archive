@@ -40,6 +40,7 @@ if ( ! function_exists( 'add_filter' ) ) {
 
 define( 'YOAST_PURGE_PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'YOAST_PURGE_FILE', __FILE__ );
+define( 'YOAST_PURGE_VERSION', '1.0.0' );
 
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Attachment_Page_Server.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Attachment_Sitemap.php';
@@ -47,11 +48,11 @@ require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Control_Yoast_SEO_Settin
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Media_Settings_Tab_Content.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Options.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Plugin.php';
+require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Upgrade.php';
 require_once YOAST_PURGE_PLUGIN_DIR . '/src/Yoast_Purge_Require_Yoast_SEO_Version.php';
 
 global $yoast_purge_plugin;
 $yoast_purge_plugin = new Yoast_Purge_Plugin();
 $yoast_purge_plugin->add_integrations();
-add_action( 'plugins_loaded', array( $yoast_purge_plugin, 'register_hooks' ) );
 
-register_activation_hook( YOAST_PURGE_FILE, array( $yoast_purge_plugin, 'activate' ) );
+add_action( 'plugins_loaded', array( $yoast_purge_plugin, 'register_hooks' ), 20 );

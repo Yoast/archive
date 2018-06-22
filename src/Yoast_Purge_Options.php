@@ -25,6 +25,27 @@ final class Yoast_Purge_Options {
 	 * @var string
 	 */
 	const KEY_PURGE_ATTACHMENT_PAGES = 'yoast-index-purge-attachment-pages';
+	const KEY_VERSION = 'yoast-index-purge-version';
+
+	/**
+	 * Retrieves the stored version.
+	 *
+	 * @return string The version saved in the database.
+	 */
+	public function get_version() {
+		return get_option( self::KEY_VERSION, null );
+	}
+
+	/**
+	 * Updates the version.
+	 *
+	 * @param string $version The version to set.
+	 *
+	 * @return void
+	 */
+	public function set_version( $version ) {
+		update_option( self::KEY_VERSION, $version, true );
+	}
 
 	/**
 	 * Returns the activation date of the plugin as a unix timestamp.
@@ -43,7 +64,7 @@ final class Yoast_Purge_Options {
 	 * @return bool Whether or not the value was updated.
 	 */
 	public function set_activation_date( $value ) {
-		return update_option( self::KEY_ACTIVATION_DATE, $value );
+		return update_option( self::KEY_ACTIVATION_DATE, $value, true );
 	}
 
 	/**
@@ -80,7 +101,7 @@ final class Yoast_Purge_Options {
 	public function set_purge_attachment_pages( $value ) {
 		$value = ( $value === true ) ? 'true' : 'false';
 
-		return update_option( self::KEY_PURGE_ATTACHMENT_PAGES, $value );
+		return update_option( self::KEY_PURGE_ATTACHMENT_PAGES, $value, true );
 	}
 
 	/**
