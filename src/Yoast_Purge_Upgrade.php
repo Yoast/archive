@@ -28,6 +28,7 @@ final class Yoast_Purge_Upgrade {
 	 * Runs upgrades, if applicable.
 	 */
 	private function run() {
+		// Always make sure the defaults are set - these are autoloaded.
 		$this->options->set_default_options();
 
 		$version = $this->options->get_version();
