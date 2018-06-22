@@ -36,6 +36,15 @@ final class Yoast_Purge_Plugin {
 	}
 
 	/**
+	 * Executes everything we need on activation.
+	 *
+	 * @deprecated 1.1.0
+	 */
+	public function activate() {
+		// Intentionally left empty.
+	}
+
+	/**
 	 * Adds the integrations that the plugin needs.
 	 */
 	public function add_integrations() {
