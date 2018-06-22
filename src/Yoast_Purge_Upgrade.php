@@ -26,6 +26,8 @@ final class Yoast_Purge_Upgrade {
 
 	/**
 	 * Runs upgrades, if applicable.
+	 *
+	 * @return void
 	 */
 	private function run() {
 		// Always make sure the defaults are set - these are autoloaded.
@@ -58,6 +60,8 @@ final class Yoast_Purge_Upgrade {
 
 	/**
 	 * Upgrades to version 1.0.0
+	 *
+	 * @return void
 	 */
 	private function upgrade_100() {
 		// Disable the attachment pages and redirect them to the attachment itself.
