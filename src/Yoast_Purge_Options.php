@@ -1,11 +1,29 @@
 <?php
+/**
+ * Yoast SEO: Search index purge plugin file.
+ *
+ * @package   WPSEO\Main
+ * @copyright Copyright (C) 2018, Yoast BV - support@yoast.com
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3 or higher
+ */
 
 /**
  * Handels retrieving and saving options for the plugin.
  */
 final class Yoast_Purge_Options {
 
+	/**
+	 * Name of the option in which the plugin activation date is saved.
+	 *
+	 * @var string
+	 */
 	const KEY_ACTIVATION_DATE = 'yoast-index-purge-activation-date';
+
+	/**
+	 * Name of the option which contains the toggle whether or not attachment pages should be purged.
+	 *
+	 * @var string
+	 */
 	const KEY_PURGE_ATTACHMENT_PAGES = 'yoast-index-purge-attachment-pages';
 	const KEY_VERSION = 'yoast-index-purge-version';
 
@@ -50,7 +68,7 @@ final class Yoast_Purge_Options {
 	}
 
 	/**
-	 * Returns whether or not attachment paged should be purged.
+	 * Returns whether or not attachment pages should be purged.
 	 *
 	 * @return bool Whether or not attachment pages should be purged.
 	 */
@@ -81,7 +99,7 @@ final class Yoast_Purge_Options {
 	 * @return bool Whether or not the value was updated.
 	 */
 	public function set_purge_attachment_pages( $value ) {
-		$value = $value ? 'true' : 'false';
+		$value = ( $value === true ) ? 'true' : 'false';
 
 		return update_option( self::KEY_PURGE_ATTACHMENT_PAGES, $value );
 	}
@@ -96,7 +114,7 @@ final class Yoast_Purge_Options {
 		}
 
 		$purge_attachment_pages = $this->get_purge_attachment_pages();
-		if ( $purge_attachment_pages === null) {
+		if ( $purge_attachment_pages === null ) {
 			$this->set_purge_attachment_pages( true );
 		}
 	}

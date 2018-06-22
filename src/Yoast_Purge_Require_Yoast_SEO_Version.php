@@ -1,4 +1,11 @@
 <?php
+/**
+ * Yoast SEO: Search index purge plugin file.
+ *
+ * @package   WPSEO\Main
+ * @copyright Copyright (C) 2018, Yoast BV - support@yoast.com
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3 or higher
+ */
 
 /**
  * The class to check for environment requirements.
