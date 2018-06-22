@@ -13,7 +13,7 @@ final class Yoast_Purge_Attachment_Sitemap_Provider extends WPSEO_Post_Type_Site
 	/**
 	 * @var Yoast_Purge_Options
 	 */
-	protected $options;
+	private $options;
 
 	/**
 	 * Initializes.
