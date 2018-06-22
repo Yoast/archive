@@ -39,14 +39,15 @@ final class Yoast_Purge_Plugin {
 	 * Adds the integrations that the plugin needs.
 	 */
 	public function add_integrations() {
-		$this->integrations = array();
+		$this->integrations = array(
+			new Yoast_Purge_Upgrade( $this->options ),
+		);
 
 		// Add integrations that handle the purging of the attachment pages.
 		if ( $this->options->is_attachment_page_purging_active() ) {
 			$this->integrations = array_merge(
 				$this->integrations,
 				array(
-					new Yoast_Purge_Upgrade( $this->options ),
 					new Yoast_Purge_Attachment_Page_Server(),
 					new Yoast_Purge_Media_Settings_Tab_Content(),
 					new Yoast_Purge_Attachment_Sitemap( $this->options ),
