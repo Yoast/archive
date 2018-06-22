@@ -7,10 +7,14 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3 or higher
  */
 
-
+/**
+ * Override attachment sitemap integration.
+ */
 final class Yoast_Purge_Attachment_Sitemap {
 
 	/**
+	 * Yoast Purge options handler.
+	 *
 	 * @var Yoast_Purge_Options
 	 */
 	private $options;
@@ -74,13 +78,13 @@ final class Yoast_Purge_Attachment_Sitemap {
 
 		$wp_query = new WP_Query(
 			array(
-				'post_type' => 'attachment',
-				'post_status' => 'any',
+				'post_type'      => 'attachment',
+				'post_status'    => 'any',
 				'posts_per_page' => '100000',
 				'date_query'     => array(
 					'after' => date( 'Y-m-d H:i:s', $timestamp ),
 				),
-				'fields' => 'ids'
+				'fields'         => 'ids',
 			)
 		);
 
