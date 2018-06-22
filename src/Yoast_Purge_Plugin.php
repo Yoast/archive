@@ -13,16 +13,22 @@
 final class Yoast_Purge_Plugin {
 
 	/**
+	 * List of integrations.
+	 *
 	 * @var array
 	 */
 	private $integrations = array();
 
 	/**
+	 * Yoast SEO requirement checker.
+	 *
 	 * @var Yoast_Purge_Require_Yoast_SEO_Version
 	 */
 	private $requirement_checker;
 
 	/**
+	 * Yoast Purge options handler.
+	 *
 	 * @var Yoast_Purge_Options
 	 */
 	private $options;

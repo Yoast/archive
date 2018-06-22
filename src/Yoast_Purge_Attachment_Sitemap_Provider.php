@@ -7,10 +7,14 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3 or higher
  */
 
-
+/**
+ * Sitemap attachment provider.
+ */
 final class Yoast_Purge_Attachment_Sitemap_Provider extends WPSEO_Post_Type_Sitemap_Provider {
 
 	/**
+	 * Yoast Purge options handler.
+	 *
 	 * @var Yoast_Purge_Options
 	 */
 	private $options;
