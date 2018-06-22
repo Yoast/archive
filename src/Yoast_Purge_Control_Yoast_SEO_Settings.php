@@ -21,15 +21,6 @@ class Yoast_Purge_Control_Yoast_SEO_Settings {
 	}
 
 	/**
-	 * Ensures the settings are set as we recommend them to be.
-	 *
-	 * @deprecated 1.1.0
-	 */
-	public function enforce_settings() {
-		// Intentionally left empty.
-	}
-
-	/**
 	 * Adds the setting to the media tab to make sure it is not overwritten with empty -> false.
 	 *
 	 * @param string|null $input The current content of the filter value.
@@ -40,5 +31,14 @@ class Yoast_Purge_Control_Yoast_SEO_Settings {
 		echo '<input type="hidden" name="wpseo_titles[disable-attachment]" value="on">';
 
 		return $input;
+	}
+
+	/**
+	 * Ensures the settings are set as we recommend them to be.
+	 *
+	 * @deprecated 1.1.0
+	 */
+	public function enforce_settings() {
+		// Intentionally left empty.
 	}
 }
