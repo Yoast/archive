@@ -28,12 +28,12 @@ final class Yoast_Purge_Upgrade {
 	 * Runs upgrades, if applicable.
 	 */
 	private function run() {
+		$this->options->set_default_options();
+
 		$version = $this->options->get_version();
 		if ( $version === YOAST_PURGE_VERSION ) {
 			return;
 		}
-
-		$this->options->set_default_options();
 
 		if ( version_compare( $version, '1.0.0', '<' ) ) {
 			$this->upgrade_100();
@@ -48,6 +48,7 @@ final class Yoast_Purge_Upgrade {
 	 * @return void
 	 */
 	private function finish_up() {
+		// Ensure the current version is set in the database.
 		$this->options->set_version( YOAST_PURGE_VERSION );
 
 		// Flush the sitemap cache, to make sure the changes are picked up.
