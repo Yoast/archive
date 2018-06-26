@@ -64,7 +64,7 @@ You'll find answers to many of your questions on [kb.yoast.com](https://yoa.st/1
 == Changelog ==
 
 = 1.1 =
-Release date: June 25th, 2018
+Release date: June 27th, 2018
 
 Enhancements:
 * Excludes attachments from the purge sitemap that were added after activating this plugin.
