@@ -35,6 +35,10 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 
 == Changelog ==
 
+= 0.5.0 =
+* Enhancements:
+    * Adds compatibility with the [Plugin Dependencies](http://wordpress.org/plugins/plugin-dependencies/) plugin.
+
 = 0.4.3 =
 * Bugfixes:
     * Fixes a fatal error in combination with `AMP for WordPress` version 0.7.0. Props [Ryan Kienstra](https://github.com/kienstra).
