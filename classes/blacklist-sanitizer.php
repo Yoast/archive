@@ -151,5 +151,4 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 			$node->removeAttribute( $attribute_name );
 		}
 	}
-
 }

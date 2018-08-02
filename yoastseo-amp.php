@@ -42,7 +42,6 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 			require 'classes/frontend.php';
 			new YoastSEO_AMP_Frontend();
 		}
-
 	}
 }
 
