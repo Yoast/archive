@@ -59,7 +59,7 @@ class Yoast_HelpScout_Beacon_Identifier {
 			$out .= '<tr><td>Hostname</td><td>' . gethostbyaddr( $ipaddress ) . '</td></tr>';
 		}
 
-		if ( function_exists( 'php_uname' ) {
+		if ( function_exists( 'php_uname' ) ) {
 			$out .= '<tr><td>OS</td><td>' . php_uname( 's r' ) . '</td></tr>';
 		}
 
