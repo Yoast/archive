@@ -88,7 +88,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 				'yoast_amp_css',
 				plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.css',
 				array( 'wp-color-picker' ),
-				false
+				YoastSEO_AMP::VERSION
 			);
 
 			wp_enqueue_media(); // Enqueue files needed for upload functionality.
@@ -96,7 +96,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 				'wpseo-admin-media',
 				plugin_dir_url( __FILE__ ) . 'assets/wp-seo-admin-media.js',
 				array( 'jquery', 'jquery-ui-core' ),
-				false,
+				YoastSEO_AMP::VERSION,
 				true
 			);
 			wp_localize_script( 'wpseo-admin-media', 'wpseoMediaL10n', $this->localize_media_script() );
@@ -105,7 +105,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 				'yoast_amp_js',
 				plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.js',
 				array( 'jquery', 'wp-color-picker' ),
-				false,
+				YoastSEO_AMP::VERSION,
 				true
 			);
 		}

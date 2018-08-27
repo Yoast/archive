@@ -25,6 +25,8 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 	 */
 	class YoastSEO_AMP {
 
+		const VERSION = '0.4.3';
+
 		/**
 		 * YoastSEO_AMP constructor.
 		 */
@@ -42,7 +44,6 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 			require 'classes/frontend.php';
 			new YoastSEO_AMP_Frontend();
 		}
-
 	}
 }
 

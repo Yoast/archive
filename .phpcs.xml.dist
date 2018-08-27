@@ -97,22 +97,6 @@
 
 	<!--
 	#############################################################################
-	SELECTIVE EXCLUSIONS
-	Exclude specific files for specific sniffs and/or exclude sub-groups in sniffs.
-	#############################################################################
-	-->
-
-	<rule ref="WordPress.VIP.RestrictedFunctions">
-		<!-- Unless and until this plugin applies to be approved to run on WP VIP,
-			 there is no need to address this issue. -->
-		<properties>
-			<property name="exclude" value="attachment_url_to_postid"/>
-		</properties>
-	</rule>
-
-
-	<!--
-	#############################################################################
 	TEMPORARY ADJUSTMENTS
 	Adjustments which should be removed once the associated issue has been resolved.
 	#############################################################################
@@ -123,16 +107,13 @@
 		 A further review of this is needed and this needs to be tested extensively.
 		 Ticket: https://github.com/Yoast/yoastseo-amp/issues/96
 	-->
-	<rule ref="WordPress.XSS.EscapeOutput.OutputNotEscaped">
+	<rule ref="WordPress.Security.EscapeOutput.OutputNotEscaped">
 		<exclude-pattern>/classes/frontend\.php$</exclude-pattern>
 	</rule>
 
 	<!-- Temporarily downgraded to warning to allow the build to pass.
 		 Ticket: https://github.com/Yoast/yoastseo-amp/issues/97 -->
 	<rule ref="Generic.Commenting.DocComment.MissingShort">
-		<type>warning</type>
-	</rule>
-	<rule ref="Generic.Commenting.DocComment.SpacingBeforeTags">
 		<type>warning</type>
 	</rule>
 	<rule ref="Squiz.Commenting.FunctionComment.MissingParamComment">
