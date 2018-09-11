@@ -140,7 +140,8 @@ $yoast_amp_yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' )
 				printf(
 					/* translators: 1: 'meta'; 2: 'link' - both wrapped in <code> tags. */
 					esc_html__( 'Only %1$s and %2$s tags are allowed, other tags will be removed automatically.', 'yoastseo-amp' ),
-					'<code>meta</code>', '<code>link</code>'
+					'<code>meta</code>',
+					'<code>link</code>'
 				);
 				?>
 			</p>
