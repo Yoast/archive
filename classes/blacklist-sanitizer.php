@@ -34,7 +34,9 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	/**
 	 * Passes through the DOM and removes stuff that shouldn't be there.
 	 *
-	 * @param DOMNode $node
+	 * @param DOMNode $node The DOM node to strip attributes from.
+	 *
+	 * @return void
 	 */
 	private function strip_attributes_recursive( $node ) {
 		if ( $node->nodeType !== XML_ELEMENT_NODE ) {
@@ -73,8 +75,10 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	/**
 	 * Passes through the DOM and strips forbidden tags.
 	 *
-	 * @param DOMNode $node
-	 * @param array   $tag_names
+	 * @param DOMNode $node      The DOM node to strip the forbidden tags from.
+	 * @param array   $tag_names The forbidden tag names.
+	 *
+	 * @return void
 	 */
 	private function strip_tags( $node, $tag_names ) {
 		foreach ( $tag_names as $tag_name ) {
@@ -99,8 +103,10 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	/**
 	 * Sanitizes anchor attributes.
 	 *
-	 * @param DOMNode $node
-	 * @param object  $attribute
+	 * @param DOMNode $node      The DOM node to sanitize the passed attribute from.
+	 * @param object  $attribute The attribute to sanitize.
+	 *
+	 * @return void
 	 */
 	private function sanitize_a_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
@@ -113,8 +119,10 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	/**
 	 * Sanitizes pre tag attributes.
 	 *
-	 * @param DOMNode $node
-	 * @param object  $attribute
+	 * @param DOMNode $node      The DOM node to sanitize the passed attribute from.
+	 * @param object  $attribute The attribute to sanitize.
+	 *
+	 * @return void
 	 */
 	private function sanitize_pre_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
@@ -127,8 +135,10 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	/**
 	 * Sanitizes td / th tag attributes.
 	 *
-	 * @param DOMNode $node
-	 * @param object  $attribute
+	 * @param DOMNode $node      The DOM node to sanitize the passed attribute from.
+	 * @param object  $attribute The attribute to sanitize.
+	 *
+	 * @return void
 	 */
 	private function sanitize_cell_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
@@ -141,8 +151,10 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	/**
 	 * Sanitize table tag attributes.
 	 *
-	 * @param DOMNode $node
-	 * @param object  $attribute
+	 * @param DOMNode $node      The DOM node to sanitize the passed attribute from.
+	 * @param object  $attribute The attribute to sanitize.
+	 *
+	 * @return void
 	 */
 	private function sanitize_table_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );

@@ -22,7 +22,7 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 		private $items = array();
 
 		/**
-		 * Add option to CSS map.
+		 * Adds the passed option to the CSS map.
 		 *
 		 * @param string $option_key Option key.
 		 * @param string $selector   CSS Selector.
@@ -36,6 +36,8 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 		}
 
 		/**
+		 * Builds the CSS.
+		 *
 		 * @return string Output CSS.
 		 */
 		public function build() {
