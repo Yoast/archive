@@ -22,11 +22,13 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 		private $items = array();
 
 		/**
-		 * Add option to CSS map.
+		 * Adds the passed option to the CSS map.
 		 *
 		 * @param string $option_key Option key.
 		 * @param string $selector   CSS Selector.
 		 * @param string $property   CSS Property that will hold the value of the option.
+		 *
+		 * @return void
 		 */
 		public function add_option( $option_key, $selector, $property ) {
 			$this->items[ $option_key ] = array(
@@ -36,7 +38,9 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 		}
 
 		/**
-		 * @return string Output CSS.
+		 * Builds the CSS, based on the passed options, to be used on the frontend.
+		 *
+		 * @return string The CSS to be used on the frontend.
 		 */
 		public function build() {
 			$options = YoastSEO_AMP_Options::get();

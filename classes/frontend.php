@@ -56,6 +56,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 
 		/**
 		 * Retrieve the plugin options and set the relevant properties.
+		 *
+		 * @return void
 		 */
 		private function set_options() {
 			$this->wpseo_options = WPSEO_Options::get_all();
@@ -63,11 +65,11 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Add our own sanitizer to the array of sanitizers.
+		 * Adds the blacklist sanitizer to the array of available sanitizers.
 		 *
-		 * @param array $sanitizers
+		 * @param array $sanitizers The current list of sanitizers.
 		 *
-		 * @return array
+		 * @return array The new array of sanitizers.
 		 */
 		public function add_sanitizer( $sanitizers ) {
 			require_once 'blacklist-sanitizer.php';
@@ -78,11 +80,11 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * If analytics tracking has been set, output it now.
+		 * Outputs the analytics tracking, if it has been set.
 		 *
-		 * @param array $analytics
+		 * @param array $analytics The available analytics options.
 		 *
-		 * @return array
+		 * @return array The analytics tracking code to output.
 		 */
 		public function analytics( $analytics ) {
 			// If Monster Insights is outputting analytics, don't do anything.
@@ -122,7 +124,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Make AMP work for all the post types we want it for.
+		 * Enables AMP for all the post types we want it for.
+		 *
+		 * @return void
 		 */
 		public function post_types() {
 			$post_types = get_post_types( array( 'public' => true ), 'objects' );
@@ -156,23 +160,30 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Disables AMP for posts specifically, run later because of AMP plugin internals.
+		 * Disables AMP for posts specifically.
+		 *
+		 * {@internal Runs later because of AMP plugin internals.}
+		 *
+		 * @return void
 		 */
 		public function disable_amp_for_posts() {
 			remove_post_type_support( 'post', AMP_QUERY_VAR );
 		}
 
 		/**
-		 * Fix the basic AMP post data.
+		 * Transforms the site's canonical URL and site icon URL and to be AMP compliant.
 		 *
-		 * @param array $data
+		 * Also ensures that the proper analytics script is loaded (if applicable).
 		 *
-		 * @return array
+		 * @param array $data The current post data.
+		 *
+		 * @return array The transformed post data.
 		 */
 		public function fix_amp_post_data( $data ) {
 			if ( ! $this->front ) {
 				$this->front = WPSEO_Frontend::get_instance();
 			}
+
 			$data['canonical_url'] = $this->front->canonical( false );
 
 			if ( ! empty( $this->options['amp_site_icon'] ) ) {
@@ -188,12 +199,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Fix the AMP metadata for a post.
+		 * Transforms the site's organization object, site description and post image to be AMP compliant.
 		 *
-		 * @param array   $metadata
-		 * @param WP_Post $post
+		 * @param array   $metadata The meta data to transform.
+		 * @param WP_Post $post     The post to transform the meta data for.
 		 *
-		 * @return array
+		 * @return array The transformed post meta data.
 		 */
 		public function fix_amp_post_metadata( $metadata, $post ) {
 			if ( ! $this->front ) {
@@ -216,7 +227,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Add additional CSS to the AMP output.
+		 * Adds additional CSS to the AMP output.
+		 *
+		 * @return void
 		 */
 		public function additional_css() {
 			require 'views/additional-css.php';
@@ -249,6 +262,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 
 		/**
 		 * Outputs extra code in the head, if set.
+		 *
+		 * @return void
 		 */
 		public function extra_head() {
 			$options = WPSEO_Options::get_option( 'wpseo_social' );
@@ -270,6 +285,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 
 		/**
 		 * Outputs analytics code in the footer, if set.
+		 *
+		 * @return void
 		 */
 		public function extra_footer() {
 			echo $this->options['analytics-extra'];
@@ -278,7 +295,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Builds the organization object if needed.
 		 *
-		 * @param array $metadata
+		 * @param array $metadata The data to base the organization object on.
+		 *
+		 * @return void
 		 */
 		private function build_organization_object( &$metadata ) {
 			// While it's using the blog name, it's actually outputting the company name.
@@ -300,7 +319,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * @param string|array $size      Optional. Image size. Accepts any valid image size, or an array of width
 		 *                                and height values in pixels (in that order). Default 'full'.
 		 *
-		 * @return array|false
+		 * @return array|false The image object array or false if the image URL is empty.
 		 */
 		private function get_image_object( $image_url, $size = 'full' ) {
 			if ( empty( $image_url ) ) {
@@ -323,12 +342,15 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Retrieve the Schema.org image for the post.
+		 * Retrieves the Schema.org image for the passed post.
 		 *
-		 * @param WP_Post    $post  Post to retrieve the data for.
+		 * If an OpenGraph image is available for the post, that one will be used. Otherwise, the default image is used.
+		 * If neither exist, the passed image is used instead.
+		 *
+		 * @param WP_Post    $post  The post to retrieve the image for.
 		 * @param array|null $image The currently set post image.
 		 *
-		 * @return array
+		 * @return array The Schema.org-compliant image for the post.
 		 */
 		private function get_image( $post, $image ) {
 			$og_image = $this->get_image_object( WPSEO_Meta::get_value( 'opengraph-image', $post->ID ) );
@@ -347,9 +369,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Gets the Schema.org type for the post, based on the post type.
 		 *
-		 * @param WP_Post $post
+		 * @param WP_Post $post The post to retrieve the data for.
 		 *
-		 * @return string
+		 * @return string The Schema.org type.
 		 */
 		private function get_post_schema_type( $post ) {
 			$type = 'WebPage';
@@ -370,9 +392,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Gets version dependent class names.
+		 * Gets the class names used by the AMP plugin.
 		 *
-		 * @return array
+		 * The AMP plugin changed the class names for a number of selectors between releases.
+		 * This method makes sure the correct CSS class name is used depending on the used version of the AMP plugin.
+		 *
+		 * @return array The version dependent class names.
 		 */
 		private function get_class_selectors() {
 			$selectors = array(

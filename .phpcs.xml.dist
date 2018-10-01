@@ -110,14 +110,4 @@
 	<rule ref="WordPress.Security.EscapeOutput.OutputNotEscaped">
 		<exclude-pattern>/classes/frontend\.php$</exclude-pattern>
 	</rule>
-
-	<!-- Temporarily downgraded to warning to allow the build to pass.
-		 Ticket: https://github.com/Yoast/yoastseo-amp/issues/97 -->
-	<rule ref="Generic.Commenting.DocComment.MissingShort">
-		<type>warning</type>
-	</rule>
-	<rule ref="Squiz.Commenting.FunctionComment.MissingParamComment">
-		<type>warning</type>
-	</rule>
-
 </ruleset>
