@@ -67,7 +67,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Adds the blacklist sanitizer to the array of available sanitizers.
 		 *
-		 * @param array $sanitizers The list of sanitizers to add the blacklist sanitizer to.
+		 * @param array $sanitizers The current list of sanitizers.
 		 *
 		 * @return array The new array of sanitizers.
 		 */
@@ -162,7 +162,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Disables AMP for posts specifically.
 		 *
-		 * Runs later because of AMP plugin internals.
+		 * {@internal Runs later because of AMP plugin internals.}
 		 *
 		 * @return void
 		 */
@@ -171,16 +171,19 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Fixes the basic AMP post data.
+		 * Transforms the site's canonical URL and site icon URL and to be AMP compliant.
 		 *
-		 * @param array $data The post data to fix.
+		 * Also ensures that the proper analytics script is loaded (if applicable).
 		 *
-		 * @return array The fixed post data.
+		 * @param array $data The current post data.
+		 *
+		 * @return array The transformed post data.
 		 */
 		public function fix_amp_post_data( $data ) {
 			if ( ! $this->front ) {
 				$this->front = WPSEO_Frontend::get_instance();
 			}
+
 			$data['canonical_url'] = $this->front->canonical( false );
 
 			if ( ! empty( $this->options['amp_site_icon'] ) ) {
@@ -196,12 +199,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Fixes the AMP metadata for a post.
+		 * Transforms the site's organization object, site description and post image to be AMP compliant.
 		 *
-		 * @param array   $metadata The metadata to fix.
-		 * @param WP_Post $post     The post to fix the metadata for.
+		 * @param array   $metadata The meta data to transform.
+		 * @param WP_Post $post     The post to transform the meta data for.
 		 *
-		 * @return array The fixed post metadata.
+		 * @return array The transformed post meta data.
 		 */
 		public function fix_amp_post_metadata( $metadata, $post ) {
 			if ( ! $this->front ) {
@@ -316,7 +319,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * @param string|array $size      Optional. Image size. Accepts any valid image size, or an array of width
 		 *                                and height values in pixels (in that order). Default 'full'.
 		 *
-		 * @return array|false The image object or false if the image URL is empty.
+		 * @return array|false The image object array or false if the image URL is empty.
 		 */
 		private function get_image_object( $image_url, $size = 'full' ) {
 			if ( empty( $image_url ) ) {
@@ -339,12 +342,15 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Retrieves the Schema.org image for the post.
+		 * Retrieves the Schema.org image for the passed post.
 		 *
-		 * @param WP_Post    $post  The post to retrieve the data for.
+		 * If an OpenGraph image is available for the post, that one will be used. Otherwise, the default image is used.
+		 * If neither exist, the passed image is used instead.
+		 *
+		 * @param WP_Post    $post  The post to retrieve the image for.
 		 * @param array|null $image The currently set post image.
 		 *
-		 * @return array The Schema.org image for the post.
+		 * @return array The Schema.org-compliant image for the post.
 		 */
 		private function get_image( $post, $image ) {
 			$og_image = $this->get_image_object( WPSEO_Meta::get_value( 'opengraph-image', $post->ID ) );
@@ -386,7 +392,10 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Gets version dependent class names.
+		 * Gets the class names used by the AMP plugin.
+		 *
+		 * The AMP plugin changed the class names for a number of selectors between releases.
+		 * This method makes sure the correct CSS class name is used depending on the used version of the AMP plugin.
 		 *
 		 * @return array The version dependent class names.
 		 */

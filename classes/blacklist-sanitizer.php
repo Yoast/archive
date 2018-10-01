@@ -104,7 +104,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	 * Sanitizes anchor attributes.
 	 *
 	 * @param DOMNode $node      The DOM node to sanitize the passed attribute from.
-	 * @param object  $attribute The attribute to sanitize.
+	 * @param DOMNode $attribute The attribute to sanitize.
 	 *
 	 * @return void
 	 */
@@ -120,7 +120,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	 * Sanitizes pre tag attributes.
 	 *
 	 * @param DOMNode $node      The DOM node to sanitize the passed attribute from.
-	 * @param object  $attribute The attribute to sanitize.
+	 * @param DOMNode $attribute The attribute to sanitize.
 	 *
 	 * @return void
 	 */
@@ -136,7 +136,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	 * Sanitizes td / th tag attributes.
 	 *
 	 * @param DOMNode $node      The DOM node to sanitize the passed attribute from.
-	 * @param object  $attribute The attribute to sanitize.
+	 * @param DOMNode $attribute The attribute to sanitize.
 	 *
 	 * @return void
 	 */
@@ -152,7 +152,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	 * Sanitize table tag attributes.
 	 *
 	 * @param DOMNode $node      The DOM node to sanitize the passed attribute from.
-	 * @param object  $attribute The attribute to sanitize.
+	 * @param DOMNode $attribute The attribute to sanitize.
 	 *
 	 * @return void
 	 */
