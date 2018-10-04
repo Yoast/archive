@@ -750,14 +750,15 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 
 			// Make sure we limit the type of HTML elements to be displayed.
 			if ( ! empty( $message ) ) {
-				$message = wp_kses( $message, array(
+				$allowed_html = array(
 					'a'  => array(
 						'href'   => array(),
 						'target' => array(),
 						'title'  => array(),
 					),
 					'br' => array(),
-				) );
+				);
+				$message      = wp_kses( $message, $allowed_html );
 
 				// Make sure we are on a new line.
 				$message = '<br />' . $message;

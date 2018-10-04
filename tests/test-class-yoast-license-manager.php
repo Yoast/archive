@@ -407,12 +407,13 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 		$this->class->set_license_api_response( 'activate', $api_response );
 		$this->class->activate_license();
 
-		$this->assertEquals( array(
+		$expected = array(
 			array(
 				'message' => $message,
 				'success' => true,
 			),
-		), $this->class->__get_notices() );
+		);
+		$this->assertEquals( $expected, $this->class->__get_notices() );
 	}
 
 	/**
@@ -434,12 +435,13 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 		$this->class->set_license_api_response( 'activate', $api_response );
 		$this->class->activate_license();
 
-		$this->assertEquals( array(
+		$expected = array(
 			array(
 				'message' => $message . '<br />' . $api_response->custom_message,
 				'success' => true,
 			),
-		), $this->class->__get_notices() );
+		);
+		$this->assertEquals( $expected, $this->class->__get_notices() );
 	}
 
 	/**
@@ -476,12 +478,14 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 		$this->class->set_license_api_response( 'deactivate', $api_response );
 
 		$this->assertTrue( $this->class->deactivate_license() );
-		$this->assertEquals( array(
+
+		$expected = array(
 			array(
 				'message' => $message,
 				'success' => true,
 			),
-		), $this->class->__get_notices() );
+		);
+		$this->assertEquals( $expected, $this->class->__get_notices() );
 	}
 
 	/**
@@ -501,12 +505,14 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 		$this->class->set_license_api_response( 'deactivate', $api_response );
 
 		$this->assertTrue( $this->class->deactivate_license() );
-		$this->assertEquals( array(
+
+		$expected = array(
 			array(
 				'message' => $message . '<br />' . $api_response->custom_message,
 				'success' => true,
 			),
-		), $this->class->__get_notices() );
+		);
+		$this->assertEquals( $expected, $this->class->__get_notices() );
 	}
 
 	/**
@@ -525,12 +531,14 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 		$this->class->set_license_api_response( 'deactivate', $api_response );
 
 		$this->assertFalse( $this->class->deactivate_license() );
-		$this->assertEquals( array(
+
+		$expected = array(
 			array(
 				'message' => $message,
 				'success' => false,
 			),
-		), $this->class->__get_notices() );
+		);
+		$this->assertEquals( $expected, $this->class->__get_notices() );
 	}
 
 	/**
@@ -550,12 +558,14 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 		$this->class->set_license_api_response( 'deactivate', $api_response );
 
 		$this->assertFalse( $this->class->deactivate_license() );
-		$this->assertEquals( array(
+
+		$expected = array(
 			array(
 				'message' => $message . '<br />' . $api_response->custom_message,
 				'success' => false,
 			),
-		), $this->class->__get_notices() );
+		);
+		$this->assertEquals( $expected, $this->class->__get_notices() );
 	}
 
 	/**
