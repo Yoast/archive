@@ -149,7 +149,7 @@ if ( ! class_exists( 'Yoast_Update_Manager_v2', false ) ) {
 			$response = $request->get_response();
 
 			// check if response returned that a given site was inactive
-			if ( isset( $response->license_check ) && ! empty( $response->license_check ) && $response->license_check != 'valid' ) {
+			if ( isset( $response->license_check ) && ! empty( $response->license_check ) && $response->license_check !== 'valid' ) {
 
 				// deactivate local license
 				$this->license_manager->set_license_status( 'invalid' );
