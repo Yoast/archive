@@ -145,12 +145,12 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 			}
 
 			// show notice if external requests are blocked through the WP_HTTP_BLOCK_EXTERNAL constant
-			if ( defined( "WP_HTTP_BLOCK_EXTERNAL" ) && WP_HTTP_BLOCK_EXTERNAL === true ) {
+			if ( defined( 'WP_HTTP_BLOCK_EXTERNAL' ) && WP_HTTP_BLOCK_EXTERNAL === true ) {
 
 				// check if our API endpoint is in the allowed hosts
 				$host = parse_url( $this->product->get_api_url(), PHP_URL_HOST );
 
-				if ( ! defined( "WP_ACCESSIBLE_HOSTS" ) || stristr( WP_ACCESSIBLE_HOSTS, $host ) === false ) {
+				if ( ! defined( 'WP_ACCESSIBLE_HOSTS' ) || stristr( WP_ACCESSIBLE_HOSTS, $host ) === false ) {
 					?>
 					<div class="notice notice-error yoast-notice-error">
 						<p><?php printf( __( '<b>Warning!</b> You\'re blocking external requests which means you won\'t be able to get %s updates. Please add %s to %s.', $this->product->get_text_domain() ), $this->product->get_item_name(), '<strong>' . $host . '</strong>', '<code>WP_ACCESSIBLE_HOSTS</code>' ); ?></p>
@@ -219,11 +219,11 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 				// show notice if license is deactivated
 				if ( $result->license === 'deactivated' ) {
 					$success = true;
-					$message = sprintf( __( "Your %s license has been deactivated.", $this->product->get_text_domain() ), $this->product->get_item_name() );
+					$message = sprintf( __( 'Your %s license has been deactivated.', $this->product->get_text_domain() ), $this->product->get_item_name() );
 				}
 				else {
 					$success = false;
-					$message = sprintf( __( "Failed to deactivate your %s license.", $this->product->get_text_domain() ), $this->product->get_item_name() );
+					$message = sprintf( __( 'Failed to deactivate your %s license.', $this->product->get_text_domain() ), $this->product->get_item_name() );
 				}
 
 				$message .= $this->get_custom_message( $result );
@@ -305,7 +305,7 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 			$request = new Yoast_API_Request_v2( $url );
 
 			if ( $request->is_valid() !== true ) {
-				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), $request->get_error_message(), '<a href="http://kb.yoast.com/article/13-license-activation-notices">', '</a>' ), false );
+				$this->set_notice( sprintf( __( 'Request error: "%s" (%scommon license notices%s)', $this->product->get_text_domain() ), $request->get_error_message(), '<a href="http://kb.yoast.com/article/13-license-activation-notices">', '</a>' ), false );
 			}
 
 			// get response
@@ -459,7 +459,7 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 		public function show_license_form_heading() {
 			?>
 			<h3>
-				<?php printf( __( "%s: License Settings", $this->product->get_text_domain() ), $this->product->get_item_name() ); ?>
+				<?php printf( __( '%s: License Settings', $this->product->get_text_domain() ), $this->product->get_item_name() ); ?>
 				&nbsp; &nbsp;
 			</h3>
 			<?php
@@ -662,14 +662,14 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 			}
 
 			// Always show that it was successful.
-			$message = sprintf( __( "Your %s license has been activated. ", $this->product->get_text_domain() ), $this->product->get_item_name() );
+			$message = sprintf( __( 'Your %s license has been activated. ', $this->product->get_text_domain() ), $this->product->get_item_name() );
 
 			// Show a custom notice it is an unlimited license.
 			if ( $result->license_limit == 0 ) {
-				$message .= __( "You have an unlimited license. ", $this->product->get_text_domain() );
+				$message .= __( 'You have an unlimited license. ', $this->product->get_text_domain() );
 			}
 			else {
-				$message .= sprintf( _n( "You have used %d/%d activation. ", "You have used %d/%d activations. ", $result->license_limit, $this->product->get_text_domain() ), $result->site_count, $result->license_limit );
+				$message .= sprintf( _n( 'You have used %d/%d activation. ', 'You have used %d/%d activations. ', $result->license_limit, $this->product->get_text_domain() ), $result->site_count, $result->license_limit );
 			}
 
 			// add upgrade notice if user has less than 3 activations left
@@ -677,7 +677,7 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 				$message .= sprintf( __( '<a href="%s">Did you know you can upgrade your license?</a> ', $this->product->get_text_domain() ), $this->product->get_extension_url( 'license-nearing-limit-notice' ) );
 			}
 
-			if ( $expiry_date !== false && $expiry_date < strtotime( "+1 month" ) ) {
+			if ( $expiry_date !== false && $expiry_date < strtotime( '+1 month' ) ) {
 				// Add extend notice if license is expiring in less than 1 month.
 				$days_left = round( ( $expiry_date - time() ) / 86400 );
 				$message  .= sprintf( _n( '<a href="%s">Your license is expiring in %d day, would you like to extend it?</a> ', '<a href="%s">Your license is expiring in %d days, would you like to extend it?</a> ', $days_left, $this->product->get_text_domain() ), $this->product->get_extension_url( 'license-expiring-notice' ), $days_left );

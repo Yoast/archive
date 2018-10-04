@@ -60,7 +60,7 @@ wp_nonce_field( $nonce_name, $nonce_name ); ?>
 			<td>
 				<input name="<?php echo esc_attr( $key_name ); ?>" type="text" class="regular-text textinput yoast-license-key-field <?php if ( $obfuscate ) { ?>yoast-license-obfuscate<?php } ?>" value="<?php echo esc_attr( $visible_license_key ); ?>" placeholder="<?php echo esc_attr( sprintf( __( 'Paste your %s license key here...', $product->get_text_domain() ), $product->get_item_name() ) ); ?>" <?php if ( $readonly ) { echo 'readonly="readonly"'; } ?> />
 				<?php if ( $this->license_constant_is_defined ) { ?>
-				<p class="help"><?php printf( __( "You defined your license key using the %s PHP constant.", $product->get_text_domain() ), '<code>' . $this->license_constant_name . '</code>' ); ?></p>
+				<p class="help"><?php printf( __( 'You defined your license key using the %s PHP constant.', $product->get_text_domain() ), '<code>' . $this->license_constant_name . '</code>' ); ?></p>
 				<?php } ?>
 			</td>
 		</tr>
