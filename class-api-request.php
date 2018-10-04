@@ -69,7 +69,7 @@ if ( ! class_exists( 'Yoast_API_Request_v2', false ) ) {
 			$response = wp_remote_request( $this->url, $this->args );
 
 			// validate raw response
-			if( $this->validate_raw_response( $response ) === false ) {
+			if ( $this->validate_raw_response( $response ) === false ) {
 				return false;
 			}
 
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Yoast_API_Request_v2', false ) ) {
 			$this->response = json_decode( wp_remote_retrieve_body( $response ) );
 
 			// response should be an object
-			if( ! is_object( $this->response ) ) {
+			if ( ! is_object( $this->response ) ) {
 				$this->error_message = 'No JSON object was returned.';
 				return false;
 			}
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Yoast_API_Request_v2', false ) ) {
 		private function validate_raw_response( $response ) {
 
 			// make sure response came back okay
-			if( is_wp_error( $response ) ) {
+			if ( is_wp_error( $response ) ) {
 				$this->error_message = $response->get_error_message();
 				return false;
 			}
@@ -100,9 +100,9 @@ if ( ! class_exists( 'Yoast_API_Request_v2', false ) ) {
 			// check response code, should be 200
 			$response_code = wp_remote_retrieve_response_code( $response );
 
-			if( false === strstr( $response_code, '200' ) ) {
+			if ( false === strstr( $response_code, '200' ) ) {
 
-				$response_message = wp_remote_retrieve_response_message( $response );
+				$response_message    = wp_remote_retrieve_response_message( $response );
 				$this->error_message = "{$response_code} {$response_message}";
 
 				return false;
