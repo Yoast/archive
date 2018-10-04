@@ -10,7 +10,8 @@ class Yst_License_Manager_UnitTestCase extends WP_UnitTestCase {
 	 * @param mixed $value
 	 */
 	protected function set_post( $key, $value ) {
-		$_POST[ $key ] = $_REQUEST[ $key ] = addslashes( $value );
+		$_POST[ $key ]    = addslashes( $value );
+		$_REQUEST[ $key ] = $_POST[ $key ];
 	}
 
 	/**
