@@ -624,10 +624,12 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 
 			if ( empty( $this->license_constant_name ) ) {
 				// generate license constant name
-				$this->set_license_constant_name( strtoupper( str_replace( array(
-						' ',
-						'-'
-					), '', sanitize_key( $this->product->get_item_name() ) ) ) . '_LICENSE' );
+				$constant_name  = sanitize_key( $this->product->get_item_name() );
+				$constant_name  = str_replace( array( ' ', '-' ), '', $constant_name );
+				$constant_name  = strtoupper( $constant_name );
+				$constant_name .= '_LICENSE';
+
+				$this->set_license_constant_name( $constant_name );
 			}
 
 			// set license key from constant
