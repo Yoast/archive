@@ -227,7 +227,7 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 
 		$api_response = (object) array(
 			'license_limit' => 0,
-			'expires'       => date( DATE_RSS, time() + ( $days_left * 86400 ) ),
+			'expires'       => date( DATE_RSS, ( time() + ( $days_left * 86400 ) ) ),
 		);
 
 		$message  = 'Your test-product license has been activated. ';
@@ -249,7 +249,7 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 
 		$api_response = (object) array(
 			'license_limit' => 0,
-			'expires'       => date( DATE_RSS, time() + ( $days_left * 86400 ) ),
+			'expires'       => date( DATE_RSS, ( time() + ( $days_left * 86400 ) ) ),
 		);
 
 		$message  = 'Your test-product license has been activated. ';
@@ -272,7 +272,7 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 		$api_response = (object) array(
 			'site_count'    => 2,
 			'license_limit' => 3,
-			'expires'       => date( DATE_RSS, time() + ( $days_left * 86400 ) ),
+			'expires'       => date( DATE_RSS, ( time() + ( $days_left * 86400 ) ) ),
 		);
 
 		$message  = 'Your test-product license has been activated. ';
