@@ -2,10 +2,10 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	header( 'HTTP/1.0 403 Forbidden' );
 	die;
-} 
+}
 ?><script type="text/javascript">
 (function($) {
-	
+
 	if( typeof YoastLicenseManager !== "undefined" ) {
 		return;
 	}
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	window.YoastLicenseManager = (function () {
 
 		function init() {
-			var $keyInputs = $(".yoast-license-key-field.yoast-license-obfuscate");
+			var $keyInputs     = $(".yoast-license-key-field.yoast-license-obfuscate");
 			var $actionButtons = $('.yoast-license-toggler button');
 			var $submitButtons = $('input[type="submit"], button[type="submit"]');
 
@@ -29,10 +29,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 
 		function actOnLicense() {
-			var $formScope = $(this).closest('form');
+			var $formScope    = $(this).closest('form');
 			var $actionButton = $formScope.find('.yoast-license-toggler button');
 
-			// fake input field with exact same name => value			
+			// fake input field with exact same name => value
 			$("<input />")
 				.attr('type', 'hidden')
 				.attr( 'name', $(this).attr('name') )
@@ -50,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 
 		function disableButtons() {
-			var $formScope = $(this).closest('form');
+			var $formScope    = $(this).closest('form');
 			var $submitButton = $formScope.find('input[type="submit"], button[type="submit"]');
 			$submitButton.prop( 'disabled', true );
 		}
@@ -58,7 +58,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		return {
 			init: init
 		}
-	
 	})();
 
 	YoastLicenseManager.init();

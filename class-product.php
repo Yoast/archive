@@ -311,11 +311,10 @@ if ( ! class_exists( 'Yoast_Product_v2', false ) ) {
 
 			// URL encode tracking vars.
 			$tracking_vars = urlencode_deep( $tracking_vars );
-			$query_string = build_query( $tracking_vars );
+			$query_string  = build_query( $tracking_vars );
 
 			return $url . '#' . $query_string;
 		}
-
 	}
 
 }

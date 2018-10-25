@@ -27,8 +27,6 @@ class Sample_Plugin {
 			// load license class
 			$this->load_license_manager();
 		}
-
-
 	}
 
 	/**
@@ -43,7 +41,6 @@ class Sample_Plugin {
 
 		// Setup the required hooks
 		$license_manager->setup_hooks();
-
 	}
 
 	/**
@@ -67,7 +64,7 @@ class Sample_Plugin {
 
 			<?php $license_manager->show_license_form( false ); ?>
 		</div>
-	<?php
+		<?php
 	}
 }
 

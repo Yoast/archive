@@ -219,7 +219,6 @@ if ( ! class_exists( 'Yoast_Update_Manager_v2', false ) ) {
 
 			return false;
 		}
-
 	}
 
 }

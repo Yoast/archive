@@ -1,6 +1,6 @@
 <?php
 
-if( class_exists( 'Yoast_Update_Manager_v2' ) && ! class_exists( 'Yoast_Plugin_Update_Manager_v2', false ) ) {
+if ( class_exists( 'Yoast_Update_Manager_v2' ) && ! class_exists( 'Yoast_Plugin_Update_Manager_v2', false ) ) {
 
 	class Yoast_Plugin_Update_Manager_v2 extends Yoast_Update_Manager_v2 {
 
@@ -45,7 +45,7 @@ if( class_exists( 'Yoast_Update_Manager_v2' ) && ! class_exists( 'Yoast_Plugin_U
 			$remote_data = $this->get_remote_data();
 
 			// did we get a response?
-			if( $remote_data === false ) {
+			if ( $remote_data === false ) {
 				return $data;
 			}
 

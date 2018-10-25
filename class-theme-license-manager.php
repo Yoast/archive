@@ -5,8 +5,8 @@ if ( class_exists( 'Yoast_License_Manager_v2' ) && ! class_exists( 'Yoast_Theme_
 	class Yoast_Theme_License_Manager_v2 extends Yoast_License_Manager_v2 {
 
 		/**
-	     * Setup auto updater for themes
-	     */
+		 * Setup auto updater for themes
+		 */
 		public function setup_auto_updater() {
 			if ( $this->license_is_valid() ) {
 				// setup auto updater
@@ -17,8 +17,8 @@ if ( class_exists( 'Yoast_License_Manager_v2' ) && ! class_exists( 'Yoast_Theme_
 		}
 
 		/**
-	     * Setup hooks
-	     */
+		 * Setup hooks
+		 */
 		public function specific_hooks() {
 			// remotely deactivate license upon switching away from this theme
 			add_action( 'switch_theme', array( $this, 'deactivate_license' ) );
@@ -35,8 +35,8 @@ if ( class_exists( 'Yoast_License_Manager_v2' ) && ! class_exists( 'Yoast_Theme_
 		}
 
 		/**
-	     * Shows license page
-	     */
+		 * Shows license page
+		 */
 		public function show_license_page() {
 			?>
 			<div class="wrap">
