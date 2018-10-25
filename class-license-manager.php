@@ -735,9 +735,9 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 			$message = '';
 
 			// Allow for translated messages to be used.
-			$localizedDescription = 'custom_message_' . $this->get_user_locale();
-			if ( ! empty( $result->{$localizedDescription} ) ) {
-				$message = $result->{$localizedDescription};
+			$localized_description = 'custom_message_' . $this->get_user_locale();
+			if ( ! empty( $result->{$localized_description} ) ) {
+				$message = $result->{$localized_description};
 			}
 
 			// Fall back to non-localized custom message if no locale has been provided.
