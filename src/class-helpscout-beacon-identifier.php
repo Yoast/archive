@@ -58,7 +58,11 @@ class Yoast_HelpScout_Beacon_Identifier {
 			$out .= '<tr><td>IP</td><td>' . $ipaddress . '</td></tr>';
 			$out .= '<tr><td>Hostname</td><td>' . gethostbyaddr( $ipaddress ) . '</td></tr>';
 		}
-		$out .= '<tr><td>OS</td><td>' . php_uname( 's r' ) . '</td></tr>';
+
+		if ( function_exists( 'php_uname' ) ) {
+			$out .= '<tr><td>OS</td><td>' . php_uname( 's r' ) . '</td></tr>';
+		}
+
 		$out .= '<tr><td>PHP</td><td>' . PHP_VERSION . '</td></tr>';
 		$out .= '<tr><td>CURL</td><td>' . $this->get_curl_info() . '</td></tr>';
 		$out .= '</table>';
