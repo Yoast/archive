@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 We follow [Semantic Versioning](http://semver.org/).
 
+## 2.0.4: Oct 31st, 2017
+
+* Wraps php_uname call in a function_exists to prevent errors on certain server configurations.
+
 ## 2.0.3: Aug 3th, 2017
 
 * Show subject field by default in HelpScout form
