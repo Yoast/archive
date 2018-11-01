@@ -127,7 +127,7 @@ if ( ! class_exists( 'Yoast_Update_Manager_v2', false ) ) {
 			// setup request parameters
 			$request_params = array(
 				'method' => 'POST',
-				'body'   => $api_params
+				'body'   => $api_params,
 			);
 
 			require_once dirname( __FILE__ ) . '/class-api-request.php';

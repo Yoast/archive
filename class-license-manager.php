@@ -294,7 +294,7 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 				'edd_action' => $action . '_license',
 				'license'    => $this->get_license_key(),
 				'item_name'  => urlencode( trim( $this->product->get_item_name() ) ),
-				'url'        => $this->get_url()
+				'url'        => $this->get_url(),
 				// grab the URL straight from the option to prevent filters from breaking it.
 			);
 
@@ -399,7 +399,7 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 			$defaults = array(
 				'key'         => '',
 				'status'      => '',
-				'expiry_date' => ''
+				'expiry_date' => '',
 			);
 
 			// merge options with defaults
@@ -751,10 +751,10 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 			// Make sure we limit the type of HTML elements to be displayed.
 			if ( ! empty( $message ) ) {
 				$message = wp_kses( $message, array(
-					'a' => array(
+					'a'  => array(
 						'href'   => array(),
 						'target' => array(),
-						'title'  => array()
+						'title'  => array(),
 					),
 					'br' => array(),
 				) );

@@ -16,13 +16,13 @@ if ( ! class_exists( 'Yoast_API_Request_v2', false ) ) {
 		* @var array Request parameters
 		*/
 		private $args = array(
-			'method' => 'GET',
-			'timeout' => 10,
+			'method'    => 'GET',
+			'timeout'   => 10,
 			'sslverify' => false,
-			'headers' => array(
+			'headers'   => array(
 				'Accept-Encoding' => '*',
-				'X-Yoast-EDD' => '1'
-			)
+				'X-Yoast-EDD'     => '1',
+			),
 		);
 
 		/**
