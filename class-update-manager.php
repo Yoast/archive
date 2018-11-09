@@ -155,7 +155,7 @@ if ( ! class_exists( 'Yoast_Update_Manager_v2', false ) ) {
 				$this->license_manager->set_license_status( 'invalid' );
 
 				// show notice to let the user know we deactivated his/her license
-				$this->error_message = __( "This site has not been activated properly on yoast.com and thus cannot check for future updates. Please activate your site with a valid license key.", $this->product->get_text_domain() );
+				$this->error_message = __( 'This site has not been activated properly on yoast.com and thus cannot check for future updates. Please activate your site with a valid license key.', $this->product->get_text_domain() );
 
 				/**
 				 * Filter: 'yoast-show-license-notice' - Show the license notice.
