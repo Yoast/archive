@@ -148,7 +148,7 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 			if ( defined( 'WP_HTTP_BLOCK_EXTERNAL' ) && WP_HTTP_BLOCK_EXTERNAL === true ) {
 
 				// check if our API endpoint is in the allowed hosts
-				$host = parse_url( $this->product->get_api_url(), PHP_URL_HOST );
+				$host = wp_parse_url( $this->product->get_api_url(), PHP_URL_HOST );
 
 				if ( ! defined( 'WP_ACCESSIBLE_HOSTS' ) || stristr( WP_ACCESSIBLE_HOSTS, $host ) === false ) {
 					?>
