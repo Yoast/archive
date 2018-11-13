@@ -483,7 +483,7 @@ if ( ! class_exists( 'Yoast_License_Manager_v2', false ) ) {
 			$obfuscate = ( strlen( $this->get_license_key() ) > 5 && ( $this->license_is_valid() || ! $this->remote_license_activation_failed ) );
 
 			if ( $obfuscate ) {
-				$visible_license_key = str_repeat( '*', strlen( $this->get_license_key() ) - 4 ) . substr( $this->get_license_key(), - 4 );
+				$visible_license_key = str_repeat( '*', ( strlen( $this->get_license_key() ) - 4 ) ) . substr( $this->get_license_key(), - 4 );
 			}
 
 			// make license key readonly when license key is valid or license is defined with a constant
