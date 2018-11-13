@@ -17,7 +17,7 @@ if ( class_exists( 'Yoast_License_Manager_v2' ) && ! class_exists( 'Yoast_Plugin
 			if ( is_admin() && is_multisite() ) {
 
 				if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-					require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+					require_once ABSPATH . 'wp-admin/includes/plugin.php';
 				}
 
 				$this->is_network_activated = is_plugin_active_for_network( $product->get_file() );
@@ -35,8 +35,8 @@ if ( class_exists( 'Yoast_License_Manager_v2' ) && ! class_exists( 'Yoast_Plugin
 			 */
 			if ( apply_filters( 'yoast-license-valid', $this->license_is_valid() ) ) {
 				// setup auto updater
-				require_once( dirname( __FILE__ ) . '/class-update-manager.php' );
-				require_once( dirname( __FILE__ ) . '/class-plugin-update-manager.php' );
+				require_once dirname( __FILE__ ) . '/class-update-manager.php';
+				require_once dirname( __FILE__ ) . '/class-plugin-update-manager.php';
 				new Yoast_Plugin_Update_Manager_v2( $this->product, $this );
 			}
 		}

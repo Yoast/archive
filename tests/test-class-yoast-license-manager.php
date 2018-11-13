@@ -1,7 +1,7 @@
 <?php
 
-include dirname( __FILE__ ) . '../../class-product.php';
-include dirname( __FILE__ ) . '../../class-license-manager.php';
+require_once dirname( __FILE__ ) . '/../../class-product.php';
+require_once dirname( __FILE__ ) . '/../../class-license-manager.php';
 
 /**
  * Class Yoast_Product_Double
