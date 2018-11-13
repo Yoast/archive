@@ -84,7 +84,7 @@ if ( class_exists( 'Yoast_License_Manager_v2' ) && ! class_exists( 'Yoast_Plugin
 				}
 			}
 			else {
-				if ( false == is_network_admin() ) {
+				if ( false === is_network_admin() ) {
 					parent::show_license_form( $embedded );
 				}
 			}
