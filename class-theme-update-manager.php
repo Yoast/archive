@@ -104,7 +104,7 @@ if ( class_exists( 'Yoast_Update_Manager_v2' ) && ! class_exists( 'Yoast_Theme_U
 				);
 				?>
 			</div>
-			<div id="<?php echo $this->product->get_slug(); ?>_changelog" style="display: none;">
+			<div id="<?php echo esc_attr( $this->product->get_slug() . '_changelog' ); ?>" style="display: none;">
 				<?php echo wpautop( $update_data->sections['changelog'] ); ?>
 			</div>
 			<?php
