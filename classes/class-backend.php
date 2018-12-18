@@ -86,7 +86,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 			wp_enqueue_script( 'wpseo-admin-media', plugin_dir_url( __FILE__ ) . 'assets/wp-seo-admin-media.js', array(
 				'jquery',
 				'jquery-ui-core',
-			), false, true );
+			), '0.4.4', true );
 			wp_localize_script( 'wpseo-admin-media', 'wpseoMediaL10n', $this->localize_media_script() );
 
 			wp_enqueue_script( 'yoast_amp_js', plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.js', array(
