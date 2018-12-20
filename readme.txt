@@ -1,8 +1,8 @@
 === Glue for Yoast SEO & AMP ===
 Contributors: joostdevalk
 Tags: AMP, SEO
-Requires at least: 4.8
-Tested up to: 4.9.5
+Requires at least: 4.9
+Tested up to: 5.0.1
 Stable tag: 0.4.3
 Requires PHP: 5.2.4
 License: GPLv2 or later
@@ -34,6 +34,10 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 3. Design settings in the plugin.
 
 == Changelog ==
+
+= 0.5 =
+* Bugfixes:
+    * Fixes a problem where the AMP icon and Default image could not be unset when Yoast SEO 9.0+ has been installed.
 
 = 0.4.3 =
 * Bugfixes:
