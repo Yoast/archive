@@ -7,7 +7,7 @@
     "amp"
   ],
   "homepage": "https://wordpress.org/plugins/glue-for-yoast-seo-amp/",
-  "license": "GPL-2.0+",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Team Yoast",
@@ -23,16 +23,18 @@
     "source": "https://github.com/Yoast/yoastseo-amp"
   },
   "require": {
+    "composer/installers": "^1.5"
   },
   "require-dev": {
-    "yoast/yoastcs": "dev-master",
-    "codeclimate/php-test-reporter": "dev-master"
+    "codeclimate/php-test-reporter": "dev-master",
+    "roave/security-advisories": "dev-master",
+    "yoast/yoastcs": "^1.1.0"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
     "config-yoastcs": [
-      "\"vendor/bin/phpcs\" --config-set installed_paths ../../../vendor/wp-coding-standards/wpcs,../../../vendor/yoast/yoastcs",
+      "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
       "\"vendor/bin/phpcs\" --config-set default_standard Yoast"
     ]
   }

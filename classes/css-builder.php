@@ -1,5 +1,7 @@
 <?php
 /**
+ * YoastSEO_AMP_Glue plugin file.
+ *
  * @package     YoastSEO_AMP_Glue\CSS_Builder
  * @author      Jip Moors
  * @copyright   2016 Yoast BV
@@ -7,25 +9,38 @@
  */
 
 if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
-
+	/**
+	 * Class to build CSS.
+	 */
 	class YoastSEO_AMP_CSS_Builder {
 
-		/** @var array Option to CSS lookup map */
+		/**
+		 * Option to CSS lookup map.
+		 *
+		 * @var array
+		 */
 		private $items = array();
 
 		/**
-		 * Add option to CSS map
+		 * Adds the passed option to the CSS map.
 		 *
 		 * @param string $option_key Option key.
 		 * @param string $selector   CSS Selector.
 		 * @param string $property   CSS Property that will hold the value of the option.
+		 *
+		 * @return void
 		 */
 		public function add_option( $option_key, $selector, $property ) {
-			$this->items[ $option_key ] = array( 'selector' => $selector, 'property' => $property );
+			$this->items[ $option_key ] = array(
+				'selector' => $selector,
+				'property' => $property,
+			);
 		}
 
 		/**
-		 * @return string Output CSS
+		 * Builds the CSS, based on the passed options, to be used on the frontend.
+		 *
+		 * @return string The CSS to be used on the frontend.
 		 */
 		public function build() {
 			$options = YoastSEO_AMP_Options::get();

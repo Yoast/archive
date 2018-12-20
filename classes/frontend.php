@@ -1,5 +1,7 @@
 <?php
 /**
+ * YoastSEO_AMP_Glue plugin file.
+ *
  * @package     YoastSEO_AMP_Glue\Frontend
  * @author      Joost de Valk
  * @copyright   2016 Yoast BV
@@ -13,16 +15,22 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 	class YoastSEO_AMP_Frontend {
 
 		/**
+		 * WPSEO_Frontend singleton instance.
+		 *
 		 * @var WPSEO_Frontend
 		 */
 		private $front;
 
 		/**
+		 * YoastSEO_AMP_Glue options.
+		 *
 		 * @var array
 		 */
 		private $options;
 
 		/**
+		 * All WPSEO options.
+		 *
 		 * @var array
 		 */
 		private $wpseo_options;
@@ -46,20 +54,25 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			add_filter( 'amp_content_sanitizers', array( $this, 'add_sanitizer' ) );
 		}
 
+		/**
+		 * Retrieve the plugin options and set the relevant properties.
+		 *
+		 * @return void
+		 */
 		private function set_options() {
 			$this->wpseo_options = WPSEO_Options::get_all();
 			$this->options       = YoastSEO_AMP_Options::get();
 		}
 
 		/**
-		 * Add our own sanitizer to the array of sanitizers
+		 * Adds the blacklist sanitizer to the array of available sanitizers.
 		 *
-		 * @param array $sanitizers
+		 * @param array $sanitizers The current list of sanitizers.
 		 *
-		 * @return array
+		 * @return array The new array of sanitizers.
 		 */
 		public function add_sanitizer( $sanitizers ) {
-			require_once 'class-sanitizer.php';
+			require_once 'blacklist-sanitizer.php';
 
 			$sanitizers['Yoast_AMP_Blacklist_Sanitizer'] = array();
 
@@ -67,11 +80,11 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * If analytics tracking has been set, output it now.
+		 * Outputs the analytics tracking, if it has been set.
 		 *
-		 * @param array $analytics
+		 * @param array $analytics The available analytics options.
 		 *
-		 * @return array
+		 * @return array The analytics tracking code to output.
 		 */
 		public function analytics( $analytics ) {
 			// If Monster Insights is outputting analytics, don't do anything.
@@ -89,14 +102,14 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			if ( ! class_exists( 'Yoast_GA_Options' ) || Yoast_GA_Options::instance()->get_tracking_code() === null ) {
 				return $analytics;
 			}
-			$UA = Yoast_GA_Options::instance()->get_tracking_code();
+			$tracking_code = Yoast_GA_Options::instance()->get_tracking_code();
 
 			$analytics['yst-googleanalytics'] = array(
 				'type'        => 'googleanalytics',
 				'attributes'  => array(),
 				'config_data' => array(
 					'vars'     => array(
-						'account' => $UA
+						'account' => $tracking_code,
 					),
 					'triggers' => array(
 						'trackPageview' => array(
@@ -111,7 +124,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Make AMP work for all the post types we want it for
+		 * Enables AMP for all the post types we want it for.
+		 *
+		 * @return void
 		 */
 		public function post_types() {
 			$post_types = get_post_types( array( 'public' => true ), 'objects' );
@@ -145,23 +160,30 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Disables AMP for posts specifically, run later because of AMP plugin internals
+		 * Disables AMP for posts specifically.
+		 *
+		 * {@internal Runs later because of AMP plugin internals.}
+		 *
+		 * @return void
 		 */
 		public function disable_amp_for_posts() {
 			remove_post_type_support( 'post', AMP_QUERY_VAR );
 		}
 
 		/**
-		 * Fix the basic AMP post data
+		 * Transforms the site's canonical URL and site icon URL and to be AMP compliant.
 		 *
-		 * @param array $data
+		 * Also ensures that the proper analytics script is loaded (if applicable).
 		 *
-		 * @return array
+		 * @param array $data The current post data.
+		 *
+		 * @return array The transformed post data.
 		 */
 		public function fix_amp_post_data( $data ) {
 			if ( ! $this->front ) {
 				$this->front = WPSEO_Frontend::get_instance();
 			}
+
 			$data['canonical_url'] = $this->front->canonical( false );
 
 			if ( ! empty( $this->options['amp_site_icon'] ) ) {
@@ -177,12 +199,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Fix the AMP metadata for a post
+		 * Transforms the site's organization object, site description and post image to be AMP compliant.
 		 *
-		 * @param array   $metadata
-		 * @param WP_Post $post
+		 * @param array   $metadata The meta data to transform.
+		 * @param WP_Post $post     The post to transform the meta data for.
 		 *
-		 * @return array
+		 * @return array The transformed post meta data.
 		 */
 		public function fix_amp_post_metadata( $metadata, $post ) {
 			if ( ! $this->front ) {
@@ -205,7 +227,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Add additional CSS to the AMP output
+		 * Adds additional CSS to the AMP output.
+		 *
+		 * @return void
 		 */
 		public function additional_css() {
 			require 'views/additional-css.php';
@@ -213,18 +237,18 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			$selectors = $this->get_class_selectors();
 
 			$css_builder = new YoastSEO_AMP_CSS_Builder();
-			$css_builder->add_option( 'header-color', $selectors[ 'header-color' ], 'background' );
-			$css_builder->add_option( 'headings-color', $selectors[ 'headings-color' ], 'color' );
-			$css_builder->add_option( 'text-color', $selectors[ 'text-color' ], 'color' );
+			$css_builder->add_option( 'header-color', $selectors['header-color'], 'background' );
+			$css_builder->add_option( 'headings-color', $selectors['headings-color'], 'color' );
+			$css_builder->add_option( 'text-color', $selectors['text-color'], 'color' );
 
-			$css_builder->add_option( 'blockquote-bg-color', $selectors[ 'blockquote-bg-color' ], 'background-color' );
-			$css_builder->add_option( 'blockquote-border-color', $selectors[ 'blockquote-border-color' ], 'border-color' );
-			$css_builder->add_option( 'blockquote-text-color', $selectors[ 'blockquote-text-color' ], 'color' );
+			$css_builder->add_option( 'blockquote-bg-color', $selectors['blockquote-bg-color'], 'background-color' );
+			$css_builder->add_option( 'blockquote-border-color', $selectors['blockquote-border-color'], 'border-color' );
+			$css_builder->add_option( 'blockquote-text-color', $selectors['blockquote-text-color'], 'color' );
 
-			$css_builder->add_option( 'link-color', $selectors[ 'link-color' ], 'color' );
-			$css_builder->add_option( 'link-color-hover', $selectors[ 'link-color-hover' ], 'color' );
+			$css_builder->add_option( 'link-color', $selectors['link-color'], 'color' );
+			$css_builder->add_option( 'link-color-hover', $selectors['link-color-hover'], 'color' );
 
-			$css_builder->add_option( 'meta-color', $selectors[ 'meta-color' ], 'color' );
+			$css_builder->add_option( 'meta-color', $selectors['meta-color'], 'color' );
 
 			echo $css_builder->build();
 
@@ -237,7 +261,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Outputs extra code in the head, if set
+		 * Outputs extra code in the head, if set.
+		 *
+		 * @return void
 		 */
 		public function extra_head() {
 			$options = WPSEO_Options::get_option( 'wpseo_social' );
@@ -247,16 +273,20 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 
 			if ( $options['opengraph'] === true ) {
-				$GLOBALS['wpseo_og'] = new WPSEO_OpenGraph;
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- WPSEO global var.
+				$GLOBALS['wpseo_og'] = new WPSEO_OpenGraph();
 			}
 
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WPSEO hook.
 			do_action( 'wpseo_opengraph' );
 
 			echo strip_tags( $this->options['extra-head'], '<link><meta>' );
 		}
 
 		/**
-		 * Outputs analytics code in the footer, if set
+		 * Outputs analytics code in the footer, if set.
+		 *
+		 * @return void
 		 */
 		public function extra_footer() {
 			echo $this->options['analytics-extra'];
@@ -265,7 +295,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Builds the organization object if needed.
 		 *
-		 * @param array $metadata
+		 * @param array $metadata The data to base the organization object on.
+		 *
+		 * @return void
 		 */
 		private function build_organization_object( &$metadata ) {
 			// While it's using the blog name, it's actually outputting the company name.
@@ -281,13 +313,13 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Builds an image object array from an image URL
+		 * Builds an image object array from an image URL.
 		 *
-		 * @param string       $image_url      Image URL to build URL for.
-		 * @param string|array $size           Optional. Image size. Accepts any valid image size, or an array of width
-		 *                                     and height values in pixels (in that order). Default 'full'.
+		 * @param string       $image_url Image URL to build URL for.
+		 * @param string|array $size      Optional. Image size. Accepts any valid image size, or an array of width
+		 *                                and height values in pixels (in that order). Default 'full'.
 		 *
-		 * @return array|false
+		 * @return array|false The image object array or false if the image URL is empty.
 		 */
 		private function get_image_object( $image_url, $size = 'full' ) {
 			if ( empty( $image_url ) ) {
@@ -302,7 +334,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 					'@type'  => 'ImageObject',
 					'url'    => $image_src[0],
 					'width'  => $image_src[1],
-					'height' => $image_src[2]
+					'height' => $image_src[2],
 				);
 			}
 
@@ -310,12 +342,15 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Retrieve the Schema.org image for the post
+		 * Retrieves the Schema.org image for the passed post.
 		 *
-		 * @param WP_Post    $post  Post to retrieve the data for.
+		 * If an OpenGraph image is available for the post, that one will be used. Otherwise, the default image is used.
+		 * If neither exist, the passed image is used instead.
+		 *
+		 * @param WP_Post    $post  The post to retrieve the image for.
 		 * @param array|null $image The currently set post image.
 		 *
-		 * @return array
+		 * @return array The Schema.org-compliant image for the post.
 		 */
 		private function get_image( $post, $image ) {
 			$og_image = $this->get_image_object( WPSEO_Meta::get_value( 'opengraph-image', $post->ID ) );
@@ -323,7 +358,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				return $og_image;
 			}
 
-			// Posts without an image fail validation in Google, leading to Search Console errors
+			// Posts without an image fail validation in Google, leading to Search Console errors.
 			if ( ! is_array( $image ) && isset( $this->options['default_image'] ) ) {
 				return $this->get_image_object( $this->options['default_image'] );
 			}
@@ -334,9 +369,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		/**
 		 * Gets the Schema.org type for the post, based on the post type.
 		 *
-		 * @param WP_Post $post
+		 * @param WP_Post $post The post to retrieve the data for.
 		 *
-		 * @return string
+		 * @return string The Schema.org type.
 		 */
 		private function get_post_schema_type( $post ) {
 			$type = 'WebPage';
@@ -345,9 +380,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 
 			/**
-			 * Filter: 'yoastseo_amp_schema_type' - Allow changing the Schema.org type for the post
+			 * Filter: 'yoastseo_amp_schema_type' - Allow changing the Schema.org type for the post.
 			 *
-			 * @api string $type The Schema.org type for the $post
+			 * @api string $type The Schema.org type for the $post.
 			 *
 			 * @param WP_Post $post
 			 */
@@ -357,24 +392,27 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		}
 
 		/**
-		 * Gets version dependent class names
+		 * Gets the class names used by the AMP plugin.
 		 *
-		 * @return array
+		 * The AMP plugin changed the class names for a number of selectors between releases.
+		 * This method makes sure the correct CSS class name is used depending on the used version of the AMP plugin.
+		 *
+		 * @return array The version dependent class names.
 		 */
 		private function get_class_selectors() {
 			$selectors = array(
-				'header-color'   => 'nav.amp-wp-title-bar',
-				'headings-color' => '.amp-wp-title, h2, h3, h4',
-				'text-color'     => '.amp-wp-content',
+				'header-color'            => 'nav.amp-wp-title-bar',
+				'headings-color'          => '.amp-wp-title, h2, h3, h4',
+				'text-color'              => '.amp-wp-content',
 
 				'blockquote-bg-color'     => '.amp-wp-content blockquote',
 				'blockquote-border-color' => '.amp-wp-content blockquote',
 				'blockquote-text-color'   => '.amp-wp-content blockquote',
 
-				'link-color'       => 'a, a:active, a:visited',
-				'link-color-hover' => 'a:hover, a:focus',
+				'link-color'              => 'a, a:active, a:visited',
+				'link-color-hover'        => 'a:hover, a:focus',
 
-				'meta-color' => '.amp-wp-meta li, .amp-wp-meta li a',
+				'meta-color'              => '.amp-wp-meta li, .amp-wp-meta li a',
 			);
 
 			// CSS classnames have been changed in version 0.4.0.
