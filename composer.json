@@ -18,11 +18,11 @@
   "type": "wordpress-plugin",
   "support": {
     "issues": "https://github.com/Yoast/yoastseo-amp/issues",
-    "forum": "https://wordpress.org/support/plugin/yoastseo-amp",
-    "wiki": "https://github.com/Yoast/yoastseo-amp/wiki",
+    "forum": "https://wordpress.org/support/plugin/glue-for-yoast-seo-amp",
     "source": "https://github.com/Yoast/yoastseo-amp"
   },
   "require": {
+    "php": ">=5.2",
     "composer/installers": "^1.5"
   },
   "require-dev": {
@@ -35,7 +35,13 @@
   "scripts": {
     "config-yoastcs": [
       "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
-      "\"vendor/bin/phpcs\" --config-set default_standard Yoast"
+      "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --config-set default_standard Yoast"
+    ],
+    "check-cs": [
+      "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs"
+    ],
+    "fix-cs": [
+      "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
     ]
   }
 }
