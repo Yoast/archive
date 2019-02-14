@@ -77,10 +77,13 @@
 		<properties>
 			<!-- Provide the prefixes to look for. -->
 			<property name="prefixes" type="array">
+				<!-- Temporarily allowed until the prefixes are fixed. -->
 				<element value="yoastseo_amp"/>
 				<element value="yoast_seo_amp"/>
-				<element value="yoast_amp"/>
 				<element value="wpseo_amp"/>
+				<!-- These are the new prefixes which all code should comply with in the future. -->
+				<element value="yoast_amp"/>
+				<element value="Yoast\WP\AMP"/>
 			</property>
 		</properties>
 	</rule>
