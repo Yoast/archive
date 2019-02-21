@@ -26,7 +26,7 @@ jobs:
   fast_finish: true
   include:
     - php: 7.3
-      env: PHPCS=1
+      env: PHPCS=1 SECURITY=1
     - php: 5.3
       dist: precise
     - php: 5.2
@@ -38,12 +38,14 @@ jobs:
 
 before_install:
   - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
+  - export SECURITYCHECK_DIR=/tmp/security-checker
 
 install:
 - |
   if [[ $PHPCS == "1" ]]; then
     composer install --prefer-dist --no-interaction
   fi
+- if [[ "$SECURITY" == "1" ]]; then wget -P $SECURITYCHECK_DIR https://get.sensiolabs.org/security-checker.phar && chmod +x $SECURITYCHECK_DIR/security-checker.phar;fi
 
 script:
 # PHP Linting
@@ -55,3 +57,6 @@ script:
 # Validate the composer.json file.
 # @link https://getcomposer.org/doc/03-cli.md#validate
 - if [[ $TRAVIS_PHP_VERSION == "5.3" || $TRAVIS_PHP_VERSION == "7.3" ]]; then composer validate --no-check-all; fi
+
+# Check for known security vulnerabilities in the currently locked-in dependencies.
+- if [[ "$SECURITY" == "1" ]]; then php $SECURITYCHECK_DIR/security-checker.phar -n security:check $(pwd)/composer.lock;fi
