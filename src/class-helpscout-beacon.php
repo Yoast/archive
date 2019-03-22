@@ -220,7 +220,8 @@ class Yoast_HelpScout_Beacon {
 			'color'        => '#A4286A',
 			'poweredBy'    => false,
 			'translation'  => $this->get_translations(),
-			'showSubject' => true,
+			'showSubject'  => true,
+			'zIndex'       => 1000001,
 		);
 
 		foreach ( $this->settings as $setting ) {
