@@ -5,7 +5,7 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: slideshare, powerpoint, keynote, ppt, presentation, slide shows, presentations
 Requires at least: 4.3
-Tested up to: 4.6
+Tested up to: 5.2
 Stable tag: 1.9.2
 
 Easily embed SlideShare presentations into your WordPress posts by using the SlideShare WordPress.com embed code.
