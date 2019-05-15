@@ -39,6 +39,10 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 * Bugfixes:
     * Fixes a problem where the AMP icon and Default image could not be unset when Yoast SEO 9.0+ has been installed.
 
+* Enhancements:
+    * Adds compatibility with the [Plugin Dependencies](http://wordpress.org/plugins/plugin-dependencies/) plugin.
+
+
 = 0.4.3 =
 * Bugfixes:
     * Fixes a fatal error in combination with `AMP for WordPress` version 0.7.0. Props [Ryan Kienstra](https://github.com/kienstra).
