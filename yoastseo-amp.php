@@ -25,7 +25,7 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 	 */
 	class YoastSEO_AMP {
 
-		const VERSION = '0.4.3';
+		const VERSION = '0.5-RC1';
 
 		/**
 		 * YoastSEO_AMP constructor.
