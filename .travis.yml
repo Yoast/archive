@@ -52,7 +52,7 @@ script:
 - if find -L . -path ./vendor -prune -o -path ./node_modules -prune -o -name '*.php' -exec php -l {} \; | grep "^[Parse error|Fatal error]"; then exit 1; fi
 
 # PHP CS
-- if [[ $PHPCS == "1" ]]; then vendor/bin/phpcs -q --runtime-set ignore_warnings_on_exit 1; fi
+- if [[ $PHPCS == "1" ]]; then vendor/bin/phpcs -q; fi
 
 # Validate the composer.json file.
 # @link https://getcomposer.org/doc/03-cli.md#validate
