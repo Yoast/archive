@@ -347,10 +347,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * If an OpenGraph image is available for the post, that one will be used. Otherwise, the default image is used.
 		 * If neither exist, the passed image is used instead.
 		 *
-		 * @param WP_Post    $post  The post to retrieve the image for.
-		 * @param array|null $image The currently set post image.
+		 * @param WP_Post                            $post  The post to retrieve the image for.
+		 * @param string|string[]|array|array[]|null $image The currently set post image(s). Can be either a URL string,
+		 *                                                  an array of URL strings, an array as a single ImageObject,
+		 *                                                  or an array of multiple ImageObject arrays. Null if none set.
 		 *
-		 * @return array The Schema.org-compliant image for the post.
+		 * @return string|string[]|array|array[]|null The Schema.org-compliant image for the post.
 		 */
 		private function get_image( $post, $image ) {
 			$og_image = $this->get_image_object( WPSEO_Meta::get_value( 'opengraph-image', $post->ID ) );
@@ -359,8 +361,11 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 
 			// Posts without an image fail validation in Google, leading to Search Console errors.
-			if ( ! is_array( $image ) && ! empty( $this->options['default_image'] ) ) {
-				return $this->get_image_object( $this->options['default_image'] );
+			if ( empty( $image ) && ! empty( $this->options['default_image'] ) ) {
+				$default_image = $this->get_image_object( $this->options['default_image'] );
+				if ( is_array( $default_image ) ) {
+					return $default_image;
+				}
 			}
 
 			return $image;
