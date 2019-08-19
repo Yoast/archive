@@ -359,7 +359,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 
 			// Posts without an image fail validation in Google, leading to Search Console errors.
-			if ( ! is_array( $image ) && isset( $this->options['default_image'] ) ) {
+			if ( ! is_array( $image ) && ! empty( $this->options['default_image'] ) ) {
 				return $this->get_image_object( $this->options['default_image'] );
 			}
 
