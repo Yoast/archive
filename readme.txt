@@ -41,7 +41,7 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 
 * Enhancements:
     * Adds compatibility with the [Plugin Dependencies](http://wordpress.org/plugins/plugin-dependencies/) plugin.
-    * Improved image handling logic in schema.
+    * Improved image handling logic in schema. Props [Weston Ruter](https://github.com/westonruter).
 
 = 0.4.3 =
 * Bugfixes:
