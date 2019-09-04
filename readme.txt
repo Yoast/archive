@@ -2,8 +2,8 @@
 Contributors: joostdevalk
 Tags: AMP, SEO
 Requires at least: 4.9
-Tested up to: 5.2
-Stable tag: 0.4.3
+Tested up to: 5.2.2
+Stable tag: 0.5.0
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -41,6 +41,7 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 
 * Enhancements:
     * Adds compatibility with the [Plugin Dependencies](http://wordpress.org/plugins/plugin-dependencies/) plugin.
+    * Improved image handling logic in schema.
 
 = 0.4.3 =
 * Bugfixes:
