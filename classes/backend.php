@@ -33,7 +33,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 			// Register AMP admin page as a Yoast SEO admin page.
 			add_filter( 'wpseo_admin_pages', array( $this, 'add_admin_pages' ) );
 
-			add_filter( 'wpseo_amp_supported_post_types', array( $this, 'remove_page_post_type' ) );
+			add_filter( 'Yoast\WP\AMP\supported_post_types', array( $this, 'remove_page_post_type' ) );
 		}
 
 		/**

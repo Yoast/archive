@@ -35,8 +35,28 @@ $yoast_amp_yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' )
 			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WPSEO hook.
 			$yoast_amp_post_types = apply_filters( 'wpseo_sitemaps_supported_post_types', get_post_types( array( 'public' => true ), 'objects' ) );
 
-			// Allow specific AMP post type overrides, especially needed for Page support.
-			$yoast_amp_post_types = apply_filters( 'wpseo_amp_supported_post_types', $yoast_amp_post_types );
+			/**
+			 * Allow specific AMP post type overrides, especially needed for Page support.
+			 *
+			 * @deprecated 0.6.0. Use the {@see 'Yoast\WP\AMP\supported_post_types'} filter instead.
+			 *
+			 * @param array $post_types Post types to show in the sitemap.
+			 */
+			$yoast_amp_post_types = apply_filters_deprecated(
+				'wpseo_amp_supported_post_types',
+				array( $yoast_amp_post_types ),
+				'YoastSEO AMP 0.6.0',
+				'Yoast\WP\AMP\supported_post_types'
+			);
+
+			/**
+			 * Allow specific AMP post type overrides, especially needed for Page support.
+			 *
+			 * @since 0.6.0
+			 *
+			 * @param array $post_types Post types to show in the sitemap.
+			 */
+			$yoast_amp_post_types = apply_filters( 'Yoast\WP\AMP\supported_post_types', $yoast_amp_post_types );
 
 			if ( is_array( $yoast_amp_post_types ) && $yoast_amp_post_types !== array() ) {
 				foreach ( $yoast_amp_post_types as $yoast_amp_pt ) {

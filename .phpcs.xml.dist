@@ -100,7 +100,6 @@
 			<property name="prefixes" type="array" extend="true">
 				<element value="yoastseo_amp"/>
 				<element value="yoast_seo_amp"/>
-				<element value="wpseo_amp"/>
 			</property>
 		</properties>
 	</rule>
