@@ -33,7 +33,15 @@
 	#############################################################################
 	-->
 
-	<rule ref="Yoast"/>
+	<rule ref="Yoast">
+		<properties>
+			<!-- Provide the plugin specific prefixes for all naming related sniffs. -->
+			<property name="prefixes" type="array">
+				<element value="Yoast\WP\AMP"/>
+				<element value="yoast_amp"/>
+			</property>
+		</properties>
+	</rule>
 
 
 	<!--
@@ -54,30 +62,14 @@
 	<rule ref="Yoast.Files.FileName">
 		<properties>
 			<!-- Don't trigger on the main file as renaming it would deactivate the plugin. -->
-			<property name="exclude" type="array">
+			<property name="excluded_files_strict_check" type="array">
 				<element value="yoastseo-amp.php"/>
 			</property>
 
 			<!-- Remove the following prefixes from the names of object structures. -->
-			<property name="prefixes" type="array">
+			<property name="oo_prefixes" type="array">
 				<element value="yoastseo_amp"/>
 				<element value="yoast_amp"/>
-			</property>
-		</properties>
-	</rule>
-
-	<!-- Verify that everything in the global namespace is prefixed with a plugin specific prefix. -->
-	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-		<properties>
-			<!-- Provide the prefixes to look for. -->
-			<property name="prefixes" type="array">
-				<!-- Temporarily allowed until the prefixes are fixed. -->
-				<element value="yoastseo_amp"/>
-				<element value="yoast_seo_amp"/>
-				<element value="wpseo_amp"/>
-				<!-- These are the new prefixes which all code should comply with in the future. -->
-				<element value="yoast_amp"/>
-				<element value="Yoast\WP\AMP"/>
 			</property>
 		</properties>
 	</rule>
@@ -101,6 +93,17 @@
 	Adjustments which should be removed once the associated issue has been resolved.
 	#############################################################################
 	-->
+
+	<!-- Until all prefixes are fixed, some exceptions are allowed to the PrefixAllGlobals sniff. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array" extend="true">
+				<element value="yoastseo_amp"/>
+				<element value="yoast_seo_amp"/>
+				<element value="wpseo_amp"/>
+			</property>
+		</properties>
+	</rule>
 
 	<!-- The below exclusion has to do with appropriate sanitization and escaping
 		 of CSS and JS data for which no standard functionality exists in WP.
