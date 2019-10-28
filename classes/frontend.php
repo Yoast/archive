@@ -387,11 +387,29 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			/**
 			 * Filter: 'yoastseo_amp_schema_type' - Allow changing the Schema.org type for the post.
 			 *
+			 * @deprecated 0.6.0. Use the {@see 'Yoast\WP\AMP\schema_type'} filter instead.
+			 *
 			 * @api string $type The Schema.org type for the $post.
 			 *
 			 * @param WP_Post $post
 			 */
-			$type = apply_filters( 'yoastseo_amp_schema_type', $type, $post );
+			$type = apply_filters_deprecated(
+				'yoastseo_amp_schema_type',
+				array( $type, $post ),
+				'YoastSEO AMP 0.6.0',
+				'Yoast\WP\AMP\schema_type'
+			);
+
+			/**
+			 * Filter: 'Yoast\WP\AMP\schema_type' - Allow changing the Schema.org type for the post.
+			 *
+			 * @since 0.6.0
+			 *
+			 * @api string $type The Schema.org type for the $post.
+			 *
+			 * @param WP_Post $post
+			 */
+			$type = apply_filters( 'Yoast\WP\AMP\schema_type', $type, $post );
 
 			return $type;
 		}
