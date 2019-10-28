@@ -41,17 +41,17 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		public function __construct() {
 			$this->set_options();
 
-			add_action( 'amp_init', array( $this, 'post_types' ) );
+			add_action( 'amp_init', [ $this, 'post_types' ] );
 
-			add_action( 'amp_post_template_css', array( $this, 'additional_css' ) );
-			add_action( 'amp_post_template_head', array( $this, 'extra_head' ) );
-			add_action( 'amp_post_template_footer', array( $this, 'extra_footer' ) );
+			add_action( 'amp_post_template_css', [ $this, 'additional_css' ] );
+			add_action( 'amp_post_template_head', [ $this, 'extra_head' ] );
+			add_action( 'amp_post_template_footer', [ $this, 'extra_footer' ] );
 
-			add_filter( 'amp_post_template_data', array( $this, 'fix_amp_post_data' ) );
-			add_filter( 'amp_post_template_metadata', array( $this, 'fix_amp_post_metadata' ), 10, 2 );
-			add_filter( 'amp_post_template_analytics', array( $this, 'analytics' ) );
+			add_filter( 'amp_post_template_data', [ $this, 'fix_amp_post_data' ] );
+			add_filter( 'amp_post_template_metadata', [ $this, 'fix_amp_post_metadata' ], 10, 2 );
+			add_filter( 'amp_post_template_analytics', [ $this, 'analytics' ] );
 
-			add_filter( 'amp_content_sanitizers', array( $this, 'add_sanitizer' ) );
+			add_filter( 'amp_content_sanitizers', [ $this, 'add_sanitizer' ] );
 		}
 
 		/**
@@ -74,7 +74,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		public function add_sanitizer( $sanitizers ) {
 			require_once 'blacklist-sanitizer.php';
 
-			$sanitizers['Yoast_AMP_Blacklist_Sanitizer'] = array();
+			$sanitizers['Yoast_AMP_Blacklist_Sanitizer'] = [];
 
 			return $sanitizers;
 		}
@@ -104,21 +104,21 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 			$tracking_code = Yoast_GA_Options::instance()->get_tracking_code();
 
-			$analytics['yst-googleanalytics'] = array(
+			$analytics['yst-googleanalytics'] = [
 				'type'        => 'googleanalytics',
-				'attributes'  => array(),
-				'config_data' => array(
-					'vars'     => array(
+				'attributes'  => [],
+				'config_data' => [
+					'vars'     => [
 						'account' => $tracking_code,
-					),
-					'triggers' => array(
-						'trackPageview' => array(
+					],
+					'triggers' => [
+						'trackPageview' => [
 							'on'      => 'visible',
 							'request' => 'pageview',
-						),
-					),
-				),
-			);
+						],
+					],
+				],
+			];
 
 			return $analytics;
 		}
@@ -129,8 +129,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * @return void
 		 */
 		public function post_types() {
-			$post_types = get_post_types( array( 'public' => true ), 'objects' );
-			if ( is_array( $post_types ) && $post_types !== array() ) {
+			$post_types = get_post_types( [ 'public' => true ], 'objects' );
+			if ( is_array( $post_types ) && $post_types !== [] ) {
 				foreach ( $post_types as $post_type ) {
 
 					$post_type_name = $post_type->name;
@@ -150,7 +150,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 					}
 
 					if ( 'post' === $post_type_name ) {
-						add_action( 'wp', array( $this, 'disable_amp_for_posts' ) );
+						add_action( 'wp', [ $this, 'disable_amp_for_posts' ] );
 						continue;
 					}
 
@@ -306,7 +306,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			}
 
 			// The logo needs to be 600px wide max, 60px high max.
-			$logo = $this->get_image_object( $this->wpseo_options['company_logo'], array( 600, 60 ) );
+			$logo = $this->get_image_object( $this->wpseo_options['company_logo'], [ 600, 60 ] );
 			if ( is_array( $logo ) ) {
 				$metadata['publisher']['logo'] = $logo;
 			}
@@ -330,12 +330,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			$image_src = wp_get_attachment_image_src( $image_id, $size );
 
 			if ( is_array( $image_src ) ) {
-				return array(
+				return [
 					'@type'  => 'ImageObject',
 					'url'    => $image_src[0],
 					'width'  => $image_src[1],
 					'height' => $image_src[2],
-				);
+				];
 			}
 
 			return false;
@@ -395,7 +395,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 			 */
 			$type = apply_filters_deprecated(
 				'yoastseo_amp_schema_type',
-				array( $type, $post ),
+				[ $type, $post ],
 				'YoastSEO AMP 0.6.0',
 				'Yoast\WP\AMP\schema_type'
 			);
@@ -423,7 +423,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 * @return array The version dependent class names.
 		 */
 		private function get_class_selectors() {
-			$selectors = array(
+			$selectors = [
 				'header-color'            => 'nav.amp-wp-title-bar',
 				'headings-color'          => '.amp-wp-title, h2, h3, h4',
 				'text-color'              => '.amp-wp-content',
@@ -436,18 +436,18 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 				'link-color-hover'        => 'a:hover, a:focus',
 
 				'meta-color'              => '.amp-wp-meta li, .amp-wp-meta li a',
-			);
+			];
 
 			// CSS classnames have been changed in version 0.4.0.
 			if ( version_compare( AMP__VERSION, '0.4.0', '>=' ) ) {
-				$selectors_v4 = array(
+				$selectors_v4 = [
 					'header-color'            => 'header.amp-wp-header, html',
 					'text-color'              => 'div.amp-wp-article',
 					'blockquote-bg-color'     => '.amp-wp-article-content blockquote',
 					'blockquote-border-color' => '.amp-wp-article-content blockquote',
 					'blockquote-text-color'   => '.amp-wp-article-content blockquote',
 					'meta-color'              => '.amp-wp-meta, .amp-wp-meta a',
-				);
+				];
 				$selectors    = array_merge( $selectors, $selectors_v4 );
 			}
 

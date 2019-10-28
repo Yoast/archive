@@ -143,7 +143,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	private function sanitize_cell_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
 
-		if ( in_array( $attribute_name, array( 'width', 'height' ), true ) ) {
+		if ( in_array( $attribute_name, [ 'width', 'height' ], true ) ) {
 			$node->removeAttribute( $attribute_name );
 		}
 	}
@@ -159,7 +159,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	private function sanitize_table_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
 
-		if ( in_array( $attribute_name, array( 'border', 'cellspacing', 'cellpadding', 'summary' ), true ) ) {
+		if ( in_array( $attribute_name, [ 'border', 'cellspacing', 'cellpadding', 'summary' ], true ) ) {
 			$node->removeAttribute( $attribute_name );
 		}
 	}
