@@ -2,9 +2,9 @@ Contributors: joostdevalk, ireneyoast, jjcomack
 
 Tags: SEO, Research, Yoast
 
-Requires at least: 4.0
+Requires at least: 5.2
 
-Tested up to: 4.9
+Tested up to: 5.3
 
 Stable tag: 1.0
 
