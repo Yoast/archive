@@ -140,7 +140,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 					}
 
 					// If AMP page support is not present, don't allow enabling it here.
-					if ( 'page' === $post_type_name && ! post_type_supports( 'page', AMP_QUERY_VAR ) ) {
+					if ( $post_type_name === 'page' && ! post_type_supports( 'page', AMP_QUERY_VAR ) ) {
 						continue;
 					}
 
@@ -149,7 +149,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 						continue;
 					}
 
-					if ( 'post' === $post_type_name ) {
+					if ( $post_type_name === 'post' ) {
 						add_action( 'wp', [ $this, 'disable_amp_for_posts' ] );
 						continue;
 					}
@@ -380,7 +380,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Frontend' ) ) {
 		 */
 		private function get_post_schema_type( $post ) {
 			$type = 'WebPage';
-			if ( 'post' === $post->post_type ) {
+			if ( $post->post_type === 'post' ) {
 				$type = 'Article';
 			}
 

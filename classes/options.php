@@ -110,7 +110,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 
 			// Only allow 'on' or 'off'.
 			foreach ( $options as $key => $value ) {
-				if ( 'post_types-' === substr( $key, 0, 11 ) ) {
+				if ( substr( $key, 0, 11 ) === 'post_types-' ) {
 					$options[ $key ] = ( $value === 'on' ) ? 'on' : 'off';
 				}
 			}
@@ -223,7 +223,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 				foreach ( $post_types as $post_type ) {
 					if ( ! isset( $this->options[ 'post_types-' . $post_type->name . '-amp' ] ) ) {
 						$this->options[ 'post_types-' . $post_type->name . '-amp' ] = 'off';
-						if ( 'post' === $post_type->name ) {
+						if ( $post_type->name === 'post' ) {
 							$this->options[ 'post_types-' . $post_type->name . '-amp' ] = 'on';
 						}
 					}

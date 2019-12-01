@@ -13,5 +13,5 @@ td, th {
 }
 
 a, a:active, a:visited {
-	text-decoration: <?php echo ( ( 'underline' === $this->options['underline'] ) ? 'underline' : 'none' ); ?>;
+	text-decoration: <?php echo ( ( $this->options['underline'] === 'underline' ) ? 'underline' : 'none' ); ?>;
 }
