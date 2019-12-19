@@ -33,7 +33,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		 *
 		 * @var array
 		 */
-		private $defaults = array(
+		private $defaults = [
 			'version'                 => 1,
 			'amp_site_icon'           => '',
 			'default_image'           => '',
@@ -50,7 +50,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 			'extra-css'               => '',
 			'extra-head'              => '',
 			'analytics-extra'         => '',
-		);
+		];
 
 		/**
 		 * Class instance.
@@ -64,14 +64,14 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		 */
 		private function __construct() {
 			// Register settings.
-			add_action( 'admin_init', array( $this, 'register_settings' ) );
+			add_action( 'admin_init', [ $this, 'register_settings' ] );
 		}
 
 		/**
 		 * Register the premium settings.
 		 */
 		public function register_settings() {
-			register_setting( 'wpseo_amp_settings', $this->option_name, array( $this, 'sanitize_options' ) );
+			register_setting( 'wpseo_amp_settings', $this->option_name, [ $this, 'sanitize_options' ] );
 		}
 
 		/**
@@ -93,7 +93,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 			// Only allow meta and link tags in head.
 			$options['extra-head'] = strip_tags( $options['extra-head'], '<link><meta>' );
 
-			$colors = array(
+			$colors = [
 				'header-color',
 				'headings-color',
 				'text-color',
@@ -102,7 +102,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 				'blockquote-text-color',
 				'blockquote-bg-color',
 				'blockquote-border-color',
-			);
+			];
 
 			foreach ( $colors as $color ) {
 				$options[ $color ] = $this->sanitize_color( $options[ $color ], '' );
@@ -110,7 +110,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 
 			// Only allow 'on' or 'off'.
 			foreach ( $options as $key => $value ) {
-				if ( 'post_types-' === substr( $key, 0, 11 ) ) {
+				if ( substr( $key, 0, 11 ) === 'post_types-' ) {
 					$options[ $key ] = ( $value === 'on' ) ? 'on' : 'off';
 				}
 			}
@@ -215,15 +215,15 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		 * Get post types.
 		 */
 		private function update_post_type_settings() {
-			$post_type_names = array();
+			$post_type_names = [];
 
-			$post_types = get_post_types( array( 'public' => true ), 'objects' );
+			$post_types = get_post_types( [ 'public' => true ], 'objects' );
 
-			if ( is_array( $post_types ) && $post_types !== array() ) {
+			if ( is_array( $post_types ) && $post_types !== [] ) {
 				foreach ( $post_types as $post_type ) {
 					if ( ! isset( $this->options[ 'post_types-' . $post_type->name . '-amp' ] ) ) {
 						$this->options[ 'post_types-' . $post_type->name . '-amp' ] = 'off';
-						if ( 'post' === $post_type->name ) {
+						if ( $post_type->name === 'post' ) {
 							$this->options[ 'post_types-' . $post_type->name . '-amp' ] = 'on';
 						}
 					}
@@ -263,11 +263,11 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 				$parts,
 				1,
 				null,
-				array(
+				[
 					'<script type="application/json">',
 					trim( $json ),
 					'</script>',
-				)
+				]
 			);
 
 			return implode( "\n", $parts );

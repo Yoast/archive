@@ -19,7 +19,7 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 		 *
 		 * @var array
 		 */
-		private $items = array();
+		private $items = [];
 
 		/**
 		 * Adds the passed option to the CSS map.
@@ -31,10 +31,10 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 		 * @return void
 		 */
 		public function add_option( $option_key, $selector, $property ) {
-			$this->items[ $option_key ] = array(
+			$this->items[ $option_key ] = [
 				'selector' => $selector,
 				'property' => $property,
-			);
+			];
 		}
 
 		/**
@@ -46,7 +46,7 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 			$options = YoastSEO_AMP_Options::get();
 
 			$output = "\n";
-			$css    = array();
+			$css    = [];
 
 			$options = array_filter( $options );
 			$apply   = array_intersect_key( $this->items, $options );
@@ -55,7 +55,7 @@ if ( ! class_exists( 'YoastSEO_AMP_CSS_Builder', false ) ) {
 				foreach ( $apply as $key => $placement ) {
 
 					if ( ! isset( $css[ $placement['selector'] ] ) ) {
-						$css[ $placement['selector'] ] = array();
+						$css[ $placement['selector'] ] = [];
 					}
 
 					$css[ $placement['selector'] ][ $placement['property'] ] = $options[ $key ];

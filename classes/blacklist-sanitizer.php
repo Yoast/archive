@@ -84,7 +84,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 		foreach ( $tag_names as $tag_name ) {
 			$elements = $node->getElementsByTagName( $tag_name );
 			$length   = $elements->length;
-			if ( 0 === $length ) {
+			if ( $length === 0 ) {
 				continue;
 			}
 
@@ -93,7 +93,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 				$parent_node = $element->parentNode;
 				$parent_node->removeChild( $element );
 
-				if ( 'body' !== $parent_node->nodeName && AMP_DOM_Utils::is_node_empty( $parent_node ) ) {
+				if ( $parent_node->nodeName !== 'body' && AMP_DOM_Utils::is_node_empty( $parent_node ) ) {
 					$parent_node->parentNode->removeChild( $parent_node );
 				}
 			}
@@ -111,7 +111,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	private function sanitize_a_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
 
-		if ( 'rel' === $attribute_name && 'nofollow' !== $attribute->value ) {
+		if ( $attribute_name === 'rel' && $attribute->value !== 'nofollow' ) {
 			$node->removeAttribute( $attribute_name );
 		}
 	}
@@ -127,7 +127,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	private function sanitize_pre_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
 
-		if ( 'line' === $attribute_name ) {
+		if ( $attribute_name === 'line' ) {
 			$node->removeAttribute( $attribute_name );
 		}
 	}
@@ -143,7 +143,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	private function sanitize_cell_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
 
-		if ( in_array( $attribute_name, array( 'width', 'height' ), true ) ) {
+		if ( in_array( $attribute_name, [ 'width', 'height' ], true ) ) {
 			$node->removeAttribute( $attribute_name );
 		}
 	}
@@ -159,7 +159,7 @@ class Yoast_AMP_Blacklist_Sanitizer extends AMP_Base_Sanitizer {
 	private function sanitize_table_attribute( $node, $attribute ) {
 		$attribute_name = strtolower( $attribute->name );
 
-		if ( in_array( $attribute_name, array( 'border', 'cellspacing', 'cellpadding', 'summary' ), true ) ) {
+		if ( in_array( $attribute_name, [ 'border', 'cellspacing', 'cellpadding', 'summary' ], true ) ) {
 			$node->removeAttribute( $attribute_name );
 		}
 	}

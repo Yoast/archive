@@ -28,12 +28,12 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 			$this->options = YoastSEO_AMP_Options::get();
 
 			// Add subitem to menu.
-			add_filter( 'wpseo_submenu_pages', array( $this, 'add_submenu_page' ) );
+			add_filter( 'wpseo_submenu_pages', [ $this, 'add_submenu_page' ] );
 
 			// Register AMP admin page as a Yoast SEO admin page.
-			add_filter( 'wpseo_admin_pages', array( $this, 'add_admin_pages' ) );
+			add_filter( 'wpseo_admin_pages', [ $this, 'add_admin_pages' ] );
 
-			add_filter( 'wpseo_amp_supported_post_types', array( $this, 'remove_page_post_type' ) );
+			add_filter( 'Yoast\WP\AMP\supported_post_types', [ $this, 'remove_page_post_type' ] );
 		}
 
 		/**
@@ -60,15 +60,15 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		 */
 		public function add_submenu_page( $sub_menu_pages ) {
 
-			$sub_menu_pages[] = array(
+			$sub_menu_pages[] = [
 				'wpseo_dashboard',
 				__( 'AMP', 'yoastseo-amp' ),
 				__( 'AMP', 'yoastseo-amp' ),
 				'manage_options',
 				'wpseo_amp',
-				array( $this, 'display' ),
-				array( array( $this, 'enqueue_admin_page' ) ),
-			);
+				[ $this, 'display' ],
+				[ [ $this, 'enqueue_admin_page' ] ],
+			];
 
 			return $sub_menu_pages;
 		}
@@ -87,7 +87,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 			wp_enqueue_style(
 				'yoast_amp_css',
 				plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.css',
-				array( 'wp-color-picker' ),
+				[ 'wp-color-picker' ],
 				YoastSEO_AMP::VERSION
 			);
 
@@ -95,7 +95,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 			wp_enqueue_script(
 				'wpseo-admin-media',
 				plugin_dir_url( __FILE__ ) . 'assets/wp-seo-admin-media.js',
-				array( 'jquery', 'jquery-ui-core' ),
+				[ 'jquery', 'jquery-ui-core' ],
 				YoastSEO_AMP::VERSION,
 				true
 			);
@@ -104,7 +104,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 			wp_enqueue_script(
 				'yoast_amp_js',
 				plugin_dir_url( __FILE__ ) . 'assets/amp-admin-page.js',
-				array( 'jquery', 'wp-color-picker' ),
+				[ 'jquery', 'wp-color-picker' ],
 				YoastSEO_AMP::VERSION,
 				true
 			);
@@ -116,9 +116,9 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		 * @return array
 		 */
 		public function localize_media_script() {
-			return array(
+			return [
 				'choose_image' => __( 'Use Logo', 'yoastseo-amp' ),
-			);
+			];
 		}
 
 		/**
