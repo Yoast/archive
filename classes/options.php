@@ -79,7 +79,7 @@ if ( ! class_exists( 'YoastSEO_AMP_Options' ) ) {
 		 *
 		 * @param array $options Options as received in $_POST.
 		 *
-		 * @return mixed
+		 * @return array
 		 */
 		public function sanitize_options( $options ) {
 			$options['version'] = 1;
