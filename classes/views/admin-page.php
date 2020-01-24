@@ -13,11 +13,9 @@ if ( ! defined( 'WPSEO_VERSION' ) ) {
 	exit();
 }
 
-$yoast_amp_yform = Yoast_Form::get_instance();
+$yoast_amp_yform = new YoastSEO_AMP_Form();
 $yoast_amp_yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' );
-
 ?>
-
 	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
 		<a class="nav-tab" id="posttypes-tab" href="#top#posttypes"><?php esc_html_e( 'Post types', 'yoastseo-amp' ); ?></a>
 		<a class="nav-tab" id="design-tab" href="#top#design"><?php esc_html_e( 'Design', 'yoastseo-amp' ); ?></a>
@@ -222,7 +220,6 @@ $yoast_amp_yform->admin_header( true, 'wpseo_amp', false, 'wpseo_amp_settings' )
 			?>
 		</div>
 	</div>
-
 <?php
 
 $yoast_amp_yform->admin_footer();
