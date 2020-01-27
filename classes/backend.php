@@ -77,6 +77,8 @@ if ( ! class_exists( 'YoastSEO_AMP_Backend', false ) ) {
 		 * Displays the admin page.
 		 */
 		public function display() {
+			require_once 'form.php';
+
 			require 'views/admin-page.php';
 		}
 
