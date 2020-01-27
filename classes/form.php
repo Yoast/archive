@@ -54,8 +54,11 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 		$var_esc = esc_attr( $var );
 
 		printf( '<div class="%s">', esc_attr( 'switch-container' . $help_class ) );
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$label` contains html.
 		echo '<fieldset id="', esc_attr( $var ), '" class="fieldset-switch-toggle"><legend>', $label, '</legend>', $help;
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The method returns html value.
 		echo $this->get_disabled_note( $var );
 		echo '<div class="switch-toggle switch-candy switch-yoast-seo">';
 
@@ -70,7 +73,9 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 
 			$key_esc = esc_attr( $key );
 			$for     = $var_esc . '-' . $key_esc;
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$key_esc` value is already escaped.
 			echo '<input type="radio" id="' . $for . '" name="' . esc_attr( $this->option_name ) . '[' . $var_esc . ']" value="' . $key_esc . '" ' . checked( $val, $key_esc, false ) . disabled( $this->is_control_disabled( $var ), true, false ) . ' />',
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$screen_reader_text_html` value contains html.
 			'<label for="', $for, '">', esc_html( $value ), $screen_reader_text_html,'</label>';
 		}
 
@@ -97,34 +102,39 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 			]
 		);
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$var_esc` value is already escaped.
 		$id_field_id = 'wpseo_' . $var_esc . '_id';
 
 		echo '<span>';
 		echo '<input',
 		' class="textinput"',
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$var_esc` value is already escaped.
 		' id="wpseo_', $var_esc, '"',
 		' type="text" size="36"',
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$var_esc` value is already escaped.
 		' name="', esc_attr( $this->option_name ), '[', $var_esc, ']"',
 		' value="', esc_attr( $val ), '"',
 		' readonly="readonly"',
 		' /> ';
 		echo '<input',
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$var_esc` value is already escaped.
 		' id="wpseo_', $var_esc, '_button"',
 		' class="wpseo_image_upload_button button"',
 		' type="button"',
-		' value="', esc_attr__( 'Upload Image', 'yoast-seo-amp' ), '"',
+		' value="', esc_attr__( 'Upload Image', 'yoastseo-amp' ), '"',
 		' data-target-id="', esc_attr( $id_field_id ), '"',
 		disabled( $this->is_control_disabled( $var ), true, false ),
 		' /> ';
 		echo '<input',
 		' class="wpseo_image_remove_button button"',
 		' type="button"',
-		' value="', esc_attr__( 'Clear Image', 'yoast-seo-amp' ), '"',
+		' value="', esc_attr__( 'Clear Image', 'yoastseo-amp' ), '"',
 		disabled( $this->is_control_disabled( $var ), true, false ),
 		' />';
 		echo '<input',
 		' type="hidden"',
 		' id="', esc_attr( $id_field_id ), '"',
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$var_esc` value is already escaped.
 		' name="', esc_attr( $this->option_name ), '[', $var_esc, '_id]"',
 		' value="', esc_attr( $id_value ), '"',
 		' />';
@@ -156,7 +166,7 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 		}
 
 		if ( empty( $buttons ) ) {
-			$buttons = [ __( 'Disabled', 'yoast-seo-amp' ), __( 'Enabled', 'yoast-seo-amp' ) ];
+			$buttons = [ __( 'Disabled', 'yoastseo-amp' ), __( 'Enabled', 'yoastseo-amp' ) ];
 		}
 
 		list( $off_button, $on_button ) = $buttons;
@@ -165,9 +175,10 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 
 		$strong_class = ( $strong ) ? ' switch-light-visual-label__strong' : '';
 
-		echo '<div class="switch-container', $help_class, '">',
-			'<span class="switch-light-visual-label' . $strong_class . '" id="', esc_attr( $var . '-label' ), '">', esc_html( $label ), '</span>' . $help,
-		'<label class="', $class, '"><b class="switch-yoast-seo-jaws-a11y">&nbsp;</b>',
+		echo '<div class="switch-container', esc_attr( $help_class ), '">',
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$help` value is already escaped.
+			'<span class="switch-light-visual-label' . esc_attr( $strong_class ) . '" id="', esc_attr( $var . '-label' ), '">', esc_html( $label ), '</span>' . $help,
+		'<label class="', esc_attr( $class ), '"><b class="switch-yoast-seo-jaws-a11y">&nbsp;</b>',
 		'<input type="checkbox" aria-labelledby="', esc_attr( $var . '-label' ), '" id="', esc_attr( $var ), '" name="', esc_attr( $this->option_name ), '[', esc_attr( $var ), ']" value="on"', checked( $val, 'on', false ), disabled( $this->is_control_disabled( $var ), true, false ), '/>',
 		'<span aria-hidden="true">
 			<span>', esc_html( $off_button ) ,'</span>
