@@ -35,6 +35,10 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 
 == Changelog ==
 
+= 0.6 =
+* Bugfixes:
+    * Fixes a bug where the saved option values aren't reflected in the form fields.
+
 = 0.5 =
 * Bugfixes:
     * Fixes a problem where the AMP icon and Default image could not be unset when Yoast SEO 9.0+ has been installed.
