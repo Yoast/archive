@@ -30,8 +30,6 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 	/**
 	 * Create a toggle switch input field using two radio buttons.
 	 *
-	 * @since 3.1
-	 *
 	 * @param string $var    The variable within the option to create the radio buttons for.
 	 * @param array  $values Associative array of on/off keys and their values to be used as
 	 *                       the label elements text for the radio buttons. Optionally, each
@@ -56,7 +54,7 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 		$var_esc = esc_attr( $var );
 
 		printf( '<div class="%s">', esc_attr( 'switch-container' . $help_class ) );
-		echo '<fieldset id="', $var_esc, '" class="fieldset-switch-toggle"><legend>', $label, '</legend>', $help;
+		echo '<fieldset id="', esc_attr( $var ), '" class="fieldset-switch-toggle"><legend>', $label, '</legend>', $help;
 
 		echo $this->get_disabled_note( $var );
 		echo '<div class="switch-toggle switch-candy switch-yoast-seo">';
@@ -81,8 +79,6 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 
 	/**
 	 * Media input.
-	 *
-	 * @since 2.0
 	 *
 	 * @param string $var   Option name.
 	 * @param string $label Label message.
@@ -116,14 +112,14 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 		' id="wpseo_', $var_esc, '_button"',
 		' class="wpseo_image_upload_button button"',
 		' type="button"',
-		' value="', esc_attr__( 'Upload Image', 'wordpress-seo' ), '"',
+		' value="', esc_attr__( 'Upload Image', 'yoast-seo-amp' ), '"',
 		' data-target-id="', esc_attr( $id_field_id ), '"',
 		disabled( $this->is_control_disabled( $var ), true, false ),
 		' /> ';
 		echo '<input',
 		' class="wpseo_image_remove_button button"',
 		' type="button"',
-		' value="', esc_attr__( 'Clear Image', 'wordpress-seo' ), '"',
+		' value="', esc_attr__( 'Clear Image', 'yoast-seo-amp' ), '"',
 		disabled( $this->is_control_disabled( $var ), true, false ),
 		' />';
 		echo '<input',
@@ -138,8 +134,6 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 
 	/**
 	 * Create a light switch input field using a single checkbox.
-	 *
-	 * @since 3.1
 	 *
 	 * @param string $var     The variable within the option to create the checkbox for.
 	 * @param string $label   The label element text for the checkbox.
@@ -162,7 +156,7 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 		}
 
 		if ( empty( $buttons ) ) {
-			$buttons = [ __( 'Disabled', 'wordpress-seo' ), __( 'Enabled', 'wordpress-seo' ) ];
+			$buttons = [ __( 'Disabled', 'yoast-seo-amp' ), __( 'Enabled', 'yoast-seo-amp' ) ];
 		}
 
 		list( $off_button, $on_button ) = $buttons;
@@ -185,8 +179,6 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 
 	/**
 	 * Create a textarea.
-	 *
-	 * @since 2.0
 	 *
 	 * @param string       $var   The variable within the option to create the textarea for.
 	 * @param string       $label The label to show for the variable.
@@ -232,5 +224,4 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 
 		return $default;
 	}
-
 }
