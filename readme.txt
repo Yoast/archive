@@ -37,7 +37,7 @@ To change your AMP page design, go to SEO -> AMP, and look at the design tab.
 
 = 0.6 =
 * Bugfixes:
-    * Fixes a bug where the saved option values aren't reflected in the form fields.
+    * Fixes a bug where the saved option values weren't reflected in the form fields.
 
 = 0.5 =
 * Bugfixes:
