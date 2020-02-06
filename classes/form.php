@@ -51,8 +51,6 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 
 		$help_class = ! empty( $help ) ? ' switch-container__has-help' : '';
 
-		$var_esc = esc_attr( $var );
-
 		printf( '<div class="%s">', esc_attr( 'switch-container' . $help_class ) );
 
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$label` contains html.
@@ -71,12 +69,18 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 				$value                   = $value['text'];
 			}
 
-			$key_esc = esc_attr( $key );
-			$for     = $var_esc . '-' . $key_esc;
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$key_esc` value is already escaped.
-			echo '<input type="radio" id="' . $for . '" name="' . esc_attr( $this->option_name ) . '[' . $var_esc . ']" value="' . $key_esc . '" ' . checked( $val, $key_esc, false ) . disabled( $this->is_control_disabled( $var ), true, false ) . ' />',
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$screen_reader_text_html` value contains html.
-			'<label for="', $for, '">', esc_html( $value ), $screen_reader_text_html,'</label>';
+			printf(
+				'<input type="radio" id="%1$s" name="%2$s" value="%3$s" %4$s %5$s/>
+				<label for="%1$s">%6$s%7$s</label>',
+				esc_attr( $var . '-' . $key ),                     // #1: field ID.
+				esc_attr( $this->option_name . '[' . $var . ']' ), // #2: field name.
+				esc_attr( $key ),                                  // #3: field value.
+				checked( $val, $key, false ),                      // #4.
+				disabled( $this->is_control_disabled( $var ), true, false ), // #5.
+				esc_html( $value ),                                // #6: label text.
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: screen reader text is escaped properly just above.
+				$screen_reader_text_html                           // #7.
+			);
 		}
 
 		echo '<a></a></div></fieldset><div class="clear"></div></div>' . PHP_EOL . PHP_EOL;
@@ -92,8 +96,6 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 		$val      = $this->get_option_value( $var, '' );
 		$id_value = $this->get_option_value( $var . '_id', '' );
 
-		$var_esc = esc_attr( $var );
-
 		$this->label(
 			$label,
 			[
@@ -102,44 +104,35 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 			]
 		);
 
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$var_esc` value is already escaped.
-		$id_field_id = 'wpseo_' . $var_esc . '_id';
-
 		echo '<span>';
-		echo '<input',
-		' class="textinput"',
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$var_esc` value is already escaped.
-		' id="wpseo_', $var_esc, '"',
-		' type="text" size="36"',
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$var_esc` value is already escaped.
-		' name="', esc_attr( $this->option_name ), '[', $var_esc, ']"',
-		' value="', esc_attr( $val ), '"',
-		' readonly="readonly"',
-		' /> ';
-		echo '<input',
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$var_esc` value is already escaped.
-		' id="wpseo_', $var_esc, '_button"',
-		' class="wpseo_image_upload_button button"',
-		' type="button"',
-		' value="', esc_attr__( 'Upload Image', 'yoastseo-amp' ), '"',
-		' data-target-id="', esc_attr( $id_field_id ), '"',
-		disabled( $this->is_control_disabled( $var ), true, false ),
-		' /> ';
-		echo '<input',
-		' class="wpseo_image_remove_button button"',
-		' type="button"',
-		' value="', esc_attr__( 'Clear Image', 'yoastseo-amp' ), '"',
-		disabled( $this->is_control_disabled( $var ), true, false ),
-		' />';
-		echo '<input',
-		' type="hidden"',
-		' id="', esc_attr( $id_field_id ), '"',
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$var_esc` value is already escaped.
-		' name="', esc_attr( $this->option_name ), '[', $var_esc, '_id]"',
-		' value="', esc_attr( $id_value ), '"',
-		' />';
-		echo '</span>';
-		echo '<br class="clear"/>';
+		printf(
+			'<input class="textinput" id="%1$s" type="text" size="36" name="%2$s" value="%3$s" readonly="readonly" /> ',
+			esc_attr( 'wpseo_' . $var ),
+			esc_attr( $this->option_name . '[' . $var . ']' ),
+			esc_attr( $val )
+		);
+
+		printf(
+			'<input id="%1$s" class="wpseo_image_upload_button button" type="button" value="%2$s" data-target-id="%3$s" %4$s /> ',
+			esc_attr( 'wpseo_' . $var . '_button' ),
+			esc_attr__( 'Upload Image', 'yoastseo-amp' ),
+			esc_attr( 'wpseo_' . $var . '_id' )
+			disabled( $this->is_control_disabled( $var ), true, false )
+		);
+
+		printf(
+			'<input class="wpseo_image_remove_button button" type="button" value="%1$s" %2$s />',
+			esc_attr__( 'Clear Image', 'yoastseo-amp' ),
+			disabled( $this->is_control_disabled( $var ), true, false )
+		);
+
+		printf(
+			'<input type="hidden" id="%1$s" name="%2$s" value="%3$s" />',
+			esc_attr( 'wpseo_' . $var . '_id' ),
+			esc_attr( $this->option_name . '[' . $var . '_id]' ),
+			esc_attr( $id_value )
+		);
+		echo '</span><br class="clear"/>';
 	}
 
 	/**
@@ -175,17 +168,29 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 
 		$strong_class = ( $strong ) ? ' switch-light-visual-label__strong' : '';
 
-		echo '<div class="switch-container', esc_attr( $help_class ), '">',
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: The `$help` value is already escaped.
-			'<span class="switch-light-visual-label' . esc_attr( $strong_class ) . '" id="', esc_attr( $var . '-label' ), '">', esc_html( $label ), '</span>' . $help,
-		'<label class="', esc_attr( $class ), '"><b class="switch-yoast-seo-jaws-a11y">&nbsp;</b>',
-		'<input type="checkbox" aria-labelledby="', esc_attr( $var . '-label' ), '" id="', esc_attr( $var ), '" name="', esc_attr( $this->option_name ), '[', esc_attr( $var ), ']" value="on"', checked( $val, 'on', false ), disabled( $this->is_control_disabled( $var ), true, false ), '/>',
-		'<span aria-hidden="true">
-			<span>', esc_html( $off_button ) ,'</span>
-			<span>', esc_html( $on_button ) ,'</span>
+		printf(
+			'<div class="%1$s"><span class="%2$s" id="%3$s">%4$s</span>%5$s
+			<label class="%6$s"><b class="switch-yoast-seo-jaws-a11y">&nbsp;</b>
+			<input type="checkbox" aria-labelledby="%3$s" id="%7$s" name="%8$s" value="on" %9$s %10$s/>',
+			esc_attr( 'switch-container' . $help_class ),               // #1: div class.
+			esc_attr( 'switch-light-visual-label' . $strong_class ),    // #2: span class.
+			esc_attr( $var . '-label' ),                                // #3: span ID.
+			esc_html( $label ),                                         // #4: text in span.
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: `$help` value is already escaped.
+			$help,                                                      // #5.
+			esc_attr( $class ),                                         // #6: label class.
+			esc_attr( $var ),                                           // #7: input field ID.
+			esc_attr( $this->option_name . '[' . $var . ']' ),          // #8: input field name.
+			checked( $val, 'on', false ),                               // #9.
+			disabled( $this->is_control_disabled( $var ), true, false ) // #10.
+		);
+
+		echo '<span aria-hidden="true">
+			<span>', esc_html( $off_button ), '</span>
+			<span>', esc_html( $on_button ), '</span>
 			<a></a>
-		 </span>
-		 </label><div class="clear"></div></div>';
+		</span>
+		</label><div class="clear"></div></div>';
 	}
 
 	/**
@@ -217,7 +222,17 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 				'class' => 'textinput',
 			]
 		);
-		echo '<textarea cols="' . esc_attr( $attr['cols'] ) . '" rows="' . esc_attr( $attr['rows'] ) . '" class="textinput ' . esc_attr( $attr['class'] ) . '" id="' . esc_attr( $var ) . '" name="' . esc_attr( $this->option_name ) . '[' . esc_attr( $var ) . ']"', disabled( $this->is_control_disabled( $var ), true, false ), '>' . esc_textarea( $val ) . '</textarea><br class="clear" />';
+
+		printf(
+			'<textarea cols="%1$s" rows="%2$s" class="%3$s" id="%4$s" name="%5$s" %6$s>%7$s</textarea><br class="clear" />',
+			(int) $attr['cols'],                               // #1: number of columns.
+			(int) $attr['rows'],                               // #2: number of rows.
+			esc_attr( 'textinput ' . $attr['class'] ),         // #3: CSS classes.
+			esc_attr( $var ),                                  // #4: field ID.
+			esc_attr( $this->option_name . '[' . $var . ']' ), // #5: field name.
+			disabled( $this->is_control_disabled( $var ), true, false ), // #6.
+			esc_textarea( $val )                               // #7: field content.
+		);
 	}
 
 	/**
