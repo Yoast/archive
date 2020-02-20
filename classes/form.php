@@ -116,7 +116,7 @@ class YoastSEO_AMP_Form extends Yoast_Form {
 			'<input id="%1$s" class="wpseo_image_upload_button button" type="button" value="%2$s" data-target-id="%3$s" %4$s /> ',
 			esc_attr( 'wpseo_' . $var . '_button' ),
 			esc_attr__( 'Upload Image', 'yoastseo-amp' ),
-			esc_attr( 'wpseo_' . $var . '_id' )
+			esc_attr( 'wpseo_' . $var . '_id' ),
 			disabled( $this->is_control_disabled( $var ), true, false )
 		);
 
