@@ -8,32 +8,16 @@ Requires PHP: 5.6.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin makes sure the default WordPress AMP plugin uses the proper Yoast SEO metadata and allows modification of the AMP page design.
+The Yoast SEO AMP plugin is no longer needed. Through good collaboration with Google the functionality of this plugin is now part of both Yoast SEO and the official AMP plugin.
 
 == Description ==
 
-Google is currently working on the "Accelerated Mobile Pages" or AMP project. The [WordPress AMP plugin](https://wordpress.org/plugins/amp/) provides the technical implementation of the AMP specifications. This makes sure that your pages contain valid AMP code.
-
-The Yoast SEO: AMP Glue plugin integrates [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) into your AMP pages. This makes sure your meta-data is implemented correctly.
-
-Next to the technical SEO improvements, the Yoast SEO: AMP Glue plugin also provides a simple way to customize your AMP pages.
-It adds rudimental styling in the form of colors and link styles, so your AMP pages can maintain the feeling your main pages have.
-To change your AMP page design, go to SEO -> AMP, and look at the design tab.
-
-== Installation ==
-
-1. Upload the plugin files to the `/wp-content/plugins/yoast-seo-amp` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-1. Go to SEO -> AMP to change your design and enable custom post types.
-1. You're done.
-
-== Screenshots ==
-
-1. Example AMP page, design changed with this plugin.
-2. Post type support in the plugin.
-3. Design settings in the plugin.
+The Yoast SEO AMP plugin is no longer needed. Through good collaboration with Google the functionality of this plugin is now part of both Yoast SEO and the official AMP plugin. If you still have this plugin running we’d suggest updating both the Yoast SEO and AMP plugins and removing the glue plugin.
 
 == Changelog ==
+
+= 0.7 =
+The Yoast SEO AMP plugin is no longer needed. Through good collaboration with Google the functionality of this plugin is now part of both Yoast SEO and the official AMP plugin. If you still have this plugin running we’d suggest updating both the Yoast SEO and AMP plugins and removing the glue plugin.
 
 = 0.6 =
 * Bugfixes:
