@@ -1,0 +1,57 @@
+language: php
+dist: trusty
+
+cache:
+  directories:
+    - vendor
+    # Cache directory for older Composer versions.
+    - $HOME/.composer/cache/files
+    # Cache directory for more recent Composer versions.
+    - $HOME/.cache/composer/files
+
+branches:
+  only:
+    - master
+    - trunk
+    - /^release\/\d+\.\d+(\.\d+)?(-\S*)?$/
+    - /^hotfix\/\d+\.\d+(\.\d+)?(-\S*)?$/
+
+php:
+  - 7.0
+  - 5.6
+  - "nightly"
+
+jobs:
+  fast_finish: true
+  include:
+    - php: 7.4
+      env: PHPCS=1 SECURITY=1
+
+  allow_failures:
+    # Allow failures for unstable builds.
+    - php: "nightly"
+
+before_install:
+  - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
+  - export SECURITYCHECK_DIR=/tmp/security-checker
+
+install:
+- |
+  if [[ $PHPCS == "1" ]]; then
+    composer install --prefer-dist --no-interaction
+  fi
+- if [[ "$SECURITY" == "1" ]]; then wget -P $SECURITYCHECK_DIR https://get.sensiolabs.org/security-checker.phar && chmod +x $SECURITYCHECK_DIR/security-checker.phar;fi
+
+script:
+# PHP Linting
+- if find -L . -path ./vendor -prune -o -path ./node_modules -prune -o -name '*.php' -exec php -l {} \; | grep "^[Parse error|Fatal error]"; then exit 1; fi
+
+# PHP CS
+- if [[ $PHPCS == "1" ]]; then vendor/bin/phpcs -q; fi
+
+# Validate the composer.json file.
+# @link https://getcomposer.org/doc/03-cli.md#validate
+- if [[ $TRAVIS_PHP_VERSION == "5.6" || $TRAVIS_PHP_VERSION == "7.4" ]]; then composer validate --no-check-all; fi
+
+# Check for known security vulnerabilities in the currently locked-in dependencies.
+- if [[ "$SECURITY" == "1" ]]; then php $SECURITYCHECK_DIR/security-checker.phar -n security:check $(pwd)/composer.lock;fi

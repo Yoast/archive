@@ -1,0 +1,28 @@
+---
+engines:
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+      - php
+  fixme:
+    enabled: true
+  phpmd:
+    enabled: true
+    config:
+      file_extensions: "php"
+      rulesets: "unusedcode,cleancode"
+    checks:
+      CleanCode/StaticAccess:
+        enabled: false
+ratings:
+  paths:
+  - "**.css"
+  - "**.js"
+  - "**.php"
+exclude_paths:
+- "grunt/**"
+- "*.xml"
