@@ -34,6 +34,11 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 			add_action( 'admin_notices', [ $this, 'sunset_notification' ] );
 		}
 
+		/**
+		 * Outputs a WordPress admin notice.
+		 *
+		 * @return void
+		 */
 		public function sunset_notification() {
 			global $pagenow;
 
@@ -42,7 +47,7 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 					'<div class="notice notice-info"><p>%1$s</p></div>',
 					sprintf(
 						/* translators: 1: Expands to "Yoast SEO AMP". */
-						esc_html__( 'The %1$s plugin is no longer needed. Through good collaboration with Google the functionality of this plugin is now part of both Yoast SEO and the official AMP plugin. If you still have this plugin running we’d suggest updating both the Yoast SEO and AMP plugins and removing the glue plugin.', 'wordpress-seo' ),
+						esc_html__( 'The %1$s plugin is no longer needed. Through good collaboration with Google the functionality of this plugin is now part of both Yoast SEO and the official AMP plugin. If you still have this plugin running we’d suggest updating both the Yoast SEO and AMP plugins and removing the glue plugin.', 'yoastseo-amp' ),
 						'Yoast SEO AMP'
 					)
 				);
@@ -50,5 +55,5 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 		}
 	}
 
-	new YoastSEO_AMP;
+	new YoastSEO_AMP();
 }
