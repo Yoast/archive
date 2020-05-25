@@ -11,7 +11,7 @@
  * Plugin Name: Glue for Yoast SEO & AMP
  * Plugin URI:  https://wordpress.org/plugins/glue-for-yoast-seo-amp/
  * Description: Makes sure the default WordPress AMP plugin uses the proper Yoast SEO metadata
- * Version:     0.6
+ * Version:     0.7
  * Author:      Joost de Valk
  * Author URI:  https://yoast.com
  * Text Domain: yoastseo-amp
@@ -25,37 +25,35 @@ if ( ! class_exists( 'YoastSEO_AMP', false ) ) {
 	 */
 	class YoastSEO_AMP {
 
-		const VERSION = '0.6.0';
+		const VERSION = '0.7.0';
 
 		/**
 		 * YoastSEO_AMP constructor.
 		 */
 		public function __construct() {
+			add_action( 'admin_notices', [ $this, 'sunset_notification' ] );
+		}
 
-			require 'classes/options.php';
+		/**
+		 * Outputs a WordPress admin notice.
+		 *
+		 * @return void
+		 */
+		public function sunset_notification() {
+			global $pagenow;
 
-			if ( is_admin() ) {
-				require 'classes/backend.php';
-				new YoastSEO_AMP_Backend();
-				return;
+			if ( in_array( $pagenow, [ 'plugins.php', 'plugin-install.php', 'update-core.php' ], true ) ) {
+				printf(
+					'<div class="notice notice-info"><p>%1$s</p></div>',
+					sprintf(
+						/* translators: 1: Expands to "Yoast SEO AMP". */
+						esc_html__( 'The %1$s plugin is no longer needed. Through good collaboration with Google the functionality of this plugin is now part of both Yoast SEO and the official AMP plugin. If you still have this plugin running we’d suggest updating both the Yoast SEO and AMP plugins and removing the glue plugin.', 'yoastseo-amp' ),
+						'Yoast SEO AMP'
+					)
+				);
 			}
-
-			require 'classes/css-builder.php';
-			require 'classes/frontend.php';
-			new YoastSEO_AMP_Frontend();
-		}
-	}
-}
-
-if ( ! function_exists( 'yoast_seo_amp_glue_init' ) ) {
-	/**
-	 * Initialize the Yoast SEO AMP Glue plugin.
-	 */
-	function yoast_seo_amp_glue_init() {
-		if ( defined( 'WPSEO_FILE' ) && defined( 'AMP__FILE__' ) ) {
-			new YoastSEO_AMP();
 		}
 	}
 
-	add_action( 'init', 'yoast_seo_amp_glue_init', 9 );
+	new YoastSEO_AMP();
 }
