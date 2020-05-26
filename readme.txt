@@ -2,7 +2,7 @@
 Contributors: joostdevalk
 Tags: AMP, SEO
 Requires at least: 5.2
-Tested up to: 5.3.3
+Tested up to: 5.4
 Stable tag: 0.7
 Requires PHP: 5.6.20
 License: GPLv2 or later
