@@ -1,8 +1,1 @@
-node_modules
-lerna-debug.log
-/packages/*/dist
-yarn-error.log
-coverage
-dependencies.json
-dependencies.md
-.vscode
+build
