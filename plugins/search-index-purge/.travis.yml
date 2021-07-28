@@ -1,0 +1,83 @@
+language: php
+dist: trusty
+sudo: false
+
+branches:
+  only:
+    - master
+    - develop
+    # Also build tags like 1.1.1 or 1.1 for deployment.
+    - /(\d+\.)?(\d+\.)?(\*|\d+)/
+
+php:
+- 7.0
+- 5.6
+- nightly
+
+jobs:
+  fast_finish: true
+  include:
+    - php: 7.2
+      env: VALIDATE_COMPOSER=1
+    - php: 5.3
+      env: VALIDATE_COMPOSER=1
+      # As 'trusty' is not supporting PHP 5.2/5.3 anymore, we need to force using 'precise'.
+      dist: precise
+    - php: 5.2
+      # As 'trusty' is not supporting PHP 5.2/5.3 anymore, we need to force using 'precise'.
+      dist: precise
+
+  allow_failures:
+    # Allow failures for unstable builds.
+    - php: nightly
+
+cache:
+  directories:
+    - vendor
+    # Cache directory for older Composer versions.
+    - $HOME/.composer/cache/files
+    # Cache directory for more recent Composer versions.
+    - $HOME/.cache/composer/files
+
+before_install:
+#- if [[ "$COVERAGE" != "1" ]]; then phpenv config-rm xdebug.ini || echo 'No xdebug config.'; fi
+#- openssl aes-256-cbc -K $encrypted_953eef802505_key -iv $encrypted_953eef802505_iv -in github_deploy_key.enc -out github_deploy_key -d
+#- chmod 600 github_deploy_key
+#- eval $(ssh-agent -s)
+#- ssh-add github_deploy_key
+
+install:
+- |
+  if [[ "$PHPCS" == "1" ]]; then
+    if [[ $TRAVIS_PHP_VERSION == "5.2" ]]; then phpenv local 5.6.13; fi
+    composer install --no-interaction
+    if [[ $TRAVIS_PHP_VERSION == "5.2" ]]; then phpenv local --unset; fi
+  fi
+
+before_script:
+- export -f travis_fold
+- export -f travis_time_start
+- export -f travis_time_finish
+- mysql --version
+- phpenv versions
+- php --version
+- php -m
+- curl --version
+- git --version
+- svn --version
+- locale -a
+
+script:
+# PHP Linting
+- find -L . -path ./vendor -prune -o -path ./node_modules -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+
+# PHP CS
+#- |
+#  if [[ "$PHPCS" == "1" ]]; then
+#    travis_fold start "PHP.code-style" && travis_time_start
+#    vendor/bin/phpcs -q --runtime-set ignore_warnings_on_exit 1
+#    travis_time_finish && travis_fold end "PHP.code-style"
+#  fi
+# Validate the composer.json file.
+# @link https://getcomposer.org/doc/03-cli.md#validate
+- if [[ $VALIDATE_COMPOSER == "1" ]]; then composer validate --no-check-all; fi
