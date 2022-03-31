@@ -33,6 +33,7 @@
 
 .yoast_tab.active {
 	display: block;
+	width: 600px;
 	padding: 0.5em 0.9em;
 	border: 1px solid #ddd;
 	border-radius: 0 3px 3px 3px;
@@ -46,6 +47,14 @@
 .yoast_tab li {
 	margin-left: 20px;
 	list-style-type: disc;
+}
+
+.yoast_tab .form-table th {
+	width: 250px;
+}
+
+.yoast_tab .intro {
+	font-size: 120%;
 }
 
 .tabwrapper .yoast_tab {

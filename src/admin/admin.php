@@ -39,18 +39,6 @@ class Admin {
 	 * Initialize needed actions.
 	 */
 	public function admin_init() {
-		$public_post_types = get_post_types( [ 'public' => true ] );
-
-		foreach ( $public_post_types as $post_type ) {
-			add_meta_box(
-				'clicky',
-				__( 'Joost Optimizations Goal Tracking', 'joost-optimizations' ),
-				[ $this, 'meta_box_content' ],
-				$post_type,
-				'side'
-			);
-		}
-
 		$this->register_menu_pages();
 	}
 
@@ -77,23 +65,6 @@ class Admin {
 	 */
 	private function plugin_options_url() {
 		return admin_url( 'options-general.php?page=' . $this->hook );
-	}
-
-	/**
-	 * Add meta box for entering specific goals.
-	 *
-	 * @link https://codex.wordpress.org/Function_Reference/get_post_meta
-	 */
-	public function meta_box_content() {
-		global $post;
-
-		if ( ! isset( $this->options['site_id'] ) || empty( $this->options['site_id'] ) ) {
-			return;
-		}
-
-		$clicky_goal = get_post_meta( $post->ID, '_clicky_goal', true );
-
-		require JOOST_OPTIMIZATIONS_PLUGIN_DIR_PATH . 'admin/views/meta-box.php';
 	}
 
 	/**

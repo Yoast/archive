@@ -5,7 +5,7 @@
     "textdomain": "joost-optimizations"
   },
   "pot": {
-    "reportmsgidbugsto": "https://github.com/jdevalk/joost-optimizations/issues",
+    "reportmsgidbugsto": "https://github.com/jdevalk/joost-optimizations/issues"
   },
   "repository": {
     "type": "git",

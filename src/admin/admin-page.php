@@ -51,7 +51,7 @@ class Admin_Page extends Admin {
 		wp_enqueue_script(
 			'joost-optimizations',
 			JOOST_OPTIMIZATIONS_PLUGIN_DIR_URL . 'js/admin.min.js',
-			null,
+			[ 'jquery' ],
 			JOOST_OPTIMIZATIONS_PLUGIN_VERSION,
 			true
 		);

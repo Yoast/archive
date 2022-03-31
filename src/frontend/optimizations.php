@@ -1,7 +1,11 @@
 <?php
 namespace Joost_Optimizations\Frontend;
 
+use Joost_Optimizations\Options\Options;
+
 class Optimizations {
+
+	private array $options;
 
 	public function __construct() {
 		add_action( 'plugins_loaded', [ $this, 'register_hooks' ] );
@@ -11,35 +15,57 @@ class Optimizations {
 	 * Register all our hooks
 	 */
 	public function register_hooks(): void {
-		// Remove shortlinks.
-		remove_action( 'wp_head', 'wp_shortlink_wp_head', 10 );
-		remove_action( 'template_redirect', 'wp_shortlink_header', 11 );
+		$this->options = Options::instance()->get();
 
-		// Remove REST API links.
-		remove_action( 'wp_head', 'rest_output_link_wp_head' );
-		remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+		echo '<!-- Options', print_r( $this->options, 1 ), '-->';
 
-		// Remove RSD and WLW Manifest links.
-		remove_action( 'wp_head', 'rsd_link' );
-		remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' );
-		remove_action( 'wp_head', 'wlwmanifest_link' );
+		if ( $this->options['remove_shortlinks'] ) {
+			// Remove shortlinks.
+			remove_action( 'wp_head', 'wp_shortlink_wp_head', 10 );
+			remove_action( 'template_redirect', 'wp_shortlink_header', 11 );
+		}
 
-		// Remove JSON+XML oEmbed links.
-		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+		if ( $this->options['remove_rest_api_links'] ) {
+			// Remove REST API links.
+			remove_action( 'wp_head', 'rest_output_link_wp_head' );
+			remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+		}
 
-		// Remove emoji scripts and additional stuff they cause.
-		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-		remove_action( 'wp_print_styles', 'print_emoji_styles' );
-		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-		remove_action( 'admin_print_styles', 'print_emoji_styles' );
-		add_filter( 'wp_resource_hints', [ $this, 'resource_hints_plain_cleanup' ], 1 );
+		if ( $this->options['remove_rsd_wlw_links'] ) {
+			// Remove RSD and WLW Manifest links.
+			remove_action( 'wp_head', 'rsd_link' );
+			remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' );
+			remove_action( 'wp_head', 'wlwmanifest_link' );
+		}
+
+		if ( $this->options['remove_oembed_links'] ) {
+			// Remove JSON+XML oEmbed links.
+			remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+		}
+
+		if ( $this->options['remove_emoji_scripts'] ) {
+			// Remove emoji scripts and additional stuff they cause.
+			remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+			remove_action( 'wp_print_styles', 'print_emoji_styles' );
+			remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+			remove_action( 'admin_print_styles', 'print_emoji_styles' );
+			add_filter( 'wp_resource_hints', [ $this, 'resource_hints_plain_cleanup' ], 1 );
+		}
 
 		// RSS
-		add_action( 'feed_links_show_comments_feed', '__return_false' );	// Remove the overall comments feed.
-		remove_action( 'wp_head', 'feed_links_extra', 3 );					// Remove a lot of the other RSS links, for comment feeds, tag feeds etc.
-		add_action( 'wp_head', [ $this, 'feed_links' ] );					// Bring back the RSS feeds we *do* want.
-		add_action( 'wp', [ $this, 'redirect_unwanted_feeds' ], -10000 );	// Redirect the ones we don't want to exist.
+		if ( $this->options['remove_feed_global_comments'] ) {
+			add_action( 'feed_links_show_comments_feed', '__return_false' );    // Remove the overall comments feed.
+		}
+		if ( $this->options['remove_feed_post_comments'] || $this->options['remove_feed_post_types'] || $this->options['remove_feed_taxonomies'] ) {
+			remove_action( 'wp_head', 'feed_links_extra', 3 );                    // Remove a lot of the other RSS links, for comment feeds, tag feeds etc.
+		}
+		if ( ! $this->options['remove_feed_post_types'] || ! $this->options['remove_feed_taxonomies'] ) {
+			// Bring back the RSS feeds we *do* want.
+			add_action( 'wp_head', [ $this, 'feed_links' ] );
+		}
 
+		// Redirect the ones we don't want to exist.
+		add_action( 'wp', [ $this, 'redirect_unwanted_feeds' ], -10000 );
 		// Remove HTTP headers we don't want.
 		add_action( 'send_headers', [ $this, 'clean_headers' ], 9999 );
 	}
@@ -87,17 +113,30 @@ class Optimizations {
 
 		$feed = get_query_var( 'feed' );
 
-		if ( is_comment_feed() || $feed === 'atom' || $feed === 'rdf' ) {
-			$url = get_home_url();
-			if ( is_singular() ) {
-				$url = get_permalink( get_queried_object() );
-			}
-
-			$this->redirect_feed( $url, 'We disable comment, ATOM and RDF feeds for performance reasons.' );
+		$url = get_home_url();
+		if ( $feed === 'atom' || $feed === 'rdf' ) {
+			$this->redirect_feed( $url, 'We disable ATOM and RDF feeds for performance reasons.' );
 		}
-		if ( is_search() ) {
+		elseif ( is_comment_feed() && is_singular() && $this->options['remove_feed_post_comments'] ) {
+			$url = get_permalink( get_queried_object() );
+			$this->redirect_feed( $url, 'We disable comment feeds for performance reasons.' );
+		}
+		elseif ( is_comment_feed() && $this->options['remove_feed_global_comments'] ) {
+			$this->redirect_feed( $url, 'We disable comment feeds for performance reasons.' );
+		}
+		elseif ( ( is_tax() || is_category() || is_tag() ) && $this->options['remove_feed_taxonomies'] ) {
+			$this->redirect_feed( $url, 'We disable taxonomy feeds for performance reasons.' );
+		}
+		elseif ( ( is_post_type_archive() ) && $this->options['remove_feed_post_types'] ) {
+			$this->redirect_feed( $url, 'We disable post type feeds for performance reasons.' );
+		}
+		elseif ( is_search() ) {
 			// We're not even going to serve a result for this. Feeds for search results are not a service yoast.com should provide.
 			$this->redirect_feed( trailingslashit( get_home_url() ) . '?s=' . urlencode( get_search_query() ), 'We disable search RSS feeds for performance reasons.' );
+		}
+		elseif ( $this->options['remove_feed_global'] ) {
+			global $wp_query;
+			print_r( $wp_query->query_vars );
 		}
 	}
 

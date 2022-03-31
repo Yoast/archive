@@ -1,4 +1,5 @@
 <?php
+
 namespace Joost_Optimizations\Options;
 
 /**
@@ -14,13 +15,17 @@ class Options {
 	 * @var array
 	 */
 	public static array $option_defaults = [
-		'site_id'          => '',    // There is no default site ID as we don't know it...
-		'site_key'         => '',    // There is no default site key as we don't know it...
-		'admin_site_key'   => '',    // There is no default admin site key as we don't know it...
-		'outbound_pattern' => '',    // By defaulting to an empty string here, we disable this functionality until it's set.
-		'ignore_admin'     => false, // While ignoring an admin by default would make sense, it leads to admins thinking the plugin doesn't work.
-		'cookies_disable'  => false, // No need to disable cookies by default as it severely impacts the quality of tracking.
-		'disable_stats'    => false, // The stats on the frontend are often found useful, but some people might want to disable them.
+//		'site_id'          => '',
+		'remove_shortlinks'           => true,
+		'remove_rest_api_links'       => true,
+		'remove_rsd_wlw_links'        => true,
+		'remove_oembed_links'         => true,
+		'remove_emoji_scripts'        => true,
+		'remove_feed_global'          => false,
+		'remove_feed_global_comments' => true,
+		'remove_feed_post_types'      => false,
+		'remove_feed_taxonomies'      => false,
+		'remove_feed_post_comments'   => true,
 	];
 
 	/**
@@ -29,14 +34,17 @@ class Options {
 	 * @var string[]
 	 */
 	public static array $option_var_types = [
-		'site_id'          => 'string',
-		'site_key'         => 'string',
-		'admin_site_key'   => 'string',
-		'outbound_pattern' => 'string',
-		'ignore_admin'     => 'bool',
-		'track_names'      => 'bool',
-		'cookies_disable'  => 'bool',
-		'disable_stats'    => 'bool',
+//		'site_id'          => 'string',
+		'remove_shortlinks'           => 'bool',
+		'remove_rest_api_links'       => 'bool',
+		'remove_rsd_wlw_links'        => 'bool',
+		'remove_oembed_links'         => 'bool',
+		'remove_emoji_scripts'        => 'bool',
+		'remove_feed_global'          => 'bool',
+		'remove_feed_global_comments' => 'bool',
+		'remove_feed_post_types'      => 'bool',
+		'remove_feed_taxonomies'      => 'bool',
+		'remove_feed_post_comments'   => 'bool',
 	];
 
 	/**
@@ -44,7 +52,7 @@ class Options {
 	 *
 	 * @var string
 	 */
-	public static string $option_name = 'joost-optimizations';
+	public static string $option_name = 'joost_optimizations';
 
 	/**
 	 * Saving active instance of this class in this static var.
@@ -74,11 +82,11 @@ class Options {
 	 */
 	private function load_options(): void {
 		$options = get_option( self::$option_name );
+
 		if ( ! is_array( $options ) ) {
 			$this->options = self::$option_defaults;
 			update_option( self::$option_name, $this->options );
-		}
-		else {
+		} else {
 			$this->options = array_merge( self::$option_defaults, $options );
 		}
 	}

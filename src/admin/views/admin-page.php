@@ -21,16 +21,16 @@ use Joost_Optimizations\Admin\Admin_Options;
 		?>
 		<div id="yoast_wrapper">
 			<h2 class="nav-tab-wrapper" id="yoast-tabs">
-				<a class="nav-tab" id="basic-tab" href="#top#basic"><?php esc_html_e( 'Basic settings', 'joost-optimizations' ); ?></a>
-				<a class="nav-tab" id="advanced-tab" href="#top#advanced"><?php esc_html_e( 'Advanced settings', 'joost-optimizations' ); ?></a>
+				<a class="nav-tab" id="joost-basic-tab" href="#top#basic"><?php esc_html_e( 'Basic settings', 'joost-optimizations' ); ?></a>
+				<a class="nav-tab" id="joost-rss-tab" href="#top#rss"><?php esc_html_e( 'RSS settings', 'joost-optimizations' ); ?></a>
 			</h2>
 
 			<div class="tabwrapper">
-				<div id="basic" class="yoast_tab">
-					<?php do_settings_sections( 'clicky' ); ?>
+				<div id="joost-basic" class="yoast_tab">
+					<?php do_settings_sections( 'joost-optimizations' ); ?>
 				</div>
-				<div id="advanced" class="yoast_tab">
-					<?php do_settings_sections( 'clicky-advanced' ); ?>
+				<div id="joost-rss" class="yoast_tab">
+					<?php do_settings_sections( 'joost-optimizations-rss' ); ?>
 				</div>
 			</div>
 			<?php
