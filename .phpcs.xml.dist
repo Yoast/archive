@@ -29,7 +29,6 @@
 	<!-- Cache the results between runs. -->
 	<arg name="cache" value="./.cache/phpcs.cache"/>
 
-
 	<!--
 	#############################################################################
 	USE THE YoastCS RULESET
