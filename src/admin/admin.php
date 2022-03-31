@@ -1,12 +1,13 @@
 <?php
-namespace Joost_Optimizations\Admin;
+namespace Joost\Optimizations\Admin;
 
-use Joost_Optimizations\Options\Options;
+use Joost\Optimizations\Options\Options;
 
 /**
  * Backend Class.
  */
 class Admin {
+
 	/**
 	 * This holds the plugins options.
 	 *

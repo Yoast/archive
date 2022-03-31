@@ -1,5 +1,5 @@
 <?php
-namespace Joost_Optimizations\Admin;
+namespace Joost\Optimizations\Admin;
 
 /**
  * Class for the Joost Optimizations plugin admin page.

@@ -1,8 +1,8 @@
 <?php
 
-namespace Joost_Optimizations\Admin;
+namespace Joost\Optimizations\Admin;
 
-use Joost_Optimizations\Options\Options;
+use Joost\Optimizations\Options\Options;
 
 /**
  * Backend Class for the Joost Optimizations plugin options.
@@ -61,17 +61,17 @@ class Admin_Options extends Options {
 				'label' => __( 'Remove RSD / WLW links', 'joost-optimizations' ),
 			],
 			'remove_oembed_links'   => [
-				'label' => __( 'Remove oEmbed links', 'joost-optimizations' )
+				'label' => __( 'Remove oEmbed links', 'joost-optimizations' ),
 			],
 			'remove_emoji_scripts'  => [
-				'label' => __( 'Remove emoji scripts', 'joost-optimizations' )
+				'label' => __( 'Remove emoji scripts', 'joost-optimizations' ),
 			],
 		];
 		foreach ( $settings as $key => $arr ) {
 			$args = [
 				'name'  => $key,
-				'value' => $this->options[ $key ] ?? false,
-				'desc'  => $arr['desc'] ?? '',
+				'value' => ( $this->options[ $key ] ?? false ),
+				'desc'  => ( $arr['desc'] ?? '' ),
 			];
 			add_settings_field(
 				$key,
@@ -115,8 +115,8 @@ class Admin_Options extends Options {
 		foreach ( $rss_settings as $key => $arr ) {
 			$args = [
 				'name'  => $key,
-				'value' => $this->options[ $key ] ?? false,
-				'desc'  => $arr['desc'] ?? '',
+				'value' => ( $this->options[ $key ] ?? false ),
+				'desc'  => ( $arr['desc'] ?? '' ),
 			];
 			add_settings_field(
 				$key,
@@ -148,7 +148,6 @@ class Admin_Options extends Options {
 	 * @return array
 	 */
 	public function sanitize_options_on_save( array $new_options ): array {
-//		echo '<pre>', print_r( $_POST, 1 ), '</pre>';
 		foreach ( self::$option_var_types as $key => $type ) {
 			switch ( $type ) {
 				case 'string':
@@ -157,7 +156,8 @@ class Admin_Options extends Options {
 				case 'bool':
 					if ( isset( $new_options[ $key ] ) ) {
 						$new_options[ $key ] = true;
-					} else {
+					}
+					else {
 						$new_options[ $key ] = false;
 					}
 					break;

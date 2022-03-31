@@ -1,6 +1,5 @@
 <?php
-
-namespace Joost_Optimizations\Options;
+namespace Joost\Optimizations\Options;
 
 /**
  * Options Class for the Joost Optimizations plugin.
@@ -15,7 +14,6 @@ class Options {
 	 * @var array
 	 */
 	public static array $option_defaults = [
-//		'site_id'          => '',
 		'remove_shortlinks'           => true,
 		'remove_rest_api_links'       => true,
 		'remove_rsd_wlw_links'        => true,
@@ -34,7 +32,6 @@ class Options {
 	 * @var string[]
 	 */
 	public static array $option_var_types = [
-//		'site_id'          => 'string',
 		'remove_shortlinks'           => 'bool',
 		'remove_rest_api_links'       => 'bool',
 		'remove_rsd_wlw_links'        => 'bool',
@@ -86,7 +83,8 @@ class Options {
 		if ( ! is_array( $options ) ) {
 			$this->options = self::$option_defaults;
 			update_option( self::$option_name, $this->options );
-		} else {
+		}
+		else {
 			$this->options = array_merge( self::$option_defaults, $options );
 		}
 	}

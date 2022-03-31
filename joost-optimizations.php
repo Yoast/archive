@@ -1,6 +1,6 @@
 <?php
 
-namespace Joost_Optimizations;
+namespace Joost\Optimizations;
 
 /**
  * Joost's Optimizations Plugin.

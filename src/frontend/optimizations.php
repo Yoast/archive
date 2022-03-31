@@ -1,12 +1,23 @@
 <?php
-namespace Joost_Optimizations\Frontend;
+namespace Joost\Optimizations\Frontend;
 
-use Joost_Optimizations\Options\Options;
+use Joost\Optimizations\Options\Options;
 
+/**
+ * The frontend class that does the work.
+ */
 class Optimizations {
 
+	/**
+	 * The options for the plugin.
+	 *
+	 * @var array
+	 */
 	private array $options;
 
+	/**
+	 * Class constructor.
+	 */
 	public function __construct() {
 		add_action( 'plugins_loaded', [ $this, 'register_hooks' ] );
 	}
@@ -16,8 +27,6 @@ class Optimizations {
 	 */
 	public function register_hooks(): void {
 		$this->options = Options::instance()->get();
-
-		echo '<!-- Options', print_r( $this->options, 1 ), '-->';
 
 		if ( $this->options['remove_shortlinks'] ) {
 			// Remove shortlinks.
@@ -52,7 +61,7 @@ class Optimizations {
 			add_filter( 'wp_resource_hints', [ $this, 'resource_hints_plain_cleanup' ], 1 );
 		}
 
-		// RSS
+		// RSS.
 		if ( $this->options['remove_feed_global_comments'] ) {
 			add_action( 'feed_links_show_comments_feed', '__return_false' );    // Remove the overall comments feed.
 		}
@@ -132,11 +141,10 @@ class Optimizations {
 		}
 		elseif ( is_search() ) {
 			// We're not even going to serve a result for this. Feeds for search results are not a service yoast.com should provide.
-			$this->redirect_feed( trailingslashit( get_home_url() ) . '?s=' . urlencode( get_search_query() ), 'We disable search RSS feeds for performance reasons.' );
+			$this->redirect_feed( esc_url( trailingslashit( get_home_url() ) . '?s=' . get_search_query() ), 'We disable search RSS feeds for performance reasons.' );
 		}
 		elseif ( $this->options['remove_feed_global'] ) {
-			global $wp_query;
-			print_r( $wp_query->query_vars );
+			$this->redirect_feed( esc_url( trailingslashit( get_home_url() ) . '?s=' . get_search_query() ), 'We disable the RSS feed for performance reasons.' );
 		}
 	}
 
@@ -154,7 +162,7 @@ class Optimizations {
 
 		$this->cache_control_header( 7 * DAY_IN_SECONDS );
 
-		wp_redirect( $url, 301, 'Strattic: ' . $reason );
+		wp_safe_redirect( $url, 301, 'Strattic: ' . $reason );
 		exit;
 	}
 
@@ -201,7 +209,7 @@ class Optimizations {
 	/**
 	 * Sends a cache control header.
 	 *
-	 * @param int         $expiration            The expiration time.
+	 * @param int $expiration The expiration time.
 	 *
 	 * @return void
 	 */

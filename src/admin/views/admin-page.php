@@ -1,19 +1,11 @@
 <?php
-/**
- * Joost Optimizations for WordPress plugin file.
- *
- * @package Yoast/Clicky/View
- */
 
-namespace Joost_Optimizations\Admin\Views;
+namespace Joost\Optimizations\Admin\Views;
 
-use Joost_Optimizations\Admin\Admin_Options;
+use Joost\Optimizations\Admin\Admin_Options;
 
 ?><div class="wrap">
-	<h2>
-		<?php /* <img id="plugin_icon" src="<?php echo esc_url( JOOST_OPTIMIZATIONS_PLUGIN_DIR_URL . 'images/clicky-32x32.png' ); ?>" class="alignleft" />  */ ?>
-        Joost Optimizations <?php esc_html_e( 'Configuration', 'joost-optimizations' ); ?>
-	</h2>
+	<h2>Joost Optimizations <?php esc_html_e( 'Configuration', 'joost-optimizations' ); ?></h2>
 
 	<form action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>" method="post">
 		<?php
