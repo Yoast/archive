@@ -26,7 +26,7 @@ class Admin_Page extends Admin {
 	 * @param string $current_page The current page.
 	 */
 	public function config_page_styles( $current_page ) {
-		if ( $current_page !== 'joost-optimizations' ) {
+		if ( $current_page !== 'settings_page_joost-optimizations' ) {
 			return;
 		}
 
@@ -44,7 +44,7 @@ class Admin_Page extends Admin {
 	 * @param string $current_page The current page.
 	 */
 	public function config_page_scripts( $current_page ) {
-		if ( $current_page !== 'joost-optimizations' ) {
+		if ( $current_page !== 'settings_page_joost-optimizations' ) {
 			return;
 		}
 

@@ -129,9 +129,9 @@ class Optimizations {
 			/* translators: Separator between blog name and feed type in feed links. */
 			'separator'     => '-',
 			/* translators: 1: Blog name, 2: Separator (raquo), 3: Term name, 4: Taxonomy singular name. */
-			'taxtitle'      => __( '%1$s %2$s %3$s %4$s Feed' ),
+			'taxtitle'      => __( '%1$s %2$s %3$s %4$s Feed', 'joost-optimizations' ),
 			/* translators: 1: Blog name, 2: Separator (raquo), 3: Post type name. */
-			'posttypetitle' => __( '%1$s %2$s %3$s Feed' ),
+			'posttypetitle' => __( '%1$s %2$s %3$s Feed', 'joost-optimizations' ),
 		];
 
 		if ( is_post_type_archive() ) {

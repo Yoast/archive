@@ -19,6 +19,10 @@
     "php": ">=7.4",
     "composer/installers": "^1.12.0"
   },
+  "require-dev": {
+    "yoast/yoastcs": "^2.2.1",
+    "yoast/wp-test-utils": "^1.0.0"
+  },
   "config": {
     "platform": {
       "php": "7.4"
@@ -31,6 +35,20 @@
   "autoload": {
     "classmap": [
       "src/"
+    ]
+  },
+  "scripts": {
+    "lint": [
+      "@php ./vendor/php-parallel-lint/php-parallel-lint/parallel-lint . -e php --show-deprecated --exclude vendor --exclude node_modules --exclude .git"
+    ],
+    "check-cs": [
+      "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs"
+    ],
+    "fix-cs": [
+      "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
+    ],
+    "test": [
+      "@php ./vendor/phpunit/phpunit/phpunit"
     ]
   }
 }
