@@ -1,0 +1,36 @@
+{
+  "name": "jdevalk/joost-optimizatons",
+  "description": "",
+  "keywords": [
+    "header optimization",
+    "wordpress"
+  ],
+  "homepage": "https://yoast.com/wordpress/plugins/joost-optimizations/",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Joost de Valk",
+      "email": "joost@joost.blog",
+      "homepage": "https://joost.blog"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=7.4",
+    "composer/installers": "^1.12.0"
+  },
+  "config": {
+    "platform": {
+      "php": "7.4"
+    },
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "composer/installers": true
+    }
+  },
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  }
+}

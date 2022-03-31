@@ -1,0 +1,20 @@
+{
+  "name": "joost-optimizations",
+  "description": "Development files for the Clicky WordPress plugin",
+  "plugin": {
+    "textdomain": "joost-optimizations"
+  },
+  "pot": {
+    "reportmsgidbugsto": "https://github.com/jdevalk/joost-optimizations/issues",
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jdevalk/joost-optimizations"
+  },
+  "devDependencies": {
+    "@yoast/grunt-plugin-tasks": "^2.0.0"
+  },
+  "yoast": {
+    "pluginVersion": "1.0"
+  }
+}
