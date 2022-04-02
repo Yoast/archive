@@ -1,4 +1,5 @@
 <?php
+
 namespace Joost\Optimizations\Options;
 
 /**
@@ -14,16 +15,24 @@ class Options {
 	 * @var array
 	 */
 	public static array $option_defaults = [
-		'remove_shortlinks'           => true,
-		'remove_rest_api_links'       => true,
-		'remove_rsd_wlw_links'        => true,
-		'remove_oembed_links'         => true,
-		'remove_emoji_scripts'        => true,
-		'remove_feed_global'          => false,
-		'remove_feed_global_comments' => true,
-		'remove_feed_post_types'      => false,
-		'remove_feed_taxonomies'      => false,
-		'remove_feed_post_comments'   => true,
+		'remove_shortlinks'              => true,
+		'remove_rest_api_links'          => true,
+		'remove_rsd_wlw_links'           => true,
+		'remove_oembed_links'            => true,
+		'remove_emoji_scripts'           => true,
+		'remove_generator'               => true,
+		'remove_powered_by_header'       => true,
+		'remove_pingback_header'         => true,
+		'remove_feed_global'             => false,
+		'remove_feed_global_comments'    => true,
+		'remove_feed_post_types'         => false,
+		'remove_feed_taxonomies'         => false,
+		'remove_feed_post_comments'      => true,
+		'remove_gutenberg_global_styles' => false,
+		'remove_gutenberg_block_library' => false,
+		'remove_gutenberg_duotone'       => true,
+		'remove_styles'                  => '',
+		'remove_scripts'                 => '',
 	];
 
 	/**
@@ -32,16 +41,24 @@ class Options {
 	 * @var string[]
 	 */
 	public static array $option_var_types = [
-		'remove_shortlinks'           => 'bool',
-		'remove_rest_api_links'       => 'bool',
-		'remove_rsd_wlw_links'        => 'bool',
-		'remove_oembed_links'         => 'bool',
-		'remove_emoji_scripts'        => 'bool',
-		'remove_feed_global'          => 'bool',
-		'remove_feed_global_comments' => 'bool',
-		'remove_feed_post_types'      => 'bool',
-		'remove_feed_taxonomies'      => 'bool',
-		'remove_feed_post_comments'   => 'bool',
+		'remove_shortlinks'              => 'bool',
+		'remove_rest_api_links'          => 'bool',
+		'remove_rsd_wlw_links'           => 'bool',
+		'remove_oembed_links'            => 'bool',
+		'remove_emoji_scripts'           => 'bool',
+		'remove_generator'               => 'bool',
+		'remove_powered_by_header'       => 'bool',
+		'remove_pingback_header'         => 'bool',
+		'remove_feed_global'             => 'bool',
+		'remove_feed_global_comments'    => 'bool',
+		'remove_feed_post_types'         => 'bool',
+		'remove_feed_taxonomies'         => 'bool',
+		'remove_feed_post_comments'      => 'bool',
+		'remove_gutenberg_global_styles' => 'bool',
+		'remove_gutenberg_block_library' => 'bool',
+		'remove_gutenberg_duotone'       => 'bool',
+		'remove_styles'                  => 'string',
+		'remove_scripts'                 => 'string',
 	];
 
 	/**

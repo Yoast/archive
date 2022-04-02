@@ -19,7 +19,7 @@ class Optimizations {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		add_action( 'plugins_loaded', [ $this, 'register_hooks' ] );
+		add_action( 'wp_loaded', [ $this, 'register_hooks' ] );
 	}
 
 	/**
@@ -52,6 +52,10 @@ class Optimizations {
 			remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 		}
 
+		if ( $this->options['remove_generator'] ) {
+			remove_action( 'wp_head', 'wp_generator' );
+		}
+
 		if ( $this->options['remove_emoji_scripts'] ) {
 			// Remove emoji scripts and additional stuff they cause.
 			remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -62,6 +66,9 @@ class Optimizations {
 		}
 
 		// RSS.
+		if ( $this->options['remove_feed_global'] ) {
+			remove_action( 'wp_head', 'feed_links', 2 );
+		}
 		if ( $this->options['remove_feed_global_comments'] ) {
 			add_action( 'feed_links_show_comments_feed', '__return_false' );    // Remove the overall comments feed.
 		}
@@ -77,6 +84,55 @@ class Optimizations {
 		add_action( 'wp', [ $this, 'redirect_unwanted_feeds' ], -10000 );
 		// Remove HTTP headers we don't want.
 		add_action( 'send_headers', [ $this, 'clean_headers' ], 9999 );
+
+		// Gutenberg.
+		add_action( 'wp_enqueue_scripts', [ $this, 'unload_gutenberg' ], 10000 );
+
+		// Advanced.
+		add_action( 'wp_enqueue_scripts', [ $this, 'unload_styles_scripts' ], 10000 );
+	}
+
+	/**
+	 * Unload styles and scripts as specified in the advanced settings.
+	 *
+	 * @return void
+	 */
+	public function unload_styles_scripts(): void {
+		if ( $this->options['remove_styles'] !== '' ) {
+			$styles_to_remove = explode( ',', $this->options['remove_styles'] );
+			foreach ( $styles_to_remove as $style ) {
+				$style = preg_replace( '/(-inline)?(-css)$/', '', trim( $style ) );
+				wp_deregister_style( $style );
+				wp_dequeue_style( $style );
+			}
+		}
+
+		if ( $this->options['remove_scripts'] !== '' ) {
+			$scripts_to_remove = explode( ',', $this->options['remove_scripts'] );
+			foreach ( $scripts_to_remove as $script ) {
+				$script = trim( $script );
+				wp_deregister_script( $script );
+				wp_dequeue_script( $script );
+			}
+		}
+	}
+
+	/**
+	 * Unloads Gutenberg styles.
+	 *
+	 * @return void
+	 */
+	public function unload_gutenberg() {
+		if ( $this->options['remove_gutenberg_global_styles'] ) {
+			wp_dequeue_style( 'global-styles' );
+		}
+		if ( $this->options['remove_gutenberg_block_library'] ) {
+			wp_dequeue_style( 'wp-block-library' );
+			wp_dequeue_style( 'wp-block-library-theme' );
+		}
+		if ( $this->options['remove_gutenberg_duotone'] ) {
+			remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
+		}
 	}
 
 	/**
@@ -89,8 +145,12 @@ class Optimizations {
 			return;
 		}
 
-		header_remove( 'X-Pingback' );
-		header_remove( 'X-Powered-By' );
+		if ( $this->options['remove_powered_by_header'] ) {
+			header_remove( 'X-Pingback' );
+		}
+		if ( $this->options['remove_pingback_header'] ) {
+			header_remove( 'X-Powered-By' );
+		}
 	}
 
 	/**

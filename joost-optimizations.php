@@ -63,7 +63,6 @@ class Joost_Optimizations {
 
 			return;
 		}
-
 		new Frontend\Optimizations();
 	}
 }
