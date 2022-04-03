@@ -1,16 +1,16 @@
 <?php
 
-namespace Joost\Optimizations\Options;
+namespace Yoast\WP\Crawl_Cleanup\Options;
 
 /**
- * Options Class for the Joost Optimizations plugin.
+ * Options Class for the Yoast Crawl Cleanup plugin.
  *
  * @since 1.5
  */
 class Options {
 
 	/**
-	 * The default options for the Joost Optimizations plugin.
+	 * The default options for the Yoast Crawl Cleanup plugin.
 	 *
 	 * @var array
 	 */
@@ -66,7 +66,7 @@ class Options {
 	 *
 	 * @var string
 	 */
-	public static string $option_name = 'joost_optimizations';
+	public static string $option_name = 'yoast_crawl_cleanup';
 
 	/**
 	 * Saving active instance of this class in this static var.
@@ -91,7 +91,7 @@ class Options {
 	}
 
 	/**
-	 * Loads Joost Optimizations-options set in WordPress.
+	 * Loads Yoast Crawl Cleanup-options set in WordPress.
 	 * If already set: trim some option, otherwise load defaults.
 	 */
 	private function load_options(): void {
@@ -135,7 +135,7 @@ class Options {
 	}
 
 	/**
-	 * Returns the Joost Optimizations options.
+	 * Returns the Yoast Crawl Cleanup options.
 	 *
 	 * @return array
 	 */

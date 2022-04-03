@@ -1,17 +1,17 @@
 {
-  "name": "jdevalk/joost-optimizatons",
+  "name": "yoast/crawl-cleanup",
   "description": "",
   "keywords": [
     "header optimization",
     "wordpress"
   ],
-  "homepage": "https://yoast.com/wordpress/plugins/joost-optimizations/",
+  "homepage": "https://yoast.com/wordpress/plugins/yoast-crawl-cleanup/",
   "license": "GPL-2.0-or-later",
   "authors": [
     {
-      "name": "Joost de Valk",
-      "email": "joost@joost.blog",
-      "homepage": "https://joost.blog"
+      "name": "Joost de Valk & Team Yoast",
+      "email": "support@yoast.com",
+      "homepage": "https://yoast.com/"
     }
   ],
   "type": "wordpress-plugin",

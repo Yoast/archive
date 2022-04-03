@@ -1,7 +1,7 @@
 <?php
-namespace Joost\Optimizations\Frontend;
+namespace Yoast\WP\Crawl_Cleanup\Frontend;
 
-use Joost\Optimizations\Options\Options;
+use Yoast\WP\Crawl_Cleanup\Options\Options;
 
 /**
  * The frontend class that does the work.
@@ -119,10 +119,8 @@ class Optimizations {
 
 	/**
 	 * Unloads Gutenberg styles.
-	 *
-	 * @return void
 	 */
-	public function unload_gutenberg() {
+	public function unload_gutenberg(): void {
 		if ( $this->options['remove_gutenberg_global_styles'] ) {
 			wp_dequeue_style( 'global-styles' );
 		}
@@ -137,8 +135,6 @@ class Optimizations {
 
 	/**
 	 * Removes X-Pingback and X-Powered-By headers as they're unneeded.
-	 *
-	 * @return void
 	 */
 	public function clean_headers(): void {
 		if ( headers_sent() ) {
@@ -172,8 +168,6 @@ class Optimizations {
 
 	/**
 	 * Redirect feeds we don't want away.
-	 *
-	 * @return void
 	 */
 	public function redirect_unwanted_feeds(): void {
 		if ( ! is_feed() ) {
@@ -213,10 +207,8 @@ class Optimizations {
 	 *
 	 * @param string $url    The location we're redirecting to.
 	 * @param string $reason The reason we're redirecting.
-	 *
-	 * @return void
 	 */
-	private function redirect_feed( $url, $reason ): void {
+	private function redirect_feed( string $url, string $reason ): void {
 		header_remove( 'Content-Type' );
 		header_remove( 'Last-Modified' );
 
@@ -228,17 +220,15 @@ class Optimizations {
 
 	/**
 	 * Adapted from `feed_links_extra` in WP core, this is a version that outputs a _lot_ less links.
-	 *
-	 * @return void
 	 */
 	public function feed_links(): void {
 		$args = [
 			/* translators: Separator between blog name and feed type in feed links. */
 			'separator'     => '-',
 			/* translators: 1: Blog name, 2: Separator (raquo), 3: Term name, 4: Taxonomy singular name. */
-			'taxtitle'      => __( '%1$s %2$s %3$s %4$s Feed', 'joost-optimizations' ),
+			'taxtitle'      => __( '%1$s %2$s %3$s %4$s Feed', 'yoast-crawl-cleanup' ),
 			/* translators: 1: Blog name, 2: Separator (raquo), 3: Post type name. */
-			'posttypetitle' => __( '%1$s %2$s %3$s Feed', 'joost-optimizations' ),
+			'posttypetitle' => __( '%1$s %2$s %3$s Feed', 'yoast-crawl-cleanup' ),
 		];
 
 		if ( is_post_type_archive() ) {
@@ -270,8 +260,6 @@ class Optimizations {
 	 * Sends a cache control header.
 	 *
 	 * @param int $expiration The expiration time.
-	 *
-	 * @return void
 	 */
 	public function cache_control_header( int $expiration ): void {
 		header_remove( 'Expires' );

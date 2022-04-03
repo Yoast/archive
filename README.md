@@ -2,6 +2,6 @@
 [![Lint](https://github.com/jdevalk/joost-optimizations/actions/workflows/lint.yml/badge.svg)](https://github.com/jdevalk/joost-optimizations/actions/workflows/lint.yml)
 [![Test](https://github.com/jdevalk/joost-optimizations/actions/workflows/test.yml/badge.svg)](https://github.com/jdevalk/joost-optimizations/actions/workflows/test.yml)
 
-Joost Optimizations
+Yoast Crawl Cleanup
 ===================
 

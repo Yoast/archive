@@ -1,8 +1,8 @@
 <?php
-namespace Joost\Optimizations\Admin;
+namespace Yoast\WP\Crawl_Cleanup\Admin;
 
 /**
- * Class for the Joost Optimizations plugin admin page.
+ * Class for the Yoast Crawl Cleanup plugin admin page.
  */
 class Admin_Page extends Admin {
 
@@ -25,16 +25,16 @@ class Admin_Page extends Admin {
 	 *
 	 * @param string $current_page The current page.
 	 */
-	public function config_page_styles( $current_page ) {
-		if ( $current_page !== 'settings_page_joost-optimizations' ) {
+	public function config_page_styles( $current_page ): void {
+		if ( $current_page !== 'settings_page_yoast-crawl-cleanup' ) {
 			return;
 		}
 
 		wp_enqueue_style(
-			'joost-optimizations-admin-css',
-			JOOST_OPTIMIZATIONS_PLUGIN_DIR_URL . 'css/dist/admin.css',
+			'ycc-admin-css',
+			YOAST_CRAWL_CLEANUP_PLUGIN_DIR_URL . 'css/dist/admin.css',
 			null,
-			JOOST_OPTIMIZATIONS_PLUGIN_VERSION
+			YOAST_CRAWL_CLEANUP_PLUGIN_VERSION
 		);
 	}
 
@@ -43,24 +43,24 @@ class Admin_Page extends Admin {
 	 *
 	 * @param string $current_page The current page.
 	 */
-	public function config_page_scripts( $current_page ) {
-		if ( $current_page !== 'settings_page_joost-optimizations' ) {
+	public function config_page_scripts( $current_page ): void {
+		if ( $current_page !== 'settings_page_yoast-crawl-cleanup' ) {
 			return;
 		}
 
 		wp_enqueue_script(
-			'joost-optimizations',
-			JOOST_OPTIMIZATIONS_PLUGIN_DIR_URL . 'js/admin.min.js',
+			'yoast-crawl-cleanup',
+			YOAST_CRAWL_CLEANUP_PLUGIN_DIR_URL . 'js/admin.min.js',
 			[ 'jquery' ],
-			JOOST_OPTIMIZATIONS_PLUGIN_VERSION,
+			YOAST_CRAWL_CLEANUP_PLUGIN_VERSION,
 			true
 		);
 	}
 
 	/**
-	 * Creates the configuration page.
+	 * Loads the configuration page view.
 	 */
-	public function config_page() {
-		require JOOST_OPTIMIZATIONS_PLUGIN_DIR_PATH . 'src/admin/views/admin-page.php';
+	public function config_page(): void {
+		require YOAST_CRAWL_CLEANUP_PLUGIN_DIR_PATH . 'src/admin/views/admin-page.php';
 	}
 }

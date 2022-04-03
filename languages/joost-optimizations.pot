@@ -1,0 +1,184 @@
+# Copyright (C) 2022 Joost de Valk
+# This file is distributed under the GPL v3.
+msgid ""
+msgstr ""
+"Project-Id-Version: Joost's optimizations. 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/jdevalk/yoast-crawl-cleanup/issues\n"
+"POT-Creation-Date: 2022-04-02 20:27:15+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: src/admin/admin-options.php:50
+msgid "Remove Gutenberg global styles"
+msgstr ""
+
+#: src/admin/admin-options.php:53
+msgid "Remove Gutenberg block library styles"
+msgstr ""
+
+#: src/admin/admin-options.php:56
+msgid "Remove Gutenberg duotone output"
+msgstr ""
+
+#: src/admin/admin-options.php:69
+msgid "Remove shortlinks"
+msgstr ""
+
+#: src/admin/admin-options.php:72
+msgid "Remove REST API links"
+msgstr ""
+
+#: src/admin/admin-options.php:75
+msgid "Remove RSD / WLW links"
+msgstr ""
+
+#: src/admin/admin-options.php:78
+msgid "Remove oEmbed links"
+msgstr ""
+
+#: src/admin/admin-options.php:81
+msgid "Remove generator tag"
+msgstr ""
+
+#: src/admin/admin-options.php:84
+msgid "Remove pingback HTTP header"
+msgstr ""
+
+#: src/admin/admin-options.php:87
+msgid "Remove powered by HTTP header"
+msgstr ""
+
+#: src/admin/admin-options.php:90
+msgid "Remove emoji scripts"
+msgstr ""
+
+#: src/admin/admin-options.php:103
+msgid "Remove the global feed"
+msgstr ""
+
+#: src/admin/admin-options.php:106
+msgid "Remove the global comments feed"
+msgstr ""
+
+#: src/admin/admin-options.php:109
+msgid "Remove post type feeds"
+msgstr ""
+
+#: src/admin/admin-options.php:112
+msgid "Remove taxonomy feeds"
+msgstr ""
+
+#: src/admin/admin-options.php:115
+msgid "Remove post comment feeds"
+msgstr ""
+
+#: src/admin/admin-options.php:128
+msgid "Remove these scripts"
+msgstr ""
+
+#: src/admin/admin-options.php:129
+msgid "Comma separate script identifiers"
+msgstr ""
+
+#: src/admin/admin-options.php:133
+msgid "Remove these styles"
+msgstr ""
+
+#: src/admin/admin-options.php:134
+msgid "Comma separate style identifiers"
+msgstr ""
+
+#: src/admin/admin-options.php:185
+msgid "Remove links added by WordPress to the header and <head>."
+msgstr ""
+
+#: src/admin/admin-options.php:194
+msgid "Remove feed links added by WordPress that aren't needed for this site."
+msgstr ""
+
+#: src/admin/admin-options.php:203
+msgid "Remove unwanted / unneeded Gutenberg output."
+msgstr ""
+
+#: src/admin/admin-options.php:212
+msgid "Remove unwanted / unneeded scripts and styles."
+msgstr ""
+
+#: src/admin/admin.php:54 src/admin/admin.php:55
+msgid "Yoast Crawl Cleanup"
+msgstr ""
+
+#: src/admin/admin.php:85
+msgid "Settings"
+msgstr ""
+
+#: src/admin/views/admin-page.php:8
+msgid "Configuration"
+msgstr ""
+
+#: src/admin/views/admin-page.php:16
+msgid "Basic"
+msgstr ""
+
+#: src/admin/views/admin-page.php:17
+msgid "RSS"
+msgstr ""
+
+#: src/admin/views/admin-page.php:18
+msgid "Gutenberg"
+msgstr ""
+
+#: src/admin/views/admin-page.php:19
+msgid "Advanced"
+msgstr ""
+
+#: src/admin/views/admin-page.php:37
+msgid "Save Yoast Crawl Cleanup settings"
+msgstr ""
+
+#: src/frontend/optimizations.php:239
+#. translators: 1: Blog name, 2: Separator (raquo), 3: Term name, 4: Taxonomy
+#. singular name.
+msgid "%1$s %2$s %3$s %4$s Feed"
+msgstr ""
+
+#: src/frontend/optimizations.php:241
+#. translators: 1: Blog name, 2: Separator (raquo), 3: Post type name.
+msgid "%1$s %2$s %3$s Feed"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Joost's optimizations."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://joost.blog/optimizations/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Header and meta optimizations."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Joost de Valk"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://joost.blog/"
+msgstr ""

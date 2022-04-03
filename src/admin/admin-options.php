@@ -1,11 +1,11 @@
 <?php
 
-namespace Joost\Optimizations\Admin;
+namespace Yoast\WP\Crawl_Cleanup\Admin;
 
-use Joost\Optimizations\Options\Options;
+use Yoast\WP\Crawl_Cleanup\Options\Options;
 
 /**
- * Backend Class for the Joost Optimizations plugin options.
+ * Backend Class for the Yoast Crawl Cleanup plugin options.
  */
 class Admin_Options extends Options {
 
@@ -14,7 +14,7 @@ class Admin_Options extends Options {
 	 *
 	 * @var string
 	 */
-	public static string $option_group = 'joost_optimizations_options';
+	public static string $option_group = 'YOAST_CRAWL_CLEANUP_options';
 
 	/**
 	 * Class constructor.
@@ -47,17 +47,17 @@ class Admin_Options extends Options {
 	private function register_gutenberg_settings(): void {
 		$settings = [
 			'remove_gutenberg_global_styles' => [
-				'label' => __( 'Remove Gutenberg global styles', 'joost-optimizations' ),
+				'label' => __( 'Remove Gutenberg global styles', 'yoast-crawl-cleanup' ),
 			],
 			'remove_gutenberg_block_library' => [
-				'label' => __( 'Remove Gutenberg block library styles', 'joost-optimizations' ),
+				'label' => __( 'Remove Gutenberg block library styles', 'yoast-crawl-cleanup' ),
 			],
 			'remove_gutenberg_duotone'       => [
-				'label' => __( 'Remove Gutenberg duotone output', 'joost-optimizations' ),
+				'label' => __( 'Remove Gutenberg duotone output', 'yoast-crawl-cleanup' ),
 			],
 		];
 
-		$this->settings_section( 'gutenberg-settings', 'gutenberg_settings_intro', 'joost-optimizations-gutenberg', $settings );
+		$this->settings_section( 'gutenberg-settings', 'gutenberg_settings_intro', 'ycc-gutenberg', $settings );
 	}
 
 	/**
@@ -66,32 +66,32 @@ class Admin_Options extends Options {
 	private function register_basic_settings(): void {
 		$settings = [
 			'remove_shortlinks'        => [
-				'label' => __( 'Remove shortlinks', 'joost-optimizations' ),
+				'label' => __( 'Remove shortlinks', 'yoast-crawl-cleanup' ),
 			],
 			'remove_rest_api_links'    => [
-				'label' => __( 'Remove REST API links', 'joost-optimizations' ),
+				'label' => __( 'Remove REST API links', 'yoast-crawl-cleanup' ),
 			],
 			'remove_rsd_wlw_links'     => [
-				'label' => __( 'Remove RSD / WLW links', 'joost-optimizations' ),
+				'label' => __( 'Remove RSD / WLW links', 'yoast-crawl-cleanup' ),
 			],
 			'remove_oembed_links'      => [
-				'label' => __( 'Remove oEmbed links', 'joost-optimizations' ),
+				'label' => __( 'Remove oEmbed links', 'yoast-crawl-cleanup' ),
 			],
 			'remove_generator'         => [
-				'label' => __( 'Remove generator tag', 'joost-optimizations' ),
+				'label' => __( 'Remove generator tag', 'yoast-crawl-cleanup' ),
 			],
 			'remove_pingback_header'   => [
-				'label' => __( 'Remove pingback HTTP header', 'joost-optimizations' ),
+				'label' => __( 'Remove pingback HTTP header', 'yoast-crawl-cleanup' ),
 			],
 			'remove_powered_by_header' => [
-				'label' => __( 'Remove powered by HTTP header', 'joost-optimizations' ),
+				'label' => __( 'Remove powered by HTTP header', 'yoast-crawl-cleanup' ),
 			],
 			'remove_emoji_scripts'     => [
-				'label' => __( 'Remove emoji scripts', 'joost-optimizations' ),
+				'label' => __( 'Remove emoji scripts', 'yoast-crawl-cleanup' ),
 			],
 		];
 
-		$this->settings_section( 'basic-settings', 'basic_settings_intro', 'joost-optimizations', $settings );
+		$this->settings_section( 'basic-settings', 'basic_settings_intro', 'yoast-crawl-cleanup', $settings );
 	}
 
 	/**
@@ -100,23 +100,23 @@ class Admin_Options extends Options {
 	private function register_rss_settings(): void {
 		$settings = [
 			'remove_feed_global'          => [
-				'label' => __( 'Remove the global feed', 'joost-optimizations' ),
+				'label' => __( 'Remove the global feed', 'yoast-crawl-cleanup' ),
 			],
 			'remove_feed_global_comments' => [
-				'label' => __( 'Remove the global comments feed', 'joost-optimizations' ),
+				'label' => __( 'Remove the global comments feed', 'yoast-crawl-cleanup' ),
 			],
 			'remove_feed_post_types'      => [
-				'label' => __( 'Remove post type feeds', 'joost-optimizations' ),
+				'label' => __( 'Remove post type feeds', 'yoast-crawl-cleanup' ),
 			],
 			'remove_feed_taxonomies'      => [
-				'label' => __( 'Remove taxonomy feeds', 'joost-optimizations' ),
+				'label' => __( 'Remove taxonomy feeds', 'yoast-crawl-cleanup' ),
 			],
 			'remove_feed_post_comments'   => [
-				'label' => __( 'Remove post comment feeds', 'joost-optimizations' ),
+				'label' => __( 'Remove post comment feeds', 'yoast-crawl-cleanup' ),
 			],
 		];
 
-		$this->settings_section( 'rss-settings', 'rss_settings_intro', 'joost-optimizations-rss', $settings );
+		$this->settings_section( 'rss-settings', 'rss_settings_intro', 'ycc-rss', $settings );
 	}
 
 	/**
@@ -125,18 +125,18 @@ class Admin_Options extends Options {
 	private function register_advanced_settings(): void {
 		$settings = [
 			'remove_scripts' => [
-				'label' => __( 'Remove these scripts', 'joost-optimizations' ),
-				'desc'  => __( 'Comma separate script identifiers', 'joost-optimizations' ),
+				'label' => __( 'Remove these scripts', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'Comma separate script identifiers', 'yoast-crawl-cleanup' ),
 				'input' => 'input_text',
 			],
 			'remove_styles'  => [
-				'label' => __( 'Remove these styles', 'joost-optimizations' ),
-				'desc'  => __( 'Comma separate style identifiers', 'joost-optimizations' ),
+				'label' => __( 'Remove these styles', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'Comma separate style identifiers', 'yoast-crawl-cleanup' ),
 				'input' => 'input_text',
 			],
 		];
 
-		$this->settings_section( 'advanced-settings', 'advanced_settings_intro', 'joost-optimizations-advanced', $settings );
+		$this->settings_section( 'advanced-settings', 'advanced_settings_intro', 'ycc-advanced', $settings );
 	}
 
 	/**
@@ -182,7 +182,7 @@ class Admin_Options extends Options {
 	 */
 	public function basic_settings_intro(): void {
 		echo '<p class="intro">';
-		esc_html_e( 'Remove links added by WordPress to the header and <head>.', 'joost-optimizations' );
+		esc_html_e( 'Remove links added by WordPress to the header and <head>.', 'yoast-crawl-cleanup' );
 		echo '</p>';
 	}
 
@@ -191,7 +191,7 @@ class Admin_Options extends Options {
 	 */
 	public function rss_settings_intro(): void {
 		echo '<p class="intro">';
-		esc_html_e( 'Remove feed links added by WordPress that aren\'t needed for this site.', 'joost-optimizations' );
+		esc_html_e( 'Remove feed links added by WordPress that aren\'t needed for this site.', 'yoast-crawl-cleanup' );
 		echo '</p>';
 	}
 
@@ -200,7 +200,7 @@ class Admin_Options extends Options {
 	 */
 	public function gutenberg_settings_intro(): void {
 		echo '<p class="intro">';
-		esc_html_e( 'Remove unwanted / unneeded Gutenberg output.', 'joost-optimizations' );
+		esc_html_e( 'Remove unwanted / unneeded Gutenberg output.', 'yoast-crawl-cleanup' );
 		echo '</p>';
 	}
 
@@ -209,7 +209,7 @@ class Admin_Options extends Options {
 	 */
 	public function advanced_settings_intro(): void {
 		echo '<p class="intro">';
-		esc_html_e( 'Remove unwanted / unneeded scripts and styles.', 'joost-optimizations' );
+		esc_html_e( 'Remove unwanted / unneeded scripts and styles.', 'yoast-crawl-cleanup' );
 		echo '</p>';
 	}
 
@@ -218,7 +218,7 @@ class Admin_Options extends Options {
 	 *
 	 * @param array $args Arguments to get data from.
 	 */
-	private function input_desc( $args ): void {
+	private function input_desc( array $args ): void {
 		if ( isset( $args['desc'] ) ) {
 			echo '<p class="description">' . esc_html( $args['desc'] ) . '</p>';
 		}
@@ -229,8 +229,8 @@ class Admin_Options extends Options {
 	 *
 	 * @param array $args Arguments to get data from.
 	 */
-	public function input_text( $args ): void {
-		echo '<input type="text" class="text" name="joost_optimizations[' . esc_attr( $args['name'] ) . ']" value="' . esc_attr( $args['value'] ) . '"/>';
+	public function input_text( array $args ): void {
+		echo '<input type="text" class="text" name="yoast_crawl_cleanup[' . esc_attr( $args['name'] ) . ']" value="' . esc_attr( $args['value'] ) . '"/>';
 		$this->input_desc( $args );
 	}
 
@@ -239,9 +239,9 @@ class Admin_Options extends Options {
 	 *
 	 * @param array $args Arguments to get data from.
 	 */
-	public function input_checkbox( $args ): void {
-		$option = isset( $this->options[ $args['name'] ] ) ? $this->options[ $args['name'] ] : false;
-		echo '<input class="checkbox" type="checkbox" ' . checked( $option, true, false ) . ' name="joost_optimizations[' . esc_attr( $args['name'] ) . ']"/>';
+	public function input_checkbox( array $args ): void {
+		$option = ( $this->options[ $args['name'] ] ?? false );
+		echo '<input class="checkbox" type="checkbox" ' . checked( $option, true, false ) . ' name="yoast_crawl_cleanup[' . esc_attr( $args['name'] ) . ']"/>';
 		$this->input_desc( $args );
 	}
 

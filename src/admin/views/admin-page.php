@@ -1,11 +1,11 @@
 <?php
 
-namespace Joost\Optimizations\Admin\Views;
+namespace Yoast\WP\Crawl_Cleanup\Admin\Views;
 
-use Joost\Optimizations\Admin\Admin_Options;
+use Yoast\WP\Crawl_Cleanup\Admin\Admin_Options;
 
 ?><div class="wrap">
-	<h2>Joost Optimizations <?php esc_html_e( 'Configuration', 'joost-optimizations' ); ?></h2>
+	<h2>Yoast Crawl Cleanup <?php esc_html_e( 'Configuration', 'yoast-crawl-cleanup' ); ?></h2>
 
 	<form action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>" method="post">
 		<?php
@@ -13,28 +13,28 @@ use Joost\Optimizations\Admin\Admin_Options;
 		?>
 		<div id="yoast_wrapper">
 			<h2 class="nav-tab-wrapper" id="yoast-tabs">
-				<a class="nav-tab" id="joost-basic-tab" href="#top#basic"><?php esc_html_e( 'Basic', 'joost-optimizations' ); ?></a>
-				<a class="nav-tab" id="joost-rss-tab" href="#top#rss"><?php esc_html_e( 'RSS', 'joost-optimizations' ); ?></a>
-				<a class="nav-tab" id="joost-gutenberg-tab" href="#top#gutenberg"><?php esc_html_e( 'Gutenberg', 'joost-optimizations' ); ?></a>
-				<a class="nav-tab" id="joost-advanced-tab" href="#top#advanced"><?php esc_html_e( 'Advanced', 'joost-optimizations' ); ?></a>
+				<a class="nav-tab" id="yoast-basic-tab" href="#top#basic"><?php esc_html_e( 'Basic', 'yoast-crawl-cleanup' ); ?></a>
+				<a class="nav-tab" id="yoast-rss-tab" href="#top#rss"><?php esc_html_e( 'RSS', 'yoast-crawl-cleanup' ); ?></a>
+				<a class="nav-tab" id="yoast-gutenberg-tab" href="#top#gutenberg"><?php esc_html_e( 'Gutenberg', 'yoast-crawl-cleanup' ); ?></a>
+				<a class="nav-tab" id="yoast-advanced-tab" href="#top#advanced"><?php esc_html_e( 'Advanced', 'yoast-crawl-cleanup' ); ?></a>
 			</h2>
 
 			<div class="tabwrapper">
-				<div id="joost-basic" class="yoast_tab">
-					<?php do_settings_sections( 'joost-optimizations' ); ?>
+				<div id="yoast-basic" class="yoast_tab">
+					<?php do_settings_sections( 'yoast-crawl-cleanup' ); ?>
 				</div>
-				<div id="joost-rss" class="yoast_tab">
-					<?php do_settings_sections( 'joost-optimizations-rss' ); ?>
+				<div id="yoast-rss" class="yoast_tab">
+					<?php do_settings_sections( 'ycc-rss' ); ?>
 				</div>
-				<div id="joost-gutenberg" class="yoast_tab">
-					<?php do_settings_sections( 'joost-optimizations-gutenberg' ); ?>
+				<div id="yoast-gutenberg" class="yoast_tab">
+					<?php do_settings_sections( 'ycc-gutenberg' ); ?>
 				</div>
-				<div id="joost-advanced" class="yoast_tab">
-					<?php do_settings_sections( 'joost-optimizations-advanced' ); ?>
+				<div id="yoast-advanced" class="yoast_tab">
+					<?php do_settings_sections( 'ycc-advanced' ); ?>
 				</div>
 			</div>
 			<?php
-			submit_button( __( 'Save Joost Optimizations settings', 'joost-optimizations' ) );
+			submit_button( __( 'Save Yoast Crawl Cleanup settings', 'yoast-crawl-cleanup' ) );
 			?>
 		</div>
 	</form>

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	name="Joost Optimizations"
+	name="Yoast Crawl Cleanup"
 	xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd">
 
-	<description>Joost Optimizations rules for PHP_CodeSniffer</description>
+	<description>Yoast Crawl Cleanup rules for PHP_CodeSniffer</description>
 
 	<!--
 	#############################################################################
@@ -36,7 +36,7 @@
 	-->
 
 	<rule ref="Yoast">
-		<!-- The Joost Optimizations plugin is a stand-alone plugin, so it doesn't have access to YoastSEO functions. -->
+		<!-- The Yoast Crawl Cleanup plugin is a stand-alone plugin, so it doesn't have access to YoastSEO functions. -->
 		<exclude name="Yoast.Yoast.AlternativeFunctions"/>
 
 		<properties>
@@ -45,8 +45,8 @@
 			-->
 			<!-- Provide the plugin specific prefixes for all naming related sniffs. -->
 			<property name="prefixes" type="array">
-				<element value="Joost\Optimizations"/>
-				<element value="joost_optimizations"/>
+				<element value="Yoast\WP\Crawl_Cleanup"/>
+				<element value="yoast_crawl_cleanup"/>
 			</property>
 		</properties>
 	</rule>
@@ -73,7 +73,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="joost-optimizations"/>
+				<element value="yoast-crawl-cleanup"/>
 			</property>
 		</properties>
 	</rule>
@@ -102,11 +102,5 @@
 	Adjustments which should be removed once the associated issue has been resolved.
 	#############################################################################
 	-->
-
-	<rule ref="Generic.Commenting.DocComment.MissingShort">
-		<!-- Temporarily downgraded to warning to allow the build to pass.
-			 Ticket: https://github.com/Yoast/clicky/issues/67 -->
-		<exclude-pattern>/tests/*\.php$</exclude-pattern>
-	</rule>
 
 </ruleset>

@@ -13,9 +13,9 @@ module.exports = function( grunt ) {
 	// Define project configuration
 	var project = {
 		pluginVersion: pluginVersion,
-		pluginSlug: "clicky",
-		pluginMainFile: "clicky.php",
-		pluginVersionConstant: "CLICKY_PLUGIN_VERSION",
+		pluginSlug: "yoast-crawl-cleanup",
+		pluginMainFile: "yoast-crawl-cleanup.php",
+		pluginVersionConstant: "YOAST_CRAWL_CLEANUP_PLUGIN_VERSION",
 		paths: {
 			/**
 			 * Get config path.

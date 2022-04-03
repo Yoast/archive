@@ -1,7 +1,7 @@
 <?php
-namespace Joost\Optimizations\Admin;
+namespace Yoast\WP\Crawl_Cleanup\Admin;
 
-use Joost\Optimizations\Options\Options;
+use Yoast\WP\Crawl_Cleanup\Options\Options;
 
 /**
  * Backend Class.
@@ -20,10 +20,10 @@ class Admin {
 	 *
 	 * @var string
 	 */
-	public string $hook = 'joost-optimizations';
+	public string $hook = 'yoast-crawl-cleanup';
 
 	/**
-	 * Construct of class Clicky_admin.
+	 * Class constructor.
 	 *
 	 * @link   https://codex.wordpress.org/Function_Reference/add_action
 	 * @link   https://codex.wordpress.org/Function_Reference/add_filter
@@ -39,7 +39,7 @@ class Admin {
 	/**
 	 * Initialize needed actions.
 	 */
-	public function admin_init() {
+	public function admin_init(): void {
 		$this->register_menu_pages();
 	}
 
@@ -49,10 +49,10 @@ class Admin {
 	 * @link https://codex.wordpress.org/Function_Reference/add_options_page
 	 * @link https://codex.wordpress.org/Function_Reference/add_dashboard_page
 	 */
-	private function register_menu_pages() {
+	private function register_menu_pages(): void {
 		add_options_page(
-			__( 'Joost Optimizations', 'joost-optimizations' ),
-			__( 'Joost Optimizations', 'joost-optimizations' ),
+			__( 'Yoast Crawl Cleanup', 'yoast-crawl-cleanup' ),
+			__( 'Yoast Crawl Cleanup', 'yoast-crawl-cleanup' ),
 			'manage_options',
 			$this->hook,
 			[ new Admin_Page(), 'config_page' ]
@@ -64,7 +64,7 @@ class Admin {
 	 *
 	 * @return string Admin URL to the current plugins settings URL.
 	 */
-	private function plugin_options_url() {
+	private function plugin_options_url(): string {
 		return admin_url( 'options-general.php?page=' . $this->hook );
 	}
 
@@ -76,13 +76,13 @@ class Admin {
 	 *
 	 * @return array
 	 */
-	public function add_action_link( $links, $file ) {
+	public function add_action_link( $links, $file ): array {
 		static $this_plugin;
 		if ( empty( $this_plugin ) ) {
-			$this_plugin = JOOST_OPTIMIZATIONS_PLUGIN_FILE;
+			$this_plugin = YOAST_CRAWL_CLEANUP_PLUGIN_FILE;
 		}
 		if ( $file === $this_plugin ) {
-			$settings_link = '<a href="' . esc_url( $this->plugin_options_url() ) . '">' . esc_html__( 'Settings', 'joost-optimizations' ) . '</a>';
+			$settings_link = '<a href="' . esc_url( $this->plugin_options_url() ) . '">' . esc_html__( 'Settings', 'yoast-crawl-cleanup' ) . '</a>';
 			array_unshift( $links, $settings_link );
 		}
 
