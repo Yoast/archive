@@ -6,6 +6,25 @@ namespace Yoast\WP\Crawl_Cleanup\Options;
  * Options Class for the Yoast Crawl Cleanup plugin.
  *
  * @since 1.5
+ *
+ * @property boolean remove_shortlinks
+ * @property boolean remove_rest_api_links
+ * @property boolean remove_rsd_wlw_links
+ * @property boolean remove_oembed_links
+ * @property boolean remove_emoji_scripts
+ * @property boolean remove_generator
+ * @property boolean remove_powered_by_header
+ * @property boolean remove_pingback_header
+ * @property boolean remove_feed_global
+ * @property boolean remove_feed_global_comments
+ * @property boolean remove_feed_post_types
+ * @property boolean remove_feed_taxonomies
+ * @property boolean remove_feed_post_comments
+ * @property boolean remove_gutenberg_global_styles
+ * @property boolean remove_gutenberg_block_library
+ * @property boolean remove_gutenberg_duotone
+ * @property string  remove_styles
+ * @property string  remove_scripts
  */
 class Options {
 
@@ -141,5 +160,21 @@ class Options {
 	 */
 	public function get(): array {
 		return $this->options;
+	}
+
+	/**
+	 * Magic getter for our options.
+	 *
+	 * @param string $option The option to retrieve.
+	 *
+	 * @return bool|string
+	 */
+	public function __get( $option ) {
+		// If it's a boolean and unset, return false.
+		if ( self::$option_var_types[ $option ] === 'bool' ) {
+			return ( $this->options[ $option ] ?? false );
+		}
+		// If it's not a boolean, return a string.
+		return ( $this->options[ $option ] ?? '' );
 	}
 }

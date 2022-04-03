@@ -9,16 +9,18 @@ use Yoast\WP\Crawl_Cleanup\Options\Options;
 class Optimizations {
 
 	/**
-	 * The options for the plugin.
+	 * Holds our options instance.
 	 *
-	 * @var array
+	 * @var Options
 	 */
-	private array $options;
+	private Options $options;
 
 	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
+		$this->options = Options::instance();
+
 		add_action( 'wp_loaded', [ $this, 'register_hooks' ] );
 	}
 
@@ -26,37 +28,36 @@ class Optimizations {
 	 * Register all our hooks
 	 */
 	public function register_hooks(): void {
-		$this->options = Options::instance()->get();
 
-		if ( $this->options['remove_shortlinks'] ) {
+		if ( $this->options->remove_shortlinks ) {
 			// Remove shortlinks.
 			remove_action( 'wp_head', 'wp_shortlink_wp_head', 10 );
 			remove_action( 'template_redirect', 'wp_shortlink_header', 11 );
 		}
 
-		if ( $this->options['remove_rest_api_links'] ) {
+		if ( $this->options->remove_rest_api_links ) {
 			// Remove REST API links.
 			remove_action( 'wp_head', 'rest_output_link_wp_head' );
 			remove_action( 'template_redirect', 'rest_output_link_header', 11 );
 		}
 
-		if ( $this->options['remove_rsd_wlw_links'] ) {
+		if ( $this->options->remove_rsd_wlw_links ) {
 			// Remove RSD and WLW Manifest links.
 			remove_action( 'wp_head', 'rsd_link' );
 			remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' );
 			remove_action( 'wp_head', 'wlwmanifest_link' );
 		}
 
-		if ( $this->options['remove_oembed_links'] ) {
+		if ( $this->options->remove_oembed_links ) {
 			// Remove JSON+XML oEmbed links.
 			remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 		}
 
-		if ( $this->options['remove_generator'] ) {
+		if ( $this->options->remove_generator ) {
 			remove_action( 'wp_head', 'wp_generator' );
 		}
 
-		if ( $this->options['remove_emoji_scripts'] ) {
+		if ( $this->options->remove_emoji_scripts ) {
 			// Remove emoji scripts and additional stuff they cause.
 			remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 			remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -66,16 +67,16 @@ class Optimizations {
 		}
 
 		// RSS.
-		if ( $this->options['remove_feed_global'] ) {
+		if ( $this->options->remove_feed_global ) {
 			remove_action( 'wp_head', 'feed_links', 2 );
 		}
-		if ( $this->options['remove_feed_global_comments'] ) {
+		if ( $this->options->remove_feed_global_comments ) {
 			add_action( 'feed_links_show_comments_feed', '__return_false' );    // Remove the overall comments feed.
 		}
-		if ( $this->options['remove_feed_post_comments'] || $this->options['remove_feed_post_types'] || $this->options['remove_feed_taxonomies'] ) {
+		if ( $this->options->remove_feed_post_comments || $this->options->remove_feed_post_types || $this->options->remove_feed_taxonomies ) {
 			remove_action( 'wp_head', 'feed_links_extra', 3 );                    // Remove a lot of the other RSS links, for comment feeds, tag feeds etc.
 		}
-		if ( ! $this->options['remove_feed_post_types'] || ! $this->options['remove_feed_taxonomies'] ) {
+		if ( ! $this->options->remove_feed_post_types || ! $this->options->remove_feed_taxonomies ) {
 			// Bring back the RSS feeds we *do* want.
 			add_action( 'wp_head', [ $this, 'feed_links' ] );
 		}
@@ -98,8 +99,8 @@ class Optimizations {
 	 * @return void
 	 */
 	public function unload_styles_scripts(): void {
-		if ( $this->options['remove_styles'] !== '' ) {
-			$styles_to_remove = explode( ',', $this->options['remove_styles'] );
+		if ( $this->options->remove_styles !== '' ) {
+			$styles_to_remove = explode( ',', $this->options->remove_styles );
 			foreach ( $styles_to_remove as $style ) {
 				$style = preg_replace( '/(-inline)?(-css)$/', '', trim( $style ) );
 				wp_deregister_style( $style );
@@ -107,8 +108,8 @@ class Optimizations {
 			}
 		}
 
-		if ( $this->options['remove_scripts'] !== '' ) {
-			$scripts_to_remove = explode( ',', $this->options['remove_scripts'] );
+		if ( $this->options->remove_scripts !== '' ) {
+			$scripts_to_remove = explode( ',', $this->options->remove_scripts );
 			foreach ( $scripts_to_remove as $script ) {
 				$script = trim( $script );
 				wp_deregister_script( $script );
@@ -121,14 +122,14 @@ class Optimizations {
 	 * Unloads Gutenberg styles.
 	 */
 	public function unload_gutenberg(): void {
-		if ( $this->options['remove_gutenberg_global_styles'] ) {
+		if ( $this->options->remove_gutenberg_global_styles ) {
 			wp_dequeue_style( 'global-styles' );
 		}
-		if ( $this->options['remove_gutenberg_block_library'] ) {
+		if ( $this->options->remove_gutenberg_block_library ) {
 			wp_dequeue_style( 'wp-block-library' );
 			wp_dequeue_style( 'wp-block-library-theme' );
 		}
-		if ( $this->options['remove_gutenberg_duotone'] ) {
+		if ( $this->options->remove_gutenberg_duotone ) {
 			remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
 		}
 	}
@@ -141,10 +142,10 @@ class Optimizations {
 			return;
 		}
 
-		if ( $this->options['remove_powered_by_header'] ) {
+		if ( $this->options->remove_powered_by_header ) {
 			header_remove( 'X-Pingback' );
 		}
-		if ( $this->options['remove_pingback_header'] ) {
+		if ( $this->options->remove_pingback_header ) {
 			header_remove( 'X-Powered-By' );
 		}
 	}
@@ -180,24 +181,24 @@ class Optimizations {
 		if ( $feed === 'atom' || $feed === 'rdf' ) {
 			$this->redirect_feed( $url, 'We disable ATOM and RDF feeds for performance reasons.' );
 		}
-		elseif ( is_comment_feed() && is_singular() && $this->options['remove_feed_post_comments'] ) {
+		elseif ( is_comment_feed() && is_singular() && $this->options->remove_feed_post_comments ) {
 			$url = get_permalink( get_queried_object() );
 			$this->redirect_feed( $url, 'We disable comment feeds for performance reasons.' );
 		}
-		elseif ( is_comment_feed() && $this->options['remove_feed_global_comments'] ) {
+		elseif ( is_comment_feed() && $this->options->remove_feed_global_comments ) {
 			$this->redirect_feed( $url, 'We disable comment feeds for performance reasons.' );
 		}
-		elseif ( ( is_tax() || is_category() || is_tag() ) && $this->options['remove_feed_taxonomies'] ) {
+		elseif ( ( is_tax() || is_category() || is_tag() ) && $this->options->remove_feed_taxonomies ) {
 			$this->redirect_feed( $url, 'We disable taxonomy feeds for performance reasons.' );
 		}
-		elseif ( ( is_post_type_archive() ) && $this->options['remove_feed_post_types'] ) {
+		elseif ( ( is_post_type_archive() ) && $this->options->remove_feed_post_types ) {
 			$this->redirect_feed( $url, 'We disable post type feeds for performance reasons.' );
 		}
 		elseif ( is_search() ) {
 			// We're not even going to serve a result for this. Feeds for search results are not a service yoast.com should provide.
 			$this->redirect_feed( esc_url( trailingslashit( get_home_url() ) . '?s=' . get_search_query() ), 'We disable search RSS feeds for performance reasons.' );
 		}
-		elseif ( $this->options['remove_feed_global'] ) {
+		elseif ( $this->options->remove_feed_global ) {
 			$this->redirect_feed( esc_url( trailingslashit( get_home_url() ) . '?s=' . get_search_query() ), 'We disable the RSS feed for performance reasons.' );
 		}
 	}
@@ -214,7 +215,7 @@ class Optimizations {
 
 		$this->cache_control_header( 7 * DAY_IN_SECONDS );
 
-		wp_safe_redirect( $url, 301, 'Strattic: ' . $reason );
+		wp_safe_redirect( $url, 301, 'Yoast Crawl Cleanup: ' . $reason );
 		exit;
 	}
 

@@ -9,13 +9,6 @@ use Yoast\WP\Crawl_Cleanup\Options\Options;
 class Admin {
 
 	/**
-	 * This holds the plugins options.
-	 *
-	 * @var array
-	 */
-	public array $options = [];
-
-	/**
 	 * Menu slug for WordPress admin.
 	 *
 	 * @var string
@@ -29,8 +22,6 @@ class Admin {
 	 * @link   https://codex.wordpress.org/Function_Reference/add_filter
 	 */
 	public function __construct() {
-		$this->options = Options::instance()->get();
-
 		add_filter( 'plugin_action_links', [ $this, 'add_action_link' ], 10, 2 );
 
 		add_action( 'admin_menu', [ $this, 'admin_init' ] );

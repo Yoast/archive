@@ -7,21 +7,27 @@ use Yoast\WP\Crawl_Cleanup\Options\Options;
 /**
  * Backend Class for the Yoast Crawl Cleanup plugin options.
  */
-class Admin_Options extends Options {
+class Admin_Options {
+
+	/**
+	 * Our options class.
+	 *
+	 * @var Options
+	 */
+	private Options $options;
 
 	/**
 	 * The option group name.
 	 *
 	 * @var string
 	 */
-	public static string $option_group = 'YOAST_CRAWL_CLEANUP_options';
+	public static string $option_group = 'yoast_crawl_cleanup_options';
 
 	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
-		parent::__construct();
-
+		$this->options = Options::instance();
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
 	}
 
@@ -31,7 +37,7 @@ class Admin_Options extends Options {
 	public function admin_init(): void {
 		register_setting(
 			self::$option_group,
-			parent::$option_name,
+			Options::$option_name,
 			[ $this, 'sanitize_options_on_save' ]
 		);
 
@@ -158,7 +164,7 @@ class Admin_Options extends Options {
 	 * @return array
 	 */
 	public function sanitize_options_on_save( array $new_options ): array {
-		foreach ( self::$option_var_types as $key => $type ) {
+		foreach ( Options::$option_var_types as $key => $type ) {
 			switch ( $type ) {
 				case 'string':
 					$new_options[ $key ] = $this->sanitize_string( $new_options[ $key ] );
@@ -240,8 +246,7 @@ class Admin_Options extends Options {
 	 * @param array $args Arguments to get data from.
 	 */
 	public function input_checkbox( array $args ): void {
-		$option = ( $this->options[ $args['name'] ] ?? false );
-		echo '<input class="checkbox" type="checkbox" ' . checked( $option, true, false ) . ' name="yoast_crawl_cleanup[' . esc_attr( $args['name'] ) . ']"/>';
+		echo '<input class="checkbox" type="checkbox" ' . checked( $args['value'], true, false ) . ' name="yoast_crawl_cleanup[' . esc_attr( $args['name'] ) . ']"/>';
 		$this->input_desc( $args );
 	}
 
@@ -267,7 +272,7 @@ class Admin_Options extends Options {
 			$field_type = ( $arr['input'] ?? 'input_checkbox' );
 			$args       = [
 				'name'  => $key,
-				'value' => ( $this->options[ $key ] ?? false ),
+				'value' => $this->options->__get( $key ),
 				'desc'  => ( $arr['desc'] ?? '' ),
 			];
 			add_settings_field(

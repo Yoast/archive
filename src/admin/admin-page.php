@@ -1,6 +1,8 @@
 <?php
 namespace Yoast\WP\Crawl_Cleanup\Admin;
 
+use Yoast\WP\Crawl_Cleanup\Options\Options;
+
 /**
  * Class for the Yoast Crawl Cleanup plugin admin page.
  */
@@ -12,9 +14,7 @@ class Admin_Page extends Admin {
 	public function __construct() {
 		parent::__construct();
 
-		$options_admin = new Admin_Options();
-
-		$this->options = $options_admin->get();
+		new Admin_Options();
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'config_page_scripts' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'config_page_styles' ] );
