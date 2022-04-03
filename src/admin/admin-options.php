@@ -63,7 +63,7 @@ class Admin_Options {
 			],
 		];
 
-		$this->settings_section( 'gutenberg-settings', 'gutenberg_settings_intro', 'ycc-gutenberg', $settings );
+		$this->settings_section( 'gutenberg-settings', '', 'gutenberg_settings_intro', 'ycc-gutenberg', $settings );
 	}
 
 	/**
@@ -97,7 +97,7 @@ class Admin_Options {
 			],
 		];
 
-		$this->settings_section( 'basic-settings', 'basic_settings_intro', 'yoast-crawl-cleanup', $settings );
+		$this->settings_section( 'basic-settings', '', 'basic_settings_intro', 'yoast-crawl-cleanup', $settings );
 	}
 
 	/**
@@ -122,13 +122,31 @@ class Admin_Options {
 			],
 		];
 
-		$this->settings_section( 'rss-settings', 'rss_settings_intro', 'ycc-rss', $settings );
+		$this->settings_section( 'rss-settings', '', 'rss_settings_intro', 'ycc-rss', $settings );
 	}
 
 	/**
 	 * Register the separate advanced settings screen.
 	 */
 	private function register_advanced_settings(): void {
+		$settings = [
+			'clean_permalink' => [
+				'label' => __( 'Remove unregistered URL parameters', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'Aggressively removes all URL parameters we don\'t recognize', 'yoast-crawl-cleanup' ),
+			],
+			'clean_permalink_google_campaign' => [
+				'label' => __( 'Maintain campaign tracking URL parameters', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'If you use Google Analytics this is recommended.', 'yoast-crawl-cleanup' ),
+			],
+			'clean_permalink_extra_variables' => [
+				'label' => __( 'Extra URL parameters to allow', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'Comma separated list of URL parameters you\'d like to keep', 'yoast-crawl-cleanup' ),
+				'input' => 'input_text',
+			],
+		];
+
+		$this->settings_section( 'advanced-settings-clean-permalinks', __( 'Permalink cleanup', 'yoast-crawl-cleanup' ),'advanced_settings_clean_permalink_intro', 'ycc-advanced', $settings );
+
 		$settings = [
 			'remove_scripts' => [
 				'label' => __( 'Remove these scripts', 'yoast-crawl-cleanup' ),
@@ -142,7 +160,7 @@ class Admin_Options {
 			],
 		];
 
-		$this->settings_section( 'advanced-settings', 'advanced_settings_intro', 'ycc-advanced', $settings );
+		$this->settings_section( 'advanced-settings-scripts-styles', __( 'Remove scripts and styles', 'yoast-crawl-cleanup' ),'advanced_settings_scripts_intro', 'ycc-advanced', $settings );
 	}
 
 	/**
@@ -211,11 +229,20 @@ class Admin_Options {
 	}
 
 	/**
-	 * Intro for the Advanced section.
+	 * Intro for the remove scripts and styles section.
 	 */
-	public function advanced_settings_intro(): void {
+	public function advanced_settings_scripts_intro(): void {
 		echo '<p class="intro">';
 		esc_html_e( 'Remove unwanted / unneeded scripts and styles.', 'yoast-crawl-cleanup' );
+		echo '</p>';
+	}
+
+	/**
+	 * Intro for the clean permalinks section.
+	 */
+	public function advanced_settings_clean_permalink_intro(): void {
+		echo '<p class="intro">';
+		esc_html_e( 'Remove unwanted URL parameters from your URLs.', 'yoast-crawl-cleanup' );
 		echo '</p>';
 	}
 
@@ -260,10 +287,10 @@ class Admin_Options {
 	 *
 	 * @return void
 	 */
-	private function settings_section( string $section, string $intro_callback, string $page, array $settings ): void {
+	private function settings_section( string $section, string $title, string $intro_callback, string $page, array $settings ): void {
 		add_settings_section(
 			$section,
-			'',
+			$title,
 			[ $this, $intro_callback ],
 			$page
 		);

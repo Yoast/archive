@@ -5,8 +5,9 @@ namespace Yoast\WP\Crawl_Cleanup\Options;
 /**
  * Options Class for the Yoast Crawl Cleanup plugin.
  *
- * @since 1.5
- *
+ * @property boolean clean_permalink
+ * @property boolean clean_permalink_google_campaign
+ * @property string clean_permalink_extra_variables
  * @property boolean remove_shortlinks
  * @property boolean remove_rest_api_links
  * @property boolean remove_rsd_wlw_links
@@ -23,8 +24,8 @@ namespace Yoast\WP\Crawl_Cleanup\Options;
  * @property boolean remove_gutenberg_global_styles
  * @property boolean remove_gutenberg_block_library
  * @property boolean remove_gutenberg_duotone
- * @property string  remove_styles
- * @property string  remove_scripts
+ * @property string remove_styles
+ * @property string remove_scripts
  */
 class Options {
 
@@ -34,24 +35,27 @@ class Options {
 	 * @var array
 	 */
 	public static array $option_defaults = [
-		'remove_shortlinks'              => true,
-		'remove_rest_api_links'          => true,
-		'remove_rsd_wlw_links'           => true,
-		'remove_oembed_links'            => true,
-		'remove_emoji_scripts'           => true,
-		'remove_generator'               => true,
-		'remove_powered_by_header'       => true,
-		'remove_pingback_header'         => true,
-		'remove_feed_global'             => false,
-		'remove_feed_global_comments'    => true,
-		'remove_feed_post_types'         => false,
-		'remove_feed_taxonomies'         => false,
-		'remove_feed_post_comments'      => true,
-		'remove_gutenberg_global_styles' => false,
-		'remove_gutenberg_block_library' => false,
-		'remove_gutenberg_duotone'       => true,
-		'remove_styles'                  => '',
-		'remove_scripts'                 => '',
+		'clean_permalink'                 => false,
+		'clean_permalink_google_campaign' => true,
+		'clean_permalink_extra_variables' => '',
+		'remove_shortlinks'               => true,
+		'remove_rest_api_links'           => true,
+		'remove_rsd_wlw_links'            => true,
+		'remove_oembed_links'             => true,
+		'remove_emoji_scripts'            => true,
+		'remove_generator'                => true,
+		'remove_powered_by_header'        => true,
+		'remove_pingback_header'          => true,
+		'remove_feed_global'              => false,
+		'remove_feed_global_comments'     => true,
+		'remove_feed_post_types'          => false,
+		'remove_feed_taxonomies'          => false,
+		'remove_feed_post_comments'       => true,
+		'remove_gutenberg_global_styles'  => false,
+		'remove_gutenberg_block_library'  => false,
+		'remove_gutenberg_duotone'        => true,
+		'remove_styles'                   => '',
+		'remove_scripts'                  => '',
 	];
 
 	/**
@@ -60,24 +64,27 @@ class Options {
 	 * @var string[]
 	 */
 	public static array $option_var_types = [
-		'remove_shortlinks'              => 'bool',
-		'remove_rest_api_links'          => 'bool',
-		'remove_rsd_wlw_links'           => 'bool',
-		'remove_oembed_links'            => 'bool',
-		'remove_emoji_scripts'           => 'bool',
-		'remove_generator'               => 'bool',
-		'remove_powered_by_header'       => 'bool',
-		'remove_pingback_header'         => 'bool',
-		'remove_feed_global'             => 'bool',
-		'remove_feed_global_comments'    => 'bool',
-		'remove_feed_post_types'         => 'bool',
-		'remove_feed_taxonomies'         => 'bool',
-		'remove_feed_post_comments'      => 'bool',
-		'remove_gutenberg_global_styles' => 'bool',
-		'remove_gutenberg_block_library' => 'bool',
-		'remove_gutenberg_duotone'       => 'bool',
-		'remove_styles'                  => 'string',
-		'remove_scripts'                 => 'string',
+		'clean_permalink'                 => 'bool',
+		'clean_permalink_google_campaign' => 'bool',
+		'clean_permalink_extra_variables' => 'string',
+		'remove_shortlinks'               => 'bool',
+		'remove_rest_api_links'           => 'bool',
+		'remove_rsd_wlw_links'            => 'bool',
+		'remove_oembed_links'             => 'bool',
+		'remove_emoji_scripts'            => 'bool',
+		'remove_generator'                => 'bool',
+		'remove_powered_by_header'        => 'bool',
+		'remove_pingback_header'          => 'bool',
+		'remove_feed_global'              => 'bool',
+		'remove_feed_global_comments'     => 'bool',
+		'remove_feed_post_types'          => 'bool',
+		'remove_feed_taxonomies'          => 'bool',
+		'remove_feed_post_comments'       => 'bool',
+		'remove_gutenberg_global_styles'  => 'bool',
+		'remove_gutenberg_block_library'  => 'bool',
+		'remove_gutenberg_duotone'        => 'bool',
+		'remove_styles'                   => 'string',
+		'remove_scripts'                  => 'string',
 	];
 
 	/**
@@ -119,8 +126,7 @@ class Options {
 		if ( ! is_array( $options ) ) {
 			$this->options = self::$option_defaults;
 			update_option( self::$option_name, $this->options );
-		}
-		else {
+		} else {
 			$this->options = array_merge( self::$option_defaults, $options );
 		}
 	}
@@ -154,26 +160,18 @@ class Options {
 	}
 
 	/**
-	 * Returns the Yoast Crawl Cleanup options.
-	 *
-	 * @return array
-	 */
-	public function get(): array {
-		return $this->options;
-	}
-
-	/**
 	 * Magic getter for our options.
 	 *
 	 * @param string $option The option to retrieve.
 	 *
 	 * @return bool|string
 	 */
-	public function __get( $option ) {
+	public function __get( string $option ) {
 		// If it's a boolean and unset, return false.
 		if ( self::$option_var_types[ $option ] === 'bool' ) {
 			return ( $this->options[ $option ] ?? false );
 		}
+
 		// If it's not a boolean, return a string.
 		return ( $this->options[ $option ] ?? '' );
 	}

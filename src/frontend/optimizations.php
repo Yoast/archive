@@ -21,6 +21,10 @@ class Optimizations {
 	public function __construct() {
 		$this->options = Options::instance();
 
+		if ( $this->options->clean_permalink ) {
+			new Clean_Permalink();
+		}
+
 		add_action( 'wp_loaded', [ $this, 'register_hooks' ] );
 	}
 
