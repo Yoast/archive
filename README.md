@@ -6,3 +6,5 @@ Yoast Crawl Cleanup
 ===================
 
 This plugin is very much in beta.
+
+![Gif of the plugin in action](svn-assets/yoast-crawl-cleanup.gif)
