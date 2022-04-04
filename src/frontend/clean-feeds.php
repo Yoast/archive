@@ -58,12 +58,15 @@ class Clean_Feeds {
 		if ( $feed === 'atom' || $feed === 'rdf' ) {
 			$this->redirect_feed( $url, 'We disable ATOM and RDF feeds for performance reasons.' );
 		}
-		elseif ( is_comment_feed() && is_singular() && $this->options->remove_feed_post_comments ) {
-			$url = get_permalink( get_queried_object() );
+		elseif ( $this->options->remove_feed_global ) {
+			$this->redirect_feed( get_home_url(), 'We disable the RSS feed for performance reasons.' );
+		}
+		elseif ( is_comment_feed() && ! is_singular() && $this->options->remove_feed_global_comments ) {
 			$this->redirect_feed( $url, 'We disable comment feeds for performance reasons.' );
 		}
-		elseif ( is_comment_feed() && $this->options->remove_feed_global_comments ) {
-			$this->redirect_feed( $url, 'We disable comment feeds for performance reasons.' );
+		elseif ( is_comment_feed() && is_singular() && $this->options->remove_feed_post_comments ) {
+			$url = get_permalink( get_queried_object() );
+			$this->redirect_feed( $url, 'We disable post comment feeds for performance reasons.' );
 		}
 		elseif ( is_author() && $this->options->remove_feed_authors ) {
 			$author_id = (int) get_query_var( 'author' );
@@ -75,15 +78,26 @@ class Clean_Feeds {
 			$this->redirect_feed( $url, 'We disable taxonomy feeds for performance reasons.' );
 		}
 		elseif ( ( is_post_type_archive() ) && $this->options->remove_feed_post_types ) {
+			$url = get_post_type_archive_link( $this->get_queried_post_type() );
 			$this->redirect_feed( $url, 'We disable post type feeds for performance reasons.' );
 		}
 		elseif ( is_search() && $this->options->remove_feed_search ) {
 			// We're not even going to serve a result for this. Feeds for search results are not a service yoast.com should provide.
 			$this->redirect_feed( esc_url( trailingslashit( get_home_url() ) . '?s=' . get_search_query() ), 'We disable search RSS feeds for performance reasons.' );
 		}
-		elseif ( $this->options->remove_feed_global ) {
-			$this->redirect_feed( get_home_url(), 'We disable the RSS feed for performance reasons.' );
+	}
+
+	/**
+	 * Retrieves the queried post type.
+	 *
+	 * @return string The queried post type.
+	 */
+	private function get_queried_post_type(): string {
+		$post_type = get_query_var( 'post_type' );
+		if ( is_array( $post_type ) ) {
+			$post_type = reset( $post_type );
 		}
+		return $post_type;
 	}
 
 	/**
@@ -139,12 +153,7 @@ class Clean_Feeds {
 			}
 		}
 		elseif ( is_post_type_archive() && $this->options->remove_feed_post_types === false ) {
-			$post_type = get_query_var( 'post_type' );
-			if ( is_array( $post_type ) ) {
-				$post_type = reset( $post_type );
-			}
-
-			$post_type_obj = get_post_type_object( $post_type );
+			$post_type_obj = get_post_type_object( $this->get_queried_post_type() );
 			$title         = sprintf( $args['posttypetitle'], get_bloginfo( 'name' ), $args['separator'], $post_type_obj->labels->name );
 			$href          = get_post_type_archive_feed_link( $post_type_obj->name );
 		}
