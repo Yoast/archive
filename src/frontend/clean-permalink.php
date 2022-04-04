@@ -122,9 +122,11 @@ class Clean_Permalink {
 				$proper_url = get_bloginfo( 'url' ) . '/';
 			}
 			elseif ( $this->is_home_static_page() ) {
-				global $post;
 				$proper_url = get_permalink( $GLOBALS['post']->ID );
 			}
+		}
+		elseif ( $this->is_posts_page() ) {
+			$proper_url = get_permalink( get_option( 'page_for_posts' ) );
 		}
 		elseif ( is_category() || is_tag() || is_tax() ) {
 			$term = $wp_query->get_queried_object();
@@ -231,6 +233,6 @@ class Clean_Permalink {
 	 * @return bool
 	 */
 	private function is_posts_page(): bool {
-		return ( is_home() && get_option( 'show_on_front' ) === 'page' );
+		return ( is_home() && ! is_front_page() );
 	}
 }
