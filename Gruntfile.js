@@ -26,7 +26,6 @@ module.exports = function( grunt ) {
 				return this.grunt + "config/";
 			},
 			css: "css/dist/",
-			sass: "css/src/",
 			grunt: "grunt/",
 			images: "images/",
 			assets: "svn-assets/",
@@ -80,9 +79,9 @@ module.exports = function( grunt ) {
 			"css/dist/admin.css": "css/src/admin.scss",
 		},
 		pkg: pkg,
-		get developmentBuild () {
+		get developmentBuild() {
 			return ! ( [ "release", "artifact", "deploy:trunk", "deploy:master" ].includes( process.argv[ 2 ] ) );
-		}
+		},
 	};
 
 	// Used to switch between development and release builds

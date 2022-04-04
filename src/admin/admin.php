@@ -68,11 +68,7 @@ class Admin {
 	 * @return array
 	 */
 	public function add_action_link( $links, $file ) {
-		static $this_plugin;
-		if ( empty( $this_plugin ) ) {
-			$this_plugin = str_replace( trailingslashit( WP_PLUGIN_DIR ), '', YOAST_CRAWL_CLEANUP_PLUGIN_FILE );
-		}
-		if ( $file === $this_plugin ) {
+		if ( preg_match( '/yoast-crawl-cleanup\.php$/', $file ) ) {
 			$settings_link = '<a href="' . esc_url( $this->plugin_options_url() ) . '">' . esc_html__( 'Settings', 'yoast-crawl-cleanup' ) . '</a>';
 			array_unshift( $links, $settings_link );
 			$links = array_unique( $links );

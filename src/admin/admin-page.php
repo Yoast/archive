@@ -9,10 +9,19 @@ use Yoast\WP\Crawl_Cleanup\Options\Options;
 class Admin_Page extends Admin {
 
 	/**
+	 * Holds our options.
+	 *
+	 * @var Options
+	 */
+	private Options $options;
+
+	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
 		parent::__construct();
+
+		$this->options = Options::instance();
 
 		new Admin_Options();
 
@@ -62,5 +71,9 @@ class Admin_Page extends Admin {
 	 */
 	public function config_page(): void {
 		require YOAST_CRAWL_CLEANUP_PLUGIN_DIR_PATH . 'src/admin/views/admin-page.php';
+
+		// Revert to our default tab.
+		$this->options->options['return_tab'] = 'yoast-basic';
+		update_option( $this->options->option_name, $this->options->options );
 	}
 }

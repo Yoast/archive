@@ -30,6 +30,7 @@ namespace Yoast\WP\Crawl_Cleanup\Options;
  * @property boolean remove_gutenberg_duotone
  * @property string  remove_styles
  * @property string  remove_scripts
+ * @property string  return_tab
  */
 class Options {
 
@@ -64,6 +65,7 @@ class Options {
 		'remove_gutenberg_duotone'        => true,
 		'remove_styles'                   => '',
 		'remove_scripts'                  => '',
+		'return_tab'                      => '',
 	];
 
 	/**
@@ -97,6 +99,7 @@ class Options {
 		'remove_gutenberg_duotone'        => 'bool',
 		'remove_styles'                   => 'string',
 		'remove_scripts'                  => 'string',
+		'return_tab'                      => 'string,',
 	];
 
 	/**
@@ -104,7 +107,7 @@ class Options {
 	 *
 	 * @var string
 	 */
-	public static string $option_name = 'yoast_crawl_cleanup';
+	public string $option_name = 'yoast_crawl_cleanup';
 
 	/**
 	 * Saving active instance of this class in this static var.
@@ -125,11 +128,11 @@ class Options {
 	 * If already set: trim some option, otherwise load defaults.
 	 */
 	private function load_options(): void {
-		$options = get_option( self::$option_name );
+		$options = get_option( $this->option_name );
 
 		if ( ! is_array( $options ) ) {
 			$this->options = self::$option_defaults;
-			update_option( self::$option_name, $this->options );
+			update_option( $this->option_name, $this->options );
 		}
 		else {
 			$this->options = array_merge( self::$option_defaults, $options );

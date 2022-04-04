@@ -6,16 +6,12 @@ jQuery( document ).ready( function( $ ) {
 		var id = $( this ).attr( "id" ).replace( "-tab", "" );
 		$( "#" + id ).addClass( "active" );
 		$( this ).addClass( "nav-tab-active" );
-		$( "#return_tab" ).val( id );
+		$( "#yoast_return_tab" ).val( id );
 	} );
 
 	// Init.
-	var activeTab = window.location.hash.replace( "#top#", "" );
-
-	// Default to first tab.
-	if ( activeTab === "" || activeTab === "#_=_" ) {
-		activeTab = $( ".yoast_tab" ).attr( "id" );
-	}
+	var activeTab = $( "#yoast_return_tab" ).val();
+	console.log( activeTab );
 
 	$( "#" + activeTab ).addClass( "active" );
 	$( "#" + activeTab + "-tab" ).addClass( "nav-tab-active" ).click();

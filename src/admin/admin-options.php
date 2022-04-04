@@ -37,7 +37,7 @@ class Admin_Options {
 	public function admin_init(): void {
 		register_setting(
 			self::$option_group,
-			Options::$option_name,
+			$this->options->option_name,
 			[ $this, 'sanitize_options_on_save' ]
 		);
 
