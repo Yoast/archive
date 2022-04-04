@@ -109,14 +109,6 @@ class Options {
 	public array $options = [];
 
 	/**
-	 * Class constructor.
-	 */
-	public function __construct() {
-		$this->load_options();
-		$this->sanitize_options();
-	}
-
-	/**
 	 * Loads Yoast Crawl Cleanup-options set in WordPress.
 	 * If already set: trim some option, otherwise load defaults.
 	 */
@@ -129,6 +121,7 @@ class Options {
 		}
 		else {
 			$this->options = array_merge( self::$option_defaults, $options );
+			$this->sanitize_options();
 		}
 	}
 
@@ -155,6 +148,7 @@ class Options {
 	public static function instance(): Options {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new Options();
+			self::$instance->load_options();
 		}
 
 		return self::$instance;
@@ -168,12 +162,6 @@ class Options {
 	 * @return bool|string
 	 */
 	public function __get( string $option ) {
-		// If it's a boolean and unset, return false.
-		if ( self::$option_var_types[ $option ] === 'bool' ) {
-			return ( $this->options[ $option ] ?? false );
-		}
-
-		// If it's not a boolean, return a string.
-		return ( $this->options[ $option ] ?? '' );
+		return ( $this->options[ $option ] ?? self::$option_defaults[ $option ] );
 	}
 }
