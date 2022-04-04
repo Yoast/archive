@@ -46,7 +46,7 @@ class Optimizations {
 	}
 
 	/**
-	 * Clean the <head> section of a site.
+	 * Clean the `<head>` section of a site.
 	 */
 	private function clean_head(): void {
 		if ( $this->options->remove_shortlinks ) {

@@ -87,35 +87,6 @@ class Clean_Feeds {
 	}
 
 	/**
-	 * Retrieves the queried post type.
-	 *
-	 * @return string The queried post type.
-	 */
-	private function get_queried_post_type(): string {
-		$post_type = get_query_var( 'post_type' );
-		if ( is_array( $post_type ) ) {
-			$post_type = reset( $post_type );
-		}
-		return $post_type;
-	}
-
-	/**
-	 * Redirect a feed result to somewhere else.
-	 *
-	 * @param string $url    The location we're redirecting to.
-	 * @param string $reason The reason we're redirecting.
-	 */
-	private function redirect_feed( string $url, string $reason ): void {
-		header_remove( 'Content-Type' );
-		header_remove( 'Last-Modified' );
-
-		$this->cache_control_header( 7 * DAY_IN_SECONDS );
-
-		wp_safe_redirect( $url, 301, 'Yoast Crawl Cleanup: ' . $reason );
-		exit;
-	}
-
-	/**
 	 * Adapted from `feed_links_extra` in WP core, this is a version that allows us to control which feeds to show.
 	 *
 	 * @param array $args Optional arguments.
@@ -216,5 +187,34 @@ class Clean_Feeds {
 		}
 
 		header( sprintf( 'Cache-Control: ' . $format, $cacheability, $expiration ), true );
+	}
+
+	/**
+	 * Retrieves the queried post type.
+	 *
+	 * @return string The queried post type.
+	 */
+	private function get_queried_post_type(): string {
+		$post_type = get_query_var( 'post_type' );
+		if ( is_array( $post_type ) ) {
+			$post_type = reset( $post_type );
+		}
+		return $post_type;
+	}
+
+	/**
+	 * Redirect a feed result to somewhere else.
+	 *
+	 * @param string $url    The location we're redirecting to.
+	 * @param string $reason The reason we're redirecting.
+	 */
+	private function redirect_feed( string $url, string $reason ): void {
+		header_remove( 'Content-Type' );
+		header_remove( 'Last-Modified' );
+
+		$this->cache_control_header( 7 * DAY_IN_SECONDS );
+
+		wp_safe_redirect( $url, 301, 'Yoast Crawl Cleanup: ' . $reason );
+		exit;
 	}
 }
