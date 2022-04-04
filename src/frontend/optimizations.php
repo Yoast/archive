@@ -1,4 +1,5 @@
 <?php
+
 namespace Yoast\WP\Crawl_Cleanup\Frontend;
 
 use Yoast\WP\Crawl_Cleanup\Options\Options;
@@ -84,7 +85,7 @@ class Optimizations {
 		}
 
 		// Redirect the ones we don't want to exist.
-		add_action( 'wp', [ $this, 'redirect_unwanted_feeds' ], -10000 );
+		add_action( 'wp', [ $this, 'redirect_unwanted_feeds' ], - 10000 );
 		// Remove HTTP headers we don't want.
 		add_action( 'send_headers', [ $this, 'clean_headers' ], 9999 );
 

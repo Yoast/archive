@@ -42,11 +42,14 @@ class Clean_Permalink {
 	 */
 	public function utm_redirect(): void {
 		// Prevents WP CLI from throwing an error.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 		if ( ! isset( $_SERVER['REQUEST_URI'] ) || strpos( $_SERVER['REQUEST_URI'], '?' ) === false ) {
 			return;
 		}
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 		if ( stripos( $_SERVER['REQUEST_URI'], 'utm_' ) ) {
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			$parsed = wp_parse_url( $_SERVER['REQUEST_URI'] );
 
 			$query      = explode( '&', $parsed['query'] );
@@ -54,7 +57,7 @@ class Clean_Permalink {
 			$other_args = [];
 
 			foreach ( $query as $query_arg ) {
-				if ( 0 === stripos( $query_arg, 'utm_' ) ) {
+				if ( stripos( $query_arg, 'utm_' ) === 0 ) {
 					$utms[] = $query_arg;
 					continue;
 				}
@@ -68,7 +71,7 @@ class Clean_Permalink {
 
 			$new_path = $parsed['path'] . $other_args_str . '#' . implode( '&', $utms );
 
-			wp_redirect( get_bloginfo( 'url' ) . $new_path, 301, 'Yoast Crawl Cleanup: redirect utm variables to #' );
+			wp_safe_redirect( get_bloginfo( 'url' ) . $new_path, 301, 'Yoast Crawl Cleanup: redirect utm variables to #' );
 			exit;
 		}
 	}

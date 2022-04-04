@@ -7,7 +7,7 @@ namespace Yoast\WP\Crawl_Cleanup\Options;
  *
  * @property boolean clean_permalink
  * @property boolean clean_permalink_google_campaign
- * @property string clean_permalink_extra_variables
+ * @property string  clean_permalink_extra_variables
  * @property boolean remove_shortlinks
  * @property boolean remove_rest_api_links
  * @property boolean remove_rsd_wlw_links
@@ -24,8 +24,8 @@ namespace Yoast\WP\Crawl_Cleanup\Options;
  * @property boolean remove_gutenberg_global_styles
  * @property boolean remove_gutenberg_block_library
  * @property boolean remove_gutenberg_duotone
- * @property string remove_styles
- * @property string remove_scripts
+ * @property string  remove_styles
+ * @property string  remove_scripts
  */
 class Options {
 
@@ -126,7 +126,8 @@ class Options {
 		if ( ! is_array( $options ) ) {
 			$this->options = self::$option_defaults;
 			update_option( self::$option_name, $this->options );
-		} else {
+		}
+		else {
 			$this->options = array_merge( self::$option_defaults, $options );
 		}
 	}

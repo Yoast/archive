@@ -35,6 +35,8 @@
 	#############################################################################
 	-->
 
+	<exclude-pattern type="relative">^artifact/*\.php$</exclude-pattern>
+
 	<rule ref="Yoast">
 		<!-- The Yoast Crawl Cleanup plugin is a stand-alone plugin, so it doesn't have access to YoastSEO functions. -->
 		<exclude name="Yoast.Yoast.AlternativeFunctions"/>
@@ -51,16 +53,16 @@
 		</properties>
 	</rule>
 
-			<rule ref="Yoast.NamingConventions.NamespaceName">
-            	<properties>
-            		<!-- Indicate which directories should be treated as project root directories for
-            			 path-to-namespace translations. -->
-            		<property name="src_directory" type="array">
-            			<element value="src"/>
-            			<element value="tests"/>
-           			</property>
-           		</properties>
-           	</rule>
+	<rule ref="Yoast.NamingConventions.NamespaceName">
+		<properties>
+			<!-- Indicate which directories should be treated as project root directories for
+				 path-to-namespace translations. -->
+			<property name="src_directory" type="array">
+				<element value="src"/>
+				<element value="src/deprecated/src"/>
+			</property>
+		</properties>
+	</rule>
 
 
 	<!--
@@ -77,30 +79,4 @@
 			</property>
 		</properties>
 	</rule>
-
-	<!--
-	#############################################################################
-	SELECTIVE EXCLUSIONS
-	Exclude specific files for specific sniffs and/or exclude sub-groups in sniffs.
-	#############################################################################
-	-->
-
-	<!-- Allow for select unit test files to use less secure code. -->
-	<rule ref="WordPress.Security">
-		<exclude-pattern>/tests/bootstrap\.php$</exclude-pattern>
-	</rule>
-
-	<!-- Valid usage: For testing purposes, some non-prefixed globals are being created. -->
-	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-		<exclude-pattern>/tests/bootstrap\.php$</exclude-pattern>
-	</rule>
-
-
-	<!--
-	#############################################################################
-	TEMPORARY ADJUSTMENTS
-	Adjustments which should be removed once the associated issue has been resolved.
-	#############################################################################
-	-->
-
 </ruleset>

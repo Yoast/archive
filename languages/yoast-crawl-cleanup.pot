@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Yoast Crawl Cleanup 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/yoast/crawl-cleanup/issues\n"
-"POT-Creation-Date: 2022-04-04 07:59:38+00:00\n"
+"POT-Creation-Date: 2022-04-04 09:48:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -190,13 +190,13 @@ msgstr ""
 msgid "Save Yoast Crawl Cleanup settings"
 msgstr ""
 
-#: src/frontend/optimizations.php:232
+#: src/frontend/optimizations.php:233
 #. translators: 1: Blog name, 2: Separator (raquo), 3: Term name, 4: Taxonomy
 #. singular name.
 msgid "%1$s %2$s %3$s %4$s Feed"
 msgstr ""
 
-#: src/frontend/optimizations.php:234
+#: src/frontend/optimizations.php:235
 #. translators: 1: Blog name, 2: Separator (raquo), 3: Post type name.
 msgid "%1$s %2$s %3$s Feed"
 msgstr ""
