@@ -64,7 +64,6 @@
 		</properties>
 	</rule>
 
-
 	<!--
 	#############################################################################
 	SNIFF SPECIFIC CONFIGURATION
@@ -79,4 +78,7 @@
 			</property>
 		</properties>
 	</rule>
+
+    <!-- Include a second ruleset to override the minimum PHP version set in YoastCS. -->
+	<rule ref="config/phpcs/ruleset.xml"/>
 </ruleset>

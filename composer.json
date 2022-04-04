@@ -42,7 +42,7 @@
       "@php ./vendor/php-parallel-lint/php-parallel-lint/parallel-lint . -e php --show-deprecated --exclude vendor --exclude node_modules --exclude .git"
     ],
     "check-cs": [
-      "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --runtime-set testVersion 7.4"
+      "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs"
     ],
     "fix-cs": [
       "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
