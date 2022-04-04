@@ -130,13 +130,13 @@ class Admin_Options {
 	 */
 	private function register_advanced_settings(): void {
 		$settings = [
+			'clean_permalink_google_campaign' => [
+				'label' => __( 'Clean campaign tracking URL parameters', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'If you use Google Analytics this is recommended: it makes sure your campaign tracking uses # instead of URL parameters.', 'yoast-crawl-cleanup' ),
+			],
 			'clean_permalink' => [
 				'label' => __( 'Remove unregistered URL parameters', 'yoast-crawl-cleanup' ),
 				'desc'  => __( 'Aggressively removes all URL parameters we don\'t recognize', 'yoast-crawl-cleanup' ),
-			],
-			'clean_permalink_google_campaign' => [
-				'label' => __( 'Maintain campaign tracking URL parameters', 'yoast-crawl-cleanup' ),
-				'desc'  => __( 'If you use Google Analytics this is recommended.', 'yoast-crawl-cleanup' ),
 			],
 			'clean_permalink_extra_variables' => [
 				'label' => __( 'Extra URL parameters to allow', 'yoast-crawl-cleanup' ),
@@ -205,45 +205,42 @@ class Admin_Options {
 	 * Intro for the basic settings screen.
 	 */
 	public function basic_settings_intro(): void {
-		echo '<p class="intro">';
-		esc_html_e( 'Remove links added by WordPress to the header and <head>.', 'yoast-crawl-cleanup' );
-		echo '</p>';
+		$this->output_intro( esc_html__( 'Remove links added by WordPress to the header and <head>.', 'yoast-crawl-cleanup' ) );
 	}
 
 	/**
 	 * Intro for the RSS settings screen.
 	 */
 	public function rss_settings_intro(): void {
-		echo '<p class="intro">';
-		esc_html_e( 'Remove feed links added by WordPress that aren\'t needed for this site.', 'yoast-crawl-cleanup' );
-		echo '</p>';
+		$this->output_intro( esc_html__( 'Remove feed links added by WordPress that aren\'t needed for this site.', 'yoast-crawl-cleanup' ) );
 	}
 
 	/**
 	 * Intro for the Gutenberg section.
 	 */
 	public function gutenberg_settings_intro(): void {
-		echo '<p class="intro">';
-		esc_html_e( 'Remove unwanted / unneeded Gutenberg output.', 'yoast-crawl-cleanup' );
-		echo '</p>';
+		$this->output_intro( esc_html__( 'Remove unwanted / unneeded Gutenberg output.', 'yoast-crawl-cleanup' ) );
 	}
 
 	/**
 	 * Intro for the remove scripts and styles section.
 	 */
 	public function advanced_settings_scripts_intro(): void {
-		echo '<p class="intro">';
-		esc_html_e( 'Remove unwanted / unneeded scripts and styles.', 'yoast-crawl-cleanup' );
-		echo '</p>';
+		$this->output_intro( esc_html__( 'Remove unwanted / unneeded scripts and styles.', 'yoast-crawl-cleanup' ) );
 	}
 
 	/**
 	 * Intro for the clean permalinks section.
 	 */
 	public function advanced_settings_clean_permalink_intro(): void {
-		echo '<p class="intro">';
-		esc_html_e( 'Remove unwanted URL parameters from your URLs.', 'yoast-crawl-cleanup' );
-		echo '</p>';
+		$this->output_intro( esc_html__( 'Remove unwanted URL parameters from your URLs.', 'yoast-crawl-cleanup' ) );
+	}
+
+	/**
+	 * Echo a section intro.
+	 */
+	private function output_intro( $intro ): void {
+		echo '<p class="intro">', $intro, '</p>';
 	}
 
 	/**
@@ -263,7 +260,7 @@ class Admin_Options {
 	 * @param array $args Arguments to get data from.
 	 */
 	public function input_text( array $args ): void {
-		echo '<input type="text" class="text" name="yoast_crawl_cleanup[' . esc_attr( $args['name'] ) . ']" value="' . esc_attr( $args['value'] ) . '"/>';
+		echo '<input id="' . $args['name'] . '" type="text" class="text" name="yoast_crawl_cleanup[' . esc_attr( $args['name'] ) . ']" value="' . esc_attr( $args['value'] ) . '"/>';
 		$this->input_desc( $args );
 	}
 
@@ -273,7 +270,7 @@ class Admin_Options {
 	 * @param array $args Arguments to get data from.
 	 */
 	public function input_checkbox( array $args ): void {
-		echo '<input class="checkbox" type="checkbox" ' . checked( $args['value'], true, false ) . ' name="yoast_crawl_cleanup[' . esc_attr( $args['name'] ) . ']"/>';
+		echo '<input id="' . $args['name'] . '" class="checkbox" type="checkbox" ' . checked( $args['value'], true, false ) . ' name="yoast_crawl_cleanup[' . esc_attr( $args['name'] ) . ']"/>';
 		$this->input_desc( $args );
 	}
 
@@ -304,7 +301,7 @@ class Admin_Options {
 			];
 			add_settings_field(
 				$key,
-				$arr['label'],
+				'<label for="' . $key . '">' . $arr['label'] . '</label>',
 				[ $this, $field_type ],
 				$page,
 				$section,

@@ -26,10 +26,51 @@ class Clean_Permalink {
 	}
 
 	/**
-	 * Register all our hooks
+	 * Register all our hooks.
 	 */
 	public function register_hooks(): void {
-		add_action( 'template_redirect', [ $this, 'clean_permalink' ], 1 );
+		if ( $this->options->clean_permalink_google_campaign ) {
+			add_action( 'template_redirect', [ $this, 'utm_redirect' ], 0 );
+		}
+		if ( $this->options->clean_permalink ) {
+			add_action( 'template_redirect', [ $this, 'clean_permalink' ], 1 );
+		}
+	}
+
+	/**
+	 * Redirect utm variables away.
+	 */
+	public function utm_redirect(): void {
+		// Prevents WP CLI from throwing an error.
+		if ( ! isset( $_SERVER['REQUEST_URI'] ) || strpos( $_SERVER['REQUEST_URI'], '?' ) === false ) {
+			return;
+		}
+
+		if ( stripos( $_SERVER['REQUEST_URI'], 'utm_' ) ) {
+			$parsed = wp_parse_url( $_SERVER['REQUEST_URI'] );
+
+			$query      = explode( '&', $parsed['query'] );
+			$utms       = [];
+			$other_args = [];
+
+			foreach ( $query as $query_arg ) {
+				if ( 0 === stripos( $query_arg, 'utm_' ) ) {
+					$utms[] = $query_arg;
+					continue;
+				}
+				$other_args[] = $query_arg;
+			}
+
+			$other_args_str = '';
+			if ( count( $other_args ) > 0 ) {
+				$other_args_str = '?' . implode( '&', $other_args );
+			}
+
+			$new_path = $parsed['path'] . $other_args_str . '#' . implode( '&', $utms );
+
+			wp_redirect( get_bloginfo( 'url' ) . $new_path, 301, 'Yoast Crawl Cleanup: redirect utm variables to #' );
+			exit;
+		}
 	}
 
 	/**
@@ -119,10 +160,6 @@ class Clean_Permalink {
 		// Allow plugins to register their own variables not to clean.
 		$whitelisted_extravars = apply_filters( 'Yoast\WP\Crawl_Cleanup\whitelist_permalink_vars', [] );
 
-		if ( $this->options->clean_permalink_google_campaign ) {
-			// Prevent cleaning out Google Analytics campaign variables.
-			$whitelisted_extravars = array_merge( $whitelisted_extravars, [ 'utm_campaign', 'utm_medium', 'utm_source', 'utm_content', 'utm_term' ] );
-		}
 		if ( $this->options->clean_permalink_extra_variables !== '' ) {
 			$whitelisted_extravars = array_merge( $whitelisted_extravars, explode( ',', $this->options->clean_permalink_extra_variables ) );
 		}

@@ -21,9 +21,7 @@ class Optimizations {
 	public function __construct() {
 		$this->options = Options::instance();
 
-		if ( $this->options->clean_permalink ) {
-			new Clean_Permalink();
-		}
+		new Clean_Permalink();
 
 		add_action( 'wp_loaded', [ $this, 'register_hooks' ] );
 	}
@@ -246,7 +244,7 @@ class Optimizations {
 			$title         = sprintf( $args['posttypetitle'], get_bloginfo( 'name' ), $args['separator'], $post_type_obj->labels->name );
 			$href          = get_post_type_archive_feed_link( $post_type_obj->name );
 		}
-		elseif ( is_tag() || is_tax() ) {
+		elseif ( is_tag() || is_tax() || is_category() ) {
 			$term = get_queried_object();
 
 			if ( $term ) {
