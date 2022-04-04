@@ -30,7 +30,6 @@ namespace Yoast\WP\Crawl_Cleanup\Options;
  * @property boolean remove_gutenberg_duotone
  * @property string  remove_styles
  * @property string  remove_scripts
- * @property string  return_tab
  */
 class Options {
 
@@ -65,7 +64,6 @@ class Options {
 		'remove_gutenberg_duotone'        => true,
 		'remove_styles'                   => '',
 		'remove_scripts'                  => '',
-		'return_tab'                      => '',
 	];
 
 	/**
@@ -99,7 +97,6 @@ class Options {
 		'remove_gutenberg_duotone'        => 'bool',
 		'remove_styles'                   => 'string',
 		'remove_scripts'                  => 'string',
-		'return_tab'                      => 'string,',
 	];
 
 	/**
