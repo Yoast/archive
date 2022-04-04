@@ -7,7 +7,7 @@ namespace Yoast\WP\Crawl_Cleanup;
  *
  * @wordpress-plugin
  * Plugin Name: Yoast Crawl Cleanup
- * Version:     1.0
+ * Version:     0.1
  * Plugin URI:  https://yoast.com/wordpress/plugins/crawl-cleanup/
  * Description: Remove unnecessary WordPress output to clean up your site for crawling.
  * Author:      Joost de Valk & Team Yoast
@@ -25,7 +25,7 @@ if ( ! function_exists( 'add_filter' ) ) {
 }
 
 define( 'YOAST_CRAWL_CLEANUP_PLUGIN_FILE', __FILE__ );
-define( 'YOAST_CRAWL_CLEANUP_PLUGIN_VERSION', '2.0' );
+define( 'YOAST_CRAWL_CLEANUP_PLUGIN_VERSION', '0.1' );
 define( 'YOAST_CRAWL_CLEANUP_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'YOAST_CRAWL_CLEANUP_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
 
