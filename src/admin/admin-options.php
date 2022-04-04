@@ -105,20 +105,32 @@ class Admin_Options {
 	 */
 	private function register_rss_settings(): void {
 		$settings = [
-			'remove_feed_global'          => [
+			'remove_feed_global'            => [
 				'label' => __( 'Remove the global feed', 'yoast-crawl-cleanup' ),
 			],
-			'remove_feed_global_comments' => [
+			'remove_feed_global_comments'   => [
 				'label' => __( 'Remove the global comments feed', 'yoast-crawl-cleanup' ),
 			],
-			'remove_feed_post_types'      => [
+			'remove_feed_authors'           => [
+				'label' => __( 'Remove feeds per post author', 'yoast-crawl-cleanup' ),
+			],
+			'remove_feed_post_types'        => [
 				'label' => __( 'Remove post type feeds', 'yoast-crawl-cleanup' ),
 			],
-			'remove_feed_taxonomies'      => [
-				'label' => __( 'Remove taxonomy feeds', 'yoast-crawl-cleanup' ),
+			'remove_feed_categories'        => [
+				'label' => __( 'Remove category feeds', 'yoast-crawl-cleanup' ),
 			],
-			'remove_feed_post_comments'   => [
+			'remove_feed_tags'              => [
+				'label' => __( 'Remove tag feeds', 'yoast-crawl-cleanup' ),
+			],
+			'remove_feed_custom_taxonomies' => [
+				'label' => __( 'Remove custom taxonomy feeds', 'yoast-crawl-cleanup' ),
+			],
+			'remove_feed_post_comments'     => [
 				'label' => __( 'Remove post comment feeds', 'yoast-crawl-cleanup' ),
+			],
+			'remove_feed_search'            => [
+				'label' => __( 'Remove search result feeds', 'yoast-crawl-cleanup' ),
 			],
 		];
 
@@ -136,11 +148,11 @@ class Admin_Options {
 			],
 			'clean_permalink'                 => [
 				'label' => __( 'Remove unregistered URL parameters', 'yoast-crawl-cleanup' ),
-				'desc'  => __( 'Aggressively removes all URL parameters we don\'t recognize', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'Aggressively removes all URL parameters we don\'t recognize.', 'yoast-crawl-cleanup' ),
 			],
 			'clean_permalink_extra_variables' => [
 				'label' => __( 'Extra URL parameters to allow', 'yoast-crawl-cleanup' ),
-				'desc'  => __( 'Comma separated list of URL parameters you\'d like to keep', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'Comma separated list of URL parameters you\'d like to keep.', 'yoast-crawl-cleanup' ),
 				'input' => 'input_text',
 			],
 		];

@@ -23,18 +23,35 @@ class Optimizations {
 		$this->options = Options::instance();
 
 		new Clean_Permalink();
+		new Clean_Feeds();
 
 		add_action( 'wp_loaded', [ $this, 'register_hooks' ] );
 	}
 
 	/**
-	 * Register all our hooks
+	 * Register all our hooks.
 	 */
 	public function register_hooks(): void {
+		// Remove stuff from the <head>.
+		$this->clean_head();
 
+		// Remove HTTP headers we don't want.
+		add_action( 'send_headers', [ $this, 'clean_headers' ], 9999 );
+
+		// Remove Gutenberg cruft.
+		add_action( 'wp_enqueue_scripts', [ $this, 'unload_gutenberg' ], 10000 );
+
+		// Advanced.
+		add_action( 'wp_enqueue_scripts', [ $this, 'unload_styles_scripts' ], 10000 );
+	}
+
+	/**
+	 * Clean the <head> section of a site.
+	 */
+	private function clean_head(): void {
 		if ( $this->options->remove_shortlinks ) {
 			// Remove shortlinks.
-			remove_action( 'wp_head', 'wp_shortlink_wp_head', 10 );
+			remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 			remove_action( 'template_redirect', 'wp_shortlink_header', 11 );
 		}
 
@@ -68,32 +85,6 @@ class Optimizations {
 			remove_action( 'admin_print_styles', 'print_emoji_styles' );
 			add_filter( 'wp_resource_hints', [ $this, 'resource_hints_plain_cleanup' ], 1 );
 		}
-
-		// RSS.
-		if ( $this->options->remove_feed_global ) {
-			remove_action( 'wp_head', 'feed_links', 2 );
-		}
-		if ( $this->options->remove_feed_global_comments ) {
-			add_action( 'feed_links_show_comments_feed', '__return_false' );    // Remove the overall comments feed.
-		}
-		if ( $this->options->remove_feed_post_comments || $this->options->remove_feed_post_types || $this->options->remove_feed_taxonomies ) {
-			remove_action( 'wp_head', 'feed_links_extra', 3 );                    // Remove a lot of the other RSS links, for comment feeds, tag feeds etc.
-		}
-		if ( ! $this->options->remove_feed_post_types || ! $this->options->remove_feed_taxonomies ) {
-			// Bring back the RSS feeds we *do* want.
-			add_action( 'wp_head', [ $this, 'feed_links' ] );
-		}
-
-		// Redirect the ones we don't want to exist.
-		add_action( 'wp', [ $this, 'redirect_unwanted_feeds' ], - 10000 );
-		// Remove HTTP headers we don't want.
-		add_action( 'send_headers', [ $this, 'clean_headers' ], 9999 );
-
-		// Gutenberg.
-		add_action( 'wp_enqueue_scripts', [ $this, 'unload_gutenberg' ], 10000 );
-
-		// Advanced.
-		add_action( 'wp_enqueue_scripts', [ $this, 'unload_styles_scripts' ], 10000 );
 	}
 
 	/**
@@ -168,116 +159,5 @@ class Optimizations {
 		}
 
 		return $hints;
-	}
-
-	/**
-	 * Redirect feeds we don't want away.
-	 */
-	public function redirect_unwanted_feeds(): void {
-		if ( ! is_feed() ) {
-			return;
-		}
-
-		$feed = get_query_var( 'feed' );
-
-		$url = get_home_url();
-		if ( $feed === 'atom' || $feed === 'rdf' ) {
-			$this->redirect_feed( $url, 'We disable ATOM and RDF feeds for performance reasons.' );
-		}
-		elseif ( is_comment_feed() && is_singular() && $this->options->remove_feed_post_comments ) {
-			$url = get_permalink( get_queried_object() );
-			$this->redirect_feed( $url, 'We disable comment feeds for performance reasons.' );
-		}
-		elseif ( is_comment_feed() && $this->options->remove_feed_global_comments ) {
-			$this->redirect_feed( $url, 'We disable comment feeds for performance reasons.' );
-		}
-		elseif ( ( is_tax() || is_category() || is_tag() ) && $this->options->remove_feed_taxonomies ) {
-			$this->redirect_feed( $url, 'We disable taxonomy feeds for performance reasons.' );
-		}
-		elseif ( ( is_post_type_archive() ) && $this->options->remove_feed_post_types ) {
-			$this->redirect_feed( $url, 'We disable post type feeds for performance reasons.' );
-		}
-		elseif ( is_search() ) {
-			// We're not even going to serve a result for this. Feeds for search results are not a service yoast.com should provide.
-			$this->redirect_feed( esc_url( trailingslashit( get_home_url() ) . '?s=' . get_search_query() ), 'We disable search RSS feeds for performance reasons.' );
-		}
-		elseif ( $this->options->remove_feed_global ) {
-			$this->redirect_feed( esc_url( trailingslashit( get_home_url() ) . '?s=' . get_search_query() ), 'We disable the RSS feed for performance reasons.' );
-		}
-	}
-
-	/**
-	 * Redirect a feed result to somewhere else.
-	 *
-	 * @param string $url    The location we're redirecting to.
-	 * @param string $reason The reason we're redirecting.
-	 */
-	private function redirect_feed( string $url, string $reason ): void {
-		header_remove( 'Content-Type' );
-		header_remove( 'Last-Modified' );
-
-		$this->cache_control_header( 7 * DAY_IN_SECONDS );
-
-		wp_safe_redirect( $url, 301, 'Yoast Crawl Cleanup: ' . $reason );
-		exit;
-	}
-
-	/**
-	 * Adapted from `feed_links_extra` in WP core, this is a version that outputs a _lot_ less links.
-	 */
-	public function feed_links(): void {
-		$args = [
-			/* translators: Separator between blog name and feed type in feed links. */
-			'separator'     => '-',
-			/* translators: 1: Blog name, 2: Separator (raquo), 3: Term name, 4: Taxonomy singular name. */
-			'taxtitle'      => __( '%1$s %2$s %3$s %4$s Feed', 'yoast-crawl-cleanup' ),
-			/* translators: 1: Blog name, 2: Separator (raquo), 3: Post type name. */
-			'posttypetitle' => __( '%1$s %2$s %3$s Feed', 'yoast-crawl-cleanup' ),
-		];
-
-		if ( is_post_type_archive() ) {
-			$post_type = get_query_var( 'post_type' );
-			if ( is_array( $post_type ) ) {
-				$post_type = reset( $post_type );
-			}
-
-			$post_type_obj = get_post_type_object( $post_type );
-			$title         = sprintf( $args['posttypetitle'], get_bloginfo( 'name' ), $args['separator'], $post_type_obj->labels->name );
-			$href          = get_post_type_archive_feed_link( $post_type_obj->name );
-		}
-		elseif ( is_tag() || is_tax() || is_category() ) {
-			$term = get_queried_object();
-
-			if ( $term ) {
-				$tax   = get_taxonomy( $term->taxonomy );
-				$title = sprintf( $args['taxtitle'], get_bloginfo( 'name' ), $args['separator'], $term->name, $tax->labels->singular_name );
-				$href  = get_term_feed_link( $term->term_id, $term->taxonomy );
-			}
-		}
-
-		if ( isset( $title ) && isset( $href ) ) {
-			echo '<link rel="alternate" type="' . esc_attr( feed_content_type() ) . '" title="' . esc_attr( $title ) . '" href="' . esc_url( $href ) . '" />' . "\n";
-		}
-	}
-
-	/**
-	 * Sends a cache control header.
-	 *
-	 * @param int $expiration The expiration time.
-	 */
-	public function cache_control_header( int $expiration ): void {
-		header_remove( 'Expires' );
-
-		// The cacheability of the current request. 'public' allows caching, 'private' would not allow caching by proxies like CloudFlare.
-		$cacheability = 'public';
-		$format       = '%1$s, max-age=%2$d, s-maxage=%2$d, stale-while-revalidate=120, stale-if-error=14400';
-
-		if ( is_user_logged_in() ) {
-			$expiration   = 0;
-			$cacheability = 'private';
-			$format       = '%1$s, max-age=%2$d';
-		}
-
-		header( sprintf( 'Cache-Control: ' . $format, $cacheability, $expiration ), true );
 	}
 }

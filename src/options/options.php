@@ -18,9 +18,13 @@ namespace Yoast\WP\Crawl_Cleanup\Options;
  * @property boolean remove_pingback_header
  * @property boolean remove_feed_global
  * @property boolean remove_feed_global_comments
+ * @property boolean remove_feed_authors
  * @property boolean remove_feed_post_types
- * @property boolean remove_feed_taxonomies
+ * @property boolean remove_feed_categories
+ * @property boolean remove_feed_tags
+ * @property boolean remove_feed_custom_taxonomies
  * @property boolean remove_feed_post_comments
+ * @property boolean remove_feed_search
  * @property boolean remove_gutenberg_global_styles
  * @property boolean remove_gutenberg_block_library
  * @property boolean remove_gutenberg_duotone
@@ -48,9 +52,13 @@ class Options {
 		'remove_pingback_header'          => true,
 		'remove_feed_global'              => false,
 		'remove_feed_global_comments'     => true,
+		'remove_feed_authors'             => false,
 		'remove_feed_post_types'          => false,
-		'remove_feed_taxonomies'          => false,
+		'remove_feed_categories'          => false,
+		'remove_feed_tags'                => false,
+		'remove_feed_custom_taxonomies'   => false,
 		'remove_feed_post_comments'       => true,
+		'remove_feed_search'              => true,
 		'remove_gutenberg_global_styles'  => false,
 		'remove_gutenberg_block_library'  => false,
 		'remove_gutenberg_duotone'        => true,
@@ -77,9 +85,13 @@ class Options {
 		'remove_pingback_header'          => 'bool',
 		'remove_feed_global'              => 'bool',
 		'remove_feed_global_comments'     => 'bool',
+		'remove_feed_authors'             => 'bool',
 		'remove_feed_post_types'          => 'bool',
-		'remove_feed_taxonomies'          => 'bool',
+		'remove_feed_categories'          => 'bool',
+		'remove_feed_tags'                => 'bool',
+		'remove_feed_custom_taxonomies'   => 'bool',
 		'remove_feed_post_comments'       => 'bool',
+		'remove_feed_search'              => 'bool',
 		'remove_gutenberg_global_styles'  => 'bool',
 		'remove_gutenberg_block_library'  => 'bool',
 		'remove_gutenberg_duotone'        => 'bool',
