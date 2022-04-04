@@ -11,8 +11,6 @@ jQuery( document ).ready( function( $ ) {
 
 	// Init.
 	var activeTab = $( "#yoast_return_tab" ).val();
-	console.log( activeTab );
-
 	$( "#" + activeTab ).addClass( "active" );
 	$( "#" + activeTab + "-tab" ).addClass( "nav-tab-active" ).click();
 } );
