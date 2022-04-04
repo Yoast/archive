@@ -82,7 +82,6 @@ class Clean_Feeds {
 			$this->redirect_feed( $url, 'We disable post type feeds for performance reasons.' );
 		}
 		elseif ( is_search() && $this->options->remove_feed_search ) {
-			// We're not even going to serve a result for this. Feeds for search results are not a service yoast.com should provide.
 			$this->redirect_feed( esc_url( trailingslashit( get_home_url() ) . '?s=' . get_search_query() ), 'We disable search RSS feeds for performance reasons.' );
 		}
 	}
