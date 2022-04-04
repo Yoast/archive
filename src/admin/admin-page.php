@@ -73,7 +73,6 @@ class Admin_Page extends Admin {
 		require YOAST_CRAWL_CLEANUP_PLUGIN_DIR_PATH . 'src/admin/views/admin-page.php';
 
 		// Revert to our default tab.
-		$this->options->options['return_tab'] = 'yoast-basic';
-		update_option( $this->options->option_name, $this->options->options );
+		update_option( 'ycc_return_tab', 'yoast-basic' );
 	}
 }

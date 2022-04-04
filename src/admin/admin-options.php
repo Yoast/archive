@@ -195,6 +195,10 @@ class Admin_Options {
 	 */
 	public function sanitize_options_on_save( array $new_options ): array {
 		foreach ( Options::$option_var_types as $key => $type ) {
+			if ( $key === 'return_tab' ) {
+				update_option( 'ycc_return_tab', $new_options['return_tab'] );
+				unset( $new_options['return_tab'] );
+			}
 			switch ( $type ) {
 				case 'string':
 					$new_options[ $key ] = $this->sanitize_string( $new_options[ $key ] );

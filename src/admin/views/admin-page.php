@@ -3,16 +3,12 @@
 namespace Yoast\WP\Crawl_Cleanup\Admin\Views;
 
 use Yoast\WP\Crawl_Cleanup\Admin\Admin_Options;
-use Yoast\WP\Crawl_Cleanup\Options\Options;
-
-/** @var Options $options */
-$options = Options::instance();
 
 ?><div class="wrap">
 	<h2>Yoast Crawl Cleanup <?php esc_html_e( 'Configuration', 'yoast-crawl-cleanup' ); ?></h2>
 
 	<form action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>" method="post">
-		<input id="yoast_return_tab" type="hidden" name="yoast_crawl_cleanup[return_tab]" value="<?php echo esc_attr( $options->return_tab ); ?>" />
+		<input id="yoast_return_tab" type="hidden" name="yoast_crawl_cleanup[return_tab]" value="<?php echo esc_attr( get_option( 'ycc_return_tab', 'yoast-basic' ) ); ?>" />
 		<?php
 		settings_fields( Admin_Options::$option_group );
 		?>

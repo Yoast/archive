@@ -58,10 +58,14 @@ class Clean_Feeds {
 		if ( $feed === 'atom' || $feed === 'rdf' ) {
 			$this->redirect_feed( $url, 'We disable ATOM and RDF feeds for performance reasons.' );
 		}
-		elseif ( $this->options->remove_feed_global ) {
+		elseif ( get_query_var( 'attachment', false ) && $feed === 'feed' ) {
+			$this->redirect_feed( $url, 'Attachment should not have feeds, so we disable them.' );
+		}
+		// Only if we're on the global feed, the query is _just_ `'feed' => 'feed'`, hence this check.
+		elseif ( $GLOBALS['wp_query']->query === [ 'feed' => 'feed' ] && $this->options->remove_feed_global ) {
 			$this->redirect_feed( get_home_url(), 'We disable the RSS feed for performance reasons.' );
 		}
-		elseif ( is_comment_feed() && ! is_singular() && $this->options->remove_feed_global_comments ) {
+		elseif ( is_comment_feed() && ! ( is_singular() || is_attachment() ) && $this->options->remove_feed_global_comments ) {
 			$this->redirect_feed( $url, 'We disable comment feeds for performance reasons.' );
 		}
 		elseif ( is_comment_feed() && is_singular() && $this->options->remove_feed_post_comments ) {
@@ -74,7 +78,11 @@ class Clean_Feeds {
 			$this->redirect_feed( $url, 'We disable author feeds for performance reasons.' );
 		}
 		elseif ( ( is_tax() && $this->options->remove_feed_custom_taxonomies ) || ( is_category() && $this->options->remove_feed_categories ) || ( is_tag() && $this->options->remove_feed_tags ) ) {
-			$url = get_term_link( get_queried_object() );
+			$term = get_queried_object();
+			$url  = get_term_link( $term, $term->taxonomy );
+			if ( is_wp_error( $url ) ) {
+				$url = get_home_url();
+			}
 			$this->redirect_feed( $url, 'We disable taxonomy feeds for performance reasons.' );
 		}
 		elseif ( ( is_post_type_archive() ) && $this->options->remove_feed_post_types ) {
@@ -83,6 +91,11 @@ class Clean_Feeds {
 		}
 		elseif ( is_search() && $this->options->remove_feed_search ) {
 			$this->redirect_feed( esc_url( trailingslashit( get_home_url() ) . '?s=' . get_search_query() ), 'We disable search RSS feeds for performance reasons.' );
+		}
+		// Always redirect paginated feeds.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		elseif ( is_feed() && preg_match( '|/page/\d+/|', $_SERVER['REQUEST_URI'] ) ) {
+			$this->redirect_feed( get_home_url(), 'We disable all paginated RSS feeds for performance reasons.' );
 		}
 	}
 
