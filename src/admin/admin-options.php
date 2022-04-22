@@ -106,9 +106,13 @@ class Admin_Options {
 	 */
 	private function register_search_settings(): void {
 		$settings = [
-			'search_cleanup_characters' => [
-				'label' => __( 'Prevent searches with uncommon characters', 'yoast-crawl-cleanup' ),
-				'desc'  => __( 'This prevents searches with a couple of commonly used emoji\'s and other spam patterns.', 'yoast-crawl-cleanup' ),
+			'search_cleanup_emoji' => [
+				'label' => __( 'Prevent searches with emoji', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'This prevents searches emoji, commonly used in spam.', 'yoast-crawl-cleanup' ),
+			],
+			'search_cleanup_patterns' => [
+				'label' => __( 'Prevent searches with common spam patterns', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'This prevents searches with a couple of commonly used spam patterns.', 'yoast-crawl-cleanup' ),
 			],
 			'search_word_limit' => [
 				'label' => __( 'Max number of words to allow', 'yoast-crawl-cleanup' ),

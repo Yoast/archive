@@ -138,8 +138,8 @@ class Clean_Permalink {
 			}
 		}
 		elseif ( is_search() ) {
-			$s          = rawurlencode( preg_replace( '`(%20|\+)`', ' ', get_search_query() ) );
-			$proper_url = get_bloginfo( 'url' ) . '/?s=' . $s;
+			$s          = get_search_query();
+			$proper_url = get_bloginfo( 'url' ) . '/?s=' . rawurlencode( $s );
 		}
 		elseif ( is_404() ) {
 			if ( is_multisite() && ! is_subdomain_install() && is_main_site() ) {
