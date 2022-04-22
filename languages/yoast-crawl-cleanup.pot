@@ -2,9 +2,9 @@
 # This file is distributed under the GPL v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Yoast Crawl Cleanup 1.0\n"
+"Project-Id-Version: Yoast Crawl Cleanup 0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/yoast/crawl-cleanup/issues\n"
-"POT-Creation-Date: 2022-04-04 13:23:39+00:00\n"
+"POT-Creation-Date: 2022-04-22 08:29:05+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,153 +24,183 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: src/admin/admin-options.php:56
+#: src/admin/admin-options.php:57
 msgid "Remove Gutenberg global styles"
 msgstr ""
 
-#: src/admin/admin-options.php:59
+#: src/admin/admin-options.php:60
 msgid "Remove Gutenberg block library styles"
 msgstr ""
 
-#: src/admin/admin-options.php:62
+#: src/admin/admin-options.php:63
 msgid "Remove Gutenberg duotone output"
 msgstr ""
 
-#: src/admin/admin-options.php:75
+#: src/admin/admin-options.php:76
 msgid "Remove shortlinks"
 msgstr ""
 
-#: src/admin/admin-options.php:78
+#: src/admin/admin-options.php:79
 msgid "Remove REST API links"
 msgstr ""
 
-#: src/admin/admin-options.php:81
+#: src/admin/admin-options.php:82
 msgid "Remove RSD / WLW links"
 msgstr ""
 
-#: src/admin/admin-options.php:84
+#: src/admin/admin-options.php:85
 msgid "Remove oEmbed links"
 msgstr ""
 
-#: src/admin/admin-options.php:87
+#: src/admin/admin-options.php:88
 msgid "Remove generator tag"
 msgstr ""
 
-#: src/admin/admin-options.php:90
+#: src/admin/admin-options.php:91
 msgid "Remove pingback HTTP header"
 msgstr ""
 
-#: src/admin/admin-options.php:93
+#: src/admin/admin-options.php:94
 msgid "Remove powered by HTTP header"
 msgstr ""
 
-#: src/admin/admin-options.php:96
+#: src/admin/admin-options.php:97
 msgid "Remove emoji scripts"
 msgstr ""
 
-#: src/admin/admin-options.php:109
-msgid "Remove the global feed"
+#: src/admin/admin-options.php:110
+msgid "Prevent searches with uncommon characters"
 msgstr ""
 
-#: src/admin/admin-options.php:112
-msgid "Remove the global comments feed"
+#: src/admin/admin-options.php:111
+msgid ""
+"This prevents searches with a couple of commonly used emoji's and other "
+"spam patterns."
+msgstr ""
+
+#: src/admin/admin-options.php:114
+msgid "Max number of words to allow"
 msgstr ""
 
 #: src/admin/admin-options.php:115
+msgid "Searches with more words will be limited to this number of words."
+msgstr ""
+
+#: src/admin/admin-options.php:119
+msgid "Max number of characters to allow"
+msgstr ""
+
+#: src/admin/admin-options.php:120
+msgid "Searches with more characters will be limited to this number of characters."
+msgstr ""
+
+#: src/admin/admin-options.php:134
+msgid "Remove the global feed"
+msgstr ""
+
+#: src/admin/admin-options.php:137
+msgid "Remove the global comments feed"
+msgstr ""
+
+#: src/admin/admin-options.php:140
 msgid "Remove feeds per post author"
 msgstr ""
 
-#: src/admin/admin-options.php:118
+#: src/admin/admin-options.php:143
 msgid "Remove post type feeds"
 msgstr ""
 
-#: src/admin/admin-options.php:121
+#: src/admin/admin-options.php:146
 msgid "Remove category feeds"
 msgstr ""
 
-#: src/admin/admin-options.php:124
+#: src/admin/admin-options.php:149
 msgid "Remove tag feeds"
 msgstr ""
 
-#: src/admin/admin-options.php:127
+#: src/admin/admin-options.php:152
 msgid "Remove custom taxonomy feeds"
 msgstr ""
 
-#: src/admin/admin-options.php:130
+#: src/admin/admin-options.php:155
 msgid "Remove post comment feeds"
 msgstr ""
 
-#: src/admin/admin-options.php:133
+#: src/admin/admin-options.php:158
 msgid "Remove search result feeds"
 msgstr ""
 
-#: src/admin/admin-options.php:146
+#: src/admin/admin-options.php:171
 msgid "Clean campaign tracking URL parameters"
 msgstr ""
 
-#: src/admin/admin-options.php:147
+#: src/admin/admin-options.php:172
 msgid ""
 "If you use Google Analytics this is recommended: it makes sure your "
 "campaign tracking uses # instead of URL parameters."
 msgstr ""
 
-#: src/admin/admin-options.php:150
+#: src/admin/admin-options.php:175
 msgid "Remove unregistered URL parameters"
 msgstr ""
 
-#: src/admin/admin-options.php:151
+#: src/admin/admin-options.php:176
 msgid "Aggressively removes all URL parameters we don't recognize."
 msgstr ""
 
-#: src/admin/admin-options.php:154
+#: src/admin/admin-options.php:179
 msgid "Extra URL parameters to allow"
 msgstr ""
 
-#: src/admin/admin-options.php:155
+#: src/admin/admin-options.php:180
 msgid "Comma separated list of URL parameters you'd like to keep."
 msgstr ""
 
-#: src/admin/admin-options.php:160
+#: src/admin/admin-options.php:185
 msgid "Permalink cleanup"
 msgstr ""
 
-#: src/admin/admin-options.php:164
+#: src/admin/admin-options.php:189
 msgid "Remove these scripts"
 msgstr ""
 
-#: src/admin/admin-options.php:165
+#: src/admin/admin-options.php:190
 msgid "Comma separate script identifiers"
 msgstr ""
 
-#: src/admin/admin-options.php:169
+#: src/admin/admin-options.php:194
 msgid "Remove these styles"
 msgstr ""
 
-#: src/admin/admin-options.php:170
+#: src/admin/admin-options.php:195
 msgid "Comma separate style identifiers"
 msgstr ""
 
-#: src/admin/admin-options.php:175
+#: src/admin/admin-options.php:200
 msgid "Remove scripts and styles"
 msgstr ""
 
-#: src/admin/admin-options.php:220
+#: src/admin/admin-options.php:250
 msgid "Remove links added by WordPress to the header and <head>."
 msgstr ""
 
-#: src/admin/admin-options.php:227
+#: src/admin/admin-options.php:257
+msgid "Clean up and restrict searches to prevent search spam."
+msgstr ""
+
+#: src/admin/admin-options.php:264
 msgid "Remove feed links added by WordPress that aren't needed for this site."
 msgstr ""
 
-#: src/admin/admin-options.php:234
+#: src/admin/admin-options.php:271
 msgid "Remove unwanted / unneeded Gutenberg output."
 msgstr ""
 
-#: src/admin/admin-options.php:241
+#: src/admin/admin-options.php:278
 msgid "Remove unwanted / unneeded scripts and styles."
 msgstr ""
 
-#: src/admin/admin-options.php:248
+#: src/admin/admin-options.php:285
 msgid "Remove unwanted URL parameters from your URLs."
 msgstr ""
 
@@ -178,7 +208,7 @@ msgstr ""
 msgid "Yoast Crawl Cleanup"
 msgstr ""
 
-#: src/admin/admin.php:76
+#: src/admin/admin.php:72
 msgid "Settings"
 msgstr ""
 
@@ -186,12 +216,8 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
-#: src/admin/views/admin-page.php:16
-msgid "Basic"
-msgstr ""
-
 #: src/admin/views/admin-page.php:17
-msgid "RSS"
+msgid "Basic"
 msgstr ""
 
 #: src/admin/views/admin-page.php:18
@@ -199,45 +225,53 @@ msgid "Gutenberg"
 msgstr ""
 
 #: src/admin/views/admin-page.php:19
+msgid "RSS"
+msgstr ""
+
+#: src/admin/views/admin-page.php:20
+msgid "Search"
+msgstr ""
+
+#: src/admin/views/admin-page.php:21
 msgid "Advanced"
 msgstr ""
 
-#: src/admin/views/admin-page.php:37
+#: src/admin/views/admin-page.php:42
 msgid "Save Yoast Crawl Cleanup settings"
 msgstr ""
 
-#: src/frontend/clean-feeds.php:115
+#: src/frontend/clean-feeds.php:112
 #. translators: 1: Blog name, 2: Separator (raquo), 3: Post title.
 msgid "%1$s %2$s %3$s Comments Feed"
 msgstr ""
 
-#: src/frontend/clean-feeds.php:117
+#: src/frontend/clean-feeds.php:114
 #. translators: 1: Blog name, 2: Separator (raquo), 3: Category name.
 msgid "%1$s %2$s %3$s Category Feed"
 msgstr ""
 
-#: src/frontend/clean-feeds.php:119
+#: src/frontend/clean-feeds.php:116
 #. translators: 1: Blog name, 2: Separator (raquo), 3: Tag name.
 msgid "%1$s %2$s %3$s Tag Feed"
 msgstr ""
 
-#: src/frontend/clean-feeds.php:121
+#: src/frontend/clean-feeds.php:118
 #. translators: 1: Blog name, 2: Separator (raquo), 3: Term name, 4: Taxonomy
 #. singular name.
 msgid "%1$s %2$s %3$s %4$s Feed"
 msgstr ""
 
-#: src/frontend/clean-feeds.php:123
+#: src/frontend/clean-feeds.php:120
 #. translators: 1: Blog name, 2: Separator (raquo), 3: Author name.
 msgid "%1$s %2$s Posts by %3$s Feed"
 msgstr ""
 
-#: src/frontend/clean-feeds.php:125
+#: src/frontend/clean-feeds.php:122
 #. translators: 1: Blog name, 2: Separator (raquo), 3: Search query.
 msgid "%1$s %2$s Search Results for &#8220;%3$s&#8221; Feed"
 msgstr ""
 
-#: src/frontend/clean-feeds.php:127
+#: src/frontend/clean-feeds.php:124
 #. translators: 1: Blog name, 2: Separator (raquo), 3: Post type name.
 msgid "%1$s %2$s %3$s Feed"
 msgstr ""
@@ -258,7 +292,7 @@ msgstr ""
 msgid "https://yoast.com/"
 msgstr ""
 
-#: src/frontend/clean-feeds.php:113
+#: src/frontend/clean-feeds.php:110
 #. translators: Separator between blog name and feed type in feed links.
 msgctxt "feed link"
 msgid "-"
