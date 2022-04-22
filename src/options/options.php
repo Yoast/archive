@@ -30,6 +30,9 @@ namespace Yoast\WP\Crawl_Cleanup\Options;
  * @property boolean remove_gutenberg_duotone
  * @property string  remove_styles
  * @property string  remove_scripts
+ * @property boolean search_cleanup_characters
+ * @property integer search_word_limit
+ * @property integer search_character_limit
  */
 class Options {
 
@@ -64,6 +67,9 @@ class Options {
 		'remove_gutenberg_duotone'        => true,
 		'remove_styles'                   => '',
 		'remove_scripts'                  => '',
+		'search_cleanup_characters'       => true,
+		'search_word_limit'               => 8,
+		'search_character_limit'          => 50,
 	];
 
 	/**
@@ -97,6 +103,9 @@ class Options {
 		'remove_gutenberg_duotone'        => 'bool',
 		'remove_styles'                   => 'string',
 		'remove_scripts'                  => 'string',
+		'search_cleanup_characters'       => 'bool',
+		'search_word_limit'               => 'int',
+		'search_character_limit'          => 'int',
 	];
 
 	/**
@@ -152,6 +161,9 @@ class Options {
 					break;
 				case 'bool':
 					$this->options[ $key ] = (bool) $value;
+					break;
+				case 'int':
+					$this->options[ $key ] = (int) $value;
 			}
 		}
 	}

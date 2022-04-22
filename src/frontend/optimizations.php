@@ -24,6 +24,7 @@ class Optimizations {
 
 		new Clean_Permalink();
 		new Clean_Feeds();
+		new Clean_Searches();
 
 		add_action( 'wp_loaded', [ $this, 'register_hooks' ] );
 	}

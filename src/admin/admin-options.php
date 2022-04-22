@@ -42,8 +42,9 @@ class Admin_Options {
 		);
 
 		$this->register_basic_settings();
-		$this->register_rss_settings();
 		$this->register_gutenberg_settings();
+		$this->register_rss_settings();
+		$this->register_search_settings();
 		$this->register_advanced_settings();
 	}
 
@@ -98,6 +99,30 @@ class Admin_Options {
 		];
 
 		$this->settings_section( 'basic-settings', '', 'basic_settings_intro', 'yoast-crawl-cleanup', $settings );
+	}
+
+	/**
+	 * Register the basic settings.
+	 */
+	private function register_search_settings(): void {
+		$settings = [
+			'search_cleanup_characters' => [
+				'label' => __( 'Prevent searches with uncommon characters', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'This prevents searches with a couple of commonly used emoji\'s and other spam patterns.', 'yoast-crawl-cleanup' ),
+			],
+			'search_word_limit' => [
+				'label' => __( 'Max number of words to allow', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'Searches with more words will be limited to this number of words.', 'yoast-crawl-cleanup' ),
+				'input' => 'input_number',
+			],
+			'search_character_limit' => [
+				'label' => __( 'Max number of characters to allow', 'yoast-crawl-cleanup' ),
+				'desc'  => __( 'Searches with more characters will be limited to this number of characters.', 'yoast-crawl-cleanup' ),
+				'input' => 'input_number',
+			],
+		];
+
+		$this->settings_section( 'ycc-search', '', 'search_settings_intro', 'ycc-search', $settings );
 	}
 
 	/**
@@ -194,11 +219,10 @@ class Admin_Options {
 	 * @return array
 	 */
 	public function sanitize_options_on_save( array $new_options ): array {
+		update_option( 'ycc_return_tab', $new_options['return_tab'] );
+		unset( $new_options['return_tab'] );
+
 		foreach ( Options::$option_var_types as $key => $type ) {
-			if ( $key === 'return_tab' ) {
-				update_option( 'ycc_return_tab', $new_options['return_tab'] );
-				unset( $new_options['return_tab'] );
-			}
 			switch ( $type ) {
 				case 'string':
 					$new_options[ $key ] = $this->sanitize_string( $new_options[ $key ] );
@@ -211,6 +235,8 @@ class Admin_Options {
 						$new_options[ $key ] = false;
 					}
 					break;
+				case 'int':
+					$new_options[ $key ] = (int) $new_options[ $key ];
 			}
 		}
 
@@ -222,6 +248,13 @@ class Admin_Options {
 	 */
 	public function basic_settings_intro(): void {
 		$this->output_intro( __( 'Remove links added by WordPress to the header and <head>.', 'yoast-crawl-cleanup' ) );
+	}
+
+	/**
+	 * Intro for the basic settings screen.
+	 */
+	public function search_settings_intro(): void {
+		$this->output_intro( __( 'Clean up and restrict searches to prevent search spam.', 'yoast-crawl-cleanup' ) );
 	}
 
 	/**
@@ -279,6 +312,16 @@ class Admin_Options {
 	 */
 	public function input_text( array $args ): void {
 		echo '<input id="' . esc_attr( $args['name'] ) . '" type="text" class="text" name="yoast_crawl_cleanup[' . esc_attr( $args['name'] ) . ']" value="' . esc_attr( $args['value'] ) . '"/>';
+		$this->input_desc( $args );
+	}
+
+	/**
+	 * Create a text input.
+	 *
+	 * @param array $args Arguments to get data from.
+	 */
+	public function input_number( array $args ): void {
+		echo '<input id="' . esc_attr( $args['name'] ) . '" type="number" class="number" name="yoast_crawl_cleanup[' . esc_attr( $args['name'] ) . ']" value="' . esc_attr( $args['value'] ) . '"/>';
 		$this->input_desc( $args );
 	}
 
