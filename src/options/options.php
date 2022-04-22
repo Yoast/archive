@@ -142,6 +142,10 @@ class Options {
 	 */
 	private function sanitize_options(): void {
 		foreach ( $this->options as $key => $value ) {
+			if ( ! isset( self::$option_var_types[ $key ] ) ) {
+				unset( $this->options[ $key ] );
+				update_option( $this->option_name, $this->options );
+			}
 			switch ( self::$option_var_types[ $key ] ) {
 				case 'string':
 					$this->options[ $key ] = (string) $value;
