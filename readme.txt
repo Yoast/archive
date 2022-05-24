@@ -4,8 +4,8 @@ Donate link: https://yoast.com/donate/
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: slideshare, powerpoint, keynote, ppt, presentation, slide shows, presentations
-Requires at least: 5.8
-Tested up to: 5.9
+Requires at least: 5.9
+Tested up to: 6.0
 Stable tag: 1.9.2
 
 Easily embed SlideShare presentations into your WordPress posts by using the SlideShare WordPress.com embed code.
