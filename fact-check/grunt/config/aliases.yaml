@@ -1,0 +1,42 @@
+# Grunt aliases
+---
+# Build everything
+
+build:
+  - 'build:js'
+
+# Build JavaScript from assets to production.
+'build:js':
+  - 'browserify:build'
+  - 'uglify'
+  - 'webpack:buildDev'
+
+'build:release':
+  - 'browserify:build'
+  - 'uglify'
+  - 'webpack:buildProd'
+
+# Check health of the project.
+check:
+  - 'check:js'
+  - 'check:php'
+
+'check:js':
+  - 'eslint'
+
+'check:php':
+  - 'phplint'
+
+artifact:
+  # Build
+  - 'build:release'
+  # Remove build folder
+  - 'clean:artifact'
+  # Copy only the relevant files to the folder
+  - 'copy:artifact'
+  # Create a zip file
+  - 'compress:artifact'
+
+# Default task
+default:
+  - build
