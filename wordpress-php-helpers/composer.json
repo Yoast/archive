@@ -1,0 +1,23 @@
+{
+    "name": "yoast/wordpress-oop",
+    "description": "A set of interfaces and classes to help with your WordPress OO development",
+    "type": "library",
+    "require": {
+        "psr/log": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    },
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Team Yoast",
+            "email": "support@yoast.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Yoast\\WordPress\\": "src"
+        }
+    }
+}
