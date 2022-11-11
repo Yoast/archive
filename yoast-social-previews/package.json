@@ -40,7 +40,7 @@
     "grunt-shell": "^2.0.0",
     "istanbul": "^0.4.0",
     "jasmine": "~3.0.0",
-    "jsdom": "^9.6.0",
+    "jsdom": "^16.5.0",
     "load-grunt-config": "^0.19.2",
     "lodash-cli": "^4.16.3",
     "sassdash": "^0.8.1",
