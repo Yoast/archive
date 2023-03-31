@@ -1,0 +1,22 @@
+{
+  "name": "slideshare",
+  "description": "Development files for the Slideshare WordPress plugin",
+  "plugin": {
+    "glotpress": "https://translate.yoast.com",
+    "slug": "slideshare",
+    "textdomain": "slideshare"
+  },
+  "pot": {
+    "reportmsgidbugsto": "https://github.com/yoast/slideshare/issues",
+    "languageteam": "Yoast Translate <translations@yoast.com>",
+    "lasttranslator": "Yoast Translate Team <translations@yoast.com>"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-checktextdomain": "^0.1.1",
+    "grunt-glotpress": "^0.2.1",
+    "grunt-wp-i18n": "^0.4.7",
+    "load-grunt-tasks": "^0.4.0",
+    "time-grunt": "^0.3.1"
+  }
+}
