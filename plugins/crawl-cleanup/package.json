@@ -1,0 +1,20 @@
+{
+  "name": "yoast-crawl-cleanup",
+  "description": "Development files for the Yoast Crawl Cleanup plugin",
+  "plugin": {
+    "textdomain": "yoast-crawl-cleanup"
+  },
+  "pot": {
+    "reportmsgidbugsto": "https://github.com/yoast/crawl-cleanup/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yoast/crawl-cleanup"
+  },
+  "devDependencies": {
+    "@yoast/grunt-plugin-tasks": "^2.0.0"
+  },
+  "yoast": {
+    "pluginVersion": "0.1"
+  }
+}
